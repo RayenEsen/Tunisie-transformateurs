@@ -8,15 +8,17 @@ import { TopNavComponent } from './top-nav/top-nav.component';
 import { TransformateurInfoComponent } from './Transformateur-info/Transformateur-info.component';
 import { FooterComponent } from './footer/footer.component';
 import { DefaultComponentComponent } from './Default-component/Default-component.component';
+import { Add_ModifyTransformateurComponent } from './Add_Modify-Transformateur/Add_Modify-Transformateur.component';
 
 @NgModule({
-  declarations: [					
+  declarations: [						
     AppComponent,
       NavBarComponent,
       TopNavComponent,
       TransformateurInfoComponent,
       FooterComponent,
-      DefaultComponentComponent
+      DefaultComponentComponent,
+      Add_ModifyTransformateurComponent
    ],
   imports: [
     BrowserModule,
