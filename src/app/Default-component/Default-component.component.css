@@ -20,3 +20,11 @@
   /* Remove the background-color property */
   border-radius: 8px; /* Add border radius for a cleaner look */
 }
+.masthead .logo {
+  /* Add styles for your logo */
+  transition: transform 0.3s ease-in-out; /* Add a smooth transition effect */
+}
+
+.masthead .logo:hover {
+  transform: scale(1.1); /* Adjust the scale factor as needed */
+}
