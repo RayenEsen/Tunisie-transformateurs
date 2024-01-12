@@ -6,11 +6,21 @@ body {
 .ui-w-100 {
     width: 100px !important;
     height: auto;
+    transition: transform 0.3s ease-in-out; /* Add a smooth transition effect */
+}
+
+.ui-w-100:hover {
+    transform: scale(1.1); /* Add a slight scale effect on hover */
 }
 
 .card {
     background-clip: padding-box;
     box-shadow: 0 1px 4px rgba(24, 28, 33, 0.012);
+    transition: box-shadow 0.3s ease-in-out; /* Add a smooth transition effect to box-shadow */
+}
+
+.card:hover {
+    box-shadow: 0 4px 8px rgba(24, 28, 33, 0.1); /* Change box-shadow on hover */
 }
 
 .user-view-table td:first-child {
@@ -21,6 +31,11 @@ body {
     padding-right: 0;
     padding-left: 0;
     border: 0;
+    transition: background-color 0.3s ease-in-out; /* Add a smooth transition effect to background-color */
+}
+
+.user-view-table td:hover {
+    background-color: #e0e0e0; /* Change background color on hover */
 }
 
 .text-light {
@@ -33,4 +48,257 @@ body {
 
 .text-xlarge {
     font-size: 170% !important;
+    transition: font-size 0.3s ease-in-out; /* Add a smooth transition effect to font-size */
+}
+
+.text-xlarge:hover {
+    font-size: 180%; /* Increase font size on hover */
+}
+card {
+    opacity: 0.8;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.card:hover {
+    opacity: 1;
+}
+
+/* Add a subtle shadow lift effect */
+.card {
+    transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* Add a color transition to text */
+.text-light {
+    transition: color 0.3s ease-in-out;
+}
+
+.text-light:hover {
+    color: #7c3a40; /* Change color on hover */
+}
+
+/* Add a border highlight effect */
+.card .row-bordered>[class*=" col-"] {
+    position: relative;
+}
+
+.card .row-bordered>[class*=" col-"]::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: transparent;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.card .row-bordered>[class*=" col-"]:hover::after {
+    background-color: #7c3a40; /* Change background color on hover */
+}
+
+/* Add a rotate effect to text-xlarge */
+.text-xlarge {
+    transition: transform 0.3s ease-in-out;
+}
+
+.text-xlarge:hover {
+    transform: rotate(5deg);
+}
+
+/* Add a background color change for user-view-table */
+.user-view-table tr {
+    transition: background-color 0.3s ease-in-out;
+}
+
+.user-view-table tr:hover {
+    background-color: #e0e0e0; /* Change background color on hover */
+}
+.card {
+    transition: border-radius 0.3s ease-in-out;
+}
+
+.card:hover {
+    border-radius: 10px; /* Increase border-radius on hover */
+}
+
+/* Add a transition to text underline on hover */
+.card a {
+    text-decoration: none;
+    position: relative;
+    transition: color 0.3s ease-in-out;
+}
+
+.card a:hover {
+    color: #007bff; /* Change text color on hover */
+}
+
+.card a::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: transparent;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.card a:hover::after {
+    background-color: #007bff; /* Change underline color on hover */
+}
+
+/* Add a subtle background color change on card hover */
+.card {
+    transition: background-color 0.3s ease-in-out;
+}
+
+.card:hover {
+    background-color: #ffffff; /* Change background color on hover */
+}
+
+/* Add a scale effect to images inside cards */
+.card img {
+    transition: transform 0.3s ease-in-out;
+}
+
+.card:hover img {
+    transform: scale(1.1); /* Scale the image on hover */
+}
+
+/* Add a shadow effect to text elements on hover */
+.card p, .card h2 {
+    transition: text-shadow 0.3s ease-in-out;
+}
+
+.card:hover p, .card:hover h2 {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Add a subtle text shadow on hover */
+}
+
+/* Add a rotation effect to icons */
+.card .fa {
+    transition: transform 0.3s ease-in-out;
+}
+
+.card:hover .fa {
+    transform: rotate(45deg); /* Rotate the icon on hover */
+}
+/* Add a pulse effect to the checkmark and x icons */
+.card .fa-check,
+.card .fa-times {
+    transition: transform 0.3s ease-in-out;
+}
+
+.card:hover .fa-check {
+    transform: scale(1.2) rotate(360deg);
+}
+
+.card:hover .fa-times {
+    transform: scale(0.8) rotate(360deg);
+}
+
+.masthead {
+    height: 150vh;
+    margin-bottom: 100px;
+    margin-left: 100px;
+    color: #51121E;
+    font-family: 'Helvetica', sans-serif; /* Change the font family as needed */
+  }
+/* Add animation and quality changes to buttons */
+.btn {
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 8px 15px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.btn-default {
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+.btn:hover {
+    background-color: #0056b3; /* Darker background color on hover */
+    color: #fff; /* Lighter text color on hover */
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3); /* Add a subtle box-shadow on hover */
+}
+
+.icon-btn {
+    background-color: transparent;
+    color: #007bff;
+    border: none;
+}
+
+.icon-btn:hover {
+    color: #0056b3; /* Darker color for the icon on hover */
+}.card input {
+    width: 100%;
+    padding: 6px; /* Adjust the padding to make them smaller */
+    font-size: 14px; /* Adjust the font size to make them smaller */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* Add animation and quality changes to input elements */
+.card input {
+    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.card input:focus {
+    border-color: #007bff; /* Change border color on focus */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3); /* Add a subtle box-shadow on focus */
+}
+
+/* Add animation to input label */
+.card label {
+    display: block;
+    margin-bottom: 3px; /* Adjust margin to make them smaller */
+    font-size: 12px; /* Adjust font size to make them smaller */
+    transition: color 0.3s ease-in-out;
+}
+
+.card input:focus + label {
+    color: #007bff; /* Change label color on focus */
+}
+
+/* Add animation to input placeholder */
+.card input::placeholder {
+    transition: color 0.3s ease-in-out;
+    font-size: 12px; /* Adjust font size to make them smaller */
+}
+
+.card input:focus::placeholder {
+    color: #007bff; /* Change placeholder color on focus */
+}
+
+/* Add animation to input icons */
+.card .input-group-prepend .input-group-text {
+    transition: color 0.3s ease-in-out;
+    font-size: 14px; /* Adjust font size to make them smaller */
+}
+
+.card .input-group-prepend .input-group-text:hover {
+    color: #007bff; /* Change icon color on hover */
+}
+
+/* Add animation to buttons inside inputs */
+.card .input-group-append .btn {
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    font-size: 12px; /* Adjust font size to make them smaller */
+}
+
+.card .input-group-append .btn:hover {
+    background-color: #0056b3; /* Darker background color on hover */
+    color: #fff; /* Lighter text color on hover */
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3); /* Add a subtle box-shadow on hover */
 }

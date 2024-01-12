@@ -1,9 +1,12 @@
 @import url(https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=swap);
 
+/* Font Awesome Size */
 .fa-2x {
     font-size: 2em;
 }
+
+/* Font Awesome Base Styles */
 .fa {
     position: relative;
     display: table-cell;
@@ -15,31 +18,54 @@
     transition: font-size 0.3s ease;
 }
 
+/* Icon Pulse Animation */
+.fa:hover {
+    animation: pulse 0.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Main Menu Animation */
 .main-menu:hover,
 nav.main-menu.expanded {
     width: 250px;
+    height: 100%;
     overflow: visible;
+    transition: width 0.3s ease, height 0.3s ease; /* Added height transition */
 }
 
+/* Main Menu Styles */
 .main-menu {
     background: #51121E;
     border-right: 1px solid #e5e5e5;
-    position: absolute;
+    position: fixed; /* Change position to fixed */
     top: 60px;
-    bottom: -2px;
-    height: 100%;
+    bottom: 0; /* Change bottom to 0 */
+    height: auto; /* Set height to auto */
     left: 0;
     width: 60px;
     overflow: hidden;
-    -webkit-transition: width 0.05s linear;
-    transition: width 0.05s linear;
+    -webkit-transition: width 0.05s linear, height 0.3s ease; /* Add height transition */
+    transition: width 0.05s linear, height 0.3s ease; /* Add height transition */
     z-index: 900;
 }
 
+/* Main Menu List Styles */
 .main-menu>ul {
     margin: 7px 0;
 }
 
+/* Main Menu Item Styles */
 .main-menu li {
     position: relative;
     display: block;
@@ -52,8 +78,8 @@ nav.main-menu.expanded {
     border-collapse: collapse;
     border-spacing: 0;
     color: #FFFFFF;
-    font-family: 'Open Sans', sans-serif; /* Updated to Open Sans font */
-    font-size: 16px; /* Updated font size for better readability */
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
     text-decoration: none;
     transition: all 0.1s linear;
 }
@@ -73,15 +99,17 @@ nav.main-menu.expanded {
     display: table-cell;
     vertical-align: middle;
     width: 190px;
-    font-family: 'Open Sans', sans-serif; /* Updated to Open Sans font */
+    font-family: 'Open Sans', sans-serif;
 }
 
+/* Logout Styles */
 .main-menu>ul.logout {
     position: absolute;
     left: 0;
     bottom: 0;
 }
 
+/* Hover Scrollable Effect */
 .no-touch .scrollable.hover {
     overflow-y: hidden;
 }
@@ -91,11 +119,13 @@ nav.main-menu.expanded {
     overflow: visible;
 }
 
+/* Hover and Focus Effect */
 a:hover,
 a:focus {
     text-decoration: none;
 }
 
+/* User Selection Disabled */
 nav {
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -104,6 +134,7 @@ nav {
     user-select: none;
 }
 
+/* List Styles */
 nav ul,
 nav li {
     outline: 0;
@@ -111,6 +142,7 @@ nav li {
     padding: 0;
 }
 
+/* Active and Hover States */
 .main-menu li:hover>a,
 nav.main-menu li.active>a,
 .dropdown-menu>li>a:hover,
@@ -124,6 +156,7 @@ nav.main-menu li.active>a,
     background-color: #C18C94;
 }
 
+/* Area Styles */
 .area {
     float: left;
     background: #e2e2e2;
@@ -133,13 +166,7 @@ nav.main-menu li.active>a,
 
 /* Removed the @font-face block as Open Sans is a system font */
 
-/* Added animation for main-menu width change */
-.main-menu:hover {
-    width: 250px;
-    transition: width 0.3s ease;
-}
-
-/* Increase the font size for the text */
+/* Increased Font Size */
 .main-menu li>a,
 .main-menu .nav-text {
     font-size: 16px;

@@ -1,15 +1,15 @@
-<header>
+<header class="masthead">
   <div>
     <div>
       <div >
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 <div class="container bootdey flex-grow-1 container-p-y">
 
-            <div class="media align-items-center py-3 mb-3" style="display: flex;">
-              <img src="assets/Default_Transfromateur.png" alt="" class="d-block ui-w-100 rounded-circle">
+            <div class="media align-items-center py-3 mb-3" style="display: flex; ">
+              <img src="assets/Default_Transfromateur.png" alt="" class="d-block ui-w-100 rounded-circle" style="margin-top: 20px;">
               <div class="media-body ml-4" style="margin-left: 23px;">
-                <h4 class="font-weight-bold mb-0">Transformateur Tunisie<span class="text-muted font-weight-normal"></span></h4>
-                <div class="text-muted mb-2">ID: 23472</div>
+                <h4 class="font-weight-bold mb-0" style="color: #51121E;">Transformateur Tunisie<span class="text-muted font-weight-normal"></span></h4>
+                <div class="text-muted mb-2" >ID: 23472</div>
                 <a href="javascript:void(0)" class="btn btn-primary btn-sm">Edit</a>&nbsp;
                 <a href="javascript:void(0)" class="btn btn-default btn-sm">Save</a>&nbsp;
                 <a href="javascript:void(0)" class="btn btn-default btn-sm icon-btn"><i class="fa fa-mail"></i></a>
@@ -20,6 +20,9 @@
               <div class="card-body">
                 <table class="table user-view-table m-0">
                   <tbody>
+                    <tr>
+                      <th style="color: #51121E; white-space: nowrap;">Information General</th>
+                    </tr>
                     <tr>
                       <td>Marque:</td>
                       <td>Sacem Industries</td>
@@ -48,7 +51,7 @@
                 <table class="table card-table m-0">
                   <tbody>
                     <tr>
-                      <th>Essais du Transformateur</th>
+                      <th style="color: #51121E;">Essais du Transformateur</th>
                     </tr>
                     <tr>
                       <td>Rapport de Transformation</td>
@@ -81,7 +84,9 @@
 
             <div class="card">
               <div class="row no-gutters row-bordered">
+                
                 <div class="d-flex col-md align-items-center">
+                  
                   <a href="javascript:void(0)" class="card-body d-block text-body">
                     <div class="text-muted small line-height-1">MT:U1</div>
                     <div class="text-xlarge">30000V</div>
@@ -113,27 +118,27 @@
                   <tbody>
                     <tr>
                       <td>Puissance:</td>
-                      <td>400KVA</td>
+                      <td><input name="Puissance" type="number"></td>
                     </tr>
                     <tr>
                       <td>Nbr des phases:</td>
-                      <td>3</td>
+                      <td><input name="Nbr_phases" type="number"></td>
                     </tr>
                     <tr>
                       <td>Prises</td>
-                      <td>2x2,5%</td>
+                      <td><input name="Prises"></td>
                     </tr>
                     <tr>
                       <td>Couplage</td>
-                      <td>Ynyn0</td>
+                      <td><input name="Couplage"></td>
                     </tr>
                     <tr>
                       <td>Refroidissement</td>
-                      <td>Onan</td>
+                      <td><input name="Refroidissement"></td>
                     </tr>
                     <tr>
                       <td>Frequence</td>
-                      <td>50 Hz</td>
+                      <td><input name="Frequence"></td>
                     </tr>
                   </tbody>
                 </table>
