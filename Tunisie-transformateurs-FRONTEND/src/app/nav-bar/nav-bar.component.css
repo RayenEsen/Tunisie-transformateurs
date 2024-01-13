@@ -55,9 +55,7 @@ nav.main-menu.expanded {
     left: 0;
     width: 60px;
     overflow: hidden;
-    -webkit-transition: width 0.05s linear, height 0.3s ease; /* Add height transition */
-    transition: width 0.05s linear, height 0.3s ease; /* Add height transition */
-    z-index: 900;
+    z-index: 900;   
 }
 
 /* Main Menu List Styles */
