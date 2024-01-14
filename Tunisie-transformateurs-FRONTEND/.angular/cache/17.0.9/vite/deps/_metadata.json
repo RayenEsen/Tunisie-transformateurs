@@ -1,0 +1,47 @@
+{
+  "hash": "a35c8c61",
+  "browserHash": "b5567828",
+  "optimized": {
+    "@angular/core": {
+      "src": "../../../../../node_modules/@angular/core/fesm2022/core.mjs",
+      "file": "@angular_core.js",
+      "fileHash": "90f05363",
+      "needsInterop": false
+    },
+    "@angular/platform-browser": {
+      "src": "../../../../../node_modules/@angular/platform-browser/fesm2022/platform-browser.mjs",
+      "file": "@angular_platform-browser.js",
+      "fileHash": "f307e0f9",
+      "needsInterop": false
+    },
+    "@angular/router": {
+      "src": "../../../../../node_modules/@angular/router/fesm2022/router.mjs",
+      "file": "@angular_router.js",
+      "fileHash": "3b324666",
+      "needsInterop": false
+    },
+    "@popperjs/core/dist/umd/popper.min.js": {
+      "src": "../../../../../node_modules/@popperjs/core/dist/umd/popper.min.js",
+      "file": "@popperjs_core_dist_umd_popper__min__js.js",
+      "fileHash": "c9da5fc0",
+      "needsInterop": true
+    },
+    "bootstrap": {
+      "src": "../../../../../node_modules/bootstrap/dist/js/bootstrap.esm.js",
+      "file": "bootstrap.js",
+      "fileHash": "2c752010",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-2TVNTQRX": {
+      "file": "chunk-2TVNTQRX.js"
+    },
+    "chunk-D5EJPOQO": {
+      "file": "chunk-D5EJPOQO.js"
+    },
+    "chunk-KSCYWWKG": {
+      "file": "chunk-KSCYWWKG.js"
+    }
+  }
+}
