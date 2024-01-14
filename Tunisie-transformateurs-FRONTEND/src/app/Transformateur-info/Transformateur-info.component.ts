@@ -9,7 +9,7 @@ import { TransformateurServiceService } from '../Shared/Transformateur-service.s
 export class TransformateurInfoComponent implements OnInit {
 
 
-  constructor(private service: TransformateurServiceService) { }
+  constructor(public service: TransformateurServiceService) { }
 
   ngOnInit() {
     this.service.refreshList();
