@@ -9,9 +9,10 @@ import { TransformateurInfoComponent } from './Transformateur-info/Transformateu
 import { FooterComponent } from './footer/footer.component';
 import { DefaultComponentComponent } from './Default-component/Default-component.component';
 import { Add_ModifyTransformateurComponent } from './Add_Modify-Transformateur/Add_Modify-Transformateur.component';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-  declarations: [						
+  declarations: [
     AppComponent,
       NavBarComponent,
       TopNavComponent,
@@ -22,7 +23,8 @@ import { Add_ModifyTransformateurComponent } from './Add_Modify-Transformateur/A
    ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

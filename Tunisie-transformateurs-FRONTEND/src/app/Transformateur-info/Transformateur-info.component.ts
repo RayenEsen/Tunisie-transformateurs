@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TransformateurServiceService } from '../Shared/Transformateur-service.service';
 
 @Component({
   selector: 'app-Transformateur-info',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TransformateurInfoComponent implements OnInit {
 
-  constructor() { }
+
+  constructor(private service: TransformateurServiceService) { }
 
   ngOnInit() {
+    this.service.refreshList();
   }
 
 }
