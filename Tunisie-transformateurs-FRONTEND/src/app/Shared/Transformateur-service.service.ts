@@ -21,4 +21,11 @@ this.http.get(this.url)
   error: err => { console.log(err)}
 })
 }
+
+
+DeleteTransformateur(id:number)
+{
+  return this.http.delete(this.url+'/'+id)
+}
+
 }

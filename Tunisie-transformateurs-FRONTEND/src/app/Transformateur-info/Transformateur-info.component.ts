@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TransformateurServiceService } from '../Shared/Transformateur-service.service';
+import { Transformateur } from '../Shared/Transformateur-service.model';
 
 @Component({
   selector: 'app-Transformateur-info',
@@ -15,4 +16,14 @@ export class TransformateurInfoComponent implements OnInit {
     this.service.refreshList();
   }
 
+  onDelete(id:number)
+  {
+    this.service.DeleteTransformateur(id)
+    .subscribe({
+      next :res => {
+        this.service.list = res as Transformateur[]
+      },
+      error: err => { console.log(err)}
+    })
+  }
 }

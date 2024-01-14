@@ -9,6 +9,7 @@ export class Transformateur {
   btU2: number = 0;
   btI2: number = 0;
   nbPhase: number = 0;
+  prises: string = "";
   couplage: string = "";
   cooling: string = "";
   frequency: number = 0;

@@ -5,7 +5,7 @@
 namespace WebAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class FirstMigration : Migration
+    public partial class First_Migration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -14,8 +14,7 @@ namespace WebAPI.Migrations
                 name: "transformateurs",
                 columns: table => new
                 {
-                    Numero = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Numero = table.Column<int>(type: "int", nullable: false),
                     Marque = table.Column<string>(type: "nvarchar(100)", nullable: false),
                     Client = table.Column<string>(type: "nvarchar(100)", nullable: false),
                     Norme = table.Column<string>(type: "nvarchar(100)", nullable: false),
@@ -25,6 +24,7 @@ namespace WebAPI.Migrations
                     BT_U2 = table.Column<float>(type: "real", nullable: false),
                     BT_I2 = table.Column<float>(type: "real", nullable: false),
                     Nb_phase = table.Column<int>(type: "int", nullable: false),
+                    Prises = table.Column<string>(type: "nvarchar(100)", nullable: false),
                     Couplage = table.Column<string>(type: "nvarchar(100)", nullable: false),
                     Cooling = table.Column<string>(type: "nvarchar(100)", nullable: false),
                     Frequency = table.Column<float>(type: "real", nullable: false)

@@ -24,10 +24,7 @@ namespace WebAPI.Migrations
             modelBuilder.Entity("WebAPI.Model.Transformateur", b =>
                 {
                     b.Property<int>("Numero")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Numero"));
 
                     b.Property<float>("BT_I2")
                         .HasColumnType("real");
@@ -68,6 +65,10 @@ namespace WebAPI.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Power")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Prises")
                         .IsRequired()
                         .HasColumnType("nvarchar(100)");
 
