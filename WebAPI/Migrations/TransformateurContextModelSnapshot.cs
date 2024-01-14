@@ -37,47 +37,43 @@ namespace WebAPI.Migrations
 
                     b.Property<string>("Client")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Cooling")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Couplage")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<float>("Frequency")
-                        .HasColumnType("real");
-
-                    b.Property<float>("MT_I1")
                         .HasColumnType("real");
 
                     b.Property<float>("MT_U1")
                         .HasColumnType("real");
 
+                    b.Property<float>("MT_U2")
+                        .HasColumnType("real");
+
                     b.Property<string>("Marque")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(100)");
 
-                    b.Property<int>("Nb_Phase")
+                    b.Property<int>("Nb_phase")
                         .HasColumnType("int");
 
                     b.Property<string>("Norme")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Power")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Prises")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Numero");
 
-                    b.ToTable("Transformateurs");
+                    b.ToTable("transformateurs");
                 });
 #pragma warning restore 612, 618
         }

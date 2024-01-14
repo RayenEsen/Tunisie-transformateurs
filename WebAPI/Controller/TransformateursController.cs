@@ -22,16 +22,16 @@ namespace WebAPI.Controller
 
         // GET: api/Transformateurs
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Transformateur>>> GetTransformateurs()
+        public async Task<ActionResult<IEnumerable<Transformateur>>> Gettransformateurs()
         {
-            return await _context.Transformateurs.ToListAsync();
+            return await _context.transformateurs.ToListAsync();
         }
 
         // GET: api/Transformateurs/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Transformateur>> GetTransformateur(int id)
         {
-            var transformateur = await _context.Transformateurs.FindAsync(id);
+            var transformateur = await _context.transformateurs.FindAsync(id);
 
             if (transformateur == null)
             {
@@ -77,7 +77,7 @@ namespace WebAPI.Controller
         [HttpPost]
         public async Task<ActionResult<Transformateur>> PostTransformateur(Transformateur transformateur)
         {
-            _context.Transformateurs.Add(transformateur);
+            _context.transformateurs.Add(transformateur);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetTransformateur", new { id = transformateur.Numero }, transformateur);
@@ -87,13 +87,13 @@ namespace WebAPI.Controller
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTransformateur(int id)
         {
-            var transformateur = await _context.Transformateurs.FindAsync(id);
+            var transformateur = await _context.transformateurs.FindAsync(id);
             if (transformateur == null)
             {
                 return NotFound();
             }
 
-            _context.Transformateurs.Remove(transformateur);
+            _context.transformateurs.Remove(transformateur);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -101,7 +101,7 @@ namespace WebAPI.Controller
 
         private bool TransformateurExists(int id)
         {
-            return _context.Transformateurs.Any(e => e.Numero == id);
+            return _context.transformateurs.Any(e => e.Numero == id);
         }
     }
 }

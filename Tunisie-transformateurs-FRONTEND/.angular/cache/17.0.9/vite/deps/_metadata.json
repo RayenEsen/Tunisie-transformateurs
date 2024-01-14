@@ -1,35 +1,35 @@
 {
-  "hash": "a35c8c61",
-  "browserHash": "b5567828",
+  "hash": "0335cbee",
+  "browserHash": "768e6e9c",
   "optimized": {
     "@angular/core": {
       "src": "../../../../../node_modules/@angular/core/fesm2022/core.mjs",
       "file": "@angular_core.js",
-      "fileHash": "90f05363",
+      "fileHash": "24112b52",
       "needsInterop": false
     },
     "@angular/platform-browser": {
       "src": "../../../../../node_modules/@angular/platform-browser/fesm2022/platform-browser.mjs",
       "file": "@angular_platform-browser.js",
-      "fileHash": "f307e0f9",
+      "fileHash": "5b70c588",
       "needsInterop": false
     },
     "@angular/router": {
       "src": "../../../../../node_modules/@angular/router/fesm2022/router.mjs",
       "file": "@angular_router.js",
-      "fileHash": "3b324666",
+      "fileHash": "cc2d891f",
       "needsInterop": false
     },
     "@popperjs/core/dist/umd/popper.min.js": {
       "src": "../../../../../node_modules/@popperjs/core/dist/umd/popper.min.js",
       "file": "@popperjs_core_dist_umd_popper__min__js.js",
-      "fileHash": "c9da5fc0",
+      "fileHash": "7d0f3b24",
       "needsInterop": true
     },
     "bootstrap": {
       "src": "../../../../../node_modules/bootstrap/dist/js/bootstrap.esm.js",
       "file": "bootstrap.js",
-      "fileHash": "2c752010",
+      "fileHash": "4a46721a",
       "needsInterop": false
     }
   },

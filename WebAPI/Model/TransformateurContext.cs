@@ -6,14 +6,14 @@ namespace WebAPI.Model
     {
         public TransformateurContext(DbContextOptions<TransformateurContext> options) : base(options)
         {
+
         }
 
-        public DbSet<Transformateur> Transformateurs { get; set; }
+        public DbSet<Transformateur> transformateurs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Transformateur>()
-                .HasKey(t => t.Numero); 
+            modelBuilder.Entity<Transformateur>().HasKey(t => t.Numero);
         }
     }
 }
