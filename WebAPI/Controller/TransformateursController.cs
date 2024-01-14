@@ -11,23 +11,23 @@ namespace WebAPI.Controller
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TransformateurController : ControllerBase
+    public class TransformateursController : ControllerBase
     {
         private readonly TransformateurContext _context;
 
-        public TransformateurController(TransformateurContext context)
+        public TransformateursController(TransformateurContext context)
         {
             _context = context;
         }
 
-        // GET: api/Transformateur
+        // GET: api/Transformateurs
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Transformateur>>> GetTransformateurs()
         {
             return await _context.Transformateurs.ToListAsync();
         }
 
-        // GET: api/Transformateur/5
+        // GET: api/Transformateurs/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Transformateur>> GetTransformateur(int id)
         {
@@ -41,7 +41,7 @@ namespace WebAPI.Controller
             return transformateur;
         }
 
-        // PUT: api/Transformateur/5
+        // PUT: api/Transformateurs/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutTransformateur(int id, Transformateur transformateur)
@@ -72,7 +72,7 @@ namespace WebAPI.Controller
             return NoContent();
         }
 
-        // POST: api/Transformateur
+        // POST: api/Transformateurs
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Transformateur>> PostTransformateur(Transformateur transformateur)
@@ -83,7 +83,7 @@ namespace WebAPI.Controller
             return CreatedAtAction("GetTransformateur", new { id = transformateur.Numero }, transformateur);
         }
 
-        // DELETE: api/Transformateur/5
+        // DELETE: api/Transformateurs/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTransformateur(int id)
         {
