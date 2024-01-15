@@ -53,11 +53,11 @@ namespace WebAPI.Model
             Client = client;
             Norme = norme;
             Power = power;
-            MT_U1 = mtU1;
-            MT_U2 = mtU2;
-            BT_U2 = btU2;
-            BT_I2 = btI2;
-            Nb_phase = nbPhase;
+            Mtu1 = mtU1;
+            Mtu2 = mtU2;
+            Btu2 = btU2;
+            Bti2 = btI2;
+            Nbphase = nbPhase;
             Prises = prises;
             Couplage = couplage;
             Cooling = cooling;

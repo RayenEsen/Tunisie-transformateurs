@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TransformateurServiceService } from '../Shared/Transformateur-service.service';
+import { Transformateur } from '../Shared/Transformateur-service.model';
 
 @Component({
   selector: 'app-Add_Modify-Transformateur',
@@ -24,6 +25,9 @@ export class Add_ModifyTransformateurComponent implements OnInit {
         console.log('Transformateur Data:', this.service.list);
       }
     });
+  }
+  saveTransformateur() {
+
   }
 
   // Function to handle image change

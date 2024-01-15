@@ -42,10 +42,6 @@ DeleteTransformateur(id:number)
   return this.http.delete(this.url+'/'+id)
 }
 
-UpdateTransformateur(transformateur: Transformateur) {
-  const urlWithId = `${this.url}/${transformateur.numero}`;
 
-  return this.http.put(urlWithId, transformateur);
-}
 
 }

@@ -11,7 +11,8 @@
               <h4 class="font-weight-bold mb-0" style="color: #51121E;">{{ service.list[0]?.marque }}<span class="text-muted font-weight-normal"></span></h4>
               <div class="text-muted mb-2">ID: {{ transformateurId }}</div>
               <a href="javascript:void(0)" class="btn btn-primary btn-sm" (click)="toggleEditMode()">Edit</a>&nbsp;
-              <a href="javascript:void(0)" class="btn btn-default btn-sm">Save</a>&nbsp;
+              <a href="javascript:void(0)" class="btn btn-default btn-sm" (click)="saveTransformateur(transformateurId)">Save</a>&nbsp;
+
               <a href="javascript:void(0)" class="btn btn-default btn-sm icon-btn"><i class="fa fa-mail"></i></a>
             </div>
             <input type="file" id="fileInput" accept="image/*" style="display: none;" (change)="handleFileInput($event)">
