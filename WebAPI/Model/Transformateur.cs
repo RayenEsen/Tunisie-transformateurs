@@ -21,11 +21,11 @@ namespace WebAPI.Model
         [Column(TypeName = "nvarchar(100)")]
         public string Power { get; set; } = "";
 
-        public float MT_U1 { get; set; }
-        public float MT_U2 { get; set; }
-        public float BT_U2 { get; set; }
-        public float BT_I2 { get; set; }
-        public int Nb_phase { get; set; }
+        public float Mtu1 { get; set; }
+        public float Mtu2 { get; set; }
+        public float Btu2 { get; set; }
+        public float Bti2 { get; set; }
+        public int Nbphase { get; set; }
 
         [Column(TypeName = "nvarchar(100)")]
         public string Prises { get; set; } = "";

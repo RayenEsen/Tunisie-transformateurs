@@ -1,155 +1,114 @@
+<!-- Your HTML component -->
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 <header class="masthead">
   <div>
     <div>
-      <div >
-        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-<div class="container bootdey flex-grow-1 container-p-y">
-
-  <div class="media align-items-center py-3 mb-3" style="display: flex; ">
-    <!-- Use Angular event binding and template reference variable -->
-    <img id="userImage" src="assets/Default_Transfromateur.png" alt="" class="d-block ui-w-100 rounded-circle" style="margin-top: 20px;" (click)="changeImage()">
-    <div class="media-body ml-4" style="margin-left: 23px;">
-      <h4 class="font-weight-bold mb-0" style="color: #51121E;">Transformateur Tunisie<span class="text-muted font-weight-normal"></span></h4>
-      <div class="text-muted mb-2">ID: 23472</div>
-      <a href="javascript:void(0)" class="btn btn-primary btn-sm">Edit</a>&nbsp;
-      <a href="javascript:void(0)" class="btn btn-default btn-sm">Save</a>&nbsp;
-      <a href="javascript:void(0)" class="btn btn-default btn-sm icon-btn"><i class="fa fa-mail"></i></a>
-    </div>
-    <!-- Add Angular template reference variable to the file input -->
-    <input type="file" id="fileInput" accept="image/*" style="display: none;" (change)="handleFileInput($event)">
-  </div>
-  
-  
-
-            <div class="card mb-4">
-              <div class="card-body">
-                <table class="table user-view-table m-0">
-                  <tbody>
-                    <tr>
-                      <th style="color: #51121E; white-space: nowrap;">Information General</th>
-                    </tr>
-                    <tr>
-                      <td>Marque:</td>
-                      <td>Sacem Industries</td>
-                    </tr>
-                    <tr>
-                      <td>Numero</td>
-                      <td>170112</td>
-                    </tr>
-                    <tr>
-                      <td>Client</td>
-                      <td>Ste Bouzid</td>
-                    </tr>
-                    <tr>
-                      <td>Norme:</td>
-                      <td>CEI76</td>
-                    </tr>
-                    <tr>
-                      <td>Conclusion:</td>
-                      <td><span>Conforme</span></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <hr class="border-light m-0">
-              <div class="table-responsive">
-                <table class="table card-table m-0">
-                  <tbody>
-                    <tr>
-                      <th style="color: #51121E;">Essais du Transformateur</th>
-                    </tr>
-                    <tr>
-                      <td>Rapport de Transformation</td>
-                      <td><span class="fa fa-check text-primary"></span></td>
-                    </tr>
-                    <tr>
-                      <td>Resistance Messurement</td>
-                      <td><span class="fa fa-check text-primary"></span></td>
-                    </tr>
-                    <tr>
-                      <td>Essai a vide</td>
-                      <td><span class="fa fa-times text-light"></span></td>
-                    </tr>
-                    <tr>
-                      <td>Essai en charge</td>
-                      <td><span class="fa fa-times text-light"></span></td>
-                    </tr>
-                    <tr>
-                      <td>Essai diélectriques</td>
-                      <td><span class="fa fa-times text-light"></span></td>
-                    </tr>
-                    <tr>
-                      <td>Essai du lequide isolant</td>
-                      <td><span class="fa fa-times text-light"></span></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+      <div>
+        <div class="container bootdey flex-grow-1 container-p-y">
+          <div class="media align-items-center py-3 mb-3" style="display: flex;">
+            <img id="userImage" src="assets/Default_Transfromateur.png" alt="" class="d-block ui-w-100 rounded-circle" style="margin-top: 20px;" (click)="changeImage()">
+            <div class="media-body ml-4" style="margin-left: 23px;">
+              <h4 class="font-weight-bold mb-0" style="color: #51121E;">{{ service.list[0]?.marque }}<span class="text-muted font-weight-normal"></span></h4>
+              <div class="text-muted mb-2">ID: {{ transformateurId }}</div>
+              <a href="javascript:void(0)" class="btn btn-primary btn-sm" (click)="toggleEditMode()">Edit</a>&nbsp;
+              <a href="javascript:void(0)" class="btn btn-default btn-sm">Save</a>&nbsp;
+              <a href="javascript:void(0)" class="btn btn-default btn-sm icon-btn"><i class="fa fa-mail"></i></a>
             </div>
+            <input type="file" id="fileInput" accept="image/*" style="display: none;" (change)="handleFileInput($event)">
+          </div>
 
-            <div class="card">
-              <div class="row no-gutters row-bordered">
-                
-                <div class="d-flex col-md align-items-center">
-                  
-                  <a href="javascript:void(0)" class="card-body d-block text-body">
-                    <div class="text-muted small line-height-1">MT:U1</div>
-                    <div><input name="MTU1" type="number" readonly></div>
-                  </a>
-                </div>
-                <div class="d-flex col-md align-items-center">
-                  <a href="javascript:void(0)" class="card-body d-block text-body">
-                    <div class="text-muted small line-height-1">MT:I1</div>
-                    <div><input name="MTI1" type="number" readonly></div>
-                  </a>
-                </div>
-                <div class="d-flex col-md align-items-center">
-                  <a href="javascript:void(0)" class="card-body d-block text-body">
-                    <div class="text-muted small line-height-1">BT:U2</div>
-                    <div><input name="BTU2" type="number" readonly></div>
-                  </a>
-                </div>
-                <div class="d-flex col-md align-items-center">
-                  <a href="javascript:void(0)" class="card-body d-block text-body">
-                    <div class="text-muted small line-height-1">BT:I2</div>
-                    <div><input name="BTI2" type="number" readonly></div>
-                  </a>
-                </div>
-              </div>
-              <hr class="border-light m-0">
-              <div class="card-body">
-
-                <table class="table user-view-table m-0">
-                  <tbody>
-                    <tr>
-                      <td>Puissance:</td>
-                      <td><input name="Puissance" type="number" readonly></td>
-                    </tr>
-                    <tr>
-                      <td>Nbr des phases:</td>
-                      <td><input name="Nbr_phases" type="number" readonly></td>
-                    </tr>
-                    <tr>
-                      <td>Prises</td>
-                      <td><input name="Prises" readonly></td>
-                    </tr>
-                    <tr>
-                      <td>Couplage</td>
-                      <td><input name="Couplage" readonly></td>
-                    </tr>
-                    <tr>
-                      <td>Refroidissement</td>
-                      <td><input name="Refroidissement" readonly></td>
-                    </tr>
-                    <tr>
-                      <td>Frequence</td>
-                      <td><input name="Frequence" readonly></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+          <div class="card mb-4">
+            <div class="card-body">
+              <table class="table user-view-table m-0">
+                <tbody>
+                  <tr>
+                    <th style="color: #51121E; white-space: nowrap;">Information General</th>
+                  </tr>
+                  <tr>
+                    <td>Marque:</td>
+                    <td>{{ service.list[0]?.marque }}</td>
+                  </tr>
+                  <tr>
+                    <td>Numero</td>
+                    <td>{{ service.list[0]?.numero }}</td>
+                  </tr>
+                  <tr>
+                    <td>Client</td>
+                    <td>{{ service.list[0]?.client }}</td>
+                  </tr>
+                  <tr>
+                    <td>Norme:</td>
+                    <td>{{ service.list[0]?.norme }}</td>
+                  </tr>
+                  <tr>
+                    <td>Conclusion:</td>
+                    <td><span>Conforme</span></td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
+
+          <div class="card">
+            <div class="row no-gutters row-bordered">
+              <div class="d-flex col-md align-items-center">
+                <a href="javascript:void(0)" class="card-body d-block text-body">
+                  <div class="text-muted small line-height-1">MT:U1</div>
+                  <div><input name="MTU1" type="number" value="{{ service.list[0]?.mtu1 }}" [readonly]="!isEditMode"></div>
+                </a>
+              </div>
+              <div class="d-flex col-md align-items-center">
+                <a href="javascript:void(0)" class="card-body d-block text-body">
+                  <div class="text-muted small line-height-1">MT:I1</div>
+                  <div><input name="MTI1" type="number" value="{{ service.list[0]?.mtu2 }}" [readonly]="!isEditMode"></div>
+                </a>
+              </div>
+              <div class="d-flex col-md align-items-center">
+                <a href="javascript:void(0)" class="card-body d-block text-body">
+                  <div class="text-muted small line-height-1">BT:U2</div>
+                  <div><input name="BTU2" type="number" value="{{ service.list[0]?.btu2 }}" [readonly]="!isEditMode"></div>
+                </a>
+              </div>
+              <div class="d-flex col-md align-items-center">
+                <a href="javascript:void(0)" class="card-body d-block text-body">
+                  <div class="text-muted small line-height-1">BT:I2</div>
+                  <div><input name="BTI2" type="number" value="{{ service.list[0]?.bti2 }}" [readonly]="!isEditMode"></div>
+                </a>
+              </div>
+            </div>
+            <hr class="border-light m-0">
+            <div class="card-body">
+              <table class="table user-view-table m-0">
+                <tbody>
+                  <tr>
+                    <td>Puissance:</td>
+                    <td><input name="Puissance" type="text" value="{{ service.list[0]?.power }}" [readonly]="!isEditMode"></td>
+                  </tr>
+                  <tr>
+                    <td>Nbr des phases:</td>
+                    <td><input name="Nbr_phases" type="number" value="{{ service.list[0]?.nbphase }}" [readonly]="!isEditMode"></td>
+                  </tr>
+                  <tr>
+                    <td>Prises</td>
+                    <td><input name="Prises" value="{{ service.list[0]?.prises }}" [readonly]="!isEditMode"></td>
+                  </tr>
+                  <tr>
+                    <td>Couplage</td>
+                    <td><input name="Couplage" value="{{ service.list[0]?.couplage }}" [readonly]="!isEditMode"></td>
+                  </tr>
+                  <tr>
+                    <td>Refroidissement</td>
+                    <td><input name="Refroidissement" value="{{ service.list[0]?.cooling }}" [readonly]="!isEditMode"></td>
+                  </tr>
+                  <tr>
+                    <td>Frequence</td>
+                    <td><input name="Frequence" type="number" value="{{ service.list[0]?.frequency }}" [readonly]="!isEditMode"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

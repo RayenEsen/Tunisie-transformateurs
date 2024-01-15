@@ -302,3 +302,6 @@ card {
     color: #fff; /* Lighter text color on hover */
     box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3); /* Add a subtle box-shadow on hover */
 }
+.btn-primary:active {
+  transform: scale(0.95); /* Add a slight scale effect on button click */
+}

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { TransformateurServiceService } from '../Shared/Transformateur-service.service';
 
 @Component({
   selector: 'app-Add_Modify-Transformateur',
@@ -6,10 +8,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./Add_Modify-Transformateur.component.css']
 })
 export class Add_ModifyTransformateurComponent implements OnInit {
+  transformateurId: number = 0;
 
-  constructor() { }
+  constructor(
+    private route: ActivatedRoute,
+    public service: TransformateurServiceService
+  ) { }
 
   ngOnInit() {
+    this.route.params.subscribe(params => {
+      this.transformateurId = +params['id'] || 0;
+
+      if (this.transformateurId) {
+        this.service.GetTransformateur(this.transformateurId);
+        console.log('Transformateur Data:', this.service.list);
+      }
+    });
   }
 
   // Function to handle image change
@@ -31,5 +45,10 @@ export class Add_ModifyTransformateurComponent implements OnInit {
       };
       reader.readAsDataURL(file);
     }
+  }
+  isEditMode: boolean = false; // Add this variable
+  // Function to toggle edit mode
+  toggleEditMode() {
+    this.isEditMode = !this.isEditMode;
   }
 }

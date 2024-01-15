@@ -4,11 +4,11 @@ export class Transformateur {
   client: string = "";
   norme: string = "";
   power: string = "";
-  mtU1: number = 0;
-  mtU2: number = 0;
-  btU2: number = 0;
-  btI2: number = 0;
-  nbPhase: number = 0;
+  mtu1: number = 0;
+  mtu2: number = 0;
+  btu2: number = 0;
+  bti2: number = 0;
+  nbphase: number = 0;
   prises: string = "";
   couplage: string = "";
   cooling: string = "";

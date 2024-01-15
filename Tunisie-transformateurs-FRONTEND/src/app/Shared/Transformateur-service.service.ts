@@ -22,10 +22,30 @@ this.http.get(this.url)
 })
 }
 
+GetTransformateur(transformerId: number) {
+  const urlWithId = `${this.url}/${transformerId}`;
+
+  this.http.get(urlWithId)
+    .subscribe({
+      next: res => {
+        this.list = [res as Transformateur]; // Assuming the response is a single transformer
+      },
+      error: err => {
+        console.log(err);
+      }
+    });
+}
+
 
 DeleteTransformateur(id:number)
 {
   return this.http.delete(this.url+'/'+id)
+}
+
+UpdateTransformateur(transformateur: Transformateur) {
+  const urlWithId = `${this.url}/${transformateur.numero}`;
+
+  return this.http.put(urlWithId, transformateur);
 }
 
 }

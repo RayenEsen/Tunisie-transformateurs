@@ -7,6 +7,7 @@ import { Add_ModifyTransformateurComponent } from './Add_Modify-Transformateur/A
 const routes: Routes = [
   { path: 'Transformateur', component: TransformateurInfoComponent },
   { path: 'Ajouter_Transformateur', component: Add_ModifyTransformateurComponent },
+  { path: 'Ajouter_Transformateur/:id', component: Add_ModifyTransformateurComponent }, // New route with parameter
   { path: '', component: DefaultComponentComponent }, // Default route
   // Add other routes as needed
 ];
