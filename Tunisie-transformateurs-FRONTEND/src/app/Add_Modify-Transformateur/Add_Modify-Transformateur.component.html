@@ -11,9 +11,7 @@
               <h4 class="font-weight-bold mb-0" style="color: #51121E;">{{ service.list[0]?.marque }}<span class="text-muted font-weight-normal"></span></h4>
               <div class="text-muted mb-2">ID: {{ transformateurId }}</div>
               <a href="javascript:void(0)" class="btn btn-primary btn-sm" (click)="toggleEditMode()">Edit</a>&nbsp;
-              <a href="javascript:void(0)" class="btn btn-default btn-sm" (click)="saveTransformateur(transformateurId)">Save</a>&nbsp;
-
-              <a href="javascript:void(0)" class="btn btn-default btn-sm icon-btn"><i class="fa fa-mail"></i></a>
+              <a href="javascript:void(0)" class="btn btn-default btn-sm" (click)="updateTransformateur()">Save</a>&nbsp;
             </div>
             <input type="file" id="fileInput" accept="image/*" style="display: none;" (change)="handleFileInput($event)">
           </div>
@@ -27,19 +25,19 @@
                   </tr>
                   <tr>
                     <td>Marque:</td>
-                    <td>{{ service.list[0]?.marque }}</td>
+                    <td><input name="Marque" [(ngModel)]="service.list[0].marque" [readonly]="!isEditMode"></td>
                   </tr>
                   <tr>
                     <td>Numero</td>
-                    <td>{{ service.list[0]?.numero }}</td>
+                    <td><input name="Numero" [(ngModel)]="service.list[0].numero" [readonly]="!isEditMode"></td>
                   </tr>
                   <tr>
                     <td>Client</td>
-                    <td>{{ service.list[0]?.client }}</td>
+                    <td><input name="Client" [(ngModel)]="service.list[0].client" [readonly]="!isEditMode"></td>
                   </tr>
                   <tr>
                     <td>Norme:</td>
-                    <td>{{ service.list[0]?.norme }}</td>
+                    <td><input name="Norme" [(ngModel)]="service.list[0].norme" [readonly]="!isEditMode"></td>
                   </tr>
                   <tr>
                     <td>Conclusion:</td>
@@ -55,25 +53,25 @@
               <div class="d-flex col-md align-items-center">
                 <a href="javascript:void(0)" class="card-body d-block text-body">
                   <div class="text-muted small line-height-1">MT:U1</div>
-                  <div><input name="MTU1" type="number" value="{{ service.list[0]?.mtu1 }}" [readonly]="!isEditMode"></div>
+                  <div><input name="MTU1" type="number" [(ngModel)]="service.list[0].mtu1" [readonly]="!isEditMode"></div>
                 </a>
               </div>
               <div class="d-flex col-md align-items-center">
                 <a href="javascript:void(0)" class="card-body d-block text-body">
                   <div class="text-muted small line-height-1">MT:I1</div>
-                  <div><input name="MTI1" type="number" value="{{ service.list[0]?.mtu2 }}" [readonly]="!isEditMode"></div>
+                  <div><input name="MTI1" type="number" [(ngModel)]="service.list[0].mtu2" [readonly]="!isEditMode"></div>
                 </a>
               </div>
               <div class="d-flex col-md align-items-center">
                 <a href="javascript:void(0)" class="card-body d-block text-body">
                   <div class="text-muted small line-height-1">BT:U2</div>
-                  <div><input name="BTU2" type="number" value="{{ service.list[0]?.btu2 }}" [readonly]="!isEditMode"></div>
+                  <div><input name="BTU2" type="number" [(ngModel)]="service.list[0].btu2" [readonly]="!isEditMode"></div>
                 </a>
               </div>
               <div class="d-flex col-md align-items-center">
                 <a href="javascript:void(0)" class="card-body d-block text-body">
                   <div class="text-muted small line-height-1">BT:I2</div>
-                  <div><input name="BTI2" type="number" value="{{ service.list[0]?.bti2 }}" [readonly]="!isEditMode"></div>
+                  <div><input name="BTI2" type="number" [(ngModel)]="service.list[0].bti2" [readonly]="!isEditMode"></div>
                 </a>
               </div>
             </div>
@@ -83,32 +81,33 @@
                 <tbody>
                   <tr>
                     <td>Puissance:</td>
-                    <td><input name="Puissance" type="text" value="{{ service.list[0]?.power }}" [readonly]="!isEditMode"></td>
+                    <td><input name="Puissance" type="text" [(ngModel)]="service.list[0].power" [readonly]="!isEditMode"></td>
                   </tr>
                   <tr>
                     <td>Nbr des phases:</td>
-                    <td><input name="Nbr_phases" type="number" value="{{ service.list[0]?.nbphase }}" [readonly]="!isEditMode"></td>
+                    <td><input name="Nbr_phases" type="number" [(ngModel)]="service.list[0].nbphase" [readonly]="!isEditMode"></td>
                   </tr>
                   <tr>
                     <td>Prises</td>
-                    <td><input name="Prises" value="{{ service.list[0]?.prises }}" [readonly]="!isEditMode"></td>
+                    <td><input name="Prises" [(ngModel)]="service.list[0].prises" [readonly]="!isEditMode"></td>
                   </tr>
                   <tr>
                     <td>Couplage</td>
-                    <td><input name="Couplage" value="{{ service.list[0]?.couplage }}" [readonly]="!isEditMode"></td>
+                    <td><input name="Couplage" [(ngModel)]="service.list[0].couplage" [readonly]="!isEditMode"></td>
                   </tr>
                   <tr>
                     <td>Refroidissement</td>
-                    <td><input name="Refroidissement" value="{{ service.list[0]?.cooling }}" [readonly]="!isEditMode"></td>
+                    <td><input name="Refroidissement" [(ngModel)]="service.list[0].cooling" [readonly]="!isEditMode"></td>
                   </tr>
                   <tr>
                     <td>Frequence</td>
-                    <td><input name="Frequence" type="number" value="{{ service.list[0]?.frequency }}" [readonly]="!isEditMode"></td>
+                    <td><input name="Frequence" type="number" [(ngModel)]="service.list[0].frequency" [readonly]="!isEditMode"></td>
                   </tr>
                 </tbody>
               </table>
             </div>
           </div>
+
         </div>
       </div>
     </div>

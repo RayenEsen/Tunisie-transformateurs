@@ -1,7 +1,7 @@
+// Add_Modify-Transformateur.component.ts
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TransformateurServiceService } from '../Shared/Transformateur-service.service';
-import { Transformateur } from '../Shared/Transformateur-service.model';
 
 @Component({
   selector: 'app-Add_Modify-Transformateur',
@@ -10,6 +10,8 @@ import { Transformateur } from '../Shared/Transformateur-service.model';
 })
 export class Add_ModifyTransformateurComponent implements OnInit {
   transformateurId: number = 0;
+  isEditMode: boolean = false;
+  transformateur: any = {};
 
   constructor(
     private route: ActivatedRoute,
@@ -17,6 +19,7 @@ export class Add_ModifyTransformateurComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
     this.route.params.subscribe(params => {
       this.transformateurId = +params['id'] || 0;
 
@@ -26,33 +29,51 @@ export class Add_ModifyTransformateurComponent implements OnInit {
       }
     });
   }
-  saveTransformateur() {
 
-  }
-
-  // Function to handle image change
   changeImage() {
-    // Trigger the file input click event using Angular template reference variable
     document.getElementById('fileInput')?.click();
   }
 
-  // Function to handle file input change
   handleFileInput(event: any) {
     const file = event.target.files[0];
     if (file) {
-      // Read the file as a data URL
       const reader = new FileReader();
       reader.onload = (e: any) => {
-        // Update the image source
         const userImage = document.getElementById('userImage') as HTMLImageElement;
         userImage.src = e.target.result;
       };
       reader.readAsDataURL(file);
     }
   }
-  isEditMode: boolean = false; // Add this variable
-  // Function to toggle edit mode
+
   toggleEditMode() {
     this.isEditMode = !this.isEditMode;
+  }
+
+  updateTransformateur() {
+        this.transformateur = {
+      marque: this.service.list[0].marque,
+      numero: this.service.list[0].numero,
+      client: this.service.list[0].client,
+      norme: this.service.list[0].norme,
+      mtu1: this.service.list[0].mtu1,
+      mtu2: this.service.list[0].mtu2,
+      btu2: this.service.list[0].btu2,
+      bti2: this.service.list[0].bti2,
+      power: this.service.list[0].power,
+      nbphase: this.service.list[0].nbphase,
+      prises: this.service.list[0].prises,
+      couplage: this.service.list[0].couplage,
+      cooling: this.service.list[0].cooling,
+      frequency: this.service.list[0].frequency,
+      // Add other properties as needed...
+    };
+    this.service.UpdateTransformateur(this.transformateurId, this.transformateur)
+      .subscribe({
+        next: (res => {
+          console.log('Transformateur updated successfully', res);
+          this.isEditMode = false;
+        })
+      });
   }
 }
