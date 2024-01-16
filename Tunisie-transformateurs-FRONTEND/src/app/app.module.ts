@@ -11,15 +11,17 @@ import { DefaultComponentComponent } from './Default-component/Default-component
 import { Add_ModifyTransformateurComponent } from './Add_Modify-Transformateur/Add_Modify-Transformateur.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { EssaiComponentComponent } from './Essai-component/Essai-component.component';
 @NgModule({
-  declarations: [
+  declarations: [	
     AppComponent,
       NavBarComponent,
       TopNavComponent,
       TransformateurInfoComponent,
       FooterComponent,
       DefaultComponentComponent,
-      Add_ModifyTransformateurComponent
+      Add_ModifyTransformateurComponent,
+      EssaiComponentComponent
    ],
   imports: [
     BrowserModule,

@@ -43,7 +43,7 @@
                       <div class="dropdown-menu dropdown-menu-end">
                         <a [routerLink]="['/Ajouter_Transformateur', transformateur.numero]"  class="dropdown-item">View Details</a>
                         <a href="./Transformateur" class="dropdown-item" (click)="onDelete(transformateur.numero)">Supprimer</a>
-                        <a href="#!" class="dropdown-item">Essais</a>
+                        <a [routerLink]="['/Essai_Transformateur', transformateur.numero]"  class="dropdown-item">Essais</a>
                     </div>
                     </div>
                   </td>

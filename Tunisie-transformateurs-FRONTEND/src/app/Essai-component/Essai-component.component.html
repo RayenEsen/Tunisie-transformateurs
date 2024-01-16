@@ -1,0 +1,388 @@
+<div #printSection class="invoice">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+<link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
+<div class="container invoice">
+  <div class="page-tools" style="margin-left: 786px;">
+    <div class="action-buttons">
+      <a class="btn bg-white btn-light mx-1px text-95" href="#" data-title="Print" (click)="onPrint()">
+        <i class="mr-1 fa fa-print text-primary-m1 text-120 w-2"></i>
+        Print
+      </a>
+      <a class="btn bg-white btn-light mx-1px text-95" href="#" data-title="Save">
+        <i class="mr-1 fa fa-save text-success-m1 text-120 w-2"></i>
+        Save
+      </a>
+    </div>
+</div>
+  <div class="invoice-header" >
+    <div class="row">
+      <div class="col-xs-8">
+        <h1>Pv d'essai <small>Transformateur</small></h1>
+        <h4 class="text-muted">NO: 554775/R1 | Date: {{ currentDate }}</h4>
+      </div>
+      <div class="col-xs-4">
+        <div class="media">
+          <div class="media-left">
+            <img class="media-object logo" src="assets/Logo.png" />
+          </div>
+          <ul class="media-body list-unstyled">
+            <li><strong>Tunisie transformateurs</strong></li>
+            <li>Rue Avicenne BP N° 3 2021</li>
+            <li>Oued Ellil-Tunis</li>
+            <li>71 629 664</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-header text-blue-d2" style="    margin: 40px 30px 20px;" >
+
+
+  <div class="row" style=" text-align: center;">
+    <div class="col-sm-6"  >
+        <div>
+            <span class="text-sm text-grey-m2 align-middle">Marque:</span>
+            <span class="text-600 text-110 text-blue align-middle"> {{ service.list[0]?.marque }}</span>
+        </div>
+        <div class="text-grey-m2">
+            <div class="my-1">
+                Numero: {{ service.list[0]?.numero }}
+            </div>
+            <div class="my-1">
+                Client: Ste Bouzid d'electrique
+            </div>
+            <div class="my-1"><b class="text-600">Norme: {{ service.list[0]?.norme }}</b></div>
+        </div>
+    </div>
+    <div class="col-sm-6" >
+      <div>
+          <span class="text-sm text-grey-m2 align-middle">Puissance:</span>
+          <span class="text-600 text-110 text-blue align-middle"> {{ service.list[0]?.power }} KVA</span>
+      </div>
+      <div class="text-grey-m2">
+          <div class="my-1">
+              MT:U1: {{ service.list[0]?.mtu1 }} V
+          </div>
+          <div class="my-1">
+              MT:I1 : {{ service.list[0]?.mtu2 }} A
+          </div>
+          <div class="my-1">
+            BT:U2: {{ service.list[0]?.btu2 }} V
+        </div>
+          <div class="my-1"><b class="text-600">BT:I2: {{ service.list[0]?.bti2 }} A</b></div>
+      </div>
+  </div>
+  <div class="col-sm-6">
+    <div>
+        <span class="text-sm text-grey-m2 align-middle">Nbr des phases:</span>
+        <span class="text-600 text-110 text-blue align-middle">{{ service.list[0]?.nbphase }}</span>
+    </div>
+    <div class="text-grey-m2">
+        <div class="my-1">
+            Prises: {{ service.list[0]?.prises }}
+        </div>
+        <div class="my-1">
+            Couplage: {{ service.list[0]?.couplage }}
+        </div>
+        <div class="my-1">
+          Refroidissement: {{ service.list[0]?.cooling }}
+      </div>
+        <div class="my-1"><b class="text-600">Frequence: {{ service.list[0]?.frequency }}Hz</b></div>
+    </div>
+</div>
+</div>
+</div>
+  <div class="invoice-body">
+    <div class="row" style="display: contents;">
+      <div class="col-xs-5" style="display: contents;">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Voltage Ratio / Rapport de transformation</h3>
+            <small>{{ service.list[0]?.mtu1 }} V/ {{ service.list[0]?.btu2 }} V / {{ service.list[0]?.couplage }}</small>
+          </div>
+          <table class="table table-bordered table-condensed" >
+            <thead>
+              <tr>
+                <th class="text-center colfix">Prises<br>
+                  <small class="text-muted">Tappings</small>
+                </th>
+                <th class="text-center ">Valeurs théorique
+                  <br>
+                  <small class="text-muted">Thoeric values</small>
+                </th>
+                <th class="text-center">Valeurs mesurées
+                  <br>
+                  <small class="text-muted">Messured values</small>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="text-center">
+                <td>
+                  1
+                  <br>
+                </td>
+                <td class="text-center">
+                  <span class="mono">78,75</span>
+                  <br>
+                </td>
+                <td class="text-center">
+                  <span class="mono"><input type="number"></span>
+                  <br>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="text-center">
+                  2
+                  <br>
+                </td>
+                <td class="text-center">
+                  <span class="mono">76,88</span>
+                  <br>
+                </td>
+                <td class="text-center">
+                  <span class="mono"><input type="number"></span>
+                  <br>
+                </td>
+              </tr>
+              <tr>
+                <td class="text-center">
+                  3
+                  <br>
+                </td>
+                <td class="text-center">
+                  <span class="mono">75,00</span>
+                  <br>
+                </td>
+                <td class="text-center">
+                  <span class="mono"><input type="number"></span>
+                  <br>
+                </td>
+              </tr>
+              <tr>
+                <td class="text-center">
+                  4
+                  <br>
+                </td>
+                <td class="text-center">
+                  <span class="mono">75,00</span>
+                  <br>
+                </td>
+                <td class="text-center">
+                  <span class="mono"><input type="number"></span>
+                  <br>
+                </td>
+              </tr>
+              <tr>
+                <td class="text-center">
+                  5
+                  <br>
+                </td>
+                <td class="text-center">
+                  <span class="mono">75,00</span>
+                  <br>
+                </td>
+                <td class="text-center">
+                  <span class="mono"><input type="number"></span>
+                  <br>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Voltage Ratio / Rapport de transformation</h3>
+            <p>{{ service.list[0]?.mtu1 }} V/ {{ service.list[0]?.btu2 }} V / {{ service.list[0]?.couplage }}</p>
+          </div>
+          <table class="table table-bordered table-condensed">
+            <thead>
+              <tr>
+                <th class="text-center colfix">Prises</th>
+                <th class="text-center colfix">Valeurs théorique</th>
+                <th class="text-center colfix">Valeurs mesurées</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  Lorem Ipsum Dolor
+                  <br>
+                  <small class="text-muted">The best lorem in town, try it now or leave forever</small>
+                </td>
+                <td class="text-right">
+                  <span class="mono">$1,000.00</span>
+                  <br>
+                  <small class="text-muted">Before Tax</small>
+                </td>
+                <td class="text-right">
+                  <span class="mono">$18,000.00</span>
+                  <br>
+                  <small class="text-muted">18 Units</small>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  Sit Amet Dolo
+                  <br>
+                  <small class="text-muted">Now you may sit</small>
+                </td>
+                <td class="text-right">
+                  <span class="mono">$120.00</span>
+                  <br>
+                  <small class="text-muted">Before Tax</small>
+                </td>
+                <td class="text-right">
+                  <span class="mono">$240.00</span>
+                  <br>
+                  <small class="text-muted">2 Units</small>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Services / Products</h3>
+      </div>
+      <table class="table table-bordered table-condensed">
+        <thead>
+          <tr>
+            <th>Item / Details</th>
+            <th class="text-center colfix">Unit Cost</th>
+            <th class="text-center colfix">Sum Cost</th>
+            <th class="text-center colfix">Discount</th>
+            <th class="text-center colfix">Tax</th>
+            <th class="text-center colfix">Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              Lorem Ipsum Dolor
+              <br>
+              <small class="text-muted">The best lorem in town, try it now or leave forever</small>
+            </td>
+            <td class="text-right">
+              <span class="mono">$1,000.00</span>
+              <br>
+              <small class="text-muted">Before Tax</small>
+            </td>
+            <td class="text-right">
+              <span class="mono">$18,000.00</span>
+              <br>
+              <small class="text-muted">18 Units</small>
+            </td>
+            <td class="text-right">
+              <span class="mono">- $1,800.00</span>
+              <br>
+              <small class="text-muted">Special -10%</small>
+            </td>
+            <td class="text-right">
+              <span class="mono">+ $3,240.00</span>
+              <br>
+              <small class="text-muted">VAT 20%</small>
+            </td>
+            <td class="text-right">
+              <strong class="mono">$19,440.00</strong>
+              <br>
+              <small class="text-muted mono">$16,200.00</small>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              Sit Amet Dolo
+              <br>
+              <small class="text-muted">Now you may sit</small>
+            </td>
+            <td class="text-right">
+              <span class="mono">$120.00</span>
+              <br>
+              <small class="text-muted">Before Tax</small>
+            </td>
+            <td class="text-right">
+              <span class="mono">$240.00</span>
+              <br>
+              <small class="text-muted">2 Units</small>
+            </td>
+            <td class="text-right">
+              <span class="mono">- $0.00</span>
+              <br>
+              <small class="text-muted">-</small>
+            </td>
+            <td class="text-right">
+              <span class="mono">+ $72.00</span>
+              <br>
+              <small class="text-muted">VAT:20% S:10%</small>
+            </td>
+            <td class="text-right">
+              <strong class="mono">$312.00</strong>
+              <br>
+              <small class="text-muted mono">$240.00</small>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="panel panel-default">
+      <table class="table table-bordered table-condensed">
+        <thead>
+          <tr>
+            <td class="text-center col-xs-1">Sub Total</td>
+            <td class="text-center col-xs-1">Discount</td>
+            <td class="text-center col-xs-1">Total</td>
+            <td class="text-center col-xs-1">Tax</td>
+            <td class="text-center col-xs-1">Final</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th class="text-center rowtotal mono">$18,240.00</th>
+            <th class="text-center rowtotal mono">-$1,800.00</th>
+            <th class="text-center rowtotal mono">$16,440.00</th>
+            <th class="text-center rowtotal mono">$3,312.00</th>
+            <th class="text-center rowtotal mono">$19,752.00</th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="row">
+      <div class="col-xs-7">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <i>Comments / Notes</i>
+            <hr style="margin:3px 0 5px" /> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit repudiandae numquam sit facere blanditiis, quasi distinctio ipsam? Libero odit ex expedita, facere sunt, possimus consectetur dolore, nobis iure amet vero.
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-5">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Payment Method</h3>
+          </div>
+          <div class="panel-body">
+            <p>For your convenience, you may deposite the final ammount at one of our banks</p>
+            <ul class="list-unstyled">
+              <li>Alpha Bank - <span class="mono">MO123456789456123</span></li>
+              <li>Beta Bank - <span class="mono">MO123456789456123</span></li>
+              <li>Gamma Bank - <span class="mono">MO123456789456123</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="invoice-footer">
+
+    Merci d'avoir choisi nos services. Nous espérons vous revoir bientôt.
+    <br/>
+    <strong>~Tunisie transformateurs~</strong>
+  </div>
+</div>
+
+</div>
+
