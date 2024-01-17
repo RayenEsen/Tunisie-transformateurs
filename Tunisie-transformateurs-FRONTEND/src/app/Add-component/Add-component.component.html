@@ -1,9 +1,9 @@
 <div class="formbold-main-wrapper">
   <!-- Author: FormBold Team -->
   <!-- Learn More: https://formbold.com -->
-  <div class="formbold-form-wrapper">
+  <div class="formbold-form-wrapper"  >
          <img src="assets/Logo.png" style="    margin-left: 320px;">
-    <form action="https://formbold.com/s/FORM_ID" method="POST">
+         <form #myForm="ngForm" (ngSubmit)="submitForm()">
       <div class="formbold-input-wrapp formbold-mb-3">
         <label for="firstname" class="formbold-form-label"> Marque / Id </label>
 
@@ -11,12 +11,15 @@
           <input
             placeholder="Tunisie transformateurs"
             class="formbold-form-input"
+            name="marque"
+            [(ngModel)]="TransformateurAjouter.marque"
           />
 
           <input
-
+            name="numero"
             placeholder="Numero"
             class="formbold-form-input"
+            [(ngModel)]="TransformateurAjouter.numero"
           />
         </div>
       </div>
@@ -24,23 +27,28 @@
       <div class="formbold-mb-3">
         <label for="age" class="formbold-form-label"> Client </label>
         <input
+          name="client"
           placeholder="Client"
           class="formbold-form-input"
+          [(ngModel)]="TransformateurAjouter.client"
+
         />
       </div>
 
       <div class="formbold-mb-3">
         <label for="age" class="formbold-form-label"> Norme </label>
         <input
+          name="norme"
           placeholder="Norme"
           class="formbold-form-input"
+          [(ngModel)]="TransformateurAjouter.norme"
         />
       </div>
 
       <div class="formbold-mb-3">
         <label class="formbold-form-label">Couplage</label>
 
-        <select class="formbold-form-input" name="occupation" id="occupation">
+        <select class="formbold-form-input" name="occupation" id="occupation"  name="couplage" [(ngModel)]="TransformateurAjouter.couplage">
           <option value="Mono">Mono</option>
           <option value="YNYN">Ynyn</option>
           <option value="DYN">Dyn</option>
@@ -51,8 +59,10 @@
       <div class="formbold-mb-3">
         <label for="email" class="formbold-form-label"> Puissance </label>
         <input
+          name="power"
           placeholder="Puissance"
           class="formbold-form-input"
+          [(ngModel)]="TransformateurAjouter.power"
         />
       </div>
 
@@ -60,14 +70,18 @@
         <label for="address" class="formbold-form-label"> Nbr des phases </label>
 
         <input
+          name="nbphase"
           placeholder="Nbr des phases"
           class="formbold-form-input formbold-mb-3"
+          [(ngModel)]="TransformateurAjouter.nbphase"
         />
         <label for="address" class="formbold-form-label"> Prises </label>
 
         <input
+          name="prises"
           placeholder="Prises"
           class="formbold-form-input"
+          [(ngModel)]="TransformateurAjouter.prises"
         />
       </div>
 
@@ -75,14 +89,18 @@
         <label for="address" class="formbold-form-label"> MT:U1 </label>
 
         <input
+          name="mtu1"
           placeholder="MT:U1"
           class="formbold-form-input formbold-mb-3"
+          [(ngModel)]="TransformateurAjouter.mtu1"
         />
         <label for="address" class="formbold-form-label"> BT:U2 </label>
 
         <input
+          name="btu2"
           placeholder="BT:U2"
           class="formbold-form-input"
+          [(ngModel)]="TransformateurAjouter.btu2"
         />
       </div>
 
@@ -90,14 +108,18 @@
         <label for="address" class="formbold-form-label"> Refroidissement	 </label>
 
         <input
+          name="cooling"
           placeholder="Refroidissement"
           class="formbold-form-input formbold-mb-3"
+          [(ngModel)]="TransformateurAjouter.cooling"
         />
         <label for="address" class="formbold-form-label"> Frequence </label>
 
         <input
+          name="frequency"
           placeholder="Frequence"
           class="formbold-form-input"
+          [(ngModel)]="TransformateurAjouter.frequency"
         />
       </div>
       <div class="formbold-mb-3">

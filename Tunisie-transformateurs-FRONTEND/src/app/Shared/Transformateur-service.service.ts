@@ -25,6 +25,10 @@ export class TransformateurServiceService {
       });
   }
 
+  AddTransformateur(transformateurAjouter: Transformateur): Observable<any> {
+    // Return the observable from the HTTP POST request
+    return this.http.post(this.url, transformateurAjouter);
+  }
   GetTransformateur(transformerId: number) {
     const urlWithId = `${this.url}/${transformerId}`;
 
