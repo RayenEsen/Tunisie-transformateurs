@@ -100,96 +100,56 @@
             <h3 class="panel-title">Voltage Ratio / Rapport de transformation</h3>
             <small>{{ service.list[0]?.mtu1 }} V/ {{ service.list[0]?.btu2 }} V / {{ service.list[0]?.couplage }}</small>
           </div>
-          <table class="table table-bordered table-condensed" >
-            <thead>
-              <tr>
-                <th class="text-center colfix">Prises<br>
-                  <small class="text-muted">Tappings</small>
-                </th>
-                <th class="text-center ">Valeurs théorique
-                  <br>
-                  <small class="text-muted">Thoeric values</small>
-                </th>
-                <th class="text-center">Valeurs mesurées
-                  <br>
-                  <small class="text-muted">Messured values</small>
-                </th>
-              </tr>
-            </thead>
+          <table class="table table-bordered table-condensed">
             <tbody>
-              <tr class="text-center">
-                <td>
-                  1
-                  <br>
-                </td>
-                <td class="text-center">
-                  <span class="mono">78,75</span>
-                  <br>
-                </td>
-                <td class="text-center">
-                  <span class="mono"><input type="number"></span>
-                  <br>
-                </td>
-              </tr>
-
               <tr>
-                <td class="text-center">
-                  2
-                  <br>
-                </td>
-                <td class="text-center">
-                  <span class="mono">76,88</span>
-                  <br>
-                </td>
-                <td class="text-center">
-                  <span class="mono"><input type="number"></span>
-                  <br>
-                </td>
+                <td class="text-center colfix">Prises / Tappings</td>
+                <td colspan="2" class="text-center colfix">Valeurs théorique / Thoeric values</td>
+                <td colspan="3" class="text-center colfix">Valeurs mesurées/Messured values</td>
               </tr>
               <tr>
-                <td class="text-center">
-                  3
-                  <br>
-                </td>
-                <td class="text-center">
-                  <span class="mono">75,00</span>
-                  <br>
-                </td>
-                <td class="text-center">
-                  <span class="mono"><input type="number"></span>
-                  <br>
-                </td>
+                <td class="text-center colfix">1</td>
+                <td class="text-center colfix"><input type="number" readonly [value]="getintervalle(0.95,1.005).toFixed(3)"></td>
+                <td class="text-center colfix"><input type="number" readonly [value]="getintervalle(0.95,0.995).toFixed(3)"></td>
+                <td class="text-center colfix"><input type="number"></td>
+                <td class="text-center colfix"><input type="number"></td>
+                <td class="text-center colfix"><input type="number"></td>
               </tr>
               <tr>
-                <td class="text-center">
-                  4
-                  <br>
-                </td>
-                <td class="text-center">
-                  <span class="mono">73,53</span>
-                  <br>
-                </td>
-                <td class="text-center">
-                  <span class="mono"><input type="number"></span>
-                  <br>
-                </td>
+                <td class="text-center colfix">2</td>
+                <td class="text-center colfix"><input type="number" readonly [value]="getintervalle(0.975,1.005).toFixed(3)"></td>
+                <td class="text-center colfix"><input type="number" readonly [value]="getintervalle(0.975,0.995).toFixed(3)"></td>
+                <td class="text-center colfix"><input type="number"></td>
+                <td class="text-center colfix"><input type="number"></td>
+                <td class="text-center colfix"><input type="number"></td>
               </tr>
               <tr>
-                <td class="text-center">
-                  5
-                  <br>
-                </td>
-                <td class="text-center">
-                  <span class="mono">71,25</span>
-                  <br>
-                </td>
-                <td class="text-center">
-                  <span class="mono"><input type="number"></span>
-                  <br>
-                </td>
+                <td class="text-center colfix">3</td>
+                <td class="text-center colfix"><input type="number" readonly [value]="getP3(1.005).toFixed(3)"></td>
+                <td class="text-center colfix"><input type="number" readonly [value]="getP3(0.995).toFixed(3)"></td>
+                <td class="text-center colfix"><input type="number"></td>
+                <td class="text-center colfix"><input type="number"></td>
+                <td class="text-center colfix"><input type="number"></td>
+              </tr>
+              <tr>
+                <td class="text-center colfix">4</td>
+                <td class="text-center colfix"><input type="number" readonly [value]="getintervalle(1.025,1.005).toFixed(3)"></td>
+                <td class="text-center colfix"><input type="number" readonly [value]="getintervalle(1.025,0.995).toFixed(3)"></td>
+                <td class="text-center colfix"><input type="number"></td>
+                <td class="text-center colfix"><input type="number"></td>
+                <td class="text-center colfix"><input type="number"></td>
+              </tr>
+              <tr>
+                <td class="text-center colfix">5</td>
+                <td class="text-center colfix"><input type="number" readonly [value]="getintervalle(1.05,1.005).toFixed(3)"></td>
+                <td class="text-center colfix"><input type="number" readonly [value]="getintervalle(1.05,0.995).toFixed(3)"></td>
+                <td class="text-center colfix"><input type="number"></td>
+                <td class="text-center colfix"><input type="number"></td>
+                <td class="text-center colfix"><input type="number"></td>
               </tr>
             </tbody>
           </table>
+
         </div>
         <div class="panel panel-default">
           <div class="panel-heading">

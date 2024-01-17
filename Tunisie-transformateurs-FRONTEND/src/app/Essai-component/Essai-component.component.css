@@ -127,7 +127,7 @@ body {
 }
 /* Styling for the input fields */
 input[type="number"] {
-  width: 70px;
+  width: 95px;
   padding: 5px;
   border: 1px solid #ccc;
   border-radius: 3px;

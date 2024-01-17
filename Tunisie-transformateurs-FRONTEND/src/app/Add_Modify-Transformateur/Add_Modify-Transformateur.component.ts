@@ -76,4 +76,20 @@ export class Add_ModifyTransformateurComponent implements OnInit {
         })
       });
   }
-}
+  getI1() {
+    let Resultat: number = 0;
+
+    if (this.service.list.length > 0) {
+      const power: number = parseFloat(this.service.list[0].power); // Convert string to number
+      const mtu1: number = this.service.list[0].mtu1; // Assuming mtu1 is a number
+
+      if (this.service.list[0].couplage.toUpperCase() === "MONO") {
+        Resultat = (power / mtu1) / Math.sqrt(3);
+      } else {
+        Resultat = power / mtu1;
+      }
+    }
+      this.service.list[0].mtu2 = Resultat;
+    }
+  }
+
