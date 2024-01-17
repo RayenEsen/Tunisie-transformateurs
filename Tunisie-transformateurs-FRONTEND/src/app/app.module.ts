@@ -12,6 +12,7 @@ import { Add_ModifyTransformateurComponent } from './Add_Modify-Transformateur/A
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { EssaiComponentComponent } from './Essai-component/Essai-component.component';
+import { AddComponentComponent } from './Add-component/Add-component.component';
 @NgModule({
   declarations: [	
     AppComponent,
@@ -21,7 +22,8 @@ import { EssaiComponentComponent } from './Essai-component/Essai-component.compo
       FooterComponent,
       DefaultComponentComponent,
       Add_ModifyTransformateurComponent,
-      EssaiComponentComponent
+      EssaiComponentComponent,
+      AddComponentComponent
    ],
   imports: [
     BrowserModule,

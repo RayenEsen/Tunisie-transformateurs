@@ -4,12 +4,13 @@ import { TransformateurInfoComponent } from './Transformateur-info/Transformateu
 import { DefaultComponentComponent } from './Default-component/Default-component.component';
 import { Add_ModifyTransformateurComponent } from './Add_Modify-Transformateur/Add_Modify-Transformateur.component';
 import { EssaiComponentComponent } from './Essai-component/Essai-component.component';
-
+import { AddComponentComponent } from './Add-component/Add-component.component';
 const routes: Routes = [
   { path: 'Transformateur', component: TransformateurInfoComponent },
   { path: 'Ajouter_Transformateur', component: Add_ModifyTransformateurComponent },
   { path: 'Ajouter_Transformateur/:id', component: Add_ModifyTransformateurComponent },
   { path: 'Essai_Transformateur/:id' , component: EssaiComponentComponent},
+  { path: 'Add_transformateur' , component: AddComponentComponent},
   // New route with parameter
   { path: '', component: DefaultComponentComponent }, // Default route
   // Add other routes as needed

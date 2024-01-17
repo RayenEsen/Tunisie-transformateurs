@@ -28,6 +28,8 @@ export class Add_ModifyTransformateurComponent implements OnInit {
         console.log('Transformateur Data:', this.service.list);
       }
     });
+    this.service.list[0].mtu2 = this.getI1();
+    this.service.list[0].bti2 = this.getI2();
   }
 
   changeImage() {
@@ -45,7 +47,11 @@ export class Add_ModifyTransformateurComponent implements OnInit {
       reader.readAsDataURL(file);
     }
   }
-
+  ngAfterViewInit() {
+    // Update mtu2 after the view has been initialized
+    this.service.list[0].mtu2 = this.getI1();
+    this.service.list[0].bti2 = this.getI2();
+  }
   toggleEditMode() {
     this.isEditMode = !this.isEditMode;
   }
@@ -84,12 +90,27 @@ export class Add_ModifyTransformateurComponent implements OnInit {
       const mtu1: number = this.service.list[0].mtu1; // Assuming mtu1 is a number
 
       if (this.service.list[0].couplage.toUpperCase() === "MONO") {
-        Resultat = (power / mtu1) / Math.sqrt(3);
-      } else {
         Resultat = power / mtu1;
+      } else {
+        Resultat = (power / mtu1) / Math.sqrt(3);
       }
     }
-      this.service.list[0].mtu2 = Resultat;
+      return Resultat;
     }
+    getI2() {
+      let Resultat: number = 0;
+
+      if (this.service.list.length > 0) {
+        const power: number = parseFloat(this.service.list[0].power); // Convert string to number
+        const btu2: number = this.service.list[0].btu2; // Assuming mtu1 is a number
+
+        if (this.service.list[0].couplage.toUpperCase() === "MONO") {
+          Resultat = (power / btu2) * 1000;
+        } else {
+          Resultat = ((power / btu2) * 1000) * Math.sqrt(3);
+        }
+      }
+        return Resultat;
+      }
   }
 
