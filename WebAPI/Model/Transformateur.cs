@@ -38,30 +38,7 @@ namespace WebAPI.Model
 
         public float Frequency { get; set; }
 
-        // Parameterless constructor for Entity Framework
-        protected Transformateur()
-        {
-        }
-
-        // Constructor for creating instances with required parameters
-        public Transformateur(int numero, string marque, string client, string norme, string power,
-                              float mtU1, float mtU2, float btU2, float btI2, int nbPhase,
-                              string prises, string couplage, string cooling, float frequency)
-        {
-            Numero = numero;
-            Marque = marque;
-            Client = client;
-            Norme = norme;
-            Power = power;
-            Mtu1 = mtU1;
-            Mtu2 = mtU2;
-            Btu2 = btU2;
-            Bti2 = btI2;
-            Nbphase = nbPhase;
-            Prises = prises;
-            Couplage = couplage;
-            Cooling = cooling;
-            Frequency = frequency;
-        }
+        //Navigation property
+        public Pv? Pv { get; set; }
     }
 }

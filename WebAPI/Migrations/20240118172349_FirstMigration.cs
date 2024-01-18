@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -33,11 +34,41 @@ namespace WebAPI.Migrations
                 {
                     table.PrimaryKey("PK_transformateurs", x => x.Numero);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "pvs",
+                columns: table => new
+                {
+                    Id_pv = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id_t = table.Column<int>(type: "int", nullable: false),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Resultat = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_pvs", x => x.Id_pv);
+                    table.ForeignKey(
+                        name: "FK_pvs_transformateurs_Id_t",
+                        column: x => x.Id_t,
+                        principalTable: "transformateurs",
+                        principalColumn: "Numero",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_pvs_Id_t",
+                table: "pvs",
+                column: "Id_t",
+                unique: true);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "pvs");
+
             migrationBuilder.DropTable(
                 name: "transformateurs");
         }

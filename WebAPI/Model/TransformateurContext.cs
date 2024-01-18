@@ -10,10 +10,17 @@ namespace WebAPI.Model
         }
 
         public DbSet<Transformateur> transformateurs { get; set; }
+        public DbSet<Pv> pvs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Transformateur>().HasKey(t => t.Numero);
+            // Configure one-to-one relationship
+            modelBuilder.Entity<Transformateur>()
+                .HasOne(t => t.Pv)
+                .WithOne(p => p.Transformateur)
+                .HasForeignKey<Pv>(p => p.Id_t); // Assuming Id_T is the foreign key in Pv referencing Transformateur
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
