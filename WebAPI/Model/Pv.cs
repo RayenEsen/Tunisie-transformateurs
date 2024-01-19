@@ -16,6 +16,14 @@ namespace WebAPI.Model
         public int? tappings;
         public float? Vt11 { get; set; }
         public float? Vt12 { get; set; }
+        public float? Vt21 { get; set; }
+        public float? Vt22 { get; set; }
+        public float? Vt31 { get; set; }
+        public float? Vt32 { get; set; }
+        public float? Vt41 { get; set; }
+        public float? Vt42 { get; set; }
+        public float? Vt51 { get; set; }
+        public float? Vt52 { get; set; }
         public float? Vm11 { get; set; }
         public float? Vm12 { get; set; }
         public float? Vm13 { get; set; }

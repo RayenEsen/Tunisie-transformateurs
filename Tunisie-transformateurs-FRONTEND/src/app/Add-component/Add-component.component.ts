@@ -48,9 +48,17 @@ export class AddComponentComponent implements OnInit {
               id_t: this.transformateurAjouter.numero,
               date: new Date(),
               resultat: 'Aucun test',
-              tappings: undefined,
+              tappings: 5,
               vt11: undefined,
               vt12: undefined,
+              vt21: undefined,
+              vt22: undefined,
+              vt31: undefined,
+              vt32: undefined,
+              vt41: undefined,
+              vt42: undefined,
+              vt51: undefined,
+              vt52: undefined,
               vm11: undefined,
               vm12: undefined,
               vm13: undefined,
@@ -88,5 +96,29 @@ export class AddComponentComponent implements OnInit {
       // Handle other types of errors, if any
       console.error('Error adding Transformateur', error);
     }
+  }
+  getP3(MultiplyFactor: number): number {
+    let result: number = 0;
+
+    if (this.service.list[0].couplage.toUpperCase() === "MONO") {
+      result = (this.service.list[0].mtu1 / this.service.list[0].btu2) * 1000;
+    } else if (this.service.list[0].couplage.toUpperCase() === "YNYN") {
+      result = (this.service.list[0].mtu1 / this.service.list[0].btu2) * 1000;
+    } else if (this.service.list[0].couplage.toUpperCase() === "DYN") {
+      result =( ( this.service.list[0].mtu1 / this.service.list[0].mtu2) * 1000 )* Math.sqrt(3);
+    } else {
+      result = ( ( (this.service.list[0].mtu1 / this.service.list[0].mtu2) * 1000 )* Math.sqrt(3) )/ 2;
+    }
+
+    result = result * MultiplyFactor;
+    // Do not call toFixed here, so the result is a number
+    return result;
+  }
+  getPI(MultiplyFactor : number)
+  {
+    return this.getP3(1)*MultiplyFactor;
+  }
+  getintervalle(MultiplyFactor: number,x : number){
+    return this.getPI(x)*MultiplyFactor;
   }
 }

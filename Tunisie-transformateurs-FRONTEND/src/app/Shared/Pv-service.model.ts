@@ -8,6 +8,14 @@ export class Pv {
   tappings: number | undefined;
   vt11: number | undefined;
   vt12: number | undefined;
+  vt21: number | undefined;
+  vt22: number | undefined;
+  vt31: number | undefined;
+  vt32: number | undefined;
+  vt41: number | undefined;
+  vt42: number | undefined;
+  vt51: number | undefined;
+  vt52: number | undefined;
   vm11: number | undefined;
   vm12: number | undefined;
   vm13: number | undefined;
