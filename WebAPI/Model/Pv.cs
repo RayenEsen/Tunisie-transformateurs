@@ -14,23 +14,23 @@ namespace WebAPI.Model
         public string? Resultat { get; set; } // Result property
         //Voltage Ratio Data
         public int? tappings;
-        public float? Vt11;
-        public float? Vt12;
-        public float? Vm11;
-        public float? Vm12;
-        public float? Vm13;
-        public float? Vm21;
-        public float? Vm22;
-        public float? Vm23;
-        public float? Vm31;
-        public float? Vm32;
-        public float? Vm33;
-        public float? Vm41;
-        public float? Vm42;
-        public float? Vm43;
-        public float? Vm51;
-        public float? Vm52;
-        public float? Vm53;
+        public float? Vt11 { get; set; }
+        public float? Vt12 { get; set; }
+        public float? Vm11 { get; set; }
+        public float? Vm12 { get; set; }
+        public float? Vm13 { get; set; }
+        public float? Vm21 { get; set; }
+        public float? Vm22 { get; set; }
+        public float? Vm23 { get; set; }
+        public float? Vm31 { get; set; }
+        public float? Vm32 { get; set; }
+        public float? Vm33 { get; set; }
+        public float? Vm41 { get; set; }
+        public float? Vm42 { get; set; }
+        public float? Vm43 { get; set; }
+        public float? Vm51 { get; set; }
+        public float? Vm52 { get; set; }
+        public float? Vm53 { get; set; }
         public Transformateur? Transformateur { get; set; }
     }
 }

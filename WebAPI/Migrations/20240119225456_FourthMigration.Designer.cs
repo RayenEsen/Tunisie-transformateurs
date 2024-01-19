@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebAPI.Model;
 
@@ -11,9 +12,11 @@ using WebAPI.Model;
 namespace WebAPI.Migrations
 {
     [DbContext(typeof(TransformateurContext))]
-    partial class TransformateurContextModelSnapshot : ModelSnapshot
+    [Migration("20240119225456_FourthMigration")]
+    partial class FourthMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,57 +41,6 @@ namespace WebAPI.Migrations
 
                     b.Property<string>("Resultat")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<float?>("Vm11")
-                        .HasColumnType("real");
-
-                    b.Property<float?>("Vm12")
-                        .HasColumnType("real");
-
-                    b.Property<float?>("Vm13")
-                        .HasColumnType("real");
-
-                    b.Property<float?>("Vm21")
-                        .HasColumnType("real");
-
-                    b.Property<float?>("Vm22")
-                        .HasColumnType("real");
-
-                    b.Property<float?>("Vm23")
-                        .HasColumnType("real");
-
-                    b.Property<float?>("Vm31")
-                        .HasColumnType("real");
-
-                    b.Property<float?>("Vm32")
-                        .HasColumnType("real");
-
-                    b.Property<float?>("Vm33")
-                        .HasColumnType("real");
-
-                    b.Property<float?>("Vm41")
-                        .HasColumnType("real");
-
-                    b.Property<float?>("Vm42")
-                        .HasColumnType("real");
-
-                    b.Property<float?>("Vm43")
-                        .HasColumnType("real");
-
-                    b.Property<float?>("Vm51")
-                        .HasColumnType("real");
-
-                    b.Property<float?>("Vm52")
-                        .HasColumnType("real");
-
-                    b.Property<float?>("Vm53")
-                        .HasColumnType("real");
-
-                    b.Property<float?>("Vt11")
-                        .HasColumnType("real");
-
-                    b.Property<float?>("Vt12")
-                        .HasColumnType("real");
 
                     b.HasKey("Id_pv");
 

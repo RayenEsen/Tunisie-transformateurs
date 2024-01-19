@@ -47,7 +47,25 @@ export class AddComponentComponent implements OnInit {
               id_pv: 0, // This will be populated by the server
               id_t: this.transformateurAjouter.numero,
               date: new Date(),
-              resultat: 'Aucun test'
+              resultat: 'Aucun test',
+              tappings: undefined,
+              vt11: undefined,
+              vt12: undefined,
+              vm11: undefined,
+              vm12: undefined,
+              vm13: undefined,
+              vm21: undefined,
+              vm22: undefined,
+              vm23: undefined,
+              vm31: undefined,
+              vm32: undefined,
+              vm33: undefined,
+              vm41: undefined,
+              vm42: undefined,
+              vm43: undefined,
+              vm51: undefined,
+              vm52: undefined,
+              vm53: undefined
             };
 
             // Use forkJoin to combine multiple observables

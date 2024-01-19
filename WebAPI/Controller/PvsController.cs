@@ -41,6 +41,21 @@ namespace WebAPI.Controller
             return pv;
         }
 
+        [HttpGet("ByTransformateur/{transformateurId}")]
+        public async Task<ActionResult<IEnumerable<Pv>>> GetPvsByTransformateur(int transformateurId)
+        {
+            // Retrieve all PVs that correspond to the given Transformateur ID
+            var pvs = await _context.pvs.Where(p => p.Id_t == transformateurId).ToListAsync();
+
+            if (pvs == null || pvs.Count == 0)
+            {
+                return NotFound();
+            }
+
+            return pvs;
+        }
+
+
         // PUT: api/Pvs/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]

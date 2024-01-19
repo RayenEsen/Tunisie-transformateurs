@@ -23,5 +23,8 @@ export class PvServiceService {
     const apiUrl = `${this.url}/ByTransformateur/${transformerId}`;
     return this.http.get<Pv[]>(apiUrl);
   }
-
+  UpdateTransformateur(id : number , UpdatePv : Pv): Observable<any>
+  {
+    return this.http.put<Pv>(`${this.url}/${id}`,UpdatePv);
+  }
 }
