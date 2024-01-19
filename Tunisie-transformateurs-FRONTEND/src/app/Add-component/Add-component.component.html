@@ -12,14 +12,14 @@
             placeholder="Tunisie transformateurs"
             class="formbold-form-input"
             name="marque"
-            [(ngModel)]="TransformateurAjouter.marque"
+            [(ngModel)]="transformateurAjouter.marque"
           />
 
           <input
             name="numero"
             placeholder="Numero"
             class="formbold-form-input"
-            [(ngModel)]="TransformateurAjouter.numero"
+            [(ngModel)]="transformateurAjouter.numero"
           />
         </div>
       </div>
@@ -30,7 +30,7 @@
           name="client"
           placeholder="Client"
           class="formbold-form-input"
-          [(ngModel)]="TransformateurAjouter.client"
+          [(ngModel)]="transformateurAjouter.client"
 
         />
       </div>
@@ -41,14 +41,14 @@
           name="norme"
           placeholder="Norme"
           class="formbold-form-input"
-          [(ngModel)]="TransformateurAjouter.norme"
+          [(ngModel)]="transformateurAjouter.norme"
         />
       </div>
 
       <div class="formbold-mb-3">
         <label class="formbold-form-label">Couplage</label>
 
-        <select class="formbold-form-input" name="occupation" id="occupation"  name="couplage" [(ngModel)]="TransformateurAjouter.couplage">
+        <select class="formbold-form-input" name="occupation" id="occupation"  name="couplage" [(ngModel)]="transformateurAjouter.couplage">
           <option value="Mono">Mono</option>
           <option value="YNYN">Ynyn</option>
           <option value="DYN">Dyn</option>
@@ -62,7 +62,7 @@
           name="power"
           placeholder="Puissance"
           class="formbold-form-input"
-          [(ngModel)]="TransformateurAjouter.power"
+          [(ngModel)]="transformateurAjouter.power"
         />
       </div>
 
@@ -73,7 +73,7 @@
           name="nbphase"
           placeholder="Nbr des phases"
           class="formbold-form-input formbold-mb-3"
-          [(ngModel)]="TransformateurAjouter.nbphase"
+          [(ngModel)]="transformateurAjouter.nbphase"
         />
         <label for="address" class="formbold-form-label"> Prises </label>
 
@@ -81,7 +81,7 @@
           name="prises"
           placeholder="Prises"
           class="formbold-form-input"
-          [(ngModel)]="TransformateurAjouter.prises"
+          [(ngModel)]="transformateurAjouter.prises"
         />
       </div>
 
@@ -92,7 +92,7 @@
           name="mtu1"
           placeholder="MT:U1"
           class="formbold-form-input formbold-mb-3"
-          [(ngModel)]="TransformateurAjouter.mtu1"
+          [(ngModel)]="transformateurAjouter.mtu1"
         />
         <label for="address" class="formbold-form-label"> BT:U2 </label>
 
@@ -100,7 +100,7 @@
           name="btu2"
           placeholder="BT:U2"
           class="formbold-form-input"
-          [(ngModel)]="TransformateurAjouter.btu2"
+          [(ngModel)]="transformateurAjouter.btu2"
         />
       </div>
 
@@ -111,7 +111,7 @@
           name="cooling"
           placeholder="Refroidissement"
           class="formbold-form-input formbold-mb-3"
-          [(ngModel)]="TransformateurAjouter.cooling"
+          [(ngModel)]="transformateurAjouter.cooling"
         />
         <label for="address" class="formbold-form-label"> Frequence </label>
 
@@ -119,7 +119,7 @@
           name="frequency"
           placeholder="Frequence"
           class="formbold-form-input"
-          [(ngModel)]="TransformateurAjouter.frequency"
+          [(ngModel)]="transformateurAjouter.frequency"
         />
       </div>
       <div class="formbold-mb-3">
@@ -146,7 +146,7 @@
         </label>
       </div>
 
-      <button class="formbold-btn">Submit</button>
+      <button class="formbold-btn"><a href="./Transformateur">Ajouter</a></button>
     </form>
   </div>
 </div>

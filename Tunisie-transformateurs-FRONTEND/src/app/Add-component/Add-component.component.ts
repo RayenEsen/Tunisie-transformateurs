@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Transformateur } from '../Shared/Transformateur-service.model';
+import { Pv } from '../Shared/Pv-service.model';
 import { TransformateurServiceService } from '../Shared/Transformateur-service.service';
-import { Observer } from 'rxjs';
+import { PvServiceService } from '../Shared/Pv-service.service';
+import { forkJoin, of } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-Add-component',
@@ -10,7 +13,7 @@ import { Observer } from 'rxjs';
 })
 export class AddComponentComponent implements OnInit {
 
-  TransformateurAjouter : Transformateur =
+  transformateurAjouter: Transformateur =
   {
     numero: 0,
     marque: '',
@@ -26,24 +29,41 @@ export class AddComponentComponent implements OnInit {
     couplage: '',
     cooling: '',
     frequency: 0
-  }
+  };
 
-  constructor(public service: TransformateurServiceService) { }
+  constructor(public service: TransformateurServiceService, public servicePv: PvServiceService) { }
 
   ngOnInit() {
   }
+
   submitForm() {
     try {
       // Call your service method with the form data
-      this.service.AddTransformateur(this.TransformateurAjouter)
+      this.service.AddTransformateur(this.transformateurAjouter)
+        .pipe(
+          switchMap((response: any) => {
+            // Create PvAjouter using the correct id_t
+            const pvAjouter: Pv = {
+              id_pv: 0, // This will be populated by the server
+              id_t: this.transformateurAjouter.numero,
+              date: new Date(),
+              resultat: 'Aucun test'
+            };
+
+            // Use forkJoin to combine multiple observables
+            return forkJoin([
+              of(response), // The response from AddTransformateur
+              this.servicePv.AddPv(pvAjouter) // Observable from AddPv
+            ]);
+          })
+        )
         .subscribe({
-          next: response => {
-            // The observable is successful, handle the response
-            console.log('Transformateur added successfully', response);
+          next: ([transformateurResponse, pvResponse]) => {
+            console.log('Transformateur added successfully', transformateurResponse);
+            console.log('Pv added successfully', pvResponse);
           },
           error: error => {
-            // The observable encountered an error, handle the error
-            console.error('Error adding Transformateur', error);
+            console.error('Error adding Transformateur or Pv', error);
           }
         });
     } catch (error) {

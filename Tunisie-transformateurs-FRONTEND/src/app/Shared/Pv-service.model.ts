@@ -1,6 +1,6 @@
-export interface Pv {
-  id_pv: number;
-  id_t: number;
-  date: Date;
-  resultat: string;
+export class Pv {
+  id_pv: number | undefined;
+  id_t: number | undefined;
+  date: Date  = new Date();
+  resultat: string | undefined;
 }

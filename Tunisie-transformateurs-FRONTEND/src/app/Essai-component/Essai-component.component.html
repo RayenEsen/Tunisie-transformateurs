@@ -1,4 +1,4 @@
-<div #printSection class="invoice">
+<div #printSection class="invoice" >
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
 <link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
 <div class="container invoice">
@@ -16,9 +16,13 @@
 </div>
   <div class="invoice-header" >
     <div class="row">
-      <div class="col-xs-8">
+      <div class="col-xs-8" *ngIf="pv">
         <h1>Pv d'essai <small>Transformateur</small></h1>
-        <h4 class="text-muted">NO: 554775/R1 | Date: {{ currentDate }}</h4>
+        <h4 class="text-muted" *ngIf="pv && pv.length > 0">
+          No: {{ pv[0].id_pv }} | Date: {{ pv[0].date.toString().split('T')[0] }}
+        </h4>
+
+
       </div>
       <div class="col-xs-4">
         <div class="media">
@@ -42,52 +46,52 @@
     <div class="col-sm-6"  >
         <div>
             <span class="text-sm text-grey-m2 align-middle">Marque:</span>
-            <span class="text-600 text-110 text-blue align-middle"> {{ service.list[0]?.marque }}</span>
+            <span class="text-600 text-110 text-blue align-middle"> {{ service.list[0].marque }}</span>
         </div>
         <div class="text-grey-m2">
             <div class="my-1">
-                Numero: {{ service.list[0]?.numero }}
+                Numero: {{ service.list[0].numero }}
             </div>
             <div class="my-1">
                 Client: Ste Bouzid d'electrique
             </div>
-            <div class="my-1"><b class="text-600">Norme: {{ service.list[0]?.norme }}</b></div>
+            <div class="my-1"><b class="text-600">Norme: {{ service.list[0].norme }}</b></div>
         </div>
     </div>
     <div class="col-sm-6" >
       <div>
           <span class="text-sm text-grey-m2 align-middle">Puissance:</span>
-          <span class="text-600 text-110 text-blue align-middle"> {{ service.list[0]?.power }} KVA</span>
+          <span class="text-600 text-110 text-blue align-middle"> {{ service.list[0].power }} KVA</span>
       </div>
       <div class="text-grey-m2">
           <div class="my-1">
-              MT:U1: {{ service.list[0]?.mtu1 }} V
+              MT:U1: {{ service.list[0].mtu1 }} V
           </div>
           <div class="my-1">
-              MT:I1 : {{ service.list[0]?.mtu2 }} A
+              MT:I1 : {{ service.list[0].mtu2 }} A
           </div>
           <div class="my-1">
-            BT:U2: {{ service.list[0]?.btu2 }} V
+            BT:U2: {{ service.list[0].btu2 }} V
         </div>
-          <div class="my-1"><b class="text-600">BT:I2: {{ service.list[0]?.bti2 }} A</b></div>
+          <div class="my-1"><b class="text-600">BT:I2: {{ service.list[0].bti2 }} A</b></div>
       </div>
   </div>
   <div class="col-sm-6">
     <div>
         <span class="text-sm text-grey-m2 align-middle">Nbr des phases:</span>
-        <span class="text-600 text-110 text-blue align-middle">{{ service.list[0]?.nbphase }}</span>
+        <span class="text-600 text-110 text-blue align-middle">{{ service.list[0].nbphase }}</span>
     </div>
     <div class="text-grey-m2">
         <div class="my-1">
-            Prises: {{ service.list[0]?.prises }}
+            Prises: {{ service.list[0].prises }}
         </div>
         <div class="my-1">
-            Couplage: {{ service.list[0]?.couplage }}
+            Couplage: {{ service.list[0].couplage }}
         </div>
         <div class="my-1">
-          Refroidissement: {{ service.list[0]?.cooling }}
+          Refroidissement: {{ service.list[0].cooling }}
       </div>
-        <div class="my-1"><b class="text-600">Frequence: {{ service.list[0]?.frequency }}Hz</b></div>
+        <div class="my-1"><b class="text-600">Frequence: {{ service.list[0].frequency }}Hz</b></div>
     </div>
 </div>
 </div>
@@ -98,7 +102,7 @@
         <div class="panel panel-default">
           <div class="panel-heading">
             <h3 class="panel-title">Voltage Ratio / Rapport de transformation</h3>
-            <small>{{ service.list[0]?.mtu1 }} V/ {{ service.list[0]?.btu2 }} V / {{ service.list[0]?.couplage }}</small>
+            <small>{{ service.list[0].mtu1 }} V/ {{ service.list[0].btu2 }} V / {{ service.list[0].couplage }}</small>
           </div>
           <table class="table table-bordered table-condensed">
             <tbody>
