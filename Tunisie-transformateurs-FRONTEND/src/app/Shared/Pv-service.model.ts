@@ -31,5 +31,4 @@ export class Pv {
   vm51: number | undefined;
   vm52: number | undefined;
   vm53: number | undefined;
-
 }

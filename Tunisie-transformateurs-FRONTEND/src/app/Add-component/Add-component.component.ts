@@ -49,16 +49,16 @@ export class AddComponentComponent implements OnInit {
               date: new Date(),
               resultat: 'Aucun test',
               tappings: 5,
-              vt11: undefined,
-              vt12: undefined,
-              vt21: undefined,
-              vt22: undefined,
-              vt31: undefined,
-              vt32: undefined,
-              vt41: undefined,
-              vt42: undefined,
-              vt51: undefined,
-              vt52: undefined,
+              vt11: this.getintervalle(0.95,1.005),
+              vt12: this.getintervalle(0.95,0.995),
+              vt21: this.getintervalle(0.975,1.005),
+              vt22: this.getintervalle(0.975,0.995),
+              vt31: this.getP3(1.005),
+              vt32: this.getP3(0.995),
+              vt41: this.getintervalle(1.025,1.005),
+              vt42: this.getintervalle(1.025,0.995),
+              vt51: this.getintervalle(1.05,1.005),
+              vt52: this.getintervalle(1.05,0.995),
               vm11: undefined,
               vm12: undefined,
               vm13: undefined,
@@ -100,14 +100,14 @@ export class AddComponentComponent implements OnInit {
   getP3(MultiplyFactor: number): number {
     let result: number = 0;
 
-    if (this.service.list[0].couplage.toUpperCase() === "MONO") {
-      result = (this.service.list[0].mtu1 / this.service.list[0].btu2) * 1000;
-    } else if (this.service.list[0].couplage.toUpperCase() === "YNYN") {
-      result = (this.service.list[0].mtu1 / this.service.list[0].btu2) * 1000;
-    } else if (this.service.list[0].couplage.toUpperCase() === "DYN") {
-      result =( ( this.service.list[0].mtu1 / this.service.list[0].mtu2) * 1000 )* Math.sqrt(3);
+    if (this.transformateurAjouter.couplage.toUpperCase() === "MONO") {
+      result = (this.transformateurAjouter.mtu1 / this.transformateurAjouter.btu2) * 1000;
+    } else if (this.transformateurAjouter.couplage.toUpperCase() === "YNYN") {
+      result = (this.transformateurAjouter.mtu1 / this.transformateurAjouter.btu2) * 1000;
+    } else if (this.transformateurAjouter.couplage.toUpperCase() === "DYN") {
+      result =( ( this.transformateurAjouter.mtu1 / this.transformateurAjouter.mtu2) * 1000 )* Math.sqrt(3);
     } else {
-      result = ( ( (this.service.list[0].mtu1 / this.service.list[0].mtu2) * 1000 )* Math.sqrt(3) )/ 2;
+      result = ( ( (this.transformateurAjouter.mtu1 /this.transformateurAjouter.mtu2) * 1000 )* Math.sqrt(3) )/ 2;
     }
 
     result = result * MultiplyFactor;
