@@ -28,8 +28,6 @@ export class Add_ModifyTransformateurComponent implements OnInit {
         console.log('Transformateur Data:', this.service.list);
       }
     });
-    this.service.list[0].mtu2 = this.getI1();
-    this.service.list[0].bti2 = this.getI2();
   }
 
   changeImage() {
@@ -47,25 +45,23 @@ export class Add_ModifyTransformateurComponent implements OnInit {
       reader.readAsDataURL(file);
     }
   }
-  ngAfterViewInit() {
-    // Update mtu2 after the view has been initialized
-    this.service.list[0].mtu2 = this.getI1();
-    this.service.list[0].bti2 = this.getI2();
-  }
+
   toggleEditMode() {
     this.isEditMode = !this.isEditMode;
   }
 
   updateTransformateur() {
+    const i1 = this.getI1();
+    const i2 = this.getI2();
         this.transformateur = {
       marque: this.service.list[0].marque,
       numero: this.service.list[0].numero,
       client: this.service.list[0].client,
       norme: this.service.list[0].norme,
       mtu1: this.service.list[0].mtu1,
-      mtu2: this.service.list[0].mtu2,
+      mtu2: i1,
       btu2: this.service.list[0].btu2,
-      bti2: this.service.list[0].bti2,
+      bti2: i2,
       power: this.service.list[0].power,
       nbphase: this.service.list[0].nbphase,
       prises: this.service.list[0].prises,
