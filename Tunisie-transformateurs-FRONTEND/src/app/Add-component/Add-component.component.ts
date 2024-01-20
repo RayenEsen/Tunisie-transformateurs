@@ -5,7 +5,7 @@ import { TransformateurServiceService } from '../Shared/Transformateur-service.s
 import { PvServiceService } from '../Shared/Pv-service.service';
 import { forkJoin, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-Add-component',
   templateUrl: './Add-component.component.html',
@@ -31,85 +31,87 @@ export class AddComponentComponent implements OnInit {
     frequency: 0
   };
 
-  constructor(public service: TransformateurServiceService, public servicePv: PvServiceService) { }
+  constructor(public service: TransformateurServiceService, public servicePv: PvServiceService, private router: Router) { }
 
   ngOnInit() {
 
   }
 
-  validateForm() {
-    const values = Object.values(this.transformateurAjouter);
-    return values.every(value => value);
+  validateForm(): boolean {
+    return Object.values(this.transformateurAjouter).every(value => value !== undefined && value !== '');
   }
+
 
 
   submitForm() {
     try {
-      this.transformateurAjouter.mtu2 = this.getI1();
-      this.transformateurAjouter.bti2 = this.getI2();
-      // Call your service method with the form data
-      if (this.validateForm())
-      {
+        // Call service method to add Transformateur
+        this.transformateurAjouter.mtu2 = this.getI1();
+        this.transformateurAjouter.bti2 = this.getI2();
+        if (!this.validateForm()) {
+          alert("Tout les champ sont obligatoire")
+          return;
+        }
         this.service.AddTransformateur(this.transformateurAjouter)
-        .pipe(
-          switchMap((response: any) => {
-            // Create PvAjouter using the correct id_t
-            const pvAjouter: Pv = {
-              id_pv: 0, // This will be populated by the server
-              id_t: this.transformateurAjouter.numero,
-              date: new Date(),
-              resultat: 'Aucun test',
-              tappings: 5,
-              vt11: this.getintervalle(0.95,1.005),
-              vt12: this.getintervalle(0.95,0.995),
-              vt21: this.getintervalle(0.975,1.005),
-              vt22: this.getintervalle(0.975,0.995),
-              vt31: this.getP3(1.005),
-              vt32: this.getP3(0.995),
-              vt41: this.getintervalle(1.025,1.005),
-              vt42: this.getintervalle(1.025,0.995),
-              vt51: this.getintervalle(1.05,1.005),
-              vt52: this.getintervalle(1.05,0.995),
-              vm11: undefined,
-              vm12: undefined,
-              vm13: undefined,
-              vm21: undefined,
-              vm22: undefined,
-              vm23: undefined,
-              vm31: undefined,
-              vm32: undefined,
-              vm33: undefined,
-              vm41: undefined,
-              vm42: undefined,
-              vm43: undefined,
-              vm51: undefined,
-              vm52: undefined,
-              vm53: undefined
-            };
+          .pipe(
+            switchMap(() => {
+              // Create PvAjouter using the correct id_t
+              const pvAjouter: Pv = {
+                id_pv: 0, // This will be populated by the server
+                id_t: this.transformateurAjouter.numero,
+                date: new Date(),
+                resultat: 'Aucun test',
+                tappings: 5,
+                vt11: this.getintervalle(0.95, 1.005),
+                vt12: this.getintervalle(0.95, 0.995),
+                vt21: this.getintervalle(0.975, 1.005),
+                vt22: this.getintervalle(0.975, 0.995),
+                vt31: this.getP3(1.005),
+                vt32: this.getP3(0.995),
+                vt41: this.getintervalle(1.025, 1.005),
+                vt42: this.getintervalle(1.025, 0.995),
+                vt51: this.getintervalle(1.05, 1.005),
+                vt52: this.getintervalle(1.05, 0.995),
+                vm11: undefined,
+                vm12: undefined,
+                vm13: undefined,
+                vm21: undefined,
+                vm22: undefined,
+                vm23: undefined,
+                vm31: undefined,
+                vm32: undefined,
+                vm33: undefined,
+                vm41: undefined,
+                vm42: undefined,
+                vm43: undefined,
+                vm51: undefined,
+                vm52: undefined,
+                vm53: undefined
+              };
 
-            // Use forkJoin to combine multiple observables
-            return forkJoin([
-              of(response), // The response from AddTransformateur
-              this.servicePv.AddPv(pvAjouter) // Observable from AddPv
-            ]);
-          })
-        )
-        .subscribe({
-          next: ([transformateurResponse, pvResponse]) => {
-            console.log('Transformateur added successfully', transformateurResponse);
-            console.log('Pv added successfully', pvResponse);
-          },
-          error: error => {
-            console.error('Error adding Transformateur or Pv', error);
-          }
-        });
-      }
-      alert("Tous les champs sont obligatoires");
+              // Call service method to add Pv
+              return this.servicePv.AddPv(pvAjouter);
+            })
+          )
+          .subscribe({
+            next: (pvResponse: any) => {
+              console.log('Transformateur added successfully', this.transformateurAjouter);
+              console.log('Pv added successfully', pvResponse);
+              this.router.navigate(['/Transformateur']);
+            },
+            error: (error: any) => {
+              alert("Tout les champ sont obligatoire");
+              console.error('Error adding Transformateur or Pv', error);
+            }
+          });
     } catch (error) {
-      // Handle other types of errors, if any
+      alert("Le champ 'numero' est obligatoire");
       console.error('Error adding Transformateur', error);
+      return;
     }
   }
+
+
   getP3(MultiplyFactor: number): number {
     let result: number = 0;
 
