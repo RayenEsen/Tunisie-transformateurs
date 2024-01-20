@@ -5,7 +5,7 @@ export class Pv {
   resultat: string | undefined;
 
   // Voltage Ratio properties (nullable)
-  tappings: number | undefined;
+  tappings: number = 0;
   vt11: number | undefined;
   vt12: number | undefined;
   vt21: number | undefined;

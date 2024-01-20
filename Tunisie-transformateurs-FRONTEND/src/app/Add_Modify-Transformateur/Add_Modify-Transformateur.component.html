@@ -57,12 +57,16 @@
                 </tr>
                 <tr>
                   <td>Rapport de transformation</td>
-                  <td><span class="fa fa-check text-primary"></span></td>
-
+                  <td *ngIf="ValidateEssais()">
+                    <span class="fa fa-check text-primary"></span>
+                  </td>
+                  <td *ngIf="!ValidateEssais()">
+                    <span class="fa fa-times text-light"></span>
+                  </td>
                 </tr>
                 <tr>
                   <td>Mesure de resistance</td>
-                  <td><span class="fa fa-check text-primary"></span></td>
+                  <td><span class="fa fa-times text-light"></span></td>
 
                 </tr>
                 <tr>
