@@ -51,17 +51,16 @@ export class Add_ModifyTransformateurComponent implements OnInit {
   }
 
   updateTransformateur() {
-    const i1 = this.getI1();
-    const i2 = this.getI2();
+
         this.transformateur = {
       marque: this.service.list[0].marque,
       numero: this.service.list[0].numero,
       client: this.service.list[0].client,
       norme: this.service.list[0].norme,
       mtu1: this.service.list[0].mtu1,
-      mtu2: i1,
+      mtu2: this.service.list[0].mtu2,
       btu2: this.service.list[0].btu2,
-      bti2: i2,
+      bti2: this.service.list[0].bti2,
       power: this.service.list[0].power,
       nbphase: this.service.list[0].nbphase,
       prises: this.service.list[0].prises,
@@ -78,35 +77,5 @@ export class Add_ModifyTransformateurComponent implements OnInit {
         })
       });
   }
-  getI1() {
-    let Resultat: number = 0;
-
-    if (this.service.list.length > 0) {
-      const power: number = parseFloat(this.service.list[0].power); // Convert string to number
-      const mtu1: number = this.service.list[0].mtu1; // Assuming mtu1 is a number
-
-      if (this.service.list[0].couplage.toUpperCase() === "MONO") {
-        Resultat = power / mtu1;
-      } else {
-        Resultat = (power / mtu1) / Math.sqrt(3);
-      }
-    }
-      return Resultat;
-    }
-    getI2() {
-      let Resultat: number = 0;
-
-      if (this.service.list.length > 0) {
-        const power: number = parseFloat(this.service.list[0].power); // Convert string to number
-        const btu2: number = this.service.list[0].btu2; // Assuming mtu1 is a number
-
-        if (this.service.list[0].couplage.toUpperCase() === "MONO") {
-          Resultat = (power / btu2) * 1000;
-        } else {
-          Resultat = ((power / btu2) * 1000) * Math.sqrt(3);
-        }
-      }
-        return Resultat;
-      }
   }
 

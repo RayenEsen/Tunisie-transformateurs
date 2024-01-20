@@ -42,6 +42,20 @@
       }
       );
     }
+    savePvValues() {
+      if (this.pv && this.pv.length > 0 && this.pv[0].id_pv !== undefined) {
+        // Call a service method to update the Pv values on the server
+        this.pvService.UpdatePv(this.pv[0].id_pv, this.pv[0]).subscribe(
+          response => {
+            console.log('Pv values updated successfully', response);
+          },
+          error => {
+            console.error('Error updating Pv values', error);
+          }
+        );
+      }
+    }
+
 
     getCurrentDate() {
       const today = new Date();
@@ -51,32 +65,10 @@
       this.currentDate = today.toLocaleDateString('en-US', options);
     }
 
+
     // Function to handle the print action
     onPrint() {
       window.print();
     }
-    getP3(MultiplyFactor: number): number {
-      let result: number = 0;
 
-      if (this.service.list[0].couplage.toUpperCase() === "MONO") {
-        result = (this.service.list[0].mtu1 / this.service.list[0].btu2) * 1000;
-      } else if (this.service.list[0].couplage.toUpperCase() === "YNYN") {
-        result = (this.service.list[0].mtu1 / this.service.list[0].btu2) * 1000;
-      } else if (this.service.list[0].couplage.toUpperCase() === "DYN") {
-        result =( ( this.service.list[0].mtu1 / this.service.list[0].mtu2) * 1000 )* Math.sqrt(3);
-      } else {
-        result = ( ( (this.service.list[0].mtu1 / this.service.list[0].mtu2) * 1000 )* Math.sqrt(3) )/ 2;
-      }
-
-      result = result * MultiplyFactor;
-      // Do not call toFixed here, so the result is a number
-      return result;
-    }
-    getPI(MultiplyFactor : number)
-    {
-      return this.getP3(1)*MultiplyFactor;
-    }
-    getintervalle(MultiplyFactor: number,x : number){
-      return this.getPI(x)*MultiplyFactor;
-    }
   }

@@ -8,7 +8,7 @@
         <i class="mr-1 fa fa-print text-primary-m1 text-120 w-2"></i>
         Print
       </a>
-      <a class="btn bg-white btn-light mx-1px text-95" href="#" data-title="Save">
+      <a class="btn bg-white btn-light mx-1px text-95" (click)="savePvValues()" data-title="Save">
         <i class="mr-1 fa fa-save text-success-m1 text-120 w-2"></i>
         Save
       </a>
@@ -102,7 +102,7 @@
             <h3 class="panel-title">Voltage Ratio / Rapport de transformation</h3>
             <small>{{ service.list[0].mtu1 }} V/ {{ service.list[0].btu2 }} V / {{ service.list[0].couplage }}</small>
           </div>
-          <table class="table table-bordered table-condensed">
+          <table class="table table-bordered table-condensed"  *ngIf="pv && pv.length > 0">
             <tbody>
               <tr>
                 <td class="text-center colfix">Prises / Tappings</td>
@@ -111,43 +111,43 @@
               </tr>
               <tr>
                 <td class="text-center colfix">1</td>
-                <td class="text-center colfix"><input type="number" readonly [value]="getintervalle(0.95,1.005).toFixed(3)"></td>
-                <td class="text-center colfix"><input type="number" readonly [value]="getintervalle(0.95,0.995).toFixed(3)"></td>
-                <td class="text-center colfix"><input type="number"></td>
-                <td class="text-center colfix"><input type="number"></td>
-                <td class="text-center colfix"><input type="number"></td>
+                <td class="text-center colfix"><input type="number" readonly [value]="this.pv[0].vt11?.toFixed(3)"></td>
+                <td class="text-center colfix"><input type="number" readonly [value]="this.pv[0].vt12?.toFixed(3)"></td>
+                <td class="text-center colfix"><input type="number"[(ngModel)]="pv[0].vm11"></td>
+                <td class="text-center colfix"><input type="number"[(ngModel)]="pv[0].vm12"></td>
+                <td class="text-center colfix"><input type="number"[(ngModel)]="pv[0].vm13"></td>
               </tr>
               <tr>
                 <td class="text-center colfix">2</td>
-                <td class="text-center colfix"><input type="number" readonly [value]="getintervalle(0.975,1.005).toFixed(3)"></td>
-                <td class="text-center colfix"><input type="number" readonly [value]="getintervalle(0.975,0.995).toFixed(3)"></td>
-                <td class="text-center colfix"><input type="number"></td>
-                <td class="text-center colfix"><input type="number"></td>
-                <td class="text-center colfix"><input type="number"></td>
+                <td class="text-center colfix"><input type="number" readonly [value]="this.pv[0].vt21?.toFixed(3)"></td>
+                <td class="text-center colfix"><input type="number" readonly [value]="this.pv[0].vt22?.toFixed(3)"></td>
+                <td class="text-center colfix"><input type="number"[(ngModel)]="pv[0].vm21"></td>
+                <td class="text-center colfix"><input type="number"[(ngModel)]="pv[0].vm22"></td>
+                <td class="text-center colfix"><input type="number"[(ngModel)]="pv[0].vm23"></td>
               </tr>
               <tr>
                 <td class="text-center colfix">3</td>
-                <td class="text-center colfix"><input type="number" readonly [value]="getP3(1.005).toFixed(3)"></td>
-                <td class="text-center colfix"><input type="number" readonly [value]="getP3(0.995).toFixed(3)"></td>
-                <td class="text-center colfix"><input type="number"></td>
-                <td class="text-center colfix"><input type="number"></td>
-                <td class="text-center colfix"><input type="number"></td>
+                <td class="text-center colfix"><input type="number" readonly [value]="this.pv[0].vt31?.toFixed(3)"></td>
+                <td class="text-center colfix"><input type="number" readonly [value]="this.pv[0].vt32?.toFixed(3)"></td>
+                <td class="text-center colfix"><input type="number"[(ngModel)]="pv[0].vm31"></td>
+                <td class="text-center colfix"><input type="number"[(ngModel)]="pv[0].vm32"></td>
+                <td class="text-center colfix"><input type="number"[(ngModel)]="pv[0].vm33"></td>
               </tr>
               <tr>
                 <td class="text-center colfix">4</td>
-                <td class="text-center colfix"><input type="number" readonly [value]="getintervalle(1.025,1.005).toFixed(3)"></td>
-                <td class="text-center colfix"><input type="number" readonly [value]="getintervalle(1.025,0.995).toFixed(3)"></td>
-                <td class="text-center colfix"><input type="number"></td>
-                <td class="text-center colfix"><input type="number"></td>
-                <td class="text-center colfix"><input type="number"></td>
+                <td class="text-center colfix"><input type="number" readonly [value]="this.pv[0].vt41?.toFixed(3)"></td>
+                <td class="text-center colfix"><input type="number" readonly [value]="this.pv[0].vt42?.toFixed(3)"></td>
+                <td class="text-center colfix"><input type="number"[(ngModel)]="pv[0].vm41"></td>
+                <td class="text-center colfix"><input type="number"[(ngModel)]="pv[0].vm42"></td>
+                <td class="text-center colfix"><input type="number"[(ngModel)]="pv[0].vm43"></td>
               </tr>
               <tr>
                 <td class="text-center colfix">5</td>
-                <td class="text-center colfix"><input type="number" readonly [value]="getintervalle(1.05,1.005).toFixed(3)"></td>
-                <td class="text-center colfix"><input type="number" readonly [value]="getintervalle(1.05,0.995).toFixed(3)"></td>
-                <td class="text-center colfix"><input type="number"></td>
-                <td class="text-center colfix"><input type="number"></td>
-                <td class="text-center colfix"><input type="number"></td>
+                <td class="text-center colfix"><input type="number" readonly [value]="this.pv[0].vt51?.toFixed(3)"></td>
+                <td class="text-center colfix"><input type="number" readonly [value]="this.pv[0].vt52?.toFixed(3)"></td>
+                <td class="text-center colfix"><input type="number"[(ngModel)]="pv[0].vm51"></td>
+                <td class="text-center colfix"><input type="number"[(ngModel)]="pv[0].vm52"></td>
+                <td class="text-center colfix"><input type="number"[(ngModel)]="pv[0].vm53"></td>
               </tr>
             </tbody>
           </table>

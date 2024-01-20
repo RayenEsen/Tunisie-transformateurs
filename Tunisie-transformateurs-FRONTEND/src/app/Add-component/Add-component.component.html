@@ -3,9 +3,9 @@
   <!-- Learn More: https://formbold.com -->
   <div class="formbold-form-wrapper"  >
          <img src="assets/Logo.png" style="    margin-left: 320px;">
-         <form #myForm="ngForm" (ngSubmit)="submitForm()">
+
       <div class="formbold-input-wrapp formbold-mb-3">
-        <label for="firstname" class="formbold-form-label"> Marque / Id </label>
+        <label for="firstname" class="formbold-form-label"> Marque / Id <small style="color: red;">*</small></label>
 
         <div>
           <input
@@ -25,7 +25,7 @@
       </div>
 
       <div class="formbold-mb-3">
-        <label for="age" class="formbold-form-label"> Client </label>
+        <label for="age" class="formbold-form-label"> Client <small style="color: red;">*</small></label>
         <input
           name="client"
           placeholder="Client"
@@ -36,7 +36,7 @@
       </div>
 
       <div class="formbold-mb-3">
-        <label for="age" class="formbold-form-label"> Norme </label>
+        <label for="age" class="formbold-form-label"> Norme <small style="color: red;">*</small></label>
         <input
           name="norme"
           placeholder="Norme"
@@ -46,18 +46,20 @@
       </div>
 
       <div class="formbold-mb-3">
-        <label class="formbold-form-label">Couplage</label>
-
-        <select class="formbold-form-input" name="occupation" id="occupation"  name="couplage" [(ngModel)]="transformateurAjouter.couplage">
+        <label class="formbold-form-label">Couplage<small style="color: red;">*</small></label>
+        <select class="formbold-form-input" name="occupation" id="occupation" name="couplage" [(ngModel)]="transformateurAjouter.couplage">
+          <option value="" disabled selected>Sélectionner le couplage</option>
           <option value="Mono">Mono</option>
           <option value="YNYN">Ynyn</option>
           <option value="DYN">Dyn</option>
           <option value="YZ">YZ</option>
         </select>
+
+
       </div>
 
       <div class="formbold-mb-3">
-        <label for="email" class="formbold-form-label"> Puissance </label>
+        <label for="email" class="formbold-form-label"> Puissance <small style="color: red;">*</small></label>
         <input
           name="power"
           placeholder="Puissance"
@@ -67,7 +69,7 @@
       </div>
 
       <div class="formbold-mb-3">
-        <label for="address" class="formbold-form-label"> Nbr des phases </label>
+        <label for="address" class="formbold-form-label"> Nbr des phases <small style="color: red;">*</small></label>
 
         <input
           name="nbphase"
@@ -75,7 +77,7 @@
           class="formbold-form-input formbold-mb-3"
           [(ngModel)]="transformateurAjouter.nbphase"
         />
-        <label for="address" class="formbold-form-label"> Prises </label>
+        <label for="address" class="formbold-form-label"> Prises <small style="color: red;">*</small></label>
 
         <input
           name="prises"
@@ -86,7 +88,7 @@
       </div>
 
       <div class="formbold-mb-3">
-        <label for="address" class="formbold-form-label"> MT:U1 </label>
+        <label for="address" class="formbold-form-label"> MT:U1 <small style="color: red;">*</small></label>
 
         <input
           name="mtu1"
@@ -94,7 +96,7 @@
           class="formbold-form-input formbold-mb-3"
           [(ngModel)]="transformateurAjouter.mtu1"
         />
-        <label for="address" class="formbold-form-label"> BT:U2 </label>
+        <label for="address" class="formbold-form-label"> BT:U2 <small style="color: red;">*</small></label>
 
         <input
           name="btu2"
@@ -105,7 +107,7 @@
       </div>
 
       <div class="formbold-mb-3">
-        <label for="address" class="formbold-form-label"> Refroidissement	 </label>
+        <label for="address" class="formbold-form-label"> Refroidissement	<small style="color: red;">*</small></label>
 
         <input
           name="cooling"
@@ -113,7 +115,7 @@
           class="formbold-form-input formbold-mb-3"
           [(ngModel)]="transformateurAjouter.cooling"
         />
-        <label for="address" class="formbold-form-label"> Frequence </label>
+        <label for="address" class="formbold-form-label"> Frequence <small style="color: red;">*</small></label>
 
         <input
           name="frequency"
@@ -146,7 +148,7 @@
         </label>
       </div>
 
-      <button class="formbold-btn">Ajouter</button>
-    </form>
+      <button class="formbold-btn" (click)="submitForm()">Ajouter</button>
+
   </div>
 </div>

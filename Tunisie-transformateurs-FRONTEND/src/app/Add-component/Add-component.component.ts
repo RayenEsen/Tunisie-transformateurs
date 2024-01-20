@@ -34,12 +34,23 @@ export class AddComponentComponent implements OnInit {
   constructor(public service: TransformateurServiceService, public servicePv: PvServiceService) { }
 
   ngOnInit() {
+
   }
+
+  validateForm() {
+    const values = Object.values(this.transformateurAjouter);
+    return values.every(value => value);
+  }
+
 
   submitForm() {
     try {
+      this.transformateurAjouter.mtu2 = this.getI1();
+      this.transformateurAjouter.bti2 = this.getI2();
       // Call your service method with the form data
-      this.service.AddTransformateur(this.transformateurAjouter)
+      if (this.validateForm())
+      {
+        this.service.AddTransformateur(this.transformateurAjouter)
         .pipe(
           switchMap((response: any) => {
             // Create PvAjouter using the correct id_t
@@ -92,6 +103,8 @@ export class AddComponentComponent implements OnInit {
             console.error('Error adding Transformateur or Pv', error);
           }
         });
+      }
+      alert("Tous les champs sont obligatoires");
     } catch (error) {
       // Handle other types of errors, if any
       console.error('Error adding Transformateur', error);
@@ -121,4 +134,34 @@ export class AddComponentComponent implements OnInit {
   getintervalle(MultiplyFactor: number,x : number){
     return this.getPI(x)*MultiplyFactor;
   }
+  getI1() {
+    let Resultat: number = 0;
+
+
+      const power: number = parseFloat(this.transformateurAjouter.power); // Convert string to number
+      const mtu1: number = this.transformateurAjouter.mtu1; // Assuming mtu1 is a number
+
+      if (this.transformateurAjouter.couplage.toUpperCase() === "MONO") {
+        Resultat = power / mtu1;
+      } else {
+        Resultat = (power / mtu1) / Math.sqrt(3);
+      }
+
+      return Resultat;
+    }
+    getI2() {
+      let Resultat: number = 0;
+
+
+        const power: number = parseFloat(this.transformateurAjouter.power); // Convert string to number
+        const btu2: number = this.transformateurAjouter.btu2; // Assuming mtu1 is a number
+
+        if (this.transformateurAjouter.couplage.toUpperCase() === "MONO") {
+          Resultat = (power / btu2) * 1000;
+        } else {
+          Resultat = ((power / btu2) * 1000) * Math.sqrt(3);
+        }
+
+        return Resultat;
+      }
 }
