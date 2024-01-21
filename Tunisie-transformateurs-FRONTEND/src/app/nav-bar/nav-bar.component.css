@@ -11,7 +11,7 @@
     position: relative;
     display: table-cell;
     width: 60px;
-    height: 36px;
+    height: 50px;
     text-align: center;
     vertical-align: middle;
     font-size: 20px;
@@ -55,7 +55,7 @@ nav.main-menu.expanded {
     left: 0;
     width: 60px;
     overflow: hidden;
-    z-index: 900;   
+    z-index: 900;
 }
 
 /* Main Menu List Styles */
@@ -102,10 +102,20 @@ nav.main-menu.expanded {
 
 /* Logout Styles */
 .main-menu>ul.logout {
-    position: absolute;
-    left: 0;
-    bottom: 0;
+  position: fixed;
+  left: 0;
+  bottom: 0;
 }
+
+.main-menu>ul.logout .nav-text {
+  transition: opacity 0s ease; /* Adjust the duration as needed */
+  opacity: 0; /* Set initial opacity to fully hidden */
+}
+
+.main-menu:hover>ul.logout .nav-text {
+  opacity: 1; /* Show the text on hover over the .main-menu */
+}
+
 
 /* Hover Scrollable Effect */
 .no-touch .scrollable.hover {
@@ -168,4 +178,13 @@ nav.main-menu li.active>a,
 .main-menu li>a,
 .main-menu .nav-text {
     font-size: 16px;
+}
+/* Normal styles for your component */
+
+
+/* Styles specifically for printing */
+@media print {
+  .printable {
+    display: none;
+  }
 }

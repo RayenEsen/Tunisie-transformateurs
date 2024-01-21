@@ -13,8 +13,9 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { EssaiComponentComponent } from './Essai-component/Essai-component.component';
 import { AddComponentComponent } from './Add-component/Add-component.component';
+import { EditProfileComponentComponent } from './EditProfile-component/EditProfile-component.component';
 @NgModule({
-  declarations: [	
+  declarations: [		
     AppComponent,
       NavBarComponent,
       TopNavComponent,
@@ -23,7 +24,8 @@ import { AddComponentComponent } from './Add-component/Add-component.component';
       DefaultComponentComponent,
       Add_ModifyTransformateurComponent,
       EssaiComponentComponent,
-      AddComponentComponent
+      AddComponentComponent,
+      EditProfileComponentComponent
    ],
   imports: [
     BrowserModule,

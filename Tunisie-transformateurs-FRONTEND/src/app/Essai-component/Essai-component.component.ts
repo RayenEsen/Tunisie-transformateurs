@@ -1,5 +1,5 @@
   import { Component, OnInit } from '@angular/core';
-  import { ActivatedRoute } from '@angular/router';
+  import { ActivatedRoute, Router } from '@angular/router';
   import { TransformateurServiceService } from '../Shared/Transformateur-service.service';
   import { Pv } from '../Shared/Pv-service.model';
   import { PvServiceService } from '../Shared/Pv-service.service';
@@ -69,6 +69,7 @@
     // Function to handle the print action
     onPrint() {
       window.print();
+
     }
 
   }
