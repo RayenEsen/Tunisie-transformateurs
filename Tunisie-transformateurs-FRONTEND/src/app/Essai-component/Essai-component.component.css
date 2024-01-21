@@ -7,7 +7,7 @@
 
 /* General body styling */
 body {
-  background-color: aliceblue;
+  background-color: #f4f4f4;
   transition: background 0.3s ease-in-out; /* Adding a background transition */
 }
 
