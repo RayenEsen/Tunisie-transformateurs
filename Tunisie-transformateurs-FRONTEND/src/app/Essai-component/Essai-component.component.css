@@ -1,12 +1,13 @@
 /* Gradient background for the main container */
 .cd__main {
+
   background: linear-gradient(to right, #9796f0, #fbc7d4) !important;
   transition: background 0.3s ease-in-out; /* Adding a background transition */
 }
 
 /* General body styling */
 body {
-  background: #eee;
+  background-color: aliceblue;
   transition: background 0.3s ease-in-out; /* Adding a background transition */
 }
 
@@ -19,7 +20,8 @@ body {
 /* Styling for the invoice container */
 .invoice {
   background: #fff;
-  width: 970px !important;
+  padding-left: 30px;
+  width: 1000px !important;
   margin: 50px auto;
   transition: transform 0.3s ease-in-out, width 0.3s ease-in-out; /* Adding a transform and width transition */
 }
