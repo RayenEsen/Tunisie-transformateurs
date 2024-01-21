@@ -39,6 +39,31 @@ namespace WebAPI.Model
         public float? Vm51 { get; set; }
         public float? Vm52 { get; set; }
         public float? Vm53 { get; set; }
+        public float? Na0 { get; set; }
+        public float? Nb0 { get; set; }
+        public float? Nc0 { get; set; }
+        public float? Na1 { get; set; }
+        public float? Nb2 { get; set; }
+        public float? Nc3 { get; set; }
+        public float? Wog { get; set; }
+        public float? Iog { get; set; }
+        public float? Iom { get; set; }
+        public float? Wom { get; set; }
+        public float? Zccg { get; set; }
+        public float? Wccg { get; set; }
+        public float? Temp { get; set; }
+        public float? Uccm { get; set; }
+        public float? Wccm1 { get; set; }
+        public float? Wccm2 { get; set; }
+        public float? Zccm1 { get; set; }
+        public float? Zcmm2 { get; set; }
+        public float? U1 { get; set; }
+        public float? T1 { get; set; }
+        public float? U2 { get; set; }
+        public float? T2 { get; set; }
+        public float? U3 { get; set; }
+        public float? T3 { get; set; }
+        public float? Claquage { get; set; }
         public Transformateur? Transformateur { get; set; }
     }
 }

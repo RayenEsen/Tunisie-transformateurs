@@ -158,7 +158,7 @@
           <div class="panel-heading">
             <h3 class="panel-title">Resistence Mesurement / Mesure des resistances</h3>
           </div>
-          <table class="table table-bordered table-condensed">
+          <table class="table table-bordered table-condensed" *ngIf="pv && pv.length > 0">
             <tbody>
               <tr>
                 <td colspan="2" class="text-center colfix">Winding Enrolement</td>
@@ -168,29 +168,29 @@
               <tr>
                 <td rowspan="3" class="text-center colfix">LV/BT</td>
                 <td class="text-center colfix">n-a</td>
-                <td class="text-center colfix"><input type="number"></td>
-                <td rowspan="6" class="text-center colfix">17</td>
+                <td class="text-center colfix"><input type="number"[(ngModel)]="pv[0].na0"></td>
+                <td rowspan="6" class="text-center colfix"><input type="number" [(ngModel)]="pv[0].temp"></td>
               </tr>
               <tr>
                 <td class="text-center colfix">n-b</td>
-                <td class="text-center colfix"><input type="number"></td>
+                <td class="text-center colfix"><input type="number" [(ngModel)]="pv[0].nb0"></td>
               </tr>
               <tr>
                 <td class="text-center colfix">n-c</td>
-                <td class="text-center colfix"><input type="number"></td>
+                <td class="text-center colfix"><input type="number"[(ngModel)]="pv[0].nc0"></td>
               </tr>
               <tr>
                 <td rowspan="3" class="text-center colfix">MV/MT</td>
                 <td class="text-center colfix">n-A</td>
-                <td class="text-center colfix"><input type="number"></td>
+                <td class="text-center colfix"><input type="number" [(ngModel)]="pv[0].na1"></td>
               </tr>
               <tr>
                 <td class="text-center colfix">n-B</td>
-                <td class="text-center colfix"><input type="number"></td>
+                <td class="text-center colfix"><input type="number" [(ngModel)]="pv[0].nb2"></td>
               </tr>
               <tr>
                 <td class="text-center colfix">n-C</td>
-                <td class="text-center colfix"><input type="number"></td>
+                <td class="text-center colfix"><input type="number" [(ngModel)]="pv[0].nc3"></td>
               </tr>
             </tbody>
           </table>
@@ -199,7 +199,7 @@
       <div class="panel-heading">
         <h3 class="panel-title">No load test / Essais a vide</h3>
       </div>
-      <table class="table table-bordered table-condensed">
+      <table class="table table-bordered table-condensed" *ngIf="pv && pv.length > 0">
         <tbody>
           <tr>
             <td></td>
@@ -218,12 +218,12 @@
             <td class="text-center colfix">Io[%]</td>
           </tr>
           <tr>
-            <td class="text-center colfix"><input type="number"></td>
-            <td class="text-center colfix"><input type="number"></td>
-            <td class="text-center colfix"><input type="number"></td>
-            <td class="text-center colfix"><input type="number"></td>
-            <td class="text-center colfix"><input type="number"></td>
-            <td class="text-center colfix"><input type="number"></td>
+            <td class="text-center colfix" [(ngModel)]="pv[0].tappings"><input type="number"></td>
+            <td class="text-center colfix" [(ngModel)]="pv[0].wog"><input type="number"></td>
+            <td class="text-center colfix" [(ngModel)]="pv[0].iog"><input type="number"></td>
+            <td class="text-center colfix" [(ngModel)]="this.service.list[0].mtu2"><input type="number"></td>
+            <td class="text-center colfix" [(ngModel)]="pv[0].iom"><input type="number"></td>
+            <td class="text-center colfix" [(ngModel)]="pv[0].wom"><input type="number"></td>
             <td class="text-center colfix"><input type="number"></td>
           </tr>
         </tbody>
@@ -233,7 +233,7 @@
       <div class="panel-heading">
         <h3 class="panel-title">Load test / Essais en charge</h3>
       </div>
-      <table class="table table-bordered table-condensed">
+      <table class="table table-bordered table-condensed" *ngIf="pv && pv.length">
         <tbody>
           <tr>
             <td></td>
@@ -252,20 +252,20 @@
             <td class="text-center colfix">Zcc [%]</td>
           </tr>
           <tr>
-            <td class="text-center colfix"><input type="number"></td>
-            <td class="text-center colfix"><input type="number"></td>
-            <td class="text-center colfix"><input type="number"></td>
-            <td class="text-center colfix"><input type="number"></td>
-            <td class="text-center colfix"><input type="number"></td>
-            <td class="text-center colfix"><input type="number"></td>
-            <td class="text-center colfix"><input type="number"></td>
-            <td class="text-center colfix"><input type="number"></td>
+            <td class="text-center colfix"><input type="number"[(ngModel)]="pv[0].tappings"></td>
+            <td class="text-center colfix"><input type="number"[(ngModel)]="pv[0].zccg"></td>
+            <td class="text-center colfix"><input type="number"[(ngModel)]="pv[0].wccg"></td>
+            <td class="text-center colfix"><input type="number"[(ngModel)]="pv[0].temp"></td>
+            <td class="text-center colfix"><input type="number"[(ngModel)]="pv[0].uccm"></td>
+            <td class="text-center colfix"><input type="number"[(ngModel)]="this.service.list[0].bti2"></td>
+            <td class="text-center colfix"><input type="number"[(ngModel)]="pv[0].wccm1"></td>
+            <td class="text-center colfix"><input type="number"[(ngModel)]="pv[0].zccm1"></td>
           </tr>
           <tr>
             <td colspan="6" class="text-right colfix">Valeurs at 75C / Valeurs à 75C
       </td>
-            <td class="text-center colfix"><input type="number"></td>
-            <td class="text-center colfix"><input type="number"></td>
+            <td class="text-center colfix"><input type="number"[(ngModel)]="pv[0].wccm2"></td>
+            <td class="text-center colfix"><input type="number"[(ngModel)]="pv[0].zcmm2"></td>
           </tr>
         </tbody>
       </table>
@@ -274,25 +274,25 @@
       <div class="panel-heading">
         <h3 class="panel-title">Dielectric test / Essais diélectrique</h3>
       </div>
-      <table class="table table-bordered table-condensed">
+      <table class="table table-bordered table-condensed" *ngIf="pv && pv.length">
         <tbody>
           <tr>
             <td class="text-left colfix" style="width: 200px;">Induced voltage test at / Essai par tension induite a 150 Hz</td>
             <td class="text-center colfix">U [V]</td>
-            <td class="text-center colfix"><input type="number"></td>
-            <td class="text-center colfix"><input type="number"></td>
+            <td class="text-center colfix"><input type="number" [(ngModel)]="pv[0].u1"></td>
+            <td class="text-center colfix"><input type="number"[(ngModel)]="pv[0].t1"></td>
           </tr>
           <tr>
             <td class="text-left colfix" style="width: 200px;">Applied voltage test (HV) at / Essai par tension appliqueés (HT) a 50Hz</td>
             <td class="text-center colfix">U [kV]</td>
-            <td class="text-center colfix"><input type="number"></td>
-            <td class="text-center colfix"><input type="number"></td>
+            <td class="text-center colfix"><input type="number"[(ngModel)]="pv[0].u2"></td>
+            <td class="text-center colfix"><input type="number"[(ngModel)]="pv[0].t2"></td>
           </tr>
           <tr>
             <td class="text-left colfix" style="width: 200px;">Applied voltage test (LV) at / Essai par tension appliqueés (BT) a 50Hz</td>
             <td class="text-center colfix">U [kV]</td>
-            <td class="text-center colfix"><input type="number"></td>
-            <td class="text-center colfix"><input type="number"></td>
+            <td class="text-center colfix"><input type="number"[(ngModel)]="pv[0].u3"></td>
+            <td class="text-center colfix"><input type="number"[(ngModel)]="pv[0].t3"></td>
           </tr>
         </tbody>
       </table>
@@ -301,7 +301,7 @@
       <div class="panel-heading">
         <h3 class="panel-title">Insulation liquid test / Essai du liquide isolant</h3>
       </div>
-      <table class="table table-bordered table-condensed">
+      <table class="table table-bordered table-condensed" *ngIf="pv && pv.length">
         <tbody>
           <tr>
             <td rowspan="2" class="text-left colfix ">Insultation liquid type / Type du liquide isolant</td>
@@ -312,7 +312,7 @@
           </tr>
           <tr>
             <td class="text-left colfix">Breakdown voltage / Tension de ciaquage (KV)</td>
-            <td class="text-center colfix"><input type="number"></td>
+            <td class="text-center colfix"><input type="number" [(ngModel)]="pv[0].claquage"></td>
           </tr>
         </tbody>
       </table>

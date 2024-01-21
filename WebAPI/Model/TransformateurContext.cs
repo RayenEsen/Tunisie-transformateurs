@@ -11,6 +11,7 @@ namespace WebAPI.Model
 
         public DbSet<Transformateur> transformateurs { get; set; }
         public DbSet<Pv> pvs { get; set; }
+        public DbSet<ControleurDeQualité> controleurDeQualités { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Configure one-to-one relationship between Transformateur and Pv
