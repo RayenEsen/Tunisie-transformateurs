@@ -13,7 +13,7 @@ namespace WebAPI.Model
         public DateTime Date { get; set; } = DateTime.Now; // Initialize with current date
         public string? Resultat { get; set; } // Result property
         //Voltage Ratio Data
-        public int? tappings;
+        public int? tappings { get; set; }
         public float? Vt11 { get; set; }
         public float? Vt12 { get; set; }
         public float? Vt21 { get; set; }

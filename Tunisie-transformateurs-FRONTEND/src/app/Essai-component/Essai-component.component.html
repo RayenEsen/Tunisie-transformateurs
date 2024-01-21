@@ -218,12 +218,13 @@
             <td class="text-center colfix">Io[%]</td>
           </tr>
           <tr>
-            <td class="text-center colfix" [(ngModel)]="pv[0].tappings"><input type="number"></td>
-            <td class="text-center colfix" [(ngModel)]="pv[0].wog"><input type="number"></td>
-            <td class="text-center colfix" [(ngModel)]="pv[0].iog"><input type="number"></td>
-            <td class="text-center colfix" [(ngModel)]="this.service.list[0].mtu2"><input type="number"></td>
-            <td class="text-center colfix" [(ngModel)]="pv[0].iom"><input type="number"></td>
-            <td class="text-center colfix" [(ngModel)]="pv[0].wom"><input type="number"></td>
+            <td class="text-center colfix"> <input type="number" [(ngModel)]="pv[0].tappings" name="tappings">
+            </td>
+            <td class="text-center colfix"><input type="number" [(ngModel)]="pv[0].wog"></td>
+            <td class="text-center colfix"><input type="number" [(ngModel)]="pv[0].iog"></td>
+            <td class="text-center colfix"><input type="number" [(ngModel)]="this.service.list[0].btu2"></td>
+            <td class="text-center colfix"><input type="number" [(ngModel)]="pv[0].iom"></td>
+            <td class="text-center colfix"><input type="number" [(ngModel)]="pv[0].wom"></td>
             <td class="text-center colfix"><input type="number"></td>
           </tr>
         </tbody>
@@ -233,7 +234,7 @@
       <div class="panel-heading">
         <h3 class="panel-title">Load test / Essais en charge</h3>
       </div>
-      <table class="table table-bordered table-condensed" *ngIf="pv && pv.length">
+      <table class="table table-bordered table-condensed">
         <tbody>
           <tr>
             <td></td>

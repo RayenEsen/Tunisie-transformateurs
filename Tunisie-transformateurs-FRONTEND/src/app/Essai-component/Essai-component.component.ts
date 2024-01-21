@@ -13,7 +13,7 @@
 
     currentDate: string = '';
     transformateurId: number = 0;
-    pv: Pv[] | undefined;
+    pv: Pv[] = [];
 
     constructor(
       private route: ActivatedRoute,
