@@ -136,6 +136,15 @@ input[type="number"] {
   transition: all 0.3s ease-in-out;
 }
 
+/* Remove spinner buttons in number input fields */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
+
 /* Hover effect on input fields */
 input[type="number"]:hover {
   border-color: #555;
@@ -159,3 +168,23 @@ input[type="number"]:hover {
   transform: scale(1.05);
 }
 
+/* Hover effect on images */
+img:hover {
+  opacity: 0.8; /* Adjust opacity as needed */
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* Animation for images */
+img {
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Scale up effect on hover for images */
+img:hover {
+  transform: scale(1.1);
+}
+@media print {
+  .printable {
+    display: none;
+  }
+}

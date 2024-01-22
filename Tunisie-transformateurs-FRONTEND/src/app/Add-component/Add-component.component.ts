@@ -122,7 +122,7 @@ export class AddComponentComponent implements OnInit {
             next: (pvResponse: any) => {
               console.log('Transformateur added successfully', this.transformateurAjouter);
               console.log('Pv added successfully', pvResponse);
-              this.router.navigate(['/Transformateur']);
+              this.router.navigate(['/Essai_Transformateur', this.transformateurAjouter.numero]);
             },
             error: (error: any) => {
               alert("Tout les champ sont obligatoire");
@@ -186,7 +186,7 @@ export class AddComponentComponent implements OnInit {
         if (this.transformateurAjouter.couplage.toUpperCase() === "MONO") {
           Resultat = (power / btu2) * 1000;
         } else {
-          Resultat = ((power / btu2) * 1000) * Math.sqrt(3);
+          Resultat =( ((power / btu2) ) / Math.sqrt(3) )*1000;
         }
 
         return Resultat;

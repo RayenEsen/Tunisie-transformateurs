@@ -90,6 +90,23 @@ export class Add_ModifyTransformateurComponent implements OnInit {
     );
   }
 
+  ValidateEssais2() {
+    if (
+      this.pv[0].na0 !== null &&
+      this.pv[0].na1 !== null &&
+      this.pv[0].nb0 !== null &&
+      this.pv[0].nb2 !== null &&
+      this.pv[0].nc0 !== null &&
+      this.pv[0].nc3 !== null
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+
+
 
   changeImage() {
     document.getElementById('fileInput')?.click();
@@ -119,9 +136,9 @@ export class Add_ModifyTransformateurComponent implements OnInit {
       client: this.service.list[0].client,
       norme: this.service.list[0].norme,
       mtu1: this.service.list[0].mtu1,
-      mtu2: this.service.list[0].mtu2,
+      mtu2: this.getI1(),
       btu2: this.service.list[0].btu2,
-      bti2: this.service.list[0].bti2,
+      bti2: this.getI2(),
       power: this.service.list[0].power,
       nbphase: this.service.list[0].nbphase,
       prises: this.service.list[0].prises,
@@ -138,5 +155,59 @@ export class Add_ModifyTransformateurComponent implements OnInit {
         })
       });
   }
+  getP3(MultiplyFactor: number): number {
+    let result: number = 0;
+
+    if (this.service.list[0].couplage.toUpperCase() === "MONO") {
+      result = (this.service.list[0].mtu1 / this.service.list[0].btu2) * 1000;
+    } else if (this.service.list[0].couplage.toUpperCase() === "YNYN") {
+      result = (this.service.list[0].mtu1 / this.service.list[0].btu2) * 1000;
+    } else if (this.service.list[0].couplage.toUpperCase() === "DYN") {
+      result =( ( this.service.list[0].mtu1 / this.service.list[0].mtu2) * 1000 )* Math.sqrt(3);
+    } else {
+      result = ( ( (this.service.list[0].mtu1 /this.service.list[0].mtu2) * 1000 )* Math.sqrt(3) )/ 2;
+    }
+
+    result = result * MultiplyFactor;
+    // Do not call toFixed here, so the result is a number
+    return result;
+  }
+  getPI(MultiplyFactor : number)
+  {
+    return this.getP3(1)*MultiplyFactor;
+  }
+  getintervalle(MultiplyFactor: number,x : number){
+    return this.getPI(x)*MultiplyFactor;
+  }
+  getI1() {
+    let Resultat: number = 0;
+
+
+      const power: number = parseFloat(this.service.list[0].power); // Convert string to number
+      const mtu1: number = this.service.list[0].mtu1; // Assuming mtu1 is a number
+
+      if (this.service.list[0].couplage.toUpperCase() === "MONO") {
+        Resultat = power / mtu1;
+      } else {
+        Resultat = (power / mtu1) / Math.sqrt(3);
+      }
+
+      return Resultat;
+    }
+    getI2() {
+      let Resultat: number = 0;
+
+
+        const power: number = parseFloat(this.service.list[0].power); // Convert string to number
+        const btu2: number = this.service.list[0].btu2; // Assuming mtu1 is a number
+
+        if (this.service.list[0].couplage.toUpperCase() === "MONO") {
+          Resultat = (power / btu2) * 1000;
+        } else {
+          Resultat =( ((power / btu2) ) / Math.sqrt(3) )*1000;
+        }
+
+        return Resultat;
+      }
   }
 
