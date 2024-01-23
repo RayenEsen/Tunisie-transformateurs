@@ -35,7 +35,9 @@ namespace WebAPI.Model
 
         [Column(TypeName = "nvarchar(100)")]
         public string Cooling { get; set; } = "";
-
+        [Column(TypeName = "nvarchar(100)")]
+        public string Libelle { get; set; } = "";
+        public float Cc { get; set; }
         public float Frequency { get; set; }
 
         //Navigation property

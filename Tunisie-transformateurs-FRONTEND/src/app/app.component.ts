@@ -8,10 +8,13 @@ declare var $: any;
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+  title(title: any) {
+    throw new Error('Method not implemented.');
+  }
   constructor(private el: ElementRef, private renderer: Renderer2) {}
 
   ngOnInit() {
-    this.setupToggleMenu();
+
   }
 
   private setupToggleMenu() {
@@ -30,4 +33,6 @@ export class AppComponent implements OnInit {
       });
     }
   }
+
+
 }

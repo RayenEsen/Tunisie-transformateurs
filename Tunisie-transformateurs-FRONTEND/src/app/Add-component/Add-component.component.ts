@@ -28,6 +28,8 @@ export class AddComponentComponent implements OnInit {
     prises: '',
     couplage: '',
     cooling: '',
+    libelle : '',
+    cc: 0,
     frequency: 0
   };
 

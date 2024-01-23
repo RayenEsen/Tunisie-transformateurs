@@ -12,5 +12,7 @@ export class Transformateur {
   prises: string = "";
   couplage: string = "";
   cooling: string = "";
+  libelle: string ="";
+  cc: number = 0;
   frequency: number = 0;
 }

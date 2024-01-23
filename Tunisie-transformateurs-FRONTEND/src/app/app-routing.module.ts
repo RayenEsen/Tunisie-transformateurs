@@ -6,6 +6,7 @@ import { Add_ModifyTransformateurComponent } from './Add_Modify-Transformateur/A
 import { EssaiComponentComponent } from './Essai-component/Essai-component.component';
 import { AddComponentComponent } from './Add-component/Add-component.component';
 import { EditProfileComponentComponent } from './EditProfile-component/EditProfile-component.component';
+import { CreateAcountComponentComponent } from './CreateAcount-component/CreateAcount-component.component';
 const routes: Routes = [
   { path: 'Transformateur', component: TransformateurInfoComponent },
   { path: 'Ajouter_Transformateur', component: Add_ModifyTransformateurComponent },
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'Essai_Transformateur/:id' , component: EssaiComponentComponent},
   { path: 'Add_transformateur' , component: AddComponentComponent},
   { path: 'Edit_profile' , component : EditProfileComponentComponent},
+  { path: 'Sign_up' , component : CreateAcountComponentComponent},
   // New route with parameter
   { path: '', component: DefaultComponentComponent }, // Default route
   // Add other routes as needed

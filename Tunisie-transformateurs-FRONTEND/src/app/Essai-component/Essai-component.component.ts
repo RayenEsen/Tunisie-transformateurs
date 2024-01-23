@@ -142,4 +142,20 @@
       }
       else return 0;
     }
+    /*
+    getWCC2()
+    {
+      if (this.service.list[0].libelle=="Cuivre")
+      {
+        const ibt : number = 1;
+        const AV15 = (  (  ( (this.pv[0].na0/ibt ) + (this.pv[0].nb0/1 ) + (this.pv[0].nc0)/1  )*this.service.list[0].bti2*this.service.list[0].bti2 )*this.service.list[0].cc )
+        const AU15 = (( (1,5*((this.pv[0].na1+(this.pv[0].nb2/1 #lbt)+(this.pv[0].nc3))/3)*this.service.list[0].mtu2*this.service.list[0].mtu2 )  ))
+        const AW15 =  (this.pv[0].zccm1 - ((1,5*(((this.pv[0].na1*((235+this.pv[0].temp)/(235+this.pv[0].temp)))+(((this.pv[0].nc3)*((235+this.pv[0].temp)/(235+this.pv[0].temp)))*((235+this.pv[0].temp)/(235+this.pv[0].temp)))+N16)/3)*this.service.list[0].mtu2*this.service.list[0].mtu2) + (( ((this.pv[0].na1/ibt)/ ((235+this.pv[0].temp)*(235+this.pv[0].temp)))/ +( (this.pv[0].) )+Z16)*this.service.list[0].bti2*this.service.list[0].bti2)))
+      }
+    }
+    getZCC2()
+    {
+      return 0;
+    }
+    */
   }

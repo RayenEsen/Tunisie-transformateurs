@@ -123,6 +123,24 @@
           [(ngModel)]="transformateurAjouter.frequency"
         />
       </div>
+      <div class="formbold-input-wrapp formbold-mb-3">
+        <label for="firstname" class="formbold-form-label"> Libelle / Coefficient de correction <small style="color: red;">*</small></label>
+        <div>
+          <select class="formbold-form-input" name="occupation" id="occupation" name="couplage" [(ngModel)]="transformateurAjouter.libelle">
+            <option value="" disabled selected>Sélectionner le couplage</option>
+            <option value="Aluminum">Aluminum</option>
+            <option value="Cuivre">Cuivre</option>
+          </select>
+
+          <input
+            name="Coefficient de correction"
+            type="number"
+            placeholder="Numero"
+            class="formbold-form-input"
+            [(ngModel)]="transformateurAjouter.cc"
+          />
+        </div>
+      </div>
       <div class="formbold-mb-3">
         <label for="upload" class="formbold-form-label">
           Téléchargez une photo
