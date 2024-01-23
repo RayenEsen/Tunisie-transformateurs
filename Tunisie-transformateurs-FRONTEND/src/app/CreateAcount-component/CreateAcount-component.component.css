@@ -6,6 +6,37 @@ body {
 	margin: 0;
 	padding: 0;
 }
+/* Styles for the checkbox */
+.form-check-input {
+  appearance: none; /* Remove default styles for checkbox */
+  width: 16px; /* Set the width of the custom checkbox */
+  height: 16px; /* Set the height of the custom checkbox */
+  border: 1px solid #51121E; /* Border color of the custom checkbox */
+  background-color: #fff; /* Background color of the custom checkbox */
+  border-radius: 3px; /* Border radius of the custom checkbox */
+  cursor: pointer; /* Set cursor to pointer for better UX */
+
+  /* Position the custom checkbox relative to its parent */
+  position: relative;
+}
+
+/* Style the tick mark inside the custom checkbox */
+.form-check-input::before {
+  content: '\2713'; /* Unicode checkmark character */
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Center the checkmark */
+  color: #51121E; /* Set the color of the checkmark */
+  font-size: 12px; /* Set the font size of the checkmark */
+  visibility: hidden; /* Hide the checkmark by default */
+}
+
+/* Style the custom checkbox when checked */
+.form-check-input:checked::before {
+  visibility: visible; /* Show the checkmark when the checkbox is checked */
+}
 
 .row {
 	width: 900px;

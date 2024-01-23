@@ -1,15 +1,15 @@
-export interface ControleurDeQualite {
-  idC: string;
-  nom: string;
-  prenom: string;
+export class ControleurDeQualite {
+  idC: string = '';
+  nom?: string ;
+  prenom?: string ;
   username?: string;
-  email: string;
-  tel: string;
+  email: string | undefined;
+  tel?: string;
   birthdate?: Date;
   department?: string;
   designation?: string;
   adresse?: string;
   region?: string;
   codePostal?: string;
-  password: string;
+  password: string | undefined;
 }
