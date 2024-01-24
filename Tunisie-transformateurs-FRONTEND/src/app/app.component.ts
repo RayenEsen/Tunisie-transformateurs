@@ -1,5 +1,5 @@
 import { Component, ElementRef, Renderer2, OnInit } from '@angular/core';
-
+import { SessionService } from './utils/session-service.service';
 declare var $: any;
 
 @Component({
@@ -11,7 +11,7 @@ export class AppComponent implements OnInit {
   title(title: any) {
     throw new Error('Method not implemented.');
   }
-  constructor(private el: ElementRef, private renderer: Renderer2) {}
+  constructor(private el: ElementRef, private renderer: Renderer2, public sessionService: SessionService) {}
 
   ngOnInit() {
 

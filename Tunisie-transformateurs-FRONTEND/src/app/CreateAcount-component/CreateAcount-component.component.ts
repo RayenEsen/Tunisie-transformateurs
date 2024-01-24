@@ -23,7 +23,7 @@ export class CreateAcountComponentComponent implements OnInit {
   }
 
   ValidateInputs() {
-    return this.Controleur.idC !== undefined && this.Controleur.email !== undefined && this.Controleur.password !== undefined;
+    return (this.Controleur.idC !== '') && this.Controleur.email !== '' && this.Controleur.password !== '';
   }
 
   Login() {

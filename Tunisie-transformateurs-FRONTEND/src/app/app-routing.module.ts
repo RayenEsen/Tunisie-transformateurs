@@ -11,11 +11,11 @@ import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   { path: 'Transformateur', component: TransformateurInfoComponent , canActivate: [AuthGuard]},
-  { path: 'Ajouter_Transformateur', component: Add_ModifyTransformateurComponent },
-  { path: 'Ajouter_Transformateur/:id', component: Add_ModifyTransformateurComponent },
-  { path: 'Essai_Transformateur/:id' , component: EssaiComponentComponent},
-  { path: 'Add_transformateur' , component: AddComponentComponent},
-  { path: 'Edit_profile' , component : EditProfileComponentComponent},
+  { path: 'Ajouter_Transformateur', component: Add_ModifyTransformateurComponent , canActivate: [AuthGuard]},
+  { path: 'Ajouter_Transformateur/:id', component: Add_ModifyTransformateurComponent , canActivate: [AuthGuard]},
+  { path: 'Essai_Transformateur/:id' , component: EssaiComponentComponent , canActivate: [AuthGuard]},
+  { path: 'Add_transformateur' , component: AddComponentComponent , canActivate: [AuthGuard]},
+  { path: 'Edit_profile' , component : EditProfileComponentComponent , canActivate: [AuthGuard]},
   { path: 'Sign_up' , component : CreateAcountComponentComponent},
   // New route with parameter
   { path: '', component: DefaultComponentComponent }, // Default route
