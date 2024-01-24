@@ -113,6 +113,16 @@ namespace WebAPI.Controller
             return NoContent();
         }
 
+        [HttpPost("VerifyUser")]
+        public async Task<ActionResult<bool>> VerifyUser(string id, string password, string email)
+        {
+            var userExists = await _context.controleurDeQualités
+                .AnyAsync(u => u.IdC == id && u.Password == password && u.Email == email);
+
+            return Ok(userExists);
+        }
+
+
         private bool ControleurDeQualitéExists(string id)
         {
             return _context.controleurDeQualités.Any(e => e.IdC == id);

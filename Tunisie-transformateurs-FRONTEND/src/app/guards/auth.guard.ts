@@ -16,7 +16,7 @@ export class AuthGuard implements CanActivate {
 
     if (protectedRoutes.includes(state.url) && !isAuthenticated) {
       // Redirect to the login page if the user is not authenticated and trying to access a protected route
-      this.router.navigate(['/Sign_up']); // Change '/Sign_up' to the actual login page route
+      this.router.navigate(['/Sign_in']); // Change '/Sign_up' to the actual login page route
       return false;
     }
 

@@ -15,8 +15,9 @@ import { EssaiComponentComponent } from './Essai-component/Essai-component.compo
 import { AddComponentComponent } from './Add-component/Add-component.component';
 import { EditProfileComponentComponent } from './EditProfile-component/EditProfile-component.component';
 import { CreateAcountComponentComponent } from './CreateAcount-component/CreateAcount-component.component';
+import { InscriptionComponentComponent } from './Inscription-component/Inscription-component.component';
 @NgModule({
-  declarations: [			
+  declarations: [				
     AppComponent,
       NavBarComponent,
       TopNavComponent,
@@ -27,7 +28,8 @@ import { CreateAcountComponentComponent } from './CreateAcount-component/CreateA
       EssaiComponentComponent,
       AddComponentComponent,
       EditProfileComponentComponent,
-      CreateAcountComponentComponent
+      CreateAcountComponentComponent,
+      InscriptionComponentComponent
    ],
   imports: [
     BrowserModule,

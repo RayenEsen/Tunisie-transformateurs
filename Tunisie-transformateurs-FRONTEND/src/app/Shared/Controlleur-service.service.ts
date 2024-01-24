@@ -19,12 +19,15 @@ constructor(private http: HttpClient) { }
 
 AddControleur(Controleur: ControleurDeQualite): Observable<any> {
   // Return the observable from the HTTP POST request
-  return this.http.post(this.url, ControleurDeQualite);
+  return this.http.post(this.url, Controleur);
 }
 
-getControleur(id: string): Observable<any> {
-  const urlWithId = `${this.url}/${id}`;
+getControleur(id: string, password: string, email: string): Observable<any> {
+  const urlWithParams = `${this.url}/VerifyUser?id=${id}&password=${password}&email=${email}`;
 
-  return this.http.get(urlWithId);
+  // Send a POST request to verify user existence
+  return this.http.post(urlWithParams, {});
 }
+
+
 }

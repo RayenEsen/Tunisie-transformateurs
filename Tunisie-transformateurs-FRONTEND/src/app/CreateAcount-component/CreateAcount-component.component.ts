@@ -28,10 +28,16 @@ export class CreateAcountComponentComponent implements OnInit {
 
   Login() {
     if (this.ValidateInputs()) {
-      this.ServiceC.getControleur(this.Controleur.idC).subscribe({
-        next: () => {
-          this.ServiceS.sessionStart(this.Controleur.idC,this.Controleur.email,this.Controleur.password);
-          this.router.navigate(['/Edit_profile']);
+      this.ServiceC.getControleur(this.Controleur.idC, this.Controleur.password, this.Controleur.email).subscribe({
+        next: (userExists) => {
+          if (userExists) {
+            // User exists, start the session and navigate to Edit_profile
+            this.ServiceS.sessionStart(this.Controleur.idC, this.Controleur.email, this.Controleur.password);
+            this.router.navigate(['/Edit_profile']);
+          } else {
+            // User not found
+            alert("Utilisateur non trouvé");
+          }
         },
         error: (error) => {
           if (error.status === 404) {
@@ -46,6 +52,5 @@ export class CreateAcountComponentComponent implements OnInit {
       alert("Toutes les entrées sont obligatoires.");
     }
   }
-
 
 }
