@@ -30,8 +30,14 @@ getControleur(id: string, password: string, email: string): Observable<any> {
 }
 
 getControleurById(id: string): Observable<any> {
-  const urlWithParams = `${this.url}${id}`;
+  const urlWithParams = `${this.url}/${id}`;
   return this.http.get(urlWithParams);
 }
+
+UpdateControleurById(id: string,Controleur : ControleurDeQualite): Observable<any> {
+  const urlWithParams = `${this.url}/${id}`;
+  return this.http.put(urlWithParams,Controleur);
+}
+
 
 }

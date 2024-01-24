@@ -1,7 +1,10 @@
 <div class="container rounded bg-white mt-5 mb-5" style="margin-left: 132px;">
   <div class="row">
       <div class="col-md-3 border-right">
-          <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"><span class="font-weight-bold">Edogaru</span><span class="text-black-50">edogarumail.com.my</span><span> </span></div>
+          <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+          <span class="font-weight-bold" *ngIf="Controleur.username===null || Controleur.username===''" >Anonyme</span>
+          <span class="font-weight-bold" *ngIf="Controleur.username!==''"> {{Controleur.username}}</span>
+          <span class="text-black-50">{{Controleur.email}}</span><span> </span></div>
       </div>
       <div class="col-md-5 border-right">
           <div class="p-3 py-5">
@@ -32,8 +35,8 @@
           <div class="p-3 py-5">
               <div class="d-flex justify-content-between align-items-center experience"><span>Changer le mot de passe</span><span class="border px-3 p-1 add-experience">    <i class="fa fa-pencil"></i>&nbsp;Modifier
               </span></div><br>
-              <div class="col-md-12"><label class="labels">Mot de passe</label><input type="password" class="form-control"  [(ngModel)]="Controleur.password"></div> <br>
-              <div class="col-md-12"><label class="labels">Confirmer le mot de passe</label><input type="password" class="form-control"  [(ngModel)]="Confirm"></div>
+              <div class="col-md-12"><label class="labels">Mot de passe</label><input type="password" class="form-control"  [(ngModel)]="Controleur.password" readonly></div> <br>
+              <div class="col-md-12"><label class="labels">Confirmer le mot de passe</label><input type="password" class="form-control"  [(ngModel)]="Confirm" ></div>
           </div>
       </div>
   </div>

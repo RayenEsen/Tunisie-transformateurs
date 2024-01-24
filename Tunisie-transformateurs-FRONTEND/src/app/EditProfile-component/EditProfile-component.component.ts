@@ -33,7 +33,7 @@ export class EditProfileComponentComponent implements OnInit {
 
   Update() {
     if (this.ConfirmPassword()) {
-      this.ServiceC.AddControleur(this.Controleur)
+      this.ServiceC.UpdateControleurById(this.Controleur.idC,this.Controleur)
         .subscribe({
           next: (response) => {
             // Handle the success response if needed
