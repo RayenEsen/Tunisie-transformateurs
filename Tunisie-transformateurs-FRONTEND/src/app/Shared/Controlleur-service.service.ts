@@ -29,5 +29,9 @@ getControleur(id: string, password: string, email: string): Observable<any> {
   return this.http.post(urlWithParams, {});
 }
 
+getControleurById(id: string): Observable<any> {
+  const urlWithParams = `${this.url}${id}`;
+  return this.http.get(urlWithParams);
+}
 
 }

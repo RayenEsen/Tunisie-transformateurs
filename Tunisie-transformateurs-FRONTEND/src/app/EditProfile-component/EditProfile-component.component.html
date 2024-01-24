@@ -9,31 +9,31 @@
                   <h4 class="text-right" style="color: #122151">Parametres du profil</h4>
               </div>
               <div class="row mt-2">
-                  <div class="col-md-6"><label class="labels">Nom</label><input type="text" class="form-control" placeholder="Nom" value="" ></div>
-                  <div class="col-md-6"><label class="labels">Prénom</label><input type="text" class="form-control" value="" placeholder="Prénom"></div>
+                  <div class="col-md-6"><label class="labels">Nom</label><input type="text" class="form-control" placeholder="Nom" name="nom" [(ngModel)]="Controleur.nom" ></div>
+                  <div class="col-md-6"><label class="labels">Prénom</label><input type="text" class="form-control" value="" placeholder="Prénom" name="prenom" [(ngModel)]="Controleur.prenom"></div>
               </div>
               <div class="row mt-3">
-                  <div class="col-md-12"><label class="labels">Nom d'utilisateur</label><input type="text" class="form-control" placeholder="Nom d'utilisateur" value=""></div>
-                  <div class="col-md-12"><label class="labels">E-mail</label><input type="email" class="form-control" placeholder="exemple@gmail.com" value=""></div>
-                  <div class="col-md-12"><label class="labels">Numéro de téléphone</label><input type="tel" class="form-control" placeholder="+216 71 234 567" value=""></div>
-                  <div class="col-md-12"><label class="labels">Date de naissance</label><input type="date" class="form-control" placeholder="01/01/1990" value=""></div>
-                  <div class="col-md-12"><label class="labels">Department</label><input type="text" class="form-control" placeholder="Department" value=""></div>
-                  <div class="col-md-12"><label class="labels">Designation</label><input type="text" class="form-control" placeholder="Contrôleur qualité" value=""></div>
-                  <div class="col-md-12"><label class="labels">Adresse</label><input type="text" class="form-control" placeholder="Adresse" value=""></div>
+                  <div class="col-md-12"><label class="labels">Nom d'utilisateur</label><input type="text" class="form-control" placeholder="Nom d'utilisateur" [(ngModel)]="Controleur.username" ></div>
+                  <div class="col-md-12"><label class="labels">E-mail</label><input type="email" class="form-control" placeholder="exemple@gmail.com" [(ngModel)]="Controleur.email"></div>
+                  <div class="col-md-12"><label class="labels">Numéro de téléphone</label><input type="tel" class="form-control" placeholder="+216 71 234 567" [(ngModel)]="Controleur.tel"></div>
+                  <div class="col-md-12"><label class="labels">Date de naissance</label><input type="date" class="form-control" placeholder="01/01/1990" [(ngModel)]="Controleur.birthdate"></div>
+                  <div class="col-md-12"><label class="labels">Department</label><input type="text" class="form-control" placeholder="Department" [(ngModel)]="Controleur.department"></div>
+                  <div class="col-md-12"><label class="labels">Designation</label><input type="text" class="form-control" placeholder="Contrôleur qualité" [(ngModel)]="Controleur.designation"></div>
+                  <div class="col-md-12"><label class="labels">Adresse</label><input type="text" class="form-control" placeholder="Adresse" [(ngModel)]="Controleur.adresse"></div>
               </div>
               <div class="row mt-3">
-                  <div class="col-md-6"><label class="labels">Region</label><input type="text" class="form-control" placeholder="Region" value=""></div>
-                  <div class="col-md-6"><label class="labels">Code postal</label><input type="text" class="form-control" value="" placeholder="Code postal"></div>
+                  <div class="col-md-6"><label class="labels">Region</label><input type="text" class="form-control" placeholder="Region" [(ngModel)]="Controleur.region"></div>
+                  <div class="col-md-6"><label class="labels">Code postal</label><input type="text" class="form-control" value="" placeholder="Code postal" [(ngModel)]="Controleur.codePostal"></div>
               </div>
-              <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Enregistrer</button></div>
+              <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button" (click)="Update()">Enregistrer</button></div>
           </div>
       </div>
       <div class="col-md-4">
           <div class="p-3 py-5">
               <div class="d-flex justify-content-between align-items-center experience"><span>Changer le mot de passe</span><span class="border px-3 p-1 add-experience">    <i class="fa fa-pencil"></i>&nbsp;Modifier
               </span></div><br>
-              <div class="col-md-12"><label class="labels">Mot de passe</label><input type="password" class="form-control"  value=""></div> <br>
-              <div class="col-md-12"><label class="labels">Confirmer le mot de passe</label><input type="password" class="form-control"  value=""></div>
+              <div class="col-md-12"><label class="labels">Mot de passe</label><input type="password" class="form-control"  [(ngModel)]="Controleur.password"></div> <br>
+              <div class="col-md-12"><label class="labels">Confirmer le mot de passe</label><input type="password" class="form-control"  [(ngModel)]="Confirm"></div>
           </div>
       </div>
   </div>
