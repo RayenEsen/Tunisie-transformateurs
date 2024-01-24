@@ -3,7 +3,7 @@ export class ControleurDeQualite {
   nom?: string ;
   prenom?: string ;
   username?: string;
-  email: string | undefined;
+  email: string = '';
   tel?: string;
   birthdate?: Date;
   department?: string;
@@ -11,5 +11,5 @@ export class ControleurDeQualite {
   adresse?: string;
   region?: string;
   codePostal?: string;
-  password: string | undefined;
+  password: string = '';
 }

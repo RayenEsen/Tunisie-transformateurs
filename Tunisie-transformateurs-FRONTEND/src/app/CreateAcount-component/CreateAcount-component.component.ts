@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ControlleurServiceService } from '../Shared/Controlleur-service.service';
 import { ControleurDeQualite } from '../Shared/Controlleur-service.model';
 import { Router } from '@angular/router';
+import { SessionService } from '../utils/session-service.service';
 @Component({
   selector: 'app-CreateAcount-component',
   templateUrl: './CreateAcount-component.component.html',
@@ -11,25 +12,26 @@ export class CreateAcountComponentComponent implements OnInit {
 
   Controleur :ControleurDeQualite =
   {
-    idC: 'test',
+    idC: '',
     email: '',
     password: ''
   };
 
-  constructor(public ServiceC : ControlleurServiceService , private router: Router) { }
+  constructor(public ServiceC : ControlleurServiceService , private router: Router , public ServiceS : SessionService) { }
 
   ngOnInit() {
   }
 
-  ValidateInputs()
-  {
-    return this.Controleur.idC!==undefined || this.Controleur.email!==undefined || this.Controleur.password!==undefined
+  ValidateInputs() {
+    return this.Controleur.idC !== undefined && this.Controleur.email !== undefined && this.Controleur.password !== undefined;
   }
+
   Login() {
     if (this.ValidateInputs()) {
       this.ServiceC.getControleur(this.Controleur.idC).subscribe({
         next: () => {
-            this.router.navigate(['/Edit_profile']);
+          this.ServiceS.sessionStart(this.Controleur.idC,this.Controleur.email,this.Controleur.password);
+          this.router.navigate(['/Edit_profile']);
         },
         error: (error) => {
           if (error.status === 404) {

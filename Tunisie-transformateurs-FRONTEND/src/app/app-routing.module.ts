@@ -7,8 +7,10 @@ import { EssaiComponentComponent } from './Essai-component/Essai-component.compo
 import { AddComponentComponent } from './Add-component/Add-component.component';
 import { EditProfileComponentComponent } from './EditProfile-component/EditProfile-component.component';
 import { CreateAcountComponentComponent } from './CreateAcount-component/CreateAcount-component.component';
+import { AuthGuard } from './guards/auth.guard';
+
 const routes: Routes = [
-  { path: 'Transformateur', component: TransformateurInfoComponent },
+  { path: 'Transformateur', component: TransformateurInfoComponent , canActivate: [AuthGuard]},
   { path: 'Ajouter_Transformateur', component: Add_ModifyTransformateurComponent },
   { path: 'Ajouter_Transformateur/:id', component: Add_ModifyTransformateurComponent },
   { path: 'Essai_Transformateur/:id' , component: EssaiComponentComponent},
