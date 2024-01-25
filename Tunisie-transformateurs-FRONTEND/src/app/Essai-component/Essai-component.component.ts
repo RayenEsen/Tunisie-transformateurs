@@ -47,6 +47,8 @@
     savePvValues() {
       if (this.pv && this.pv.length > 0 && this.pv[0].id_pv !== undefined) {
         this.pv[0].zccm1=this.getZccPourcentage();
+        this.pv[0].zcmm2=this.getZcc2();
+        this.pv[0].wccm2=this.getwccm2();
         // Call a service method to update the Pv values on the server
         this.pvService.UpdatePv(this.pv[0].id_pv, this.pv[0]).subscribe(
           response => {
@@ -69,60 +71,7 @@
       // Format the date as "DD/MM/YYYY"
       this.currentDate = today.toLocaleDateString('en-US', options);
     }
-    getP3(MultiplyFactor: number): number {
-      let result: number = 0;
 
-      if (this.service.list[0].couplage.toUpperCase() === "MONO") {
-        result = (this.service.list[0].mtu1 / this.service.list[0].btu2) * 1000;
-      } else if (this.service.list[0].couplage.toUpperCase() === "YNYN") {
-        result = (this.service.list[0].mtu1 / this.service.list[0].btu2) * 1000;
-      } else if (this.service.list[0].couplage.toUpperCase() === "DYN") {
-        result =( ( this.service.list[0].mtu1 / this.service.list[0].mtu2) * 1000 )* Math.sqrt(3);
-      } else {
-        result = ( ( (this.service.list[0].mtu1 /this.service.list[0].mtu2) * 1000 )* Math.sqrt(3) )/ 2;
-      }
-
-      result = result * MultiplyFactor;
-      // Do not call toFixed here, so the result is a number
-      return result;
-    }
-    getPI(MultiplyFactor : number)
-    {
-      return this.getP3(1)*MultiplyFactor;
-    }
-    getintervalle(MultiplyFactor: number,x : number){
-      return this.getPI(x)*MultiplyFactor;
-    }
-    getI1() {
-      let Resultat: number = 0;
-
-
-        const power: number = parseFloat(this.service.list[0].power); // Convert string to number
-        const mtu1: number = this.service.list[0].mtu1; // Assuming mtu1 is a number
-
-        if (this.service.list[0].couplage.toUpperCase() === "MONO") {
-          Resultat = power / mtu1;
-        } else {
-          Resultat = (power / mtu1) / Math.sqrt(3);
-        }
-
-        return Resultat;
-      }
-      getI2() {
-        let Resultat: number = 0;
-
-
-          const power: number = parseFloat(this.service.list[0].power); // Convert string to number
-          const btu2: number = this.service.list[0].btu2; // Assuming mtu1 is a number
-
-          if (this.service.list[0].couplage.toUpperCase() === "MONO") {
-            Resultat = (power / btu2) * 1000;
-          } else {
-            Resultat =( ((power / btu2) ) / Math.sqrt(3) )*1000;
-          }
-
-          return Resultat;
-        }
 
     // Function to handle the print action
     onPrint() {
@@ -142,20 +91,142 @@
       }
       else return 0;
     }
-    /*
-    getWCC2()
-    {
-      if (this.service.list[0].libelle=="Cuivre")
-      {
-        const ibt : number = 1;
-        const AV15 = (  (  ( (this.pv[0].na0/ibt ) + (this.pv[0].nb0/1 ) + (this.pv[0].nc0)/1  )*this.service.list[0].bti2*this.service.list[0].bti2 )*this.service.list[0].cc )
-        const AU15 = (( (1,5*((this.pv[0].na1+(this.pv[0].nb2/1 #lbt)+(this.pv[0].nc3))/3)*this.service.list[0].mtu2*this.service.list[0].mtu2 )  ))
-        const AW15 =  (this.pv[0].zccm1 - ((1,5*(((this.pv[0].na1*((235+this.pv[0].temp)/(235+this.pv[0].temp)))+(((this.pv[0].nc3)*((235+this.pv[0].temp)/(235+this.pv[0].temp)))*((235+this.pv[0].temp)/(235+this.pv[0].temp)))+N16)/3)*this.service.list[0].mtu2*this.service.list[0].mtu2) + (( ((this.pv[0].na1/ibt)/ ((235+this.pv[0].temp)*(235+this.pv[0].temp)))/ +( (this.pv[0].) )+Z16)*this.service.list[0].bti2*this.service.list[0].bti2)))
+
+    getZcc2() {
+      if (this.service.list[0].libelle === "Cuivre" && this.pv[0].temp !== undefined &&
+          this.pv[0].na1 !== undefined && this.pv[0].nb2 !== undefined && this.pv[0].nc3 !== undefined &&
+          this.pv[0].na0 !== undefined && this.pv[0].nb0 !== undefined && this.pv[0].nc0 !== undefined &&
+          this.pv[0].wccm1 !== undefined) {
+
+        const ibt = 1;
+        const cc = (235 + 75) / (235 + this.pv[0].temp);
+        const x6 = (235 + this.pv[0].temp) / (235 + this.pv[0].temp);
+        const UAB = this.pv[0].na1;
+        const UAC = this.pv[0].nb2;
+        const UBC = this.pv[0].nc3;
+        const Ua = this.pv[0].na0;
+        const Ub = this.pv[0].nb0;
+        const Uc = this.pv[0].nc0;
+
+        const Po = this.pv[0].wom;
+        const UccT0 = this.pv[0].uccm;
+        const UccT0Pourcentage = this.getZccPourcentage();
+        const PccTocc = this.pv[0].wccm1;
+
+        const RABohmT0 = UAB / ibt;
+        const RABohmT0cc = RABohmT0 * x6;
+        const RABohm = RABohmT0 * cc;
+
+        const RACohmT0 = UAC / ibt;
+        const RACohmT0cc = RACohmT0 * x6;
+        const RACohm = RACohmT0 * cc;
+
+        const RBCohmT0 = UBC / ibt;
+        const RBCohmT0cc = RBCohmT0 * x6;
+        const RBCohm = RBCohmT0 * cc;
+
+        const RaohmTo = Ua / ibt;
+        const RaohmT0cc = RaohmTo * x6;
+        const Raohm = RaohmT0cc * cc;
+
+        const RbohmTo = Ub / ibt;
+        const RbohmT0cc = RbohmTo * x6;
+        const Rbohm = RbohmT0cc * cc;
+
+        const RcohmTo = Uc / ibt;
+        const RcohmT0cc = RcohmTo * x6;
+        const Rcohm = RcohmT0cc * cc;
+
+        const PjhTo = 1.5 * ((RABohmT0 + RACohmT0 + RBCohmT0) / 3) * this.service.list[0].mtu2 * this.service.list[0].mtu2;
+        const PjhtT0cc = 1.5 * ((RABohmT0cc + RACohmT0cc + RBCohmT0cc) / 3) * this.service.list[0].mtu2 * this.service.list[0].mtu2;
+        const PjbTo = (RaohmTo + RbohmTo + RcohmTo) * this.service.list[0].bti2 * this.service.list[0].bti2;
+        const PjbT0cc = (RaohmT0cc + RbohmT0cc + RcohmT0cc) * this.service.list[0].bti2 * this.service.list[0].bti2;
+        const PaddTo = PccTocc - (PjhtT0cc + PjbT0cc);
+        const Pjht = PjhTo * cc;
+        const Pjbt = PjbTo * cc;
+        const Padd = PaddTo / cc;
+
+        const power: number = parseInt(this.service.list[0].power, 10);
+        const UrT0 = PccTocc / (power * 10);
+        const Ux = Math.sqrt((UccT0Pourcentage * UccT0Pourcentage) - (UrT0 * UrT0));
+        const wccm2 = this.getwccm2();
+        const Ur = wccm2 / (power * 10);
+        console.log(`
+        UAB: ${UAB}, UAC: ${UAC}, UBC: ${UBC},
+        Ua: ${Ua}, Ub: ${Ub}, Uc: ${Uc},
+        Po: ${Po}, UccT0: ${UccT0}, UccT0Pourcentage: ${UccT0Pourcentage}, PccTocc: ${PccTocc},
+        RABohmT0: ${RABohmT0}, RABohmT0cc: ${RABohmT0cc}, RABohm: ${RABohm},
+        RACohmT0: ${RACohmT0}, RACohmT0cc: ${RACohmT0cc}, RACohm: ${RACohm},
+        RBCohmT0: ${RBCohmT0}, RBCohmT0cc: ${RBCohmT0cc}, RBCohm: ${RBCohm},
+        RaohmTo: ${RaohmTo}, RaohmT0cc: ${RaohmT0cc}, Raohm: ${Raohm},
+        RbohmTo: ${RbohmTo}, RbohmT0cc: ${RbohmT0cc}, Rbohm: ${Rbohm},
+        RcohmTo: ${RcohmTo}, RcohmT0cc: ${RcohmT0cc}, Rcohm: ${Rcohm},
+        PjhTo: ${PjhTo}, PjhtT0cc: ${PjhtT0cc}, PjbTo: ${PjbTo},
+        PjbT0cc: ${PjbT0cc}, PaddTo: ${PaddTo}, Pjht: ${Pjht},
+        Pjbt: ${Pjbt}, Padd: ${Padd},
+        power: ${power}, UrT0: ${UrT0}, Ux: ${Ux}, wccm2: ${wccm2},
+        Ur: ${Ur}
+      `);
+        return  Math.sqrt((Ur * Ur) + (Ux * Ux));
       }
+      else return 0 ;
     }
-    getZCC2()
+    getwccm2()
     {
-      return 0;
+      if (this.service.list[0].libelle === "Cuivre" && this.pv[0].temp !== undefined &&
+          this.pv[0].na1 !== undefined && this.pv[0].nb2 !== undefined && this.pv[0].nc3 !== undefined &&
+          this.pv[0].na0 !== undefined && this.pv[0].nb0 !== undefined && this.pv[0].nc0 !== undefined &&
+          this.pv[0].wccm1 !== undefined) {
+
+        const ibt = 1;
+        const cc = (235 + 75) / (235 + this.pv[0].temp);
+        const x6 = (235 + this.pv[0].temp) / (235 + this.pv[0].temp);
+        const UAB = this.pv[0].na1;
+        const UAC = this.pv[0].nb2;
+        const UBC = this.pv[0].nc3;
+        const Ua = this.pv[0].na0;
+        const Ub = this.pv[0].nb0;
+        const Uc = this.pv[0].nc0;
+
+        const Po = this.pv[0].wom;
+        const UccT0 = this.pv[0].uccm;
+        const UccT0Pourcentage = this.getZccPourcentage();
+        const PccTocc = this.pv[0].wccm1;
+
+        const RABohmT0 = UAB / ibt;
+        const RABohmT0cc = RABohmT0 * x6;
+        const RABohm = RABohmT0 * cc;
+
+        const RACohmT0 = UAC / ibt;
+        const RACohmT0cc = RACohmT0 * x6;
+        const RACohm = RACohmT0 * cc;
+
+        const RBCohmT0 = UBC / ibt;
+        const RBCohmT0cc = RBCohmT0 * x6;
+        const RBCohm = RBCohmT0 * cc;
+
+        const RaohmTo = Ua / ibt;
+        const RaohmT0cc = RaohmTo * x6;
+        const Raohm = RaohmT0cc * cc;
+
+        const RbohmTo = Ub / ibt;
+        const RbohmT0cc = RbohmTo * x6;
+        const Rbohm = RbohmT0cc * cc;
+
+        const RcohmTo = Uc / ibt;
+        const RcohmT0cc = RcohmTo * x6;
+        const Rcohm = RcohmT0cc * cc;
+
+        const PjhTo = 1.5 * ((RABohmT0 + RACohmT0 + RBCohmT0) / 3) * this.service.list[0].mtu2 * this.service.list[0].mtu2;
+        const PjhtT0cc = 1.5 * ((RABohmT0cc + RACohmT0cc + RBCohmT0cc) / 3) * this.service.list[0].mtu2 * this.service.list[0].mtu2;
+        const PjbTo = (RaohmTo + RbohmTo + RcohmTo) * this.service.list[0].bti2 * this.service.list[0].bti2;
+        const PjbT0cc = (RaohmT0cc + RbohmT0cc + RcohmT0cc) * this.service.list[0].bti2 * this.service.list[0].bti2;
+        const PaddTo = PccTocc - (PjhtT0cc + PjbT0cc);
+        const Pjht = PjhTo * cc;
+        const Pjbt = PjbTo * cc;
+        const Padd = PaddTo / cc;
+        return Pjht+Pjbt+Padd;
     }
-    */
+    else return 0;
+  }
   }

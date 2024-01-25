@@ -21,7 +21,6 @@ export class Add_ModifyTransformateurComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
     this.route.params.subscribe(params => {
       this.transformateurId = +params['id'] || 0;
 
@@ -145,8 +144,19 @@ export class Add_ModifyTransformateurComponent implements OnInit {
       couplage: this.service.list[0].couplage,
       cooling: this.service.list[0].cooling,
       frequency: this.service.list[0].frequency,
+      libelle : this.service.list[0].libelle,
       // Add other properties as needed...
     };
+    this.pv[0].vt11 = this.getintervalle(0.95, 1.005),
+    this.pv[0].vt12 = this.getintervalle(0.95, 0.995),
+    this.pv[0].vt21 = this.getintervalle(0.975, 1.005),
+    this.pv[0].vt22 = this.getintervalle(0.975, 0.995),
+    this.pv[0].vt31 = this.getP3(1.005),
+    this.pv[0].vt32 = this.getP3(0.995),
+    this.pv[0].vt41 = this.getintervalle(1.025, 1.005),
+    this.pv[0].vt42 = this.getintervalle(1.025, 0.995),
+    this.pv[0].vt51 = this.getintervalle(1.05, 1.005),
+    this.pv[0].vt52 = this.getintervalle(1.05, 0.995),
     this.service.UpdateTransformateur(this.transformateurId, this.transformateur)
       .subscribe({
         next: (res => {
@@ -154,6 +164,20 @@ export class Add_ModifyTransformateurComponent implements OnInit {
           this.isEditMode = false;
         })
       });
+      if (this.pv[0].id_pv !== undefined) {
+        this.servicePv.UpdatePv(this.pv[0].id_pv, this.pv[0])
+          .subscribe({
+            next: (res => {
+              console.log('Pv updated successfully', res);
+              // Other logic after successful update
+            }),
+            error: (error => {
+              console.error('Error updating Pv', error);
+            })
+          });
+      } else {
+        console.error('Cannot update Pv - id_pv is undefined');
+      }
   }
   getP3(MultiplyFactor: number): number {
     let result: number = 0;
@@ -163,9 +187,9 @@ export class Add_ModifyTransformateurComponent implements OnInit {
     } else if (this.service.list[0].couplage.toUpperCase() === "YNYN") {
       result = (this.service.list[0].mtu1 / this.service.list[0].btu2) * 1000;
     } else if (this.service.list[0].couplage.toUpperCase() === "DYN") {
-      result =( ( this.service.list[0].mtu1 / this.service.list[0].mtu2) * 1000 )* Math.sqrt(3);
+      result =( ( this.service.list[0].mtu1 / this.service.list[0].btu2) * 1000 )* Math.sqrt(3);
     } else {
-      result = ( ( (this.service.list[0].mtu1 /this.service.list[0].mtu2) * 1000 )* Math.sqrt(3) )/ 2;
+      result = ( ( (this.service.list[0].mtu1 /this.service.list[0].btu2) * 1000 )* Math.sqrt(3) )/ 2;
     }
 
     result = result * MultiplyFactor;

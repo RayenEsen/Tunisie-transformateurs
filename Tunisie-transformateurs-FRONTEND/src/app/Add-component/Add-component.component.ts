@@ -147,9 +147,9 @@ export class AddComponentComponent implements OnInit {
     } else if (this.transformateurAjouter.couplage.toUpperCase() === "YNYN") {
       result = (this.transformateurAjouter.mtu1 / this.transformateurAjouter.btu2) * 1000;
     } else if (this.transformateurAjouter.couplage.toUpperCase() === "DYN") {
-      result =( ( this.transformateurAjouter.mtu1 / this.transformateurAjouter.mtu2) * 1000 )* Math.sqrt(3);
+      result =( ( this.transformateurAjouter.mtu1 / this.transformateurAjouter.btu2) * 1000 )* Math.sqrt(3);
     } else {
-      result = ( ( (this.transformateurAjouter.mtu1 /this.transformateurAjouter.mtu2) * 1000 )* Math.sqrt(3) )/ 2;
+      result = ( ( (this.transformateurAjouter.mtu1 /this.transformateurAjouter.btu2) * 1000 )* Math.sqrt(3) )/ 2;
     }
 
     result = result * MultiplyFactor;
