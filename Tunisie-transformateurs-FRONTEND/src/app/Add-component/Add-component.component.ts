@@ -6,6 +6,7 @@ import { PvServiceService } from '../Shared/Pv-service.service';
 import { forkJoin, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { SessionService } from '../utils/session-service.service';
 @Component({
   selector: 'app-Add-component',
   templateUrl: './Add-component.component.html',
@@ -33,7 +34,7 @@ export class AddComponentComponent implements OnInit {
     frequency: 0
   };
 
-  constructor(public service: TransformateurServiceService, public servicePv: PvServiceService, private router: Router) { }
+  constructor(public service: TransformateurServiceService, public servicePv: PvServiceService, private router: Router , public serviceS : SessionService) { }
 
   ngOnInit() {
 
@@ -62,7 +63,7 @@ export class AddComponentComponent implements OnInit {
                 id_pv: 0, // This will be populated by the server
                 id_t: this.transformateurAjouter.numero,
                 date: new Date(),
-                resultat: 'Aucun test',
+                resultat: 'En Attente',
                 tappings: 5,
                 vt11: this.getintervalle(0.95, 1.005),
                 vt12: this.getintervalle(0.95, 0.995),
@@ -89,31 +90,32 @@ export class AddComponentComponent implements OnInit {
                 vm51: undefined,
                 vm52: undefined,
                 vm53: undefined,
-                na0:  undefined,
-                nb0 :  undefined,
-                nc0 : undefined,
-                na1 :  undefined,
+                na0: undefined,
+                nb0: undefined,
+                nc0: undefined,
+                na1: undefined,
                 nb2: undefined,
-                nc3 :  undefined,
-                wog : undefined,
-                iog :  undefined,
-                iom :  undefined,
-                wom : undefined,
-                zccg : undefined,
-                wccg :  undefined,
-                temp :  undefined,
-                uccm :  undefined,
-                wccm1 :  undefined,
-                wccm2 : undefined,
-                zccm1:  undefined,
-                zcmm2 :  undefined,
-                u1 :  undefined,
-                t1 :  undefined,
-                u2  :undefined,
-                t2  :undefined,
-                u3 :  undefined,
-                t3 :  undefined,
-                claquage:  undefined,
+                nc3: undefined,
+                wog: undefined,
+                iog: undefined,
+                iom: undefined,
+                wom: undefined,
+                zccg: undefined,
+                wccg: undefined,
+                temp: undefined,
+                uccm: undefined,
+                wccm1: undefined,
+                wccm2: undefined,
+                zccm1: undefined,
+                zcmm2: undefined,
+                u1: undefined,
+                t1: undefined,
+                u2: undefined,
+                t2: undefined,
+                u3: undefined,
+                t3: undefined,
+                claquage: undefined,
+                id_C: this.serviceS.Controleur.idC,
               };
 
               // Call service method to add Pv
@@ -180,8 +182,6 @@ export class AddComponentComponent implements OnInit {
     }
     getI2() {
       let Resultat: number = 0;
-
-
         const power: number = parseFloat(this.transformateurAjouter.power); // Convert string to number
         const btu2: number = this.transformateurAjouter.btu2; // Assuming mtu1 is a number
 
@@ -190,7 +190,6 @@ export class AddComponentComponent implements OnInit {
         } else {
           Resultat =( ((power / btu2) ) / Math.sqrt(3) )*1000;
         }
-
         return Resultat;
       }
 }

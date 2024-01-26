@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -45,5 +46,8 @@ namespace WebAPI.Model
 
         [Column(TypeName = "nvarchar(100)")]
         public string Password { get; set; } = "";
+
+        // Collection navigation property for Pv
+        public ICollection<Pv> Pvs { get; set; } = new List<Pv>();
     }
 }

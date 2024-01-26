@@ -25,6 +25,16 @@ export class TransformateurServiceService {
       });
   }
 
+  refreshList2(): Observable<Transformateur[]> {
+    return this.http.get<Transformateur[]>(this.url)
+      .pipe(
+        catchError(err => {
+          console.error(err);
+          return throwError(err);
+        })
+      );
+  }
+
   AddTransformateur(transformateurAjouter: Transformateur): Observable<any> {
     // Return the observable from the HTTP POST request
     return this.http.post(this.url, transformateurAjouter);

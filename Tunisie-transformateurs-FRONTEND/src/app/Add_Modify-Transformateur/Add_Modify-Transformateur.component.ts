@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { TransformateurServiceService } from '../Shared/Transformateur-service.service';
 import { PvServiceService } from '../Shared/Pv-service.service';
 import { Pv } from '../Shared/Pv-service.model';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-Add_Modify-Transformateur',
   templateUrl: './Add_Modify-Transformateur.component.html',
@@ -17,7 +19,8 @@ export class Add_ModifyTransformateurComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     public service: TransformateurServiceService,
-    public servicePv : PvServiceService
+    public servicePv : PvServiceService,
+    public router: Router
   ) { }
 
   ngOnInit() {
@@ -162,6 +165,7 @@ export class Add_ModifyTransformateurComponent implements OnInit {
         next: (res => {
           console.log('Transformateur updated successfully', res);
           this.isEditMode = false;
+          this.router.navigate(['/Transformateur']);
         })
       });
       if (this.pv[0].id_pv !== undefined) {

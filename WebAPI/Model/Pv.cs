@@ -10,10 +10,12 @@ namespace WebAPI.Model
         public int Id_pv { get; set; } // Auto-generated primary key
         [ForeignKey("Transformateur")]
         public int Id_t { get; set; } // Foreign key
+        [ForeignKey("ControleurDeQualité")]
+        public string Id_C { get; set; } = ""; // Foreign key
         public DateTime Date { get; set; } = DateTime.Now; // Initialize with current date
         public string? Resultat { get; set; } // Result property
         //Voltage Ratio Data
-        public int? tappings { get; set; }
+        public int? Tappings { get; set; }
         public float? Vt11 { get; set; }
         public float? Vt12 { get; set; }
         public float? Vt21 { get; set; }
@@ -65,5 +67,7 @@ namespace WebAPI.Model
         public float? T3 { get; set; }
         public float? Claquage { get; set; }
         public Transformateur? Transformateur { get; set; }
+        public ControleurDeQualité? ControleurDeQualité { get; set; }
+
     }
 }

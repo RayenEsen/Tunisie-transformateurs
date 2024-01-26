@@ -27,4 +27,8 @@ export class PvServiceService {
   {
     return this.http.put<Pv>(`${this.url}/${id}`,UpdatePv);
   }
+  getPvsCountByResult(result: string): Observable<number> {
+    const apiUrl = `${this.url}/CountByResult/${result}`;
+    return this.http.get<number>(apiUrl);
+  }
 }

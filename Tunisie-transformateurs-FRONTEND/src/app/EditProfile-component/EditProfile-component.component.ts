@@ -38,6 +38,7 @@ export class EditProfileComponentComponent implements OnInit {
           next: (response) => {
             // Handle the success response if needed
             console.log('Controleur added successfully:', response);
+            alert('Les informations de la Controleur sont Enregistrer')
           },
           error: (error) => {
             // Handle the error

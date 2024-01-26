@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebAPI.Model;
 
@@ -11,9 +12,11 @@ using WebAPI.Model;
 namespace WebAPI.Migrations
 {
     [DbContext(typeof(TransformateurContext))]
-    partial class TransformateurContextModelSnapshot : ModelSnapshot
+    [Migration("20240126115542_RemovedUsellessColums")]
+    partial class RemovedUsellessColums
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -86,10 +89,6 @@ namespace WebAPI.Migrations
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Id_C")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("Id_t")
                         .HasColumnType("int");
@@ -249,8 +248,6 @@ namespace WebAPI.Migrations
 
                     b.HasKey("Id_pv");
 
-                    b.HasIndex("Id_C");
-
                     b.HasIndex("Id_t")
                         .IsUnique();
 
@@ -319,26 +316,13 @@ namespace WebAPI.Migrations
 
             modelBuilder.Entity("WebAPI.Model.Pv", b =>
                 {
-                    b.HasOne("WebAPI.Model.ControleurDeQualité", "ControleurDeQualité")
-                        .WithMany("Pvs")
-                        .HasForeignKey("Id_C")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("WebAPI.Model.Transformateur", "Transformateur")
                         .WithOne("Pv")
                         .HasForeignKey("WebAPI.Model.Pv", "Id_t")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ControleurDeQualité");
-
                     b.Navigation("Transformateur");
-                });
-
-            modelBuilder.Entity("WebAPI.Model.ControleurDeQualité", b =>
-                {
-                    b.Navigation("Pvs");
                 });
 
             modelBuilder.Entity("WebAPI.Model.Transformateur", b =>

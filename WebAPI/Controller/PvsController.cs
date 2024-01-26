@@ -113,6 +113,26 @@ namespace WebAPI.Controller
 
             return NoContent();
         }
+        [HttpGet("CountByResult/{result}")]
+        public async Task<ActionResult<int>> GetPvsCountByResult(string result)
+        {
+            try
+            {
+                // Convert the result parameter to uppercase for case-insensitive comparison
+                result = result.ToUpper();
+
+                // Retrieve the count of PVs with the specified result
+                var count = await _context.pvs.CountAsync(p => p.Resultat.ToUpper() == result);
+
+                return count;
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions as needed
+                return BadRequest($"An error occurred: {ex.Message}");
+            }
+        }
+
 
         private bool PvExists(int id)
         {
