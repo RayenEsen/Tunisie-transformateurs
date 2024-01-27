@@ -62,6 +62,12 @@ export class TransformateurServiceService {
         })
       );
   }
+
+  searchTransformateurs(searchTerm: string): Observable<Transformateur[]> {
+    const searchUrl = `${this.url}/Search?searchTerm=${searchTerm}`;
+    return this.http.get<Transformateur[]>(searchUrl);
+  }
+
   UpdateTransformateur(id : number , UpdateTransformateur : Transformateur): Observable<any>
   {
     return this.http.put<Transformateur>(`${this.url}/${id}`,UpdateTransformateur);

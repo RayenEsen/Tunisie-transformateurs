@@ -45,9 +45,9 @@
                       <div class="form-group mb-0">
                           <label>Rercherche</label>
                           <div class="input-group mb-0">
-                              <input type="text" class="form-control" placeholder="Rercherche..." aria-describedby="project-search-addon" />
+                              <input type="text" class="form-control" placeholder="Rercherche..." name="searchItem" aria-describedby="project-search-addon" [(ngModel)]="searchItem"/>
                               <div class="input-group-append">
-                                  <button class="btn btn-danger" type="button" id="project-search-addon"><i class="fa fa-search search-icon font-12"></i></button>
+                                  <button class="btn btn-danger" type="button" id="project-search-addon" (click)="Search()"><i class="fa fa-search search-icon font-12"></i></button>
                               </div>
                           </div>
                       </div>
@@ -78,7 +78,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let transformateur of service.list" class="align-middle">
+                <tr *ngFor="let transformateur of list" class="align-middle">
                   <td>
                     <div class="d-flex align-items-center">
                       <img src="assets/Default_Transfromateur.png" class="avatar sm rounded-pill me-3 flex-shrink-0" alt="Customer">
@@ -90,8 +90,8 @@
                   <td>{{ transformateur.numero }}</td>
                   <td><span class="d-inline-block align-middle">{{ transformateur.client }}</span></td>
                   <td><span>{{ transformateur.couplage }}</span></td>
-                  <td>{{PV.resultat}}</td>
-                  <td><span>{{ Controleur.username }}</span></td>
+                  <td>{{transformateur.Pv?.resultat}}</td>
+                  <td><span>{{ transformateur.Pv?.controleurDeQualite?.username }}</span></td>
                   <td class="text-end">
                     <div class="drodown">
                       <a data-bs-toggle="dropdown" href="#" class="btn p-1" aria-expanded="false">

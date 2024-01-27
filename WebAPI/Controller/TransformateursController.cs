@@ -113,6 +113,28 @@ namespace WebAPI.Controller
             return NoContent();
         }
 
+        [HttpGet("Search")]
+        public async Task<ActionResult<IEnumerable<Transformateur>>> SearchTransformateurs([FromQuery] string searchTerm)
+        {
+            // Perform a search based on the searchTerm
+            var result = await _context.transformateurs
+                .Where(t =>
+                    t.Marque.Contains(searchTerm) ||
+                    t.Client.Contains(searchTerm) ||
+                    t.Norme.Contains(searchTerm) ||
+                    t.Power.Contains(searchTerm) ||
+                    t.Prises.Contains(searchTerm) ||
+                    t.Couplage.Contains(searchTerm) ||
+                    t.Cooling.Contains(searchTerm) ||
+                    t.Libelle.Contains(searchTerm) ||
+                    t.Pv.Resultat.Contains(searchTerm) ||
+                    t.Pv.ControleurDeQualité.Username.Contains(searchTerm) ||
+                    t.Numero.ToString().Contains(searchTerm)) // Include Numero in the search
+                .ToListAsync();
+
+            return result;
+        }
+
         private bool TransformateurExists(int id)
         {
             return _context.transformateurs.Any(e => e.Numero == id);

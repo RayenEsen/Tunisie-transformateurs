@@ -13,11 +13,12 @@ import { ControlleurServiceService } from '../Shared/Controlleur-service.service
 })
 export class TransformateurInfoComponent implements OnInit {
 
-  PV: Pv = new Pv();
+
   list: Transformateur[] = [];
   nbAttente: number = 0;
   nbConforme: number = 0;
   nbNonConforme: number = 0;
+  searchItem: string = '';
   [index: string]: any;
 
   Controleur: ControleurDeQualite = new ControleurDeQualite();
@@ -29,38 +30,44 @@ export class TransformateurInfoComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.service.refreshList();
     this.service.refreshList2().subscribe({
       next: (res: Transformateur[]) => {
         this.list = res;
-
         if (this.list.length > 0) {
-          this.ServicePv.getPvByTransformerId(this.list[0].numero).subscribe({
-            next: (response: Pv[]) => {
-              if (response.length > 0) {
-                this.PV = response[0];
+          // Iterate through each item in this.list
+          this.list.forEach((transformateur, index) => {
+            this.ServicePv.getPvByTransformerId(transformateur.numero).subscribe({
+              next: (response: Pv[]) => {
+                if (response.length > 0) {
+                  // Assign the Pv to the current item in this.list
+                  this.list[index].Pv = response[0];
 
-                if (this.PV.id_C) {
-                  this.ServiceC.getControleurById(this.PV.id_C)
-                  .subscribe({
-                    next: (result: ControleurDeQualite) => {
-                      // Assuming the result is of type ControleurDeQualite
-                      this.Controleur = result;
-                    },
-                    error: (error) => {
-                      console.error('Error fetching data:', error);
-                    }
-                  });
+                  // Check if id_C is defined in Pv
+                  if (this.list[index].Pv?.id_C) {
+                    const currentIndex = index as number;  // Cast index to number
+                    this.ServiceC.getControleurById(this.list[currentIndex].Pv!.id_C)
+                      .subscribe({
+                        next: (result: ControleurDeQualite) => {
+                          // Assuming the result is of type ControleurDeQualite
+                          // Assign the ControleurDeQualite to the current Pv
+                          console.log(this.list[index])
+                          this.list[currentIndex].Pv!.controleurDeQualite = result;
+                        },
+                        error: (error) => {
+                          console.error('Error fetching data:', error);
+                        }
+                    });
+                  } else {
+                    console.error('Error: Pv.id_C is undefined.');
+                  }
                 } else {
-                  console.error('Error: this.PV.id_C is undefined.');
+                  console.error('Error: Empty result for Pv.');
                 }
-              } else {
-                console.error('Error: Empty result for Pv.');
+              },
+              error: (err: any) => {
+                console.error('Error fetching Pv:', err);
               }
-            },
-            error: (err: any) => {
-              console.error('Error fetching Pv:', err);
-            }
+            });
           });
         } else {
           console.error('Error: this.list is empty.');
@@ -75,6 +82,55 @@ export class TransformateurInfoComponent implements OnInit {
     this.fetchPvsCountByResult("Conforme", 'nbConforme');
     this.fetchPvsCountByResult("Non Conforme", 'nbNonConforme');
   }
+
+  Search() {
+    console.log(this.searchItem);
+    this.service.searchTransformateurs(this.searchItem).subscribe({
+      next: (Response: Transformateur[]) => {
+        console.log(Response);
+        this.list = Response;
+
+        // Iterate through each item in this.list
+        this.list.forEach((transformateur, index) => {
+          this.ServicePv.getPvByTransformerId(transformateur.numero).subscribe({
+            next: (response: Pv[]) => {
+              if (response.length > 0) {
+                // Assign the Pv to the current item in this.list
+                this.list[index].Pv = response[0];
+
+                // Check if id_C is defined in Pv
+                if (this.list[index].Pv?.id_C) {
+                  const currentIndex = index as number;  // Cast index to number
+                  this.ServiceC.getControleurById(this.list[currentIndex].Pv!.id_C).subscribe({
+                    next: (result: ControleurDeQualite) => {
+                      // Assuming the result is of type ControleurDeQualite
+                      // Assign the ControleurDeQualite to the current Pv
+                      console.log(this.list[index])
+                      this.list[currentIndex].Pv!.controleurDeQualite = result;
+                    },
+                    error: (error) => {
+                      console.error('Error fetching data:', error);
+                    }
+                  });
+                } else {
+                  console.error('Error: Pv.id_C is undefined.');
+                }
+              } else {
+                console.error('Error: Empty result for Pv.');
+              }
+            },
+            error: (err: any) => {
+              console.error('Error fetching Pv:', err);
+            }
+          });
+        });
+      },
+      error: (err) => {
+        console.error('Error fetching Transformateur:', err);
+      }
+    });
+  }
+
 
   fetchPvsCountByResult(result: string, property: string) {
     this.ServicePv.getPvsCountByResult(result).subscribe({

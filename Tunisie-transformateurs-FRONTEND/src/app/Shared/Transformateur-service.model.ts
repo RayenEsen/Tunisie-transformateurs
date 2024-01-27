@@ -1,3 +1,5 @@
+import { Pv } from "./Pv-service.model";
+
 export class Transformateur {
   numero: number = 0;
   marque: string = "";
@@ -15,4 +17,5 @@ export class Transformateur {
   libelle: string ="";
   cc: number = 0;
   frequency: number = 0;
+  Pv?: Pv;
 }

@@ -31,4 +31,5 @@ export class PvServiceService {
     const apiUrl = `${this.url}/CountByResult/${result}`;
     return this.http.get<number>(apiUrl);
   }
+
 }

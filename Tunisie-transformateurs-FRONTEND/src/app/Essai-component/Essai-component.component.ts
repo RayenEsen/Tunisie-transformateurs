@@ -3,6 +3,7 @@
   import { TransformateurServiceService } from '../Shared/Transformateur-service.service';
   import { Pv } from '../Shared/Pv-service.model';
   import { PvServiceService } from '../Shared/Pv-service.service';
+import { SessionService } from '../utils/session-service.service';
 
   @Component({
     selector: 'app-Essai-component',
@@ -19,19 +20,15 @@
       private router: Router,
       private route: ActivatedRoute,
       public service: TransformateurServiceService,
-      public pvService: PvServiceService
+      public pvService: PvServiceService,
+      public ServiceS : SessionService
     ) { }
 
     ngOnInit() {
-
       this.getCurrentDate();
       this.route.params.subscribe(params => {
         this.transformateurId = +params['id'] || 0;
-
-        if (this.transformateurId) {
           this.service.GetTransformateur(this.transformateurId);
-          console.log('Transformateur Data:', this.service.list);
-        }
         this.pvService.getPvByTransformerId(this.transformateurId).subscribe(
           (pvData: Pv[]) => {
             this.pv = pvData;
@@ -49,6 +46,7 @@
         this.pv[0].zccm1=this.getZccPourcentage();
         this.pv[0].zcmm2=this.getZcc2();
         this.pv[0].wccm2=this.getwccm2();
+        this.pv[0].id_C=this.ServiceS.Controleur.idC;
         // Call a service method to update the Pv values on the server
         this.pvService.UpdatePv(this.pv[0].id_pv, this.pv[0]).subscribe(
           response => {

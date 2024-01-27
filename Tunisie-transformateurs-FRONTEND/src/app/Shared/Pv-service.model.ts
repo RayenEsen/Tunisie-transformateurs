@@ -1,3 +1,4 @@
+import { ControleurDeQualite } from '../Shared/Controlleur-service.model';
 export class Pv {
   id_pv: number | undefined;
   id_t: number | undefined;
@@ -57,4 +58,5 @@ export class Pv {
   u3 : number | undefined;
   t3 : number | undefined;
   claquage: number | undefined;
+  controleurDeQualite?: ControleurDeQualite;
 }
