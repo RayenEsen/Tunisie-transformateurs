@@ -1,0 +1,129 @@
+
+.card {
+  border: none;
+  -webkit-box-shadow: 1px 0 20px rgba(96,93,175,.05);
+  box-shadow: 1px 0 20px rgba(96,93,175,.05);
+  margin-bottom: 30px;
+}
+.table th {
+  font-weight: 500;
+  color: #827fc0;
+}
+.table thead {
+  background-color: #f3f2f7;
+}
+.table>tbody>tr>td, .table>tfoot>tr>td, .table>thead>tr>td {
+  padding: 14px 12px;
+  vertical-align: middle;
+}
+.table tr td {
+  color: #8887a9;
+}
+.thumb-sm {
+  height: 32px;
+  width: 32px;
+}
+.badge-soft-warning {
+  background-color: rgba(248,201,85,.2);
+  color: #f8c955;
+}
+
+.badge {
+  font-weight: 500;
+}
+.badge-soft-primary {
+  background-color: rgba(96,93,175,.2);
+  color: #605daf;
+}
+/* General styles */
+
+
+/* Card styles */
+.card {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 15px;
+  margin-top: 20px;
+  background-color: #fff;
+  border: 1px solid #eee;
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+}
+
+/* Avatar styles */
+.avatar.sm {
+  width: 3rem;
+  height: 3rem;
+  font-size: 1rem;
+  border-radius: 50%;
+  transition: transform 0.3s;
+}
+
+.avatar.sm:hover {
+  transform: scale(1.1);
+}
+
+/* Table styles */
+.table {
+  font-size: 1rem;
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.table th, .table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ccc;
+}
+
+.table th {
+  font-weight: 600;
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.table tbody tr:hover {
+  background-color: #f9f9f9;
+}
+
+/* Table responsive styles */
+.table-responsive {
+  max-height: calc(80vh - 40px);
+  overflow-y: auto;
+}
+
+/* Hover effect for table rows */
+.table tbody tr:hover {
+  background-color: #f9f9f9; /* Light gray hover background */
+}
+
+/* Scroll bar styles */
+.table-responsive::-webkit-scrollbar {
+  width: 8px;
+}
+
+.table-responsive::-webkit-scrollbar-thumb {
+  background-color: #ddd; /* Light gray scrollbar thumb color */
+  border-radius: 5px;
+}
+
+.table-responsive::-webkit-scrollbar-track {
+  background-color: #f5f5f5; /* Light gray scrollbar track color */
+}
+
+
+
+.masthead:hover {
+  color: #ff7f50; /* Highlight color on hover */
+}
+
+
+
+
+

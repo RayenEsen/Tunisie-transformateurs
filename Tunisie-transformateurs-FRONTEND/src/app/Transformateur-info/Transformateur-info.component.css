@@ -88,7 +88,6 @@ body {
 
 /* Masthead styles */
 .masthead {
-
   margin-left: 50px;
   height: 100vh;
   min-height: 500px;
@@ -114,18 +113,7 @@ body {
 .drodown a:hover i {
   transform: scale(1.2) rotate(20deg);
 }
-/* existing-component.component.css */
-.popup {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+
 .fa-warning:before, .fa-exclamation-triangle:before {
   color: darkred;
   content: "\f071";
@@ -166,3 +154,4 @@ a{
   color: orange; /* Change the color as needed */
   transform: scale(1.2);
 }
+
