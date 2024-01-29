@@ -78,5 +78,10 @@ export class TransformateurServiceService {
     return this.http.put<Transformateur>(`${this.url}/${id}`,UpdateTransformateur);
   }
 
+  filter(choix1: string, choix2: string): Observable<Transformateur[]> {
+    const filterUrl = `${this.url}/Filter?choix1=${choix1}&choix2=${choix2}`;
+    return this.http.get<Transformateur[]>(filterUrl);
+  }
+
 
 }

@@ -39,5 +39,4 @@ UpdateControleurById(id: string,Controleur : ControleurDeQualite): Observable<an
   return this.http.put(urlWithParams,Controleur);
 }
 
-
 }

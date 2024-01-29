@@ -10,6 +10,8 @@ export class PlanificationComponentComponent implements OnInit {
 
   list: Transformateur[] = [];
   searchItem: string = '';
+  Choix1: string = '';
+  Choix2: string = '';
 
   constructor(public Service: TransformateurServiceService) { }
 
@@ -32,6 +34,20 @@ export class PlanificationComponentComponent implements OnInit {
         this.list=Result;
       }
     });
+  }
+
+  filtrer()
+  {
+    console.log("Choix1 = "+this.Choix1)
+    console.log("Choix2 = "+this.Choix2)
+    this.Service.filter(this.Choix1,this.Choix2)
+    .subscribe({
+      next:(Result : Transformateur[]) =>
+      {
+        this.list=Result;
+        console.log(Result);
+      }
+    })
   }
 
 }

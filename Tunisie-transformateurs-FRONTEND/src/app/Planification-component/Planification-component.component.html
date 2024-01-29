@@ -24,27 +24,26 @@
                                     <div class="col-lg-3">
                                         <div class="filler-job-form">
                                             <i class="uil uil-location-point"></i>
-                                            <select class="form-select selectForm__inner" data-trigger="true" name="choices-single-location" id="choices-single-location" aria-label="Default select example">
-                                                <option value="AF">Date de lancement</option>
-                                                <option value="AX">Date de production</option>
-                                                <option value="AL">Date d'essai</option>
+                                            <select class="form-select selectForm__inner" data-trigger="true" name="Choix1" [(ngModel)]="Choix1" id="choices-single-location" aria-label="Default select example">
+                                                <option value="DL">Date de lancement</option>
+                                                <option value="DP">Date de fin production</option>
+                                                <option value="DE">Date d'essai</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-lg-3">
                                         <div class="filler-job-form">
                                             <i class="uil uil-clipboard-notes"></i>
-                                            <select class="form-select selectForm__inner" data-trigger="true" name="choices-single-categories" id="choices-single-categories" aria-label="Default select example">
-                                                <option value="4">Conforme</option>
-                                                <option value="1">Non Conforme</option>
-                                                <option value="3">En attente</option>
+                                            <select class="form-select selectForm__inner" data-trigger="true" name="Choix2" [(ngModel)]="Choix2" id="choices-single-categories" aria-label="Default select example">
+                                                <option value="A">Ascendant</option>
+                                                <option value="D">Descendant</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-lg-3">
                                         <div>
                                           <a href="javascript:void(0)" class="btn btn-primary btn" style="background-color: #122151; border-color: #122151;" (click)="Search()">Rechercher</a>&nbsp;
-                                          <a href="javascript:void(0)" class="btn btn-default btn">Filtrer</a>&nbsp;
+                                          <a href="javascript:void(0)" class="btn btn-default btn" (click)="filtrer()" >Filtrer</a>&nbsp;
                                         </div>
                                     </div>
                                 </div>

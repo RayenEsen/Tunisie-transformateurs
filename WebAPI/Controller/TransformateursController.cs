@@ -147,6 +147,52 @@ namespace WebAPI.Controller
             return result;
         }
 
+        [HttpGet("Filter")]
+        public async Task<ActionResult<IEnumerable<Transformateur>>> FilterTransformateurs(
+    [FromQuery] string choix1,
+    [FromQuery] string choix2)
+        {
+            IQueryable<Transformateur> query = _context.transformateurs.Include(t => t.Pv);
+
+            // Apply filtering and sorting based on the specified conditions
+            switch (choix1)
+            {
+                case "DL": // Date de lancement (Transformateur Date)
+                    switch (choix2)
+                    {
+                        case "A": // Ascending
+                            query = query.OrderBy(t => t.Date);
+                            break;
+                        case "D": // Descending
+                            query = query.OrderByDescending(t => t.Date);
+                            break;
+                        default:
+                            return BadRequest("Invalid sort order. Use 'A' for Ascending or 'D' for Descending.");
+                    }
+                    break;
+                case "DE": // Date d'essai (Pv Date)
+                    switch (choix2)
+                    {
+                        case "A": // Ascending
+                            query = query.OrderBy(t => t.Pv.Date);
+                            break;
+                        case "D": // Descending
+                            query = query.OrderByDescending(t => t.Pv.Date);
+                            break;
+                        default:
+                            return BadRequest("Invalid sort order. Use 'A' for Ascending or 'D' for Descending.");
+                    }
+                    break;
+                default:
+                    return BadRequest("Invalid filter type. Use 'DL' for Date de lancement or 'DE' for Date d'essai.");
+            }
+
+            var result = await query.ToListAsync();
+
+            return result;
+        }
+
+
 
         private bool TransformateurExists(int id)
         {
