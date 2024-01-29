@@ -19,7 +19,7 @@
       </div>
     </div>
   </div>
-  <div class="page-header text-blue-d2" style="    margin: 40px 30px 20px;" >
+  <div class="page-header text-blue-d2" style=" margin: 40px 30px 20px;" >
 
 
   <div class="row">
@@ -58,7 +58,14 @@
   </div>
   <div class="col-sm-6" style=" text-align: right;">
     <div>
-        <span> <strong>CE-FOR-20-V6</strong></span><br>
+        <span> <strong>CE-FOR-20-V<input placeholder="6" [(ngModel)]="pv[0].version" type="number"
+          style="border: none;
+          padding-left: 1px;
+          outline: none;
+          background: none;
+          font-size: inherit;
+          font-family: inherit;
+          color: inherit;width: 2ch;"></strong></span><br>
         <span class="text-sm text-grey-m2 align-middle">Nbr des phases/Nb of phases:</span>
         <span class="text-600 text-110 text-blue align-middle">{{ service.list[0].nbphase }}</span>
     </div>

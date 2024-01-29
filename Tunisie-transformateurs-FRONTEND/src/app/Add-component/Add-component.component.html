@@ -85,7 +85,17 @@
           [(ngModel)]="transformateurAjouter.prises"
         />
       </div>
+      <div class="formbold-mb-3">
+        <label class="formbold-form-label" style="color: #122151;">Type<small style="color: red;">*</small></label>
+        <select class="formbold-form-input" name="occupation" id="occupation" name="couplage" [(ngModel)]="transformateurAjouter.type">
+          <option value="" disabled selected>Sélectionner le type</option>
+          <option value="Triphasés">Triphasés</option>
+          <option value="Monophasés">Monophasés</option>
+          <option value="Résine">Résine</option>
+        </select>
 
+
+      </div>
       <div class="formbold-mb-3">
         <label for="address" class="formbold-form-label" style="color: #122151;"> MT:U1 <small style="color: red;">*</small></label>
 

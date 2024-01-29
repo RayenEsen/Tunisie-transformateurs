@@ -137,6 +137,7 @@ export class Add_ModifyTransformateurComponent implements OnInit {
       numero: this.service.list[0].numero,
       client: this.service.list[0].client,
       norme: this.service.list[0].norme,
+      type: this.service.list[0].type,
       mtu1: this.service.list[0].mtu1,
       mtu2: this.getI1(),
       btu2: this.service.list[0].btu2,

@@ -40,18 +40,18 @@ export class TransformateurInfoComponent implements OnInit {
               next: (response: Pv[]) => {
                 if (response.length > 0) {
                   // Assign the Pv to the current item in this.list
-                  this.list[index].Pv = response[0];
+                  this.list[index].pv = response[0];
 
                   // Check if id_C is defined in Pv
-                  if (this.list[index].Pv?.id_C) {
+                  if (this.list[index].pv?.id_C) {
                     const currentIndex = index as number;  // Cast index to number
-                    this.ServiceC.getControleurById(this.list[currentIndex].Pv!.id_C)
+                    this.ServiceC.getControleurById(this.list[currentIndex].pv!.id_C)
                       .subscribe({
                         next: (result: ControleurDeQualite) => {
                           // Assuming the result is of type ControleurDeQualite
                           // Assign the ControleurDeQualite to the current Pv
                           console.log(this.list[index])
-                          this.list[currentIndex].Pv!.controleurDeQualite = result;
+                          this.list[currentIndex].pv!.controleurDeQualite = result;
                         },
                         error: (error) => {
                           console.error('Error fetching data:', error);
@@ -96,17 +96,17 @@ export class TransformateurInfoComponent implements OnInit {
             next: (response: Pv[]) => {
               if (response.length > 0) {
                 // Assign the Pv to the current item in this.list
-                this.list[index].Pv = response[0];
+                this.list[index].pv = response[0];
 
                 // Check if id_C is defined in Pv
-                if (this.list[index].Pv?.id_C) {
+                if (this.list[index].pv?.id_C) {
                   const currentIndex = index as number;  // Cast index to number
-                  this.ServiceC.getControleurById(this.list[currentIndex].Pv!.id_C).subscribe({
+                  this.ServiceC.getControleurById(this.list[currentIndex].pv!.id_C).subscribe({
                     next: (result: ControleurDeQualite) => {
                       // Assuming the result is of type ControleurDeQualite
                       // Assign the ControleurDeQualite to the current Pv
+                      this.list[currentIndex].pv!.controleurDeQualite = result;
                       console.log(this.list[index])
-                      this.list[currentIndex].Pv!.controleurDeQualite = result;
                     },
                     error: (error) => {
                       console.error('Error fetching data:', error);

@@ -18,7 +18,7 @@ namespace WebAPI.Model
             // Configure one-to-one relationship between Transformateur and Pv
             modelBuilder.Entity<Transformateur>()
                 .HasOne(t => t.Pv)
-                .WithOne(p => p.Transformateur)
+                .WithOne() // Remove the navigation property reference
                 .HasForeignKey<Pv>(p => p.Id_t);
 
             // Configure one-to-many relationship between ControleurDeQualité and Pv

@@ -11,6 +11,8 @@ namespace WebAPI.Model
 
         [Column(TypeName = "nvarchar(100)")]
         public string Marque { get; set; } = "";
+        public DateTime Date { get; set; } = DateTime.Now; // Initialize with current date
+        public string Type { get; set; } = "";
 
         [Column(TypeName = "nvarchar(100)")]
         public string Client { get; set; } = "";

@@ -18,7 +18,7 @@
                                 <div class="g-2 row">
                                     <div class="col-lg-3">
                                         <div class="filler-job-form">
-                                            <i class="uil uil-briefcase-alt"></i><input id="exampleFormControlInput1" placeholder="Recherche... " type="search" class="form-control filler-job-input-box form-control" />
+                                            <i class="uil uil-briefcase-alt"></i><input id="exampleFormControlInput1" placeholder="Recherche... " [(ngModel)]="searchItem" name="searchItem" type="search" class="form-control filler-job-input-box form-control" />
                                         </div>
                                     </div>
                                     <div class="col-lg-3">
@@ -28,7 +28,6 @@
                                                 <option value="AF">Date de lancement</option>
                                                 <option value="AX">Date de production</option>
                                                 <option value="AL">Date d'essai</option>
-
                                             </select>
                                         </div>
                                     </div>
@@ -44,7 +43,8 @@
                                     </div>
                                     <div class="col-lg-3">
                                         <div>
-                                            <a class="btn btn-primary" href="#" ><i class="uil uil-filter"></i> Filtrer</a><a class="btn btn-success ms-2" href="#"><i class="uil uil-cog"></i> Recherche</a>
+                                          <a href="javascript:void(0)" class="btn btn-primary btn" style="background-color: #122151; border-color: #122151;" (click)="Search()">Rechercher</a>&nbsp;
+                                          <a href="javascript:void(0)" class="btn btn-default btn">Filtrer</a>&nbsp;
                                         </div>
                                     </div>
                                 </div>
@@ -67,18 +67,21 @@
                               </tr>
                           </thead>
                           <tbody>
-                              <tr>
-                                  <td><img src="assets/Default_Transfromateur.png" class="avatar sm rounded-pill me-3 flex-shrink-0" alt="Customer">21827</td>
-                                  <td> Triphase</td>
-                                  <td>630Kva</td>
-                                  <td>30/08/2021</td>
-                                  <td>29/06/2021</td>
-                                  <td>27/09/2021</td>
-                                  <td><span class="badge badge-boxed badge-soft-warning">Conformer</span></td>
-                                  <td>25/10/2021</td>
+                              <tr *ngFor="let transformateur of list">
+                                  <td>
+                                    <img *ngIf="transformateur.type==='Triphasés' " src="assets/mono.png" class="avatar sm rounded-pill me-3 flex-shrink-0" alt="Customer">
+                                    <img *ngIf="transformateur.type==='Monophasés' " src="assets/triphaser.png" class="avatar sm rounded-pill me-3 flex-shrink-0" alt="Customer">
+                                    <img *ngIf="transformateur.type==='Résine' " src="assets/resine.png" class="avatar sm rounded-pill me-3 flex-shrink-0" alt="Customer">
+                                    {{transformateur.numero}}
+                                  </td>
+                                  <td> {{transformateur.type}} </td>
+                                  <td> {{transformateur.power}}Kva </td>
+                                  <td> {{transformateur.date| date:'yyyy-MM-dd'}} </td>
+                                  <td>IDK</td>
+                                  <td>{{ transformateur.pv?.date | date:'yyyy-MM-dd' }}</td>
+                                  <td><span class="badge badge-boxed badge-soft-warning">{{transformateur.pv?.resultat}}</span></td>
+                                  <td>IDK</td>
                               </tr>
-
-
                           </tbody>
                       </table>
                   </div>

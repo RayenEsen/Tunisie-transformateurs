@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace WebAPI.Model
 {
@@ -48,6 +49,7 @@ namespace WebAPI.Model
         public string Password { get; set; } = "";
 
         // Collection navigation property for Pv
-        public ICollection<Pv> Pvs { get; set; } = new List<Pv>();
+        [JsonIgnore]
+        public ICollection<Pv>? Pvs { get; set; }
     }
 }

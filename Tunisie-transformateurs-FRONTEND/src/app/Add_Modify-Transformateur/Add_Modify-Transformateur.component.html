@@ -40,8 +40,13 @@
                     <td><input name="Norme" [(ngModel)]="service.list[0].norme" [readonly]="!isEditMode"></td>
                   </tr>
                   <tr>
+                    <td>Type:</td>
+                    <td><input name="Norme" [(ngModel)]="service.list[0].type"  [readonly]="!isEditMode"></td>
+                  </tr>
+
+                  <tr>
                     <td>Conclusion:</td>
-                    <td><span>Conforme</span></td>
+                    <td><span>{{pv[0].resultat}}</span></td>
                   </tr>
                 </tbody>
               </table>

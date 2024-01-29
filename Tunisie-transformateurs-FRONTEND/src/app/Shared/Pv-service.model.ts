@@ -8,6 +8,7 @@ export class Pv {
 
   // Voltage Ratio properties (nullable)
   tappings: number = 0;
+  version: number = 6;
   vt11: number | undefined;
   vt12: number | undefined;
   vt21: number | undefined;

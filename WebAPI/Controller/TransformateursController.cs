@@ -27,6 +27,15 @@ namespace WebAPI.Controller
             return await _context.transformateurs.ToListAsync();
         }
 
+        [HttpGet("AllTransformateursWithPv")]
+        public async Task<ActionResult<IEnumerable<Transformateur>>> GetAllTransformateursWithPv()
+        {
+                // Include the Pv navigation property in the query
+                var transformateursWithPvs = await _context.transformateurs.Include(t => t.Pv).ToListAsync();
+
+                return transformateursWithPvs;
+        }
+
         // GET: api/Transformateurs/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Transformateur>> GetTransformateur(int id)
@@ -118,6 +127,8 @@ namespace WebAPI.Controller
         {
             // Perform a search based on the searchTerm
             var result = await _context.transformateurs
+                .Include(t => t.Pv)
+                .Include(t => t.Pv.ControleurDeQualité)
                 .Where(t =>
                     t.Marque.Contains(searchTerm) ||
                     t.Client.Contains(searchTerm) ||
@@ -127,13 +138,15 @@ namespace WebAPI.Controller
                     t.Couplage.Contains(searchTerm) ||
                     t.Cooling.Contains(searchTerm) ||
                     t.Libelle.Contains(searchTerm) ||
+                    t.Type.Contains(searchTerm) ||
                     t.Pv.Resultat.Contains(searchTerm) ||
                     t.Pv.ControleurDeQualité.Username.Contains(searchTerm) ||
-                    t.Numero.ToString().Contains(searchTerm)) // Include Numero in the search
+                    t.Numero.ToString().Contains(searchTerm))
                 .ToListAsync();
 
             return result;
         }
+
 
         private bool TransformateurExists(int id)
         {

@@ -15,6 +15,11 @@ export class TransformateurServiceService {
 
   constructor(private http: HttpClient) { }
 
+  getTransformateurAndItsPvs(): Observable<Transformateur[]> {
+    const getUrl = `${this.url}/AllTransformateursWithPv`;
+    return this.http.get<Transformateur[]>(getUrl);
+  }
+
   refreshList() {
     this.http.get(this.url)
       .subscribe({
@@ -72,4 +77,6 @@ export class TransformateurServiceService {
   {
     return this.http.put<Transformateur>(`${this.url}/${id}`,UpdateTransformateur);
   }
+
+
 }

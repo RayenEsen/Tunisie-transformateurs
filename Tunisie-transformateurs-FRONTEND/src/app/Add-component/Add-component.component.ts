@@ -17,7 +17,7 @@ export class AddComponentComponent implements OnInit {
   transformateurAjouter: Transformateur =
   {
     numero: 0,
-    marque: '',
+    marque: 'Tunisie transformateurs',
     client: '',
     norme: '',
     power: '',
@@ -29,9 +29,10 @@ export class AddComponentComponent implements OnInit {
     prises: '',
     couplage: '',
     cooling: '',
-    libelle : '',
-    cc: 0,
-    frequency: 0
+    libelle: '',
+    frequency: 0,
+    date: new Date(),
+    type: ''
   };
 
   constructor(public service: TransformateurServiceService, public servicePv: PvServiceService, private router: Router , public serviceS : SessionService) { }
@@ -116,6 +117,7 @@ export class AddComponentComponent implements OnInit {
                 t3: undefined,
                 claquage: undefined,
                 id_C: this.serviceS.Controleur.idC,
+                version: 0
               };
 
               // Call service method to add Pv

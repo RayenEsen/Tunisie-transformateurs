@@ -3,6 +3,8 @@ import { Pv } from "./Pv-service.model";
 export class Transformateur {
   numero: number = 0;
   marque: string = "";
+  date: Date = new Date();
+  type: string = "";
   client: string = "";
   norme: string = "";
   power: string = "";
@@ -15,7 +17,6 @@ export class Transformateur {
   couplage: string = "";
   cooling: string = "";
   libelle: string ="";
-  cc: number = 0;
   frequency: number = 0;
-  Pv?: Pv;
+  pv?: Pv;
 }

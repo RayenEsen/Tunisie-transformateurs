@@ -1,3 +1,5 @@
+import { Pv } from "./Pv-service.model";
+
 export class ControleurDeQualite {
   idC: string = '';
   nom?: string ;
@@ -12,4 +14,5 @@ export class ControleurDeQualite {
   region?: string;
   codePostal?: string;
   password: string = '';
+  pvs?: Pv[] = [];
 }

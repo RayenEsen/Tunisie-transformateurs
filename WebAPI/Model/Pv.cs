@@ -16,6 +16,7 @@ namespace WebAPI.Model
         public string? Resultat { get; set; } // Result property
         //Voltage Ratio Data
         public int? Tappings { get; set; }
+        public int? Version { get; set; }
         public float? Vt11 { get; set; }
         public float? Vt12 { get; set; }
         public float? Vt21 { get; set; }
@@ -66,7 +67,6 @@ namespace WebAPI.Model
         public float? U3 { get; set; }
         public float? T3 { get; set; }
         public float? Claquage { get; set; }
-        public Transformateur? Transformateur { get; set; }
         public ControleurDeQualité? ControleurDeQualité { get; set; }
 
     }
