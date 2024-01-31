@@ -12,8 +12,8 @@ using WebAPI.Model;
 namespace WebAPI.Migrations
 {
     [DbContext(typeof(TransformateurContext))]
-    [Migration("20240128122848_fixes")]
-    partial class fixes
+    [Migration("20240130234940_FirstMigration")]
+    partial class FirstMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,21 @@ namespace WebAPI.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("ControleurDeQualitéEtape", b =>
+                {
+                    b.Property<string>("ControleursIdC")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("EtapesId_E")
+                        .HasColumnType("int");
+
+                    b.HasKey("ControleursIdC", "EtapesId_E");
+
+                    b.HasIndex("EtapesId_E");
+
+                    b.ToTable("ControleurEtape", (string)null);
+                });
 
             modelBuilder.Entity("WebAPI.Model.ControleurDeQualité", b =>
                 {
@@ -76,6 +91,27 @@ namespace WebAPI.Migrations
                     b.ToTable("controleurDeQualités");
                 });
 
+            modelBuilder.Entity("WebAPI.Model.Etape", b =>
+                {
+                    b.Property<int>("Id_E")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("DateDebut")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DateFin")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Numero")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id_E");
+
+                    b.HasIndex("Numero");
+
+                    b.ToTable("etapes");
+                });
+
             modelBuilder.Entity("WebAPI.Model.Pv", b =>
                 {
                     b.Property<int>("Id_pv")
@@ -90,7 +126,7 @@ namespace WebAPI.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Id_C")
+                    b.Property<string>("IdC")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
@@ -255,7 +291,7 @@ namespace WebAPI.Migrations
 
                     b.HasKey("Id_pv");
 
-                    b.HasIndex("Id_C");
+                    b.HasIndex("IdC");
 
                     b.HasIndex("Id_t")
                         .IsUnique();
@@ -321,16 +357,46 @@ namespace WebAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Numero");
 
                     b.ToTable("transformateurs");
+                });
+
+            modelBuilder.Entity("ControleurDeQualitéEtape", b =>
+                {
+                    b.HasOne("WebAPI.Model.ControleurDeQualité", null)
+                        .WithMany()
+                        .HasForeignKey("ControleursIdC")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebAPI.Model.Etape", null)
+                        .WithMany()
+                        .HasForeignKey("EtapesId_E")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("WebAPI.Model.Etape", b =>
+                {
+                    b.HasOne("WebAPI.Model.Transformateur", "Transformateur")
+                        .WithMany("Etapes")
+                        .HasForeignKey("Numero")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Transformateur");
                 });
 
             modelBuilder.Entity("WebAPI.Model.Pv", b =>
                 {
                     b.HasOne("WebAPI.Model.ControleurDeQualité", "ControleurDeQualité")
                         .WithMany("Pvs")
-                        .HasForeignKey("Id_C")
+                        .HasForeignKey("IdC")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -350,6 +416,8 @@ namespace WebAPI.Migrations
 
             modelBuilder.Entity("WebAPI.Model.Transformateur", b =>
                 {
+                    b.Navigation("Etapes");
+
                     b.Navigation("Pv");
                 });
 #pragma warning restore 612, 618

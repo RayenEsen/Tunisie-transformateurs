@@ -125,5 +125,14 @@
 
 
 
+/* Add this CSS to your stylesheet */
+tbody tr {
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Add a smooth transition effect */
+}
+
+tbody tr:hover {
+  background-color: #f0f0f0; /* Change the background color on hover */
+}
 
 

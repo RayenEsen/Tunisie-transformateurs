@@ -10,6 +10,7 @@ import { CreateAcountComponentComponent } from './CreateAcount-component/CreateA
 import { PlanificationComponentComponent } from './Planification-component/Planification-component.component';
 import { AuthGuard } from './guards/auth.guard';
 import { InscriptionComponentComponent } from './Inscription-component/Inscription-component.component';
+import { ControleComponentComponent } from './Controle-component/Controle-component.component';
 
 const routes: Routes = [
   { path: 'Transformateur', component: TransformateurInfoComponent , canActivate: [AuthGuard]},
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'Sign_in' , component : CreateAcountComponentComponent},
   { path: 'Planification' , component : PlanificationComponentComponent , canActivate: [AuthGuard]},
   { path: 'Sign_up' , component : InscriptionComponentComponent},
+  { path: 'Controle/:id' , component : ControleComponentComponent, canActivate: [AuthGuard]},
   // New route with parameter
   { path: '', component: DefaultComponentComponent }, // Default route
   // Add other routes as needed

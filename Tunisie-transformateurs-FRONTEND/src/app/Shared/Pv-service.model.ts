@@ -4,7 +4,7 @@ export class Pv {
   id_t: number | undefined;
   date: Date = new Date();
   resultat: string = 'en Attente';
-  id_C : string = ""; // Foreign key
+  idC : string = ""; // Foreign key
 
   // Voltage Ratio properties (nullable)
   tappings: number = 0;

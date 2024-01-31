@@ -11,7 +11,7 @@ namespace WebAPI.Model
         [ForeignKey("Transformateur")]
         public int Id_t { get; set; } // Foreign key
         [ForeignKey("ControleurDeQualité")]
-        public string Id_C { get; set; } = ""; // Foreign key
+        public string IdC { get; set; } = ""; // Foreign key
         public DateTime Date { get; set; } = DateTime.Now; // Initialize with current date
         public string? Resultat { get; set; } // Result property
         //Voltage Ratio Data
@@ -68,6 +68,5 @@ namespace WebAPI.Model
         public float? T3 { get; set; }
         public float? Claquage { get; set; }
         public ControleurDeQualité? ControleurDeQualité { get; set; }
-
     }
 }

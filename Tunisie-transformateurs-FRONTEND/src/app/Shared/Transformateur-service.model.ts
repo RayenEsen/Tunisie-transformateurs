@@ -1,4 +1,5 @@
 import { Pv } from "./Pv-service.model";
+import { Etape } from "./Etape-servicemodel"; // Make sure to import Etape model
 
 export class Transformateur {
   numero: number = 0;
@@ -16,7 +17,8 @@ export class Transformateur {
   prises: string = "";
   couplage: string = "";
   cooling: string = "";
-  libelle: string ="";
+  libelle: string = "";
   frequency: number = 0;
   pv?: Pv;
+  etapes?: Etape[]; // One-to-many relationship with Etape
 }

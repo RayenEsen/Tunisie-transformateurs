@@ -25,6 +25,7 @@
                                         <div class="filler-job-form">
                                             <i class="uil uil-location-point"></i>
                                             <select class="form-select selectForm__inner" data-trigger="true" name="Choix1" [(ngModel)]="Choix1" id="choices-single-location" aria-label="Default select example">
+                                                <option value="">Filtrer selon les dates</option>
                                                 <option value="DL">Date de lancement</option>
                                                 <option value="DP">Date de fin production</option>
                                                 <option value="DE">Date d'essai</option>
@@ -35,6 +36,7 @@
                                         <div class="filler-job-form">
                                             <i class="uil uil-clipboard-notes"></i>
                                             <select class="form-select selectForm__inner" data-trigger="true" name="Choix2" [(ngModel)]="Choix2" id="choices-single-categories" aria-label="Default select example">
+                                                <option value="">Saisir Type de filtre</option>
                                                 <option value="A">Ascendant</option>
                                                 <option value="D">Descendant</option>
                                             </select>
@@ -66,22 +68,23 @@
                               </tr>
                           </thead>
                           <tbody>
-                              <tr *ngFor="let transformateur of list">
-                                  <td>
-                                    <img *ngIf="transformateur.type==='Triphasés' " src="assets/mono.png" class="avatar sm rounded-pill me-3 flex-shrink-0" alt="Customer">
-                                    <img *ngIf="transformateur.type==='Monophasés' " src="assets/triphaser.png" class="avatar sm rounded-pill me-3 flex-shrink-0" alt="Customer">
-                                    <img *ngIf="transformateur.type==='Résine' " src="assets/resine.png" class="avatar sm rounded-pill me-3 flex-shrink-0" alt="Customer">
+                            <tr *ngFor="let transformateur of list" [routerLink]="['/Controle', transformateur.numero]">
+                              <td>
+                                    <img *ngIf="transformateur.type==='Triphasés'" src="assets/mono.png" class="avatar sm rounded-pill me-3 flex-shrink-0" alt="Customer">
+                                    <img *ngIf="transformateur.type==='Monophasés'" src="assets/triphaser.png" class="avatar sm rounded-pill me-3 flex-shrink-0" alt="Customer">
+                                    <img *ngIf="transformateur.type==='Résine'" src="assets/resine.png" class="avatar sm rounded-pill me-3 flex-shrink-0" alt="Customer">
                                     {{transformateur.numero}}
-                                  </td>
-                                  <td> {{transformateur.type}} </td>
-                                  <td> {{transformateur.power}}Kva </td>
-                                  <td> {{transformateur.date| date:'yyyy-MM-dd'}} </td>
-                                  <td>IDK</td>
-                                  <td>{{ transformateur.pv?.date | date:'yyyy-MM-dd' }}</td>
-                                  <td><span class="badge badge-boxed badge-soft-warning">{{transformateur.pv?.resultat}}</span></td>
-                                  <td>IDK</td>
-                              </tr>
-                          </tbody>
+                                </td>
+                                <td>{{transformateur.type}}</td>
+                                <td>{{transformateur.power}}Kva</td>
+                                <td>{{transformateur.date | date:'yyyy-MM-dd'}}</td>
+                                <td>IDK</td>
+                                <td>{{transformateur.pv?.date | date:'yyyy-MM-dd'}}</td>
+                                <td><span class="badge badge-boxed badge-soft-warning">{{transformateur.pv?.resultat}}</span></td>
+                                <td>IDK</td>
+                            </tr>
+                        </tbody>
+
                       </table>
                   </div>
                   <!--end table-responsive-->

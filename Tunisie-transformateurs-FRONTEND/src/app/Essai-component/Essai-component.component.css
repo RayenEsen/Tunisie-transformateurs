@@ -183,11 +183,32 @@ img {
 img:hover {
   transform: scale(1.1);
 }
+/* Styles for input fields in print media */
+@media print {
+  input[type="number"] {
+    border: none;
+    padding: 0;
+    background: none;
+    box-shadow: none;
+  }
+}
+
 @media print {
   .printable {
     display: none;
   }
 }
+/* Styles for print media */
+@media print {
+  /* Styles for input fields in print media */
+  input[type="number"] {
+    border: none;
+    padding: 0;
+    background: none;
+    box-shadow: none;
+  }
+}
+
 @page {
   size: auto;
   margin: 0;

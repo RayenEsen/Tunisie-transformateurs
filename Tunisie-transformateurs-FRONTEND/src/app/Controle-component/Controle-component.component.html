@@ -1,0 +1,148 @@
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+<div class="container">
+    <div class="row">
+        <div class="col-xl-3 col-md-6">
+            <div class="card bg-pattern">
+                <div class="card-body">
+                    <div class="float-right">
+                        <i class="fa fa-archive text-primary h4 ml-3"></i>
+                    </div>
+                    <h5 class="font-size-20 mt-0 pt-1">24</h5>
+                    <p class="text-muted mb-0">Bobinage BT</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="card bg-pattern">
+                <div class="card-body">
+                    <div class="float-right">
+                        <i class="fa fa-th text-primary h4 ml-3"></i>
+                    </div>
+                    <h5 class="font-size-20 mt-0 pt-1">18</h5>
+                    <p class="text-muted mb-0">Bobinage MT</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="card bg-pattern">
+                <div class="card-body">
+                    <div class="float-right">
+                        <i class="fa fa-file text-primary h4 ml-3"></i>
+                    </div>
+                    <h5 class="font-size-20 mt-0 pt-1">06</h5>
+                    <p class="text-muted mb-0">Circuit magnétique</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+          <div class="card bg-pattern">
+              <div class="card-body">
+                  <div class="float-right">
+                      <i class="fa fa-file text-primary h4 ml-3"></i>
+                  </div>
+                  <h5 class="font-size-20 mt-0 pt-1">06</h5>
+                  <p class="text-muted mb-0">Montage</p>
+              </div>
+          </div>
+      </div>
+      <div class="col-xl-3 col-md-6">
+        <div class="card bg-pattern">
+            <div class="card-body">
+                <div class="float-right">
+                    <i class="fa fa-file text-primary h4 ml-3"></i>
+                </div>
+                <h5 class="font-size-20 mt-0 pt-1">06</h5>
+                <p class="text-muted mb-0">Pending Projects</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6">
+      <div class="card bg-pattern">
+          <div class="card-body">
+              <div class="float-right">
+                  <i class="fa fa-file text-primary h4 ml-3"></i>
+              </div>
+              <h5 class="font-size-20 mt-0 pt-1">06</h5>
+              <p class="text-muted mb-0">Pending Projects</p>
+          </div>
+      </div>
+  </div>
+  <div class="col-xl-3 col-md-6">
+    <div class="card bg-pattern">
+        <div class="card-body">
+            <div class="float-right">
+                <i class="fa fa-file text-primary h4 ml-3"></i>
+            </div>
+            <h5 class="font-size-20 mt-0 pt-1">06</h5>
+            <p class="text-muted mb-0">Pending Projects</p>
+        </div>
+    </div>
+</div>
+<div class="col-xl-3 col-md-6">
+  <div class="card bg-pattern">
+      <div class="card-body">
+          <div class="float-right">
+              <i class="fa fa-file text-primary h4 ml-3"></i>
+          </div>
+          <h5 class="font-size-20 mt-0 pt-1">06</h5>
+          <p class="text-muted mb-0">Pending Projects</p>
+      </div>
+  </div>
+</div>
+    </div>
+    <!-- end row -->
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive project-list">
+                        <table class="table project-table table-centered table-nowrap">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Etape</th>
+                                    <th scope="col">Operateur 1</th>
+                                    <th scope="col">Operateur 2</th>
+                                    <th scope="col">Date Début</th>
+                                    <th scope="col">Date Fin</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let etape of etapes" >
+                                    <th scope="row">{{etape.id_E}}</th>
+                                    <td>{{etape.nom}}</td>
+                                    <td>
+                                      <div class="team">
+                                        <a href="javascript: void(0);" class="team-member" data-toggle="tooltip" data-placement="top" title="" data-original-title="Roger Drake">
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar6.png"  class="rounded-circle avatar-xs" alt="" />
+                                        </a>
+                                    </div>
+                                    </td>
+                                    <td>
+                                      <div class="team">
+                                        <a href="javascript: void(0);" class="team-member" data-toggle="tooltip" data-placement="top" title="" data-original-title="Roger Drake">
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar6.png" class="rounded-circle avatar-xs" alt="" />
+                                        </a>
+                                    </div>
+                                    </td>
+                                    <td>
+                                      <span class="text-success font-12"><i class="mdi mdi-checkbox-blank-circle mr-1"></i></span>
+                                    </td>
+                                    <td>
+
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- end project-list -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end row -->
+</div>
+CSS code

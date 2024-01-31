@@ -43,9 +43,9 @@ export class TransformateurInfoComponent implements OnInit {
                   this.list[index].pv = response[0];
 
                   // Check if id_C is defined in Pv
-                  if (this.list[index].pv?.id_C) {
+                  if (this.list[index].pv?.idC) {
                     const currentIndex = index as number;  // Cast index to number
-                    this.ServiceC.getControleurById(this.list[currentIndex].pv!.id_C)
+                    this.ServiceC.getControleurById(this.list[currentIndex].pv!.idC)
                       .subscribe({
                         next: (result: ControleurDeQualite) => {
                           // Assuming the result is of type ControleurDeQualite
@@ -99,9 +99,9 @@ export class TransformateurInfoComponent implements OnInit {
                 this.list[index].pv = response[0];
 
                 // Check if id_C is defined in Pv
-                if (this.list[index].pv?.id_C) {
+                if (this.list[index].pv?.idC) {
                   const currentIndex = index as number;  // Cast index to number
-                  this.ServiceC.getControleurById(this.list[currentIndex].pv!.id_C).subscribe({
+                  this.ServiceC.getControleurById(this.list[currentIndex].pv!.idC).subscribe({
                     next: (result: ControleurDeQualite) => {
                       // Assuming the result is of type ControleurDeQualite
                       // Assign the ControleurDeQualite to the current Pv

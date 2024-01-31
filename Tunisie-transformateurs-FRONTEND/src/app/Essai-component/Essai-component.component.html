@@ -85,13 +85,17 @@
 </div>
 </div>
   <div class="invoice-body">
+
     <div class="row" style="display: contents;">
+      <div>
+
       <div class="col-xs-5" style="display: contents;">
         <div class="panel panel-default">
           <div class="panel-heading">
             <h3 class="panel-title">Voltage Ratio / Rapport de transformation</h3>
             <small>{{ service.list[0].mtu1 }} V/ {{ service.list[0].btu2 }} V / {{ service.list[0].couplage }}</small>
           </div>
+
           <table class="table table-bordered table-condensed"  *ngIf="pv && pv.length > 0">
             <tbody>
               <tr>
@@ -184,6 +188,8 @@
             </tbody>
           </table>
         </div>
+
+        </div>
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">No load test / Essais a vide</h3>
@@ -219,6 +225,7 @@
         </tbody>
       </table>
     </div>
+
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">Load test / Essais en charge</h3>

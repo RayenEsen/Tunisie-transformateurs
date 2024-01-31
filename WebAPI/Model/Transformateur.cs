@@ -43,5 +43,8 @@ namespace WebAPI.Model
 
         //Navigation property
         public Pv? Pv { get; set; }
+        public ICollection<Etape>? Etapes { get; set; }
+
+
     }
 }

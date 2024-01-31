@@ -17,8 +17,9 @@ import { EditProfileComponentComponent } from './EditProfile-component/EditProfi
 import { CreateAcountComponentComponent } from './CreateAcount-component/CreateAcount-component.component';
 import { InscriptionComponentComponent } from './Inscription-component/Inscription-component.component';
 import { PlanificationComponentComponent } from './Planification-component/Planification-component.component';
+import { ControleComponentComponent } from './Controle-component/Controle-component.component';
 @NgModule({
-  declarations: [					
+  declarations: [						
     AppComponent,
       NavBarComponent,
       TopNavComponent,
@@ -31,7 +32,8 @@ import { PlanificationComponentComponent } from './Planification-component/Plani
       EditProfileComponentComponent,
       CreateAcountComponentComponent,
       InscriptionComponentComponent,
-      PlanificationComponentComponent
+      PlanificationComponentComponent,
+      ControleComponentComponent
    ],
   imports: [
     BrowserModule,

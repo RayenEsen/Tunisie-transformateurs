@@ -46,7 +46,7 @@ import { SessionService } from '../utils/session-service.service';
         this.pv[0].zccm1=this.getZccPourcentage();
         this.pv[0].zcmm2=this.getZcc2();
         this.pv[0].wccm2=this.getwccm2();
-        this.pv[0].id_C=this.ServiceS.Controleur.idC;
+        this.pv[0].idC=this.ServiceS.Controleur.idC;
         // Call a service method to update the Pv values on the server
         this.pvService.UpdatePv(this.pv[0].id_pv, this.pv[0]).subscribe(
           response => {
