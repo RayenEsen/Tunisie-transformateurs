@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NuGet.Packaging;
 using WebAPI.Model;
 
 namespace WebAPI.Controller
@@ -46,7 +47,7 @@ namespace WebAPI.Controller
         [HttpPut("{id}")]
         public async Task<IActionResult> PutEtape(int id, Etape etape)
         {
-            if (id != etape.Id_E)
+            if (id != etape.Id_Etape)
             {
                 return BadRequest();
             }
@@ -78,24 +79,21 @@ namespace WebAPI.Controller
         public async Task<ActionResult<Etape>> PostEtape(Etape etape)
         {
             _context.etapes.Add(etape);
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (EtapeExists(etape.Id_E))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetEtape", new { id = etape.Id_E }, etape);
+            return CreatedAtAction("GetEtape", new { id = etape.Id_Etape }, etape);
         }
+        [HttpGet("ByTransformateur/{transformateurId}")]
+        public async Task<ActionResult<IEnumerable<Etape>>> GetEtapesByTransformateurId(int transformateurId)
+        {
+            var etapes = await _context.etapes
+                .Include(e => e.Controleurs) // Include Controleurs
+                .Where(e => e.Numero == transformateurId)
+                .ToListAsync();
+
+            return etapes;
+        }
+
 
         // DELETE: api/Etapes/5
         [HttpDelete("{id}")]
@@ -113,23 +111,63 @@ namespace WebAPI.Controller
             return NoContent();
         }
 
-        [HttpGet("ByTransformateur/{transformateurId}")]
-        public async Task<ActionResult<IEnumerable<Etape>>> GetEtapesByTransformateur(int transformateurId)
+        [HttpPut("UpdateTransformateur/{transformateurId}/{etapeNumero}")]
+        public async Task<IActionResult> UpdateTransformateur(int transformateurId, int etapeNumero, [FromBody] Etape updatedEtape)
         {
-            var etapes = await _context.etapes
-                                        .Where(e => e.Numero == transformateurId)
-                                        .ToListAsync();
-
-            if (etapes == null || etapes.Count == 0)
+            try
             {
-                return NotFound("No Etapes found for the specified Transformateur id.");
-            }
+                // Check if the provided IDs match the model
+                if (transformateurId != updatedEtape.Numero || etapeNumero != updatedEtape.EtapeNumero)
+                {
+                    return BadRequest("IDs do not match the provided Etape");
+                }
 
-            return etapes;
+                // Retrieve the existing Etape with Controleurs
+                var existingEtape = await _context.etapes
+                    .Include(e => e.Controleurs)
+                    .FirstOrDefaultAsync(e => e.Numero == transformateurId && e.EtapeNumero == etapeNumero);
+
+                // Check if the Etape exists
+                if (existingEtape == null)
+                {
+                    return NotFound("Etape not found");
+                }
+
+                // Update other properties of the existing Etape
+                existingEtape.Nom = updatedEtape.Nom;
+                existingEtape.DateDebut = updatedEtape.DateDebut;
+                existingEtape.DateFin = updatedEtape.DateFin;
+
+                // Clear existing Controleurs (assuming that you want to replace the existing ones)
+                existingEtape.Controleurs.Clear();
+
+                // Update the Controleurs collection
+                if (updatedEtape.Controleurs != null && updatedEtape.Controleurs.Any())
+                {
+                    // Assuming that Controleur objects have unique IDs
+                    var existingControleurs = await _context.controleurDeQualités
+                        .Where(c => updatedEtape.Controleurs.Select(cc => cc.IdC).Contains(c.IdC))
+                        .ToListAsync();
+
+                    existingEtape.Controleurs.AddRange(existingControleurs);
+                }
+
+                // Update the database
+                await _context.SaveChangesAsync();
+
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Failed to update Etape: {ex.Message}");
+            }
         }
+
+
+
         private bool EtapeExists(int id)
         {
-            return _context.etapes.Any(e => e.Id_E == id);
+            return _context.etapes.Any(e => e.Id_Etape == id);
         }
     }
 }

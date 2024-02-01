@@ -7,8 +7,9 @@ namespace WebAPI.Model
     public class Etape
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int Id_E { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id_Etape { get; set; } // Auto-generated primary key
+        public int EtapeNumero { get; set; }
 
         [ForeignKey("Transformateur")]
         public int Numero { get; set; }

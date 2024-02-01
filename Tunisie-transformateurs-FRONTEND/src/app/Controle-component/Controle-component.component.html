@@ -110,30 +110,26 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let etape of etapes" >
-                                    <th scope="row">{{etape.id_E}}</th>
-                                    <td>{{etape.nom}}</td>
-                                    <td>
-                                      <div class="team">
-                                        <a href="javascript: void(0);" class="team-member" data-toggle="tooltip" data-placement="top" title="" data-original-title="Roger Drake">
-                                            <img src="https://bootdey.com/img/Content/avatar/avatar6.png"  class="rounded-circle avatar-xs" alt="" />
-                                        </a>
+                              <tr *ngFor="let etape of etapes" (click)="updateEtape(etape.etapeNumero)">
+                                <th scope="row">{{etape.etapeNumero}}</th>
+                                <td>{{etape.nom}}</td>
+                                <td>
+                                    <div class="team">
+                                        {{etape.controleurs?.[0]?.username}}
                                     </div>
-                                    </td>
-                                    <td>
-                                      <div class="team">
-                                        <a href="javascript: void(0);" class="team-member" data-toggle="tooltip" data-placement="top" title="" data-original-title="Roger Drake">
-                                            <img src="https://bootdey.com/img/Content/avatar/avatar6.png" class="rounded-circle avatar-xs" alt="" />
-                                        </a>
+                                </td>
+                                <td>
+                                    <div class="team">
+                                          {{etape.controleurs?.[1]?.username}}
                                     </div>
-                                    </td>
-                                    <td>
-                                      <span class="text-success font-12"><i class="mdi mdi-checkbox-blank-circle mr-1"></i></span>
-                                    </td>
-                                    <td>
-
-                                    </td>
-                                </tr>
+                                </td>
+                                <td>
+                                    <span class="text-success font-12"><i class="mdi mdi-checkbox-blank-circle mr-1"></i>{{ etape.dateDebut | date: 'yyyy-MM-dd HH:mm' }}
+                                    </span>
+                                </td>
+                                <td>
+                                </td>
+                            </tr>
 
                             </tbody>
                         </table>

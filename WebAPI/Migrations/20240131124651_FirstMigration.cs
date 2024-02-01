@@ -65,14 +65,17 @@ namespace WebAPI.Migrations
                 name: "etapes",
                 columns: table => new
                 {
-                    Id_E = table.Column<int>(type: "int", nullable: false),
+                    Id_Etape = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    EtapeNumero = table.Column<int>(type: "int", nullable: false),
                     Numero = table.Column<int>(type: "int", nullable: false),
+                    Nom = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DateDebut = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DateFin = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_etapes", x => x.Id_E);
+                    table.PrimaryKey("PK_etapes", x => x.Id_Etape);
                     table.ForeignKey(
                         name: "FK_etapes_transformateurs_Numero",
                         column: x => x.Numero,
@@ -166,11 +169,11 @@ namespace WebAPI.Migrations
                 columns: table => new
                 {
                     ControleursIdC = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    EtapesId_E = table.Column<int>(type: "int", nullable: false)
+                    EtapesId_Etape = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ControleurEtape", x => new { x.ControleursIdC, x.EtapesId_E });
+                    table.PrimaryKey("PK_ControleurEtape", x => new { x.ControleursIdC, x.EtapesId_Etape });
                     table.ForeignKey(
                         name: "FK_ControleurEtape_controleurDeQualités_ControleursIdC",
                         column: x => x.ControleursIdC,
@@ -178,17 +181,17 @@ namespace WebAPI.Migrations
                         principalColumn: "IdC",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ControleurEtape_etapes_EtapesId_E",
-                        column: x => x.EtapesId_E,
+                        name: "FK_ControleurEtape_etapes_EtapesId_Etape",
+                        column: x => x.EtapesId_Etape,
                         principalTable: "etapes",
-                        principalColumn: "Id_E",
+                        principalColumn: "Id_Etape",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ControleurEtape_EtapesId_E",
+                name: "IX_ControleurEtape_EtapesId_Etape",
                 table: "ControleurEtape",
-                column: "EtapesId_E");
+                column: "EtapesId_Etape");
 
             migrationBuilder.CreateIndex(
                 name: "IX_etapes_Numero",

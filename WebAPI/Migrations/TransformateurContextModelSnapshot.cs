@@ -27,12 +27,12 @@ namespace WebAPI.Migrations
                     b.Property<string>("ControleursIdC")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("EtapesId_E")
+                    b.Property<int>("EtapesId_Etape")
                         .HasColumnType("int");
 
-                    b.HasKey("ControleursIdC", "EtapesId_E");
+                    b.HasKey("ControleursIdC", "EtapesId_Etape");
 
-                    b.HasIndex("EtapesId_E");
+                    b.HasIndex("EtapesId_Etape");
 
                     b.ToTable("ControleurEtape", (string)null);
                 });
@@ -90,14 +90,20 @@ namespace WebAPI.Migrations
 
             modelBuilder.Entity("WebAPI.Model.Etape", b =>
                 {
-                    b.Property<int>("Id_E")
+                    b.Property<int>("Id_Etape")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id_Etape"));
 
                     b.Property<DateTime?>("DateDebut")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("DateFin")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("EtapeNumero")
+                        .HasColumnType("int");
 
                     b.Property<string>("Nom")
                         .IsRequired()
@@ -106,7 +112,7 @@ namespace WebAPI.Migrations
                     b.Property<int>("Numero")
                         .HasColumnType("int");
 
-                    b.HasKey("Id_E");
+                    b.HasKey("Id_Etape");
 
                     b.HasIndex("Numero");
 
@@ -377,7 +383,7 @@ namespace WebAPI.Migrations
 
                     b.HasOne("WebAPI.Model.Etape", null)
                         .WithMany()
-                        .HasForeignKey("EtapesId_E")
+                        .HasForeignKey("EtapesId_Etape")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

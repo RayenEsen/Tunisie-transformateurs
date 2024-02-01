@@ -57,3 +57,18 @@ body {
   transform: scale(1.1);
 }
 
+/* Add hover effect for clickable table rows */
+tr:hover {
+  background-color: #f0f0f0; /* Change background color on hover */
+  transition: background-color 0.3s;
+}
+
+/* Add hover effect for clickable cells within the table row */
+tr:hover td {
+  color: #4570e7; /* Change text color on hover */
+}
+/* Change cursor to pointer on hover */
+tr:hover {
+  cursor: pointer;
+}
+

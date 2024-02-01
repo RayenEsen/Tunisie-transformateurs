@@ -156,11 +156,12 @@ export class AddComponentComponent implements OnInit {
 
             for (let i = 1; i <= 17; i++) { // Starting from 1 and adding 17 Etapes
               const etapeAjouter: Etape = {
-                id_E: i,
+                id_Etape: 0,
+                etapeNumero: i,
                 numero: this.transformateurAjouter.numero,
-                dateDebut: undefined,
+                dateDebut: new Date(),
                 dateFin: undefined,
-                nom: etapeNames[i] || ''
+                nom: etapeNames[i] || '',
               };
 
               // Call service method to add each Etape
