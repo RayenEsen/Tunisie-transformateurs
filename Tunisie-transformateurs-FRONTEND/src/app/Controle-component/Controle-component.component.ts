@@ -66,8 +66,7 @@ export class ControleComponentComponent implements OnInit {
               () => {
                 console.log('Etape updated successfully');
 
-                // Navigate to /BT/:id after a successful update
-                this.router.navigate([`/BT/${this.transformateurId}`]);
+                this.router.navigate([`/BT/${this.transformateurId}/${etapeNumero}`]);
               },
               error => {
                 console.error('Error updating Etape', error);
@@ -75,12 +74,16 @@ export class ControleComponentComponent implements OnInit {
               }
             );
         } else {
-          // If there are already two controleurs or the user is already assigned, navigate without updating
-          if (selectedEtape.controleurs.length >= 2) {
+          // If the current Controleur is already assigned, allow navigation without updating
+          if (this.isUserAlreadyAssigned(sessionControleur, selectedEtape.controleurs)) {
+            this.router.navigate([`/BT/${this.transformateurId}/${etapeNumero}`]);
+          } else if (selectedEtape.controleurs.length >= 2) {
+            // If there are already two controleurs and the current Controleur is not assigned, display an alert
             alert('This Etape is full');
           } else {
-            this.router.navigate([`/BT/${this.transformateurId}`]);
-          }
+            // If there is still space and the current Controleur is not assigned, navigate without updating
+            this.router.navigate([`/BT/${this.transformateurId}/${etapeNumero}`]);
+            console.log('Navigation attempted');          }
         }
       } else {
         console.error('Controleur not found in the session');
@@ -88,6 +91,7 @@ export class ControleComponentComponent implements OnInit {
       }
     }
   }
+
 
 
 // Method to check if the user is already assigned to the Etape

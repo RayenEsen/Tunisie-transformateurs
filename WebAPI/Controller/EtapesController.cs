@@ -163,6 +163,23 @@ namespace WebAPI.Controller
             }
         }
 
+        [HttpGet("ByNumeroAndTransformateur/{numero}/{transformateurId}")]
+        public async Task<ActionResult<Etape>> GetEtapeByNumeroAndTransformateur(int numero, int transformateurId)
+        {
+            var etape = await _context.etapes
+                .Include(e => e.Controleurs) // Include Controleurs if needed
+                .Where(e => e.Numero == transformateurId && e.EtapeNumero == numero)
+                .FirstOrDefaultAsync();
+
+            if (etape == null)
+            {
+                return NotFound("Etape not found");
+            }
+
+            return etape;
+        }
+
+
 
 
         private bool EtapeExists(int id)

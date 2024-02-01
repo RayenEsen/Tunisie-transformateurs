@@ -20,7 +20,7 @@ import { PlanificationComponentComponent } from './Planification-component/Plani
 import { ControleComponentComponent } from './Controle-component/Controle-component.component';
 import { BTComponentComponent } from './BT-component/BT-component.component';
 @NgModule({
-  declarations: [							
+  declarations: [
     AppComponent,
       NavBarComponent,
       TopNavComponent,
@@ -35,7 +35,8 @@ import { BTComponentComponent } from './BT-component/BT-component.component';
       InscriptionComponentComponent,
       PlanificationComponentComponent,
       ControleComponentComponent,
-      BTComponentComponent
+      BTComponentComponent,
+
    ],
   imports: [
     BrowserModule,

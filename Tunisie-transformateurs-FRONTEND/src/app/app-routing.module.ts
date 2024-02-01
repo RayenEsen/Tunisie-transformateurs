@@ -23,7 +23,7 @@ const routes: Routes = [
   { path: 'Planification' , component : PlanificationComponentComponent , canActivate: [AuthGuard]},
   { path: 'Sign_up' , component : InscriptionComponentComponent},
   { path: 'Controle/:id' , component : ControleComponentComponent, canActivate: [AuthGuard]},
-  { path: 'BT/:id' , component : BTComponentComponent , canActivate: [AuthGuard]},
+  { path: 'BT/:id/:etapenumero' , component : BTComponentComponent , canActivate: [AuthGuard]},
   // New route with parameter
   { path: '', component: DefaultComponentComponent }, // Default route
   // Add other routes as needed
