@@ -16,5 +16,5 @@ export class ControleurDeQualite {
   codePostal?: string = '';
   password: string = '';
   pvs?: Pv[] = [];
-  etapes?: Etape[] = [];
+
 }

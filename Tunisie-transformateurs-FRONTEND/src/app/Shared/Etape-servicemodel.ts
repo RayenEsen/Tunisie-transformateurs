@@ -6,8 +6,10 @@ export class Etape {
   etapeNumero: number = 0;
   numero : number = 0;
   nom : string = '';
+  operateur1 : string  = "";
+  operateur2 : string  = "";
   dateDebut: Date | undefined;
   dateFin: Date | undefined;
-  controleurs?: ControleurDeQualite[]; // Many-to-many relationship with ControleurDeQualite
+
   transformateur?: Transformateur
 }

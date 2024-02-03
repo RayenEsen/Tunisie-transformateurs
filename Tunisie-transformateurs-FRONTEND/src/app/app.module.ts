@@ -18,7 +18,6 @@ import { CreateAcountComponentComponent } from './CreateAcount-component/CreateA
 import { InscriptionComponentComponent } from './Inscription-component/Inscription-component.component';
 import { PlanificationComponentComponent } from './Planification-component/Planification-component.component';
 import { ControleComponentComponent } from './Controle-component/Controle-component.component';
-import { BTComponentComponent } from './BT-component/BT-component.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +34,6 @@ import { BTComponentComponent } from './BT-component/BT-component.component';
       InscriptionComponentComponent,
       PlanificationComponentComponent,
       ControleComponentComponent,
-      BTComponentComponent,
 
    ],
   imports: [

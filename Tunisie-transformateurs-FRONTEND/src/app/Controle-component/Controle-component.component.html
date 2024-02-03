@@ -1,48 +1,87 @@
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<header class="back">
+  <div class="container" >
 
-<div class="container">
+    <div class="row align-items-center" >
+      <div class="col-xl-12 col-lg-12 col-md-12 col-12">
+        <!-- Bg -->
+        <div class="pt-20 rounded-top" style="background-color: #122151; background-size: cover;margin-top: 20px;" >
+        </div>
+        <div class="card rounded-bottom smooth-shadow-sm">
+          <div class="d-flex align-items-center justify-content-between
+            pt-4 pb-6 px-4">
+            <!-- avatar -->
+            <div class="d-flex align-items-center">
+              <div class="avatar-xxl   me-2
+                position-relative d-flex justify-content-end
+                align-items-end mt-n10">
+                <img *ngIf="Service.list[0].type==='Triphasés' " src="assets/mono.png" class="avatar-xxl
+                rounded-circle border border-2 " alt="Image" style="margin-bottom: -16px;">
+                <img *ngIf="Service.list[0].type==='Monophasés' " src="assets/triphaser.png" class="avatar-xxl
+                rounded-circle border border-2 "  alt="Image" style="margin-bottom: -16px;" >
+                <img *ngIf="Service.list[0].type==='Résine' " src="assets/resine.png" class="avatar-xxl
+                rounded-circle border border-2 " alt="Image" style="margin-bottom: -16px;">
+
+                <a href="#!" class="position-absolute top-0 right-0 me-2">
+                  <img src="https://dashui.codescandy.com/dashuipro/assets/images/svg/checked-mark.svg" alt="Image" class="icon-sm">
+                </a>
+
+              </div>
+              <!-- content -->
+              <div class="lh-1" style="padding-top: 35px;">
+                <h2 class="mb-0">{{Service.list[0].marque}}
+                  <a href="#!" class="text-decoration-none">
+                  </a>
+                </h2>
+                <p class="mb-0 d-block">{{Service.list[0].numero}}</p>
+              </div>
+            </div>
+            <div>
+              <!-- button -->
+              <a [routerLink]="['/Ajouter_Transformateur', transformateurId]"  class="btn btn-outline-primary
+                d-none d-md-block">Voir les détails</a>
+            </div>
+          </div>
+          <!-- nav -->
+          <ul class="nav nav-lt-tab px-4" id="pills-tab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" href="#">{{Service.list[0].type}}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
     <div class="row">
-        <div class="col-xl-3 col-md-6">
-            <div class="card bg-pattern">
-                <div class="card-body">
-                    <div class="float-right">
-                        <i class="fa fa-archive text-primary h4 ml-3"></i>
-                    </div>
-                    <h5 class="font-size-20 mt-0 pt-1">24</h5>
-                    <p class="text-muted mb-0">Bobinage BT</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-md-6">
-            <div class="card bg-pattern">
-                <div class="card-body">
-                    <div class="float-right">
-                        <i class="fa fa-th text-primary h4 ml-3"></i>
-                    </div>
-                    <h5 class="font-size-20 mt-0 pt-1">18</h5>
-                    <p class="text-muted mb-0">Bobinage MT</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-md-6">
-            <div class="card bg-pattern">
-                <div class="card-body">
-                    <div class="float-right">
-                        <i class="fa fa-file text-primary h4 ml-3"></i>
-                    </div>
-                    <h5 class="font-size-20 mt-0 pt-1">06</h5>
-                    <p class="text-muted mb-0">Circuit magnétique</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-md-6">
+      <div class="col-xl-3 col-md-6">
           <div class="card bg-pattern">
               <div class="card-body">
                   <div class="float-right">
-                      <i class="fa fa-file text-primary h4 ml-3"></i>
+                    <i class="fa fa-cogs text-primary h4 ml-3"></i>
                   </div>
-                  <h5 class="font-size-20 mt-0 pt-1">06</h5>
-                  <p class="text-muted mb-0">Montage</p>
+                  <h5 class="font-size-20 mt-0 pt-1">En Attente</h5>
+                  <p class="text-muted mb-0">Bobinage BT</p>
+              </div>
+          </div>
+      </div>
+      <div class="col-xl-3 col-md-6">
+          <div class="card bg-pattern">
+              <div class="card-body">
+                  <div class="float-right">
+                    <i class="fa fa-wrench text-primary h4 ml-3"></i>
+                  </div>
+                  <h5 class="font-size-20 mt-0 pt-1">En Attente</h5>
+                  <p class="text-muted mb-0">Bobinage MT</p>
+              </div>
+          </div>
+      </div>
+      <div class="col-xl-3 col-md-6">
+          <div class="card bg-pattern">
+              <div class="card-body">
+                  <div class="float-right">
+                    <i class="fa fa-magnet text-primary h4 ml-3"></i>
+                  </div>
+                  <h5 class="font-size-20 mt-0 pt-1">En Attente</h5>
+                  <p class="text-muted mb-0">Circuit magnétique</p>
               </div>
           </div>
       </div>
@@ -50,10 +89,10 @@
         <div class="card bg-pattern">
             <div class="card-body">
                 <div class="float-right">
-                    <i class="fa fa-file text-primary h4 ml-3"></i>
+                  <i class="fa fa-search text-primary h4 ml-3"></i>
                 </div>
-                <h5 class="font-size-20 mt-0 pt-1">06</h5>
-                <p class="text-muted mb-0">Pending Projects</p>
+                <h5 class="font-size-20 mt-0 pt-1">En Attente</h5>
+                <p class="text-muted mb-0">Montage</p>
             </div>
         </div>
     </div>
@@ -61,10 +100,10 @@
       <div class="card bg-pattern">
           <div class="card-body">
               <div class="float-right">
-                  <i class="fa fa-file text-primary h4 ml-3"></i>
+                <i class="fa fa-ban text-primary h4 ml-3"></i>
               </div>
-              <h5 class="font-size-20 mt-0 pt-1">06</h5>
-              <p class="text-muted mb-0">Pending Projects</p>
+              <h5 class="font-size-20 mt-0 pt-1">N/A</h5>
+              <p class="text-muted mb-0">À venir</p>
           </div>
       </div>
   </div>
@@ -72,10 +111,10 @@
     <div class="card bg-pattern">
         <div class="card-body">
             <div class="float-right">
-                <i class="fa fa-file text-primary h4 ml-3"></i>
+              <i class="fa fa-ban text-primary h4 ml-3"></i>
             </div>
-            <h5 class="font-size-20 mt-0 pt-1">06</h5>
-            <p class="text-muted mb-0">Pending Projects</p>
+            <h5 class="font-size-20 mt-0 pt-1">N/A</h5>
+            <p class="text-muted mb-0">À venir</p>
         </div>
     </div>
 </div>
@@ -83,62 +122,119 @@
   <div class="card bg-pattern">
       <div class="card-body">
           <div class="float-right">
-              <i class="fa fa-file text-primary h4 ml-3"></i>
+            <i class="fa fa-ban text-primary h4 ml-3"></i>
           </div>
-          <h5 class="font-size-20 mt-0 pt-1">06</h5>
-          <p class="text-muted mb-0">Pending Projects</p>
+          <h5 class="font-size-20 mt-0 pt-1">N/A</h5>
+          <p class="text-muted mb-0">À venir</p>
       </div>
   </div>
 </div>
-    </div>
-    <!-- end row -->
-
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="table-responsive project-list">
-                        <table class="table project-table table-centered table-nowrap">
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Etape</th>
-                                    <th scope="col">Operateur 1</th>
-                                    <th scope="col">Operateur 2</th>
-                                    <th scope="col">Date Début</th>
-                                    <th scope="col">Date Fin</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                              <tr *ngFor="let etape of etapes" (click)="updateEtape(etape.etapeNumero)">
-                                <th scope="row">{{etape.etapeNumero}}</th>
-                                <td>{{etape.nom}}</td>
-                                <td>
-                                    <div class="team">
-                                        {{etape.controleurs?.[0]?.username}}
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="team">
-                                          {{etape.controleurs?.[1]?.username}}
-                                    </div>
-                                </td>
-                                <td>
-                                    <span class="text-success font-12"><i class="mdi mdi-checkbox-blank-circle mr-1"></i>{{ etape.dateDebut | date: 'yyyy-MM-dd HH:mm' }}
-                                    </span>
-                                </td>
-                                <td>
-                                </td>
-                            </tr>
-
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- end project-list -->
-                </div>
-            </div>
+<div class="col-xl-3 col-md-6">
+<div class="card bg-pattern">
+    <div class="card-body">
+        <div class="float-right">
+          <i class="fa fa-ban text-primary h4 ml-3"></i>
         </div>
+        <h5 class="font-size-20 mt-0 pt-1">N/A</h5>
+        <p class="text-muted mb-0">À venir</p>
     </div>
-    <!-- end row -->
+</div>
+</div>
+    <!-- page content -->
+    <div class="py-6" >
+      <div class="row"style="margin-right: -119px; margin-left: -119px;">
+        <div class="offset-lg-1 col-lg-10 col-md-12 col-12">
+          <!-- row -->
+          <div class="row align-items-center mb-6">
+            <div class="col-lg-6 col-md-12 col-12">
+              <!-- form -->
+              <form>
+                <input type="search" class="form-control" placeholder="Rechercher un Etape..." style="width: 189%;">
+              </form>
+            </div>
+            <div class="col-lg-6 col-md-12 col-12 d-flex justify-content-end">
+              <!-- form -->
+            <div>
+              <a href="#!" class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip" data-template="filterOne">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-filter icon-xs"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg>
+                <div class="d-none" id="filterOne">
+                  <span>Filter</span>
+                </div>
+              </a>
+              <a href="#!" class="btn btn-outline-secondary ms-3">
+                Delete
+              </a>
+            </div>
+
+            </div>
+          </div>
+          <!-- hr -->
+
+          <div class="mb-8 container" *ngFor="let etape of etapes">
+            <!-- card -->
+            <div *ngIf="showCard(etape.etapeNumero)" class="card bg-blue-500 shadow-none mb-4" style="background-color: #0f253c;" [style.order]="getOrderValue(etape.etapeNumero)">
+              <!-- card body -->
+              <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <h5 class="mb-0" style="color: white;">{{ getCardTitle(etape.etapeNumero) }}</h5>
+                  </div>
+                  <div>
+                    <a href="#!" class="text-muted">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right icon-xs" style="color: white;">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- card -->
+            <div class="card">
+              <!-- list group -->
+              <ul class="list-group list-group-flush">
+                <!-- list group item -->
+                <li class="list-group-item p-3">
+                  <!-- content -->
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center">
+                      <!-- img -->
+                      <div style="font-size: 25px; font-weight: bold; text-align: center; background-color: #122151; color: white; width: 50px; height: 50px; line-height: 50px; border-radius: 50%;">
+                        <span style="display: inline-block; border-radius: 50%;">{{etape.etapeNumero}}</span>
+                      </div>
+
+                      <!-- content -->
+                      <div class="ms-3">
+                        <p class="mb-0 font-weight-medium">La phase {{etape.nom}} a été gérée conjointement par l'Opérateur : <input type="text" [(ngModel)]="etape.operateur1" [readonly]="isReadOnly" style="font-weight:500; color:#0f253c;" />
+                          et l'Opérateur : <input type="text" [(ngModel)]="etape.operateur2" [readonly]="isReadOnly" style="font-weight:500; color:#0f253c;" />
+                          <br> débutant le {{etape.dateDebut | date:'dd/MM/yyyy HH:mm'}} et se terminant le {{etape.dateFin | date:'dd/MM/yyyy HH:mm'}}.</p>
+                      </div>
+                    </div>
+                    <div>
+                      <!-- dropdown -->
+                      <div class="dropdown dropstart">
+                        <a href="#!" class="btn btn-ghost btn-icon btn-sm rounded-circle" id="dropdownactivityOne" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical icon-xs"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownactivityOne">
+                          <a class="dropdown-item d-flex align-items-center" (click)="toggleEditable()">Modifier</a>
+                          <a class="dropdown-item d-flex align-items-center" (click)="updateEtape(etape.etapeNumero)">Sauvegarder</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end row -->
 </div>
 CSS code
+
+</header>

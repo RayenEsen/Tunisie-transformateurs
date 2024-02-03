@@ -25,9 +25,10 @@ export class EtapeServiceService {
   }
 
   UpdateEtape(transformateurId: number, etapeNumero: number, updatedEtape: Etape): Observable<any> {
-    const apiUrl = `${this.url}/UpdateTransformateur/${transformateurId}/${etapeNumero}`;
+    const apiUrl = `${this.url}/UpdateByNumeroAndTransformateur/${etapeNumero}/${transformateurId}`;
     return this.http.put(apiUrl, updatedEtape);
   }
+
   getEtapeByNumeroAndTransformateur(numero: number, transformateurId: number): Observable<Etape> {
     const apiUrl = `${this.url}/ByNumeroAndTransformateur/${numero}/${transformateurId}`;
     return this.http.get<Etape>(apiUrl);

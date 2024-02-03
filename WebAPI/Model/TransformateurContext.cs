@@ -13,7 +13,8 @@ namespace WebAPI.Model
         public DbSet<Transformateur> transformateurs { get; set; }
         public DbSet<Pv> pvs { get; set; }
         public DbSet<ControleurDeQualité> controleurDeQualités { get; set; }
-        public DbSet<Etape> etapes { get; set; } // Add Etape DbSet
+        public DbSet<Etape> etapes { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -29,17 +30,13 @@ namespace WebAPI.Model
                 .WithOne(p => p.ControleurDeQualité)
                 .HasForeignKey(p => p.IdC);
 
-            // Configure many-to-many relationship between ControleurDeQualité and Etape
-            modelBuilder.Entity<ControleurDeQualité>()
-                .HasMany(c => c.Etapes)
-                .WithMany(e => e.Controleurs)
-                .UsingEntity(j => j.ToTable("ControleurEtape"));
 
             // Configure the relationship between Etape and Transformateur
             modelBuilder.Entity<Etape>()
                .HasOne(e => e.Transformateur)
                .WithMany(t => t.Etapes)
                .HasForeignKey(e => e.Numero);
+
 
             base.OnModelCreating(modelBuilder);
         }

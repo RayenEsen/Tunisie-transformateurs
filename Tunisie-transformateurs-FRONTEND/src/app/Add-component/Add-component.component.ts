@@ -159,9 +159,11 @@ export class AddComponentComponent implements OnInit {
                 id_Etape: 0,
                 etapeNumero: i,
                 numero: this.transformateurAjouter.numero,
-                dateDebut: new Date(),
+                dateDebut: undefined,
                 dateFin: undefined,
                 nom: etapeNames[i] || '',
+                operateur1: '',
+                operateur2: '',
               };
 
               // Call service method to add each Etape

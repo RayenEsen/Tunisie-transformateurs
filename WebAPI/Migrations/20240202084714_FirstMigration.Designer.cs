@@ -12,7 +12,7 @@ using WebAPI.Model;
 namespace WebAPI.Migrations
 {
     [DbContext(typeof(TransformateurContext))]
-    [Migration("20240131124651_FirstMigration")]
+    [Migration("20240202084714_FirstMigration")]
     partial class FirstMigration
     {
         /// <inheritdoc />
@@ -24,21 +24,6 @@ namespace WebAPI.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("ControleurDeQualitéEtape", b =>
-                {
-                    b.Property<string>("ControleursIdC")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("EtapesId_Etape")
-                        .HasColumnType("int");
-
-                    b.HasKey("ControleursIdC", "EtapesId_Etape");
-
-                    b.HasIndex("EtapesId_Etape");
-
-                    b.ToTable("ControleurEtape", (string)null);
-                });
 
             modelBuilder.Entity("WebAPI.Model.ControleurDeQualité", b =>
                 {
@@ -114,6 +99,12 @@ namespace WebAPI.Migrations
 
                     b.Property<int>("Numero")
                         .HasColumnType("int");
+
+                    b.Property<string>("Operateur1")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Operateur2")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id_Etape");
 
@@ -374,21 +365,6 @@ namespace WebAPI.Migrations
                     b.HasKey("Numero");
 
                     b.ToTable("transformateurs");
-                });
-
-            modelBuilder.Entity("ControleurDeQualitéEtape", b =>
-                {
-                    b.HasOne("WebAPI.Model.ControleurDeQualité", null)
-                        .WithMany()
-                        .HasForeignKey("ControleursIdC")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("WebAPI.Model.Etape", null)
-                        .WithMany()
-                        .HasForeignKey("EtapesId_Etape")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("WebAPI.Model.Etape", b =>

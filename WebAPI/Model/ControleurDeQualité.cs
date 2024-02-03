@@ -51,7 +51,6 @@ namespace WebAPI.Model
         // Collection navigation property for Pv
         [JsonIgnore]
         public ICollection<Pv>? Pvs { get; set; }
-        [JsonIgnore]
-        public ICollection<Etape>? Etapes { get; set; }
+
     }
 }
