@@ -13,6 +13,7 @@ import { InscriptionComponentComponent } from './Inscription-component/Inscripti
 import { ControleComponentComponent } from './Controle-component/Controle-component.component';
 import { BobinageComponentComponent } from './Bobinage-component/Bobinage-component.component';
 import { BobinageMTComponentComponent } from './BobinageMT-component/BobinageMT-component.component';
+import { MagnetiqueComponentComponent } from './Magnetique-component/Magnetique-component.component';
 const routes: Routes = [
   { path: 'Transformateur', component: TransformateurInfoComponent , canActivate: [AuthGuard]},
   { path: 'Ajouter_Transformateur', component: Add_ModifyTransformateurComponent , canActivate: [AuthGuard]},
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'Planification' , component : PlanificationComponentComponent , canActivate: [AuthGuard]},
   { path: 'Bobinage/:id' , component : BobinageComponentComponent , canActivate: [AuthGuard]},
   { path: 'BobinageMT/:id' , component : BobinageMTComponentComponent , canActivate: [AuthGuard]},
+  { path: 'Magnetique/:id' , component : MagnetiqueComponentComponent , canActivate: [AuthGuard]},
 
   { path: 'Sign_up' , component : InscriptionComponentComponent},
   { path: 'Controle/:id' , component : ControleComponentComponent, canActivate: [AuthGuard]},

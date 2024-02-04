@@ -14,6 +14,8 @@ import { Bobinage } from '../Shared/Bobinage-service.model';
 import { BobinageServiceService } from '../Shared/Bobinage-service.service';
 import { BobinageMTServiceService } from '../Shared/BobinageMT-service.service';
 import { BobinageMT } from '../Shared/BobinageMT-service.model';
+import { Magnetique } from '../Shared/Magnetique-service.model';
+import { MagnetiqueServiceService } from '../Shared/Magnetique-service.service';
 
 @Component({
   selector: 'app-Add-component',
@@ -50,6 +52,7 @@ export class AddComponentComponent implements OnInit {
      public serviceE : EtapeServiceService ,
      public ServiceB : BobinageServiceService,
      public ServiceMT : BobinageMTServiceService,
+     public ServiceM : MagnetiqueServiceService
      ){ }
 
   ngOnInit() {
@@ -191,6 +194,27 @@ export class AddComponentComponent implements OnInit {
             }
 
             return forkJoin(bobinageMTObservables);
+          }),
+          concatMap(() => {
+            // Use forkJoin to execute multiple observables in parallel
+            const MagnetiqueObservable: Observable<any>[] = [];
+
+            const MagnetiqueNames: { [key: number]: string } = {
+              1: 'Largeur (B)',
+              2: 'Largeur (A)',
+              3: 'Epaisseur total (e1)',
+              4: 'Epaisseur total (e2)',
+            };
+
+            for (let i = 1; i <= 4; i++) {
+              const MagnetiqueAjouter: Magnetique = {
+                numero: this.transformateurAjouter.numero,
+                nom: MagnetiqueNames[i] || ''
+              };
+              MagnetiqueObservable.push(this.ServiceM.AddBobinage(MagnetiqueAjouter));
+            }
+
+            return forkJoin(MagnetiqueObservable);
           }),
           concatMap(() => {
             // Use forkJoin to execute multiple observables in parallel

@@ -16,7 +16,7 @@ namespace WebAPI.Model
         public int? Bt3 { get; set; }
 
         public int? Prevue { get; set; }
-        public string nom { get; set; } = "";
+        public string Nom { get; set; } = "";
         [JsonIgnore]
         public Transformateur? Transformateur { get; set; }
     }

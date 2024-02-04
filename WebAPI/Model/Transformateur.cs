@@ -47,7 +47,7 @@ namespace WebAPI.Model
 
         public ICollection<Bobinage>? Bobinages { get; set; }
         public ICollection<BobinageMT>? BobinagesMT { get; set; }
-
+        public ICollection<Magnetique>? Magnetique { get; set; }
 
     }
 }

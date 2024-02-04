@@ -20,8 +20,9 @@ import { PlanificationComponentComponent } from './Planification-component/Plani
 import { ControleComponentComponent } from './Controle-component/Controle-component.component';
 import { BobinageComponentComponent } from './Bobinage-component/Bobinage-component.component';
 import { BobinageMTComponentComponent } from './BobinageMT-component/BobinageMT-component.component';
+import { MagnetiqueComponentComponent } from './Magnetique-component/Magnetique-component.component';
 @NgModule({
-  declarations: [		
+  declarations: [			
     AppComponent,
       NavBarComponent,
       TopNavComponent,
@@ -37,7 +38,8 @@ import { BobinageMTComponentComponent } from './BobinageMT-component/BobinageMT-
       PlanificationComponentComponent,
       ControleComponentComponent,
       BobinageComponentComponent,
-      BobinageMTComponentComponent
+      BobinageMTComponentComponent,
+      MagnetiqueComponentComponent
    ],
   imports: [
     BrowserModule,
