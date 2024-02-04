@@ -44,5 +44,9 @@ export class MagnetiqueComponentComponent implements OnInit {
       }
     );
   }
+    // Function to handle the print action
+    onPrint() {
+      window.print();
 
+    }
 }

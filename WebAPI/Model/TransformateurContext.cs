@@ -17,6 +17,7 @@ namespace WebAPI.Model
         public DbSet<Bobinage> bobinages { get; set; }
         public DbSet<BobinageMT> bobinageMTs { get; set; }
         public DbSet<Magnetique> magnetiques { get; set; }
+        public DbSet<Montage> montages { get; set; }
 
 
 
@@ -55,6 +56,11 @@ namespace WebAPI.Model
             modelBuilder.Entity<Magnetique>()
             .HasOne(b => b.Transformateur)
             .WithMany(t => t.Magnetique)
+            .HasForeignKey(b => b.Numero);
+
+            modelBuilder.Entity<Montage>()
+            .HasOne(b => b.Transformateur)
+            .WithMany(t => t.Montage)
             .HasForeignKey(b => b.Numero);
 
             base.OnModelCreating(modelBuilder);
