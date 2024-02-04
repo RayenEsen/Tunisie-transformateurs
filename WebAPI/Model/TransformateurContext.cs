@@ -14,6 +14,9 @@ namespace WebAPI.Model
         public DbSet<Pv> pvs { get; set; }
         public DbSet<ControleurDeQualité> controleurDeQualités { get; set; }
         public DbSet<Etape> etapes { get; set; }
+        public DbSet<Bobinage> bobinages { get; set; }
+        public DbSet<BobinageMT> bobinageMTs { get; set; }
+
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -40,6 +43,11 @@ namespace WebAPI.Model
             modelBuilder.Entity<Bobinage>()
             .HasOne(b => b.Transformateur)
             .WithMany(t => t.Bobinages)
+            .HasForeignKey(b => b.Numero);
+
+            modelBuilder.Entity<BobinageMT>()
+            .HasOne(b => b.Transformateur)
+            .WithMany(t => t.BobinagesMT)
             .HasForeignKey(b => b.Numero);
 
             base.OnModelCreating(modelBuilder);

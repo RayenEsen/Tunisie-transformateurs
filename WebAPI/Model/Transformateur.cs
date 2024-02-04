@@ -46,6 +46,8 @@ namespace WebAPI.Model
         public ICollection<Etape>? Etapes { get; set; }
 
         public ICollection<Bobinage>? Bobinages { get; set; }
+        public ICollection<BobinageMT>? BobinagesMT { get; set; }
+
 
     }
 }

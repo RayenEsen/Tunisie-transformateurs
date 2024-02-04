@@ -12,6 +12,8 @@ import { EtapeServiceService } from '../Shared/Etape-service.service';
 import { concatMap, toArray } from 'rxjs/operators';
 import { Bobinage } from '../Shared/Bobinage-service.model';
 import { BobinageServiceService } from '../Shared/Bobinage-service.service';
+import { BobinageMTServiceService } from '../Shared/BobinageMT-service.service';
+import { BobinageMT } from '../Shared/BobinageMT-service.model';
 
 @Component({
   selector: 'app-Add-component',
@@ -41,7 +43,14 @@ export class AddComponentComponent implements OnInit {
     type: ''
   };
 
-  constructor(public service: TransformateurServiceService, public servicePv: PvServiceService, private router: Router , public serviceS : SessionService , public serviceE : EtapeServiceService , public ServiceB : BobinageServiceService) { }
+  constructor(public service: TransformateurServiceService,
+     public servicePv: PvServiceService,
+     private router: Router ,
+     public serviceS : SessionService ,
+     public serviceE : EtapeServiceService ,
+     public ServiceB : BobinageServiceService,
+     public ServiceMT : BobinageMTServiceService,
+     ){ }
 
   ngOnInit() {
 
@@ -155,6 +164,33 @@ export class AddComponentComponent implements OnInit {
             }
 
             return forkJoin(bobinageObservables);
+          }),
+          concatMap(() => {
+            // Use forkJoin to execute multiple observables in parallel
+            const bobinageMTObservables: Observable<any>[] = [];
+
+            const BobinageMTNames: { [key: number]: string } = {
+              1: 'Diemnsion du fil',
+              2: 'Nombre de ful/spire',
+              3: 'Diamètre inter Bobine(d)',
+              4: 'Diamètre Ext bobine(d)',
+              5: 'Epaisseur entre couche',
+              6: 'Nombre de spire / couche',
+              7: 'Nombre de spires Totales',
+              8: 'Hauteur de bobinage (h)',
+              9: 'Hauteur de la bobine (H)',
+            };
+
+            for (let i = 1; i <= 9; i++) {
+              const BobinageMTAjouter: BobinageMT = {
+                idBobinageMT: 0,
+                numero: this.transformateurAjouter.numero,
+                nom: BobinageMTNames[i] || ''
+              };
+              bobinageMTObservables.push(this.ServiceMT.AddBobinage(BobinageMTAjouter));
+            }
+
+            return forkJoin(bobinageMTObservables);
           }),
           concatMap(() => {
             // Use forkJoin to execute multiple observables in parallel

@@ -106,6 +106,19 @@ export class ControleComponentComponent implements OnInit {
       }
     }
 
+    getRouterLink(etapeNumero: number): any[] {
+      switch (etapeNumero) {
+        case 1:
+          return ['/Bobinage', this.transformateurId];
+        case 4:
+          return ['/BobinageMT', this.transformateurId];
+        default:
+          // Add default route or handle other cases as needed
+          return ['/DefaultRoute'];
+      }
+    }
+
+
 }
 
 

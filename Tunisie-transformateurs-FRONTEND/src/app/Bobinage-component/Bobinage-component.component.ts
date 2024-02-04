@@ -32,6 +32,7 @@ export class BobinageComponentComponent implements OnInit {
 
   Update()
   {
+
     this.ServiceB.UpdateListBobinage(this.bobinages).subscribe(
       () => {
         console.log('Bobinages updated successfully');

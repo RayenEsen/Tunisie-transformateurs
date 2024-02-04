@@ -52,123 +52,13 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-xl-3 col-md-6">
-          <div class="card bg-pattern">
-              <div class="card-body">
-                  <div class="float-right">
-                    <i class="fa fa-cogs text-primary h4 ml-3"></i>
-                  </div>
-                  <h5 class="font-size-20 mt-0 pt-1">En Attente</h5>
-                  <p class="text-muted mb-0">Bobinage BT</p>
-              </div>
-          </div>
-      </div>
-      <div class="col-xl-3 col-md-6">
-          <div class="card bg-pattern">
-              <div class="card-body">
-                  <div class="float-right">
-                    <i class="fa fa-wrench text-primary h4 ml-3"></i>
-                  </div>
-                  <h5 class="font-size-20 mt-0 pt-1">En Attente</h5>
-                  <p class="text-muted mb-0">Bobinage MT</p>
-              </div>
-          </div>
-      </div>
-      <div class="col-xl-3 col-md-6">
-          <div class="card bg-pattern">
-              <div class="card-body">
-                  <div class="float-right">
-                    <i class="fa fa-magnet text-primary h4 ml-3"></i>
-                  </div>
-                  <h5 class="font-size-20 mt-0 pt-1">En Attente</h5>
-                  <p class="text-muted mb-0">Circuit magnétique</p>
-              </div>
-          </div>
-      </div>
-      <div class="col-xl-3 col-md-6">
-        <div class="card bg-pattern">
-            <div class="card-body">
-                <div class="float-right">
-                  <i class="fa fa-search text-primary h4 ml-3"></i>
-                </div>
-                <h5 class="font-size-20 mt-0 pt-1">En Attente</h5>
-                <p class="text-muted mb-0">Montage</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-3 col-md-6">
-      <div class="card bg-pattern">
-          <div class="card-body">
-              <div class="float-right">
-                <i class="fa fa-ban text-primary h4 ml-3"></i>
-              </div>
-              <h5 class="font-size-20 mt-0 pt-1">N/A</h5>
-              <p class="text-muted mb-0">À venir</p>
-          </div>
-      </div>
-  </div>
-  <div class="col-xl-3 col-md-6">
-    <div class="card bg-pattern">
-        <div class="card-body">
-            <div class="float-right">
-              <i class="fa fa-ban text-primary h4 ml-3"></i>
-            </div>
-            <h5 class="font-size-20 mt-0 pt-1">N/A</h5>
-            <p class="text-muted mb-0">À venir</p>
-        </div>
-    </div>
-</div>
-<div class="col-xl-3 col-md-6">
-  <div class="card bg-pattern">
-      <div class="card-body">
-          <div class="float-right">
-            <i class="fa fa-ban text-primary h4 ml-3"></i>
-          </div>
-          <h5 class="font-size-20 mt-0 pt-1">N/A</h5>
-          <p class="text-muted mb-0">À venir</p>
-      </div>
-  </div>
-</div>
-<div class="col-xl-3 col-md-6">
-<div class="card bg-pattern">
-    <div class="card-body">
-        <div class="float-right">
-          <i class="fa fa-ban text-primary h4 ml-3"></i>
-        </div>
-        <h5 class="font-size-20 mt-0 pt-1">N/A</h5>
-        <p class="text-muted mb-0">À venir</p>
-    </div>
-</div>
-</div>
+
+
     <!-- page content -->
     <div class="py-6" >
       <div class="row"style="margin-right: -119px; margin-left: -119px;">
         <div class="offset-lg-1 col-lg-10 col-md-12 col-12">
-          <!-- row -->
-          <div class="row align-items-center mb-6">
-            <div class="col-lg-6 col-md-12 col-12">
-              <!-- form -->
-              <form>
-                <input type="search" class="form-control" placeholder="Rechercher un Etape..." style="width: 189%;">
-              </form>
-            </div>
-            <div class="col-lg-6 col-md-12 col-12 d-flex justify-content-end">
-              <!-- form -->
-            <div>
-              <a href="#!" class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip" data-template="filterOne">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-filter icon-xs"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg>
-                <div class="d-none" id="filterOne">
-                  <span>Filter</span>
-                </div>
-              </a>
-              <a href="#!" class="btn btn-outline-secondary ms-3">
-                Delete
-              </a>
-            </div>
 
-            </div>
-          </div>
-          <!-- hr -->
 
           <div class="mb-8 container" *ngFor="let etape of etapes">
             <!-- card -->
@@ -180,7 +70,7 @@
                     <h5 class="mb-0" style="color: white;">{{ getCardTitle(etape.etapeNumero) }}</h5>
                   </div>
                   <div>
-                    <a [routerLink]="['/Bobinage', transformateurId]" class="text-muted">
+                    <a [routerLink]="getRouterLink(etape.etapeNumero)" class="text-muted">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right icon-xs" style="color: white;">
                         <line x1="5" y1="12" x2="19" y2="12"></line>
                         <polyline points="12 5 19 12 12 19"></polyline>

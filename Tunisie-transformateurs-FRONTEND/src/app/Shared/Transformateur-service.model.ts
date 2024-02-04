@@ -1,6 +1,7 @@
 import { Pv } from "./Pv-service.model";
 import { Etape } from "./Etape-servicemodel"; // Make sure to import Etape model
 import { Bobinage } from "./Bobinage-service.model";
+import { BobinageMT } from "./BobinageMT-service.model";
 
 export class Transformateur {
   numero: number = 0;
@@ -23,5 +24,6 @@ export class Transformateur {
   pv?: Pv;
   etapes?: Etape[]; // One-to-many relationship with Etape
   bobinage?: Bobinage[]; // One-to-many relationship with Etape
+  bobinageMT?: BobinageMT[]; // One-to-many relationship with Etape
 
 }

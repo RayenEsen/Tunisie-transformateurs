@@ -73,24 +73,24 @@
         <tbody>
           <tr>
             <td rowspan="3" class="text-center colfix"></td>
-            <td colspan="4" class="text-center colfix">Bobinage BT</td>
+            <td colspan="4" class="text-center colfix">Bobinage MT</td>
           </tr>
           <tr>
             <td colspan="3" class="text-center colfix">Mesure</td>
             <td class="text-center colfix">Prevue</td>
           </tr>
           <tr>
-            <td class="text-center colfix">BT1</td>
-            <td class="text-center colfix">BT2</td>
-            <td class="text-center colfix">BT3</td>
+            <td class="text-center colfix">MT1</td>
+            <td class="text-center colfix">MT2</td>
+            <td class="text-center colfix">MT3</td>
             <td class="text-center colfix"></td>
             </tr>
-            <tr *ngFor="let bobinage of bobinages">
-              <td class="text-left colfix">{{bobinage.nom}}</td>
-              <td class="text-center colfix"><input type="number" [(ngModel)]="bobinage.bt1"></td>
-              <td class="text-center colfix"><input type="number" [(ngModel)]="bobinage.bt2"></td>
-              <td class="text-center colfix"><input type="number" [(ngModel)]="bobinage.bt3"></td>
-              <td class="text-center colfix"><input type="number" [(ngModel)]="bobinage.prevue"></td>
+            <tr *ngFor="let bobinageMT of bobinagesMT">
+              <td class="text-left colfix">{{bobinageMT.nom}}</td>
+              <td class="text-center colfix"><input type="number" [(ngModel)]="bobinageMT.bt1"></td>
+              <td class="text-center colfix"><input type="number" [(ngModel)]="bobinageMT.bt2"></td>
+              <td class="text-center colfix"><input type="number" [(ngModel)]="bobinageMT.bt3"></td>
+              <td class="text-center colfix"><input type="number" [(ngModel)]="bobinageMT.prevue"></td>
             </tr>
         </tbody>
       </table>
