@@ -62,6 +62,30 @@ namespace WebAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Bobinage",
+                columns: table => new
+                {
+                    IdBobinage = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Numero = table.Column<int>(type: "int", nullable: false),
+                    TypeBobinage = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Bt1 = table.Column<int>(type: "int", nullable: true),
+                    Bt2 = table.Column<int>(type: "int", nullable: true),
+                    Prevue = table.Column<int>(type: "int", nullable: true),
+                    nom = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Bobinage", x => x.IdBobinage);
+                    table.ForeignKey(
+                        name: "FK_Bobinage_transformateurs_Numero",
+                        column: x => x.Numero,
+                        principalTable: "transformateurs",
+                        principalColumn: "Numero",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "etapes",
                 columns: table => new
                 {
@@ -167,6 +191,11 @@ namespace WebAPI.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Bobinage_Numero",
+                table: "Bobinage",
+                column: "Numero");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_etapes_Numero",
                 table: "etapes",
                 column: "Numero");
@@ -186,6 +215,9 @@ namespace WebAPI.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Bobinage");
+
             migrationBuilder.DropTable(
                 name: "etapes");
 

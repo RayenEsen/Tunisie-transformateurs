@@ -11,6 +11,7 @@ import { PlanificationComponentComponent } from './Planification-component/Plani
 import { AuthGuard } from './guards/auth.guard';
 import { InscriptionComponentComponent } from './Inscription-component/Inscription-component.component';
 import { ControleComponentComponent } from './Controle-component/Controle-component.component';
+import { BobinageComponentComponent } from './Bobinage-component/Bobinage-component.component';
 const routes: Routes = [
   { path: 'Transformateur', component: TransformateurInfoComponent , canActivate: [AuthGuard]},
   { path: 'Ajouter_Transformateur', component: Add_ModifyTransformateurComponent , canActivate: [AuthGuard]},
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'Edit_profile' , component : EditProfileComponentComponent , canActivate: [AuthGuard]},
   { path: 'Sign_in' , component : CreateAcountComponentComponent},
   { path: 'Planification' , component : PlanificationComponentComponent , canActivate: [AuthGuard]},
+  { path: 'Bobinage/:id' , component : BobinageComponentComponent , canActivate: [AuthGuard]},
   { path: 'Sign_up' , component : InscriptionComponentComponent},
   { path: 'Controle/:id' , component : ControleComponentComponent, canActivate: [AuthGuard]},
   // New route with parameter

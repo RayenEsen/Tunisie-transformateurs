@@ -1,0 +1,215 @@
+/* Gradient background for the main container */
+.cd__main {
+
+  background: linear-gradient(to right, #9796f0, #fbc7d4) !important;
+  transition: background 0.3s ease-in-out; /* Adding a background transition */
+}
+
+/* General body styling */
+body {
+  background-color: #f4f4f4;
+  transition: background 0.3s ease-in-out; /* Adding a background transition */
+}
+
+/* Styling for columns */
+.col-sm-6 {
+  width: 32%;
+  transition: width 0.3s ease-in-out; /* Adding a width transition */
+}
+
+/* Styling for the invoice container */
+.invoice {
+  background: #fff;
+  padding-left: 30px;
+  width: 1000px !important;
+  margin: 50px auto;
+  transition: transform 0.3s ease-in-out, width 0.3s ease-in-out; /* Adding a transform and width transition */
+}
+
+/* Styling for the header of the invoice */
+.invoice .invoice-header {
+  padding: 25px 25px 15px;
+  transition: padding 0.3s ease-in-out; /* Adding a padding transition */
+}
+
+/* Styling for the h1 tag in the header */
+.invoice .invoice-header h1 {
+  margin: 0;
+  transition: margin 0.3s ease-in-out; /* Adding a margin transition */
+}
+
+/* Styling for the media body in the header */
+.invoice .invoice-header .media .media-body {
+  font-size: 0.9em;
+  margin: 0;
+  transition: font-size 0.3s ease-in-out; /* Adding a font-size transition */
+}
+
+/* Styling for the body of the invoice */
+.invoice .invoice-body {
+  border-radius: 10px;
+  padding: 25px;
+  background: #fff;
+  transition: background 0.3s ease-in-out; /* Adding a background transition */
+}
+
+/* Styling for the footer of the invoice */
+.invoice .invoice-footer {
+  padding: 15px;
+  font-size: 0.9em;
+  text-align: center;
+  color: #999;
+  transition: padding 0.3s ease-in-out; /* Adding a padding transition */
+}
+
+/* Styling for the logo */
+.logo {
+  max-height: 70px;
+  border-radius: 10px;
+  transition: transform 0.3s ease-in-out, max-height 0.3s ease-in-out; /* Adding a transform and max-height transition */
+}
+
+/* Styling for the horizontal definition list */
+.dl-horizontal {
+  margin: 0;
+}
+
+.dl-horizontal dt {
+  float: left;
+  width: 80px;
+  overflow: hidden;
+  clear: left;
+  text-align: right;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: width 0.3s ease-in-out; /* Adding a width transition */
+}
+
+.dl-horizontal dd {
+  margin-left: 90px;
+  transition: margin-left 0.3s ease-in-out; /* Adding a margin-left transition */
+}
+
+/* Styling for the row amount */
+.rowamount {
+  padding-top: 15px !important;
+  transition: padding-top 0.3s ease-in-out; /* Adding a padding-top transition */
+}
+
+/* Styling for the row total */
+.rowtotal {
+  font-size: 1.3em;
+  transition: font-size 0.3s ease-in-out; /* Adding a font-size transition */
+}
+
+/* Styling for a fixed-width column */
+.colfix {
+  width: 12%;
+  transition: width 0.3s ease-in-out; /* Adding a width transition */
+}
+
+/* Styling for monospace font */
+.mono {
+  font-family: monospace;
+}
+
+/* Hover effect on the invoice container */
+.invoice:hover {
+  transform: scale(1.02); /* Scaling up on hover */
+}
+
+/* Hover effect on the logo */
+.logo {
+  transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out; /* Adding scale and filter transitions */
+}
+
+.logo:hover {
+  transform: scale(1.05) translate(2px, -2px); /* Slight scaling up and movement on hover */
+  filter: brightness(1.2); /* Slight increase in brightness on hover */
+}
+/* Styling for the input fields */
+input[type="number"] {
+  width: 95px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Remove spinner buttons in number input fields */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
+
+/* Hover effect on input fields */
+input[type="number"]:hover {
+  border-color: #555;
+}
+
+/* Focus effect on input fields */
+input[type="number"]:focus {
+  outline: none;
+  border-color: #2196F3;
+  box-shadow: 0 0 5px rgba(33, 150, 243, 0.5);
+}
+
+/* Animation for input fields */
+input[type="number"] {
+  transform: scale(1);
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Scale up effect on hover for input fields */
+input[type="number"]:hover {
+  transform: scale(1.05);
+}
+
+/* Hover effect on images */
+img:hover {
+  opacity: 0.8; /* Adjust opacity as needed */
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* Animation for images */
+img {
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Scale up effect on hover for images */
+img:hover {
+  transform: scale(1.1);
+}
+/* Styles for input fields in print media */
+@media print {
+  input[type="number"] {
+    border: none;
+    padding: 0;
+    background: none;
+    box-shadow: none;
+  }
+}
+
+@media print {
+  .printable {
+    display: none;
+  }
+}
+/* Styles for print media */
+@media print {
+  /* Styles for input fields in print media */
+  input[type="number"] {
+    border: none;
+    padding: 0;
+    background: none;
+    box-shadow: none;
+  }
+}
+
+@page {
+  size: auto;
+  margin: 0;
+       }

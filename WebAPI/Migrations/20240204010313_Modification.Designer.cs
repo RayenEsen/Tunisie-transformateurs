@@ -12,8 +12,8 @@ using WebAPI.Model;
 namespace WebAPI.Migrations
 {
     [DbContext(typeof(TransformateurContext))]
-    [Migration("20240202084714_FirstMigration")]
-    partial class FirstMigration
+    [Migration("20240204010313_Modification")]
+    partial class Modification
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,40 @@ namespace WebAPI.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("WebAPI.Model.Bobinage", b =>
+                {
+                    b.Property<int>("IdBobinage")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdBobinage"));
+
+                    b.Property<int?>("Bt1")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Bt2")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Bt3")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Numero")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Prevue")
+                        .HasColumnType("int");
+
+                    b.Property<string>("nom")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("IdBobinage");
+
+                    b.HasIndex("Numero");
+
+                    b.ToTable("Bobinage");
+                });
 
             modelBuilder.Entity("WebAPI.Model.ControleurDeQualité", b =>
                 {
@@ -367,6 +401,17 @@ namespace WebAPI.Migrations
                     b.ToTable("transformateurs");
                 });
 
+            modelBuilder.Entity("WebAPI.Model.Bobinage", b =>
+                {
+                    b.HasOne("WebAPI.Model.Transformateur", "Transformateur")
+                        .WithMany("Bobinages")
+                        .HasForeignKey("Numero")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Transformateur");
+                });
+
             modelBuilder.Entity("WebAPI.Model.Etape", b =>
                 {
                     b.HasOne("WebAPI.Model.Transformateur", "Transformateur")
@@ -402,6 +447,8 @@ namespace WebAPI.Migrations
 
             modelBuilder.Entity("WebAPI.Model.Transformateur", b =>
                 {
+                    b.Navigation("Bobinages");
+
                     b.Navigation("Etapes");
 
                     b.Navigation("Pv");

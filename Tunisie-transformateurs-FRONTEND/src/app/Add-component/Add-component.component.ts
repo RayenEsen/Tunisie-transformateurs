@@ -10,6 +10,8 @@ import { SessionService } from '../utils/session-service.service';
 import { Etape } from '../Shared/Etape-servicemodel';
 import { EtapeServiceService } from '../Shared/Etape-service.service';
 import { concatMap, toArray } from 'rxjs/operators';
+import { Bobinage } from '../Shared/Bobinage-service.model';
+import { BobinageServiceService } from '../Shared/Bobinage-service.service';
 
 @Component({
   selector: 'app-Add-component',
@@ -39,7 +41,7 @@ export class AddComponentComponent implements OnInit {
     type: ''
   };
 
-  constructor(public service: TransformateurServiceService, public servicePv: PvServiceService, private router: Router , public serviceS : SessionService , public serviceE : EtapeServiceService) { }
+  constructor(public service: TransformateurServiceService, public servicePv: PvServiceService, private router: Router , public serviceS : SessionService , public serviceE : EtapeServiceService , public ServiceB : BobinageServiceService) { }
 
   ngOnInit() {
 
@@ -48,9 +50,6 @@ export class AddComponentComponent implements OnInit {
   validateForm(): boolean {
     return Object.values(this.transformateurAjouter).every(value => value !== undefined && value !== '');
   }
-
-
-
 
 
   submitForm() {
@@ -130,9 +129,36 @@ export class AddComponentComponent implements OnInit {
             // Call service method to add Pv
             return this.servicePv.AddPv(pvAjouter);
           }),
-          concatMap((pvResponse: any) => {
-            // Use concatMap to add each Etape sequentially
-            let etapeObservables: Observable<any>[] = [];
+          concatMap(() => {
+            // Use forkJoin to execute multiple observables in parallel
+            const bobinageObservables: Observable<any>[] = [];
+
+            const BobinageNames: { [key: number]: string } = {
+              1: 'Diemnsion du fil',
+              2: 'Nombre de ful/spire',
+              3: 'Diamètre inter Bobine(d)',
+              4: 'Diamètre Ext bobine(d)',
+              5: 'Epaisseur entre couche',
+              6: 'Nombre de spire / couche',
+              7: 'Nombre de spires Totales',
+              8: 'Hauteur de bobinage (h)',
+              9: 'Hauteur de la bobine (H)',
+            };
+
+            for (let i = 1; i <= 9; i++) {
+              const BobinageAjouter: Bobinage = {
+                idBobinage: 0,
+                numero: this.transformateurAjouter.numero,
+                nom: BobinageNames[i] || ''
+              };
+              bobinageObservables.push(this.ServiceB.AddBobinage(BobinageAjouter));
+            }
+
+            return forkJoin(bobinageObservables);
+          }),
+          concatMap(() => {
+            // Use forkJoin to execute multiple observables in parallel
+            const etapeObservables: Observable<any>[] = [];
 
             const etapeNames: { [key: number]: string } = {
               1: 'BT1',
@@ -154,7 +180,7 @@ export class AddComponentComponent implements OnInit {
               17: 'Finir'
             };
 
-            for (let i = 1; i <= 17; i++) { // Starting from 1 and adding 17 Etapes
+            for (let i = 1; i <= 17; i++) {
               const etapeAjouter: Etape = {
                 id_Etape: 0,
                 etapeNumero: i,
@@ -163,28 +189,23 @@ export class AddComponentComponent implements OnInit {
                 dateFin: undefined,
                 nom: etapeNames[i] || '',
                 operateur1: '',
-                operateur2: '',
+                operateur2: ''
               };
-
-              // Call service method to add each Etape
               etapeObservables.push(this.serviceE.AddEtape(etapeAjouter));
             }
 
-
-            // Concatenate all Etape observables
-            return concat(...etapeObservables);
+            return forkJoin(etapeObservables);
           })
         )
         .subscribe({
-          next: (result: any) => {
-            console.log('Transformateur added successfully', this.transformateurAjouter);
-            console.log('Etape added successfully', result);
+          next: (results: any) => {
+            console.log('Transformateur, Bobinage, and Etape added successfully', results);
             // Navigate or perform other actions on successful completion
             this.router.navigate(['/Transformateur']);
           },
           error: (error: any) => {
             alert("Tout les champs sont obligatoires");
-            console.error('Error adding Transformateur, Pv, or Etapes', error);
+            console.error('Error adding Transformateur, Pv, Bobinage, or Etapes', error);
           }
         });
     } catch (error) {
@@ -193,6 +214,7 @@ export class AddComponentComponent implements OnInit {
       return;
     }
   }
+
 
 
   getP3(MultiplyFactor: number): number {

@@ -88,6 +88,7 @@ namespace WebAPI.Controller
         {
             var etapes = await _context.etapes
                 .Where(e => e.Numero == transformateurId)
+                .OrderBy(e => e.EtapeNumero) // Order by the 'etapeNumero' property
                 .ToListAsync();
 
             return etapes;

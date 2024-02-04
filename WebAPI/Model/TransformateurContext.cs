@@ -37,8 +37,13 @@ namespace WebAPI.Model
                .WithMany(t => t.Etapes)
                .HasForeignKey(e => e.Numero);
 
+            modelBuilder.Entity<Bobinage>()
+            .HasOne(b => b.Transformateur)
+            .WithMany(t => t.Bobinages)
+            .HasForeignKey(b => b.Numero);
 
             base.OnModelCreating(modelBuilder);
         }
+        public DbSet<WebAPI.Model.Bobinage> Bobinage { get; set; } = default!;
     }
 }
