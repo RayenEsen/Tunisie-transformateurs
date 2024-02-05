@@ -99,6 +99,45 @@ namespace WebAPI.Controller
             return NoContent();
         }
 
+        [HttpGet("ByTransformateur/{transformateurId}")]
+        public async Task<ActionResult<IEnumerable<Montage>>> GetMontagesByTransformateurId(int transformateurId)
+        {
+            var montages = await _context.montages
+                .Where(m => m.Numero == transformateurId)
+                .ToListAsync();
+
+            return Ok(montages);
+        }
+
+        [HttpPut("UpdateList")]
+        public async Task<IActionResult> UpdateMontageList(List<Montage> montages)
+        {
+            if (montages == null || !montages.Any())
+            {
+                return BadRequest("No montages provided for update.");
+            }
+
+            foreach (var montage in montages)
+            {
+                _context.Entry(montage).State = EntityState.Modified;
+            }
+
+            try
+            {
+                await _context.SaveChangesAsync();
+                return NoContent();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return StatusCode(500, "Failed to update montages due to a concurrency issue.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"An error occurred: {ex.Message}");
+            }
+        }
+
+
         private bool MontageExists(int id)
         {
             return _context.montages.Any(e => e.IdMagnetique == id);

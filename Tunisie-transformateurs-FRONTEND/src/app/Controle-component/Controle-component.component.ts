@@ -114,6 +114,8 @@ export class ControleComponentComponent implements OnInit {
           return ['/BobinageMT', this.transformateurId];
         case 7:
             return ['/Magnetique', this.transformateurId];
+        case 9:
+            return ['/Montage', this.transformateurId];
         default:
           // Add default route or handle other cases as needed
           return ['/DefaultRoute'];
