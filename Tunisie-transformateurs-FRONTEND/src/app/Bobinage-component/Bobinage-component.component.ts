@@ -3,6 +3,7 @@ import { BobinageServiceService } from '../Shared/Bobinage-service.service'
 import { Bobinage } from '../Shared/Bobinage-service.model'
 import { ActivatedRoute, Router } from '@angular/router';
 import { TransformateurServiceService } from '../Shared/Transformateur-service.service';
+import { EtapeServiceService } from '../Shared/Etape-service.service';
 @Component({
   selector: 'app-Bobinage-component',
   templateUrl: './Bobinage-component.component.html',
@@ -13,7 +14,7 @@ export class BobinageComponentComponent implements OnInit {
   transformateurId: number = 0;
   bobinages: Bobinage[] = [];
 
-  constructor(public ServiceB : BobinageServiceService,public router: Router,private route: ActivatedRoute , public service : TransformateurServiceService) { }
+  constructor(public ServiceB : BobinageServiceService,public router: Router,private route: ActivatedRoute , public service : TransformateurServiceService , public ServiceE : EtapeServiceService) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -47,6 +48,5 @@ export class BobinageComponentComponent implements OnInit {
     // Function to handle the print action
     onPrint() {
       window.print();
-
     }
 }

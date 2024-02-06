@@ -45,8 +45,8 @@
           BT:U2/LV:V2: {{ service.list[0].btu2 }} V
       </div>
       <div class="my-1">
-          Accessoires: None
-    </div>
+        Couplage: {{ service.list[0].couplage }}
+      </div>
     </div>
     </div>
     </div>
@@ -77,13 +77,14 @@
           </tr>
           <tr>
             <td colspan="3" class="text-center colfix">Mesure</td>
-            <td class="text-center colfix">Prevue</td>
+            <td class="text-center colfix" rowspan="2">Prevue</td>
+            <td class="text-center colfix" rowspan="2">CN/C</td>
+
           </tr>
           <tr>
             <td class="text-center colfix">MT1</td>
             <td class="text-center colfix">MT2</td>
             <td class="text-center colfix">MT3</td>
-            <td class="text-center colfix"></td>
             </tr>
             <tr *ngFor="let bobinageMT of bobinagesMT">
               <td class="text-left colfix">{{bobinageMT.nom}}</td>
@@ -91,6 +92,8 @@
               <td class="text-center colfix"><input type="number" [(ngModel)]="bobinageMT.bt2"></td>
               <td class="text-center colfix"><input type="number" [(ngModel)]="bobinageMT.bt3"></td>
               <td class="text-center colfix"><input type="number" [(ngModel)]="bobinageMT.prevue"></td>
+              <td class="text-center colfix"><input type="number" [(ngModel)]="bobinageMT.cnc"></td>
+
             </tr>
         </tbody>
       </table>
@@ -113,7 +116,7 @@
       <i class="mr-1 fa fa-print text-primary-m1 text-120 w-2"></i>
       Print
     </a>
-    <a class="btn bg-white btn-light mx-1px text-95" data-title="Save" (click)="Update()">
+    <a class="btn bg-white btn-light mx-1px text-95" data-title="Save" (click)="Update()" [routerLink]="['/Controle',this.service.list[0].numero]">
       <i class="mr-1 fa fa-save text-success-m1 text-120 w-2"></i>
       Save
     </a>

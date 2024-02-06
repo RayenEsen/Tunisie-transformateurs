@@ -31,20 +31,23 @@ export class MontageComponentComponent implements OnInit {
       }
     });
   }
-  Update()
-  {
-
+  Update() {
     this.ServiceMontage.UpdateListMontage(this.Montages).subscribe(
       () => {
-        console.log('Bobinages updated successfully');
         // Add any additional logic after the update if needed
       },
       error => {
-        console.error('Error updating bobinages:', error);
+        console.error('Error updating Montages:', error);
+        // Check the error details for more information
+        if (error && error.error && error.error.errors) {
+          console.log('Montages updated successfully'+this.Montages);
+          console.log('Validation errors:', error.error.errors);
+        }
         // Handle the error as needed
       }
     );
   }
+
     // Function to handle the print action
     onPrint() {
       window.print();

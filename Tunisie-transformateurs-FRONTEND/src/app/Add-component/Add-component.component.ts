@@ -44,7 +44,12 @@ export class AddComponentComponent implements OnInit {
     libelle: '',
     frequency: 0,
     date: new Date(),
-    type: ''
+    type: '',
+    accessoires: '',
+    thermostat: '',
+    bornesembrochables: '',
+    relais: '',
+    assecheur: ''
   };
 
   constructor(public service: TransformateurServiceService,
@@ -63,7 +68,7 @@ export class AddComponentComponent implements OnInit {
   }
 
   validateForm(): boolean {
-    return Object.values(this.transformateurAjouter).every(value => value !== undefined && value !== '');
+    return Object.values(this.transformateurAjouter).every(value => value !== undefined);
   }
 
 
