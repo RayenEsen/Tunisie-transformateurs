@@ -143,33 +143,17 @@
         </div>
       </div>
 
-      <div class="formbold-mb-3">
-        <label for="email" class="formbold-form-label" style="color: #122151;"> Accessoires <small style="color: red;">*</small></label>
-        <input
-          name="accessoires"
-          placeholder="accessoires"
-          class="formbold-form-input"
-          [(ngModel)]="transformateurAjouter.accessoires"
-        />
+      <div class="formbold-input-wrapp formbold-mb-3">
+        <label for="firstname" class="formbold-form-label" style="color: #122151;"> Accessoires <small style="color: red;">*</small></label>
+        <div>
+          <select class="formbold-form-input" name="Accessoires" id="occupation"  [(ngModel)]="transformateurAjouter.accessoires">
+            <option value="" disabled selected>Sélectionner les Accessoires</option>
+            <option value="NONDMCR">Relais/Thermostat/Assecheur</option>
+            <option value="DMCR">DMCR</option>
+          </select>
+        </div>
       </div>
-      <div class="formbold-mb-3">
-        <label for="address" class="formbold-form-label" style="color: #122151;"> Thermostat	<small style="color: red;">*</small></label>
 
-        <input
-          name="thermostat"
-          placeholder="Thermostat"
-          class="formbold-form-input formbold-mb-3"
-          [(ngModel)]="transformateurAjouter.thermostat"
-        />
-        <label for="address" class="formbold-form-label" style="color: #122151;"> Relais BuckKolz / DGPT2 / Galets<small style="color: red;">*</small></label>
-
-        <input
-          name="Relais"
-          placeholder="Relais BuckKolz / DGPT2 / Galets"
-          class="formbold-form-input"
-          [(ngModel)]="transformateurAjouter.relais"
-        />
-      </div>
       <div class="formbold-mb-3">
         <label for="address" class="formbold-form-label" style="color: #122151;"> Bornes embrochables	<small style="color: red;">*</small></label>
 
@@ -179,14 +163,7 @@
           class="formbold-form-input formbold-mb-3"
           [(ngModel)]="transformateurAjouter.bornesembrochables"
         />
-        <label for="address" class="formbold-form-label" style="color: #122151;">Assécheur d'air<small style="color: red;">*</small></label>
 
-        <input
-          name="assecheur"
-          placeholder="Assécheur d'air"
-          class="formbold-form-input"
-          [(ngModel)]="transformateurAjouter.assecheur"
-        />
       </div>
       <div class="formbold-mb-3">
         <label for="upload" class="formbold-form-label" style="color: #122151;">

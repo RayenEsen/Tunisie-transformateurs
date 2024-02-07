@@ -5,7 +5,7 @@
     <div class="row align-items-center" >
       <div class="col-xl-12 col-lg-12 col-md-12 col-12">
         <!-- Bg -->
-        <div class="pt-20 rounded-top" style="background-color: #122151; background-size: cover;margin-top: 20px;">
+        <div class="pt-20 rounded-top" style="background-color: #122151; background-size: cover;margin-top: 20px;" >
           <img src="assets/white.png"
           style="    margin-left: 500px;
           margin-top: -129px;
@@ -26,9 +26,6 @@
                 <img *ngIf="Service.list[0].type==='Résine' " src="assets/resine.png" class="avatar-xxl
                 rounded-circle border border-2 " alt="Image" style="margin-bottom: -16px;">
 
-                <a href="#!" class="position-absolute top-0 right-0 me-2">
-                  <img src="https://dashui.codescandy.com/dashuipro/assets/images/svg/checked-mark.svg" alt="Image" class="icon-sm">
-                </a>
 
               </div>
               <!-- content -->
@@ -100,9 +97,24 @@
 
                       <!-- content -->
                       <div class="ms-3">
-                        <p class="mb-0 font-weight-medium">La phase {{etape.nom}} a été gérée conjointement par l'Opérateur : <input type="text" [(ngModel)]="etape.operateur1" [readonly]="isReadOnly" style="font-weight:500; color:#0f253c;" />
-                          et l'Opérateur : <input type="text" [(ngModel)]="etape.operateur2" [readonly]="isReadOnly" style="font-weight:500; color:#0f253c;" />
-                          <br> débutant le {{etape.dateDebut | date:'dd/MM/yyyy HH:mm'}} et se terminant le {{etape.dateFin | date:'dd/MM/yyyy HH:mm'}}.</p>
+                        <p class="mb-0 font-weight-medium">La phase {{etape.nom}} a été gérée conjointement par l'Opérateur :
+                          <select [(ngModel)]="etape.operateur1" [disabled]="isReadOnly" style="font-weight:500; color:#0f253c;">
+                            <option [value]="etape.operateur1 ? etape.operateur1 : ''">{{ etape.operateur1 ? etape.operateur1 : 'Operateur 1' }}</option>
+                            <ng-container *ngFor="let username of users ">
+                              <option *ngIf="username !== etape.operateur1 "   [value]="username">{{ username }}</option>
+                            </ng-container>
+                          </select>
+
+                          et l'Opérateur :
+                          <select [(ngModel)]="etape.operateur2" [disabled]="isReadOnly" style="font-weight:500; color:#0f253c;">
+                            <option [value]="etape.operateur2 ? etape.operateur2 : ''">{{ etape.operateur2 ? etape.operateur2 : 'Operateur 2' }}</option>
+                            <ng-container *ngFor="let username of users">
+                              <option *ngIf="username !== etape.operateur2" [value]="username">{{ username }}</option>
+                            </ng-container>
+                          </select>
+
+
+                           <br> débutant le {{etape.dateDebut | date:'dd/MM/yyyy HH:mm'}} et se terminant le {{etape.dateFin | date:'dd/MM/yyyy HH:mm'}}.</p>
                       </div>
                     </div>
                     <div>

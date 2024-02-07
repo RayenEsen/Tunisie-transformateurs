@@ -39,4 +39,10 @@ UpdateControleurById(id: string,Controleur : ControleurDeQualite): Observable<an
   return this.http.put(urlWithParams,Controleur);
 }
 
+getUsersByRole(role: string): Observable<any[]> {
+  const urlWithParams = `${this.url}/ByDesignation/${role}`;
+  return this.http.get<any[]>(urlWithParams);
+}
+
+
 }

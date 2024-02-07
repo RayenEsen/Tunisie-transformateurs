@@ -122,6 +122,21 @@ namespace WebAPI.Controller
             return Ok(userExists);
         }
 
+        [HttpGet("ByDesignation/{designation}")]
+        public async Task<ActionResult<IEnumerable<string>>> GetControleurNamesByDesignation(string designation)
+        {
+            var controleurNames = await _context.controleurDeQualités
+                                            .Where(c => c.Designation == designation)
+                                            .Select(c => c.Username) // Assuming the name property is called "Name"
+                                            .ToListAsync();
+
+            if (controleurNames == null || !controleurNames.Any())
+            {
+                return NotFound();
+            }
+
+            return controleurNames;
+        }
 
         private bool ControleurDeQualitéExists(string id)
         {

@@ -13,6 +13,8 @@ import { MagnetiqueServiceService } from '../Shared/Magnetique-service.service';
 import { Magnetique } from '../Shared/Magnetique-service.model';
 import { MontageServiceService } from '../Shared/Montage-service.service';
 import { Montage } from '../Shared/Montage-service.model';
+import { ControlleurServiceService } from '../Shared/Controlleur-service.service';
+import { ControleurDeQualite } from '../Shared/Controlleur-service.model';
 
 @Component({
   selector: 'app-Controle-component',
@@ -22,11 +24,13 @@ import { Montage } from '../Shared/Montage-service.model';
 export class ControleComponentComponent implements OnInit {
 
   transformateurId: number = 0;
+
   etapes: Etape[] = []; // Array to store fetched Etapes
   bobinages: Bobinage[] = []; // Array to store fetched Etapes
   bobinagesMT: BobinageMT[] = []; // Array to store fetched Etapes
   Magnetiques: Magnetique[] = []; // Array to store fetched Etapes
   Montages: Montage[] = []; // Array to store fetched Etapes
+  users: any[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -38,7 +42,7 @@ export class ControleComponentComponent implements OnInit {
     public ServiceMT : BobinageMTServiceService,
     public ServiceMag : MagnetiqueServiceService,
     public ServiceMon : MontageServiceService,
-
+    public userService : ControlleurServiceService,
   ) {}
 
   ngOnInit() {
@@ -132,10 +136,7 @@ export class ControleComponentComponent implements OnInit {
       }
     );
 
-
-
   }
-
 
 
   updateEtapeDateFin(etapeNumero: number) {
@@ -163,7 +164,19 @@ export class ControleComponentComponent implements OnInit {
 
   toggleEditable() {
     this.isReadOnly = !this.isReadOnly;
+
+    if (!this.isReadOnly) {
+      this.userService.getUsersByRole('Operateur').subscribe((usernames: string[]) => {
+        this.users = usernames;
+        console.log(this.users)
+      });
+    } else {
+      // Clear the users array when readonly to hide the autocomplete options
+      this.users = [];
+    }
   }
+
+
 
   updateEtape(etapeNumero: number) {
     const selectedEtape = this.etapes.find(et => et.etapeNumero === etapeNumero);

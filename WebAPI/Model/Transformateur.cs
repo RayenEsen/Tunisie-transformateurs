@@ -40,11 +40,7 @@ namespace WebAPI.Model
         [Column(TypeName = "nvarchar(100)")]
         public string Libelle { get; set; } = "";
         public string Accessoires { get; set; } = "";
-        public string Thermostat { get; set; } = "";
         public string Bornesembrochables { get; set; } = "";
-        public string Relais { get; set; } = "";
-        public string Assecheur { get; set; } = "";
-
         public float Frequency { get; set; }
 
         //Navigation property

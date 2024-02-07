@@ -46,10 +46,7 @@ export class AddComponentComponent implements OnInit {
     date: new Date(),
     type: '',
     accessoires: '',
-    thermostat: '',
     bornesembrochables: '',
-    relais: '',
-    assecheur: ''
   };
 
   constructor(public service: TransformateurServiceService,

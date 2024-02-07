@@ -22,11 +22,7 @@ export class Transformateur {
   cooling: string = "";
   libelle: string = "";
   accessoires: string = "";
-  thermostat: string  = "";
   bornesembrochables: string  = "";
-  relais: string = "";
-  assecheur: string  = "";
-
   frequency: number = 0;
   pv?: Pv;
   etapes?: Etape[]; // One-to-many relationship with Etape
