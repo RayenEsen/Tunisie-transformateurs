@@ -11,14 +11,14 @@ namespace WebAPI.Model
         public int IdMagnetique { get; set; } // Auto-generated primary key
         [ForeignKey("Transformateur")]
         public int Numero { get; set; }
-        public int? F1c1m { get; set; }
-        public int? F1c1p { get; set; }
-        public int? F2c2m { get; set; }
-        public int? F2c2p { get; set; }
-        public int? F3c3m { get; set; }
-        public int? F3c3p { get; set; }
-        public int? C4m { get; set; }
-        public int? C4p { get; set; }
+        public float? F1c1m { get; set; }
+        public float? F1c1p { get; set; }
+        public float? F2c2m { get; set; }
+        public float? F2c2p { get; set; }
+        public float? F3c3m { get; set; }
+        public float? F3c3p { get; set; }
+        public float? C4m { get; set; }
+        public float? C4p { get; set; }
         public string Nom { get; set; } = "";
 
         [JsonIgnore]

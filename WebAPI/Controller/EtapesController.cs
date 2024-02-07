@@ -130,6 +130,9 @@ namespace WebAPI.Controller
             etape.DateDebut = updatedEtape.DateDebut;
             etape.DateFin = updatedEtape.DateFin;
 
+            // Update IdC property
+            etape.IdC = updatedEtape.IdC;
+
             try
             {
                 await _context.SaveChangesAsync();
@@ -153,6 +156,7 @@ namespace WebAPI.Controller
         public async Task<ActionResult<Etape>> GetEtapeByNumeroAndTransformateur(int numero, int transformateurId)
         {
             var etape = await _context.etapes
+                .Include(e => e.Controleur) // Include the ControleurDeQualité navigation property
                 .Where(e => e.Numero == transformateurId && e.EtapeNumero == numero)
                 .FirstOrDefaultAsync();
 

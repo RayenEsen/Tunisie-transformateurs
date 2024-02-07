@@ -32,7 +32,7 @@ export class CreateAcountComponentComponent implements OnInit {
         next: (userExists) => {
           if (userExists) {
             // User exists, start the session and navigate to Edit_profile
-            this.ServiceS.sessionStart(this.Controleur.idC, this.Controleur.email, this.Controleur.password);
+            this.ServiceS.sessionStart(this.Controleur);
             this.router.navigate(['/Edit_profile']);
           } else {
             // User not found

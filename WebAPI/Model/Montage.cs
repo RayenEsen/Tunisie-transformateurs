@@ -12,11 +12,11 @@ namespace WebAPI.Model
         [ForeignKey("Transformateur")]
         public int Numero { get; set; }
         public int? c1m { get; set; }
-        public int? c1p { get; set; }
-        public int? c2m { get; set; }
-        public int? c2p { get; set; }
-        public int? c3m { get; set; }
-        public int? c3p { get; set; }
+        public float? c1p { get; set; }
+        public float? c2m { get; set; }
+        public float? c2p { get; set; }
+        public float? c3m { get; set; }
+        public float? c3p { get; set; }
         public string Nom { get; set; } = "";
         [JsonIgnore]
         public Transformateur? Transformateur { get; set; }

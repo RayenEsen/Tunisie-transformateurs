@@ -177,7 +177,6 @@ export class ControleComponentComponent implements OnInit {
   }
 
 
-
   updateEtape(etapeNumero: number) {
     const selectedEtape = this.etapes.find(et => et.etapeNumero === etapeNumero);
     selectedEtape!.dateDebut = new Date();
@@ -239,13 +238,13 @@ export class ControleComponentComponent implements OnInit {
     getRouterLink(etapeNumero: number): any[] {
       switch (etapeNumero) {
         case 1:
-          return ['/Bobinage', this.transformateurId];
+          return ['/Bobinage', this.transformateurId,etapeNumero];
         case 4:
-          return ['/BobinageMT', this.transformateurId];
+          return ['/BobinageMT', this.transformateurId,etapeNumero];
         case 7:
-            return ['/Magnetique', this.transformateurId];
+            return ['/Magnetique', this.transformateurId,etapeNumero];
         case 9:
-            return ['/Montage', this.transformateurId];
+            return ['/Montage', this.transformateurId,etapeNumero];
         default:
           // Add default route or handle other cases as needed
           return ['/DefaultRoute'];

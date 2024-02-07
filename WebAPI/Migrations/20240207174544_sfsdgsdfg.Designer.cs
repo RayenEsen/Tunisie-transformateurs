@@ -12,8 +12,8 @@ using WebAPI.Model;
 namespace WebAPI.Migrations
 {
     [DbContext(typeof(TransformateurContext))]
-    [Migration("20240206154744_Niggga")]
-    partial class Niggga
+    [Migration("20240207174544_sfsdgsdfg")]
+    partial class sfsdgsdfg
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,17 +33,20 @@ namespace WebAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdBobinage"));
 
-                    b.Property<int?>("Bt1")
-                        .HasColumnType("int");
+                    b.Property<float?>("Bt1")
+                        .HasColumnType("real");
 
-                    b.Property<int?>("Bt2")
-                        .HasColumnType("int");
+                    b.Property<float?>("Bt2")
+                        .HasColumnType("real");
 
-                    b.Property<int?>("Bt3")
-                        .HasColumnType("int");
+                    b.Property<float?>("Bt3")
+                        .HasColumnType("real");
 
-                    b.Property<int?>("Cnc")
-                        .HasColumnType("int");
+                    b.Property<float?>("Cnc")
+                        .HasColumnType("real");
+
+                    b.Property<string>("ControleurIdC")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Nom")
                         .IsRequired()
@@ -52,10 +55,12 @@ namespace WebAPI.Migrations
                     b.Property<int>("Numero")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Prevue")
-                        .HasColumnType("int");
+                    b.Property<float?>("Prevue")
+                        .HasColumnType("real");
 
                     b.HasKey("IdBobinage");
+
+                    b.HasIndex("ControleurIdC");
 
                     b.HasIndex("Numero");
 
@@ -70,17 +75,17 @@ namespace WebAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdBobinageMT"));
 
-                    b.Property<int?>("Bt1")
-                        .HasColumnType("int");
+                    b.Property<float?>("Bt1")
+                        .HasColumnType("real");
 
-                    b.Property<int?>("Bt2")
-                        .HasColumnType("int");
+                    b.Property<float?>("Bt2")
+                        .HasColumnType("real");
 
-                    b.Property<int?>("Bt3")
-                        .HasColumnType("int");
+                    b.Property<float?>("Bt3")
+                        .HasColumnType("real");
 
-                    b.Property<int?>("Cnc")
-                        .HasColumnType("int");
+                    b.Property<float?>("Cnc")
+                        .HasColumnType("real");
 
                     b.Property<string>("Nom")
                         .IsRequired()
@@ -89,8 +94,8 @@ namespace WebAPI.Migrations
                     b.Property<int>("Numero")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Prevue")
-                        .HasColumnType("int");
+                    b.Property<float?>("Prevue")
+                        .HasColumnType("real");
 
                     b.HasKey("IdBobinageMT");
 
@@ -167,6 +172,9 @@ namespace WebAPI.Migrations
                     b.Property<int>("EtapeNumero")
                         .HasColumnType("int");
 
+                    b.Property<string>("IdC")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Nom")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -182,6 +190,8 @@ namespace WebAPI.Migrations
 
                     b.HasKey("Id_Etape");
 
+                    b.HasIndex("IdC");
+
                     b.HasIndex("Numero");
 
                     b.ToTable("etapes");
@@ -195,29 +205,29 @@ namespace WebAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdMagnetique"));
 
-                    b.Property<int?>("C4m")
-                        .HasColumnType("int");
+                    b.Property<float?>("C4m")
+                        .HasColumnType("real");
 
-                    b.Property<int?>("C4p")
-                        .HasColumnType("int");
+                    b.Property<float?>("C4p")
+                        .HasColumnType("real");
 
-                    b.Property<int?>("F1c1m")
-                        .HasColumnType("int");
+                    b.Property<float?>("F1c1m")
+                        .HasColumnType("real");
 
-                    b.Property<int?>("F1c1p")
-                        .HasColumnType("int");
+                    b.Property<float?>("F1c1p")
+                        .HasColumnType("real");
 
-                    b.Property<int?>("F2c2m")
-                        .HasColumnType("int");
+                    b.Property<float?>("F2c2m")
+                        .HasColumnType("real");
 
-                    b.Property<int?>("F2c2p")
-                        .HasColumnType("int");
+                    b.Property<float?>("F2c2p")
+                        .HasColumnType("real");
 
-                    b.Property<int?>("F3c3m")
-                        .HasColumnType("int");
+                    b.Property<float?>("F3c3m")
+                        .HasColumnType("real");
 
-                    b.Property<int?>("F3c3p")
-                        .HasColumnType("int");
+                    b.Property<float?>("F3c3p")
+                        .HasColumnType("real");
 
                     b.Property<string>("Nom")
                         .IsRequired()
@@ -251,20 +261,20 @@ namespace WebAPI.Migrations
                     b.Property<int?>("c1m")
                         .HasColumnType("int");
 
-                    b.Property<int?>("c1p")
-                        .HasColumnType("int");
+                    b.Property<float?>("c1p")
+                        .HasColumnType("real");
 
-                    b.Property<int?>("c2m")
-                        .HasColumnType("int");
+                    b.Property<float?>("c2m")
+                        .HasColumnType("real");
 
-                    b.Property<int?>("c2p")
-                        .HasColumnType("int");
+                    b.Property<float?>("c2p")
+                        .HasColumnType("real");
 
-                    b.Property<int?>("c3m")
-                        .HasColumnType("int");
+                    b.Property<float?>("c3m")
+                        .HasColumnType("real");
 
-                    b.Property<int?>("c3p")
-                        .HasColumnType("int");
+                    b.Property<float?>("c3p")
+                        .HasColumnType("real");
 
                     b.HasKey("IdMagnetique");
 
@@ -537,11 +547,17 @@ namespace WebAPI.Migrations
 
             modelBuilder.Entity("WebAPI.Model.Bobinage", b =>
                 {
+                    b.HasOne("WebAPI.Model.ControleurDeQualité", "Controleur")
+                        .WithMany()
+                        .HasForeignKey("ControleurIdC");
+
                     b.HasOne("WebAPI.Model.Transformateur", "Transformateur")
                         .WithMany("Bobinages")
                         .HasForeignKey("Numero")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Controleur");
 
                     b.Navigation("Transformateur");
                 });
@@ -559,11 +575,17 @@ namespace WebAPI.Migrations
 
             modelBuilder.Entity("WebAPI.Model.Etape", b =>
                 {
+                    b.HasOne("WebAPI.Model.ControleurDeQualité", "Controleur")
+                        .WithMany("Etapes")
+                        .HasForeignKey("IdC");
+
                     b.HasOne("WebAPI.Model.Transformateur", "Transformateur")
                         .WithMany("Etapes")
                         .HasForeignKey("Numero")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Controleur");
 
                     b.Navigation("Transformateur");
                 });
@@ -609,6 +631,8 @@ namespace WebAPI.Migrations
 
             modelBuilder.Entity("WebAPI.Model.ControleurDeQualité", b =>
                 {
+                    b.Navigation("Etapes");
+
                     b.Navigation("Pvs");
                 });
 

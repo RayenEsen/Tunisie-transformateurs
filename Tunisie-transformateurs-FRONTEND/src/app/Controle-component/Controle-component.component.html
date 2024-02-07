@@ -98,7 +98,7 @@
                       <!-- content -->
                       <div class="ms-3">
                         <p class="mb-0 font-weight-medium">La phase {{etape.nom}} a été gérée conjointement par l'Opérateur :
-                          <select [(ngModel)]="etape.operateur1" [disabled]="isReadOnly" style="font-weight:500; color:#0f253c;">
+                          <select [(ngModel)]="etape.operateur1" [disabled]="isReadOnly" style="font-weight:500; color:#0f253c;" >
                             <option [value]="etape.operateur1 ? etape.operateur1 : ''">{{ etape.operateur1 ? etape.operateur1 : 'Operateur 1' }}</option>
                             <ng-container *ngFor="let username of users ">
                               <option *ngIf="username !== etape.operateur1 "   [value]="username">{{ username }}</option>

@@ -1,3 +1,4 @@
+import { ControleurDeQualite } from "./Controlleur-service.model";
 import { Transformateur } from "./Transformateur-service.model";
 
 export class Bobinage {

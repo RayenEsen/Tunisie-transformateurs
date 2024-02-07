@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace WebAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class FirstMigration : Migration
+    public partial class sfsdgsdfg : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -54,6 +54,8 @@ namespace WebAPI.Migrations
                     Couplage = table.Column<string>(type: "nvarchar(100)", nullable: false),
                     Cooling = table.Column<string>(type: "nvarchar(100)", nullable: false),
                     Libelle = table.Column<string>(type: "nvarchar(100)", nullable: false),
+                    Accessoires = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Bornesembrochables = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Frequency = table.Column<float>(type: "real", nullable: false)
                 },
                 constraints: table =>
@@ -68,17 +70,49 @@ namespace WebAPI.Migrations
                     IdBobinage = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Numero = table.Column<int>(type: "int", nullable: false),
-                    TypeBobinage = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Bt1 = table.Column<int>(type: "int", nullable: true),
-                    Bt2 = table.Column<int>(type: "int", nullable: true),
-                    Prevue = table.Column<int>(type: "int", nullable: true),
-                    nom = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Bt1 = table.Column<float>(type: "real", nullable: true),
+                    Bt2 = table.Column<float>(type: "real", nullable: true),
+                    Bt3 = table.Column<float>(type: "real", nullable: true),
+                    Prevue = table.Column<float>(type: "real", nullable: true),
+                    Cnc = table.Column<float>(type: "real", nullable: true),
+                    Nom = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ControleurIdC = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Bobinage", x => x.IdBobinage);
                     table.ForeignKey(
+                        name: "FK_Bobinage_controleurDeQualités_ControleurIdC",
+                        column: x => x.ControleurIdC,
+                        principalTable: "controleurDeQualités",
+                        principalColumn: "IdC");
+                    table.ForeignKey(
                         name: "FK_Bobinage_transformateurs_Numero",
+                        column: x => x.Numero,
+                        principalTable: "transformateurs",
+                        principalColumn: "Numero",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "bobinageMTs",
+                columns: table => new
+                {
+                    IdBobinageMT = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Numero = table.Column<int>(type: "int", nullable: false),
+                    Bt1 = table.Column<float>(type: "real", nullable: true),
+                    Bt2 = table.Column<float>(type: "real", nullable: true),
+                    Bt3 = table.Column<float>(type: "real", nullable: true),
+                    Prevue = table.Column<float>(type: "real", nullable: true),
+                    Cnc = table.Column<float>(type: "real", nullable: true),
+                    Nom = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_bobinageMTs", x => x.IdBobinageMT);
+                    table.ForeignKey(
+                        name: "FK_bobinageMTs_transformateurs_Numero",
                         column: x => x.Numero,
                         principalTable: "transformateurs",
                         principalColumn: "Numero",
@@ -93,6 +127,7 @@ namespace WebAPI.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     EtapeNumero = table.Column<int>(type: "int", nullable: false),
                     Numero = table.Column<int>(type: "int", nullable: false),
+                    IdC = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     Nom = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Operateur1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Operateur2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -103,7 +138,66 @@ namespace WebAPI.Migrations
                 {
                     table.PrimaryKey("PK_etapes", x => x.Id_Etape);
                     table.ForeignKey(
+                        name: "FK_etapes_controleurDeQualités_IdC",
+                        column: x => x.IdC,
+                        principalTable: "controleurDeQualités",
+                        principalColumn: "IdC");
+                    table.ForeignKey(
                         name: "FK_etapes_transformateurs_Numero",
+                        column: x => x.Numero,
+                        principalTable: "transformateurs",
+                        principalColumn: "Numero",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "magnetiques",
+                columns: table => new
+                {
+                    IdMagnetique = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Numero = table.Column<int>(type: "int", nullable: false),
+                    F1c1m = table.Column<float>(type: "real", nullable: true),
+                    F1c1p = table.Column<float>(type: "real", nullable: true),
+                    F2c2m = table.Column<float>(type: "real", nullable: true),
+                    F2c2p = table.Column<float>(type: "real", nullable: true),
+                    F3c3m = table.Column<float>(type: "real", nullable: true),
+                    F3c3p = table.Column<float>(type: "real", nullable: true),
+                    C4m = table.Column<float>(type: "real", nullable: true),
+                    C4p = table.Column<float>(type: "real", nullable: true),
+                    Nom = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_magnetiques", x => x.IdMagnetique);
+                    table.ForeignKey(
+                        name: "FK_magnetiques_transformateurs_Numero",
+                        column: x => x.Numero,
+                        principalTable: "transformateurs",
+                        principalColumn: "Numero",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "montages",
+                columns: table => new
+                {
+                    IdMagnetique = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Numero = table.Column<int>(type: "int", nullable: false),
+                    c1m = table.Column<int>(type: "int", nullable: true),
+                    c1p = table.Column<float>(type: "real", nullable: true),
+                    c2m = table.Column<float>(type: "real", nullable: true),
+                    c2p = table.Column<float>(type: "real", nullable: true),
+                    c3m = table.Column<float>(type: "real", nullable: true),
+                    c3p = table.Column<float>(type: "real", nullable: true),
+                    Nom = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_montages", x => x.IdMagnetique);
+                    table.ForeignKey(
+                        name: "FK_montages_transformateurs_Numero",
                         column: x => x.Numero,
                         principalTable: "transformateurs",
                         principalColumn: "Numero",
@@ -191,13 +285,38 @@ namespace WebAPI.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Bobinage_ControleurIdC",
+                table: "Bobinage",
+                column: "ControleurIdC");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Bobinage_Numero",
                 table: "Bobinage",
                 column: "Numero");
 
             migrationBuilder.CreateIndex(
+                name: "IX_bobinageMTs_Numero",
+                table: "bobinageMTs",
+                column: "Numero");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_etapes_IdC",
+                table: "etapes",
+                column: "IdC");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_etapes_Numero",
                 table: "etapes",
+                column: "Numero");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_magnetiques_Numero",
+                table: "magnetiques",
+                column: "Numero");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_montages_Numero",
+                table: "montages",
                 column: "Numero");
 
             migrationBuilder.CreateIndex(
@@ -219,7 +338,16 @@ namespace WebAPI.Migrations
                 name: "Bobinage");
 
             migrationBuilder.DropTable(
+                name: "bobinageMTs");
+
+            migrationBuilder.DropTable(
                 name: "etapes");
+
+            migrationBuilder.DropTable(
+                name: "magnetiques");
+
+            migrationBuilder.DropTable(
+                name: "montages");
 
             migrationBuilder.DropTable(
                 name: "pvs");

@@ -11,15 +11,19 @@ namespace WebAPI.Model
         public int IdBobinage { get; set; } // Auto-generated primary key
         [ForeignKey("Transformateur")]
         public int Numero { get; set; }
-        public int? Bt1 { get; set; }
-        public int? Bt2 { get; set; }
-        public int? Bt3 { get; set; }
 
-        public int? Prevue { get; set; }
-        public int? Cnc { get; set; }
+
+        public float? Bt1 { get; set; }
+        public float? Bt2 { get; set; }
+        public float? Bt3 { get; set; }
+
+        public float? Prevue { get; set; }
+        public float? Cnc { get; set; }
 
         public string Nom { get; set; } = "";
         [JsonIgnore]
         public Transformateur? Transformateur { get; set; }
+        [JsonIgnore]
+        public ControleurDeQualité? Controleur { get; set; }
     }
 }

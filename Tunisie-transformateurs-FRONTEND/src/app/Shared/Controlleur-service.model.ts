@@ -1,5 +1,6 @@
 import { Pv } from "./Pv-service.model";
 import { Etape } from "./Etape-servicemodel"; // Make sure to import Etape model
+import { Bobinage } from "./Bobinage-service.model";
 
 export class ControleurDeQualite {
   idC: string = '';
@@ -16,5 +17,6 @@ export class ControleurDeQualite {
   codePostal?: string = '';
   password: string = '';
   pvs?: Pv[] = [];
+  etapes?: Etape[] = [];
 
 }

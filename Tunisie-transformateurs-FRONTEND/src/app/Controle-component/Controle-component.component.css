@@ -244,17 +244,13 @@ body{padding-top:20px;
     opacity: 1;
   }
 }
-/* Add hover effect for the select element */
-select:hover {
-  cursor: pointer; /* Change cursor to pointer on hover */
-  border-color: #4570e7; /* Change border color on hover */
-}
+
+
 /* Add bottom border to select element */
 select {
   border-bottom: 1px solid #ccc; /* Add bottom border */
 }
 
-/* Set a maximum height and enable overflow scrolling for the select element */
 select {
   max-height: 100px; /* Adjust the maximum height as needed */
   overflow-y: auto; /* Enable vertical overflow scrolling */

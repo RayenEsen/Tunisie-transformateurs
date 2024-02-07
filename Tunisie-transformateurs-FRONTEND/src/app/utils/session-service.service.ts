@@ -10,15 +10,15 @@ export class SessionService {
 
   get Controleur(): ControleurDeQualite {
     const storedData = sessionStorage.getItem(this.SESSION_KEY);
-    return storedData ? JSON.parse(storedData) : { idC: '', email: '', password: '' };
+    return storedData ? JSON.parse(storedData) : null;
   }
 
   set Controleur(value: ControleurDeQualite) {
     sessionStorage.setItem(this.SESSION_KEY, JSON.stringify(value));
   }
 
-  sessionStart(idC: string, email: string, password: string) {
-    this.Controleur = { idC, email, password };
+  sessionStart(controleur: ControleurDeQualite) {
+    this.Controleur = controleur;
   }
 
   sessionDestroy() {
@@ -26,7 +26,6 @@ export class SessionService {
   }
 
   hasSession(): boolean {
-    // Check if the idC property is not an empty string
-    return this.Controleur.idC !== '';
+    return this.Controleur !== null;
   }
 }

@@ -3,8 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment.development';
 import { ControleurDeQualite } from './Controlleur-service.model';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-
+import { catchError, tap } from 'rxjs/operators';
+import { SessionService } from '../utils/session-service.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -14,7 +14,7 @@ export class ControlleurServiceService {
 url: string = environment.apiBaseUrl + '/ControleurDeQualité';
 
 
-constructor(private http: HttpClient) { }
+constructor(private http: HttpClient, private SessionC : SessionService) { }
 
 
 AddControleur(Controleur: ControleurDeQualite): Observable<any> {
@@ -34,9 +34,10 @@ getControleurById(id: string): Observable<any> {
   return this.http.get(urlWithParams);
 }
 
-UpdateControleurById(id: string,Controleur : ControleurDeQualite): Observable<any> {
+UpdateControleurById(id: string, Controleur: ControleurDeQualite): Observable<any> {
   const urlWithParams = `${this.url}/${id}`;
-  return this.http.put(urlWithParams,Controleur);
+  this.SessionC.Controleur=Controleur;
+  return this.http.put(urlWithParams, Controleur)
 }
 
 getUsersByRole(role: string): Observable<any[]> {

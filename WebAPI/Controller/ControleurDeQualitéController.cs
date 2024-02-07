@@ -40,7 +40,6 @@ namespace WebAPI.Controller
 
             return controleurDeQualité;
         }
-
         // PUT: api/ControleurDeQualité/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
@@ -51,10 +50,9 @@ namespace WebAPI.Controller
                 return BadRequest();
             }
 
-            _context.Entry(controleurDeQualité).State = EntityState.Modified;
-
             try
             {
+                _context.Entry(controleurDeQualité).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
@@ -71,6 +69,7 @@ namespace WebAPI.Controller
 
             return NoContent();
         }
+
 
         // POST: api/ControleurDeQualité
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754

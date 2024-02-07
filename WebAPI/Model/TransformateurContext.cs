@@ -63,6 +63,14 @@ namespace WebAPI.Model
             .WithMany(t => t.Montage)
             .HasForeignKey(b => b.Numero);
 
+            // Configure the relationship between ControleurDeQualité and Etape
+            modelBuilder.Entity<Etape>()
+                .HasOne(e => e.Controleur)
+                .WithMany(c => c.Etapes)
+                .HasForeignKey(e => e.IdC);
+
+
+
             base.OnModelCreating(modelBuilder);
         }
         public DbSet<WebAPI.Model.Bobinage> Bobinage { get; set; } = default!;

@@ -10,6 +10,8 @@ export class Etape {
   operateur2 : string  = "";
   dateDebut: Date | undefined;
   dateFin: Date | undefined;
+  idC?:string;
 
+  controleur?: ControleurDeQualite ;
   transformateur?: Transformateur
 }

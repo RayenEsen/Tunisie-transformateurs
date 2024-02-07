@@ -98,6 +98,28 @@
         </tbody>
       </table>
     </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Trucs connexes:</h3>
+      </div>
+      <table class="table table-bordered table-condensed" >
+        <tbody>
+          <tr>
+            <td class="text-left colfix">Operateur</td>
+            <td class="text-center colfix"><input type="text" [(ngModel)]="etapeSelected.operateur1"></td>
+            <td class="text-center colfix"><input type="text" [(ngModel)]="etapeSelected.operateur2"></td>
+          </tr>
+          <tr>
+            <td class="text-left colfix">Controleur</td>
+            <td colspan="2" class="text-center colfix"><input type="text" value="{{etapeSelected.controleur?.username}}" readonly ></td>
+          </tr>
+          <tr>
+            <td class="text-left colfix">Verificateur</td>
+            <td colspan="2" class="text-center colfix"><input type="number" ></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
   </div>
   <div class="invoice-footer">
