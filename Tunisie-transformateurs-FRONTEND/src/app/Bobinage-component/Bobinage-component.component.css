@@ -213,3 +213,6 @@ img:hover {
   size: auto;
   margin: 0;
        }
+       .text-light {
+        color: #920303 !important;
+    }
