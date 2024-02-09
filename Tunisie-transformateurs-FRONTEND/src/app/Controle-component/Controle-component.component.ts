@@ -30,7 +30,8 @@ export class ControleComponentComponent implements OnInit {
   bobinagesMT: BobinageMT[] = []; // Array to store fetched Etapes
   Magnetiques: Magnetique[] = []; // Array to store fetched Etapes
   Montages: Montage[] = []; // Array to store fetched Etapes
-  users: any[] = [];
+  users: ControleurDeQualite[] = [];
+
 
   constructor(
     private route: ActivatedRoute,
@@ -141,7 +142,6 @@ export class ControleComponentComponent implements OnInit {
 
   updateEtapeDateFin(etapeNumero: number) {
     const selectedEtape = this.etapes.find(et => et.etapeNumero === etapeNumero);
-
     if (selectedEtape) {
         selectedEtape.dateFin = new Date();
 
@@ -166,8 +166,8 @@ export class ControleComponentComponent implements OnInit {
     this.isReadOnly = !this.isReadOnly;
 
     if (!this.isReadOnly) {
-      this.userService.getUsersByRole('Operateur').subscribe((usernames: string[]) => {
-        this.users = usernames;
+      this.userService.getUsersByRole('Operateur').subscribe((user: ControleurDeQualite[]) => {
+        this.users = user ;
         console.log(this.users)
       });
     } else {
@@ -179,7 +179,6 @@ export class ControleComponentComponent implements OnInit {
 
   updateEtape(etapeNumero: number) {
     const selectedEtape = this.etapes.find(et => et.etapeNumero === etapeNumero);
-    selectedEtape!.dateDebut = new Date();
     if (selectedEtape) {
       console.log(selectedEtape)
           this.serviceE.UpdateEtape(this.transformateurId, etapeNumero, selectedEtape)

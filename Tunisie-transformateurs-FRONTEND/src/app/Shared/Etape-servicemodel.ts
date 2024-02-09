@@ -6,12 +6,10 @@ export class Etape {
   etapeNumero: number = 0;
   numero : number = 0;
   nom : string = '';
-  operateur1 : string  = "";
-  operateur2 : string  = "";
+
   dateDebut: Date | undefined;
   dateFin: Date | undefined;
-  idC?:string;
 
-  controleur?: ControleurDeQualite ;
-  transformateur?: Transformateur
+  controleurs: ControleurDeQualite[] = [];
+  transformateur?: Transformateur;
 }

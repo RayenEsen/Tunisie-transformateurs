@@ -63,13 +63,10 @@ namespace WebAPI.Model
             .WithMany(t => t.Montage)
             .HasForeignKey(b => b.Numero);
 
-            // Configure the relationship between ControleurDeQualité and Etape
-            modelBuilder.Entity<Etape>()
-                .HasOne(e => e.Controleur)
-                .WithMany(c => c.Etapes)
-                .HasForeignKey(e => e.IdC);
-
-
+            // Configure the many-to-many relationship between ControleurDeQualité and Etape
+            modelBuilder.Entity<ControleurDeQualité>()
+                .HasMany(c => c.Etapes)
+                .WithMany(e => e.Controleurs);
 
             base.OnModelCreating(modelBuilder);
         }

@@ -18,5 +18,4 @@ export class ControleurDeQualite {
   password: string = '';
   pvs?: Pv[] = [];
   etapes?: Etape[] = [];
-
 }

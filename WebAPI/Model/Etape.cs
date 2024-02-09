@@ -13,17 +13,16 @@ namespace WebAPI.Model
 
         [ForeignKey("Transformateur")]
         public int Numero { get; set; }
-        [ForeignKey("Controleur")]
-        public string? IdC { get; set; } // Foreign key to ControleurDeQualité
+
         public string Nom { get; set; } = "";
-        public string? Operateur1 { get; set; } = "";
-        public string? Operateur2 { get; set; } = "";
+
         public DateTime? DateDebut { get; set; }
         public DateTime? DateFin { get; set; }
 
         [JsonIgnore]
         public Transformateur? Transformateur { get; set; }
-        public ControleurDeQualité? Controleur { get; set; }
+
+        public ICollection<ControleurDeQualité> Controleurs { get; set; } = new List<ControleurDeQualité>();
 
     }
 }

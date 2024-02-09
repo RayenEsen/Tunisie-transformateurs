@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace WebAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class sfsdgsdfg : Migration
+    public partial class fckkkinbbullshit : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -127,21 +127,13 @@ namespace WebAPI.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     EtapeNumero = table.Column<int>(type: "int", nullable: false),
                     Numero = table.Column<int>(type: "int", nullable: false),
-                    IdC = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     Nom = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Operateur1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Operateur2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DateDebut = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DateFin = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_etapes", x => x.Id_Etape);
-                    table.ForeignKey(
-                        name: "FK_etapes_controleurDeQualités_IdC",
-                        column: x => x.IdC,
-                        principalTable: "controleurDeQualités",
-                        principalColumn: "IdC");
                     table.ForeignKey(
                         name: "FK_etapes_transformateurs_Numero",
                         column: x => x.Numero,
@@ -284,6 +276,30 @@ namespace WebAPI.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "ControleurDeQualitéEtape",
+                columns: table => new
+                {
+                    ControleursIdC = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    EtapesId_Etape = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ControleurDeQualitéEtape", x => new { x.ControleursIdC, x.EtapesId_Etape });
+                    table.ForeignKey(
+                        name: "FK_ControleurDeQualitéEtape_controleurDeQualités_ControleursIdC",
+                        column: x => x.ControleursIdC,
+                        principalTable: "controleurDeQualités",
+                        principalColumn: "IdC",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ControleurDeQualitéEtape_etapes_EtapesId_Etape",
+                        column: x => x.EtapesId_Etape,
+                        principalTable: "etapes",
+                        principalColumn: "Id_Etape",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Bobinage_ControleurIdC",
                 table: "Bobinage",
@@ -300,9 +316,9 @@ namespace WebAPI.Migrations
                 column: "Numero");
 
             migrationBuilder.CreateIndex(
-                name: "IX_etapes_IdC",
-                table: "etapes",
-                column: "IdC");
+                name: "IX_ControleurDeQualitéEtape_EtapesId_Etape",
+                table: "ControleurDeQualitéEtape",
+                column: "EtapesId_Etape");
 
             migrationBuilder.CreateIndex(
                 name: "IX_etapes_Numero",
@@ -341,7 +357,7 @@ namespace WebAPI.Migrations
                 name: "bobinageMTs");
 
             migrationBuilder.DropTable(
-                name: "etapes");
+                name: "ControleurDeQualitéEtape");
 
             migrationBuilder.DropTable(
                 name: "magnetiques");
@@ -351,6 +367,9 @@ namespace WebAPI.Migrations
 
             migrationBuilder.DropTable(
                 name: "pvs");
+
+            migrationBuilder.DropTable(
+                name: "etapes");
 
             migrationBuilder.DropTable(
                 name: "controleurDeQualités");

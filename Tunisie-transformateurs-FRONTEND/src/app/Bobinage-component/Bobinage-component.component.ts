@@ -55,10 +55,22 @@ export class BobinageComponentComponent implements OnInit {
         console.error('Error updating bobinages:', error);
       }
     );
-
     if (this.ServiceS.Controleur.designation === "Controleur") {
+      this.etapeSelected.controleurs[2]=this.ServiceS.Controleur;
+      console.log(this.etapeSelected)
       // Update etapeSelected.idC with the value from the session's Controleur Id
-      this.etapeSelected.idC = this.ServiceS.Controleur.idC;
+      this.ServiceE.UpdateEtape(this.transformateurId, this.etapenumero, this.etapeSelected).subscribe(
+        () => {
+          console.log(this.etapeSelected);
+        },
+        error => {
+          console.error('Error updating bobinages:', error);
+        }
+      );
+    }
+    else
+    {
+      this.etapeSelected.controleurs[3]=this.ServiceS.Controleur;
       this.ServiceE.UpdateEtape(this.transformateurId, this.etapenumero, this.etapeSelected).subscribe(
         () => {
           console.log(this.etapeSelected);

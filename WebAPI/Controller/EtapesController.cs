@@ -87,12 +87,14 @@ namespace WebAPI.Controller
         public async Task<ActionResult<IEnumerable<Etape>>> GetEtapesByTransformateurId(int transformateurId)
         {
             var etapes = await _context.etapes
+                .Include(e => e.Controleurs) // Include the related Controleur entities
                 .Where(e => e.Numero == transformateurId)
                 .OrderBy(e => e.EtapeNumero) // Order by the 'etapeNumero' property
                 .ToListAsync();
 
             return etapes;
         }
+
 
 
         // DELETE: api/Etapes/5
@@ -110,11 +112,11 @@ namespace WebAPI.Controller
 
             return NoContent();
         }
-
         [HttpPut("UpdateByNumeroAndTransformateur/{numero}/{transformateurId}")]
-        public async Task<IActionResult> UpdateEtapeByNumeroAndTransformateur(int numero, int transformateurId, Etape updatedEtape)
+        public async Task<IActionResult> UpdateControleursByNumeroAndTransformateur(int numero, int transformateurId, Etape updatedEtape)
         {
             var etape = await _context.etapes
+                .Include(e => e.Controleurs) // Include the Controleurs related to the Etape
                 .Where(e => e.Numero == transformateurId && e.EtapeNumero == numero)
                 .FirstOrDefaultAsync();
 
@@ -122,16 +124,22 @@ namespace WebAPI.Controller
             {
                 return NotFound("Etape not found");
             }
+            etape.DateDebut = DateTime.Now;
 
-            // Update the properties of the existing etape with the new values
-            etape.Nom = updatedEtape.Nom;
-            etape.Operateur1 = updatedEtape.Operateur1;
-            etape.Operateur2 = updatedEtape.Operateur2;
-            etape.DateDebut = updatedEtape.DateDebut;
-            etape.DateFin = updatedEtape.DateFin;
+            // Clear existing Controleurs
+            etape.Controleurs.Clear();
 
-            // Update IdC property
-            etape.IdC = updatedEtape.IdC;
+            // Add new Controleurs
+            foreach (var controleur in updatedEtape.Controleurs)
+            {
+                // Find the corresponding ControleurDeQualité object from the database
+                var existingControleur = await _context.controleurDeQualités.FindAsync(controleur.IdC);
+                if (existingControleur != null)
+                {
+                    // Add the ControleurDeQualité to the Etape's Controleurs collection
+                    etape.Controleurs.Add(existingControleur);
+                }
+            }
 
             try
             {
@@ -152,11 +160,13 @@ namespace WebAPI.Controller
         }
 
 
+
+
         [HttpGet("ByNumeroAndTransformateur/{numero}/{transformateurId}")]
         public async Task<ActionResult<Etape>> GetEtapeByNumeroAndTransformateur(int numero, int transformateurId)
         {
             var etape = await _context.etapes
-                .Include(e => e.Controleur) // Include the ControleurDeQualité navigation property
+                .Include(e => e.Controleurs) // Include the controleur data in the query
                 .Where(e => e.Numero == transformateurId && e.EtapeNumero == numero)
                 .FirstOrDefaultAsync();
 
@@ -167,6 +177,7 @@ namespace WebAPI.Controller
 
             return etape;
         }
+
 
 
 

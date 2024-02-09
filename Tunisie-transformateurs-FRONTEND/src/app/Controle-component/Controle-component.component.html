@@ -19,22 +19,22 @@
               <div class="avatar-xxl   me-2
                 position-relative d-flex justify-content-end
                 align-items-end mt-n10">
-                <img *ngIf="Service.list[0].type==='Triphasés' " src="assets/mono.png" class="avatar-xxl
+                <img *ngIf="Service.list[0]?.type==='Triphasés' " src="assets/mono.png" class="avatar-xxl
                 rounded-circle border border-2 " alt="Image" style="margin-bottom: -16px;">
-                <img *ngIf="Service.list[0].type==='Monophasés' " src="assets/triphaser.png" class="avatar-xxl
+                <img *ngIf="Service.list[0]?.type==='Monophasés' " src="assets/triphaser.png" class="avatar-xxl
                 rounded-circle border border-2 "  alt="Image" style="margin-bottom: -16px;" >
-                <img *ngIf="Service.list[0].type==='Résine' " src="assets/resine.png" class="avatar-xxl
+                <img *ngIf="Service.list[0]?.type==='Résine' " src="assets/resine.png" class="avatar-xxl
                 rounded-circle border border-2 " alt="Image" style="margin-bottom: -16px;">
 
 
               </div>
               <!-- content -->
               <div class="lh-1" style="padding-top: 35px;">
-                <h2 class="mb-0">{{Service.list[0].marque}}
+                <h2 class="mb-0">{{Service.list[0]?.marque}}
                   <a href="#!" class="text-decoration-none">
                   </a>
                 </h2>
-                <p class="mb-0 d-block">{{Service.list[0].numero}}</p>
+                <p class="mb-0 d-block">{{Service.list[0]?.numero}}</p>
               </div>
             </div>
             <div>
@@ -46,7 +46,7 @@
           <!-- nav -->
           <ul class="nav nav-lt-tab px-4" id="pills-tab" role="tablist">
             <li class="nav-item">
-              <a class="nav-link active" href="#">{{Service.list[0].type}}</a>
+              <a class="nav-link active" href="#">{{Service.list[0]?.type}}</a>
             </li>
           </ul>
         </div>
@@ -95,27 +95,24 @@
                         <span style="display: inline-block; border-radius: 50%;">{{etape.etapeNumero}}</span>
                       </div>
 
-                      <!-- content -->
                       <div class="ms-3">
-                        <p class="mb-0 font-weight-medium">La phase {{etape.nom}} a été gérée conjointement par l'Opérateur :
-                          <select [(ngModel)]="etape.operateur1" [disabled]="isReadOnly" style="font-weight:500; color:#0f253c;" >
-                            <option [value]="etape.operateur1 ? etape.operateur1 : ''">{{ etape.operateur1 ? etape.operateur1 : 'Operateur 1' }}</option>
-                            <ng-container *ngFor="let username of users ">
-                              <option *ngIf="username !== etape.operateur1 "   [value]="username">{{ username }}</option>
-                            </ng-container>
-                          </select>
+                        <p class="mb-0 font-weight-medium">La phase {{ etape.nom }} a été gérée conjointement par l'Opérateur :
+                            <select [(ngModel)]="etape.controleurs[0]" [disabled]="isReadOnly" style="font-weight:500; color:#0f253c;">
+                                <option *ngIf="etape.controleurs.length > 0" [ngValue]="etape.controleurs[0]" disabled  selected  >{{ etape.controleurs[0]?.username }}</option>
+                                <option *ngIf="etape.controleurs.length <= 0" value="" disabled selected>Operateur 1</option>
+                                <option *ngFor="let user of users" [ngValue]="user">{{ user.username }}</option>
+                            </select>
+                            et l'Opérateur :
+                            <select [(ngModel)]="etape.controleurs[1]" [disabled]="isReadOnly" style="font-weight:500; color:#0f253c;">
+                                <option *ngIf="etape.controleurs.length > 1" [ngValue]="etape.controleurs[1]" disabled selected>{{ etape.controleurs[1]?.username }}</option>
+                                <option *ngIf="etape.controleurs.length <= 1" value="" disabled selected>Operateur 1</option>
+                                <option *ngFor="let user of users" [ngValue]="user" >{{ user.username }}</option>
+                            </select>
+                            <br> débutant le {{ etape.dateDebut | date:'dd/MM/yyyy HH:mm' }} et se terminant le {{ etape.dateFin | date:'dd/MM/yyyy HH:mm' }}.
+                        </p>
+                    </div>
 
-                          et l'Opérateur :
-                          <select [(ngModel)]="etape.operateur2" [disabled]="isReadOnly" style="font-weight:500; color:#0f253c;">
-                            <option [value]="etape.operateur2 ? etape.operateur2 : ''">{{ etape.operateur2 ? etape.operateur2 : 'Operateur 2' }}</option>
-                            <ng-container *ngFor="let username of users">
-                              <option *ngIf="username !== etape.operateur2" [value]="username">{{ username }}</option>
-                            </ng-container>
-                          </select>
 
-
-                           <br> débutant le {{etape.dateDebut | date:'dd/MM/yyyy HH:mm'}} et se terminant le {{etape.dateFin | date:'dd/MM/yyyy HH:mm'}}.</p>
-                      </div>
                     </div>
                     <div>
                       <!-- dropdown -->

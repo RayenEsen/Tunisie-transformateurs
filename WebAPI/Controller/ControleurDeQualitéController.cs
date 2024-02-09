@@ -122,20 +122,20 @@ namespace WebAPI.Controller
         }
 
         [HttpGet("ByDesignation/{designation}")]
-        public async Task<ActionResult<IEnumerable<string>>> GetControleurNamesByDesignation(string designation)
+        public async Task<ActionResult<IEnumerable<ControleurDeQualité>>> GetControleursByDesignation(string designation)
         {
-            var controleurNames = await _context.controleurDeQualités
+            var controleurs = await _context.controleurDeQualités
                                             .Where(c => c.Designation == designation)
-                                            .Select(c => c.Username) // Assuming the name property is called "Name"
                                             .ToListAsync();
 
-            if (controleurNames == null || !controleurNames.Any())
+            if (controleurs == null || !controleurs.Any())
             {
                 return NotFound();
             }
 
-            return controleurNames;
+            return controleurs;
         }
+
 
         private bool ControleurDeQualitéExists(string id)
         {

@@ -22,6 +22,21 @@ namespace WebAPI.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("ControleurDeQualitéEtape", b =>
+                {
+                    b.Property<string>("ControleursIdC")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("EtapesId_Etape")
+                        .HasColumnType("int");
+
+                    b.HasKey("ControleursIdC", "EtapesId_Etape");
+
+                    b.HasIndex("EtapesId_Etape");
+
+                    b.ToTable("ControleurDeQualitéEtape");
+                });
+
             modelBuilder.Entity("WebAPI.Model.Bobinage", b =>
                 {
                     b.Property<int>("IdBobinage")
@@ -169,9 +184,6 @@ namespace WebAPI.Migrations
                     b.Property<int>("EtapeNumero")
                         .HasColumnType("int");
 
-                    b.Property<string>("IdC")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("Nom")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -179,15 +191,7 @@ namespace WebAPI.Migrations
                     b.Property<int>("Numero")
                         .HasColumnType("int");
 
-                    b.Property<string>("Operateur1")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Operateur2")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id_Etape");
-
-                    b.HasIndex("IdC");
 
                     b.HasIndex("Numero");
 
@@ -542,6 +546,21 @@ namespace WebAPI.Migrations
                     b.ToTable("transformateurs");
                 });
 
+            modelBuilder.Entity("ControleurDeQualitéEtape", b =>
+                {
+                    b.HasOne("WebAPI.Model.ControleurDeQualité", null)
+                        .WithMany()
+                        .HasForeignKey("ControleursIdC")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebAPI.Model.Etape", null)
+                        .WithMany()
+                        .HasForeignKey("EtapesId_Etape")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("WebAPI.Model.Bobinage", b =>
                 {
                     b.HasOne("WebAPI.Model.ControleurDeQualité", "Controleur")
@@ -572,17 +591,11 @@ namespace WebAPI.Migrations
 
             modelBuilder.Entity("WebAPI.Model.Etape", b =>
                 {
-                    b.HasOne("WebAPI.Model.ControleurDeQualité", "Controleur")
-                        .WithMany("Etapes")
-                        .HasForeignKey("IdC");
-
                     b.HasOne("WebAPI.Model.Transformateur", "Transformateur")
                         .WithMany("Etapes")
                         .HasForeignKey("Numero")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Controleur");
 
                     b.Navigation("Transformateur");
                 });
@@ -628,8 +641,6 @@ namespace WebAPI.Migrations
 
             modelBuilder.Entity("WebAPI.Model.ControleurDeQualité", b =>
                 {
-                    b.Navigation("Etapes");
-
                     b.Navigation("Pvs");
                 });
 
