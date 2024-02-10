@@ -273,7 +273,8 @@ export class AddComponentComponent implements OnInit {
                 dateDebut: undefined,
                 dateFin: undefined,
                 nom: etapeNames[i] || '',
-                controleurs: [] = []
+                controleurs: [] = [],
+
               };
               etapeObservables.push(this.serviceE.AddEtape(etapeAjouter));
             }

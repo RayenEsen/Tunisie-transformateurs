@@ -48,39 +48,30 @@ export class BobinageComponentComponent implements OnInit {
   Update() {
     // Call the service method to update bobinages
     this.ServiceB.UpdateListBobinage(this.bobinages).subscribe(
-      () => {
-        console.log('Bobinages updated successfully');
-      },
-      error => {
-        console.error('Error updating bobinages:', error);
-      }
+        () => {
+            console.log('Bobinages updated successfully');
+            // Check if the session's Controleur is present
+            if (this.ServiceS.Controleur) {
+                // Determine the index position to insert the Controleur object based on its designation
+                let controleurIndex = this.ServiceS.Controleur.designation === "Controleur" ? 2 : 3;
+                // Insert the Controleur object into the controleurs array at the determined index position
+                this.etapeSelected.controleurs.splice(controleurIndex, 0, this.ServiceS.Controleur);
+                // Update etapeSelected with the modified controleurs array
+                this.ServiceE.UpdateEtape(this.transformateurId, this.etapenumero, this.etapeSelected).subscribe(
+                    () => {
+                        console.log('Etape updated successfully:', this.etapeSelected);
+                    },
+                    error => {
+                        console.error('Error updating Etape:', error);
+                    }
+                );
+            }
+        },
+        error => {
+            console.error('Error updating bobinages:', error);
+        }
     );
-    if (this.ServiceS.Controleur.designation === "Controleur") {
-      this.etapeSelected.controleurs[2]=this.ServiceS.Controleur;
-      console.log(this.etapeSelected)
-      // Update etapeSelected.idC with the value from the session's Controleur Id
-      this.ServiceE.UpdateEtape(this.transformateurId, this.etapenumero, this.etapeSelected).subscribe(
-        () => {
-          console.log(this.etapeSelected);
-        },
-        error => {
-          console.error('Error updating bobinages:', error);
-        }
-      );
-    }
-    else
-    {
-      this.etapeSelected.controleurs[3]=this.ServiceS.Controleur;
-      this.ServiceE.UpdateEtape(this.transformateurId, this.etapenumero, this.etapeSelected).subscribe(
-        () => {
-          console.log(this.etapeSelected);
-        },
-        error => {
-          console.error('Error updating bobinages:', error);
-        }
-      );
-    }
-  }
+}
 
 
     // Function to handle the print action

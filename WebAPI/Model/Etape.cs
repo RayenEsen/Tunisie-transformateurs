@@ -21,6 +21,8 @@ namespace WebAPI.Model
 
         [JsonIgnore]
         public Transformateur? Transformateur { get; set; }
+        public string? Etat { get; set; } = "";
+        public string? Observation { get; set; } = "";
 
         public ICollection<ControleurDeQualité> Controleurs { get; set; } = new List<ControleurDeQualité>();
 

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebAPI.Model;
 
@@ -11,9 +12,11 @@ using WebAPI.Model;
 namespace WebAPI.Migrations
 {
     [DbContext(typeof(TransformateurContext))]
-    partial class TransformateurContextModelSnapshot : ModelSnapshot
+    [Migration("20240209191643_qsfghsdfghhahahaha")]
+    partial class qsfghsdfghhahahaha
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -185,6 +188,7 @@ namespace WebAPI.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Etat")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nom")
@@ -195,6 +199,7 @@ namespace WebAPI.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Observation")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id_Etape");

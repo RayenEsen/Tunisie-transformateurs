@@ -127,9 +127,9 @@ body {
   transform: scale(1.05) translate(2px, -2px); /* Slight scaling up and movement on hover */
   filter: brightness(1.2); /* Slight increase in brightness on hover */
 }
-/* Styling for the input fields */
-input[type="number"] {
-  width: 95px;
+/* Styling for input fields */
+input {
+  width: 100%; /* Make the input fields fill the width of their parent */
   padding: 5px;
   border: 1px solid #ccc;
   border-radius: 3px;
@@ -143,30 +143,30 @@ input[type="number"]::-webkit-outer-spin-button {
   margin: 0;
 }
 
-
-
 /* Hover effect on input fields */
-input[type="number"]:hover {
+input:hover {
   border-color: #555;
 }
 
 /* Focus effect on input fields */
-input[type="number"]:focus {
+input:focus {
   outline: none;
   border-color: #2196F3;
   box-shadow: 0 0 5px rgba(33, 150, 243, 0.5);
 }
 
 /* Animation for input fields */
-input[type="number"] {
+input {
   transform: scale(1);
   transition: transform 0.3s ease-in-out;
 }
 
 /* Scale up effect on hover for input fields */
-input[type="number"]:hover {
+input:hover {
   transform: scale(1.05);
 }
+
+
 
 /* Hover effect on images */
 img:hover {
@@ -185,7 +185,7 @@ img:hover {
 }
 /* Styles for input fields in print media */
 @media print {
-  input[type="number"] {
+  input[type="text"] {
     border: none;
     padding: 0;
     background: none;
@@ -213,3 +213,6 @@ img:hover {
   size: auto;
   margin: 0;
        }
+       .text-light {
+        color: #920303 !important;
+    }

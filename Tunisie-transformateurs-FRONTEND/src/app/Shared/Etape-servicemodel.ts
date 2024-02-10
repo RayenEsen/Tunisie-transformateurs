@@ -9,7 +9,8 @@ export class Etape {
 
   dateDebut: Date | undefined;
   dateFin: Date | undefined;
-
+  etat?: string = "";
+  observation?: string = "";
   controleurs: ControleurDeQualite[] = [];
   transformateur?: Transformateur;
 }

@@ -61,7 +61,31 @@
 </div>
 </div>
   <div class="invoice-body">
-
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Supplémentaires:</h3>
+      </div>
+      <table class="table table-bordered table-condensed" >
+          <tbody>
+            <tr>
+              <td class="text-center colfix">Borne</td>
+              <td class="text-center colfix">Isolateur</td>
+              <td class="text-center colfix">Relais</td>
+              <td class="text-center colfix">Reservoir</td>
+              <td class="text-center colfix">5 POS</td>
+              <td class="text-center colfix">3 POS</td>
+            </tr>
+            <tr>
+              <td class="text-center colfix"><span class="fa fa-check text-primary"></span></td>
+              <td class="text-center colfix"><span class="fa fa-check text-primary"></span></td>
+              <td class="text-center colfix"><span class="fa fa-check text-primary"></span></td>
+              <td class="text-center colfix"><span class="fa fa-times text-light"></span></td>
+              <td class="text-center colfix"><span class="fa fa-check text-primary"></span></td>
+              <td class="text-center colfix"><span class="fa fa-check text-primary"></span></td>
+            </tr>
+          </tbody>
+      </table>
+    </div>
     <div class="row" style="display: contents;">
       <div>
 
@@ -103,7 +127,33 @@
       </table>
 
     </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Trucs connexes:</h3>
+      </div>
+      <table class="table table-bordered table-condensed" >
+        <tbody>
+          <tr>
+            <td class="text-left colfix">Operateur</td>
+            <td class="text-left colfix" style="padding-left: 10px;">{{etapeSelected.controleurs[0]?.username}}</td>
+            <td class="text-left colfix">{{etapeSelected.controleurs[1]?.username}}</td>
+          </tr>
+          <tr>
+            <td class="text-left colfix">Controleur</td>
+            <td colspan="2" class="text-left colfix" style="padding-left: 10px;">{{etapeSelected.controleurs[2]?.username}}</td>
 
+          </tr>
+          <tr>
+            <td class="text-left colfix">Verificateur</td>
+            <td colspan="2" class="text-left colfix" style="padding-left: 10px;">{{etapeSelected.controleurs[3]?.username}}</td>
+          </tr>
+          <tr>
+            <td class="text-left colfix">Etat</td>
+            <td colspan="2" class="text-left colfix" style="padding-left: 10px;"><input type="" [(ngModel)]="etapeSelected.etat"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
   <div class="invoice-footer">
 

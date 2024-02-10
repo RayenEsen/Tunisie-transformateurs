@@ -125,6 +125,8 @@ namespace WebAPI.Controller
                 return NotFound("Etape not found");
             }
             etape.DateDebut = DateTime.Now;
+            etape.Etat = updatedEtape.Etat;
+            etape.Observation = updatedEtape.Observation;
 
             // Clear existing Controleurs
             etape.Controleurs.Clear();

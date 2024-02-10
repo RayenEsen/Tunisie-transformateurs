@@ -56,88 +56,106 @@ export class ControleComponentComponent implements OnInit {
           etapes => {
             console.log(etapes);
             this.etapes = etapes; // Store fetched Etapes in the array
+
+            // Move the code dependent on this.etapes inside this subscription callback
+            this.fetchAndUpdateBobinages();
+            this.fetchAndUpdateBobinagesMT();
+            this.fetchAndUpdateMagnetiques();
+            this.fetchAndUpdateMontages();
           },
           error => {
             console.error('Error loading Etapes', error);
           }
         );
     });
-    this.ServiceBT.getBobinageByTransformateurId(this.transformateurId)
-    .subscribe(
-       bobinages => {
-        console.log(bobinages);
-        if (bobinages.every(b => b.bt1 !== null) && this.etapes[0].dateFin===null) {
-          this.updateEtapeDateFin(1);
-        }
-        if (bobinages.every(b => b.bt2 !== null)&& this.etapes[1].dateFin===null) {
-          this.updateEtapeDateFin(2);
-        }
-        if (bobinages.every(b => b.bt3 !== null)&& this.etapes[2].dateFin===null) {
-          this.updateEtapeDateFin(3);
-        }
-      }
-    )
-    this.ServiceMT.getBobinageByTransformateurId(this.transformateurId)
-    .subscribe(
-       bobinagesMT => {
-        console.log(BobinageMT);
-        if (bobinagesMT.every(b => b.bt1 !== null) && this.etapes[3].dateFin===null) {
-          this.updateEtapeDateFin(4);
-        }
-        if (bobinagesMT.every(b => b.bt2 !== null) && this.etapes[4].dateFin===null) {
-          this.updateEtapeDateFin(5);
-        }
-        if (bobinagesMT.every(b => b.bt3 !== null) && this.etapes[5].dateFin===null) {
-          this.updateEtapeDateFin(6);
-        }
-      }
-    )
-    this.ServiceMag.getMagnetiqueByTransformateurId(this.transformateurId)
-    .subscribe(
-      Magnetiques => {
-        console.log(Magnetiques);
-
-        const allConditionsMet = Magnetiques.every(item =>
-          item.f1c1m !== null &&
-          item.f1c1p !== null &&
-          item.f2c2m !== null &&
-          item.f2c2p !== null &&
-          item.f3c3m !== null &&
-          item.f3c3p !== null
-        );
-
-        if (allConditionsMet && this.etapes[6].dateFin === null && this.etapes[7].dateFin === null) {
-          this.updateEtapeDateFin(7);
-          this.updateEtapeDateFin(8);
-        }
-      }
-    );
-
-    this.ServiceMon.getMontageByTransformateurId(this.transformateurId)
-    .subscribe(
-      Montages => {
-        console.log(Montages);
-
-        const allConditionsMet = Montages.every(item =>
-          item.c1m !== null &&
-          item.c1p !== null &&
-          item.c2m !== null &&
-          item.c2p !== null &&
-          item.c3m !== null &&
-          item.c3p !== null
-        );
-
-        if (allConditionsMet && this.etapes[8].dateFin === null && this.etapes[9].dateFin === null && allConditionsMet && this.etapes[10].dateFin === null && allConditionsMet && this.etapes[11].dateFin === null) {
-          this.updateEtapeDateFin(9);
-          this.updateEtapeDateFin(10);
-          this.updateEtapeDateFin(11);
-          this.updateEtapeDateFin(12);
-
-        }
-      }
-    );
-
   }
+
+  fetchAndUpdateBobinages() {
+    this.ServiceBT.getBobinageByTransformateurId(this.transformateurId)
+      .subscribe(
+        bobinages => {
+          console.log(bobinages);
+          // Check if this.etapes[0] is defined before accessing its properties
+          if (bobinages.every(b => b.bt1 !== null) && this.etapes[0] && this.etapes[0].dateFin === null) {
+            this.updateEtapeDateFin(1);
+          }
+          if (bobinages.every(b => b.bt2 !== null) && this.etapes[1] && this.etapes[1].dateFin === null) {
+            this.updateEtapeDateFin(2);
+          }
+          if (bobinages.every(b => b.bt3 !== null) && this.etapes[2] && this.etapes[2].dateFin === null) {
+            this.updateEtapeDateFin(3);
+          }
+        }
+      );
+  }
+
+  fetchAndUpdateBobinagesMT() {
+    this.ServiceMT.getBobinageByTransformateurId(this.transformateurId)
+      .subscribe(
+        bobinagesMT => {
+          console.log(bobinagesMT);
+          // Check if this.etapes[3] is defined before accessing its properties
+          if (bobinagesMT.every(b => b.bt1 !== null) && this.etapes[3] && this.etapes[3].dateFin === null) {
+            this.updateEtapeDateFin(4);
+          }
+          if (bobinagesMT.every(b => b.bt2 !== null) && this.etapes[4] && this.etapes[4].dateFin === null) {
+            this.updateEtapeDateFin(5);
+          }
+          if (bobinagesMT.every(b => b.bt3 !== null) && this.etapes[5] && this.etapes[5].dateFin === null) {
+            this.updateEtapeDateFin(6);
+          }
+        }
+      );
+  }
+
+  fetchAndUpdateMagnetiques() {
+    this.ServiceMag.getMagnetiqueByTransformateurId(this.transformateurId)
+      .subscribe(
+        Magnetiques => {
+          console.log(Magnetiques);
+
+          const allConditionsMet = Magnetiques.every(item =>
+            item.f1c1m !== null &&
+            item.f1c1p !== null &&
+            item.f2c2m !== null &&
+            item.f2c2p !== null &&
+            item.f3c3m !== null &&
+            item.f3c3p !== null
+          );
+
+          if (allConditionsMet && this.etapes[6] && this.etapes[6].dateFin === null && this.etapes[7] && this.etapes[7].dateFin === null) {
+            this.updateEtapeDateFin(7);
+            this.updateEtapeDateFin(8);
+          }
+        }
+      );
+  }
+
+  fetchAndUpdateMontages() {
+    this.ServiceMon.getMontageByTransformateurId(this.transformateurId)
+      .subscribe(
+        Montages => {
+          console.log(Montages);
+
+          const allConditionsMet = Montages.every(item =>
+            item.c1m !== null &&
+            item.c1p !== null &&
+            item.c2m !== null &&
+            item.c2p !== null &&
+            item.c3m !== null &&
+            item.c3p !== null
+          );
+
+          if (allConditionsMet && this.etapes[8] && this.etapes[8].dateFin === null && this.etapes[9] && this.etapes[9].dateFin === null && allConditionsMet && this.etapes[10] && this.etapes[10].dateFin === null && allConditionsMet && this.etapes[11] && this.etapes[11].dateFin === null) {
+            this.updateEtapeDateFin(9);
+            this.updateEtapeDateFin(10);
+            this.updateEtapeDateFin(11);
+            this.updateEtapeDateFin(12);
+          }
+        }
+      );
+  }
+
 
 
   updateEtapeDateFin(etapeNumero: number) {
@@ -179,6 +197,7 @@ export class ControleComponentComponent implements OnInit {
 
   updateEtape(etapeNumero: number) {
     const selectedEtape = this.etapes.find(et => et.etapeNumero === etapeNumero);
+    this.etapes.find(et => et.etapeNumero === etapeNumero)!.dateDebut = new Date();
     if (selectedEtape) {
       console.log(selectedEtape)
           this.serviceE.UpdateEtape(this.transformateurId, etapeNumero, selectedEtape)
