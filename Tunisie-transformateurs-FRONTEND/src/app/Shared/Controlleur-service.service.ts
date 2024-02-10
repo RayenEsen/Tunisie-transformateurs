@@ -45,5 +45,20 @@ getUsersByRole(role: string): Observable<any[]> {
   return this.http.get<any[]>(urlWithParams);
 }
 
+getAllControleurs(): Observable <ControleurDeQualite[]>
+{
+  return this.http.get<ControleurDeQualite[]>(this.url);
+}
+
+RemoveControleur(id : string): Observable<any>
+{
+  return this.http.delete(`${this.url}/${id}`)
+}
+
+SearchControlleurs(keyword: string): Observable<ControleurDeQualite[]> {
+  const urlWithParams = `${this.url}/Search?keyword=${keyword}`;
+  return this.http.get<ControleurDeQualite[]>(urlWithParams);
+}
+
 
 }

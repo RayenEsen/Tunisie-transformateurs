@@ -26,9 +26,10 @@ import { BobinageComponentComponent } from './Bobinage-component/Bobinage-compon
 import { BobinageMTComponentComponent } from './BobinageMT-component/BobinageMT-component.component';
 import { MagnetiqueComponentComponent } from './Magnetique-component/Magnetique-component.component';
 import { MontageComponentComponent } from './Montage-component/Montage-component.component';
+import { UsersComponentComponent } from './Users-component/Users-component.component';
 
 @NgModule({
-  declarations: [
+  declarations: [	
     AppComponent,
     NavBarComponent,
     TopNavComponent,
@@ -47,6 +48,7 @@ import { MontageComponentComponent } from './Montage-component/Montage-component
     BobinageMTComponentComponent,
     MagnetiqueComponentComponent,
     MontageComponentComponent,
+      UsersComponentComponent
    ],
   imports: [
     BrowserModule,

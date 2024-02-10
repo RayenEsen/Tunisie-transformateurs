@@ -1,0 +1,189 @@
+<div class="container mt-5" style="padding-left: 55px; padding-bottom: 30px;" [ngClass]="{'pagemargin': !UserSelected, 'pagemarginSelected': UserSelected}">
+
+  <div class="row">
+
+    <div class="col-md-8" [ngClass]="{'col-md-8': UserSelected, 'col-md-12': !UserSelected}">
+
+      <div class="card">
+        <div class="card-header bg-primary text-white" style="display: flex;">
+
+          <h5 class="card-title mb-0">Personnels</h5>
+
+        </div>
+
+        <div class="card-body">
+     <!-- Form -->
+     <div class="justify-content-center row">
+      <div class="col-lg-12">
+          <div class="candidate-list-widgets mb-4" >
+              <form action="#" class="">
+                  <div class="g-2 row">
+                      <div class="col-lg-3">
+                          <div class="filler-job-form">
+                              <i class="uil uil-briefcase-alt"></i><input id="exampleFormControlInput1" placeholder="Recherche... "  name="searchItem" type="search" [(ngModel)]="keyword"  class="form-control filler-job-input-box form-control" />
+                          </div>
+                      </div>
+                      <div class="col-lg-3">
+                          <div class="filler-job-form">
+                              <i class="uil uil-location-point"></i>
+                              <select class="form-select selectForm__inner" data-trigger="true" name="Choix1"  id="choices-single-location" aria-label="Default select example">
+                                  <option value="">Filtrer selon les dates</option>
+                                  <option value="DL">Date de lancement</option>
+                                  <option value="DP">Date de fin production</option>
+                                  <option value="DE">Date d'essai</option>
+                              </select>
+                          </div>
+                      </div>
+                      <div class="col-lg-3">
+                          <div class="filler-job-form">
+                              <i class="uil uil-clipboard-notes"></i>
+                              <select class="form-select selectForm__inner" data-trigger="true" name="Choix2"  id="choices-single-categories" aria-label="Default select example">
+                                  <option value="">Saisir Type de filtre</option>
+                                  <option value="A">Ascendant</option>
+                                  <option value="D">Descendant</option>
+                              </select>
+                          </div>
+                      </div>
+                      <div class="col-lg-3">
+                          <div>
+                            <a href="javascript:void(0)" class="btn btn-primary btn" style="background-color: #122151; border-color: #122151;" (click)="search(keyword)" >Rechercher</a>&nbsp;
+                            <a href="javascript:void(0)" class="btn btn-default btn"  >Filtrer</a>&nbsp;
+                          </div>
+                      </div>
+                  </div>
+              </form>
+          </div>
+      </div>
+  </div>
+          <table class="table table" style="margin-top: 20px;">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Cin</th>
+                <th>Identifiant</th>
+                <th>Email</th>
+                <th>Designation</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let User of list" (click)="getControllerById(User.idC)">
+                <td>
+                  <img src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
+                       class="rounded-circle my-n1"
+                       alt="Avatar"
+                       style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover;">
+                </td>
+                <td>{{User.idC.slice(0, -3)}}***</td>
+                <td>{{User.username}}</td>
+                <td>{{User.email}}</td>
+                <td>
+                  <ng-container *ngIf="User.designation">
+                    <span>{{User.designation}}</span>
+                  </ng-container>
+                  <ng-container *ngIf="!User.designation">
+                    <span>Pas de Designation</span>
+                  </ng-container>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4" style="padding-bottom: 100px;" *ngIf="UserSelected">
+      <div class="card">
+        <div class="card-header bg-info text-white" style="display: flex;">
+
+          <h5 class="card-title mb-0">{{UserSelected.username}}</h5>
+          <div class="card-actions float-right" style="margin-left: 340px; position: absolute;">
+            <div data-bs-toggle="dropdown" href="#">
+              <a  data-toggle="dropdown" data-display="static">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal align-middle"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
+              </a>
+
+              <div class="dropdown-menu dropdown-menu-right">
+                <a class="dropdown-item" href="#" (click)="Supprimer(UserSelected.idC)">Supprimer</a>
+                <a class="dropdown-item" href="#" (click)="Update(UserSelected.idC,UserSelected)">Sauvegarder</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-4 text-center">
+              <img src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg" width="100" height="120" class="rounded-circle mt-2" alt="Angelica Ramos">
+            </div>
+            <div class="col-sm-8">
+              <p><strong>About me</strong></p>
+              <p>Je m'appelle {{UserSelected.prenom}} {{UserSelected.nom}}, résidant à {{UserSelected.adresse}}. Je travaille au sein du département {{UserSelected.department}} en tant que {{UserSelected.designation}}..</p>
+            </div>
+          </div>
+
+          <table class="table table-sm mt-3">
+            <tbody>
+              <tr>
+                <th>Nom</th>
+                <td>{{UserSelected.nom}}</td>
+              </tr>
+              <tr>
+                <th>Prenom</th>
+                <td>{{UserSelected.prenom}}</td>
+              </tr>
+              <tr>
+                <th>Email</th>
+                <td>{{UserSelected.email}}</td>
+              </tr>
+              <tr>
+                <th>Tel</th>
+                <td>{{UserSelected.tel}}</td>
+              </tr>
+              <tr>
+                <th>Designation</th>
+                <td>
+                  <select [(ngModel)]="UserSelected.designation" style="border: none;">
+                    <option value="" disabled>Designation</option>
+                    <option value="Operateur">Operateur</option>
+                    <option value="Controleur">Controleur</option>
+                    <option value="Verificateur">Verificateur</option>
+                  </select>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p><strong>Activité</strong></p>
+
+          <ul class="timeline">
+            <li class="timeline-item">
+              <strong>Signed out</strong>
+              <span class="float-right text-muted">30m ago</span>
+              <p>Nam pretium turpis et arcu. Duis arcu tortor, suscipit...</p>
+            </li>
+            <li class="timeline-item">
+              <strong>Created invoice #1204</strong>
+              <span class="float-right text-muted">2h ago</span>
+              <p>Sed aliquam ultrices mauris. Integer ante arcu...</p>
+            </li>
+            <li class="timeline-item">
+              <strong>Discarded invoice #1147</strong>
+              <span class="float-right text-muted">3h ago</span>
+              <p>Nam pretium turpis et arcu. Duis arcu tortor, suscipit...</p>
+            </li>
+            <li class="timeline-item">
+              <strong>Signed in</strong>
+              <span class="float-right text-muted">3h ago</span>
+              <p>Curabitur ligula sapien, tincidunt non, euismod vitae...</p>
+            </li>
+            <li class="timeline-item">
+              <strong>Signed up</strong>
+              <span class="float-right text-muted">2d ago</span>
+              <p>Sed aliquam ultrices mauris. Integer ante arcu...</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

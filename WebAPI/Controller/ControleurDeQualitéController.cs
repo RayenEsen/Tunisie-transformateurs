@@ -135,6 +135,27 @@ namespace WebAPI.Controller
 
             return controleurs;
         }
+        [HttpGet("Search")]
+        public async Task<ActionResult<IEnumerable<ControleurDeQualité>>> SearchControleurs(string keyword)
+        {
+            var controleurs = await _context.controleurDeQualités
+                .Where(c => EF.Functions.Like(c.IdC, $"%{keyword}%")
+                         || EF.Functions.Like(c.Nom, $"%{keyword}%")
+                         || EF.Functions.Like(c.Email, $"%{keyword}%")
+                         || EF.Functions.Like(c.Designation, $"%{keyword}%")
+                         || EF.Functions.Like(c.Department, $"%{keyword}%")
+                         || EF.Functions.Like(c.Adresse, $"%{keyword}%")
+                         // Add additional fields here
+                         )
+                .ToListAsync();
+
+            if (controleurs == null || !controleurs.Any())
+            {
+                return NotFound();
+            }
+
+            return controleurs;
+        }
 
 
         private bool ControleurDeQualitéExists(string id)
