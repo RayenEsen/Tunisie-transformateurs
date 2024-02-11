@@ -53,5 +53,7 @@ namespace WebAPI.Model
         public ICollection<Pv>? Pvs { get; set; }
         [JsonIgnore]
         public ICollection<Etape>? Etapes { get; set; }
+        [JsonIgnore]
+        public ICollection<Event>? Event { get; set; }
     }
 }

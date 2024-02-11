@@ -18,7 +18,7 @@ namespace WebAPI.Model
         public DbSet<BobinageMT> bobinageMTs { get; set; }
         public DbSet<Magnetique> magnetiques { get; set; }
         public DbSet<Montage> montages { get; set; }
-
+        public DbSet<Event> events { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -67,6 +67,12 @@ namespace WebAPI.Model
             modelBuilder.Entity<ControleurDeQualité>()
                 .HasMany(c => c.Etapes)
                 .WithMany(e => e.Controleurs);
+
+            // Configure the one-to-many relationship between ControleurDeQualité and Event
+            modelBuilder.Entity<ControleurDeQualité>()
+                .HasMany(c => c.Event) // A ControleurDeQualité can have many events
+                .WithOne(e => e.ControleurDeQualité) // An Event belongs to one ControleurDeQualité
+                .HasForeignKey(e => e.IdC); // Foreign key relationship
 
             base.OnModelCreating(modelBuilder);
         }

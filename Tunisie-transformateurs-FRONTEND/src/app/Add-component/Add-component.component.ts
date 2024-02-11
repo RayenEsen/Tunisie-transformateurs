@@ -18,7 +18,8 @@ import { Magnetique } from '../Shared/Magnetique-service.model';
 import { MagnetiqueServiceService } from '../Shared/Magnetique-service.service';
 import { Montage } from '../Shared/Montage-service.model';
 import { MontageServiceService } from '../Shared/Montage-service.service';
-
+import { Event } from '../Shared/Event-service.model'
+import { EventServiceService } from '../Shared/Event-service.service';
 @Component({
   selector: 'app-Add-component',
   templateUrl: './Add-component.component.html',
@@ -58,6 +59,7 @@ export class AddComponentComponent implements OnInit {
      public ServiceMT : BobinageMTServiceService,
      public ServiceM : MagnetiqueServiceService,
      public ServiceMontage : MontageServiceService,
+     public EventService: EventServiceService,
      ){ }
 
   ngOnInit() {
@@ -286,6 +288,19 @@ export class AddComponentComponent implements OnInit {
           next: (results: any) => {
             console.log('Transformateur, Bobinage, and Etape added successfully', results);
             // Navigate or perform other actions on successful completion
+            const newEvent = new Event(this.serviceS.Controleur.idC, 'Ajouter un transformateur', new Date());
+            this.EventService.AddEvent(newEvent)
+              .subscribe({
+                next: (response) => {
+                  console.log('Event added successfully:', response);
+                  // Add any further logic here if needed
+                },
+                error: (error) => {
+                  console.error('Error adding event:', error);
+                  // Handle the error appropriately
+                }
+              });
+
             this.router.navigate(['/Transformateur']);
           },
           error: (error: any) => {

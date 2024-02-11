@@ -204,6 +204,32 @@ namespace WebAPI.Migrations
                     b.ToTable("etapes");
                 });
 
+            modelBuilder.Entity("WebAPI.Model.Event", b =>
+                {
+                    b.Property<int>("Ide")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Ide"));
+
+                    b.Property<DateTime>("EventDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Eventname")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IdC")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Ide");
+
+                    b.HasIndex("IdC");
+
+                    b.ToTable("events");
+                });
+
             modelBuilder.Entity("WebAPI.Model.Magnetique", b =>
                 {
                     b.Property<int>("IdMagnetique")
@@ -606,6 +632,17 @@ namespace WebAPI.Migrations
                     b.Navigation("Transformateur");
                 });
 
+            modelBuilder.Entity("WebAPI.Model.Event", b =>
+                {
+                    b.HasOne("WebAPI.Model.ControleurDeQualité", "ControleurDeQualité")
+                        .WithMany("Event")
+                        .HasForeignKey("IdC")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ControleurDeQualité");
+                });
+
             modelBuilder.Entity("WebAPI.Model.Magnetique", b =>
                 {
                     b.HasOne("WebAPI.Model.Transformateur", "Transformateur")
@@ -647,6 +684,8 @@ namespace WebAPI.Migrations
 
             modelBuilder.Entity("WebAPI.Model.ControleurDeQualité", b =>
                 {
+                    b.Navigation("Event");
+
                     b.Navigation("Pvs");
                 });
 

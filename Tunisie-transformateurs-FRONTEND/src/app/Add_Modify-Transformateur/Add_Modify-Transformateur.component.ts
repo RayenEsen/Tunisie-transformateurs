@@ -5,7 +5,9 @@ import { TransformateurServiceService } from '../Shared/Transformateur-service.s
 import { PvServiceService } from '../Shared/Pv-service.service';
 import { Pv } from '../Shared/Pv-service.model';
 import { Router } from '@angular/router';
-
+import { Event } from '../Shared/Event-service.model'
+import { EventServiceService } from '../Shared/Event-service.service'
+import { SessionService } from '../utils/session-service.service'
 @Component({
   selector: 'app-Add_Modify-Transformateur',
   templateUrl: './Add_Modify-Transformateur.component.html',
@@ -20,7 +22,9 @@ export class Add_ModifyTransformateurComponent implements OnInit {
     private route: ActivatedRoute,
     public service: TransformateurServiceService,
     public servicePv : PvServiceService,
-    public router: Router
+    public router: Router,
+    public SessionS : SessionService,
+    public eventService : EventServiceService
   ) { }
 
   ngOnInit() {
@@ -165,6 +169,20 @@ export class Add_ModifyTransformateurComponent implements OnInit {
       .subscribe({
         next: (res => {
           console.log('Transformateur updated successfully', res);
+          // Creating and adding the event
+          const newEvent = new Event(this.SessionS.Controleur.idC, 'Modifier un transformateur', new Date());
+          this.eventService.AddEvent(newEvent)
+            .subscribe({
+              next: (response) => {
+                console.log('Event added successfully:', response);
+                // Add any further logic here if needed
+              },
+              error: (error) => {
+                console.error('Error adding event:', error);
+                // Handle the error appropriately
+              }
+            });
+
           this.isEditMode = false;
           this.router.navigate(['/Transformateur']);
         })

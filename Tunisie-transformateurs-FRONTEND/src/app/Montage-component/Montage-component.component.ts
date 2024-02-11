@@ -4,9 +4,10 @@ import { MontageServiceService } from '../Shared/Montage-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TransformateurServiceService } from '../Shared/Transformateur-service.service';
 import { Etape } from '../Shared/Etape-servicemodel';
-import { SessionService } from '../utils/session-service.service';
 import { EtapeServiceService } from '../Shared/Etape-service.service';
-
+import { SessionService } from '../utils/session-service.service';
+import { EventServiceService } from '../Shared/Event-service.service'
+import { Event } from '../Shared/Event-service.model'
 @Component({
   selector: 'app-Montage-component',
   templateUrl: './Montage-component.component.html',
@@ -20,7 +21,7 @@ export class MontageComponentComponent implements OnInit {
   etapenumero:number = 0;
 
 
-  constructor(public ServiceMontage : MontageServiceService,public router: Router,private route: ActivatedRoute , public service : TransformateurServiceService, public SessionS : SessionService , public ServiceE : EtapeServiceService) { }
+  constructor(public ServiceMontage : MontageServiceService,public router: Router,private route: ActivatedRoute , public service : TransformateurServiceService, public SessionS : SessionService , public ServiceE : EtapeServiceService , public eventService : EventServiceService) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -52,6 +53,19 @@ export class MontageComponentComponent implements OnInit {
     this.ServiceMontage.UpdateListMontage(this.Montages).subscribe(
         () => {
             console.log('Montages updated successfully');
+                                    // Creating and adding the event
+                                    const newEvent = new Event(this.SessionS.Controleur.idC, 'Participer a le Controle Montage', new Date());
+                                    this.eventService.AddEvent(newEvent)
+                                    .subscribe({
+                                    next: (response) => {
+                                    console.log('Event added successfully:', response);
+                                    // Add any further logic here if needed
+                                    },
+                                    error: (error) => {
+                                    console.error('Error adding event:', error);
+                                    // Handle the error appropriately
+                                    }
+                                    });
             // Check if the session's Controleur is present
             if (this.SessionS.Controleur) {
                 // Determine the index position to insert the Controleur object based on its designation

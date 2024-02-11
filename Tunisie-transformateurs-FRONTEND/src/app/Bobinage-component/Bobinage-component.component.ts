@@ -6,6 +6,9 @@ import { TransformateurServiceService } from '../Shared/Transformateur-service.s
 import { EtapeServiceService } from '../Shared/Etape-service.service';
 import { Etape } from '../Shared/Etape-servicemodel';
 import { SessionService } from '../utils/session-service.service';
+import { EventServiceService } from '../Shared/Event-service.service'
+import { Event } from '../Shared/Event-service.model'
+
 @Component({
   selector: 'app-Bobinage-component',
   templateUrl: './Bobinage-component.component.html',
@@ -17,7 +20,8 @@ export class BobinageComponentComponent implements OnInit {
   transformateurId: number = 0;
   bobinages: Bobinage[] = [];
   etapeSelected : Etape = new Etape;
-  constructor(public ServiceB : BobinageServiceService,public router: Router,private route: ActivatedRoute , public service : TransformateurServiceService , public ServiceE : EtapeServiceService , public ServiceS : SessionService) { }
+  constructor(public ServiceB : BobinageServiceService,public router: Router,private route: ActivatedRoute , public service : TransformateurServiceService , public ServiceE : EtapeServiceService , public ServiceS : SessionService , public eventService : EventServiceService,
+    ) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -50,6 +54,19 @@ export class BobinageComponentComponent implements OnInit {
     this.ServiceB.UpdateListBobinage(this.bobinages).subscribe(
         () => {
             console.log('Bobinages updated successfully');
+                        // Creating and adding the event
+                        const newEvent = new Event(this.ServiceS.Controleur.idC, 'Participer a le Controle dimensionnelle bobinage BT', new Date());
+                        this.eventService.AddEvent(newEvent)
+                        .subscribe({
+                        next: (response) => {
+                        console.log('Event added successfully:', response);
+                        // Add any further logic here if needed
+                        },
+                        error: (error) => {
+                        console.error('Error adding event:', error);
+                        // Handle the error appropriately
+                        }
+                        });
             // Check if the session's Controleur is present
             if (this.ServiceS.Controleur) {
                 // Determine the index position to insert the Controleur object based on its designation

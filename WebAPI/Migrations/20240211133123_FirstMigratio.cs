@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace WebAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class fckkkinbbullshit : Migration
+    public partial class FirstMigratio : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -61,6 +61,27 @@ namespace WebAPI.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_transformateurs", x => x.Numero);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "events",
+                columns: table => new
+                {
+                    Ide = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IdC = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Eventname = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    EventDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_events", x => x.Ide);
+                    table.ForeignKey(
+                        name: "FK_events_controleurDeQualités_IdC",
+                        column: x => x.IdC,
+                        principalTable: "controleurDeQualités",
+                        principalColumn: "IdC",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -129,7 +150,9 @@ namespace WebAPI.Migrations
                     Numero = table.Column<int>(type: "int", nullable: false),
                     Nom = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DateDebut = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DateFin = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    DateFin = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Etat = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Observation = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -326,6 +349,11 @@ namespace WebAPI.Migrations
                 column: "Numero");
 
             migrationBuilder.CreateIndex(
+                name: "IX_events_IdC",
+                table: "events",
+                column: "IdC");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_magnetiques_Numero",
                 table: "magnetiques",
                 column: "Numero");
@@ -358,6 +386,9 @@ namespace WebAPI.Migrations
 
             migrationBuilder.DropTable(
                 name: "ControleurDeQualitéEtape");
+
+            migrationBuilder.DropTable(
+                name: "events");
 
             migrationBuilder.DropTable(
                 name: "magnetiques");

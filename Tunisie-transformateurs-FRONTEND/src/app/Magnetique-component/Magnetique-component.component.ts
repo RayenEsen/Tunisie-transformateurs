@@ -3,7 +3,9 @@ import { Magnetique } from '../Shared/Magnetique-service.model';
 import { MagnetiqueServiceService } from '../Shared/Magnetique-service.service'
 import { ActivatedRoute, Router } from '@angular/router';
 import { TransformateurServiceService } from '../Shared/Transformateur-service.service';
-import { SessionService } from '../utils/session-service.service';
+import { Event } from '../Shared/Event-service.model'
+import { EventServiceService } from '../Shared/Event-service.service'
+import { SessionService } from '../utils/session-service.service'
 import { Etape } from '../Shared/Etape-servicemodel';
 import { EtapeServiceService } from '../Shared/Etape-service.service';
 
@@ -24,7 +26,8 @@ export class MagnetiqueComponentComponent implements OnInit {
               private route: ActivatedRoute ,
               public service : TransformateurServiceService,
               public serviceS : SessionService,
-              public serviceE : EtapeServiceService
+              public serviceE : EtapeServiceService,
+              public eventService : EventServiceService,
               ) { }
 
   ngOnInit() {
@@ -57,6 +60,19 @@ export class MagnetiqueComponentComponent implements OnInit {
     this.ServiceM.UpdateListBobinage(this.Magnetiques).subscribe(
         () => {
             console.log('Magnetiques updated successfully');
+            // Creating and adding the event
+            const newEvent = new Event(this.serviceS.Controleur.idC, 'Participer a le Controle dimensionnelle circuit magnetique', new Date());
+            this.eventService.AddEvent(newEvent)
+            .subscribe({
+            next: (response) => {
+            console.log('Event added successfully:', response);
+            // Add any further logic here if needed
+            },
+            error: (error) => {
+            console.error('Error adding event:', error);
+            // Handle the error appropriately
+            }
+            });
             // Check if the session's Controleur is present
             if (this.serviceS.Controleur) {
                 // Determine the index position to insert the Controleur object based on its designation

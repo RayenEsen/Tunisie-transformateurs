@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { SessionService } from '../utils/session-service.service';
+import { Event } from '../Shared/Event-service.model'
+import { EventServiceService } from '../Shared/Event-service.service'
+import { SessionService } from '../utils/session-service.service'
 
 @Component({
   selector: 'app-nav-bar',
@@ -8,13 +10,26 @@ import { SessionService } from '../utils/session-service.service';
 })
 export class NavBarComponent implements OnInit {
 
-  constructor(public ServiceS : SessionService) { }
+  constructor(public ServiceS : SessionService,public eventService : EventServiceService) { }
 
   ngOnInit() {
   }
 
   Disconnect()
   {
+    // Creating and adding the event
+    const newEvent = new Event(this.ServiceS.Controleur.idC, 'Deconnecter', new Date());
+    this.eventService.AddEvent(newEvent)
+    .subscribe({
+    next: (response) => {
+    console.log('Event added successfully:', response);
+    // Add any further logic here if needed
+    },
+    error: (error) => {
+    console.error('Error adding event:', error);
+    // Handle the error appropriately
+    }
+    });
     this.ServiceS.sessionDestroy();
   }
 }

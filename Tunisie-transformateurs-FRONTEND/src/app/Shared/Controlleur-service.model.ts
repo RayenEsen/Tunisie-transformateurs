@@ -1,7 +1,7 @@
 import { Pv } from "./Pv-service.model";
 import { Etape } from "./Etape-servicemodel"; // Make sure to import Etape model
 import { Bobinage } from "./Bobinage-service.model";
-
+import { Event} from "./Event-service.model"
 export class ControleurDeQualite {
   idC: string = '';
   nom?: string = '';
@@ -18,4 +18,5 @@ export class ControleurDeQualite {
   password: string = '';
   pvs?: Pv[] = [];
   etapes?: Etape[] = [];
+  events?: Event[] = [];
 }

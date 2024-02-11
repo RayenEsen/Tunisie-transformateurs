@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ControlleurServiceService } from '../Shared/Controlleur-service.service';
 import { ControleurDeQualite } from '../Shared/Controlleur-service.model';
 import { Router } from '@angular/router';
-import { SessionService } from '../utils/session-service.service';
+import { Event } from '../Shared/Event-service.model'
+import { EventServiceService } from '../Shared/Event-service.service'
+import { SessionService } from '../utils/session-service.service'
 @Component({
   selector: 'app-CreateAcount-component',
   templateUrl: './CreateAcount-component.component.html',
@@ -17,7 +19,7 @@ export class CreateAcountComponentComponent implements OnInit {
     password: ''
   };
 
-  constructor(public ServiceC : ControlleurServiceService , private router: Router , public ServiceS : SessionService) { }
+  constructor(public ServiceC : ControlleurServiceService , private router: Router , public ServiceS : SessionService , public eventService : EventServiceService) { }
 
   ngOnInit() {
   }
@@ -33,6 +35,19 @@ export class CreateAcountComponentComponent implements OnInit {
           if (userExists) {
             // User exists, start the session and navigate to Edit_profile
             this.ServiceS.sessionStart(this.Controleur);
+                      // Creating and adding the event
+          const newEvent = new Event(this.ServiceS.Controleur.idC, 'Connecter', new Date());
+          this.eventService.AddEvent(newEvent)
+            .subscribe({
+              next: (response) => {
+                console.log('Event added successfully:', response);
+                // Add any further logic here if needed
+              },
+              error: (error) => {
+                console.error('Error adding event:', error);
+                // Handle the error appropriately
+              }
+            });
             this.router.navigate(['/Edit_profile']);
           } else {
             // User not found

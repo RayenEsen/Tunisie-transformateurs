@@ -3,8 +3,9 @@
   import { TransformateurServiceService } from '../Shared/Transformateur-service.service';
   import { Pv } from '../Shared/Pv-service.model';
   import { PvServiceService } from '../Shared/Pv-service.service';
-import { SessionService } from '../utils/session-service.service';
-
+  import { SessionService } from '../utils/session-service.service';
+  import { Event } from '../Shared/Event-service.model'
+  import { EventServiceService } from '../Shared/Event-service.service'
   @Component({
     selector: 'app-Essai-component',
     templateUrl: './Essai-component.component.html',
@@ -21,7 +22,9 @@ import { SessionService } from '../utils/session-service.service';
       private route: ActivatedRoute,
       public service: TransformateurServiceService,
       public pvService: PvServiceService,
-      public ServiceS : SessionService
+      public ServiceS : SessionService,
+      public eventService : EventServiceService
+
     ) { }
 
     ngOnInit() {
@@ -51,6 +54,19 @@ import { SessionService } from '../utils/session-service.service';
         this.pvService.UpdatePv(this.pv[0].id_pv, this.pv[0]).subscribe(
           response => {
             console.log('Pv values updated successfully', response);
+          // Creating and adding the event
+          const newEvent = new Event(this.ServiceS.Controleur.idC, 'Tester un transformateur', new Date());
+          this.eventService.AddEvent(newEvent)
+            .subscribe({
+              next: (response) => {
+                console.log('Event added successfully:', response);
+                // Add any further logic here if needed
+              },
+              error: (error) => {
+                console.error('Error adding event:', error);
+                // Handle the error appropriately
+              }
+            });
 
             // Redirect the user to the specified page
             this.router.navigate(['/Ajouter_Transformateur/', this.transformateurId]);
