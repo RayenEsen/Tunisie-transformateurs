@@ -54,7 +54,7 @@ export class MontageComponentComponent implements OnInit {
         () => {
             console.log('Montages updated successfully');
                                     // Creating and adding the event
-                                    const newEvent = new Event(this.SessionS.Controleur.idC, 'Participer a le Controle Montage', new Date());
+                                    const newEvent = new Event(this.SessionS.Controleur.idC, 'Participer a le Controle Montage', new Date(),"opéré par " + this.etapeSelected.controleurs[0] + " et " + this.etapeSelected.controleurs[1] + " pour le transformateur " + this.transformateurId + ".");
                                     this.eventService.AddEvent(newEvent)
                                     .subscribe({
                                     next: (response) => {

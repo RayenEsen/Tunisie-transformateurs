@@ -62,7 +62,7 @@ export class BobinageMTComponentComponent implements OnInit {
         () => {
             console.log('Bobinages updated successfully');
                         // Creating and adding the event
-                        const newEvent = new Event(this.ServiceS.Controleur.idC,'Participer a le Controle dimensionnelle bobinage MT', new Date());
+                        const newEvent = new Event(this.ServiceS.Controleur.idC,'Participer a le Controle dimensionnelle bobinage MT', new Date(),"opéré par " + this.etapeSelected.controleurs[0] + " et " + this.etapeSelected.controleurs[1] + " pour le transformateur " + this.transformateurId + ".");
                         this.eventService.AddEvent(newEvent)
                         .subscribe({
                         next: (response) => {

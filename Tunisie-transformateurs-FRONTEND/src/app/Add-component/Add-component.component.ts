@@ -288,7 +288,7 @@ export class AddComponentComponent implements OnInit {
           next: (results: any) => {
             console.log('Transformateur, Bobinage, and Etape added successfully', results);
             // Navigate or perform other actions on successful completion
-            const newEvent = new Event(this.serviceS.Controleur.idC, 'Ajouter un transformateur', new Date());
+            const newEvent = new Event(this.serviceS.Controleur.idC, 'Ajouter un transformateur', new Date(),"transformateur de type " + this.transformateurAjouter.type + " avec le numéro " + this.transformateurAjouter.numero+".");
             this.EventService.AddEvent(newEvent)
               .subscribe({
                 next: (response) => {

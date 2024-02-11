@@ -29,7 +29,7 @@ import { MontageComponentComponent } from './Montage-component/Montage-component
 import { UsersComponentComponent } from './Users-component/Users-component.component';
 
 @NgModule({
-  declarations: [	
+  declarations: [
     AppComponent,
     NavBarComponent,
     TopNavComponent,

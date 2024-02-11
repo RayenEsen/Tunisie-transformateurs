@@ -11,6 +11,7 @@ namespace WebAPI.Model
         [ForeignKey("ControleurDeQualité")]
         public string IdC { get; set; } = ""; // Foreign key  
         public string Eventname { get; set; } = "";
+        public string EventDetails { get; set; } = "";
         public DateTime EventDate { get; set; }
         public ControleurDeQualité? ControleurDeQualité { get; set; }
     }

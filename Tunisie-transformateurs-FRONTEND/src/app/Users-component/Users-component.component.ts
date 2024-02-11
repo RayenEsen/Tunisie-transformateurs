@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ControleurDeQualite } from '../Shared/Controlleur-service.model'
 import { ControleComponentComponent } from '../Controle-component/Controle-component.component'
 import { ControlleurServiceService } from '../Shared/Controlleur-service.service';
-
+import { Event } from '../Shared/Event-service.model'
+import { EventServiceService } from '../Shared/Event-service.service'
 
 @Component({
   selector: 'app-Users-component',
@@ -12,9 +13,10 @@ import { ControlleurServiceService } from '../Shared/Controlleur-service.service
 export class UsersComponentComponent implements OnInit {
 
   list : ControleurDeQualite[] = [];
+  events : Event[] = [];
   UserSelected: ControleurDeQualite | null = null;
   keyword: string = "";
-  constructor(public ServiceC : ControlleurServiceService) { }
+  constructor(public ServiceC : ControlleurServiceService,public eventService : EventServiceService,) { }
 
   ngOnInit(): void {
     this.ServiceC.getAllControleurs().subscribe({
@@ -27,14 +29,27 @@ export class UsersComponentComponent implements OnInit {
     });
   }
 
-  getControllerById(id : string)
-  {
-    this.ServiceC.getControleurById(id).subscribe({
-      next: (data) => {
-        this.UserSelected=data;
-      }
-    });
+  getControllerById(id : string) {
+    // Check if UserSelected is already set
+    if (this.UserSelected?.idC === id) {
+      this.UserSelected = null; // Clear user selection
+      this.events = [];
+    } else {
+      // Fetch the user data
+      this.ServiceC.getControleurById(id).subscribe({
+        next: (data) => {
+          this.UserSelected = data;
+          // Fetch events for the selected user
+          this.eventService.GetEventsByController(this.UserSelected!.idC).subscribe({
+            next : (events: Event[]) => {
+              this.events = events;
+            }
+          });
+        }
+      });
+    }
   }
+
 
   Update(id: string, User: ControleurDeQualite) {
     this.ServiceC.UpdateControleurById(id, User)
@@ -57,6 +72,25 @@ export class UsersComponentComponent implements OnInit {
         }
       });
   }
+
+  getElapsedTime(eventDate: Date | string): string {
+    const eventDateTime = typeof eventDate === 'string' ? new Date(eventDate).getTime() : (eventDate as Date).getTime();
+    const now = Date.now();
+
+    const diffMs = now - eventDateTime;
+    const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+    const diffHrs = Math.floor((diffMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const diffMins = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+
+    if (diffDays > 0) {
+      return `il y a ${diffDays} jours`;
+    } else if (diffHrs > 0) {
+      return `il y a ${diffHrs} heures`;
+    } else {
+      return `il y a ${diffMins} minutes`;
+    }
+  }
+
 
 
   Supprimer(id: string) {

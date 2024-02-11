@@ -170,7 +170,8 @@ export class Add_ModifyTransformateurComponent implements OnInit {
         next: (res => {
           console.log('Transformateur updated successfully', res);
           // Creating and adding the event
-          const newEvent = new Event(this.SessionS.Controleur.idC, 'Modifier un transformateur', new Date());
+
+          const newEvent = new Event(this.SessionS.Controleur.idC, 'Modifier un transformateur', new Date(),"type " + this.transformateur.type + " avec le numéro " + this.transformateur.numero+".");
           this.eventService.AddEvent(newEvent)
             .subscribe({
               next: (response) => {

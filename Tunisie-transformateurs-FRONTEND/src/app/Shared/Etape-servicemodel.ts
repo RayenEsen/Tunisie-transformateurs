@@ -6,7 +6,6 @@ export class Etape {
   etapeNumero: number = 0;
   numero : number = 0;
   nom : string = '';
-
   dateDebut: Date | undefined;
   dateFin: Date | undefined;
   etat?: string = "";

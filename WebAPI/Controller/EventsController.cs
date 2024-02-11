@@ -98,6 +98,24 @@ namespace WebAPI.Controller
 
             return NoContent();
         }
+        // GET: api/Events/ByController/{controllerId}
+        [HttpGet("ByController/{controllerId}")]
+        public async Task<ActionResult<IEnumerable<Event>>> GetEventsByController(string controllerId)
+        {
+            var events = await _context.events
+                .Where(e => e.IdC == controllerId)
+                .OrderByDescending(e => e.EventDate)
+                .Take(3)
+                .ToListAsync();
+
+            if (events == null || events.Count == 0)
+            {
+                return NotFound();
+            }
+
+            return events;
+        }
+
 
         private bool EventExists(int id)
         {

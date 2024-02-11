@@ -215,6 +215,10 @@ namespace WebAPI.Migrations
                     b.Property<DateTime>("EventDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("EventDetails")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Eventname")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
