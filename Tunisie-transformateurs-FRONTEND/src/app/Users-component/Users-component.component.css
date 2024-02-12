@@ -4,6 +4,13 @@ body {
   background-color: #f8f9fa;
 }
 
+.background{
+  background-image: url('https://source.unsplash.com/BtbjCFUvBXs/1920x1080');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 .card {
   border: none;
   border-radius: 10px;
@@ -104,6 +111,7 @@ body {
   .pagemargin
   {
     margin-bottom: 520px;
+
   }
   .pagemarginSelected
   {
@@ -113,5 +121,4 @@ body {
  thead th {
   background-color: #f0f0f0; /* Grey background color for the table header */
 }
-
 

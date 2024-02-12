@@ -48,6 +48,8 @@ export class AddComponentComponent implements OnInit {
     type: '',
     accessoires: '',
     bornesembrochables: '',
+    accessoires2: '',
+    etat: ''
   };
 
   constructor(public service: TransformateurServiceService,

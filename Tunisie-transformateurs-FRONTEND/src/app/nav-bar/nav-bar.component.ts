@@ -18,7 +18,7 @@ export class NavBarComponent implements OnInit {
   Disconnect()
   {
     // Creating and adding the event
-    const newEvent = new Event(this.ServiceS.Controleur.idC, 'Deconnecter', new Date());
+    const newEvent = new Event(this.ServiceS.Controleur.idC, 'Deconnecter', new Date(),"");
     this.eventService.AddEvent(newEvent)
     .subscribe({
     next: (response) => {

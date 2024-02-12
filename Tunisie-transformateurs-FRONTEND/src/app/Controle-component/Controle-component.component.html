@@ -1,6 +1,6 @@
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <header class="back">
-  <div class="container">
+  <div class="container" style="padding-left: 75px;padding-top: 20px;">
 
     <div class="row align-items-center" >
       <div class="col-xl-12 col-lg-12 col-md-12 col-12">
@@ -25,8 +25,6 @@
                 rounded-circle border border-2 "  alt="Image" style="margin-bottom: -16px;" >
                 <img *ngIf="Service.list[0]?.type==='Résine' " src="assets/resine.png" class="avatar-xxl
                 rounded-circle border border-2 " alt="Image" style="margin-bottom: -16px;">
-
-
               </div>
               <!-- content -->
               <div class="lh-1" style="padding-top: 35px;">
@@ -57,7 +55,7 @@
 
     <!-- page content -->
     <div class="py-6" >
-      <div class="row"style="margin-right: -119px; margin-left: -119px;">
+      <div class="row"style="margin-right: -111px; margin-left: -119px;">
         <div class="offset-lg-1 col-lg-10 col-md-12 col-12">
 
 
@@ -96,7 +94,7 @@
                       </div>
 
                       <div class="ms-3">
-                        <p class="mb-0 font-weight-medium">La phase {{ etape.nom }} a été gérée conjointement par l'Opérateur :
+                        <p class="mb-0 font-weight-medium">La phase <strong>{{ etape.nom }}</strong> a été gérée conjointement par l'Opérateur :
                             <select [(ngModel)]="etape.controleurs[0]" [disabled]="isReadOnly" style="font-weight:500; color:#0f253c;">
                                 <option *ngIf="etape.controleurs.length > 0" [ngValue]="etape.controleurs[0]" disabled  selected  >{{ etape.controleurs[0]?.username }}</option>
                                 <option *ngIf="etape.controleurs.length <= 0" value="" disabled selected>Operateur </option>
@@ -108,24 +106,24 @@
                                 <option *ngIf="etape.controleurs.length <= 1" value="" disabled selected>Operateur </option>
                                 <option *ngFor="let user of users" [ngValue]="user" >{{ user.username }}</option>
                             </select>
-                            <br> débutant le {{ etape.dateDebut | date:'dd/MM/yyyy HH:mm' }} et se terminant le {{ etape.dateFin | date:'dd/MM/yyyy HH:mm' }}.
+                            <br> débutant le   {{ etape.dateDebut | date:'dd/MM/yyyy HH:mm' }} et se terminant le {{ etape.dateFin | date:'dd/MM/yyyy HH:mm' }}.
                         </p>
                     </div>
 
 
                     </div>
                     <div>
-                      <!-- dropdown -->
-                      <div class="dropdown dropstart">
-                        <a href="#!" class="btn btn-ghost btn-icon btn-sm rounded-circle" id="dropdownactivityOne" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical icon-xs"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownactivityOne">
-                          <a class="dropdown-item d-flex align-items-center" (click)="toggleEditable()">Modifier</a>
-                          <a class="dropdown-item d-flex align-items-center" (click)="updateEtape(etape.etapeNumero)">Sauvegarder</a>
-                        </div>
-                      </div>
+                      <!-- spans with icons -->
+                      <span class="btn btn-ghost btn-icon btn-sm rounded-circle" (click)="toggleEditable()">
+                        <i class="material-icons" style="color: #122151;">edit</i>
+                      </span>
+
+                      <span class="btn btn-ghost btn-icon btn-sm rounded-circle" (click)="updateEtape(etape.etapeNumero)">
+                        <i class="material-icons" style="color: #122151;">save</i>
+                      </span>
                     </div>
+
+
                   </div>
                 </li>
               </ul>

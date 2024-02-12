@@ -22,6 +22,9 @@ export class Transformateur {
   cooling: string = "";
   libelle: string = "";
   accessoires: string = "";
+  accessoires2: string = "";
+  etat: string = "";
+
   bornesembrochables: string  = "";
   frequency: number = 0;
   pv?: Pv;

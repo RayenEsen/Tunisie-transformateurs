@@ -55,7 +55,7 @@
           response => {
             console.log('Pv values updated successfully', response);
           // Creating and adding the event
-          const newEvent = new Event(this.ServiceS.Controleur.idC, 'Tester un transformateur', new Date());
+          const newEvent = new Event(this.ServiceS.Controleur.idC, 'Tester un transformateur', new Date(),"Essai No "+this.pv[0].id_pv+" de transformateur "+this.pv[0].id_t);
           this.eventService.AddEvent(newEvent)
             .subscribe({
               next: (response) => {

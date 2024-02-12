@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ControleurDeQualite } from '../Shared/Controlleur-service.model';
+import { Router } from '@angular/router'; // Import Router
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +8,7 @@ import { ControleurDeQualite } from '../Shared/Controlleur-service.model';
 export class SessionService {
 
   private readonly SESSION_KEY = 'controleurData';
+  constructor(private router: Router) {}
 
   get Controleur(): ControleurDeQualite {
     const storedData = sessionStorage.getItem(this.SESSION_KEY);
@@ -23,6 +25,7 @@ export class SessionService {
 
   sessionDestroy() {
     sessionStorage.removeItem(this.SESSION_KEY);
+    this.router.navigate(['/login']);
   }
 
   hasSession(): boolean {

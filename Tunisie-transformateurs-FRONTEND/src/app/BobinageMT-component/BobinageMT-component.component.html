@@ -76,13 +76,14 @@
               <td class="text-center colfix">3 POS</td>
             </tr>
             <tr>
-              <td class="text-center colfix"><span class="fa fa-check text-primary"></span></td>
-              <td class="text-center colfix"><span class="fa fa-check text-primary"></span></td>
-              <td class="text-center colfix"><span class="fa fa-check text-primary"></span></td>
-              <td class="text-center colfix"><span class="fa fa-times text-light"></span></td>
-              <td class="text-center colfix"><span class="fa fa-check text-primary"></span></td>
-              <td class="text-center colfix"><span class="fa fa-check text-primary"></span></td>
-            </tr>
+              <td class="text-center colfix" *ngIf="service.list[0].accessoires2==='Borne'; else notMet"><span class="fa fa-check text-primary"></span></td>
+              <td class="text-center colfix" *ngIf="service.list[0].accessoires2==='Isolateur'; else notMet"><span class="fa fa-check text-primary"></span></td>
+                <td class="text-center colfix" *ngIf="service.list[0].accessoires==='NONDMCR' ; else notMet"><span class="fa fa-check text-primary"></span></td>
+                <td class="text-center colfix" *ngIf="service.list[0].accessoires==='NONDMCR' ; else notMet"><span class="fa fa-times text-light"></span></td>
+                <td class="text-center colfix" *ngIf="service.list[0].bornesembrochables==='5POS' ; else notMet"><span class="fa fa-check text-primary"></span></td>
+                <td class="text-center colfix" *ngIf="service.list[0].accessoires==='3POS' ; else notMet"><span class="fa fa-check text-primary"></span></td>
+              </tr>
+              <ng-template #notMet><td class="text-center colfix"><span class="fa fa-times text-danger"></span></td></ng-template>
           </tbody>
       </table>
     </div>
@@ -132,15 +133,21 @@
             <td class="text-left colfix">Operateur</td>
             <td class="text-left colfix" style="padding-left: 10px;">{{etapeSelected.controleurs[0]?.username}}</td>
             <td class="text-left colfix">{{etapeSelected.controleurs[1]?.username}}</td>
+
+            <td class="text-left colfix" style="padding-left: 10px;">{{etapeSelected2.controleurs[0]?.username}}</td>
+            <td class="text-left colfix">{{etapeSelected2.controleurs[1]?.username}}</td>
+
+            <td class="text-left colfix" style="padding-left: 10px;">{{etapeSelected3.controleurs[0]?.username}}</td>
+            <td class="text-left colfix">{{etapeSelected3.controleurs[1]?.username}}</td>
           </tr>
           <tr>
             <td class="text-left colfix">Controleur</td>
-            <td colspan="2" class="text-left colfix" style="padding-left: 10px;">{{etapeSelected.controleurs[2]?.username}}</td>
+            <td colspan="2" class="text-left colfix" style="padding-left: 10px;" [colSpan]="6">{{etapeSelected.controleurs[2]?.username}}</td>
 
           </tr>
           <tr>
             <td class="text-left colfix">Verificateur</td>
-            <td colspan="2" class="text-left colfix" style="padding-left: 10px;">{{etapeSelected.controleurs[3]?.username}}</td>
+            <td colspan="2" class="text-left colfix" style="padding-left: 10px;" [colSpan]="6">{{etapeSelected.controleurs[3]?.username}}</td>
           </tr>
         </tbody>
       </table>

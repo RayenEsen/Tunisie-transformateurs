@@ -19,6 +19,8 @@ export class MagnetiqueComponentComponent implements OnInit {
   transformateurId: number = 0;
   Magnetiques: Magnetique[] = [];
   etapeSelected : Etape = new Etape;
+  etapeSelected2 : Etape = new Etape;
+
   etapenumero:number = 0;
 
   constructor(public ServiceM : MagnetiqueServiceService,
@@ -53,6 +55,18 @@ export class MagnetiqueComponentComponent implements OnInit {
           console.error('Error fetching etape:', error);
         }
       );
+      this.serviceE.getEtapeByNumeroAndTransformateur(this.etapenumero+1,this.transformateurId)
+      .subscribe(
+        etape => {
+          this.etapeSelected2=etape;
+          console.log(this.etapeSelected);
+        },
+        error => {
+          // Handle any errors that occur during the HTTP request
+          console.error('Error fetching etape:', error);
+        }
+      );
+
     });
   }
   Update() {

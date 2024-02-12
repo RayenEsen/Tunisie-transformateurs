@@ -18,6 +18,10 @@ export class MontageComponentComponent implements OnInit {
   transformateurId: number = 0;
   Montages: Montage[] = [];
   etapeSelected : Etape = new Etape;
+  etapeSelected2 : Etape = new Etape;
+  etapeSelected3 : Etape = new Etape;
+  etapeSelected4 : Etape = new Etape;
+
   etapenumero:number = 0;
 
 
@@ -40,6 +44,39 @@ export class MontageComponentComponent implements OnInit {
       .subscribe(
         etape => {
           this.etapeSelected=etape;
+          console.log(this.etapeSelected);
+        },
+        error => {
+          // Handle any errors that occur during the HTTP request
+          console.error('Error fetching etape:', error);
+        }
+      );
+      this.ServiceE.getEtapeByNumeroAndTransformateur(this.etapenumero+1,this.transformateurId)
+      .subscribe(
+        etape => {
+          this.etapeSelected2=etape;
+          console.log(this.etapeSelected);
+        },
+        error => {
+          // Handle any errors that occur during the HTTP request
+          console.error('Error fetching etape:', error);
+        }
+      );
+      this.ServiceE.getEtapeByNumeroAndTransformateur(this.etapenumero+2,this.transformateurId)
+      .subscribe(
+        etape => {
+          this.etapeSelected3=etape;
+          console.log(this.etapeSelected);
+        },
+        error => {
+          // Handle any errors that occur during the HTTP request
+          console.error('Error fetching etape:', error);
+        }
+      );
+      this.ServiceE.getEtapeByNumeroAndTransformateur(this.etapenumero+3,this.transformateurId)
+      .subscribe(
+        etape => {
+          this.etapeSelected4=etape;
           console.log(this.etapeSelected);
         },
         error => {

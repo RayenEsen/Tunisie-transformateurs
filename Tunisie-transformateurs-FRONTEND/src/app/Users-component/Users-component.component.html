@@ -1,4 +1,4 @@
-<div class="container mt-5" style="padding-left: 55px; padding-bottom: 30px;" [ngClass]="{'pagemargin': !UserSelected, 'pagemarginSelected': UserSelected}">
+<div class="container mt-5" style="padding-left: 55px; padding-bottom: 30px;" [ngClass]="{'pagemargin': !UserSelected, 'pagemarginSelected': UserSelected}" >
 
   <div class="row">
 
@@ -59,7 +59,7 @@
             <thead>
               <tr>
                 <th>#</th>
-                <th>Cin</th>
+                <th>Matricule</th>
                 <th>Identifiant</th>
                 <th>Email</th>
                 <th>Designation</th>
@@ -116,7 +116,7 @@
               <img src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg" width="100" height="120" class="rounded-circle mt-2" alt="Angelica Ramos">
             </div>
             <div class="col-sm-8">
-              <p><strong>About me</strong></p>
+              <p><strong>À propos de moi</strong></p>
               <p>Je m'appelle {{UserSelected.prenom}} {{UserSelected.nom}}, résidant à {{UserSelected.adresse}}. Je travaille au sein du département {{UserSelected.department}} en tant que {{UserSelected.designation}}..</p>
             </div>
           </div>
@@ -159,7 +159,7 @@
             <li class="timeline-item" *ngFor="let event of events">
               <strong>{{event.eventname}}</strong>
               <span class="float-right text-muted"> {{ getElapsedTime(event.eventDate)}}</span>
-              <p>Details...</p>
+              <p>{{event.eventDetails}}</p>
             </li>
           </ul>
         </div>

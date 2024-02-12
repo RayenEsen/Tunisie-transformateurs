@@ -20,6 +20,10 @@ export class BobinageComponentComponent implements OnInit {
   transformateurId: number = 0;
   bobinages: Bobinage[] = [];
   etapeSelected : Etape = new Etape;
+  etapeSelected2 : Etape = new Etape;
+  etapeSelected3 : Etape = new Etape;
+
+
   constructor(public ServiceB : BobinageServiceService,public router: Router,private route: ActivatedRoute , public service : TransformateurServiceService , public ServiceE : EtapeServiceService , public ServiceS : SessionService , public eventService : EventServiceService,
     ) { }
 
@@ -46,7 +50,29 @@ export class BobinageComponentComponent implements OnInit {
           console.error('Error fetching etape:', error);
         }
       );
+      this.ServiceE.getEtapeByNumeroAndTransformateur(this.etapenumero+1,this.transformateurId)
+      .subscribe(
+        etape => {
+          this.etapeSelected2=etape;
+          console.log(this.etapeSelected);
+        },
+        error => {
+          // Handle any errors that occur during the HTTP request
+          console.error('Error fetching etape:', error);
+        }
+      );
     });
+    this.ServiceE.getEtapeByNumeroAndTransformateur(this.etapenumero+2,this.transformateurId)
+    .subscribe(
+      etape => {
+        this.etapeSelected3=etape;
+        console.log(this.etapeSelected);
+      },
+      error => {
+        // Handle any errors that occur during the HTTP request
+        console.error('Error fetching etape:', error);
+      }
+    );
   }
 
   Update() {
@@ -55,16 +81,16 @@ export class BobinageComponentComponent implements OnInit {
         () => {
             console.log('Bobinages updated successfully');
                         // Creating and adding the event
-                        const newEvent = new Event(this.ServiceS.Controleur.idC, 'Participer a le Controle dimensionnelle bobinage BT', new Date(),"opéré par " + this.etapeSelected.controleurs[0] + " et " + this.etapeSelected.controleurs[1] + " pour le transformateur " + this.transformateurId + ".");
+                        const newEvent = new Event(this.ServiceS.Controleur.idC, 'Participer a le Controle dimensionnelle bobinage BT'
+                        , new Date(),"opéré par " + this.etapeSelected.controleurs[0] + " et " + this.etapeSelected.controleurs[1] +
+                        " pour le transformateur " + this.transformateurId + ".");
                         this.eventService.AddEvent(newEvent)
                         .subscribe({
                         next: (response) => {
                         console.log('Event added successfully:', response);
-                        // Add any further logic here if needed
                         },
                         error: (error) => {
                         console.error('Error adding event:', error);
-                        // Handle the error appropriately
                         }
                         });
             // Check if the session's Controleur is present

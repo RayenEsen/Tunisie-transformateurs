@@ -19,6 +19,8 @@ export class BobinageMTComponentComponent implements OnInit {
   bobinagesMT: BobinageMT[] = [];
   etapeSelected : Etape = new Etape;
   etapenumero:number = 0;
+  etapeSelected2 : Etape = new Etape;
+  etapeSelected3 : Etape = new Etape;
 
   constructor(
     public ServiceMT: BobinageMTServiceService,
@@ -53,8 +55,32 @@ export class BobinageMTComponentComponent implements OnInit {
           // Handle any errors that occur during the HTTP request
           console.error('Error fetching etape:', error);
         }
-      );
+      ),
+      this.ServiceE.getEtapeByNumeroAndTransformateur(this.etapenumero+1,this.transformateurId)
+      .subscribe(
+        etape => {
+          this.etapeSelected2=etape;
+          console.log(this.etapeSelected2);
+        },
+        error => {
+          // Handle any errors that occur during the HTTP request
+          console.error('Error fetching etape:', error);
+        }
+      ),
+      this.ServiceE.getEtapeByNumeroAndTransformateur(this.etapenumero+2,this.transformateurId)
+      .subscribe(
+        etape => {
+          this.etapeSelected3=etape;
+          console.log(this.etapeSelected3);
+        },
+        error => {
+          // Handle any errors that occur during the HTTP request
+          console.error('Error fetching etape:', error);
+        }
+      )
+
     });
+
   }
   Update() {
     // Call the service method to update bobinages

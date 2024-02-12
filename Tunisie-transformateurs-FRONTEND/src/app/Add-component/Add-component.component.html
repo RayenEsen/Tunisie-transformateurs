@@ -22,6 +22,17 @@
         </div>
       </div>
 
+            <div class="formbold-mb-3">
+        <label class="formbold-form-label" style="color: #122151;">Mission<small style="color: red;">*</small></label>
+        <select class="formbold-form-input" name="occupation" id="occupation" name="couplage" [(ngModel)]="transformateurAjouter.etat">
+          <option value="" disabled selected>Sélectionner le mission</option>
+          <option value="Production">Production</option>
+          <option value="Reparation">Reparation</option>
+        </select>
+
+
+      </div>
+
       <div class="formbold-mb-3">
         <label for="age" class="formbold-form-label" style="color: #122151;"> Client <small style="color: red;">*</small></label>
         <input
@@ -57,7 +68,7 @@
       </div>
 
       <div class="formbold-mb-3">
-        <label for="email" class="formbold-form-label" style="color: #122151;"> Puissance <small style="color: red;">*</small></label>
+        <label for="email" class="formbold-form-label" style="color: #122151;"> Puissance (KVA) <small style="color: red;">*</small></label>
         <input
           name="power"
           placeholder="Puissance"
@@ -96,7 +107,7 @@
 
       </div>
       <div class="formbold-mb-3">
-        <label for="address" class="formbold-form-label" style="color: #122151;"> MT:U1 <small style="color: red;">*</small></label>
+        <label for="address" class="formbold-form-label" style="color: #122151;"> MT:U1 (KV) <small style="color: red;">*</small></label>
 
         <input
           name="mtu1"
@@ -104,7 +115,7 @@
           class="formbold-form-input formbold-mb-3"
           [(ngModel)]="transformateurAjouter.mtu1"
         />
-        <label for="address" class="formbold-form-label" style="color: #122151;"> BT:U2 <small style="color: red;">*</small></label>
+        <label for="address" class="formbold-form-label" style="color: #122151;"> BT:U2 (V)<small style="color: red;">*</small></label>
 
         <input
           name="btu2"
@@ -123,7 +134,7 @@
           class="formbold-form-input formbold-mb-3"
           [(ngModel)]="transformateurAjouter.cooling"
         />
-        <label for="address" class="formbold-form-label" style="color: #122151;"> Frequence <small style="color: red;">*</small></label>
+        <label for="address" class="formbold-form-label" style="color: #122151;"> Frequence (HZ)<small style="color: red;">*</small></label>
 
         <input
           name="frequency"
@@ -144,27 +155,38 @@
       </div>
 
       <div class="formbold-input-wrapp formbold-mb-3">
-        <label for="firstname" class="formbold-form-label" style="color: #122151;"> Accessoires <small style="color: red;">*</small></label>
+        <label for="firstname" class="formbold-form-label" style="color: #122151;"> Accessoires 1<small style="color: red;">*</small></label>
         <div>
           <select class="formbold-form-input" name="Accessoires" id="occupation"  [(ngModel)]="transformateurAjouter.accessoires">
             <option value="" disabled selected>Sélectionner les Accessoires</option>
-            <option value="NONDMCR">Relais/Thermostat/Assecheur</option>
+            <option value="NONDMCR">Relais/Thermostat/Assecheur/Reservoir</option>
             <option value="DMCR">DMCR</option>
           </select>
         </div>
       </div>
 
-      <div class="formbold-mb-3">
-        <label for="address" class="formbold-form-label" style="color: #122151;"> Bornes embrochables	<small style="color: red;">*</small></label>
-
-        <input
-          name="Bornesembrochables"
-          placeholder="Bornes embrochables"
-          class="formbold-form-input formbold-mb-3"
-          [(ngModel)]="transformateurAjouter.bornesembrochables"
-        />
-
+      <div class="formbold-input-wrapp formbold-mb-3">
+        <label for="firstname" class="formbold-form-label" style="color: #122151;"> Accessoires 2<small style="color: red;">*</small></label>
+        <div>
+          <select class="formbold-form-input" name="Accessoires" id="occupation"  [(ngModel)]="transformateurAjouter.accessoires2">
+            <option value="" disabled selected>Sélectionner les Accessoires</option>
+            <option value="Borne">Borne</option>
+            <option value="Isolateur">Isolateur</option>
+          </select>
+        </div>
       </div>
+
+      <div class="formbold-input-wrapp formbold-mb-3">
+        <label for="firstname" class="formbold-form-label" style="color: #122151;"> Position <small style="color: red;">*</small></label>
+        <div>
+          <select class="formbold-form-input" name="Accessoires" id="occupation"  [(ngModel)]="transformateurAjouter.bornesembrochables">
+            <option value="" disabled selected>Sélectionner les Accessoires</option>
+            <option value="3POS">3POS</option>
+            <option value="5POS">5POS</option>
+          </select>
+        </div>
+      </div>
+
       <div class="formbold-mb-3">
         <label for="upload" class="formbold-form-label" style="color: #122151;">
           Téléchargez une photo
