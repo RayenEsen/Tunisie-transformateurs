@@ -20,6 +20,10 @@ import { Montage } from '../Shared/Montage-service.model';
 import { MontageServiceService } from '../Shared/Montage-service.service';
 import { Event } from '../Shared/Event-service.model'
 import { EventServiceService } from '../Shared/Event-service.service';
+import { Electrique } from '../Shared/electrique-service.model';
+import { ElectriqueServiceService } from '../Shared/electrique-service.service';
+import { Partie2 } from '../Shared/Partie2-service.model';
+import { Partie2ServiceService } from '../Shared/Partie2-service.service';
 @Component({
   selector: 'app-Add-component',
   templateUrl: './Add-component.component.html',
@@ -62,6 +66,8 @@ export class AddComponentComponent implements OnInit {
      public ServiceM : MagnetiqueServiceService,
      public ServiceMontage : MontageServiceService,
      public EventService: EventServiceService,
+     public ServiceElectrique : ElectriqueServiceService,
+     public ServicePartie2 : Partie2ServiceService,
      ){ }
 
   ngOnInit() {
@@ -225,6 +231,38 @@ export class AddComponentComponent implements OnInit {
 
             return forkJoin(MagnetiqueObservable);
           }),
+
+
+          concatMap(() => {
+            // Use forkJoin to execute multiple observables in parallel
+            const ElectriqueObservable: Observable<any>[] = [];
+
+            for (let i = 1; i <= 4; i++) {
+              const ElectriqueAjouter: Electrique = {
+                numero: this.transformateurAjouter.numero,
+                idMagnetique: 0
+              };
+              ElectriqueObservable.push(this.ServiceElectrique.AddBobinage(ElectriqueAjouter));
+            }
+
+            return forkJoin(ElectriqueObservable);
+          }),
+
+          concatMap(() => {
+            // Use forkJoin to execute multiple observables in parallel
+            const Partie2Observable: Observable<any>[] = [];
+
+            for (let i = 1; i <= 8; i++) {
+              const Partie2Ajouter: Partie2 = {
+                numero: this.transformateurAjouter.numero,
+                idMagnetique: 0
+              };
+              Partie2Observable.push(this.ServicePartie2.AddPartie2(Partie2Ajouter));
+            }
+
+            return forkJoin(Partie2Observable);
+          }),
+
           concatMap(() => {
             // Use forkJoin to execute multiple observables in parallel
             const MontageObservable: Observable<any>[] = [];

@@ -1,3 +1,172 @@
-<p>
-  ApresMontage-component works!
-</p>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+
+<div #printSection class="invoice" >
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+<link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
+<div style="display: flex;">
+<img src="assets/LogoPV.png" style="width: 300px;">
+<img src="assets/9001ISO.png" style="width: 180px; height: 70px;">
+<img src="assets/14001ISO-removebg-preview.png" style="width: 180px; height: 93px;">
+<img src="assets/iso-45001.png" style="width: 180px; height: 147px;   ; margin-left: -27px;     margin-top: -38px; ">
+<img src="assets/iso50001.png" style="width: 180px; height: 72px; ">
+</div>
+
+  <div class="page-header text-blue-d2" style=" margin: 40px 30px 20px;" >
+    <div class="page-header text-blue-d2" style=" margin: 40px 30px 20px;" >
+
+
+      <div class="row">
+        <div class="col-sm-6"style=" text-align: left;">
+
+            <div class="text-grey-m2">
+                <div class="my-1">
+                    Numero/Numéro: {{ service.list[0].numero }}
+                </div>
+                <div class="my-1">
+                  Libelle: {{ service.list[0].libelle }}
+              </div>
+            </div>
+        </div>
+        <div class="col-sm-6" style=" text-align: center;">
+          <div>
+              <span class="text-sm text-grey-m2 align-middle">Puissance/Power:</span>
+              <span class="text-600 text-110 text-blue align-middle"> {{ service.list[0].power }} KVA</span>
+          </div>
+          <div class="text-grey-m2">
+              <div class="my-1">
+                  MT:U1/MV:V1: {{ service.list[0].mtu1 }} KV
+              </div>
+          </div>
+      </div>
+      <div class="col-sm-6" style=" text-align: right;">
+        <div class="my-1">
+          BT:U2/LV:V2: {{ service.list[0].btu2 }} V
+      </div>
+      <div class="my-1">
+          Couplage: {{ service.list[0].couplage }}
+    </div>
+    </div>
+    </div>
+    </div>
+
+  <div class="row">
+
+
+  <div class="col-sm-6" style=" text-align: right;">
+
+
+</div>
+</div>
+</div>
+  <div class="invoice-body">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Controle électrique:</h3>
+      </div>
+      <table class="table table-bordered table-condensed" >
+        <tbody>
+          <tr>
+            <td colspan="5" class="text-center colfix">Rapport (Valeur mesurée)</td>
+            <td rowspan="2" class="text-center colfix">C/NC</td>
+          </tr>
+          <tr>
+            <td class="text-center colfix">P1</td>
+            <td class="text-center colfix">P2</td>
+            <td class="text-center colfix">P3</td>
+            <td class="text-center colfix">P4</td>
+            <td class="text-center colfix">P5</td>
+          </tr>
+          <tr *ngFor="let electrique of electriques">
+            <td class="text-center colfix"><input type="number" [(ngModel)]="electrique.p1"></td>
+            <td class="text-center colfix"><input type="number" [(ngModel)]="electrique.p2"></td>
+            <td class="text-center colfix"><input type="number" [(ngModel)]="electrique.p3"></td>
+            <td class="text-center colfix"><input type="number" [(ngModel)]="electrique.p4"></td>
+            <td class="text-center colfix"><input type="number" [(ngModel)]="electrique.p5"></td>
+            <td class="text-center colfix"><input type="number" [(ngModel)]="electrique.cnc"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="row" style="display: contents;">
+      <div>
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Partie 1</h3>
+          </div>
+          <table class="table table-bordered table-condensed">
+            <tbody>
+              <tr>
+                <td class="text-center colfix">Appel de courant</td>
+                <td class="text-center colfix" rowspan="2">C/NC</td>
+                <td class="text-center colfix">MT/BT</td>
+                <td class="text-center colfix" rowspan="2">C/NC</td>
+              </tr>
+              <tr>
+                <td class="text-center colfix">V P = 0</td>
+                <td class="text-center colfix">VP ≥ 3000 m&Omega;</td>
+              </tr>
+              <tr *ngFor="let parties2 of partie2.slice(0, 4)">
+                <td class="text-center colfix"><input type="number" [(ngModel)]="parties2.vp1"></td>
+                <td class="text-center colfix"><input type="number" [(ngModel)]="parties2.cnc1"></td>
+                <td class="text-center colfix"><input type="number" [(ngModel)]="parties2.vp2"></td>
+                <td class="text-center colfix"><input type="number" [(ngModel)]="parties2.cnc2"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Partie 2</h3>
+          </div>
+          <table class="table table-bordered table-condensed">
+            <tbody>
+              <tr>
+                <td class="text-center colfix">MT ⏚</td>
+                <td class="text-center colfix" rowspan="2">C/NC</td>
+                <td class="text-center colfix">BT ⏚</td>
+                <td class="text-center colfix" rowspan="2">C/NC</td>
+              </tr>
+              <tr>
+                <td class="text-center colfix">V P = 3000 m&Omega;</td>
+                <td class="text-center colfix">V P ≥ 500 m&Omega;</td>
+              </tr>
+              <tr *ngFor="let parties2 of partie2.slice(4)">
+                <td class="text-center colfix"><input type="number" [(ngModel)]="parties2.vp1"></td>
+                <td class="text-center colfix"><input type="number" [(ngModel)]="parties2.cnc1"></td>
+                <td class="text-center colfix"><input type="number" [(ngModel)]="parties2.vp2"></td>
+                <td class="text-center colfix"><input type="number" [(ngModel)]="parties2.cnc2"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+
+  </div>
+  <div class="invoice-footer">
+
+      <hr style="border-color: #51121E; border-width: 5px; height: 10px;">
+    <br/>
+    <strong>Direction commerciale :</strong>Immeuble l'Express-Centre Nord 2eme Etage- Appt A2-7 Tunis 1082 Tél : 00 216 71 822 503 Fax : 00 216 71 822 515
+    <br><strong>Siege Social & Usine </strong>Rue Avicenne -2021 OUED ELLIL-TUNISIE Tél : 216 71 629 664 Fax : +216 71 629 664 Fax : +216 71 629 551
+    <br>Web : www.ttransfo.com / E-Mail : info&#64;ttransfo.com
+
+  </div>
+</div>
+<div class="page-tools" style="margin-left: 786px;" class="printable">
+  <div class="action-buttons" style="display: flex;">
+    <a class="btn bg-white btn-light mx-1px text-95" data-title="Print" (click)="onPrint()">
+      <i class="mr-1 fa fa-print text-primary-m1 text-120 w-2"></i>
+      Print
+    </a>
+    <a class="btn bg-white btn-light mx-1px text-95" data-title="Save" (click)="update()"  [routerLink]="['/Controle',this.service.list[0].numero]">
+      <i class="mr-1 fa fa-save text-success-m1 text-120 w-2"></i>
+      Save
+    </a>
+  </div>
+</div>
+</div>
+

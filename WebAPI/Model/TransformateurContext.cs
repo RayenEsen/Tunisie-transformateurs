@@ -74,8 +74,23 @@ namespace WebAPI.Model
                 .WithOne(e => e.ControleurDeQualité) // An Event belongs to one ControleurDeQualité
                 .HasForeignKey(e => e.IdC); // Foreign key relationship
 
+            modelBuilder.Entity<Electrique>()
+                .HasOne(e => e.Transformateur)
+                .WithMany(t => t.Electriques)
+                .HasForeignKey(e => e.Numero)
+                .IsRequired();
+
+            modelBuilder.Entity<Etape1>()
+                .HasOne(e => e.Transformateur)
+                .WithMany(t => t.Etapes1)
+                .HasForeignKey(e => e.Numero)
+                .IsRequired();
+
+
             base.OnModelCreating(modelBuilder);
         }
         public DbSet<WebAPI.Model.Bobinage> Bobinage { get; set; } = default!;
+        public DbSet<WebAPI.Model.Electrique> Electrique { get; set; } = default!;
+        public DbSet<WebAPI.Model.Etape1> Etape1 { get; set; } = default!;
     }
 }

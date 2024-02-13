@@ -54,6 +54,10 @@ namespace WebAPI.Model
         public ICollection<BobinageMT>? BobinagesMT { get; set; }
         public ICollection<Magnetique>? Magnetique { get; set; }
         public ICollection<Montage>? Montage { get; set; }
+        public ICollection<Electrique>? Electriques { get; set; }
+        public ICollection<Etape1>? Etapes1 { get; set; }
+
+
 
     }
 }
