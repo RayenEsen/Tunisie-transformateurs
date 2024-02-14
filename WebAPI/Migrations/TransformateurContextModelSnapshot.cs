@@ -167,6 +167,30 @@ namespace WebAPI.Migrations
                     b.ToTable("controleurDeQualités");
                 });
 
+            modelBuilder.Entity("WebAPI.Model.Ecuvage", b =>
+                {
+                    b.Property<int>("IdMagnetique")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdMagnetique"));
+
+                    b.Property<string>("Conformite")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Numero")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Observation")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("IdMagnetique");
+
+                    b.HasIndex("Numero");
+
+                    b.ToTable("ecuvages");
+                });
+
             modelBuilder.Entity("WebAPI.Model.Electrique", b =>
                 {
                     b.Property<int>("IdMagnetique")
@@ -699,6 +723,17 @@ namespace WebAPI.Migrations
                     b.Navigation("Transformateur");
                 });
 
+            modelBuilder.Entity("WebAPI.Model.Ecuvage", b =>
+                {
+                    b.HasOne("WebAPI.Model.Transformateur", "Transformateur")
+                        .WithMany("Ecuvage")
+                        .HasForeignKey("Numero")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Transformateur");
+                });
+
             modelBuilder.Entity("WebAPI.Model.Electrique", b =>
                 {
                     b.HasOne("WebAPI.Model.Transformateur", "Transformateur")
@@ -794,6 +829,8 @@ namespace WebAPI.Migrations
                     b.Navigation("Bobinages");
 
                     b.Navigation("BobinagesMT");
+
+                    b.Navigation("Ecuvage");
 
                     b.Navigation("Electriques");
 

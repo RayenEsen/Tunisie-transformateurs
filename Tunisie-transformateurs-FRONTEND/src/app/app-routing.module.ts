@@ -17,6 +17,7 @@ import { MagnetiqueComponentComponent } from './Magnetique-component/Magnetique-
 import { MontageComponentComponent } from './Montage-component/Montage-component.component';
 import { UsersComponentComponent } from './Users-component/Users-component.component';
 import { ApresMontageComponentComponent } from './ApresMontage-component/ApresMontage-component.component'
+import { EcuvageComponentComponent } from './Ecuvage-component/Ecuvage-component.component';
 const routes: Routes = [
   { path: 'Transformateur', component: TransformateurInfoComponent , canActivate: [AuthGuard]},
   { path: 'Ajouter_Transformateur', component: Add_ModifyTransformateurComponent , canActivate: [AuthGuard]},
@@ -30,6 +31,8 @@ const routes: Routes = [
   { path: 'Bobinage/:id/:etapenumero' , component : BobinageComponentComponent , canActivate: [AuthGuard]},
   { path: 'BobinageMT/:id/:etapenumero' , component : BobinageMTComponentComponent , canActivate: [AuthGuard]},
   { path: 'Magnetique/:id/:etapenumero' , component : MagnetiqueComponentComponent , canActivate: [AuthGuard]},
+  { path: 'Ecuvage/:id/:etapenumero' , component : EcuvageComponentComponent, canActivate: [AuthGuard]},
+
   { path: 'Montage/:id/:etapenumero' , component : MontageComponentComponent , canActivate: [AuthGuard]},
   { path: 'ApresMontage/:id/:etapenumero' , component : ApresMontageComponentComponent , canActivate: [AuthGuard]},
 

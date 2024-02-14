@@ -24,6 +24,8 @@ import { Electrique } from '../Shared/electrique-service.model';
 import { ElectriqueServiceService } from '../Shared/electrique-service.service';
 import { Partie2 } from '../Shared/Partie2-service.model';
 import { Partie2ServiceService } from '../Shared/Partie2-service.service';
+import { Ecuvage } from '../Shared/Ecuvage-service.model';
+import { EcuvageServiceService } from '../Shared/Ecuvage-service.service';
 @Component({
   selector: 'app-Add-component',
   templateUrl: './Add-component.component.html',
@@ -68,6 +70,7 @@ export class AddComponentComponent implements OnInit {
      public EventService: EventServiceService,
      public ServiceElectrique : ElectriqueServiceService,
      public ServicePartie2 : Partie2ServiceService,
+     public ServiceEcuvage : EcuvageServiceService,
      ){ }
 
   ngOnInit() {
@@ -265,6 +268,20 @@ export class AddComponentComponent implements OnInit {
 
           concatMap(() => {
             // Use forkJoin to execute multiple observables in parallel
+            const EcuvageObservable: Observable<any>[] = [];
+
+            for (let i = 1; i <= 11; i++) {
+              const EcuvageAjouter: Ecuvage = {
+                numero: this.transformateurAjouter.numero,
+                idMagnetique: 0
+              };
+              EcuvageObservable.push(this.ServiceEcuvage.AddEcuvage(EcuvageAjouter));
+            }
+            return forkJoin(EcuvageObservable);
+          }),
+
+          concatMap(() => {
+            // Use forkJoin to execute multiple observables in parallel
             const MontageObservable: Observable<any>[] = [];
 
             const MontageNames: { [key: number]: string } = {
@@ -283,6 +300,8 @@ export class AddComponentComponent implements OnInit {
 
             return forkJoin(MontageObservable);
           }),
+
+
           concatMap(() => {
             // Use forkJoin to execute multiple observables in parallel
             const etapeObservables: Observable<any>[] = [];

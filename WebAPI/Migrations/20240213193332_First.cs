@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace WebAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class FirstMigration : Migration
+    public partial class First : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -55,6 +55,8 @@ namespace WebAPI.Migrations
                     Cooling = table.Column<string>(type: "nvarchar(100)", nullable: false),
                     Libelle = table.Column<string>(type: "nvarchar(100)", nullable: false),
                     Accessoires = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Accessoires2 = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Etat = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Bornesembrochables = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Frequency = table.Column<float>(type: "real", nullable: false)
                 },
@@ -135,6 +137,75 @@ namespace WebAPI.Migrations
                     table.PrimaryKey("PK_bobinageMTs", x => x.IdBobinageMT);
                     table.ForeignKey(
                         name: "FK_bobinageMTs_transformateurs_Numero",
+                        column: x => x.Numero,
+                        principalTable: "transformateurs",
+                        principalColumn: "Numero",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ecuvages",
+                columns: table => new
+                {
+                    IdMagnetique = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Numero = table.Column<int>(type: "int", nullable: false),
+                    Conformite = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Observation = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ecuvages", x => x.IdMagnetique);
+                    table.ForeignKey(
+                        name: "FK_ecuvages_transformateurs_Numero",
+                        column: x => x.Numero,
+                        principalTable: "transformateurs",
+                        principalColumn: "Numero",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Electrique",
+                columns: table => new
+                {
+                    IdMagnetique = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Numero = table.Column<int>(type: "int", nullable: false),
+                    P1 = table.Column<float>(type: "real", nullable: true),
+                    P2 = table.Column<float>(type: "real", nullable: true),
+                    P3 = table.Column<float>(type: "real", nullable: true),
+                    P4 = table.Column<float>(type: "real", nullable: true),
+                    P5 = table.Column<float>(type: "real", nullable: true),
+                    Cnc = table.Column<float>(type: "real", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Electrique", x => x.IdMagnetique);
+                    table.ForeignKey(
+                        name: "FK_Electrique_transformateurs_Numero",
+                        column: x => x.Numero,
+                        principalTable: "transformateurs",
+                        principalColumn: "Numero",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Etape1",
+                columns: table => new
+                {
+                    IdMagnetique = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Numero = table.Column<int>(type: "int", nullable: false),
+                    Vp1 = table.Column<float>(type: "real", nullable: true),
+                    Cnc1 = table.Column<float>(type: "real", nullable: true),
+                    Vp2 = table.Column<float>(type: "real", nullable: true),
+                    Cnc2 = table.Column<float>(type: "real", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Etape1", x => x.IdMagnetique);
+                    table.ForeignKey(
+                        name: "FK_Etape1_transformateurs_Numero",
                         column: x => x.Numero,
                         principalTable: "transformateurs",
                         principalColumn: "Numero",
@@ -345,6 +416,21 @@ namespace WebAPI.Migrations
                 column: "EtapesId_Etape");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ecuvages_Numero",
+                table: "ecuvages",
+                column: "Numero");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Electrique_Numero",
+                table: "Electrique",
+                column: "Numero");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Etape1_Numero",
+                table: "Etape1",
+                column: "Numero");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_etapes_Numero",
                 table: "etapes",
                 column: "Numero");
@@ -387,6 +473,15 @@ namespace WebAPI.Migrations
 
             migrationBuilder.DropTable(
                 name: "ControleurDeQualitéEtape");
+
+            migrationBuilder.DropTable(
+                name: "ecuvages");
+
+            migrationBuilder.DropTable(
+                name: "Electrique");
+
+            migrationBuilder.DropTable(
+                name: "Etape1");
 
             migrationBuilder.DropTable(
                 name: "events");

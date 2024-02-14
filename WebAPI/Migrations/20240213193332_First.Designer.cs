@@ -12,8 +12,8 @@ using WebAPI.Model;
 namespace WebAPI.Migrations
 {
     [DbContext(typeof(TransformateurContext))]
-    [Migration("20240211175222_FirstMigration")]
-    partial class FirstMigration
+    [Migration("20240213193332_First")]
+    partial class First
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -170,6 +170,66 @@ namespace WebAPI.Migrations
                     b.ToTable("controleurDeQualités");
                 });
 
+            modelBuilder.Entity("WebAPI.Model.Ecuvage", b =>
+                {
+                    b.Property<int>("IdMagnetique")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdMagnetique"));
+
+                    b.Property<string>("Conformite")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Numero")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Observation")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("IdMagnetique");
+
+                    b.HasIndex("Numero");
+
+                    b.ToTable("ecuvages");
+                });
+
+            modelBuilder.Entity("WebAPI.Model.Electrique", b =>
+                {
+                    b.Property<int>("IdMagnetique")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdMagnetique"));
+
+                    b.Property<float?>("Cnc")
+                        .HasColumnType("real");
+
+                    b.Property<int>("Numero")
+                        .HasColumnType("int");
+
+                    b.Property<float?>("P1")
+                        .HasColumnType("real");
+
+                    b.Property<float?>("P2")
+                        .HasColumnType("real");
+
+                    b.Property<float?>("P3")
+                        .HasColumnType("real");
+
+                    b.Property<float?>("P4")
+                        .HasColumnType("real");
+
+                    b.Property<float?>("P5")
+                        .HasColumnType("real");
+
+                    b.HasKey("IdMagnetique");
+
+                    b.HasIndex("Numero");
+
+                    b.ToTable("Electrique");
+                });
+
             modelBuilder.Entity("WebAPI.Model.Etape", b =>
                 {
                     b.Property<int>("Id_Etape")
@@ -205,6 +265,36 @@ namespace WebAPI.Migrations
                     b.HasIndex("Numero");
 
                     b.ToTable("etapes");
+                });
+
+            modelBuilder.Entity("WebAPI.Model.Etape1", b =>
+                {
+                    b.Property<int>("IdMagnetique")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdMagnetique"));
+
+                    b.Property<float?>("Cnc1")
+                        .HasColumnType("real");
+
+                    b.Property<float?>("Cnc2")
+                        .HasColumnType("real");
+
+                    b.Property<int>("Numero")
+                        .HasColumnType("int");
+
+                    b.Property<float?>("Vp1")
+                        .HasColumnType("real");
+
+                    b.Property<float?>("Vp2")
+                        .HasColumnType("real");
+
+                    b.HasKey("IdMagnetique");
+
+                    b.HasIndex("Numero");
+
+                    b.ToTable("Etape1");
                 });
 
             modelBuilder.Entity("WebAPI.Model.Event", b =>
@@ -519,6 +609,10 @@ namespace WebAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Accessoires2")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Bornesembrochables")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -543,6 +637,10 @@ namespace WebAPI.Migrations
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Etat")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<float>("Frequency")
                         .HasColumnType("real");
@@ -628,10 +726,43 @@ namespace WebAPI.Migrations
                     b.Navigation("Transformateur");
                 });
 
+            modelBuilder.Entity("WebAPI.Model.Ecuvage", b =>
+                {
+                    b.HasOne("WebAPI.Model.Transformateur", "Transformateur")
+                        .WithMany("Ecuvage")
+                        .HasForeignKey("Numero")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Transformateur");
+                });
+
+            modelBuilder.Entity("WebAPI.Model.Electrique", b =>
+                {
+                    b.HasOne("WebAPI.Model.Transformateur", "Transformateur")
+                        .WithMany("Electriques")
+                        .HasForeignKey("Numero")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Transformateur");
+                });
+
             modelBuilder.Entity("WebAPI.Model.Etape", b =>
                 {
                     b.HasOne("WebAPI.Model.Transformateur", "Transformateur")
                         .WithMany("Etapes")
+                        .HasForeignKey("Numero")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Transformateur");
+                });
+
+            modelBuilder.Entity("WebAPI.Model.Etape1", b =>
+                {
+                    b.HasOne("WebAPI.Model.Transformateur", "Transformateur")
+                        .WithMany("Etapes1")
                         .HasForeignKey("Numero")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -702,7 +833,13 @@ namespace WebAPI.Migrations
 
                     b.Navigation("BobinagesMT");
 
+                    b.Navigation("Ecuvage");
+
+                    b.Navigation("Electriques");
+
                     b.Navigation("Etapes");
+
+                    b.Navigation("Etapes1");
 
                     b.Navigation("Magnetique");
 

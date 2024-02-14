@@ -19,6 +19,8 @@ namespace WebAPI.Model
         public DbSet<Magnetique> magnetiques { get; set; }
         public DbSet<Montage> montages { get; set; }
         public DbSet<Event> events { get; set; }
+        public DbSet<Etape1> etape1s { get; set; }
+        public DbSet<Ecuvage> ecuvages { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -83,6 +85,12 @@ namespace WebAPI.Model
             modelBuilder.Entity<Etape1>()
                 .HasOne(e => e.Transformateur)
                 .WithMany(t => t.Etapes1)
+                .HasForeignKey(e => e.Numero)
+                .IsRequired();
+
+            modelBuilder.Entity<Ecuvage>()
+                .HasOne(e => e.Transformateur)
+                .WithMany(t => t.Ecuvage)
                 .HasForeignKey(e => e.Numero)
                 .IsRequired();
 

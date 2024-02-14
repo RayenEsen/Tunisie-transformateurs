@@ -28,9 +28,10 @@ import { MagnetiqueComponentComponent } from './Magnetique-component/Magnetique-
 import { MontageComponentComponent } from './Montage-component/Montage-component.component';
 import { UsersComponentComponent } from './Users-component/Users-component.component';
 import { ApresMontageComponentComponent } from './ApresMontage-component/ApresMontage-component.component';
+import { EcuvageComponentComponent } from './Ecuvage-component/Ecuvage-component.component';
 
 @NgModule({
-  declarations: [	
+  declarations: [		
     AppComponent,
     NavBarComponent,
     TopNavComponent,
@@ -50,7 +51,8 @@ import { ApresMontageComponentComponent } from './ApresMontage-component/ApresMo
     MagnetiqueComponentComponent,
     MontageComponentComponent,
       UsersComponentComponent,
-      ApresMontageComponentComponent
+      ApresMontageComponentComponent,
+      EcuvageComponentComponent
    ],
   imports: [
     BrowserModule,
