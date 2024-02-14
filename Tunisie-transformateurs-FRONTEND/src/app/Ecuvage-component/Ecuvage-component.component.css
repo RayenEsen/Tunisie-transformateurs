@@ -26,7 +26,12 @@ body {
   margin-bottom: 100px;
   transition: transform 0.3s ease-in-out, width 0.3s ease-in-out; /* Adding a transform and width transition */
 }
-
+/* Media query for print styles */
+@media print {
+  .invoice {
+    margin-left: 0px;
+  }
+}
 /* Styling for the header of the invoice */
 .invoice .invoice-header {
   padding: 25px 25px 15px;

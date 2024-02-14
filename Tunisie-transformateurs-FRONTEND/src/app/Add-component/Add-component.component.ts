@@ -320,10 +320,10 @@ export class AddComponentComponent implements OnInit {
               11: 'Cablage BT',
               12: 'Cablage MT',
               13: 'Etuvage',
-              14: 'Ecuvage',
-              15: 'Huile',
-              16: 'Peinture',
-              17: 'Finir'
+              14: 'Encuvage',
+              15: 'Remplissage',
+              16: 'Etancheite',
+              17: 'Peinture'
             };
 
             for (let i = 1; i <= 17; i++) {
@@ -335,7 +335,6 @@ export class AddComponentComponent implements OnInit {
                 dateFin: undefined,
                 nom: etapeNames[i] || '',
                 controleurs: [] = [],
-
               };
               etapeObservables.push(this.serviceE.AddEtape(etapeAjouter));
             }

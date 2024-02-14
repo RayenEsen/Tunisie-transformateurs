@@ -100,22 +100,6 @@ export class BobinageMTComponentComponent implements OnInit {
                         // Handle the error appropriately
                         }
                         });
-            // Check if the session's Controleur is present
-            if (this.ServiceS.Controleur) {
-                // Determine the index position to insert the Controleur object based on its designation
-                let controleurIndex = this.ServiceS.Controleur.designation === "Controleur" ? 2 : 3;
-                // Insert the Controleur object into the controleurs array at the determined index position
-                this.etapeSelected.controleurs.splice(controleurIndex, 0, this.ServiceS.Controleur);
-                // Update etapeSelected with the modified controleurs array
-                this.ServiceE.UpdateEtape(this.transformateurId, this.etapenumero, this.etapeSelected).subscribe(
-                    () => {
-                        console.log('Etape updated successfully:', this.etapeSelected);
-                    },
-                    error => {
-                        console.error('Error updating Etape:', error);
-                    }
-                );
-            }
         },
         error => {
             console.error('Error updating bobinages:', error);

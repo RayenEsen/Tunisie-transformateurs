@@ -248,6 +248,8 @@ export class ControleComponentComponent implements OnInit {
           return 'Controle dimensionnelle circuit magnetique';
         case 9:
           return 'Montage';
+        case 13:
+          return 'Ecuvage';
         default:
           return 'Default Title';
       }
