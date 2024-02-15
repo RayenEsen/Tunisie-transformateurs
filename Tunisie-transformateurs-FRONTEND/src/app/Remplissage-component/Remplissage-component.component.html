@@ -60,9 +60,36 @@
 </div>
 </div>
 </div>
-  <div class="invoice-body">
 
+<div class="invoice-body">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Supplémentaires:</h3>
+    </div>
+    <table class="table table-bordered table-condensed" >
+        <tbody>
+          <tr>
+            <td class="text-center colfix">Borne</td>
+            <td class="text-center colfix">Isolateur</td>
+            <td class="text-center colfix">Relais</td>
+            <td class="text-center colfix">Reservoir</td>
+            <td class="text-center colfix">5 POS</td>
+            <td class="text-center colfix">3 POS</td>
+          </tr>
+          <tr>
+            <td class="text-center colfix" *ngIf="service.list[0].accessoires2==='Borne'; else notMet"><span class="fa fa-check text-primary"></span></td>
+            <td class="text-center colfix" *ngIf="service.list[0].accessoires2==='Isolateur'; else notMet"><span class="fa fa-check text-primary"></span></td>
+              <td class="text-center colfix" *ngIf="service.list[0].accessoires==='NONDMCR' ; else notMet"><span class="fa fa-check text-primary"></span></td>
+              <td class="text-center colfix" *ngIf="service.list[0].accessoires==='NONDMCR' ; else notMet"><span class="fa fa-times text-light"></span></td>
+              <td class="text-center colfix" *ngIf="service.list[0].bornesembrochables==='5POS' ; else notMet"><span class="fa fa-check text-primary"></span></td>
+              <td class="text-center colfix" *ngIf="service.list[0].accessoires==='3POS' ; else notMet"><span class="fa fa-check text-primary"></span></td>
+            </tr>
+            <ng-template #notMet><td class="text-center colfix"><span class="fa fa-times text-danger"></span></td></ng-template>
+        </tbody>
+    </table>
+  </div>
     <div class="row" style="display: contents;">
+
       <div>
 
  <div  class="panel panel-default">
@@ -72,77 +99,33 @@
       <div style="display: flex;">
         <table class="table table-bordered table-condensed" >
           <tbody>
-            <tr style="height: 10%;padding-bottom: 32px;">
-              <td class="text-center colfix">Points de controle</td>
-            </tr>
             <tr>
-              <td class="text-left colfix">Etat des accessoires de la cuve (Terre, crochets de fixation , support plaque,...)</td>
-            </tr>
-            <tr>
-              <td class="text-left colfix">Propreté de la cuve et la partie active (Présence poussiére , bavure,...)</td>
-            </tr>
-            <tr>
-              <td class="text-left colfix">Distance entre la partie active et la cuve TRF 30KV VP>=6cm & TRF 15KV: VP>= 5cm</td>
-            </tr>
-            <tr>
-              <td class="text-left colfix">Distance entre BT (variation , entrée et sortie) et cuve : VP>=3cm</td>
-            </tr>
-            <tr>
-              <td class="text-left colfix">Fixation de la partie active par rapport à la cuve</td>
-            </tr>
-            <tr>
-              <td class="text-left colfix">Controle commutateur (5 manoeuvres avant montage)</td>
-            </tr>
-            <tr>
-              <td class="text-left colfix">Verification cablage BT (soudure , Emballage,...)</td>
-            </tr>
-            <tr>
-              <td class="text-left colfix">Controle du serrage des boulons (pointage,...)</td>
-            </tr>
-            <tr>
-              <td class="text-left colfix">Etat du joint (couverecle, commutateur,...)</td>
-            </tr>
-            <tr>
-              <td class="text-left colfix"><strong>Distace couvercle/culasse:</strong> TRI: VP&ge;15cm, TRI(H61): VP&ge;17cm, Biphasé: VP>22cm</td>
-            </tr>
-            <tr>
-              <td class="text-left colfix"><strong>Longeur Phase:</strong> TRF 30KV (Isolateur classe36 : 30KV) : VP=42cm<br>TRF 15KV (Isolateur classe24 : 20KV) : VP=38cm, TRF 10KV (Isolateur classe12 : 10KV) : VP=20cm</td>
-            </tr>
-          </tbody>
-        </table>
-        <table class="table table-bordered table-condensed" >
-          <tbody>
-            <tr style="height: 51px;">
-              <td class="text-center colfix">Conforme</td>
-              <td class="text-center colfix">Non Conforme</td>
+              <td class="text-center colfix">Date test d'étacheité</td>
+              <td class="text-center colfix">Pression injectée (mba)</td>
+              <td class="text-center colfix">Pression à la fin d'essai</td>
+              <td class="text-center colfix">Heure début</td>
+              <td class="text-center colfix">Heure fin</td>
+              <td class="text-center colfix">C/NC</td>
+              <td class="text-center colfix">Controleur</td>
               <td class="text-center colfix">Observations</td>
             </tr>
-
-            <tr *ngFor="let ecuvage of ecuvages; let last = last">
-              <td class="text-center colfix clickable" (click)="conforme(ecuvage.idMagnetique)">
-                <span class="icon" [style.color]="ecuvage.conformite === 'Yes' ? 'blue' : 'transparent'">
-                  <i class="fa fa-times"></i>
-                </span>
-              </td>
-              <td class="text-center colfix clickable" (click)="conformepas(ecuvage.idMagnetique)">
-                <span class="icon" [style.color]="ecuvage.conformite === 'No' ? 'red' : 'transparent'">
-                  <i class="fa fa-times"></i>
-                </span>
-              </td>
-              <td class="text-center colfix" [style.padding-bottom.px]="last ? 48 : 0">
-                <input type="text" [(ngModel)]="ecuvage.observation">
-              </td>
+            <tr *ngFor="let remplissage of remplissages">
+              <td class="text-center colfix"><input [(ngModel)]="remplissage.datet" type="date"></td>
+              <td class="text-center colfix"><input [(ngModel)]="remplissage.pressiond" type="number"></td>
+              <td class="text-center colfix"><input [(ngModel)]="remplissage.pressionf" type="number"></td>
+              <td class="text-center colfix"><input [(ngModel)]="remplissage.hd" type="number"></td>
+              <td class="text-center colfix"><input [(ngModel)]="remplissage.hf" type="number"></td>
+              <td class="text-center colfix"><input [(ngModel)]="remplissage.cnc" type="number"></td>
+              <td class="text-center colfix"><input [(ngModel)]="remplissage.controleur" type="text"></td>
+              <td class="text-center colfix"><input [(ngModel)]="remplissage.observations" type="text"></td>
             </tr>
-
           </tbody>
         </table>
-
       </div>
     </div>
   </div>
 
   <div class="invoice-footer">
-
       <hr style="border-color: #51121E; border-width: 5px; height: 10px;">
     <br/>
     <strong>Direction commerciale :</strong>Immeuble l'Express-Centre Nord 2eme Etage- Appt A2-7 Tunis 1082 Tél : 00 216 71 822 503 Fax : 00 216 71 822 515
@@ -151,13 +134,13 @@
 
   </div>
 </div>
-<div class="page-tools" style="margin-left: 786px;padding-left: 200px;" class="printable">
+<div class="page-tools" style="margin-left: 786px;padding-left: 0px;" class="printable">
   <div class="action-buttons" style="display: flex;">
     <a class="btn bg-white btn-light mx-1px text-95" (click)="onPrint()" data-title="Print" >
       <i class="mr-1 fa fa-print text-primary-m1 text-120 w-2"></i>
       Print
     </a>
-    <a class="btn bg-white btn-light mx-1px text-95" data-title="Save"(click)="update()" [routerLink]="['/Controle',this.service.list[0].numero]">
+    <a class="btn bg-white btn-light mx-1px text-95" data-title="Save" (click)="update()"  [routerLink]="['/Controle',this.service.list[0].numero]">
       <i class="mr-1 fa fa-save text-success-m1 text-120 w-2"></i>
       Save
     </a>

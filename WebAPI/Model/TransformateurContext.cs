@@ -21,7 +21,7 @@ namespace WebAPI.Model
         public DbSet<Event> events { get; set; }
         public DbSet<Etape1> etape1s { get; set; }
         public DbSet<Ecuvage> ecuvages { get; set; }
-
+        public DbSet<Remplissage> remplissages { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -94,7 +94,11 @@ namespace WebAPI.Model
                 .HasForeignKey(e => e.Numero)
                 .IsRequired();
 
-
+            modelBuilder.Entity<Remplissage>()
+                .HasOne(e => e.Transformateur)
+                .WithMany(t => t.Remplissage)
+                .HasForeignKey(e => e.Numero)
+                .IsRequired();
 
 
             base.OnModelCreating(modelBuilder);

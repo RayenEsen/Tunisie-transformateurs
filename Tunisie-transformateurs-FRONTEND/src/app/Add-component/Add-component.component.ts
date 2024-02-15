@@ -26,6 +26,8 @@ import { Partie2 } from '../Shared/Partie2-service.model';
 import { Partie2ServiceService } from '../Shared/Partie2-service.service';
 import { Ecuvage } from '../Shared/Ecuvage-service.model';
 import { EcuvageServiceService } from '../Shared/Ecuvage-service.service';
+import { Remplissage } from '../Shared/Remplissage-service.model';
+import { RemplissageServiceService } from '../Shared/Remplissage-service.service';
 @Component({
   selector: 'app-Add-component',
   templateUrl: './Add-component.component.html',
@@ -71,6 +73,7 @@ export class AddComponentComponent implements OnInit {
      public ServiceElectrique : ElectriqueServiceService,
      public ServicePartie2 : Partie2ServiceService,
      public ServiceEcuvage : EcuvageServiceService,
+     public ServiceRemplissage : RemplissageServiceService,
      ){ }
 
   ngOnInit() {
@@ -301,6 +304,21 @@ export class AddComponentComponent implements OnInit {
             return forkJoin(MontageObservable);
           }),
 
+          concatMap(() => {
+            // Use forkJoin to execute multiple observables in parallel
+            const RemplissageObservable: Observable<any>[] = [];
+
+
+            for (let i = 1; i <= 3; i++) {
+              const RemplissageAjouter: Remplissage = {
+                numero: this.transformateurAjouter.numero,
+                idRemplissage: 0
+              };
+              RemplissageObservable.push(this.ServiceRemplissage.addRemplissage(RemplissageAjouter));
+            }
+
+            return forkJoin(RemplissageObservable);
+          }),
 
           concatMap(() => {
             // Use forkJoin to execute multiple observables in parallel

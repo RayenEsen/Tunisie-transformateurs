@@ -18,6 +18,7 @@ import { MontageComponentComponent } from './Montage-component/Montage-component
 import { UsersComponentComponent } from './Users-component/Users-component.component';
 import { ApresMontageComponentComponent } from './ApresMontage-component/ApresMontage-component.component'
 import { EcuvageComponentComponent } from './Ecuvage-component/Ecuvage-component.component';
+import { RemplissageComponentComponent } from './Remplissage-component/Remplissage-component.component';
 const routes: Routes = [
   { path: 'Transformateur', component: TransformateurInfoComponent , canActivate: [AuthGuard]},
   { path: 'Ajouter_Transformateur', component: Add_ModifyTransformateurComponent , canActivate: [AuthGuard]},
@@ -35,6 +36,7 @@ const routes: Routes = [
 
   { path: 'Montage/:id/:etapenumero' , component : MontageComponentComponent , canActivate: [AuthGuard]},
   { path: 'ApresMontage/:id/:etapenumero' , component : ApresMontageComponentComponent , canActivate: [AuthGuard]},
+  { path: 'Remplissage/:id/:etapenumero' , component : RemplissageComponentComponent, canActivate: [AuthGuard]},
 
   { path: 'Sign_up' , component : InscriptionComponentComponent},
   { path: 'Controle/:id' , component : ControleComponentComponent, canActivate: [AuthGuard]},

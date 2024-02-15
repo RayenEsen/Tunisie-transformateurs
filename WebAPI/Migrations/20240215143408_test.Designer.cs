@@ -12,8 +12,8 @@ using WebAPI.Model;
 namespace WebAPI.Migrations
 {
     [DbContext(typeof(TransformateurContext))]
-    [Migration("20240214144155_Test")]
-    partial class Test
+    [Migration("20240215143408_test")]
+    partial class test
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -600,6 +600,48 @@ namespace WebAPI.Migrations
                     b.ToTable("pvs");
                 });
 
+            modelBuilder.Entity("WebAPI.Model.Remplissage", b =>
+                {
+                    b.Property<int>("IdRemplissage")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdRemplissage"));
+
+                    b.Property<float?>("Cnc")
+                        .HasColumnType("real");
+
+                    b.Property<string>("Controleur")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateOnly?>("Datet")
+                        .HasColumnType("date");
+
+                    b.Property<float?>("Hd")
+                        .HasColumnType("real");
+
+                    b.Property<float?>("Hf")
+                        .HasColumnType("real");
+
+                    b.Property<int>("Numero")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Observations")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float?>("Pressiond")
+                        .HasColumnType("real");
+
+                    b.Property<float?>("Pressionf")
+                        .HasColumnType("real");
+
+                    b.HasKey("IdRemplissage");
+
+                    b.HasIndex("Numero");
+
+                    b.ToTable("remplissages");
+                });
+
             modelBuilder.Entity("WebAPI.Model.Transformateur", b =>
                 {
                     b.Property<int>("Numero")
@@ -820,6 +862,17 @@ namespace WebAPI.Migrations
                     b.Navigation("ControleurDeQualité");
                 });
 
+            modelBuilder.Entity("WebAPI.Model.Remplissage", b =>
+                {
+                    b.HasOne("WebAPI.Model.Transformateur", "Transformateur")
+                        .WithMany("Remplissage")
+                        .HasForeignKey("Numero")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Transformateur");
+                });
+
             modelBuilder.Entity("WebAPI.Model.ControleurDeQualité", b =>
                 {
                     b.Navigation("Event");
@@ -846,6 +899,8 @@ namespace WebAPI.Migrations
                     b.Navigation("Montage");
 
                     b.Navigation("Pv");
+
+                    b.Navigation("Remplissage");
                 });
 #pragma warning restore 612, 618
         }

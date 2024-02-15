@@ -29,9 +29,10 @@ import { MontageComponentComponent } from './Montage-component/Montage-component
 import { UsersComponentComponent } from './Users-component/Users-component.component';
 import { ApresMontageComponentComponent } from './ApresMontage-component/ApresMontage-component.component';
 import { EcuvageComponentComponent } from './Ecuvage-component/Ecuvage-component.component';
+import { RemplissageComponentComponent } from './Remplissage-component/Remplissage-component.component';
 
 @NgModule({
-  declarations: [		
+  declarations: [			
     AppComponent,
     NavBarComponent,
     TopNavComponent,
@@ -52,7 +53,8 @@ import { EcuvageComponentComponent } from './Ecuvage-component/Ecuvage-component
     MontageComponentComponent,
       UsersComponentComponent,
       ApresMontageComponentComponent,
-      EcuvageComponentComponent
+      EcuvageComponentComponent,
+      RemplissageComponentComponent
    ],
   imports: [
     BrowserModule,

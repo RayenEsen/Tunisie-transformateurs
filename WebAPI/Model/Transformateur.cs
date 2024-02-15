@@ -57,6 +57,8 @@ namespace WebAPI.Model
         public ICollection<Electrique>? Electriques { get; set; }
         public ICollection<Etape1>? Etapes1 { get; set; }
         public ICollection<Ecuvage>? Ecuvage { get; set; }
+        public ICollection<Remplissage>? Remplissage { get; set; }
+
 
     }
 }

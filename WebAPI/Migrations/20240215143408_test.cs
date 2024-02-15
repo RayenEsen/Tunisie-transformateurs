@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace WebAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class Test : Migration
+    public partial class test : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -372,6 +372,33 @@ namespace WebAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "remplissages",
+                columns: table => new
+                {
+                    IdRemplissage = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Numero = table.Column<int>(type: "int", nullable: false),
+                    Datet = table.Column<DateOnly>(type: "date", nullable: true),
+                    Pressiond = table.Column<float>(type: "real", nullable: true),
+                    Pressionf = table.Column<float>(type: "real", nullable: true),
+                    Hd = table.Column<float>(type: "real", nullable: true),
+                    Hf = table.Column<float>(type: "real", nullable: true),
+                    Cnc = table.Column<float>(type: "real", nullable: true),
+                    Controleur = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Observations = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_remplissages", x => x.IdRemplissage);
+                    table.ForeignKey(
+                        name: "FK_remplissages_transformateurs_Numero",
+                        column: x => x.Numero,
+                        principalTable: "transformateurs",
+                        principalColumn: "Numero",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ControleurDeQualitéEtape",
                 columns: table => new
                 {
@@ -460,6 +487,11 @@ namespace WebAPI.Migrations
                 name: "IX_pvs_IdC",
                 table: "pvs",
                 column: "IdC");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_remplissages_Numero",
+                table: "remplissages",
+                column: "Numero");
         }
 
         /// <inheritdoc />
@@ -494,6 +526,9 @@ namespace WebAPI.Migrations
 
             migrationBuilder.DropTable(
                 name: "pvs");
+
+            migrationBuilder.DropTable(
+                name: "remplissages");
 
             migrationBuilder.DropTable(
                 name: "etapes");

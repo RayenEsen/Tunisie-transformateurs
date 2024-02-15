@@ -21,35 +21,9 @@ body {
 .invoice {
   background: #fff;
   padding-left: 30px;
-  width: 1200px !important;
-  margin-left: 190px;
-  margin-bottom: 100px;
+  width: 1000px !important;
+  margin: 50px auto;
   transition: transform 0.3s ease-in-out, width 0.3s ease-in-out; /* Adding a transform and width transition */
-}
-/* Media query for print styles */
-@media print {
-  .invoice {
-    margin-left: 0px;
-  }
-}
-.clickable {
-  cursor: pointer;
-}
-
-.icon {
-  display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
-  height: 100%;
-}
-
-.icon i {
-  font-size: 1.2em; /* Adjust the icon size as needed */
-}
-
-.clickable:hover {
-  background-color: lightgray; /* Change background color when hovering */
-  /* You can also add other styles like border or text color */
 }
 
 /* Styling for the header of the invoice */
