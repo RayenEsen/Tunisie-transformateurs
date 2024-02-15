@@ -95,6 +95,8 @@ namespace WebAPI.Model
                 .IsRequired();
 
 
+
+
             base.OnModelCreating(modelBuilder);
         }
         public DbSet<WebAPI.Model.Bobinage> Bobinage { get; set; } = default!;

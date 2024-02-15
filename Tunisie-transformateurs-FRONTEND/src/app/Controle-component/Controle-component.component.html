@@ -59,7 +59,7 @@
         <div class="offset-lg-1 col-lg-10 col-md-12 col-12">
 
 
-          <div class="mb-8 container" *ngFor="let etape of etapes">
+          <div class="mb-8 container"  *ngFor="let etape of filteredEtapes">
             <!-- card -->
             <div *ngIf="showCard(etape.etapeNumero)" class="card bg-blue-500 shadow-none mb-4" style="background-color: #0f253c;" [style.order]="getOrderValue(etape.etapeNumero)">
               <!-- card body -->
@@ -96,21 +96,19 @@
                       <div class="ms-3">
                         <p class="mb-0 font-weight-medium">La phase <strong>{{ etape.nom }}</strong> a été gérée conjointement par l'Opérateur :
                             <select [(ngModel)]="etape.controleurs[0]" [disabled]="isReadOnly" style="font-weight:500; color:#0f253c;">
-                                <option *ngIf="etape.controleurs.length > 0" [ngValue]="etape.controleurs[0]" disabled  selected  >{{ etape.controleurs[0]?.username }}</option>
+                                <option  [ngValue]="etape.controleurs[0]" disabled selected>{{ etape.controleurs[0]?.username }}</option>
                                 <option *ngIf="etape.controleurs.length <= 0" value="" disabled selected>Operateur </option>
                                 <option *ngFor="let user of users" [ngValue]="user">{{ user.username }}</option>
                             </select>
                             et l'Opérateur :
                             <select [(ngModel)]="etape.controleurs[1]" [disabled]="isReadOnly" style="font-weight:500; color:#0f253c;">
-                                <option *ngIf="etape.controleurs.length > 1" [ngValue]="etape.controleurs[1]" disabled selected>{{ etape.controleurs[1]?.username }}</option>
+                                <option [ngValue]="etape.controleurs[1]" disabled selected>{{ etape.controleurs[1]?.username }}</option>
                                 <option *ngIf="etape.controleurs.length <= 1" value="" disabled selected>Operateur </option>
-                                <option *ngFor="let user of users" [ngValue]="user" >{{ user.username }}</option>
+                                <option *ngFor="let user of users" [ngValue]="user">{{ user.username }}</option>
                             </select>
                             <br> débutant le   {{ etape.dateDebut | date:'dd/MM/yyyy HH:mm' }} et se terminant le {{ etape.dateFin | date:'dd/MM/yyyy HH:mm' }}.
                         </p>
-                    </div>
-
-
+                      </div>
                     </div>
                     <div>
                       <!-- spans with icons -->

@@ -131,8 +131,12 @@
         <tbody>
           <tr>
             <td class="text-left colfix">Operateur</td>
-            <td class="text-left colfix" style="padding-left: 10px;">{{etapeSelected.controleurs[0]?.username}}</td>
-            <td class="text-left colfix">{{etapeSelected.controleurs[1]?.username}}</td>
+            <ng-container *ngFor="let index of [0, 1, 2 ,3]">
+              <ng-container *ngIf="etapeSelected.controleurs[index]?.designation === 'Operateur'">
+                <td class="text-left colfix" style="padding-left: 10px;">{{ etapeSelected.controleurs[index]?.username }}</td>
+              </ng-container>
+            </ng-container>
+
 
             <td class="text-left colfix" style="padding-left: 10px;">{{etapeSelected2.controleurs[0]?.username}}</td>
             <td class="text-left colfix">{{etapeSelected2.controleurs[1]?.username}}</td>
@@ -142,17 +146,38 @@
           </tr>
           <tr>
             <td class="text-left colfix">Controleur</td>
-            <td colspan="2" class="text-left colfix" style="padding-left: 10px;" [colSpan]="6"></td>
+            <ng-container *ngFor="let index of [0, 1, 2, 3]; let first = first">
+              <ng-container *ngIf="etapeSelected.controleurs[index]?.designation === 'Controleur'; else normalCell">
+                <td class="text-left colfix" style="padding-left: 10px;" [colSpan]="6">{{ etapeSelected.controleurs[index]?.username }}</td>
+              </ng-container>
+              <ng-template #normalCell>
+                <ng-container *ngIf="first">
+                  <td colspan="6"><!-- Normal td content here --></td>
+                </ng-container>
+              </ng-template>
+            </ng-container>
+
 
           </tr>
           <tr>
             <td class="text-left colfix">Verificateur</td>
-            <td colspan="2" class="text-left colfix" style="padding-left: 10px;" [colSpan]="6"></td>
+            <ng-container *ngFor="let index of [0, 1,2, 3]; let verifFound = first">
+              <ng-container *ngIf="etapeSelected.controleurs[index]?.designation === 'Verificateur'">
+                <td class="text-left colfix" style="padding-left: 10px;" [colSpan]="6">{{ etapeSelected.controleurs[index]?.username }}</td>
+              </ng-container>
+              <ng-template #normalCell>
+                <ng-container *ngIf="verifFound">
+                  <td colspan="6"><!-- Normal td content here --></td>
+                </ng-container>
+              </ng-template>
+            </ng-container>
           </tr>
+
+
         </tbody>
       </table>
     </div>
-  </div>
+
   <div class="invoice-footer">
       <hr style="border-color: #51121E; border-width: 5px; height: 10px;">
     <br/>

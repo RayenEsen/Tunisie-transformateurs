@@ -78,27 +78,46 @@ export class BobinageComponentComponent implements OnInit {
   Update() {
     // Call the service method to update bobinages
     this.ServiceB.UpdateListBobinage(this.bobinages).subscribe(
-        () => {
-            console.log('Bobinages updated successfully');
-                        // Creating and adding the event
-                        const newEvent = new Event(this.ServiceS.Controleur.idC, 'Participer a le Controle dimensionnelle bobinage BT'
-                        , new Date(),"opéré par " + this.etapeSelected.controleurs[0] + " et " + this.etapeSelected.controleurs[1] +
-                        " pour le transformateur " + this.transformateurId + ".");
-                        this.eventService.AddEvent(newEvent)
-                        .subscribe({
-                        next: (response) => {
-                        console.log('Event added successfully:', response);
-                        },
-                        error: (error) => {
-                        console.error('Error adding event:', error);
-                        }
-                        });
-        },
-        error => {
-            console.error('Error updating bobinages:', error);
-        }
-    );
+      () => {
+        console.log('Bobinages updated successfully');
+
+        // Creating and adding the event
+        const newEvent = new Event(this.ServiceS.Controleur.idC, 'Participer a le Controle dimensionnelle bobinage BT'
+          , new Date(), " pour le transformateur " + this.transformateurId + ".");
+        this.eventService.AddEvent(newEvent)
+          .subscribe({
+            next: (response) => {
+              console.log('Event added successfully:', response);
+// Check if there is already a controller with designation 'Controlleur'
+const existingControllerIndex = this.etapeSelected.controleurs.findIndex(controller => controller.designation === 'Controlleur');
+
+// If there is an existing controller with designation 'Controlleur', replace it
+if (existingControllerIndex !== -1) {
+  this.etapeSelected.controleurs[existingControllerIndex] = this.ServiceS.Controleur;
+} else {
+  // If there is no existing controller with designation 'Controlleur', add the new controller to the end
+  this.etapeSelected.controleurs.push(this.ServiceS.Controleur);
 }
+
+// Update the etapeSelected
+this.ServiceE.UpdateEtape(this.transformateurId, this.etapenumero, this.etapeSelected).subscribe({
+  next: (response) => {
+    console.log('Etape updated successfully:', response);
+    // Handle the response as needed
+  },
+});
+            },
+            error: (error) => {
+              console.error('Error adding event:', error);
+            }
+          });
+      },
+      error => {
+        console.error('Error updating bobinages:', error);
+      }
+    );
+  }
+
 
 
     // Function to handle the print action

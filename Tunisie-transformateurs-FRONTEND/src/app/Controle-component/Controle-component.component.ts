@@ -24,6 +24,7 @@ import { ControleurDeQualite } from '../Shared/Controlleur-service.model';
 export class ControleComponentComponent implements OnInit {
 
   transformateurId: number = 0;
+  filteredEtapes: Etape[] = [];
 
   etapes: Etape[] = []; // Array to store fetched Etapes
   bobinages: Bobinage[] = []; // Array to store fetched Etapes
@@ -31,8 +32,7 @@ export class ControleComponentComponent implements OnInit {
   Magnetiques: Magnetique[] = []; // Array to store fetched Etapes
   Montages: Montage[] = []; // Array to store fetched Etapes
   users: ControleurDeQualite[] = [];
-
-
+  operateurIndexes: number[][] = [];
   constructor(
     private route: ActivatedRoute,
     public serviceE: EtapeServiceService,
@@ -46,29 +46,36 @@ export class ControleComponentComponent implements OnInit {
     public userService : ControlleurServiceService,
   ) {}
 
+
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.transformateurId = +params['id'] || 0;
       this.Service.GetTransformateur(this.transformateurId);
       // Fetch Etapes by Transformateur id
       this.serviceE.getEtapesByTransformateurId(this.transformateurId)
-        .subscribe(
-          etapes => {
-            console.log(etapes);
-            this.etapes = etapes; // Store fetched Etapes in the array
+          .subscribe(
+              etapes => {
+                  console.log(etapes);
+                  // Filter etapes based on "Operateur" designation
+                  this.filteredEtapes = etapes.map(et => ({
+                      ...et,
+                      controleurs: et.controleurs.filter(c => c.designation === 'Operateur' || c === null)
+                  }));
 
-            // Move the code dependent on this.etapes inside this subscription callback
-            this.fetchAndUpdateBobinages();
-            this.fetchAndUpdateBobinagesMT();
-            this.fetchAndUpdateMagnetiques();
-            this.fetchAndUpdateMontages();
-          },
-          error => {
-            console.error('Error loading Etapes', error);
-          }
-        );
+                  // Move the code dependent on this.etapes inside this subscription callback
+                  this.fetchAndUpdateBobinages();
+                  this.fetchAndUpdateBobinagesMT();
+                  this.fetchAndUpdateMagnetiques();
+                  this.fetchAndUpdateMontages();
+              },
+              error => {
+                  console.error('Error loading Etapes', error);
+              }
+          );
     });
   }
+
+
 
   fetchAndUpdateBobinages() {
     this.ServiceBT.getBobinageByTransformateurId(this.transformateurId)
@@ -194,24 +201,34 @@ export class ControleComponentComponent implements OnInit {
     }
   }
 
-
   updateEtape(etapeNumero: number) {
-    const selectedEtape = this.etapes.find(et => et.etapeNumero === etapeNumero);
-    this.etapes.find(et => et.etapeNumero === etapeNumero)!.dateDebut = new Date();
-    if (selectedEtape) {
-      console.log(selectedEtape)
-          this.serviceE.UpdateEtape(this.transformateurId, etapeNumero, selectedEtape)
-            .subscribe(
-              () => {
-                console.log('Etape updated successfully');
-                this.isReadOnly = true;
-              },
-              error => {
-                console.error('Error updating Etape', error);
-              }
-            );
-        }
+    // Find the selected etape from filteredEtapes
+    const selectedFilteredEtape = this.filteredEtapes.find(et => et.etapeNumero === etapeNumero);
+
+    // Update dateDebut for the selected etape
+    if (selectedFilteredEtape) {
+      selectedFilteredEtape.dateDebut = new Date();
+
+      // Apply changes from selectedFilteredEtape to the original etape
+      const index = this.etapes.findIndex(et => et.etapeNumero === etapeNumero);
+      if (index !== -1) {
+        this.etapes[index] = { ...this.etapes[index], ...selectedFilteredEtape };
+      }
+
+      // Update the etape via service
+      this.serviceE.UpdateEtape(this.transformateurId, etapeNumero, selectedFilteredEtape)
+        .subscribe(
+          () => {
+            console.log('Etape updated successfully');
+            this.isReadOnly = true;
+          },
+          error => {
+            console.error('Error updating Etape', error);
+          }
+        );
     }
+  }
+
 
 
     getOrderValue(numeroETAPE: number): number {

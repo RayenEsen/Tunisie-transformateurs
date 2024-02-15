@@ -11,4 +11,5 @@ export class Bobinage {
   cnc?: number;
   nom: string = '';
   transformateur?: Transformateur; // Assuming Transformateur is another TypeScript class
+  controleurDeQualité?: ControleurDeQualite[] = [];
 }
