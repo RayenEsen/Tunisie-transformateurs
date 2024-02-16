@@ -33,7 +33,7 @@
                 Numero/Numéro: {{ service.list[0].numero }}
             </div>
             <div class="my-1">
-                Client/Customer: Ste Bouzid d'electrique
+                Client/Customer: {{service.list[0].client}}
             </div>
             <div class="my-1"><b class="text-600">Norme/Standard: {{ service.list[0].norme }}</b></div>
         </div>
@@ -318,9 +318,9 @@
   </div>
   <div class="invoice-footer">
     <div style="display: flex; justify-content: space-between;">
-      <strong style="text-align: left;">Customer <br> Client</strong>
-      <strong style="text-align: center;">R.Laboratory <br> R.Loborataire</strong>
-      <strong style="text-align: right;">R. Technical <br>R.Technique</strong>
+      <strong style="text-align: left;">Customer <br> Client<br> {{service.list[0].client}}</strong>
+      <strong style="text-align: center;">R.Laboratory <br> R.Loborataire <br> {{pv[0].controleurDeQualite?.username}} </strong>
+      <strong style="text-align: right;">R. Technical <br>R.Technique<br> {{pv[0].technique}} </strong>
   </div>
       <hr style="border-color: #51121E; border-width: 5px; height: 10px;">
     <br/>

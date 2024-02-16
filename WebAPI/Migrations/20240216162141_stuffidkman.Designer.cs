@@ -12,15 +12,15 @@ using WebAPI.Model;
 namespace WebAPI.Migrations
 {
     [DbContext(typeof(TransformateurContext))]
-    [Migration("20240215143408_test")]
-    partial class test
+    [Migration("20240216162141_stuffidkman")]
+    partial class stuffidkman
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.1")
+                .HasAnnotation("ProductVersion", "8.0.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -473,6 +473,9 @@ namespace WebAPI.Migrations
                     b.Property<int?>("Tappings")
                         .HasColumnType("int");
 
+                    b.Property<string>("Technique")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<float?>("Temp")
                         .HasColumnType("real");
 
@@ -847,7 +850,7 @@ namespace WebAPI.Migrations
 
             modelBuilder.Entity("WebAPI.Model.Pv", b =>
                 {
-                    b.HasOne("WebAPI.Model.ControleurDeQualité", "ControleurDeQualité")
+                    b.HasOne("WebAPI.Model.ControleurDeQualité", "ControleurDeQualite")
                         .WithMany("Pvs")
                         .HasForeignKey("IdC")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -859,7 +862,7 @@ namespace WebAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ControleurDeQualité");
+                    b.Navigation("ControleurDeQualite");
                 });
 
             modelBuilder.Entity("WebAPI.Model.Remplissage", b =>

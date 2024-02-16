@@ -34,7 +34,7 @@ namespace WebAPI.Model
             // Configure one-to-many relationship between ControleurDeQualité and Pv
             modelBuilder.Entity<ControleurDeQualité>()
                 .HasMany(c => c.Pvs)
-                .WithOne(p => p.ControleurDeQualité)
+                .WithOne(p => p.ControleurDeQualite)
                 .HasForeignKey(p => p.IdC);
 
 

@@ -169,7 +169,6 @@ export class ControleComponentComponent implements OnInit {
     const selectedEtape = this.etapes.find(et => et.etapeNumero === etapeNumero);
     if (selectedEtape) {
         selectedEtape.dateFin = new Date();
-
         this.serviceE.UpdateEtape(this.transformateurId, etapeNumero, selectedEtape)
             .subscribe(
                 () => {
@@ -269,6 +268,8 @@ export class ControleComponentComponent implements OnInit {
           return 'Encuvage';
         case 15:
           return 'Remplissage et Etancheite';
+        case 17:
+          return 'Peinture';
         default:
           return 'Default Title';
       }

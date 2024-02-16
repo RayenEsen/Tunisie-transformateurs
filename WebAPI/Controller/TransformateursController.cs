@@ -128,7 +128,7 @@ namespace WebAPI.Controller
             // Perform a search based on the searchTerm
             var result = await _context.transformateurs
                 .Include(t => t.Pv)
-                .Include(t => t.Pv.ControleurDeQualité)
+                .Include(t => t.Pv.ControleurDeQualite)
                 .Where(t =>
                     t.Marque.Contains(searchTerm) ||
                     t.Client.Contains(searchTerm) ||
@@ -140,7 +140,7 @@ namespace WebAPI.Controller
                     t.Libelle.Contains(searchTerm) ||
                     t.Type.Contains(searchTerm) ||
                     t.Pv.Resultat.Contains(searchTerm) ||
-                    t.Pv.ControleurDeQualité.Username.Contains(searchTerm) ||
+                    t.Pv.ControleurDeQualite.Username.Contains(searchTerm) ||
                     t.Numero.ToString().Contains(searchTerm))
                 .ToListAsync();
 

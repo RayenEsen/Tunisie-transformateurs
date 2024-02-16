@@ -130,6 +130,37 @@ export class BobinageMTComponentComponent implements OnInit {
     );
 }
 
+hasControleur(): boolean {
+  if (!this.etapeSelected || !this.etapeSelected.controleurs) {
+    return false; // If etapeSelected or controleurs is not defined or null, return false
+  }
+
+  // Loop through controleurs array to find if any controller has the designation "Controleur"
+  for (let index = 0; index < this.etapeSelected.controleurs.length; index++) {
+    if (this.etapeSelected.controleurs[index]?.designation === 'Controleur') {
+      return true; // If found, return true
+    }
+  }
+
+  return false; // If not found, return false
+}
+
+
+hasVerificateur(): boolean {
+  if (!this.etapeSelected || !this.etapeSelected.controleurs) {
+    return false; // If etapeSelected or controleurs is not defined or null, return false
+  }
+
+  // Loop through controleurs array to find if any controller has the designation "Verificateur"
+  for (let index = 0; index < this.etapeSelected.controleurs.length; index++) {
+    if (this.etapeSelected.controleurs[index]?.designation === 'Verificateur') {
+      return true; // If found, return true
+    }
+  }
+
+  return false; // If not found, return false
+}
+
 
     // Function to handle the print action
     onPrint() {

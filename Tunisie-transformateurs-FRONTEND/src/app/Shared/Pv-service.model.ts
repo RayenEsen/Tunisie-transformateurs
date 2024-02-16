@@ -5,7 +5,7 @@ export class Pv {
   date: Date = new Date();
   resultat: string = 'en Attente';
   idC : string = ""; // Foreign key
-
+  technique?: string;
   // Voltage Ratio properties (nullable)
   tappings: number = 0;
   version: number = 6;

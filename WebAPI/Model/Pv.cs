@@ -14,6 +14,8 @@ namespace WebAPI.Model
         public string IdC { get; set; } = ""; // Foreign key
         public DateTime Date { get; set; } = DateTime.Now; // Initialize with current date
         public string? Resultat { get; set; } // Result property
+        public string? Technique { get; set; } 
+
         //Voltage Ratio Data
         public int? Tappings { get; set; }
         public int? Version { get; set; }
@@ -67,6 +69,6 @@ namespace WebAPI.Model
         public float? U3 { get; set; }
         public float? T3 { get; set; }
         public float? Claquage { get; set; }
-        public ControleurDeQualité? ControleurDeQualité { get; set; }
+        public ControleurDeQualité? ControleurDeQualite { get; set; }
     }
 }

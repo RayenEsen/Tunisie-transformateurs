@@ -45,7 +45,10 @@ namespace WebAPI.Controller
         public async Task<ActionResult<IEnumerable<Pv>>> GetPvsByTransformateur(int transformateurId)
         {
             // Retrieve all PVs that correspond to the given Transformateur ID
-            var pvs = await _context.pvs.Where(p => p.Id_t == transformateurId).ToListAsync();
+            var pvs = await _context.pvs
+                .Include(p => p.ControleurDeQualite) // Include the ControleurDeQualite navigation property
+                .Where(p => p.Id_t == transformateurId)
+                .ToListAsync();
 
             if (pvs == null || pvs.Count == 0)
             {

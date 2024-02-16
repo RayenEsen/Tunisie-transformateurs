@@ -1,0 +1,120 @@
+
+/* Card styles */
+.card {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 15px;
+  margin-top: 20px;
+  background-color: #fff;
+  border: 1px solid #eee;
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+}
+
+
+/* Hover effect on the logo */
+.logo {
+  transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out; /* Adding scale and filter transitions */
+}
+
+.logo:hover {
+  transform: scale(1.05) translate(2px, -2px); /* Slight scaling up and movement on hover */
+  filter: brightness(1.2); /* Slight increase in brightness on hover */
+}
+/* Styling for input fields */
+input {
+  width: 100%; /* Make the input fields fill the width of their parent */
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  transition: all 0.3s ease-in-out;
+}
+
+
+
+/* Hover effect on input fields */
+input:hover {
+  border-color: #555;
+}
+
+/* Focus effect on input fields */
+input:focus {
+  outline: none;
+  border-color: #2196F3;
+  box-shadow: 0 0 5px rgba(33, 150, 243, 0.5);
+}
+
+/* Animation for input fields */
+input {
+  transform: scale(1);
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Scale up effect on hover for input fields */
+input:hover {
+  transform: scale(1.05);
+}
+
+
+
+/* Hover effect on images */
+img:hover {
+  opacity: 0.8; /* Adjust opacity as needed */
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* Animation for images */
+img {
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Scale up effect on hover for images */
+img:hover {
+  transform: scale(1.1);
+}
+/* Styles for input fields in print media */
+@media print {
+  input[type="text"] {
+    border: none;
+    padding: 0;
+    background: none;
+    box-shadow: none;
+  }
+}
+
+@media print {
+  .printable {
+    display: none;
+  }
+}
+/* Styles for print media */
+@media print {
+  /* Styles for input fields in print media */
+  input[type="number"] {
+    border: none;
+    padding: 0;
+    background: none;
+    box-shadow: none;
+  }
+}
+
+@page {
+  size: auto;
+  margin: 0;
+       }
+       .text-light {
+        color: #920303 !important;
+    }
+/* Styling for the logo */
+.logo {
+  max-height: 70px;
+  border-radius: 10px;
+  transition: transform 0.3s ease-in-out, max-height 0.3s ease-in-out; /* Adding a transform and max-height transition */
+}
+
+

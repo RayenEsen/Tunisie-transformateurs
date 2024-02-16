@@ -49,7 +49,14 @@
         this.pv[0].zccm1=this.getZccPourcentage();
         this.pv[0].zcmm2=this.getZcc2();
         this.pv[0].wccm2=this.getwccm2();
-        this.pv[0].idC=this.ServiceS.Controleur.idC;
+        if(this.ServiceS.Controleur.designation==="Verificateur")
+        {
+          this.pv[0].technique=this.ServiceS.Controleur.username;
+        }
+        if(this.ServiceS.Controleur.designation==="Controleur")
+        {
+          this.pv[0].idC=this.ServiceS.Controleur.idC;
+        }
         // Call a service method to update the Pv values on the server
         this.pvService.UpdatePv(this.pv[0].id_pv, this.pv[0]).subscribe(
           response => {

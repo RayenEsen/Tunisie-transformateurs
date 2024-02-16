@@ -19,6 +19,7 @@ import { UsersComponentComponent } from './Users-component/Users-component.compo
 import { ApresMontageComponentComponent } from './ApresMontage-component/ApresMontage-component.component'
 import { EcuvageComponentComponent } from './Ecuvage-component/Ecuvage-component.component';
 import { RemplissageComponentComponent } from './Remplissage-component/Remplissage-component.component';
+import { LivraisonComponentComponent } from './Livraison-component/Livraison-component.component';
 const routes: Routes = [
   { path: 'Transformateur', component: TransformateurInfoComponent , canActivate: [AuthGuard]},
   { path: 'Ajouter_Transformateur', component: Add_ModifyTransformateurComponent , canActivate: [AuthGuard]},
@@ -33,13 +34,13 @@ const routes: Routes = [
   { path: 'BobinageMT/:id/:etapenumero' , component : BobinageMTComponentComponent , canActivate: [AuthGuard]},
   { path: 'Magnetique/:id/:etapenumero' , component : MagnetiqueComponentComponent , canActivate: [AuthGuard]},
   { path: 'Ecuvage/:id/:etapenumero' , component : EcuvageComponentComponent, canActivate: [AuthGuard]},
-
+  { path: 'Livraison', component : LivraisonComponentComponent ,  canActivate: [AuthGuard]},
   { path: 'Montage/:id/:etapenumero' , component : MontageComponentComponent , canActivate: [AuthGuard]},
   { path: 'ApresMontage/:id/:etapenumero' , component : ApresMontageComponentComponent , canActivate: [AuthGuard]},
   { path: 'Remplissage/:id/:etapenumero' , component : RemplissageComponentComponent, canActivate: [AuthGuard]},
-
   { path: 'Sign_up' , component : InscriptionComponentComponent},
   { path: 'Controle/:id' , component : ControleComponentComponent, canActivate: [AuthGuard]},
+
   // New route with parameter
   { path: '', component: DefaultComponentComponent }, // Default route
   // Add other routes as needed
