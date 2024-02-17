@@ -1,4 +1,4 @@
-<div class="container" style="padding-left: 45px;   margin-top:20px; padding-bottom: 100px;  min-height: 700px;">
+<div class="container" style="padding-left: 45px;   margin-top:20px; padding-bottom: 300px;  min-height: 700px;">
 
   <div class="row">
 
@@ -85,7 +85,7 @@
                               <th>Client</th>
                             </tr>
                             <tr *ngFor="let transformateur of list">
-                              <td style="white-space: nowrap;color: #122151;">{{ this.list[0].date | date:'yyyy-MM-dd' }}</td>
+                              <td style="white-space: nowrap;color: #122151;">{{ this.transformateur.date | date:'yyyy-MM-dd' }}</td>
                               <td style="color: #122151;">123456</td>
                               <td style="color: #122151;">{{this.transformateur.client}}</td>
                               <td style="color: #122151;">{{this.transformateur.numero}}</td>

@@ -53,6 +53,7 @@ export class UsersComponentComponent implements OnInit {
 
 
   Update(id: string, User: ControleurDeQualite) {
+    console.log(this.ServiceS.Controleur)
     this.ServiceC.UpdateControleurById(id, User)
       .subscribe({
         next: (response) => {
@@ -66,6 +67,7 @@ export class UsersComponentComponent implements OnInit {
           } else {
             console.error('Controleur not found for id:', id);
           }
+          console.log(this.ServiceS.Controleur)
         },
         error: (error) => {
           // Handle the error

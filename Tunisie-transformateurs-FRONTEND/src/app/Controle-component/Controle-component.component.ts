@@ -75,21 +75,19 @@ export class ControleComponentComponent implements OnInit {
     });
   }
 
-
-
   fetchAndUpdateBobinages() {
     this.ServiceBT.getBobinageByTransformateurId(this.transformateurId)
       .subscribe(
         bobinages => {
           console.log(bobinages);
-          // Check if this.etapes[0] is defined before accessing its properties
-          if (bobinages.every(b => b.bt1 !== null) && this.etapes[0] && this.etapes[0].dateFin === null) {
+          // Check if filteredEtapes[0] is defined before accessing its properties
+          if (bobinages.every(b => b.bt1 !== null) && this.filteredEtapes[0] && this.filteredEtapes[0].dateFin === null) {
             this.updateEtapeDateFin(1);
           }
-          if (bobinages.every(b => b.bt2 !== null) && this.etapes[1] && this.etapes[1].dateFin === null) {
+          if (bobinages.every(b => b.bt2 !== null) && this.filteredEtapes[1] && this.filteredEtapes[1].dateFin === null) {
             this.updateEtapeDateFin(2);
           }
-          if (bobinages.every(b => b.bt3 !== null) && this.etapes[2] && this.etapes[2].dateFin === null) {
+          if (bobinages.every(b => b.bt3 !== null) && this.filteredEtapes[2] && this.filteredEtapes[2].dateFin === null) {
             this.updateEtapeDateFin(3);
           }
         }
@@ -101,14 +99,14 @@ export class ControleComponentComponent implements OnInit {
       .subscribe(
         bobinagesMT => {
           console.log(bobinagesMT);
-          // Check if this.etapes[3] is defined before accessing its properties
-          if (bobinagesMT.every(b => b.bt1 !== null) && this.etapes[3] && this.etapes[3].dateFin === null) {
+          // Check if filteredEtapes[3] is defined before accessing its properties
+          if (bobinagesMT.every(b => b.bt1 !== null) && this.filteredEtapes[3] && this.filteredEtapes[3].dateFin === null) {
             this.updateEtapeDateFin(4);
           }
-          if (bobinagesMT.every(b => b.bt2 !== null) && this.etapes[4] && this.etapes[4].dateFin === null) {
+          if (bobinagesMT.every(b => b.bt2 !== null) && this.filteredEtapes[4] && this.filteredEtapes[4].dateFin === null) {
             this.updateEtapeDateFin(5);
           }
-          if (bobinagesMT.every(b => b.bt3 !== null) && this.etapes[5] && this.etapes[5].dateFin === null) {
+          if (bobinagesMT.every(b => b.bt3 !== null) && this.filteredEtapes[5] && this.filteredEtapes[5].dateFin === null) {
             this.updateEtapeDateFin(6);
           }
         }
@@ -130,7 +128,7 @@ export class ControleComponentComponent implements OnInit {
             item.f3c3p !== null
           );
 
-          if (allConditionsMet && this.etapes[6] && this.etapes[6].dateFin === null && this.etapes[7] && this.etapes[7].dateFin === null) {
+          if (allConditionsMet && this.filteredEtapes[6] && this.filteredEtapes[6].dateFin === null && this.filteredEtapes[7] && this.filteredEtapes[7].dateFin === null) {
             this.updateEtapeDateFin(7);
             this.updateEtapeDateFin(8);
           }
@@ -153,7 +151,7 @@ export class ControleComponentComponent implements OnInit {
             item.c3p !== null
           );
 
-          if (allConditionsMet && this.etapes[8] && this.etapes[8].dateFin === null && this.etapes[9] && this.etapes[9].dateFin === null && allConditionsMet && this.etapes[10] && this.etapes[10].dateFin === null && allConditionsMet && this.etapes[11] && this.etapes[11].dateFin === null) {
+          if (allConditionsMet && this.filteredEtapes[8] && this.filteredEtapes[8].dateFin === null && this.filteredEtapes[9] && this.filteredEtapes[9].dateFin === null && allConditionsMet && this.filteredEtapes[10] && this.filteredEtapes[10].dateFin === null && allConditionsMet && this.filteredEtapes[11] && this.filteredEtapes[11].dateFin === null) {
             this.updateEtapeDateFin(9);
             this.updateEtapeDateFin(10);
             this.updateEtapeDateFin(11);
@@ -163,25 +161,24 @@ export class ControleComponentComponent implements OnInit {
       );
   }
 
-
-
   updateEtapeDateFin(etapeNumero: number) {
-    const selectedEtape = this.etapes.find(et => et.etapeNumero === etapeNumero);
+    const selectedEtape = this.filteredEtapes.find(et => et.etapeNumero === etapeNumero);
     if (selectedEtape) {
-        selectedEtape.dateFin = new Date();
-        this.serviceE.UpdateEtape(this.transformateurId, etapeNumero, selectedEtape)
-            .subscribe(
-                () => {
-                    console.log(`Etape ${etapeNumero} dateFin updated successfully`);
-                },
-                error => {
-                    console.error(`Error updating Etape ${etapeNumero} dateFin`, error);
-                }
-            );
+      selectedEtape.dateFin = new Date();
+      this.serviceE.UpdateEtape(this.transformateurId, etapeNumero, selectedEtape)
+        .subscribe(
+          () => {
+            console.log(`Etape ${etapeNumero} dateFin updated successfully`);
+          },
+          error => {
+            console.error(`Error updating Etape ${etapeNumero} dateFin`, error);
+          }
+        );
     } else {
-        console.error(`Etape ${etapeNumero} not found`);
+      console.error(`Etape ${etapeNumero} not found`);
     }
-}
+  }
+
 
 
   isReadOnly: boolean = true;
