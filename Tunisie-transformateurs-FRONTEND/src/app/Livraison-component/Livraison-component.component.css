@@ -117,4 +117,25 @@ img:hover {
   transition: transform 0.3s ease-in-out, max-height 0.3s ease-in-out; /* Adding a transform and max-height transition */
 }
 
+/* Table styles */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th, .table td {
+  padding: 12px;
+  text-align: center;
+  border: 1px solid #e0e0e0;
+}
+
+.table th {
+  font-weight: bold;
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+.table tbody tr:nth-child(even) {
+  background-color: #fafafa;
+}
 
