@@ -20,11 +20,12 @@ namespace WebAPI.Controller
             _context = context;
         }
 
-        // GET: api/Pvs
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Pv>>> Getpvs()
         {
-            return await _context.pvs.ToListAsync();
+            return await _context.pvs
+                .Include(pv => pv.ControleurDeQualite) // Include the ControleurDeQualite navigation property
+                .ToListAsync();
         }
 
         // GET: api/Pvs/5

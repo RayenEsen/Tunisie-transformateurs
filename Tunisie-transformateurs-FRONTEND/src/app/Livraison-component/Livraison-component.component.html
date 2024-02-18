@@ -1,4 +1,4 @@
-<div class="container" style="padding-left: 45px;   margin-top:20px; padding-bottom: 300px;  min-height: 700px;">
+<div class="container" style="padding-left: 45px;   margin-top:20px; padding-bottom: 500px;  min-height: 700px;">
 
   <div class="row">
 
@@ -6,7 +6,7 @@
 
           <div class="card">
 
-            <div class="container">
+            <div class="container" style="padding-bottom: 50px;">
               <div style="display: flex;margin-top: -15px;">
                 <img src="assets/LogoPV.png" style="width: 300px">
                 <img src="assets/9001ISO.png" style="width: 180px; height: 70px; margin-left: 230px;">
@@ -59,7 +59,7 @@
                 <div class="panel panel-default" style="padding-block: 10px;">
 
                   <div class="table-responsive" style="width: fit-content;">
-                    <table class="table table-hover mb-0" >
+                    <table class="table table-hover mb-0">
                         <thead>
                             <tr class="align-self-center">
                               <th rowspan="2">Date</th>
@@ -75,7 +75,7 @@
                               <th style="writing-mode: vertical-rl; text-orientation: mixed;">Thermostat</th>
                               <th style="writing-mode: vertical-rl; text-orientation: mixed;">Galet</th>
                               <th style="writing-mode: vertical-rl; text-orientation: mixed;">Borne</th>
-                              <th style="writing-mode: vertical-rl; text-orientation: mixed;">Asscheur</th>
+                              <th style="writing-mode: vertical-rl; text-orientation: mixed;">Assecheur</th>
                               <th style="writing-mode: vertical-rl; text-orientation: mixed;">Capot</th>
                               <th style="writing-mode: vertical-rl; text-orientation: mixed;">Relais</th>
                               <th style="writing-mode: vertical-rl; text-orientation: mixed;">SANS</th>
@@ -90,18 +90,19 @@
                               <td style="color: #122151;">{{this.transformateur.client}}</td>
                               <td style="color: #122151;">{{this.transformateur.numero}}</td>
                               <td style="color: #122151;">{{this.transformateur.power}}</td>
+                              <td><span class="fa fa-check text-primary" *ngIf="transformateur.accessoires==='NONDMCR' ; else notMet"></span></td>
                               <td><span class="fa fa-check text-primary"></span></td>
-                              <td><span class="fa fa-times text-danger"></span></td>
+                              <td><span class="fa fa-check text-primary" *ngIf="transformateur.accessoires2==='Borne'; else notMet"></span></td>
+                              <td><span class="fa fa-check text-primary" *ngIf="transformateur.accessoires==='NONDMCR' ; else notMet"></span></td>
                               <td><span class="fa fa-check text-primary"></span></td>
-                              <td><span class="fa fa-times text-danger"></span></td>
+                              <td><span class="fa fa-check text-primary" *ngIf="transformateur.accessoires==='NONDMCR' ; else notMet"></span></td>
                               <td><span class="fa fa-check text-primary"></span></td>
-                              <td><span class="fa fa-times text-danger"></span></td>
-                              <td><span class="fa fa-check text-primary"></span></td>
-                              <td></td>
-                              <td></td>
-                              <td></td>
+                              <td>{{ transformateur.pv?.resultat}}</td>
+                              <td>{{ transformateur.pv?.controleurDeQualite?.username }}</td>
+                              <td>{{ transformateur.pv?.technique}}</td>
                               <td></td>
                             </tr>
+                            <ng-template #notMet><span class="fa fa-times text-danger" style="border-radius: 0;"></span></ng-template>
                         </thead>
                         <tbody>
 

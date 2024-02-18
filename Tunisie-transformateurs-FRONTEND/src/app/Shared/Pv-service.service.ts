@@ -31,5 +31,7 @@ export class PvServiceService {
     const apiUrl = `${this.url}/CountByResult/${result}`;
     return this.http.get<number>(apiUrl);
   }
-
+  getPvs(): Observable<Pv[]> {
+    return this.http.get<Pv[]>(this.url);
+  }
 }

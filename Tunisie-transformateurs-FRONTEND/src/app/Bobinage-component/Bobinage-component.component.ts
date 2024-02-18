@@ -28,6 +28,7 @@ export class BobinageComponentComponent implements OnInit {
     ) { }
 
   ngOnInit() {
+    console.log(this.ServiceS.Controleur)
     this.route.params.subscribe(params => {
       this.transformateurId = +params['id'] || 0;
       this.etapenumero= +params['etapenumero'] || 0;

@@ -49,6 +49,7 @@
         this.pv[0].zccm1=this.getZccPourcentage();
         this.pv[0].zcmm2=this.getZcc2();
         this.pv[0].wccm2=this.getwccm2();
+        console.log(this.ServiceS.Controleur)
         if(this.ServiceS.Controleur.designation==="Verificateur")
         {
           this.pv[0].technique=this.ServiceS.Controleur.username;

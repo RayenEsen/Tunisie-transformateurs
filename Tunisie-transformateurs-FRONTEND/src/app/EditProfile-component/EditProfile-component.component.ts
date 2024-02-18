@@ -20,6 +20,7 @@ export class EditProfileComponentComponent implements OnInit {
         next: (result: ControleurDeQualite) => {
           // Assuming the result is of type ControleurDeQualite
           this.Controleur = result;
+          this.ServiceS.Controleur.designation=this.Controleur.designation;
         },
         error: (error) => {
           console.error('Error fetching data:', error);
@@ -33,6 +34,7 @@ export class EditProfileComponentComponent implements OnInit {
 
   Update() {
     if (this.ConfirmPassword()) {
+      this.ServiceS.Controleur=this.Controleur;
       this.ServiceC.UpdateControleurById(this.Controleur.idC,this.Controleur)
         .subscribe({
           next: (response) => {
