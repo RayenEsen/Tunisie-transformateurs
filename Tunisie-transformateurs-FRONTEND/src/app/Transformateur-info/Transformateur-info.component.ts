@@ -33,6 +33,7 @@ export class TransformateurInfoComponent implements OnInit {
     this.service.refreshList2().subscribe({
       next: (res: Transformateur[]) => {
         this.list = res;
+        console.log(this.list)
         if (this.list.length > 0) {
           // Iterate through each item in this.list
           this.list.forEach((transformateur, index) => {
@@ -50,7 +51,6 @@ export class TransformateurInfoComponent implements OnInit {
                         next: (result: ControleurDeQualite) => {
                           // Assuming the result is of type ControleurDeQualite
                           // Assign the ControleurDeQualite to the current Pv
-                          console.log(this.list[index])
                           this.list[currentIndex].pv!.controleurDeQualite = result;
                         },
                         error: (error) => {

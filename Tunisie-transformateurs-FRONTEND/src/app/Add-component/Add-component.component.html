@@ -141,6 +141,7 @@
           [(ngModel)]="transformateurAjouter.frequency"
         />
       </div>
+
       <div class="formbold-input-wrapp formbold-mb-3">
         <label for="firstname" class="formbold-form-label" style="color: #122151;"> Libelle <small style="color: red;">*</small></label>
         <div>
@@ -151,9 +152,56 @@
           </select>
         </div>
       </div>
+      <div class="formbold-input-wrapp formbold-mb-3">
+        <label for="accessories" class="formbold-form-label" style="color: #122151;">Accessoires 1<small style="color: red;">*</small></label>
+        <div style="display: block;">
+          <div class="checkbox-wrapper">
+            <input id="option1" name="option1" type="checkbox" value="Galet" [(ngModel)]="transformateurAjouter.galet">
+            <label class="terms-label" for="option1">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 200 200" class="checkbox-svg">
+                <mask fill="white" id="path-1-inside-1_476_5-37">
+                  <rect height="200" width="200"></rect>
+                </mask>
+                <rect mask="url(#path-1-inside-1_476_5-37)" stroke-width="40" class="checkbox-box" height="200" width="200"></rect>
+                <path stroke-width="15" d="M52 111.018L76.9867 136L149 64" class="checkbox-tick"></path>
+              </svg>
+              <span class="label-text">Galet</span>
+            </label>
+          </div>
+
+          <div class="checkbox-wrapper">
+            <input id="option2" name="option2" type="checkbox" value="Capot" [(ngModel)]="transformateurAjouter.capot">
+            <label class="terms-label" for="option2">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 200 200" class="checkbox-svg">
+                <mask fill="white" id="path-1-inside-1_476_5-37">
+                  <rect height="200" width="200"></rect>
+                </mask>
+                <rect mask="url(#path-1-inside-1_476_5-37)" stroke-width="40" class="checkbox-box" height="200" width="200"></rect>
+                <path stroke-width="15" d="M52 111.018L76.9867 136L149 64" class="checkbox-tick"></path>
+              </svg>
+              <span class="label-text">Capot</span>
+            </label>
+          </div>
+
+          <div class="checkbox-wrapper">
+            <input id="option3" name="option3" type="checkbox" value="Sans" [(ngModel)]="transformateurAjouter.sans">
+            <label class="terms-label" for="option3">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 200 200" class="checkbox-svg">
+                <mask fill="white" id="path-1-inside-1_476_5-37">
+                  <rect height="200" width="200"></rect>
+                </mask>
+                <rect mask="url(#path-1-inside-1_476_5-37)" stroke-width="40" class="checkbox-box" height="200" width="200"></rect>
+                <path stroke-width="15" d="M52 111.018L76.9867 136L149 64" class="checkbox-tick"></path>
+              </svg>
+              <span class="label-text">Sans</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
 
       <div class="formbold-input-wrapp formbold-mb-3">
-        <label for="firstname" class="formbold-form-label" style="color: #122151;"> Accessoires 1<small style="color: red;">*</small></label>
+        <label for="firstname" class="formbold-form-label" style="color: #122151;"> Accessoires 2<small style="color: red;">*</small></label>
         <div>
           <select class="formbold-form-input" name="Accessoires" id="occupation"  [(ngModel)]="transformateurAjouter.accessoires">
             <option value="" disabled selected>Sélectionner les Accessoires</option>
@@ -164,7 +212,7 @@
       </div>
 
       <div class="formbold-input-wrapp formbold-mb-3">
-        <label for="firstname" class="formbold-form-label" style="color: #122151;"> Accessoires 2<small style="color: red;">*</small></label>
+        <label for="firstname" class="formbold-form-label" style="color: #122151;"> Accessoires 3<small style="color: red;">*</small></label>
         <div>
           <select class="formbold-form-input" name="Accessoires" id="occupation"  [(ngModel)]="transformateurAjouter.accessoires2">
             <option value="" disabled selected>Sélectionner les Accessoires</option>

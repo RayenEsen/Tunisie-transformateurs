@@ -20,7 +20,8 @@ export class EditProfileComponentComponent implements OnInit {
         next: (result: ControleurDeQualite) => {
           // Assuming the result is of type ControleurDeQualite
           this.Controleur = result;
-          this.ServiceS.Controleur.designation=this.Controleur.designation;
+          this.ServiceS.Controleur=this.Controleur;
+          console.log(this.ServiceS.Controleur)
         },
         error: (error) => {
           console.error('Error fetching data:', error);

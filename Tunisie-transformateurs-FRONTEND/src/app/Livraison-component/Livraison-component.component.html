@@ -1,4 +1,4 @@
-<div class="container" style="padding-left: 45px;   margin-top:20px; padding-bottom: 500px;  min-height: 700px;">
+<div class="container" style="padding-left: 45px;   margin-top:20px; padding-bottom: 300px;  min-height: 700px;">
 
   <div class="row">
 
@@ -91,12 +91,12 @@
                               <td style="color: #122151;">{{this.transformateur.numero}}</td>
                               <td style="color: #122151;">{{this.transformateur.power}}</td>
                               <td><span class="fa fa-check text-primary" *ngIf="transformateur.accessoires==='NONDMCR' ; else notMet"></span></td>
-                              <td><span class="fa fa-check text-primary"></span></td>
+                              <td><span class="fa fa-check text-primary" *ngIf="transformateur.galet==='Galet' ; else notMet"></span></td>
                               <td><span class="fa fa-check text-primary" *ngIf="transformateur.accessoires2==='Borne'; else notMet"></span></td>
                               <td><span class="fa fa-check text-primary" *ngIf="transformateur.accessoires==='NONDMCR' ; else notMet"></span></td>
-                              <td><span class="fa fa-check text-primary"></span></td>
+                              <td><span class="fa fa-check text-primary" *ngIf="transformateur.capot==='Capot' ; else notMet"></span></td>
                               <td><span class="fa fa-check text-primary" *ngIf="transformateur.accessoires==='NONDMCR' ; else notMet"></span></td>
-                              <td><span class="fa fa-check text-primary"></span></td>
+                              <td><span class="fa fa-check text-primary" *ngIf="transformateur.sans==='Sans' ; else notMet"></span></td>
                               <td>{{ transformateur.pv?.resultat}}</td>
                               <td>{{ transformateur.pv?.controleurDeQualite?.username }}</td>
                               <td>{{ transformateur.pv?.technique}}</td>

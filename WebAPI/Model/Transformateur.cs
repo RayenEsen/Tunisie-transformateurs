@@ -42,6 +42,9 @@ namespace WebAPI.Model
         public string Accessoires { get; set; } = "";
         public string Accessoires2 { get; set; } = "";
         public string Etat { get; set; } = "";
+        public string Galet { get; set; } = "";
+        public string Capot { get; set; } = "";
+        public string Sans { get; set; } = "";
 
         public string Bornesembrochables { get; set; } = "";
         public float Frequency { get; set; }
@@ -58,7 +61,6 @@ namespace WebAPI.Model
         public ICollection<Etape1>? Etapes1 { get; set; }
         public ICollection<Ecuvage>? Ecuvage { get; set; }
         public ICollection<Remplissage>? Remplissage { get; set; }
-
-
+        public ICollection<Peinture>? Peinture { get; set; }
     }
 }

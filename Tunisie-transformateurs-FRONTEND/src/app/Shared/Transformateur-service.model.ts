@@ -24,6 +24,9 @@ export class Transformateur {
   accessoires: string = "";
   accessoires2: string = "";
   etat: string = "";
+  galet: string = "";
+  capot: string = "";
+  sans: string = "";
 
   bornesembrochables: string  = "";
   frequency: number = 0;

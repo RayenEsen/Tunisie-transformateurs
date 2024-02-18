@@ -57,7 +57,10 @@ export class AddComponentComponent implements OnInit {
     accessoires: '',
     bornesembrochables: '',
     accessoires2: '',
-    etat: ''
+    etat: '',
+    galet: '',
+    capot: '',
+    sans: ''
   };
 
   constructor(public service: TransformateurServiceService,
@@ -94,7 +97,10 @@ export class AddComponentComponent implements OnInit {
         alert("Tout les champs sont obligatoires");
         return;
       }
-
+      this.transformateurAjouter.galet = this.transformateurAjouter.galet ? "Galet" : "";
+      this.transformateurAjouter.capot = this.transformateurAjouter.capot ? "Capot" : "";
+      this.transformateurAjouter.sans = this.transformateurAjouter.sans ? "Sans" : "";
+      console.log(this.transformateurAjouter)
       this.service.AddTransformateur(this.transformateurAjouter)
         .pipe(
           concatMap(() => {
