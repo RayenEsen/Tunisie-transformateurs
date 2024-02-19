@@ -286,6 +286,8 @@ export class ControleComponentComponent implements OnInit {
             return ['/Ecuvage', this.transformateurId,etapeNumero];
         case 15:
           return ['/Remplissage', this.transformateurId,etapeNumero];
+        case 17:
+          return ['/Peinture', this.transformateurId,etapeNumero];
         default:
           // Add default route or handle other cases as needed
           return ['/DefaultRoute'];

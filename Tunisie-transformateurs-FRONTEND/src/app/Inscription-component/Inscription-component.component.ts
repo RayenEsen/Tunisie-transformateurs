@@ -51,4 +51,9 @@ export class InscriptionComponentComponent implements OnInit {
       alert("Toutes les entrées sont obligatoires.");
     }
   }
+  eyeClosed: boolean = true;
+
+  toggleEye() {
+    this.eyeClosed = !this.eyeClosed;
+  }
 }

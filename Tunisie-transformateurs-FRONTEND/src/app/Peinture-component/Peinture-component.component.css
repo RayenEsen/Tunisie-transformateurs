@@ -1,0 +1,223 @@
+body {
+  margin-top: 20px;
+}
+.timeline_area {
+  position: relative;
+  z-index: 1;
+}
+.single-timeline-area {
+  position: relative;
+  z-index: 1;
+  padding-left: 180px;
+}
+@media only screen and (max-width: 575px) {
+  .single-timeline-area {
+      padding-left: 100px;
+  }
+}
+.single-timeline-area .timeline-date {
+  position: absolute;
+  width: 180px;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -ms-grid-row-align: center;
+  align-items: center;
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  padding-right: 60px;
+}
+@media only screen and (max-width: 575px) {
+  .single-timeline-area .timeline-date {
+      width: 100px;
+  }
+}
+.single-timeline-area .timeline-date::after {
+  position: absolute;
+  width: 3px;
+  height: 100%;
+  content: "";
+  background-color: #ebebeb;
+  top: 0;
+  right: 30px;
+  z-index: 1;
+}
+.single-timeline-area .timeline-date::before {
+  position: absolute;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background-color: #122151;
+  content: "";
+  top: 50%;
+  right: 26px;
+  z-index: 5;
+  margin-top: -5.5px;
+}
+.single-timeline-area .timeline-date p {
+  margin-bottom: 0;
+  color: #020710;
+  font-size: 13px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.single-timeline-area .single-timeline-content {
+  position: relative;
+  z-index: 1;
+  padding: 30px 30px 25px;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  margin-top: 15px;
+  -webkit-box-shadow: 0 0.25rem 1rem 0 rgba(47, 91, 234, 0.125);
+  box-shadow: 0 0.25rem 1rem 0 rgba(47, 91, 234, 0.125);
+  border: 1px solid #ebebeb;
+}
+@media only screen and (max-width: 575px) {
+  .single-timeline-area .single-timeline-content {
+      padding: 20px;
+  }
+}
+.single-timeline-area .single-timeline-content .timeline-icon {
+  -webkit-transition-duration: 500ms;
+  transition-duration: 500ms;
+  width: 30px;
+  height: 30px;
+  background-color: #122151;
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 30px;
+  flex: 0 0 30px;
+  text-align: center;
+  max-width: 30px;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+.single-timeline-area .single-timeline-content .timeline-icon i {
+  color: #ffffff;
+  line-height: 30px;
+}
+.single-timeline-area .single-timeline-content .timeline-text h6 {
+  -webkit-transition-duration: 500ms;
+  transition-duration: 500ms;
+}
+.single-timeline-area .single-timeline-content .timeline-text p {
+  font-size: 13px;
+  margin-bottom: 0;
+}
+.single-timeline-area .single-timeline-content:hover .timeline-icon,
+.single-timeline-area .single-timeline-content:focus .timeline-icon {
+  background-color: #020710;
+}
+.single-timeline-area .single-timeline-content:hover .timeline-text h6,
+.single-timeline-area .single-timeline-content:focus .timeline-text h6 {
+  color:#122151;
+}
+/* Card styles */
+.card {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 15px;
+  margin-top: 20px;
+  background-color: #fff;
+  border: 1px solid #eee;
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+}
+
+/* Hover effect on images */
+img:hover {
+  opacity: 0.8; /* Adjust opacity as needed */
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* Animation for images */
+img {
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Scale up effect on hover for images */
+img:hover {
+  transform: scale(1.1);
+}
+.table {
+  width: auto; /* Adjust the width automatically based on content */
+  border-collapse: collapse;
+}
+
+.table th, .table td {
+  padding: 8px; /* Reduce padding for tighter spacing */
+  text-align: left; /* Center alignment might cause tighter appearance */
+  border: 1px solid #e0e0e0;
+}
+
+.table th {
+  font-weight: bold;
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+.table tbody tr:nth-child(even) {
+  background-color: #fafafa;
+}
+.table-full-width {
+  width: 100%; /* Ensure the table takes up the full width of its container */
+}
+.text-center.colfix {
+  padding: 6px; /* Adjust padding for smaller size */
+  font-size: 12px; /* Reduce font size for smaller text */
+  width: 30px; /* Reduce width to make them more compressed */
+}
+
+.vertical-text {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+/* Styling for input fields */
+input {
+  width: 100%; /* Make the input fields fill the width of their parent */
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Remove spinner buttons in number input fields */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Hover effect on input fields */
+input:hover {
+  border-color: #555;
+}
+
+/* Focus effect on input fields */
+input:focus {
+  outline: none;
+  border-color: #2196F3;
+  box-shadow: 0 0 5px rgba(33, 150, 243, 0.5);
+}
+
+/* Animation for input fields */
+input {
+  transform: scale(1);
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Scale up effect on hover for input fields */
+input:hover {
+  transform: scale(1.05);
+}

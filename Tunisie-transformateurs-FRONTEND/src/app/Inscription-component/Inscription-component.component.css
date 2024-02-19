@@ -160,9 +160,6 @@ h2.heading {
 	transition: transform 0.3s ease-in-out;
 }
 
-.fone .image:hover {
-	transform: scale(1.1);
-}
 
 .form-check-input {
 	margin-top: 10px;

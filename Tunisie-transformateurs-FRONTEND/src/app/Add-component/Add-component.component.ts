@@ -28,6 +28,8 @@ import { Ecuvage } from '../Shared/Ecuvage-service.model';
 import { EcuvageServiceService } from '../Shared/Ecuvage-service.service';
 import { Remplissage } from '../Shared/Remplissage-service.model';
 import { RemplissageServiceService } from '../Shared/Remplissage-service.service';
+import { Peinture } from '../Shared/Peinture-service.model';
+import { PeintureServiceService } from '../Shared/Peinture-service.service';
 @Component({
   selector: 'app-Add-component',
   templateUrl: './Add-component.component.html',
@@ -77,6 +79,7 @@ export class AddComponentComponent implements OnInit {
      public ServicePartie2 : Partie2ServiceService,
      public ServiceEcuvage : EcuvageServiceService,
      public ServiceRemplissage : RemplissageServiceService,
+     public ServicePeinture : PeintureServiceService,
      ){ }
 
   ngOnInit() {
@@ -259,6 +262,19 @@ export class AddComponentComponent implements OnInit {
 
             return forkJoin(ElectriqueObservable);
           }),
+
+
+          concatMap(() => {
+            // Create a single PeintureAjouter object
+            const peintureAjouter: Peinture = {
+              numero: this.transformateurAjouter.numero,
+              idPeinture: 0
+            };
+
+            // Return the observable for adding the single Peinture
+            return this.ServicePeinture.addPeinture(peintureAjouter);
+          }),
+
 
           concatMap(() => {
             // Use forkJoin to execute multiple observables in parallel
