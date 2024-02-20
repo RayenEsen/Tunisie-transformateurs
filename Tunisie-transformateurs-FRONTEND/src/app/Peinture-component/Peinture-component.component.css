@@ -221,3 +221,55 @@ input {
 input:hover {
   transform: scale(1.05);
 }
+.clickable-td {
+  cursor: pointer;
+}
+
+.clickable-td:hover {
+  background-color: lightgray;
+}
+/* Styles for input fields in print media */
+@media print {
+  input[type="text"] {
+    border: none;
+    padding: 0;
+    background: none;
+    box-shadow: none;
+  }
+}
+
+@media print {
+  .printable {
+    display: none;
+  }
+}
+/* Styles for print media */
+@media print {
+  /* Styles for input fields in print media */
+  input[type="number"] {
+    border: none;
+    padding: 0;
+    background: none;
+    box-shadow: none;
+  }
+}
+
+@page {
+  size: auto;
+  margin: 0;
+       }
+       .text-light {
+        color: #920303 !important;
+    }
+    input[type="date"] {
+      /* Remove default styles */
+      border: none;
+      background-color: transparent;
+      /* Ensure text is visible */
+      color: inherit;
+      /* Optional: Adjust font size, padding, etc. */
+      font-size: inherit;
+      padding: 0;
+      /* Optional: Adjust cursor */
+      cursor: text;
+    }

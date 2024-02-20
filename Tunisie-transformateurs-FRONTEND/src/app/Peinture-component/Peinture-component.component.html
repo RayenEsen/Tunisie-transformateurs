@@ -16,9 +16,9 @@
                 <div class="apland-timeline-area" >
                     <!-- Single Timeline Content-->
 
-                    <div class="single-timeline-area">
+                    <div class="single-timeline-area" *ngFor="let peinture of peintures">
                         <div class="timeline-date wow fadeInLeft" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInLeft;">
-                            <p><strong>#1</strong> Near Future</p>
+                            <p><strong>#{{peinture.numerop}}</strong><input type="date" [(ngModel)]="peinture.datePentiure"></p>
                         </div>
 
                         <div class="row" style="margin-right: 0vh;">
@@ -49,35 +49,52 @@
                                             <tr>
                                               <td class="text-center colfix">{{service.list[0].numero}}</td>
                                               <td class="text-center colfix">{{service.list[0].power}}</td>
-                                              <td class="text-center colfix"></td>
-                                              <td class="text-center colfix"></td>
-                                              <td class="text-center colfix"></td>
-                                              <td class="text-center colfix"></td>
-                                              <td class="text-center colfix"></td>
-                                              <td class="text-center colfix"></td>
-                                              <td class="text-center colfix"></td>
-                                              <td class="text-center colfix"></td>
-                                              <td class="text-center colfix"></td>
-                                              <td class="text-center colfix"></td>
-                                              <td class="text-center colfix"></td>
-                                              <td class="text-center colfix"></td>
-                                              <td class="text-center colfix"></td>
-                                              <td class="text-center colfix"></td>
-                                              <td class="text-center colfix"><input style="width: 100%;"></td>
+                                              <td class="text-center colfix clickable-td" (click)="confirm(3, peinture.numerop)">{{this.peinture.fuite}}</td>
+                                              <td class="text-center colfix clickable-td" (click)="confirm(4, peinture.numerop)">{{this.peinture.penture}}</td>
+                                              <td class="text-center colfix clickable-td" (click)="confirm(5, peinture.numerop)">{{this.peinture.isolateur}}</td>
+                                              <td class="text-center colfix clickable-td" (click)="confirm(6, peinture.numerop)">{{this.peinture.marquage}}</td>
+                                              <td class="text-center colfix clickable-td" (click)="confirm(7, peinture.numerop)">{{this.peinture.neutre}}</td>
+                                              <td class="text-center colfix clickable-td" (click)="confirm(8, peinture.numerop)">{{this.peinture.terre}}</td>
+                                              <td class="text-center colfix clickable-td" (click)="confirm(9, peinture.numerop)">{{this.peinture.commut}}</td>
+                                              <td class="text-center colfix clickable-td" (click)="confirm(10, peinture.numerop)">{{this.peinture.soupage}}</td>
+                                              <td class="text-center colfix clickable-td" (click)="confirm(11, peinture.numerop)">{{this.peinture.signature}}</td>
+                                              <td class="text-center colfix clickable-td" (click)="confirm(12, peinture.numerop)">{{this.peinture.vanne}}</td>
+                                              <td class="text-center colfix clickable-td" (click)="confirm(13, peinture.numerop)">{{this.peinture.relais}}</td>
+                                              <td class="text-center colfix clickable-td" (click)="confirm(14, peinture.numerop)">{{this.peinture.doigt}}</td>
+                                              <td class="text-center colfix clickable-td" (click)="confirm(15, peinture.numerop)">{{this.peinture.cosse}}</td>
+                                              <td class="text-center colfix clickable-td" style="color: red;">{{this.peinture.cnc}}</td>
+                                              <td class="text-center colfix"><input [(ngModel)]="peinture.observation"  style="width: 100%;"></td>
                                             </tr>
+
                                             <tr>
                                           </tbody>
                                         </table>
-                                    </div>
-                                </div>
-                            </div>
 
+                                    </div>
+
+                                </div>
+
+                            </div>
                         </div>
                     </div>
-
-
+                <div class="page-tools" style="margin-left: 1200px;" class="printable">
+                  <div class="action-buttons" style="display: flex;">
+                    <a class="btn bg-white btn-light mx-1px text-95" data-title="Print" >
+                      <i class="mr-1 fa fa-print text-primary-m1 text-120 w-2"></i>
+                      Print
+                    </a>
+                    <a class="btn bg-white btn-light mx-1px text-95" data-title="Save" (click)="update()">
+                      <i class="mr-1 fa fa-save text-success-m1 text-120 w-2"></i>
+                      Save
+                    </a>
+                  </div>
                 </div>
+                </div>
+
             </div>
+
         </div>
+
     </div>
+
 </section>

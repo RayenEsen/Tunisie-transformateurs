@@ -71,6 +71,50 @@ namespace WebAPI.Controller
 
             return NoContent();
         }
+        // GET: api/Peintures/ByTransformateur/5
+        [HttpGet("ByTransformateur/{transformateurId}")]
+        public async Task<ActionResult<IEnumerable<Peinture>>> GetPeinturesByTransformateur(int transformateurId)
+        {
+            var peintures = await _context.peintures
+                .Where(p => p.Numero == transformateurId)
+                .ToListAsync();
+
+            if (!peintures.Any())
+            {
+                return NotFound();
+            }
+
+            return peintures;
+        }
+
+        [HttpPut("UpdateList")]
+        public async Task<IActionResult> UpdatePeintureList(List<Peinture> peintures)
+        {
+            if (peintures == null || !peintures.Any())
+            {
+                return BadRequest("No peintures provided for update.");
+            }
+
+            foreach (var peinture in peintures)
+            {
+                _context.Entry(peinture).State = EntityState.Modified;
+            }
+
+            try
+            {
+                await _context.SaveChangesAsync();
+                return NoContent();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return StatusCode(500, "Failed to update peintures due to a concurrency issue.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"An error occurred: {ex.Message}");
+            }
+        }
+
 
         // POST: api/Peintures
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754

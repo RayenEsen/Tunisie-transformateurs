@@ -1,11 +1,12 @@
 import { Transformateur } from "./Transformateur-service.model";
 
 export class Peinture {
-  idPeinture!: number; // Auto-generated primary key
+  idPeinture?: number;
+  numerop!: number; // Auto-generated primary key
   numero!: number;
-  datePeinture?: Date; // You can use Date type if DateOnly is not available
+  datePentiure?: Date; // You can use Date type if DateOnly is not available
   fuite?: string;
-  peinture?: string;
+  penture?: string;
   isolateur?: string;
   marquage?: string;
   neutre?: string;
@@ -18,5 +19,6 @@ export class Peinture {
   doigt?: string;
   cosse?: string;
   observation?: string;
+  cnc?: string;
   transformateur?: Transformateur;
 }

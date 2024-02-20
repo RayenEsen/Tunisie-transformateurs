@@ -268,7 +268,7 @@ export class AddComponentComponent implements OnInit {
             // Create a single PeintureAjouter object
             const peintureAjouter: Peinture = {
               numero: this.transformateurAjouter.numero,
-              idPeinture: 0
+              numerop: 1
             };
 
             // Return the observable for adding the single Peinture

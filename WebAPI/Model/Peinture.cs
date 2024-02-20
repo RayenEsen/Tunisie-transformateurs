@@ -9,6 +9,7 @@ namespace WebAPI.Model
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdPeinture { get; set; } // Auto-generated primary key
         [ForeignKey("Transformateur")]
+        public int Numerop { get; set; }
         public int Numero { get; set; }
         public DateOnly? DatePentiure { get; set; }
         public string? Fuite { get; set; }
@@ -25,6 +26,8 @@ namespace WebAPI.Model
         public string? Doigt { get; set; }
         public string? Cosse { get; set; }
         public string? Observation { get; set; }
+        public string? Cnc { get; set; }
+
         [JsonIgnore]
         public Transformateur? Transformateur { get; set; }
     }
