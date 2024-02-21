@@ -70,20 +70,38 @@ export class EditProfileComponentComponent implements OnInit {
             console.log('Controleur updated successfully:', response);
             // Check if a file is selected
             if (this.selectedFile) {
-              // Call the service to upload the profile picture
-              this.ServicePfp.uploadPfp(this.Controleur.idC, this.selectedFile)
-                .subscribe({
-                  next: (pfpResponse) => {
-                    // Handle the success response if needed
-                    console.log('Profile picture uploaded successfully:', pfpResponse);
-                    alert('Profile picture uploaded successfully');
-                  },
-                  error: (pfpError) => {
-                    // Handle the error
-                    console.error('Error uploading profile picture:', pfpError);
-                    alert('Failed to upload profile picture');
-                  }
-                });
+              // Check if imageData is defined
+              if (this.imageData) {
+                // Call the service to update the profile picture
+                this.ServicePfp.updatePfp(this.Controleur.idC, this.selectedFile)
+                  .subscribe({
+                    next: (pfpResponse) => {
+                      // Handle the success response if needed
+                      console.log('Profile picture updated successfully:', pfpResponse);
+                      alert('Profile picture updated successfully');
+                    },
+                    error: (pfpError) => {
+                      // Handle the error
+                      console.error('Error updating profile picture:', pfpError);
+                      alert('Failed to update profile picture');
+                    }
+                  });
+              } else {
+                // Call the service to upload the profile picture
+                this.ServicePfp.uploadPfp(this.Controleur.idC, this.selectedFile)
+                  .subscribe({
+                    next: (pfpResponse) => {
+                      // Handle the success response if needed
+                      console.log('Profile picture uploaded successfully:', pfpResponse);
+                      alert('Profile picture uploaded successfully');
+                    },
+                    error: (pfpError) => {
+                      // Handle the error
+                      console.error('Error uploading profile picture:', pfpError);
+                      alert('Failed to upload profile picture');
+                    }
+                  });
+              }
             } else {
               alert('Les informations de la Controleur sont Enregistrer');
             }
@@ -99,10 +117,17 @@ export class EditProfileComponentComponent implements OnInit {
       // You may want to show a message or take other actions here
     }
   }
+
   onFileSelected(event: any) {
     if (event.target.files && event.target.files.length > 0) {
-      this.selectedFile = event.target.files[0];
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imageData = reader.result as string; // Update the imageData property with the base64 data URL of the selected image
+      };
+      reader.readAsDataURL(file); // Read the selected file as a data URL
     }
   }
+
 
 }

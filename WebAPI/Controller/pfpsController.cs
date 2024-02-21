@@ -63,37 +63,61 @@ namespace WebAPI.Controller
             return File(imageBytes, "image/jpeg");
         }
 
-
-        // PUT: api/pfps/5
+        // PUT: api/pfps/image/{controleurId}
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Putpfp(int id, pfp pfp)
+        [HttpPut("image/{controleurId}")]
+        public async Task<IActionResult> PutPfp(string controleurId, IFormFile imageFile)
         {
-            if (id != pfp.Idpfp)
+            // Find the pfp that corresponds to the given controleurId
+            var pfp = await _context.pfps.FirstOrDefaultAsync(p => p.IdC == controleurId);
+
+            if (pfp == null)
             {
-                return BadRequest();
+                return NotFound();
             }
 
-            _context.Entry(pfp).State = EntityState.Modified;
+            // Update the image pathway
+            if (imageFile != null && imageFile.Length > 0)
+            {
+                // Get the path to the directory where images are stored
+                var imagePath = "C:\\Users\\USER\\Desktop\\PFE\\WebAPI\\bin\\Debug\\net8.0\\uploads";
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!pfpExists(id))
+                // Delete the existing image file
+                if (!string.IsNullOrEmpty(pfp.Pathway) && System.IO.File.Exists(pfp.Pathway))
                 {
-                    return NotFound();
+                    System.IO.File.Delete(pfp.Pathway);
                 }
-                else
+
+                // Generate a unique filename for the new image
+                var fileName = Guid.NewGuid().ToString() + Path.GetExtension(imageFile.FileName);
+                var filePath = Path.Combine(imagePath, fileName);
+
+                // Save the new image file
+                using (var stream = new FileStream(filePath, FileMode.Create))
                 {
-                    throw;
+                    await imageFile.CopyToAsync(stream);
+                }
+
+                // Update the pfp pathway
+                pfp.Pathway = filePath;
+
+                // Save changes to the database
+                try
+                {
+                    await _context.SaveChangesAsync();
+                    return NoContent();
+                }
+                catch (Exception ex)
+                {
+                    return StatusCode(500, $"Internal server error: {ex.Message}");
                 }
             }
-
-            return NoContent();
+            else
+            {
+                return BadRequest("Image file is required.");
+            }
         }
+
 
         // POST: api/pfps
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754

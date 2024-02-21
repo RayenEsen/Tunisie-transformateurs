@@ -30,4 +30,13 @@ export class PfpServiceService {
     return this.http.get<Blob>(apiUrl, { responseType: 'blob' as 'json', observe: 'response' }); // Set responseType to 'blob' and observe response
   }
 
+  updatePfp(controleurId: string, file: File): Observable<any> {
+    const formData: FormData = new FormData();
+    formData.append('imageFile', file);
+
+    // Use the correct URL
+    return this.http.put<any>(`${this.url}/image/${controleurId}`, formData);
+  }
+
+
 }
