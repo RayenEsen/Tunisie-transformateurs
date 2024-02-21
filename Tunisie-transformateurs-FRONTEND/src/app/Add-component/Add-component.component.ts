@@ -62,7 +62,7 @@ export class AddComponentComponent implements OnInit {
     etat: '',
     galet: '',
     capot: '',
-    sans: ''
+    sans: '',
   };
 
   constructor(public service: TransformateurServiceService,

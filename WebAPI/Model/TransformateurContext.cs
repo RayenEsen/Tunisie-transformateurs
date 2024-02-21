@@ -23,7 +23,7 @@ namespace WebAPI.Model
         public DbSet<Ecuvage> ecuvages { get; set; }
         public DbSet<Remplissage> remplissages { get; set; }
         public DbSet<Peinture> peintures { get; set; }
-
+        public DbSet<pfp> pfps { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Configure one-to-one relationship between Transformateur and Pv
@@ -31,6 +31,12 @@ namespace WebAPI.Model
                 .HasOne(t => t.Pv)
                 .WithOne()
                 .HasForeignKey<Pv>(p => p.Id_t);
+
+            // Configure one-to-one relationship between ControleurDeQualité and pfp
+            modelBuilder.Entity<ControleurDeQualité>()
+                .HasOne(c => c.Pfp)            // ControleurDeQualité has one Pfp
+                .WithOne(p => p.Controleur)     // Pfp has one ControleurDeQualité
+                .HasForeignKey<pfp>(p => p.IdC); // Use IdC as the foreign key in pfp
 
             // Configure one-to-many relationship between ControleurDeQualité and Pv
             modelBuilder.Entity<ControleurDeQualité>()

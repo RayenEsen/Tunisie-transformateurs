@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebAPI.Model;
 
@@ -11,9 +12,11 @@ using WebAPI.Model;
 namespace WebAPI.Migrations
 {
     [DbContext(typeof(TransformateurContext))]
-    partial class TransformateurContextModelSnapshot : ModelSnapshot
+    [Migration("20240220191318_efgsdfg")]
+    partial class efgsdfg
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -764,6 +767,9 @@ namespace WebAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Libelle")
                         .IsRequired()
                         .HasColumnType("nvarchar(100)");
@@ -804,30 +810,6 @@ namespace WebAPI.Migrations
                     b.HasKey("Numero");
 
                     b.ToTable("transformateurs");
-                });
-
-            modelBuilder.Entity("WebAPI.Model.pfp", b =>
-                {
-                    b.Property<int>("Idpfp")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Idpfp"));
-
-                    b.Property<string>("IdC")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Pathway")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Idpfp");
-
-                    b.HasIndex("IdC")
-                        .IsUnique();
-
-                    b.ToTable("pfps");
                 });
 
             modelBuilder.Entity("ControleurDeQualitéEtape", b =>
@@ -989,22 +971,9 @@ namespace WebAPI.Migrations
                     b.Navigation("Transformateur");
                 });
 
-            modelBuilder.Entity("WebAPI.Model.pfp", b =>
-                {
-                    b.HasOne("WebAPI.Model.ControleurDeQualité", "Controleur")
-                        .WithOne("Pfp")
-                        .HasForeignKey("WebAPI.Model.pfp", "IdC")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Controleur");
-                });
-
             modelBuilder.Entity("WebAPI.Model.ControleurDeQualité", b =>
                 {
                     b.Navigation("Event");
-
-                    b.Navigation("Pfp");
 
                     b.Navigation("Pvs");
                 });

@@ -48,7 +48,6 @@ namespace WebAPI.Model
 
         public string Bornesembrochables { get; set; } = "";
         public float Frequency { get; set; }
-
         //Navigation property
         public Pv? Pv { get; set; }
         public ICollection<Etape>? Etapes { get; set; }

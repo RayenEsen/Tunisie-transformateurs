@@ -27,7 +27,6 @@ export class Transformateur {
   galet: string = "";
   capot: string = "";
   sans: string = "";
-
   bornesembrochables: string  = "";
   frequency: number = 0;
   pv?: Pv;
