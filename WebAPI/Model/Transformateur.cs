@@ -61,5 +61,7 @@ namespace WebAPI.Model
         public ICollection<Ecuvage>? Ecuvage { get; set; }
         public ICollection<Remplissage>? Remplissage { get; set; }
         public ICollection<Peinture>? Peinture { get; set; }
+        public ICollection<Conseption>? Conseption { get; set; }
+
     }
 }

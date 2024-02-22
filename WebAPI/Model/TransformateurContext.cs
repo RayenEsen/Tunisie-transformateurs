@@ -24,6 +24,7 @@ namespace WebAPI.Model
         public DbSet<Remplissage> remplissages { get; set; }
         public DbSet<Peinture> peintures { get; set; }
         public DbSet<pfp> pfps { get; set; }
+        public DbSet<Conseption> Conseptions { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Configure one-to-one relationship between Transformateur and Pv
@@ -113,6 +114,11 @@ namespace WebAPI.Model
                 .HasForeignKey(e => e.Numero)
                 .IsRequired();
 
+            modelBuilder.Entity<Conseption>()
+                .HasOne(c => c.Transformateur)
+                .WithMany(t => t.Conseption)
+                .HasForeignKey(c => c.Numero)
+                .IsRequired();
 
             base.OnModelCreating(modelBuilder);
         }

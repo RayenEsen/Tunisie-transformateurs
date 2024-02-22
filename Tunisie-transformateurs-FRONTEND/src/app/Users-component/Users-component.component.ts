@@ -19,6 +19,7 @@ export class UsersComponentComponent implements OnInit {
   list : ControleurDeQualite[] = [];
   events : Event[] = [];
   UserSelected: ControleurDeQualite | null = null;
+  PfoOfUserSelected?: string;
   keyword: string = "";
   imageData: string[] = [];
   defaultImageUrl = 'https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg';
@@ -69,6 +70,21 @@ export class UsersComponentComponent implements OnInit {
       this.ServiceC.getControleurById(id).subscribe({
         next: (data) => {
           this.UserSelected = data;
+          if(this.UserSelected?.idC!==undefined)
+          {
+            this.ServicePFP.getPfp(this.UserSelected.idC).subscribe(
+              (response: HttpResponse<Blob | null>) => {
+              // Check if the response body is not null
+              if (response.body !== null) {
+                // Extract the URL from the response
+                const url = window.URL.createObjectURL(response.body);
+                // Assign the URL to the imageData property
+                this.PfoOfUserSelected= url;
+              } else {
+                console.error('No image data returned.');
+              }
+            })
+          }
           // Fetch events for the selected user
           this.eventService.GetEventsByController(this.UserSelected!.idC).subscribe({
             next : (events: Event[]) => {
