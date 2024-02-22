@@ -66,26 +66,27 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let User of list" (click)="getControllerById(User.idC)">
+              <tr *ngFor="let controleur of list; let i = index" (click)="getControllerById(controleur.idC)">
                 <td>
-                  <img src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
+                  <img [src]="imageData[i] ? imageData[i] : defaultImageUrl"
                        class="rounded-circle my-n1"
                        alt="Avatar"
                        style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover;">
                 </td>
-                <td>{{User.idC.slice(0, -3)}}***</td>
-                <td>{{User.username}}</td>
-                <td>{{User.email}}</td>
+                <td>{{ controleur.idC.slice(0, -3) }}***</td>
+                <td>{{ controleur.username }}</td>
+                <td>{{ controleur.email }}</td>
                 <td>
-                  <ng-container *ngIf="User.designation">
-                    <span>{{User.designation}}</span>
+                  <ng-container *ngIf="controleur.designation">
+                    <span>{{ controleur.designation }}</span>
                   </ng-container>
-                  <ng-container *ngIf="!User.designation">
+                  <ng-container *ngIf="!controleur.designation">
                     <span>Pas de Designation</span>
                   </ng-container>
                 </td>
               </tr>
             </tbody>
+
           </table>
         </div>
       </div>

@@ -2,6 +2,7 @@ import { Pv } from "./Pv-service.model";
 import { Etape } from "./Etape-servicemodel"; // Make sure to import Etape model
 import { Bobinage } from "./Bobinage-service.model";
 import { Event} from "./Event-service.model"
+import { Pfp } from "./pfp-service.model";
 export class ControleurDeQualite {
   idC: string = '';
   nom?: string = '';
@@ -20,4 +21,5 @@ export class ControleurDeQualite {
   etapes?: Etape[] = [];
   event?: Event[] = [];
   bobinage?: Bobinage[] = [];
+  pfp?: Pfp;
 }

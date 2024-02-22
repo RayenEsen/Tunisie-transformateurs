@@ -5,6 +5,9 @@ import { ControlleurServiceService } from '../Shared/Controlleur-service.service
 import { Event } from '../Shared/Event-service.model'
 import { EventServiceService } from '../Shared/Event-service.service'
 import { SessionService } from '../utils/session-service.service'
+import { Pfp } from '../Shared/pfp-service.model';
+import { PfpServiceService } from '../Shared/pfp-service.service';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-Users-component',
@@ -17,18 +20,44 @@ export class UsersComponentComponent implements OnInit {
   events : Event[] = [];
   UserSelected: ControleurDeQualite | null = null;
   keyword: string = "";
-  constructor(public ServiceC : ControlleurServiceService,public eventService : EventServiceService,public ServiceS : SessionService) { }
+  imageData: string[] = [];
+  defaultImageUrl = 'https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg';
+
+  constructor(public ServicePFP : PfpServiceService,public ServiceC : ControlleurServiceService,public eventService : EventServiceService,public ServiceS : SessionService) { }
 
   ngOnInit(): void {
     this.ServiceC.getAllControleurs().subscribe({
       next: (data) => {
-        this.list=data;
+        this.list = data;
+        console.log(this.list);
+
+        // Iterate over each Controleur in the list
+        this.list.forEach((controleur) => {
+          // Fetch the image data for the current Controleur
+          this.ServicePFP.getPfp(controleur.idC).subscribe(
+            (response: HttpResponse<Blob | null>) => {
+              // Check if the response body is not null
+              if (response.body !== null) {
+                // Extract the URL from the response
+                const url = window.URL.createObjectURL(response.body);
+                // Push the URL to the imageData array
+                this.imageData.push(url);
+              } else {
+                console.error('No image data returned for Controleur with id:', controleur.idC);
+              }
+            },
+            (error) => {
+              console.error('Error fetching pfp for Controleur with id:', controleur.idC, error);
+            }
+          );
+        });
       },
       error: (error) => {
         console.error(error);
       }
     });
   }
+
 
   getControllerById(id : string) {
     // Check if UserSelected is already set

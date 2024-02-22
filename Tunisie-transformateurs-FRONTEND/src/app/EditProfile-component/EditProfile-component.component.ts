@@ -19,6 +19,7 @@ export class EditProfileComponentComponent implements OnInit {
   pfp: Pfp = new Pfp;
   defaultImageUrl = 'https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg';
   imageData: string | undefined;
+  imageData1: string | undefined;
 
 
   constructor(public ServiceC : ControlleurServiceService,public ServiceS : SessionService, public ServicePfp : PfpServiceService) { }
@@ -121,11 +122,16 @@ export class EditProfileComponentComponent implements OnInit {
   onFileSelected(event: any) {
     if (event.target.files && event.target.files.length > 0) {
       const file = event.target.files[0];
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.imageData = reader.result as string; // Update the imageData property with the base64 data URL of the selected image
-      };
-      reader.readAsDataURL(file); // Read the selected file as a data URL
+      if (file) {
+        this.selectedFile = file;
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          if (typeof e.target?.result === 'string') {
+            this.imageData1 = e.target?.result;
+          }
+        };
+        reader.readAsDataURL(file);
+      }
     }
   }
 

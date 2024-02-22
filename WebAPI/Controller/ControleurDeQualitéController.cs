@@ -24,8 +24,14 @@ namespace WebAPI.Controller
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ControleurDeQualité>>> GetcontroleurDeQualités()
         {
-            return await _context.controleurDeQualités.ToListAsync();
+            // Include the related pfp data
+            var controleurs = await _context.controleurDeQualités
+                                        .Include(c => c.Pfp) // Assuming the navigation property is called "Pfp"
+                                        .ToListAsync();
+
+            return controleurs;
         }
+
 
         // GET: api/ControleurDeQualité/5
         [HttpGet("{id}")]
