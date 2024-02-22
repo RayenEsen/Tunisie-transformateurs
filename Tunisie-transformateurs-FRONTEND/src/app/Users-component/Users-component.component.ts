@@ -145,15 +145,36 @@ Supprimer(id: string) {
 }
 
 
-  search(keyword : string)
-  {
-    this.ServiceC.SearchControlleurs(keyword).subscribe({
-      next: (response) =>
-      {
-        this.list=response;
-      }
-    })
-  }
+search(keyword: string) {
+  this.ServiceC.SearchControlleurs(keyword).subscribe({
+    next: (response) => {
+      this.list = response;
+
+      // Clear imageData array before populating it with new data
+      this.imageData = [];
+
+      // Iterate over each Controleur in the list and fetch the image data
+      this.list.forEach((controleur) => {
+        this.ServicePFP.getPfp(controleur.idC).subscribe(
+          (response: HttpResponse<Blob | null>) => {
+            if (response.body !== null) {
+              const url = window.URL.createObjectURL(response.body);
+              this.imageData.push(url);
+            } else {
+              console.error('No image data returned for Controleur with id:', controleur.idC);
+            }
+          },
+          (error) => {
+            console.error('Error fetching pfp for Controleur with id:', controleur.idC, error);
+          }
+        );
+      });
+    },
+    error: (error) => {
+      console.error('Error searching Controleurs:', error);
+    }
+  });
+}
 
 
 }
