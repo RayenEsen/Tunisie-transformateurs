@@ -99,13 +99,14 @@ namespace WebAPI.Controller
             return NoContent();
         }
 
-        // GET: api/Conseptions/Transformateur/{transformateurId}
+        // OBTENIR : api/Conseptions/Transformateur/{transformateurId}
         [HttpGet("Transformateur/{transformateurId}")]
         public async Task<ActionResult<IEnumerable<Conseption>>> GetConseptionsByTransformateur(int transformateurId)
         {
             var controleurs = await _context.Conseptions
-                .Where(c => c.Numero == transformateurId) // Filter by transformateurId
-                .Include(c => c.ConseptionValues) // Include related ConseptionValues
+                .Where(c => c.Numero == transformateurId) // Filtrer par transformateurId
+                .Include(c => c.ConseptionValues) // Inclure les ConseptionValues associés
+                .OrderBy(c => c.IdConseption) // Ordonner par Id, du plus petit au plus grand
                 .ToListAsync();
 
             if (controleurs == null || !controleurs.Any())

@@ -21,7 +21,6 @@ export class ConseptionComponentComponent implements OnInit {
   etapenumero:number = 0;
   transformateurId: number = 0;
   conseption: Conseption[] = [];
-
   constructor(
     public ServiceConseption: ConseptionServiceService,
     public ServiceConseptionValues : ConseptionValuesServiceService,
@@ -48,6 +47,7 @@ export class ConseptionComponentComponent implements OnInit {
               console.error('Error fetching Conseptions by Transformateur ID:', error);
             }
           );
+          this.service.GetTransformateur(this.transformateurId);
       }
     });
   }

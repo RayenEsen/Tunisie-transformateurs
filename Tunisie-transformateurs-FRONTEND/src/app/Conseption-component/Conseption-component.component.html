@@ -1,12 +1,12 @@
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 
 
-<div #printSection class="invoice" >
+<div #printSection class="invoice">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
 <link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
 <div style="display: flex;">
-<img src="assets/LogoPV.png" style="width: 300px;">
+<img src="assets/LogoPV.png" style="width: 300px;    margin-right: 35vh;">
 <img src="assets/9001ISO.png" style="width: 180px; height: 70px;">
 <img src="assets/14001ISO-removebg-preview.png" style="width: 180px; height: 93px;">
 <img src="assets/iso-45001.png" style="width: 180px; height: 147px;   ; margin-left: -27px;     margin-top: -38px; ">
@@ -14,43 +14,114 @@
 </div>
 
   <div class="page-header text-blue-d2" style=" margin: 40px 30px 20px;" >
-    <div class="page-header text-blue-d2" style=" margin: 40px 30px 20px;" >
-
-
 
   <div class="invoice-body">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">Supplémentaires:</h3>
+        <h3 class="panel-title">Informations Générales:</h3>
       </div>
       <table class="table table-bordered table-condensed" >
-	<tbody>
-		<tr>
-			<td colspan="2">Identification</td>
-			<td>Ref</td>
-			<td>FOR</td>
-			<td rowspan="4">
-        <img src="assets/Logo.png" style="width: 100px;">
-      </td>
-		</tr>
-		<tr>
-			<td>Puissance</td>
-			<td>250</td>
-			<td>Code</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>U1/U2</td>
-			<td>3000/420V</td>
-			<td>Quantité</td>
-			<td></td>
-		</tr>
-		<tr>
-			<td>N'</td>
-			<td colspan="3">24095-24103</td>
-		</tr>
-	</tbody>
+        <tbody>
+          <tr>
+            <td colspan="2" class="text-left colfix">Identification : {{this.service.list[0].numero}}</td>
+            <td class="text-center colfix">Ref</td>
+            <td class="text-center colfix">FOR</td>
+            <td rowspan="4" class="text-center colfix">
+              <img src="assets/Logo.png" style="width: 100px;">
+            </td>
+          </tr>
+          <tr>
+            <td class="text-left colfix">Puissance</td>
+            <td class="text-center colfix">{{this.service.list[0].power}}</td>
+            <td class="text-center colfix">Code</td>
+            <td class="text-center colfix">LALV1</td>
+          </tr>
+          <tr>
+            <td class="text-left colfix">U1/U2</td>
+            <td class="text-center colfix">{{this.service.list[0].mtu1}}/{{this.service.list[0].btu2}}V</td>
+            <td class="text-center colfix">Quantité</td>
+            <td class="text-center colfix">9</td>
+          </tr>
+          <tr>
+            <td class="text-left colfix">N'</td>
+            <td colspan="3" class="text-center colfix">24095-24103</td>
+          </tr>
+        </tbody>
       </table>
+    </div>
+    <div class="panel panel-default"  *ngFor="let Conseption of conseption">
+      <div class="panel-heading">
+        <h3 class="panel-title">Conseption:</h3>
+      </div>
+      <div style="display: flex;">
+        <table class="table table-bordered table-condensed">
+          <tbody>
+            <tr>
+              <th class="text-center colfix">{{Conseption.nom}}</th>
+              <th class="text-center colfix">Prévue</th>
+              <th class="text-center colfix">Mesurée</th>
+            </tr>
+          </tbody>
+          <tbody *ngFor="let values of Conseption.conseptionValues; let first = first">
+            <tr>
+              <td class="text-center colfix">{{values.nom}}</td>
+              <td class="text-center colfix"><input type="number"></td>
+              <td class="text-center colfix"><input type="number"></td>
+            </tr>
+          </tbody>
+          <tbody>
+            <tr>
+              <td class="text-center colfix">Quantité</td>
+              <td class="text-center colfix"><input type="number"></td>
+              <td class="text-center colfix"><input type="number"></td>
+            </tr>
+            <tr>
+              <td class="text-center colfix">Conformité</td>
+              <td class="text-center colfix"><input type="number"></td>
+              <td class="text-center colfix"><input type="number"></td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="table table-bordered table-condensed">
+          <tbody>
+            <tr>
+              <td class="text-center colfix">250</td>
+              <td class="text-center colfix">24095-24103</td>
+            </tr>
+            <tr>
+              <td colspan="2" class="text-center colfix"><img src="assets/temp.png" width="250px"></td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="table table-bordered table-condensed">
+          <tbody>
+            <tr>
+              <td class="text-center colfix">Date</td>
+            </tr>
+            <tr>
+              <td class="text-center colfix"><input type="date"></td>
+            </tr>
+            <tr>
+              <td class="text-center colfix">Opérateur</td>
+            </tr>
+            <tr>
+              <td class="text-center colfix">Mohsen hamdi</td>
+            </tr>
+            <tr>
+              <td class="text-center colfix">Controleur</td>
+            </tr>
+            <tr>
+              <td class="text-center colfix">Basem Chaafi</td>
+            </tr>
+            <tr>
+              <td class="text-center colfix">Observation</td>
+            </tr>
+            <tr>
+              <td class="text-center colfix"><input type="string"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
     <div class="row" style="display: contents;">
       <div>
@@ -64,7 +135,7 @@
 
   </div>
 </div>
-<div class="page-tools" style="margin-left: 786px;" class="printable">
+<div class="page-tools" style="padding-left: 90vh;" class="printable">
   <div class="action-buttons" style="display: flex;">
     <a class="btn bg-white btn-light mx-1px text-95" data-title="Print">
       <i class="mr-1 fa fa-print text-primary-m1 text-120 w-2"></i>
