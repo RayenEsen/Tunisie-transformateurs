@@ -25,6 +25,8 @@ namespace WebAPI.Model
         public DbSet<Peinture> peintures { get; set; }
         public DbSet<pfp> pfps { get; set; }
         public DbSet<Conseption> Conseptions { get; set; }
+        public DbSet<ConseptionValues> ConseptionValues { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Configure one-to-one relationship between Transformateur and Pv
@@ -45,6 +47,10 @@ namespace WebAPI.Model
                 .WithOne(p => p.ControleurDeQualite)
                 .HasForeignKey(p => p.IdC);
 
+            modelBuilder.Entity<Conseption>()
+                .HasMany(c => c.ConseptionValues)
+                .WithOne(cv => cv.Conseption)
+                .HasForeignKey(cv => cv.IdConseption);
 
             // Configure the relationship between Etape and Transformateur
             modelBuilder.Entity<Etape>()

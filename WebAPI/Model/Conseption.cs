@@ -12,13 +12,16 @@ namespace WebAPI.Model
         [ForeignKey("Transformateur")]
         public int Numero { get; set; }
         public string Nom { get; set; } = "";
-        public DateOnly Date { get; set; }
-        public int? Quantity { get; set; } 
+        public DateOnly? Date { get; set; }
+        public int? Quantity { get; set; }
         public string Conformiter { get; set; } = "";
+
+        // Byte array to store the image
         public byte[]? Image { get; set; }
+
+        public ICollection<ConseptionValues>? ConseptionValues { get; set; }
 
         [JsonIgnore]
         public Transformateur? Transformateur { get; set; }
-
     }
 }

@@ -32,9 +32,10 @@ import { EcuvageComponentComponent } from './Ecuvage-component/Ecuvage-component
 import { RemplissageComponentComponent } from './Remplissage-component/Remplissage-component.component';
 import { LivraisonComponentComponent } from './Livraison-component/Livraison-component.component';
 import { PeintureComponentComponent } from './Peinture-component/Peinture-component.component';
+import { ConseptionComponentComponent } from './Conseption-component/Conseption-component.component';
 
 @NgModule({
-  declarations: [	
+  declarations: [		
     AppComponent,
     NavBarComponent,
     TopNavComponent,
@@ -58,7 +59,8 @@ import { PeintureComponentComponent } from './Peinture-component/Peinture-compon
       EcuvageComponentComponent,
       RemplissageComponentComponent,
       LivraisonComponentComponent,
-      PeintureComponentComponent
+      PeintureComponentComponent,
+      ConseptionComponentComponent
    ],
   imports: [
     BrowserModule,

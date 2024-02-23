@@ -30,6 +30,10 @@ import { Remplissage } from '../Shared/Remplissage-service.model';
 import { RemplissageServiceService } from '../Shared/Remplissage-service.service';
 import { Peinture } from '../Shared/Peinture-service.model';
 import { PeintureServiceService } from '../Shared/Peinture-service.service';
+import { Conseption } from '../Shared/Conseption-service.model';
+import { ConseptionServiceService } from '../Shared/Conseption-service.service';
+import { ConseptionValues } from '../Shared/ConseptionValues-service.model';
+import { ConseptionValuesServiceService } from '../Shared/ConseptionValues-service.service';
 @Component({
   selector: 'app-Add-component',
   templateUrl: './Add-component.component.html',
@@ -65,7 +69,8 @@ export class AddComponentComponent implements OnInit {
     sans: '',
   };
 
-  constructor(public service: TransformateurServiceService,
+  constructor(
+     public service: TransformateurServiceService,
      public servicePv: PvServiceService,
      private router: Router ,
      public serviceS : SessionService ,
@@ -80,6 +85,8 @@ export class AddComponentComponent implements OnInit {
      public ServiceEcuvage : EcuvageServiceService,
      public ServiceRemplissage : RemplissageServiceService,
      public ServicePeinture : PeintureServiceService,
+     public ServiceConseption : ConseptionServiceService,
+     public ServiceConseptionValues : ConseptionValuesServiceService,
      ){ }
 
   ngOnInit() {
@@ -245,6 +252,73 @@ export class AddComponentComponent implements OnInit {
             }
 
             return forkJoin(MagnetiqueObservable);
+          }),
+
+          concatMap(() => {
+            const ConseptionObservable: Observable<any>[] = [];
+            const ConseptionNames: { [key: number]: string } = {
+              1: 'Cadre',
+              2: 'Couverte',
+              3: 'Fond',
+              4: 'Cote fond',
+              5: 'Corinere structure',
+              6: 'Fer plat structure'
+            };
+
+            // Define the number of ConseptionValues for each Conseption
+            const ConseptionValuesCounts: { [key: number]: number } = {
+              1: 5,
+              2: 4,
+              3: 5,
+              4: 3,
+              5: 3,
+              6: 3
+            };
+
+            // Define the specific names for ConseptionValues of each Conseption
+            const ConseptionValueNames: { [key: number]: string[] } = {
+              1: ['a10', 'b10', 'c10', 'd10', 'e10'],
+              2: ['a11', 'b11', 'c11', 'd11'],
+              3: ['a', 'b', 'c', 'e', 'Ongle'],
+              4: ['a1', 'b1', 'e'],
+              5: ['a2', 'a2', 'n2'],
+              6: ['a3', 'b3', 'c3']
+            };
+
+            // Helper function to save ConseptionValues
+            const saveConseptionValues = (conseptionId: number, values: string[]) => {
+              const observables: Observable<any>[] = [];
+              values.forEach((name, index) => {
+                const ConseptionValueAjouter: ConseptionValues = {
+                  idConseption: conseptionId,
+                  nom: name,
+                  valueId: 0
+                };
+                observables.push(this.ServiceConseptionValues.addConseptionValues(ConseptionValueAjouter));
+              });
+              return observables;
+            };
+
+            for (let i = 1; i <= 6; i++) {
+              const ConseptionAjouter: Conseption = {
+                numero: this.transformateurAjouter.numero,
+                nom: ConseptionNames[i] || '',
+                idConseption: 0,
+                conformiter: 'No'
+              };
+
+              const conseptionObservable = this.ServiceConseption.addConseption(ConseptionAjouter).pipe(
+                concatMap((conseption: any) => {
+                  // After saving Conseption, save ConseptionValues with specific names
+                  const values = ConseptionValueNames[i] || [];
+                  return forkJoin(saveConseptionValues(conseption.idConseption, values));
+                })
+              );
+
+              ConseptionObservable.push(conseptionObservable);
+            }
+
+            return forkJoin(ConseptionObservable);
           }),
 
 

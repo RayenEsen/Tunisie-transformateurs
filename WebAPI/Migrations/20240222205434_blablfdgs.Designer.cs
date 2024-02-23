@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebAPI.Model;
 
@@ -11,9 +12,11 @@ using WebAPI.Model;
 namespace WebAPI.Migrations
 {
     [DbContext(typeof(TransformateurContext))]
-    partial class TransformateurContextModelSnapshot : ModelSnapshot
+    [Migration("20240222205434_blablfdgs")]
+    partial class blablfdgs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -149,34 +152,6 @@ namespace WebAPI.Migrations
                     b.HasIndex("Numero");
 
                     b.ToTable("Conseptions");
-                });
-
-            modelBuilder.Entity("WebAPI.Model.ConseptionValues", b =>
-                {
-                    b.Property<int>("ValueId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ValueId"));
-
-                    b.Property<int>("IdConseption")
-                        .HasColumnType("int");
-
-                    b.Property<float?>("Mesuree")
-                        .HasColumnType("real");
-
-                    b.Property<string>("Nom")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float?>("Prevue")
-                        .HasColumnType("real");
-
-                    b.HasKey("ValueId");
-
-                    b.HasIndex("IdConseption");
-
-                    b.ToTable("ConseptionValues");
                 });
 
             modelBuilder.Entity("WebAPI.Model.ControleurDeQualité", b =>
@@ -947,17 +922,6 @@ namespace WebAPI.Migrations
                     b.Navigation("Transformateur");
                 });
 
-            modelBuilder.Entity("WebAPI.Model.ConseptionValues", b =>
-                {
-                    b.HasOne("WebAPI.Model.Conseption", "Conseption")
-                        .WithMany("ConseptionValues")
-                        .HasForeignKey("IdConseption")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Conseption");
-                });
-
             modelBuilder.Entity("WebAPI.Model.Ecuvage", b =>
                 {
                     b.HasOne("WebAPI.Model.Transformateur", "Transformateur")
@@ -1083,11 +1047,6 @@ namespace WebAPI.Migrations
                         .IsRequired();
 
                     b.Navigation("Controleur");
-                });
-
-            modelBuilder.Entity("WebAPI.Model.Conseption", b =>
-                {
-                    b.Navigation("ConseptionValues");
                 });
 
             modelBuilder.Entity("WebAPI.Model.ControleurDeQualité", b =>
