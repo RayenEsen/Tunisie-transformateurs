@@ -31,4 +31,34 @@ addConseption(ConseptionAjouter: Conseption): Observable<any> {
       );
   }
 
+  updateConseptions(transformateurId: number, updatedConseptions: any[]): Observable<any> {
+    const url = `${this.url}/UpdateConseption/Transformateur/${transformateurId}`;
+    const updatedData = updatedConseptions.map(conseption => {
+      if (conseption.image instanceof ArrayBuffer) {
+        // Convert ArrayBuffer to Base64 string
+        conseption.image = this.arrayBufferToBase64(conseption.image);
+      }
+      return conseption;
+    });
+
+    return this.http.put(url, updatedData)
+      .pipe(
+        catchError(error => {
+          console.error('Error updating Conseptions:', error);
+          throw error; // Rethrow the error for further handling
+        })
+      );
+  }
+
+  // Function to convert ArrayBuffer to Base64
+  private arrayBufferToBase64(buffer: ArrayBuffer): string {
+    const binary = new Uint8Array(buffer);
+    let binaryString = '';
+    for (let i = 0; i < binary.length; i++) {
+      binaryString += String.fromCharCode(binary[i]);
+    }
+    return btoa(binaryString);
+  }
+
+
 }

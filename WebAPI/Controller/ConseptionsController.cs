@@ -117,6 +117,73 @@ namespace WebAPI.Controller
             return controleurs;
         }
 
+        [HttpPut("UpdateConseption/Transformateur/{transformateurId}")]
+        public async Task<IActionResult> UpdateConseption(int transformateurId, List<Conseption> updatedConseptions)
+        {
+            foreach (var updatedConseption in updatedConseptions)
+            {
+                var id = updatedConseption.IdConseption;
+                if (id != updatedConseption.IdConseption || updatedConseption.Numero != transformateurId)
+                {
+                    return BadRequest();
+                }
+
+                var existingConseption = await _context.Conseptions
+                                                        .Include(c => c.ConseptionValues) // Include related entities
+                                                        .FirstOrDefaultAsync(c => c.IdConseption == id && c.Numero == transformateurId);
+
+                if (existingConseption == null)
+                {
+                    return NotFound();
+                }
+
+                // Update properties of existing Conseption entity
+                existingConseption.Nom = updatedConseption.Nom;
+                existingConseption.Date = updatedConseption.Date;
+                existingConseption.Quantity = updatedConseption.Quantity;
+                existingConseption.Conformiter = updatedConseption.Conformiter;
+
+                // Handle image data
+                if (updatedConseption.Image != null && updatedConseption.Image.Length > 0)
+                {
+                    existingConseption.Image = updatedConseption.Image;
+                }
+
+                // Update related ConseptionValues
+                foreach (var updatedValue in updatedConseption.ConseptionValues)
+                {
+                    var existingValue = existingConseption.ConseptionValues.FirstOrDefault(cv => cv.ValueId == updatedValue.ValueId);
+                    if (existingValue != null)
+                    {
+                        existingValue.Nom = updatedValue.Nom;
+                        existingValue.Prevue = updatedValue.Prevue;
+                        existingValue.Mesuree = updatedValue.Mesuree;
+                    }
+                    else
+                    {
+                        // Handle addition of new ConseptionValue if necessary
+                        // For example:
+                        // existingConseption.ConseptionValues.Add(updatedValue);
+                    }
+                }
+
+                try
+                {
+                    // Save changes to the database
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    // Handle concurrency exception
+                    return StatusCode(StatusCodes.Status500InternalServerError, "Database operation failed. Please try again.");
+                }
+            }
+
+            return NoContent();
+        }
+
+
+
 
         private bool ConseptionExists(int id)
         {

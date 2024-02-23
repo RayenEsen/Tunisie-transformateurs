@@ -6,5 +6,6 @@ export class ConseptionValues {
   nom: string = "";
   prevue?: number
   mesuree?: number
+  image?: ArrayBuffer; // Add image property of type ArrayBuffer
   conseption?: Conseption
 }

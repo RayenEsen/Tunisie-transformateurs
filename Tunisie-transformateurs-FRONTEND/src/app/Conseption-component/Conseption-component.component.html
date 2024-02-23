@@ -65,20 +65,19 @@
           <tbody *ngFor="let values of Conseption.conseptionValues; let first = first">
             <tr>
               <td class="text-center colfix">{{values.nom}}</td>
-              <td class="text-center colfix"><input type="number"></td>
-              <td class="text-center colfix"><input type="number"></td>
+              <td class="text-center colfix"><input type="number" [(ngModel)]="values.prevue"></td>
+              <td class="text-center colfix"><input type="number" [(ngModel)]="values.mesuree"></td>
             </tr>
           </tbody>
           <tbody>
             <tr>
               <td class="text-center colfix">Quantité</td>
-              <td class="text-center colfix"><input type="number"></td>
+              <td class="text-center colfix"><input type="number" [(ngModel)]="Conseption.quantity"></td>
               <td class="text-center colfix"><input type="number"></td>
             </tr>
             <tr>
               <td class="text-center colfix">Conformité</td>
-              <td class="text-center colfix"><input type="number"></td>
-              <td class="text-center colfix"><input type="number"></td>
+              <td class="text-center colfix" colspan="2"></td>
             </tr>
           </tbody>
         </table>
@@ -89,8 +88,14 @@
               <td class="text-center colfix">24095-24103</td>
             </tr>
             <tr>
-              <td colspan="2" class="text-center colfix"><img src="assets/temp.png" width="250px"></td>
-            </tr>
+              <td colspan="2" class="text-center colfix" (click)="uploadFileAndUpdateConseption(Conseption.idConseption)">
+                  <img [src]="Conseption.image ? 'data:image/jpeg;base64,' + Conseption.image : 'assets/temp.png'" style="width: 250px;" alt="Conseption Image">
+                  <!-- Hidden file input element -->
+                  <input type="file" id="fileInput" (change)="onFileSelected($event)" style="display: none;">
+              </td>
+          </tr>
+
+
           </tbody>
         </table>
         <table class="table table-bordered table-condensed">
@@ -141,7 +146,7 @@
       <i class="mr-1 fa fa-print text-primary-m1 text-120 w-2"></i>
       Print
     </a>
-    <a class="btn bg-white btn-light mx-1px text-95" data-title="Save" [routerLink]="['/Controle',this.service.list[0].numero]">
+    <a class="btn bg-white btn-light mx-1px text-95" data-title="Save" (click)="update()" >
       <i class="mr-1 fa fa-save text-success-m1 text-120 w-2"></i>
       Save
     </a>
