@@ -17,6 +17,7 @@ namespace WebAPI.Model
         public int? Quantity2 { get; set; }
 
         public string Conformiter { get; set; } = "";
+        public string Observation { get; set; } = "";
 
         // Byte array to store the image
         public byte[]? Image { get; set; }

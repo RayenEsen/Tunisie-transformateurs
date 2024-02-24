@@ -78,8 +78,12 @@
             <tr>
               <td class="text-center colfix">Conformité</td>
               <td class="text-center colfix clickable" colspan="2" (click)="Conforme(Conseption.idConseption)"
-              [ngStyle]="{'background-color': Conseption.conformiter === 'Yes' ? 'rgb(0 128 0 / 67%)' : '#8080806b'}">
+              [ngStyle]="{
+                  'background-image': Conseption.conformiter !== 'Yes' ? 'linear-gradient(to right, #666666, #aaaaaa)' : 'none',
+                  'background-color': Conseption.conformiter === 'Yes' ? 'rgba(0, 128, 0, 0.67)' : 'transparent'
+              }">
           </td>
+
             </tr>
           </tbody>
         </table>
@@ -91,29 +95,26 @@
             </tr>
             <tr>
               <td colspan="2" class="text-center colfix clickable" (click)="uploadFileAndUpdateConseption(Conseption.idConseption)">
-                <img [src]="Conseption.image ? 'data:image/jpeg;base64,' + Conseption.image : 'assets/temp.png'" style="width: 250px;" alt="Conseption Image">
+                <img [src]="Conseption.image ? 'data:image/jpeg;base64,' + Conseption.image : 'assets/temp.png'" style="width: 250px;padding-top: 23px;" alt="Conseption Image">
                 <!-- Hidden file input element -->
                 <input type="file" id="fileInput" (change)="onFileSelected($event)" style="display: none;">
             </td>
-
           </tr>
-
-
           </tbody>
         </table>
         <table class="table table-bordered table-condensed">
           <tbody>
             <tr>
-              <td class="text-center colfix">Date</td>
+              <td class="text-center colfix" style="padding-bottom: 12px;">Date</td>
             </tr>
             <tr>
-              <td class="text-center colfix"><input type="date"></td>
+              <td class="text-center colfix"><input type="date" [(ngModel)]="Conseption.date"></td>
             </tr>
             <tr>
               <td class="text-center colfix">Opérateur</td>
             </tr>
             <tr>
-              <td class="text-center colfix">Mohsen hamdi</td>
+              <td class="text-center colfix">{{this.etapeSelected.controleurs[0].username}}</td>
             </tr>
             <tr>
               <td class="text-center colfix">Controleur</td>
@@ -125,7 +126,7 @@
               <td class="text-center colfix">Observation</td>
             </tr>
             <tr>
-              <td class="text-center colfix"><input type="string"></td>
+              <td class="text-center colfix"><input type="string"  style="text-align: center;" [(ngModel)]="Conseption.observation"></td>
             </tr>
           </tbody>
         </table>

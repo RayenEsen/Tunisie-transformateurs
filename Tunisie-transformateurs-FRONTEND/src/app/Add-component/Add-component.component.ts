@@ -262,7 +262,17 @@ export class AddComponentComponent implements OnInit {
               3: 'Fond',
               4: 'Cote fond',
               5: 'Corinere structure',
-              6: 'Fer plat structure'
+              6: 'Fer plat structure',
+              7: 'Onduleés Largeur',
+              8: 'Onduleés Longueur',
+              9: 'Pied Cuve',
+              10: 'Cuve',
+              11: 'Tige serrage',
+              12: 'Tige tirantes',
+              13: 'Tige couvercle',
+              14: 'Fer plat fixation',
+              15: 'UPN SUP',
+              16: 'UPN Inf'
             };
 
             // Define the number of ConseptionValues for each Conseption
@@ -272,7 +282,17 @@ export class AddComponentComponent implements OnInit {
               3: 5,
               4: 3,
               5: 3,
-              6: 3
+              6: 3,
+              7: 4,
+              8: 4,
+              9: 4,
+              10: 3,
+              11: 2,
+              12: 2,
+              13: 2,
+              14: 8,
+              15: 15,
+              16: 12,
             };
 
             // Define the specific names for ConseptionValues of each Conseption
@@ -282,7 +302,17 @@ export class AddComponentComponent implements OnInit {
               3: ['a', 'b', 'c', 'e', 'Ongle'],
               4: ['a1', 'b1', 'e'],
               5: ['a2', 'a2', 'n2'],
-              6: ['a3', 'b3', 'c3']
+              6: ['a3', 'b3', 'c3'],
+              7: ['a4', 'b4', 'c4', 'Nombres des parois'],
+              8: ['a4', 'b4', 'c4', 'Nombres des parois'],
+              9: ['b5', 'a5', 'c5', 'd5'],
+              10: ['a12', 'b12', 'c12'],
+              11: ['a6','b6'],
+              12: ['a7', 'b7'],
+              13: ['a8', 'b8'],
+              14: ['a9' , 'b9' , 'c9' , 'd9' , 'e9' , 'f9' , 'g9' , 'h9'],
+              15: ['a7','b7','c7','d7','e7','f7','g7','h7','i7','j7','k7','l7','m7','n','o'],
+              16: ['d8','e8','f8','g8','h8','i8','j8','k8','l8','m8','n8','o8']
             };
 
             // Helper function to save ConseptionValues
@@ -299,7 +329,7 @@ export class AddComponentComponent implements OnInit {
               return observables;
             };
 
-            for (let i = 1; i <= 6; i++) {
+            for (let i = 1; i <= 16; i++) {
               const ConseptionAjouter: Conseption = {
                 numero: this.transformateurAjouter.numero,
                 nom: ConseptionNames[i] || '',

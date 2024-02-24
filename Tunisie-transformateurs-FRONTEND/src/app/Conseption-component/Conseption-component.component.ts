@@ -23,6 +23,7 @@ export class ConseptionComponentComponent implements OnInit {
   transformateurId: number = 0;
   conseption: Conseption[] = [];
   selectedFileData: File | null = null;
+  etapeSelected: Etape = new Etape;
 
   constructor(
     public ServiceConseption: ConseptionServiceService,
@@ -52,6 +53,17 @@ export class ConseptionComponentComponent implements OnInit {
             }
           );
           this.service.GetTransformateur(this.transformateurId);
+          this.ServiceE.getEtapeByNumeroAndTransformateur(this.etapenumero,this.transformateurId)
+          .subscribe(
+            etape => {
+              this.etapeSelected=etape;
+              console.log(this.etapeSelected);
+            },
+            error => {
+              // Handle any errors that occur during the HTTP request
+              console.error('Error fetching etape:', error);
+            }
+          );
       }
     });
   }
@@ -70,6 +82,14 @@ export class ConseptionComponentComponent implements OnInit {
         console.error('Error updating Conseptions:', error); // Log the error
         // Handle error as needed
       }
+    });
+    // Update the etapeSelected
+    console.log(this.etapeSelected)
+    this.ServiceE.UpdateEtape(this.transformateurId, this.etapenumero, this.etapeSelected).subscribe({
+      next: (response) => {
+        console.log('Etape updated successfully:', response);
+        // Handle the response as needed
+      },
     });
   }
 

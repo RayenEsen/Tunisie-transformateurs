@@ -142,6 +142,7 @@ namespace WebAPI.Controller
                 existingConseption.Date = updatedConseption.Date;
                 existingConseption.Quantity = updatedConseption.Quantity;
                 existingConseption.Quantity2 = updatedConseption.Quantity2;
+                existingConseption.Observation = updatedConseption.Observation;
 
                 existingConseption.Conformiter = updatedConseption.Conformiter;
 

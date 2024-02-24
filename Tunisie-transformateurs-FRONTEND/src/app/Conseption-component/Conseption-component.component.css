@@ -115,7 +115,7 @@ body {
 
 /* Hover effect on the invoice container */
 .invoice:hover {
-  transform: scale(1.02); /* Scaling up on hover */
+  transform: scale(1.005); /* Scaling up on hover */
 }
 
 /* Hover effect on the logo */
