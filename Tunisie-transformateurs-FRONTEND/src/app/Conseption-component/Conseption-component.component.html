@@ -73,11 +73,13 @@
             <tr>
               <td class="text-center colfix">Quantité</td>
               <td class="text-center colfix"><input type="number" [(ngModel)]="Conseption.quantity"></td>
-              <td class="text-center colfix"><input type="number"></td>
+              <td class="text-center colfix"><input type="number" [(ngModel)]="Conseption.quantity2"></td>
             </tr>
             <tr>
               <td class="text-center colfix">Conformité</td>
-              <td class="text-center colfix" colspan="2"></td>
+              <td class="text-center colfix clickable" colspan="2" (click)="Conforme(Conseption.idConseption)"
+              [ngStyle]="{'background-color': Conseption.conformiter === 'Yes' ? 'rgb(0 128 0 / 67%)' : '#8080806b'}">
+          </td>
             </tr>
           </tbody>
         </table>
@@ -88,11 +90,12 @@
               <td class="text-center colfix">24095-24103</td>
             </tr>
             <tr>
-              <td colspan="2" class="text-center colfix" (click)="uploadFileAndUpdateConseption(Conseption.idConseption)">
-                  <img [src]="Conseption.image ? 'data:image/jpeg;base64,' + Conseption.image : 'assets/temp.png'" style="width: 250px;" alt="Conseption Image">
-                  <!-- Hidden file input element -->
-                  <input type="file" id="fileInput" (change)="onFileSelected($event)" style="display: none;">
-              </td>
+              <td colspan="2" class="text-center colfix clickable" (click)="uploadFileAndUpdateConseption(Conseption.idConseption)">
+                <img [src]="Conseption.image ? 'data:image/jpeg;base64,' + Conseption.image : 'assets/temp.png'" style="width: 250px;" alt="Conseption Image">
+                <!-- Hidden file input element -->
+                <input type="file" id="fileInput" (change)="onFileSelected($event)" style="display: none;">
+            </td>
+
           </tr>
 
 

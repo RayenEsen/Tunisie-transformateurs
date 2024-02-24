@@ -183,6 +183,12 @@ img {
 img:hover {
   transform: scale(1.1);
 }
+
+.clickable {
+  cursor: pointer;
+}
+
+
 /* Styles for input fields in print media */
 @media print {
   input[type="text"] {

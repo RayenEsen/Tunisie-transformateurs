@@ -14,6 +14,8 @@ namespace WebAPI.Model
         public string Nom { get; set; } = "";
         public DateOnly? Date { get; set; }
         public int? Quantity { get; set; }
+        public int? Quantity2 { get; set; }
+
         public string Conformiter { get; set; } = "";
 
         // Byte array to store the image

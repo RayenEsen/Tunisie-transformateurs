@@ -126,5 +126,14 @@ export class ConseptionComponentComponent implements OnInit {
   }
 
 
+  Conforme(id: number) {
+    const targetConseption = this.conseption.find(c => c.idConseption === id);
+    if (targetConseption) {
+        targetConseption.conformiter = targetConseption.conformiter === "No" ? "Yes" : "No";
+    }
+}
+
+
+
 }
 

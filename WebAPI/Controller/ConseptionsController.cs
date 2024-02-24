@@ -141,6 +141,8 @@ namespace WebAPI.Controller
                 existingConseption.Nom = updatedConseption.Nom;
                 existingConseption.Date = updatedConseption.Date;
                 existingConseption.Quantity = updatedConseption.Quantity;
+                existingConseption.Quantity2 = updatedConseption.Quantity2;
+
                 existingConseption.Conformiter = updatedConseption.Conformiter;
 
                 // Handle image data

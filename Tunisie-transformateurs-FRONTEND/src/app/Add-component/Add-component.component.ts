@@ -437,10 +437,11 @@ export class AddComponentComponent implements OnInit {
               14: 'Encuvage',
               15: 'Remplissage',
               16: 'Etancheite',
-              17: 'Peinture'
+              17: 'Peinture',
+              18: 'Conseption'
             };
 
-            for (let i = 1; i <= 17; i++) {
+            for (let i = 1; i <= 18; i++) {
               const etapeAjouter: Etape = {
                 id_Etape: 0,
                 etapeNumero: i,

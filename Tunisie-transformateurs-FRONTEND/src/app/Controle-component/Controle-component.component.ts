@@ -248,7 +248,7 @@ export class ControleComponentComponent implements OnInit {
     }
     showCard(etapeNumero: number): boolean {
       // Add your logic here to determine whether to show the card based on etapeNumero
-      return [1, 4, 7, 9, 13, 15, 17].includes(etapeNumero);
+      return [1, 4, 7, 9, 13, 15, 17, 18].includes(etapeNumero);
     }
 
     getCardTitle(etapeNumero: number): string {
@@ -267,6 +267,8 @@ export class ControleComponentComponent implements OnInit {
           return 'Remplissage et Etancheite';
         case 17:
           return 'Peinture';
+        case 18:
+          return 'Conseption';
         default:
           return 'Default Title';
       }
@@ -288,6 +290,8 @@ export class ControleComponentComponent implements OnInit {
           return ['/Remplissage', this.transformateurId,etapeNumero];
         case 17:
           return ['/Peinture', this.transformateurId,etapeNumero];
+        case 18:
+          return ['/Conseption', this.transformateurId,etapeNumero];
         default:
           // Add default route or handle other cases as needed
           return ['/DefaultRoute'];
