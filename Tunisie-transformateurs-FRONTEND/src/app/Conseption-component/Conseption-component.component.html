@@ -16,6 +16,7 @@
   <div class="page-header text-blue-d2" style=" margin: 40px 30px 20px;" >
 
   <div class="invoice-body">
+
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">Informations Générales:</h3>
@@ -166,12 +167,12 @@
       <i class="mr-1 fa fa-print text-primary-m1 text-120 w-2" style="margin-right: 5px;"></i> <!-- Added margin-right -->
       Print
     </a>
-    <a class="btn bg-white btn-light mx-1px text-95" data-title="Save" (click)="update()">
+    <a [routerLink]="['/Controle', service.list[0]!.numero]" class="btn bg-white btn-light mx-1px text-95" data-title="Save" (click)="update()">
       <i class="mr-1 fa fa-save text-success-m1 text-120 w-2" style="margin-right: 5px;"></i> <!-- Added margin-right -->
       Save
     </a>
+
   </div>
 </div>
 
 </div>
-
