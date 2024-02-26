@@ -51,8 +51,24 @@
     </div>
     <div class="panel panel-default"  *ngFor="let Conseption of conseption">
       <div class="panel-heading">
-        <h3 class="panel-title">Conseption:</h3>
-      </div>
+        <ng-container *ngIf="Conseption.conseptionNumber <= 6">
+          <h3 class="panel-title">{{Conseption.nom}}</h3>
+        </ng-container>
+        <ng-container *ngIf="Conseption.conseptionNumber === 7 || Conseption.conseptionNumber === 8">
+          <h3 class="panel-title">Onduleés:</h3>
+        </ng-container>
+        <ng-container *ngIf="Conseption.conseptionNumber === 9 || Conseption.conseptionNumber === 10">
+          <h3 class="panel-title">Cuve:</h3>
+        </ng-container>
+        <ng-container *ngIf="Conseption.conseptionNumber === 11 || Conseption.conseptionNumber === 12 || Conseption.conseptionNumber === 13">
+          <h3 class="panel-title">Tiges:</h3>
+        </ng-container>
+        <ng-container *ngIf="Conseption.conseptionNumber === 14">
+          <h3 class="panel-title">Fer plat fixation:</h3>
+        </ng-container>
+        <ng-container *ngIf="Conseption.conseptionNumber >= 15">
+          <h3 class="panel-title">UPN:</h3>
+        </ng-container>      </div>
       <div style="display: flex;">
         <table class="table table-bordered table-condensed">
           <tbody>
@@ -95,10 +111,10 @@
             </tr>
             <tr>
               <td colspan="2" class="text-center colfix clickable" (click)="uploadFileAndUpdateConseption(Conseption.idConseption)">
-                <img [src]="Conseption.image ? 'data:image/jpeg;base64,' + Conseption.image : 'assets/temp.png'" style="width: 250px;padding-top: 23px;" alt="Conseption Image">
+                <img [src]="Conseption.image ? 'data:image/jpeg;base64,' + Conseption.image : 'assets/temp.png'" style="max-width: 250px; padding-top: 3vh;" alt="Conseption Image">
                 <!-- Hidden file input element -->
                 <input type="file" id="fileInput" (change)="onFileSelected($event)" style="display: none;">
-            </td>
+              </td>
           </tr>
           </tbody>
         </table>
@@ -144,17 +160,18 @@
 
   </div>
 </div>
-<div class="page-tools" style="padding-left: 90vh;" class="printable">
+<div class="page-tools" style="padding-left: 140vh;" class="printable">
   <div class="action-buttons" style="display: flex;">
     <a class="btn bg-white btn-light mx-1px text-95" data-title="Print">
-      <i class="mr-1 fa fa-print text-primary-m1 text-120 w-2"></i>
+      <i class="mr-1 fa fa-print text-primary-m1 text-120 w-2" style="margin-right: 5px;"></i> <!-- Added margin-right -->
       Print
     </a>
-    <a class="btn bg-white btn-light mx-1px text-95" data-title="Save" (click)="update()" >
-      <i class="mr-1 fa fa-save text-success-m1 text-120 w-2"></i>
+    <a class="btn bg-white btn-light mx-1px text-95" data-title="Save" (click)="update()">
+      <i class="mr-1 fa fa-save text-success-m1 text-120 w-2" style="margin-right: 5px;"></i> <!-- Added margin-right -->
       Save
     </a>
   </div>
 </div>
+
 </div>
 

@@ -119,8 +119,13 @@ namespace WebAPI.Controller
             _context.transformateurs.Remove(transformateur);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            // Get the updated list of transformateurs after deletion
+            var updatedTransformateurs = await _context.transformateurs.ToListAsync();
+
+            // Return the updated list
+            return Ok(updatedTransformateurs);
         }
+
 
         [HttpGet("Search")]
         public async Task<ActionResult<IEnumerable<Transformateur>>> SearchTransformateurs([FromQuery] string searchTerm)

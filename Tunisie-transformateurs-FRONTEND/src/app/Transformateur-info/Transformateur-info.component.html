@@ -6,20 +6,19 @@
       <div class="col-xl-3 col-md-6">
         <div class="card bg-pattern">
           <div class="card-body">
-              <div class="float-right">
+              <div style="padding-right: 0px;">
                   <i class="fa fa-check-circle text-success h4 ml-3 fa-solid"></i>
               </div>
               <h5 class="font-size-20 mt-0 pt-1">{{nbConforme}}</h5>
               <p class="text-muted mb-0">Conforme Total</p>
           </div>
       </div>
-
       </div>
       <div class="col-xl-3 col-md-6">
           <div class="card bg-pattern">
             <div class="card-body">
-              <div class="float-right">
-                  <i class="fa fa-hourglass text-primary h4 ml-3"></i>
+              <div style="padding-right: 0px;">
+                <i class="fa fa-hourglass text-primary h4 ml-3"></i>
               </div>
               <h5 class="font-size-20 mt-0 pt-1">{{nbAttente}}</h5>
               <p class="text-muted mb-0">En Attente Total</p>
@@ -29,8 +28,8 @@
       <div class="col-xl-3 col-md-6">
         <div class="card bg-pattern">
             <div class="card-body">
-                <div class="float-right">
-                    <i class="fa fa-exclamation-triangle text-warning h4 ml-3"></i>
+              <div style="padding-right: 0px;">
+                <i class="fa fa-exclamation-triangle text-warning h4 ml-3"></i>
                 </div>
                 <h5 class="font-size-20 mt-0 pt-1">{{nbNonConforme}}</h5>
                 <p class="text-muted mb-0">Non conforme Total</p>
@@ -101,7 +100,9 @@
                       </a>
                       <div class="dropdown-menu dropdown-menu-end">
                         <a [routerLink]="['/Ajouter_Transformateur', transformateur.numero]"  class="dropdown-item">Voir les détails</a>
-                        <a href="./Transformateur" class="dropdown-item" (click)="onDelete(transformateur.numero)">Supprimer</a>
+                        <!-- Replace the anchor tag with a button -->
+
+                        <button type="button" class="dropdown-item"  (click)="confirm1(transformateur.numero)">Supprimer</button>
                         <a [routerLink]="['/Essai_Transformateur', transformateur.numero]"  class="dropdown-item">Essais</a>
                     </div>
                     </div>
@@ -116,6 +117,8 @@
   </div>
 
 </header>
+<p-toast></p-toast>
+<p-confirmDialog></p-confirmDialog>
 
 
 

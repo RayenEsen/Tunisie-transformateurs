@@ -128,6 +128,9 @@ namespace WebAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("ConseptionNumber")
+                        .HasColumnType("int");
+
                     b.Property<DateOnly?>("Date")
                         .HasColumnType("date");
 

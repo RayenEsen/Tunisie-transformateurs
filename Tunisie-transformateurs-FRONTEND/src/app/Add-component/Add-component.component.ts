@@ -34,6 +34,8 @@ import { Conseption } from '../Shared/Conseption-service.model';
 import { ConseptionServiceService } from '../Shared/Conseption-service.service';
 import { ConseptionValues } from '../Shared/ConseptionValues-service.model';
 import { ConseptionValuesServiceService } from '../Shared/ConseptionValues-service.service';
+import { MessageService } from 'primeng/api';
+
 @Component({
   selector: 'app-Add-component',
   templateUrl: './Add-component.component.html',
@@ -87,6 +89,7 @@ export class AddComponentComponent implements OnInit {
      public ServicePeinture : PeintureServiceService,
      public ServiceConseption : ConseptionServiceService,
      public ServiceConseptionValues : ConseptionValuesServiceService,
+     private messageService: MessageService,
      ){ }
 
   ngOnInit() {
@@ -94,7 +97,28 @@ export class AddComponentComponent implements OnInit {
   }
 
   validateForm(): boolean {
-    return Object.values(this.transformateurAjouter).every(value => value !== undefined);
+    if (
+      this.transformateurAjouter.numero === 0 || this.transformateurAjouter.numero === undefined ||
+      this.transformateurAjouter.marque === '' || this.transformateurAjouter.marque === undefined ||
+      this.transformateurAjouter.client === '' || this.transformateurAjouter.client === undefined ||
+      this.transformateurAjouter.norme === '' || this.transformateurAjouter.norme === undefined ||
+      this.transformateurAjouter.power === '' || this.transformateurAjouter.power === undefined ||
+      this.transformateurAjouter.mtu1 === 0 || this.transformateurAjouter.mtu1 === undefined ||
+      this.transformateurAjouter.mtu2 === 0 || this.transformateurAjouter.mtu2 === undefined ||
+      this.transformateurAjouter.btu2 === 0 || this.transformateurAjouter.btu2 === undefined ||
+      this.transformateurAjouter.bti2 === 0 || this.transformateurAjouter.bti2 === undefined ||
+      this.transformateurAjouter.nbphase === 0 || this.transformateurAjouter.nbphase === undefined ||
+      this.transformateurAjouter.prises === '' || this.transformateurAjouter.prises === undefined ||
+      this.transformateurAjouter.couplage === '' || this.transformateurAjouter.couplage === undefined ||
+      this.transformateurAjouter.cooling === '' || this.transformateurAjouter.cooling === undefined ||
+      this.transformateurAjouter.libelle === '' || this.transformateurAjouter.libelle === undefined ||
+      this.transformateurAjouter.frequency === 0 || this.transformateurAjouter.frequency === undefined ||
+      this.transformateurAjouter.type === '' || this.transformateurAjouter.type === undefined
+    ) {
+      return true; // Form is valid if any property meets the condition
+    }
+
+    return false; // Form is invalid if none of the conditions are met
   }
 
 
@@ -103,8 +127,8 @@ export class AddComponentComponent implements OnInit {
       // Call service method to add Transformateur
       this.transformateurAjouter.mtu2 = this.getI1();
       this.transformateurAjouter.bti2 = this.getI2();
-      if (!this.validateForm()) {
-        alert("Tout les champs sont obligatoires");
+      if (this.validateForm()) {
+        this.messageService.add({ severity: 'error', summary: 'Erreur', detail: 'Tout les informations sont obligatoire' });
         return;
       }
       this.transformateurAjouter.galet = this.transformateurAjouter.galet ? "Galet" : "";
@@ -334,7 +358,8 @@ export class AddComponentComponent implements OnInit {
                 numero: this.transformateurAjouter.numero,
                 nom: ConseptionNames[i] || '',
                 idConseption: 0,
-                conformiter: 'No'
+                conformiter: 'No',
+                conseptionNumber: i
               };
 
               const conseptionObservable = this.ServiceConseption.addConseption(ConseptionAjouter).pipe(
@@ -489,7 +514,6 @@ export class AddComponentComponent implements OnInit {
         )
         .subscribe({
           next: (results: any) => {
-            console.log('Transformateur, Bobinage, and Etape added successfully', results);
             // Navigate or perform other actions on successful completion
             const newEvent = new Event(this.serviceS.Controleur.idC, 'Ajouter un transformateur', new Date(),"transformateur de type " + this.transformateurAjouter.type + " avec le numéro " + this.transformateurAjouter.numero+".");
             this.EventService.AddEvent(newEvent)
@@ -503,17 +527,15 @@ export class AddComponentComponent implements OnInit {
                   // Handle the error appropriately
                 }
               });
-
             this.router.navigate(['/Transformateur']);
           },
           error: (error: any) => {
-            alert("Tout les champs sont obligatoires");
-            console.error('Error adding Transformateur, Pv, Bobinage, or Etapes', error);
+            if (error.status === 409) {
+              this.messageService.add({ severity: 'error', summary: 'Erreur', detail: 'Transformateur existe déjà' });
+            }
           }
         });
     } catch (error) {
-      alert("Le champ 'numero' est obligatoire");
-      console.error('Error adding Transformateur', error);
       return;
     }
   }

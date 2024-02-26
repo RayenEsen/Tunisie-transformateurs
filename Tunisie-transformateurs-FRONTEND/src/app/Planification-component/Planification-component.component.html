@@ -70,10 +70,12 @@
                           <tbody>
                             <tr *ngFor="let transformateur of list" [routerLink]="['/Controle', transformateur.numero]">
                               <td>
-                                    <img *ngIf="transformateur.type==='Monophasés'" src="assets/mono.png" class="avatar sm rounded-pill me-3 flex-shrink-0" alt="Customer">
-                                    <img *ngIf="transformateur.type==='Triphasés'" src="assets/triphaser.png" class="avatar sm rounded-pill me-3 flex-shrink-0" alt="Customer">
-                                    <img *ngIf="transformateur.type==='Biphasés'" src="assets/resine.png" class="avatar sm rounded-pill me-3 flex-shrink-0" alt="Customer">
-                                    {{transformateur.numero}}
+                                <div class="d-flex align-items-center">
+                                  <img *ngIf="transformateur.type==='Monophasés'" src="assets/mono.png" class="avatar sm rounded-pill me-3 flex-shrink-0" alt="Customer">
+                                  <img *ngIf="transformateur.type==='Triphasés'" src="assets/triphaser.png" class="avatar sm rounded-pill me-3 flex-shrink-0" alt="Customer">
+                                  <img *ngIf="transformateur.type==='Biphasés'" src="assets/resine.png" class="avatar sm rounded-pill me-3 flex-shrink-0" alt="Customer">
+                                  <span>{{transformateur.numero}}</span>
+                                </div>
                                 </td>
                                 <td>{{transformateur.type}}</td>
                                 <td>{{transformateur.power}}Kva</td>

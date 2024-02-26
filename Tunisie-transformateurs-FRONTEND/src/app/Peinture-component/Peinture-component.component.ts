@@ -114,6 +114,16 @@ export class PeintureComponentComponent implements OnInit {
         this.ServiceP.addPeinture(newPeinture).subscribe(
           (response) => {
             console.log('Peinture added successfully:', response);
+            this.ServiceP.updateListPeinture(this.peintures)
+            .subscribe(
+              () => {
+                window.location.reload();
+              },
+              error => {
+                console.error('Failed to update peintures:', error);
+                // Optionally, you can handle the error here, display a message to the user, or perform other actions
+              }
+            );
           },
           (error) => {
             console.error('Failed to add peinture:', error);
@@ -130,7 +140,6 @@ export class PeintureComponentComponent implements OnInit {
       this.ServiceP.updateListPeinture(this.peintures)
         .subscribe(
           () => {
-            window.location.reload();
           },
           error => {
             console.error('Failed to update peintures:', error);
@@ -138,8 +147,5 @@ export class PeintureComponentComponent implements OnInit {
           }
         );
     }
-
-
-
 
 }

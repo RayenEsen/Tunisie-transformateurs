@@ -15,6 +15,7 @@ namespace WebAPI.Model
         public DateOnly? Date { get; set; }
         public int? Quantity { get; set; }
         public int? Quantity2 { get; set; }
+        public int? ConseptionNumber { get; set; }
 
         public string Conformiter { get; set; } = "";
         public string Observation { get; set; } = "";

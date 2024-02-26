@@ -7,6 +7,7 @@ export interface Conseption {
   date?: string; // Assuming DateOnly is a string representation of date
   quantity?: number | null;
   quantity2?: number | null;
+  conseptionNumber: number;
   observation?: string;
   conformiter: string;
   image?: ArrayBuffer | string | null; // Assuming byte[] maps to ArrayBuffer or string

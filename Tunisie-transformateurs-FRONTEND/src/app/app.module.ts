@@ -1,12 +1,18 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatInputModule } from '@angular/material/input'; // Add this line
+import { ButtonModule } from 'primeng/button'
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MessagesModule } from 'primeng/messages';
+import { PasswordModule } from 'primeng/password';
+import { ToastModule } from 'primeng/toast';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
+import { ImageModule } from 'primeng/image';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { TopNavComponent } from './top-nav/top-nav.component';
 import { TransformateurInfoComponent } from './Transformateur-info/Transformateur-info.component';
@@ -33,9 +39,10 @@ import { RemplissageComponentComponent } from './Remplissage-component/Remplissa
 import { LivraisonComponentComponent } from './Livraison-component/Livraison-component.component';
 import { PeintureComponentComponent } from './Peinture-component/Peinture-component.component';
 import { ConseptionComponentComponent } from './Conseption-component/Conseption-component.component';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
-  declarations: [		
+  declarations: [
     AppComponent,
     NavBarComponent,
     TopNavComponent,
@@ -60,19 +67,24 @@ import { ConseptionComponentComponent } from './Conseption-component/Conseption-
       RemplissageComponentComponent,
       LivraisonComponentComponent,
       PeintureComponentComponent,
-      ConseptionComponentComponent
+      ConseptionComponentComponent,
    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    MatAutocompleteModule,
-    MatInputModule, // Add MatInputModule here
+    ButtonModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MessagesModule,
+    PasswordModule,
+    ToastModule,
+    ConfirmDialogModule,
+    ImageModule
   ],
-  providers: [],
+  providers: [MessageService,ConfirmationService],
   bootstrap: [AppComponent]
+
 })
 export class AppModule { }

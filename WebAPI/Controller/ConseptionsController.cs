@@ -106,7 +106,7 @@ namespace WebAPI.Controller
             var controleurs = await _context.Conseptions
                 .Where(c => c.Numero == transformateurId) // Filtrer par transformateurId
                 .Include(c => c.ConseptionValues) // Inclure les ConseptionValues associés
-                .OrderBy(c => c.IdConseption) // Ordonner par Id, du plus petit au plus grand
+                .OrderBy(c => c.ConseptionNumber) // Ordonner par Id, du plus petit au plus grand
                 .ToListAsync();
 
             if (controleurs == null || !controleurs.Any())

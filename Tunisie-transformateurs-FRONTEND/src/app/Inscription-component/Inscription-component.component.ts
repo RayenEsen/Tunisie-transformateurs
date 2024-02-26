@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ControleurDeQualite } from '../Shared/Controlleur-service.model';
 import { ControlleurServiceService } from '../Shared/Controlleur-service.service';
 import { Router } from '@angular/router';
-
+import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-Inscription-component',
   templateUrl: './Inscription-component.component.html',
@@ -20,7 +20,7 @@ export class InscriptionComponentComponent implements OnInit {
     nom:''
 
   }
-  constructor(public ServiceC : ControlleurServiceService , public router : Router ) { }
+  constructor(public ServiceC : ControlleurServiceService , public router : Router, public SerivceM : MessageService ) { }
 
   ngOnInit() {
   }
@@ -39,8 +39,7 @@ export class InscriptionComponentComponent implements OnInit {
         error: (error) => {
           if (error.status === 409) {
             // Duplicate entry (conflict), user already exists
-            alert("L'utilisateur existe déjà.");
-            this.router.navigate(['/Sign_in']);
+            this.SerivceM.add({ severity: 'info', summary: 'Existant', detail: 'Utilisateur existe deja.' });
           } else {
             // Handle other types of errors if needed
             console.error('An error occurred during registration:', error);
@@ -48,7 +47,7 @@ export class InscriptionComponentComponent implements OnInit {
         }
       });
     } else {
-      alert("Toutes les entrées sont obligatoires.");
+      this.SerivceM.add({ severity: 'error', summary: 'Champs obligatoires', detail: 'Tous les champs sont obligatoires.' });
     }
   }
   eyeClosed: boolean = true;

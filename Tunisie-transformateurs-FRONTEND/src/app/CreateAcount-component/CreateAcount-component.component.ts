@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Event } from '../Shared/Event-service.model'
 import { EventServiceService } from '../Shared/Event-service.service'
 import { SessionService } from '../utils/session-service.service'
+import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-CreateAcount-component',
   templateUrl: './CreateAcount-component.component.html',
@@ -19,7 +20,7 @@ export class CreateAcountComponentComponent implements OnInit {
     password: ''
   };
 
-  constructor(public ServiceC : ControlleurServiceService , private router: Router , public ServiceS : SessionService , public eventService : EventServiceService) { }
+  constructor(public ServiceM : MessageService,public ServiceC : ControlleurServiceService , private router: Router , public ServiceS : SessionService , public eventService : EventServiceService) { }
 
   ngOnInit() {
   }
@@ -51,20 +52,28 @@ export class CreateAcountComponentComponent implements OnInit {
             this.router.navigate(['/Edit_profile']);
           } else {
             // User not found
-            alert("Utilisateur non trouvé");
-          }
+            this.ServiceM.add({
+              severity: 'error',
+              summary: 'Utilisateur introuvable',
+              detail: 'Identifiant ou mot de passe incorrect. Veuillez réessayer.'
+            });
+            }
         },
         error: (error) => {
           if (error.status === 404) {
-            alert("Utilisateur non trouvé");
-          } else {
+            this.ServiceM.add({
+              severity: 'error',
+              summary: 'Utilisateur introuvable',
+              detail: 'Identifiant ou mot de passe incorrect. Veuillez réessayer.'
+            });
+            } else {
             // Handle other types of errors if needed
             console.error('An error occurred:', error);
           }
         }
       });
     } else {
-      alert("Toutes les entrées sont obligatoires.");
+      this.ServiceM.add({ severity: 'warn', summary: 'Attention', detail: 'Toutes les entrées sont obligatoires.' });
     }
   }
   eyeClosed: boolean = true;

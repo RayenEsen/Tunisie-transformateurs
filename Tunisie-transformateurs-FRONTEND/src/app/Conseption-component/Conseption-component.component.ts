@@ -105,7 +105,6 @@ export class ConseptionComponentComponent implements OnInit {
     if (file) {
       // Store the selected file data
       this.selectedFileData = file;
-
       // Here you can implement additional logic if needed
       console.log('Selected file:', file);
     }
@@ -131,6 +130,7 @@ export class ConseptionComponentComponent implements OnInit {
           if (targetConseption) {
             // Assign the binary data to the image property of the target Conseption object
             targetConseption.image = binaryData;
+            this.update()
 
             // Optionally, you can update other properties of the target Conseption object here
 

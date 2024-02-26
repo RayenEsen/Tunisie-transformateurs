@@ -31,7 +31,7 @@
         </div>
         <div class="col-sm-6" style=" text-align: center;">
           <div>
-              <span class="text-sm text-grey-m2 align-middle">Puissance/Power:</span>
+              <span class="text text-grey-m2 align-middle">Puissance/Power:</span>
               <span class="text-600 text-110 text-blue align-middle"> {{ service.list[0].power }} KVA</span>
           </div>
           <div class="text-grey-m2">
@@ -160,11 +160,11 @@
   <div class="action-buttons" style="display: flex;">
     <a class="btn bg-white btn-light mx-1px text-95" data-title="Print" (click)="onPrint()">
       <i class="mr-1 fa fa-print text-primary-m1 text-120 w-2"></i>
-      Print
+      <span style="padding-left: 8px;">Print</span>
     </a>
     <a class="btn bg-white btn-light mx-1px text-95" data-title="Save" (click)="update()"  [routerLink]="['/Controle',this.service.list[0].numero]">
       <i class="mr-1 fa fa-save text-success-m1 text-120 w-2"></i>
-      Save
+      <span style="padding-left: 8px;">Print</span>
     </a>
   </div>
 </div>

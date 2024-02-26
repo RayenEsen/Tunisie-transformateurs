@@ -45,10 +45,7 @@ const routes: Routes = [
 
   { path: 'Sign_up' , component : InscriptionComponentComponent},
   { path: 'Controle/:id' , component : ControleComponentComponent, canActivate: [AuthGuard]},
-
-  // New route with parameter
   { path: '', component: DefaultComponentComponent }, // Default route
-  // Add other routes as needed
 ];
 
 @NgModule({

@@ -5,6 +5,8 @@ import { SessionService } from '../utils/session-service.service';
 import { Pfp } from '../Shared/pfp-service.model';
 import { PfpServiceService } from '../Shared/pfp-service.service';
 import { HttpResponse } from '@angular/common/http';
+import { MessageService } from 'primeng/api';
+
 @Component({
   selector: 'app-EditProfile-component',
   templateUrl: './EditProfile-component.component.html',
@@ -22,7 +24,7 @@ export class EditProfileComponentComponent implements OnInit {
   imageData1: string | undefined;
 
 
-  constructor(public ServiceC : ControlleurServiceService,public ServiceS : SessionService, public ServicePfp : PfpServiceService) { }
+  constructor(private messageService: MessageService,public ServiceC : ControlleurServiceService,public ServiceS : SessionService, public ServicePfp : PfpServiceService) { }
 
   ngOnInit() {
     this.ServiceC.getControleurById(this.ServiceS.Controleur.idC)
@@ -67,57 +69,45 @@ export class EditProfileComponentComponent implements OnInit {
       this.ServiceC.UpdateControleurById(this.Controleur.idC, this.Controleur)
         .subscribe({
           next: (response) => {
-            // Handle the success response if needed
             console.log('Controleur updated successfully:', response);
-            // Check if a file is selected
             if (this.selectedFile) {
-              // Check if imageData is defined
               if (this.imageData) {
-                // Call the service to update the profile picture
                 this.ServicePfp.updatePfp(this.Controleur.idC, this.selectedFile)
                   .subscribe({
                     next: (pfpResponse) => {
-                      // Handle the success response if needed
-                      console.log('Profile picture updated successfully:', pfpResponse);
-                      alert('Profile picture updated successfully');
+                      this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Les informations de la Controleur sont Enregistrer' });
                     },
                     error: (pfpError) => {
-                      // Handle the error
-                      console.error('Error updating profile picture:', pfpError);
-                      alert('Failed to update profile picture');
+
                     }
                   });
               } else {
-                // Call the service to upload the profile picture
                 this.ServicePfp.uploadPfp(this.Controleur.idC, this.selectedFile)
                   .subscribe({
                     next: (pfpResponse) => {
-                      // Handle the success response if needed
-                      console.log('Profile picture uploaded successfully:', pfpResponse);
-                      alert('Profile picture uploaded successfully');
+                      this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Les informations de la Controleur sont Enregistrer' });
                     },
                     error: (pfpError) => {
-                      // Handle the error
-                      console.error('Error uploading profile picture:', pfpError);
-                      alert('Failed to upload profile picture');
+
                     }
                   });
               }
             } else {
-              alert('Les informations de la Controleur sont Enregistrer');
+              this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Les informations de la Controleur sont Enregistrer' });
             }
           },
           error: (error) => {
-            // Handle the error
-            console.error('Error updating Controleur:', error);
-            alert('Failed to update Controleur');
+
           }
         });
     } else {
       console.error('Password confirmation failed');
-      // You may want to show a message or take other actions here
+      this.messageService.add({ severity: 'error', summary: 'Erreur', detail: 'Le mot de passe est Obligatoire' });
     }
   }
+
+
+
 
   onFileSelected(event: any) {
     if (event.target.files && event.target.files.length > 0) {
