@@ -62,7 +62,9 @@
                                               <td class="text-center colfix clickable-td" (click)="confirm(13, peinture.numerop)">{{this.peinture.relais}}</td>
                                               <td class="text-center colfix clickable-td" (click)="confirm(14, peinture.numerop)">{{this.peinture.doigt}}</td>
                                               <td class="text-center colfix clickable-td" (click)="confirm(15, peinture.numerop)">{{this.peinture.cosse}}</td>
-                                              <td class="text-center colfix clickable-td" style="color: red;">{{this.peinture.cnc}}</td>
+                                              <td *ngIf="this.peinture.cnc==='NC' " class="text-center colfix clickable-td" style="color: red;">{{this.peinture.cnc}}</td>
+                                              <td *ngIf="this.peinture.cnc==='C'" class="text-center colfix clickable-td" style="color: green;">{{this.peinture.cnc}}</td>
+
                                               <td class="text-center colfix"><input [(ngModel)]="peinture.observation"  style="width: 100%;"></td>
                                             </tr>
 

@@ -104,8 +104,8 @@
               </a>
 
               <div class="dropdown-menu dropdown-menu-right">
-                <a class="dropdown-item" href="#" (click)="Supprimer(UserSelected.idC)">Supprimer</a>
-                <a class="dropdown-item" href="#" (click)="Update(UserSelected.idC,UserSelected)">Sauvegarder</a>
+                <a class="dropdown-item" href="#" (click)="confirm1(UserSelected.idC)">Supprimer</a>
+                <button class="dropdown-item" href="#" (click)="Update(UserSelected.idC,UserSelected)">Sauvegarder</button>
               </div>
             </div>
           </div>
@@ -168,3 +168,5 @@
     </div>
   </div>
 </div>
+<p-confirmDialog></p-confirmDialog>
+<p-toast></p-toast>

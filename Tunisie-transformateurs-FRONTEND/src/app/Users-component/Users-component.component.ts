@@ -8,7 +8,8 @@ import { SessionService } from '../utils/session-service.service'
 import { Pfp } from '../Shared/pfp-service.model';
 import { PfpServiceService } from '../Shared/pfp-service.service';
 import { HttpResponse } from '@angular/common/http';
-
+import { ConfirmationService } from 'primeng/api';
+import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-Users-component',
   templateUrl: './Users-component.component.html',
@@ -24,7 +25,7 @@ export class UsersComponentComponent implements OnInit {
   imageData: string[] = [];
   defaultImageUrl = 'https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg';
 
-  constructor(public ServicePFP : PfpServiceService,public ServiceC : ControlleurServiceService,public eventService : EventServiceService,public ServiceS : SessionService) { }
+  constructor(public MessageService : MessageService,public ConformationService : ConfirmationService,public ServicePFP : PfpServiceService,public ServiceC : ControlleurServiceService,public eventService : EventServiceService,public ServiceS : SessionService) { }
 
   ngOnInit(): void {
     this.ServiceC.getAllControleurs().subscribe({
@@ -108,11 +109,14 @@ export class UsersComponentComponent implements OnInit {
             // Update the properties of the existing controlleur object
             Object.assign(controlleur, response);
             console.log('Controleur updated successfully:', response);
-            alert('Les informations de la Controleur ont été enregistrées');
-          } else {
+            this.MessageService.add({
+              severity: 'info',
+              summary: 'Info',
+              detail: 'Le rôle de l\'utilisateur a été mis à jour avec succès'
+            });
+            } else {
             console.error('Controleur not found for id:', id);
           }
-          console.log(this.ServiceS.Controleur)
         },
         error: (error) => {
           // Handle the error
@@ -189,6 +193,29 @@ search(keyword: string) {
     error: (error) => {
       console.error('Error searching Controleurs:', error);
     }
+  });
+}
+
+confirm1(id: string) {
+  // Use the confirmation service to display a confirmation dialog
+  this.ConformationService.confirm({
+    message: 'Confirmer la suppression du cette utilisateur?',
+    header: 'Suppression',
+    icon: 'pi pi-exclamation-triangle pi-lg',
+    accept: () => {
+          // Call the onDelete method to perform the deletion
+          this.Supprimer(id);
+          this.MessageService.add({ severity: 'info', summary: 'info', detail: 'Utilisateur supprimé avec succès' });
+        },
+      acceptLabel: 'Oui',
+      rejectLabel: 'Non',
+      acceptButtonStyleClass: 'p-button-danger',
+      rejectButtonStyleClass: 'p-button-secondary',
+      reject: () => {
+          // Logic to execute when the user cancels deletion
+          console.log('Deletion cancelled');
+          // You can put any action you want to perform upon cancellation here
+      }
   });
 }
 
