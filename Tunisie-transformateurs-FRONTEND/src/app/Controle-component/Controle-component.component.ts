@@ -16,6 +16,14 @@ import { Montage } from '../Shared/Montage-service.model';
 import { ControlleurServiceService } from '../Shared/Controlleur-service.service';
 import { ControleurDeQualite } from '../Shared/Controlleur-service.model';
 import { Message, MessageService } from 'primeng/api';
+import { Ecuvage } from '../Shared/Ecuvage-service.model';
+import { EcuvageServiceService } from '../Shared/Ecuvage-service.service';
+import { RemplissageServiceService } from '../Shared/Remplissage-service.service';
+import { Remplissage } from '../Shared/Remplissage-service.model';
+import { PeintureServiceService } from '../Shared/Peinture-service.service';
+import { Peinture } from '../Shared/Peinture-service.model';
+import { ConseptionServiceService } from '../Shared/Conseption-service.service';
+import { Conseption } from '../Shared/Conseption-service.model';
 @Component({
   selector: 'app-Controle-component',
   templateUrl: './Controle-component.component.html',
@@ -45,6 +53,10 @@ export class ControleComponentComponent implements OnInit {
     public ServiceMon : MontageServiceService,
     public userService : ControlleurServiceService,
     public MessageService : MessageService,
+    public EcuvageService : EcuvageServiceService,
+    public RemplissageService : RemplissageServiceService,
+    public PeintureService : PeintureServiceService,
+    public ConseptionService : ConseptionServiceService,
   ) {}
 
 
@@ -68,6 +80,11 @@ export class ControleComponentComponent implements OnInit {
                   this.fetchAndUpdateBobinagesMT();
                   this.fetchAndUpdateMagnetiques();
                   this.fetchAndUpdateMontages();
+                  this.fetchAndUpdateEncuvage();
+                  this.fetchAndUpdateRemplissage();
+                  this.fetchAndUpdatePeinture();
+                  this.fetchAndUpdateConseption();
+                  this.END_OF_PRODUCTION();
               },
               error => {
                   console.error('Error loading Etapes', error);
@@ -157,6 +174,73 @@ export class ControleComponentComponent implements OnInit {
             this.updateEtapeDateFin(10);
             this.updateEtapeDateFin(11);
             this.updateEtapeDateFin(12);
+          }
+        }
+      );
+  }
+
+  fetchAndUpdateEncuvage() {
+    this.EcuvageService.getEcuvageByTransformateurId(this.transformateurId)
+      .subscribe(
+        Ecuvages => {
+          const allConditionsMet = Ecuvages.every(item =>
+            item.conformite !== null
+          );
+
+          if (allConditionsMet && this.filteredEtapes[12] && this.filteredEtapes[12].dateFin === null && this.filteredEtapes[13] && this.filteredEtapes[13].dateFin === null )
+          {
+            this.updateEtapeDateFin(13);
+            this.updateEtapeDateFin(14);
+
+          }
+        }
+      );
+  }
+
+  fetchAndUpdateRemplissage() {
+    this.RemplissageService.getRemplissagesByTransformateurId(this.transformateurId)
+      .subscribe(
+        Remplissages => {
+          const allConditionsMet = Remplissages.every(item =>
+            item.cnc !== null
+          );
+
+          if (allConditionsMet && this.filteredEtapes[14] && this.filteredEtapes[14].dateFin === null && this.filteredEtapes[15] && this.filteredEtapes[15].dateFin === null )
+          {
+            this.updateEtapeDateFin(15);
+            this.updateEtapeDateFin(16);
+          }
+        }
+      );
+  }
+
+  fetchAndUpdatePeinture() {
+    this.PeintureService.getPeintureByTransformateurId(this.transformateurId)
+      .subscribe(
+        Peintures => {
+          const allConditionsMet = Peintures.some(item =>
+            item.cnc==='C'
+          );
+
+          if (allConditionsMet && this.filteredEtapes[16] && this.filteredEtapes[16].dateFin === null)
+          {
+            this.updateEtapeDateFin(17);
+          }
+        }
+      );
+  }
+
+  fetchAndUpdateConseption() {
+    this.ConseptionService.getConseptionsByTransformateur(this.transformateurId)
+      .subscribe(
+        Conseptions => {
+          const allConditionsMet = Conseptions.every(item =>
+            item.conformiter==='Yes'
+          );
+
+          if (allConditionsMet && this.filteredEtapes[17] && this.filteredEtapes[17].dateFin === null)
+          {
+            this.updateEtapeDateFin(18);
           }
         }
       );
@@ -306,6 +390,25 @@ export class ControleComponentComponent implements OnInit {
         this.MessageService.add({ severity: 'error', summary: 'Erreur', detail: 'Opérateur est requis pour continuer.' });
       }
     }
+
+    END_OF_PRODUCTION() {
+      if (
+        this.etapes.every(item => item.dateFin !== undefined) &&
+        this.Service.list.length > 0 &&
+        this.Service.list[0].dateFin?.toString() === "0001-01-01T00:00:00"
+      ) {
+        this.Service.list[0].dateFin = new Date();
+        this.Service.UpdateTransformateur(this.transformateurId, this.Service.list[0]).subscribe({
+          next: (response) => {
+            console.log("Finished updating dateFin");
+          },
+          error: (error) => {
+            console.error("Error updating dateFin:", error);
+          }
+        });
+      }
+    }
+
 
 
 }
