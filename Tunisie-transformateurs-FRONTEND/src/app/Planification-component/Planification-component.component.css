@@ -136,3 +136,26 @@ tbody tr:hover {
 }
 
 
+/* Style for datetime-local input */
+input[type="datetime-local"] {
+  /* Remove default styles */
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  /* Customize border and padding */
+  border: 0px ;
+  padding: 8px 12px;
+  /* Set font size and color */
+  font-size: inherit;
+  color: inherit;
+  /* Set background color */
+  background-color: transparent; /* transparent background */
+  /* Add transition for smooth change */
+  transition: border-color 0.3s ease-in-out;
+}
+
+/* Style for datetime-local input when focused */
+input[type="datetime-local"]:focus {
+  /* Change border color when focused */
+  border-color: #80bdff; /* example color */
+}

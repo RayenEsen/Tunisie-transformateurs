@@ -91,7 +91,13 @@ export class ConseptionComponentComponent implements OnInit {
         // Handle the response as needed
       },
     });
-
+    this.service.UpdateTransformateur(this.transformateurId,this.service.list[0])
+    .subscribe({
+      next : (response) =>
+      {
+        console.log('Transformateur updated successfully:', response);
+      }
+    })
   }
 
   // Method to trigger file input click event
@@ -150,11 +156,29 @@ export class ConseptionComponentComponent implements OnInit {
   Conforme(id: number) {
     const targetConseption = this.conseption.find(c => c.idConseption === id);
     if (targetConseption) {
-        targetConseption.conformiter = targetConseption.conformiter === "No" ? "Yes" : "No";
+        let conformiter = 'En Attente'; // Default value
+        for (const targetValue of targetConseption.conseptionValues || []) {
+            if (!targetValue.mesuree || !targetValue.prevue || !targetConseption.quantity || !targetConseption.quantity2) {
+                conformiter = 'En Attente';
+                break; // Break the loop since 'En Attente' condition is met
+            } else if (targetValue.mesuree === targetValue.prevue && targetConseption.quantity === targetConseption.quantity2) {
+                conformiter = 'Yes';
+            } else {
+                conformiter = 'No';
+                break; // Break the loop since 'No' condition is met
+            }
+        }
+        targetConseption.conformiter = conformiter;
+    } else {
+        return;
     }
 }
 
 
+verif()
+{
+
+}
 
 }
 

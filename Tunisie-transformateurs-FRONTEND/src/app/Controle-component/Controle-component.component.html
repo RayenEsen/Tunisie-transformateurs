@@ -51,14 +51,10 @@
       </div>
     </div>
     <div class="row">
-
-
     <!-- page content -->
     <div class="py-6" >
       <div class="row"style="margin-right: -111px; margin-left: -119px;">
         <div class="offset-lg-1 col-lg-10 col-md-12 col-12">
-
-
           <div class="mb-8 container"  *ngFor="let etape of filteredEtapes">
             <!-- card -->
             <div *ngIf="showCard(etape.etapeNumero)" class="card bg-blue-500 shadow-none mb-4" style="background-color: #0f253c;" [style.order]="getOrderValue(etape.etapeNumero)">
@@ -69,12 +65,13 @@
                     <h5 class="mb-0" style="color: white;">{{ getCardTitle(etape.etapeNumero) }}</h5>
                   </div>
                   <div>
-                    <a [routerLink]="getRouterLink(etape.etapeNumero)" class="text-muted">
+                    <button (click)="verif(etape)" class="text-muted" style="background: none; border: none;">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right icon-xs" style="color: white;">
                         <line x1="5" y1="12" x2="19" y2="12"></line>
                         <polyline points="12 5 19 12 12 19"></polyline>
                       </svg>
-                    </a>
+                    </button>
+
                   </div>
                 </div>
               </div>
@@ -137,3 +134,4 @@
 
 
 </header>
+<p-toast></p-toast>

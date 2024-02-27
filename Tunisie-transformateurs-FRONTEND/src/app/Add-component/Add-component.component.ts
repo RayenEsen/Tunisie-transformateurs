@@ -35,6 +35,7 @@ import { ConseptionServiceService } from '../Shared/Conseption-service.service';
 import { ConseptionValues } from '../Shared/ConseptionValues-service.model';
 import { ConseptionValuesServiceService } from '../Shared/ConseptionValues-service.service';
 import { MessageService } from 'primeng/api';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 @Component({
   selector: 'app-Add-component',
@@ -42,7 +43,7 @@ import { MessageService } from 'primeng/api';
   styleUrls: ['./Add-component.component.css']
 })
 export class AddComponentComponent implements OnInit {
-
+  loading = false;
   transformateurAjouter: Transformateur =
   {
     numero: 0,
@@ -69,6 +70,7 @@ export class AddComponentComponent implements OnInit {
     galet: '',
     capot: '',
     sans: '',
+    quantite: 1
   };
 
   constructor(
@@ -131,6 +133,7 @@ export class AddComponentComponent implements OnInit {
         this.messageService.add({ severity: 'error', summary: 'Erreur', detail: 'Tout les informations sont obligatoire' });
         return;
       }
+      this.loading=true;
       this.transformateurAjouter.galet = this.transformateurAjouter.galet ? "Galet" : "";
       this.transformateurAjouter.capot = this.transformateurAjouter.capot ? "Capot" : "";
       this.transformateurAjouter.sans = this.transformateurAjouter.sans ? "Sans" : "";
@@ -358,8 +361,10 @@ export class AddComponentComponent implements OnInit {
                 numero: this.transformateurAjouter.numero,
                 nom: ConseptionNames[i] || '',
                 idConseption: 0,
-                conformiter: 'No',
-                conseptionNumber: i
+                conformiter: 'En Attente',
+                conseptionNumber: i,
+                quantity : 1,
+                quantity2 : 1,
               };
 
               const conseptionObservable = this.ServiceConseption.addConseption(ConseptionAjouter).pipe(
@@ -392,7 +397,6 @@ export class AddComponentComponent implements OnInit {
             return forkJoin(ElectriqueObservable);
           }),
 
-
           concatMap(() => {
             // Create a single PeintureAjouter object
             const peintureAjouter: Peinture = {
@@ -403,7 +407,6 @@ export class AddComponentComponent implements OnInit {
             // Return the observable for adding the single Peinture
             return this.ServicePeinture.addPeinture(peintureAjouter);
           }),
-
 
           concatMap(() => {
             // Use forkJoin to execute multiple observables in parallel

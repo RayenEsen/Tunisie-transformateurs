@@ -12,6 +12,9 @@ namespace WebAPI.Model
         [Column(TypeName = "nvarchar(100)")]
         public string Marque { get; set; } = "";
         public DateTime Date { get; set; } = DateTime.Now; // Initialize with current date
+        public DateTime DateLivraison { get; set; }
+        public DateTime DateFin { get; set; }
+
         public string Type { get; set; } = "";
 
         [Column(TypeName = "nvarchar(100)")]
@@ -28,6 +31,7 @@ namespace WebAPI.Model
         public float Btu2 { get; set; }
         public float Bti2 { get; set; }
         public int Nbphase { get; set; }
+        public int Quantite { get; set; } = 1;
 
         [Column(TypeName = "nvarchar(100)")]
         public string Prises { get; set; } = "";

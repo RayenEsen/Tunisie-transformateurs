@@ -20,6 +20,7 @@ export class LivraisonComponentComponent implements OnInit {
   ngOnInit() {
     this.service.refreshList2().subscribe({
       next: (res: Transformateur[]) => {
+        res = res.filter(item => item.dateLivraison?.toString()!== '0001-01-01T00:00:00' )
         this.list = res;
         if (this.list.length > 0) {
           // Iterate through each item in this.list
@@ -27,6 +28,7 @@ export class LivraisonComponentComponent implements OnInit {
             this.ServicePv.getPvByTransformerId(transformateur.numero).subscribe({
               next: (response: Pv[]) => {
                 if (response.length > 0) {
+
                   // Assign the Pv to the current item in this.list
                   this.list[index].pv = response[0];
 
@@ -61,8 +63,6 @@ export class LivraisonComponentComponent implements OnInit {
       },
 
     });
-
-
   }
 
 

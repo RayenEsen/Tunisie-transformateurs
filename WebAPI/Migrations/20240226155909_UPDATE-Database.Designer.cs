@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebAPI.Model;
 
@@ -11,9 +12,11 @@ using WebAPI.Model;
 namespace WebAPI.Migrations
 {
     [DbContext(typeof(TransformateurContext))]
-    partial class TransformateurContextModelSnapshot : ModelSnapshot
+    [Migration("20240226155909_UPDATE-Database")]
+    partial class UPDATEDatabase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -826,11 +829,11 @@ namespace WebAPI.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DateFin")
-                        .HasColumnType("datetime2");
+                    b.Property<DateOnly>("DateFin")
+                        .HasColumnType("date");
 
-                    b.Property<DateTime>("DateLivraison")
-                        .HasColumnType("datetime2");
+                    b.Property<DateOnly>("DateLivraison")
+                        .HasColumnType("date");
 
                     b.Property<string>("Etat")
                         .IsRequired()
@@ -871,9 +874,6 @@ namespace WebAPI.Migrations
                     b.Property<string>("Prises")
                         .IsRequired()
                         .HasColumnType("nvarchar(100)");
-
-                    b.Property<int>("Quantite")
-                        .HasColumnType("int");
 
                     b.Property<string>("Sans")
                         .IsRequired()

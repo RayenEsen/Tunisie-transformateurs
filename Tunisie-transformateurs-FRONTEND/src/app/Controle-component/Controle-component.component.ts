@@ -15,7 +15,7 @@ import { MontageServiceService } from '../Shared/Montage-service.service';
 import { Montage } from '../Shared/Montage-service.model';
 import { ControlleurServiceService } from '../Shared/Controlleur-service.service';
 import { ControleurDeQualite } from '../Shared/Controlleur-service.model';
-
+import { Message, MessageService } from 'primeng/api';
 @Component({
   selector: 'app-Controle-component',
   templateUrl: './Controle-component.component.html',
@@ -44,6 +44,7 @@ export class ControleComponentComponent implements OnInit {
     public ServiceMag : MagnetiqueServiceService,
     public ServiceMon : MontageServiceService,
     public userService : ControlleurServiceService,
+    public MessageService : MessageService,
   ) {}
 
 
@@ -295,6 +296,14 @@ export class ControleComponentComponent implements OnInit {
         default:
           // Add default route or handle other cases as needed
           return ['/DefaultRoute'];
+      }
+    }
+
+    verif(etape: Etape): void {
+      if (etape.controleurs.some(controleur => controleur.designation === "Operateur")) {
+        this.router.navigate(this.getRouterLink(etape.etapeNumero));
+      } else {
+        this.MessageService.add({ severity: 'error', summary: 'Erreur', detail: 'Opérateur est requis pour continuer.' });
       }
     }
 

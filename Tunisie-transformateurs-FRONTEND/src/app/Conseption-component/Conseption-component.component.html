@@ -9,7 +9,7 @@
 <img src="assets/LogoPV.png" style="width: 300px;    margin-right: 35vh;">
 <img src="assets/9001ISO.png" style="width: 180px; height: 70px;">
 <img src="assets/14001ISO-removebg-preview.png" style="width: 180px; height: 93px;">
-<img src="assets/iso-45001.png" style="width: 180px; height: 147px;   ; margin-left: -27px;     margin-top: -38px; ">
+<img src="assets/iso-45001.png" style="width: 180px; height: 147px; margin-left: -27px; margin-top: -38px; ">
 <img src="assets/iso50001.png" style="width: 180px; height: 72px; ">
 </div>
 
@@ -41,7 +41,7 @@
             <td class="text-left colfix">U1/U2</td>
             <td class="text-center colfix">{{this.service.list[0].mtu1}}/{{this.service.list[0].btu2}}V</td>
             <td class="text-center colfix">Quantité</td>
-            <td class="text-center colfix">9</td>
+            <td class="text-center colfix"><input type="number" style="text-align: center;" [(ngModel)]="this.service.list[0].quantite"></td>
           </tr>
           <tr>
             <td class="text-left colfix">N'</td>
@@ -94,13 +94,23 @@
             </tr>
             <tr>
               <td class="text-center colfix">Conformité</td>
-              <td class="text-center colfix clickable" colspan="2" (click)="Conforme(Conseption.idConseption)"
-              [ngStyle]="{
-                  'background-image': Conseption.conformiter !== 'Yes' ? 'linear-gradient(to right, #666666, #aaaaaa)' : 'none',
-                  'background-color': Conseption.conformiter === 'Yes' ? 'rgba(0, 128, 0, 0.67)' : 'transparent'
-              }">
+              <td class="text-center colfix clickable" colspan="2"
+              *ngIf="Conseption.conformiter === 'Yes'"
+              [style.background-color]="'rgba(0, 128, 0, 0.67)'"
+              [ngClass]="{ 'conforme-style': Conforme(Conseption.idConseption) }">
           </td>
 
+          <td class="text-center colfix clickable" colspan="2"
+              *ngIf="Conseption.conformiter === 'En Attente'"
+              [style.background-image]="'linear-gradient(to right, #666666, #aaaaaa)'"
+              [ngClass]="{ 'conforme-style': Conforme(Conseption.idConseption) }">
+          </td>
+
+          <td class="text-center colfix clickable" colspan="2"
+              *ngIf="Conseption.conformiter === 'No'"
+              [style.background-image]="'linear-gradient(to right, rgb(207 20 20), rgb(223 19 19 / 45%))'"
+              [ngClass]="{ 'conforme-style': Conforme(Conseption.idConseption) }">
+          </td>
             </tr>
           </tbody>
         </table>

@@ -9,6 +9,9 @@ import { ToastModule } from 'primeng/toast';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { ImageModule } from 'primeng/image';
+import { CalendarModule } from 'primeng/calendar';
+import { ProgressBarModule } from 'primeng/progressbar';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -81,7 +84,10 @@ import { MessageService } from 'primeng/api';
     PasswordModule,
     ToastModule,
     ConfirmDialogModule,
-    ImageModule
+    ImageModule,
+    CalendarModule,
+    ProgressBarModule,
+    ProgressSpinnerModule,
   ],
   providers: [MessageService,ConfirmationService],
   bootstrap: [AppComponent]

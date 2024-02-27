@@ -64,27 +64,37 @@
                                   <th>Date de fin production</th>
                                   <th>Date d'essai</th>
                                   <th>Resultat Essai</th>
-                                  <th>Date de livraison</th>
+                                  <th style="padding-left: 6vh;">Date de livraison</th>
                               </tr>
                           </thead>
                           <tbody>
                             <tr *ngFor="let transformateur of list" [routerLink]="['/Controle', transformateur.numero]">
                               <td>
-                                <div class="d-flex align-items-center">
-                                  <img *ngIf="transformateur.type==='Monophasés'" src="assets/mono.png" class="avatar sm rounded-pill me-3 flex-shrink-0" alt="Customer">
-                                  <img *ngIf="transformateur.type==='Triphasés'" src="assets/triphaser.png" class="avatar sm rounded-pill me-3 flex-shrink-0" alt="Customer">
-                                  <img *ngIf="transformateur.type==='Biphasés'" src="assets/resine.png" class="avatar sm rounded-pill me-3 flex-shrink-0" alt="Customer">
-                                  <span>{{transformateur.numero}}</span>
+                                  <div class="d-flex align-items-center">
+                                      <img *ngIf="transformateur.type==='Monophasés'" src="assets/mono.png" class="avatar sm rounded-pill me-3 flex-shrink-0" alt="Customer">
+                                      <img *ngIf="transformateur.type==='Triphasés'" src="assets/triphaser.png" class="avatar sm rounded-pill me-3 flex-shrink-0" alt="Customer">
+                                      <img *ngIf="transformateur.type==='Biphasés'" src="assets/resine.png" class="avatar sm rounded-pill me-3 flex-shrink-0" alt="Customer">
+                                      <span>{{transformateur.numero}}</span>
+                                  </div>
+                              </td>
+                              <td class="text-center colfix">{{transformateur.type}}</td>
+                              <td class="text-center colfix">{{transformateur.power}}Kva</td>
+                              <td class="text-center colfix">{{transformateur.date | date:'yyyy-MM-dd'}}</td>
+                              <td class="text-center colfix">
+                                {{
+                                  isDateFinDefault(transformateur) ? 'En construction' : (transformateur.dateFin | date:'yyyy-MM-dd')
+                                }}
+                              </td>
+
+                              <td class="text-center colfix">{{transformateur.pv?.date | date:'yyyy-MM-dd'}}</td>
+                              <td class="text-center colfix"><span class="badge badge-boxed badge-soft-warning">{{transformateur.pv?.resultat}}</span></td>
+                              <td class="text-center colfix">
+                                <div (click)="$event.stopPropagation()" class="text-center colfix">
+                                  <input type="datetime-local" [(ngModel)]="transformateur.dateLivraison" (change)="saveDateLivraison(transformateur)" style="width: 85%;">
                                 </div>
-                                </td>
-                                <td>{{transformateur.type}}</td>
-                                <td>{{transformateur.power}}Kva</td>
-                                <td>{{transformateur.date | date:'yyyy-MM-dd'}}</td>
-                                <td>IDK</td>
-                                <td>{{transformateur.pv?.date | date:'yyyy-MM-dd'}}</td>
-                                <td><span class="badge badge-boxed badge-soft-warning">{{transformateur.pv?.resultat}}</span></td>
-                                <td>IDK</td>
-                            </tr>
+                              </td>
+                          </tr>
+
                         </tbody>
 
                       </table>
@@ -95,3 +105,4 @@
       </div>
   </div>
 </div>
+<p-toast></p-toast>
