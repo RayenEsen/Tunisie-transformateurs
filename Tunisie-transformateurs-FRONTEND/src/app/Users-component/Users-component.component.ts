@@ -110,8 +110,8 @@ export class UsersComponentComponent implements OnInit {
             Object.assign(controlleur, response);
             console.log('Controleur updated successfully:', response);
             this.MessageService.add({
-              severity: 'info',
-              summary: 'Info',
+              severity: 'success',
+              summary: 'success',
               detail: 'Le rôle de l\'utilisateur a été mis à jour avec succès'
             });
             } else {

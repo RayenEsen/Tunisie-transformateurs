@@ -44,6 +44,24 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 })
 export class AddComponentComponent implements OnInit {
   loading = false;
+  Accessoires : any[] = [
+    {name : 'Relais,Thermostat,Assecheur,Reservoir'},
+    {name : 'DMCR'},
+    {name : 'Borne'},
+    {name : 'Isolateur'},
+    {name : 'Galet'},
+    {name : 'Capot'},
+  ]
+  Missions: any[] =[
+    {name : 'Production'},
+    {name : 'Reparation'}
+  ]
+  etat : any;
+  selectedMission: any; // Declare selectedCountry property
+  SelectedAccesoires: any[] = [];
+  onMissionChange(event: any) {
+    this.selectedMission = event.value;
+  }
   transformateurAjouter: Transformateur =
   {
     numero: 0,
@@ -123,12 +141,66 @@ export class AddComponentComponent implements OnInit {
     return false; // Form is invalid if none of the conditions are met
   }
 
+  getMissionImageUrl(mission: any): string {
+    // Construct the image URL using the mission's name
+    return "assets/" + mission.name+ ".png";
+  }
+
+
 
   submitForm() {
     try {
       // Call service method to add Transformateur
       this.transformateurAjouter.mtu2 = this.getI1();
       this.transformateurAjouter.bti2 = this.getI2();
+      this.transformateurAjouter.etat = this.etat.name;
+      let foundMatch = false;
+
+      for (let Accessoire of this.SelectedAccesoires) {
+        if (Accessoire.name === "Relais,Thermostat,Assecheur,Reservoir") {
+          this.transformateurAjouter.accessoires = "NONDMCR";
+          foundMatch = true;
+        }
+
+        if (Accessoire.name === "DMCR") {
+          this.transformateurAjouter.accessoires = "DMCR";
+          foundMatch = true;
+        }
+
+        if (Accessoire.name === "Borne") {
+          this.transformateurAjouter.accessoires2 = "Borne";
+          foundMatch = true;
+        }
+
+        if (Accessoire.name === "Isolateur") {
+          this.transformateurAjouter.accessoires2 = "Isolateur";
+          foundMatch = true;
+        }
+
+        if (Accessoire.name === "Capot") {
+          this.transformateurAjouter.capot = "Capot";
+          foundMatch = true;
+        }
+
+        if (Accessoire.name === "Galet") {
+          this.transformateurAjouter.galet = "Galet";
+          foundMatch = true;
+        }
+      }
+
+      if (!foundMatch) {
+        this.transformateurAjouter.sans = "Sans";
+      }
+
+      if(this.transformateurAjouter.type === "Triphasés")
+      {
+        this.transformateurAjouter.nbphase= 3
+      }
+      else if (this.transformateurAjouter.type === "Monophasés")
+      {
+        this.transformateurAjouter.nbphase= 2
+      }
+      else this.transformateurAjouter.nbphase=1;
       if (this.validateForm()) {
         this.messageService.add({ severity: 'error', summary: 'Erreur', detail: 'Tout les informations sont obligatoire' });
         return;
@@ -533,6 +605,7 @@ export class AddComponentComponent implements OnInit {
             this.router.navigate(['/Transformateur']);
           },
           error: (error: any) => {
+            this.loading=false;
             if (error.status === 409) {
               this.messageService.add({ severity: 'error', summary: 'Erreur', detail: 'Transformateur existe déjà' });
             }

@@ -12,6 +12,7 @@ import { ImageModule } from 'primeng/image';
 import { CalendarModule } from 'primeng/calendar';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { DropdownModule } from 'primeng/dropdown';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -43,6 +44,7 @@ import { LivraisonComponentComponent } from './Livraison-component/Livraison-com
 import { PeintureComponentComponent } from './Peinture-component/Peinture-component.component';
 import { ConseptionComponentComponent } from './Conseption-component/Conseption-component.component';
 import { MessageService } from 'primeng/api';
+import { MultiSelectModule } from 'primeng/multiselect';
 
 @NgModule({
   declarations: [
@@ -88,7 +90,9 @@ import { MessageService } from 'primeng/api';
     CalendarModule,
     ProgressBarModule,
     ProgressSpinnerModule,
-  ],
+    MultiSelectModule,
+    DropdownModule,
+    ],
   providers: [MessageService,ConfirmationService],
   bootstrap: [AppComponent]
 

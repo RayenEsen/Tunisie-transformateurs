@@ -43,7 +43,6 @@ namespace WebAPI.Controller
             {
                 return NotFound();
             }
-
             return controleurDeQualité;
         }
         // PUT: api/ControleurDeQualité/5
@@ -98,7 +97,6 @@ namespace WebAPI.Controller
                     throw;
                 }
             }
-
             return CreatedAtAction("GetControleurDeQualité", new { id = controleurDeQualité.IdC }, controleurDeQualité);
         }
 
