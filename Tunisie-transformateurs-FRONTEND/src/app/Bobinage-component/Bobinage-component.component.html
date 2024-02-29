@@ -131,50 +131,23 @@
       <table  class="table table-bordered table-condensed" >
         <tbody>
           <tr>
-            <td class="text-left colfix">Operateur</td>
-            <ng-container *ngFor="let index of [0, 1, 2 ,3]">
-              <ng-container *ngIf="etapeSelected.controleurs[index]?.designation === 'Operateur'">
-                <td class="text-left colfix" style="padding-left: 10px;">{{ etapeSelected.controleurs[index]?.username }}</td>
-              </ng-container>
-            </ng-container>
-
-
-            <td class="text-left colfix" style="padding-left: 10px;">{{etapeSelected2.controleurs[0]?.username}}</td>
-            <td class="text-left colfix">{{etapeSelected2.controleurs[1]?.username}}</td>
-
-            <td class="text-left colfix" style="padding-left: 10px;">{{etapeSelected3.controleurs[0]?.username}}</td>
-            <td class="text-left colfix">{{etapeSelected3.controleurs[1]?.username}}</td>
+            <td>Operateur</td>
+            <td class="text-center colfix">{{etapeSelected.operateur1}}</td>
+            <td class="text-center colfix">{{etapeSelected.operateur2}}</td>
+            <td class="text-center colfix">{{etapeSelected2.operateur1}}</td>
+            <td class="text-center colfix">{{etapeSelected2.operateur1}}</td>
+            <td class="text-center colfix">{{etapeSelected3.operateur1}}</td>
+            <td class="text-center colfix">{{etapeSelected3.operateur1}}</td>
           </tr>
-          </tbody>
-          <tbody>
-            <tr>
-              <td class="text-left colfix">Controleur</td>
-              <ng-container *ngFor="let index of [0, 1, 2, 3]; let isFirst = first">
-                <ng-container *ngIf="etapeSelected.controleurs[index]?.designation === 'Controleur'">
-                  <td class="text-left colfix" style="padding-left: 10px;">{{ etapeSelected.controleurs[index]?.username }}</td>
-                </ng-container>
-              </ng-container>
-              <!-- Show one empty td if there are no "Controleur" controllers -->
-              <ng-container *ngIf="!hasControleur()">
-                <td><!-- Normal td content here --></td>
-              </ng-container>
-            </tr>
-          </tbody>
-          <tbody>
-            <tr>
-              <td class="text-left colfix">Verificateur</td>
-              <ng-container *ngFor="let index of [0, 1, 2, 3]; let isFirst = first">
-                <ng-container *ngIf="etapeSelected.controleurs[index]?.designation === 'Verificateur'">
-                  <td class="text-left colfix" style="padding-left: 10px;">{{ etapeSelected.controleurs[index]?.username }}</td>
-                </ng-container>
-              </ng-container>
-              <!-- Show one empty td if there are no "Verificateur" controllers -->
-              <ng-container *ngIf="!hasVerificateur()">
-                <td><!-- Normal td content here --></td>
-              </ng-container>
-            </tr>
-
-          </tbody>
+          <tr>
+            <td>Controleur</td>
+            <td colspan="6" class="text-center colfix">{{etapeSelected.controleur}}</td>
+          </tr>
+          <tr>
+            <td>Verificateur</td>
+            <td colspan="6" class="text-center colfix">{{etapeSelected.verificateur}}</td>
+          </tr>
+        </tbody>
       </table>
     </div>
 
@@ -189,7 +162,7 @@
 
   </div>
 </div>
-<div class="page-tools" style="margin-left: 786px;" class="printable">
+<div class="page-tools" style="margin-left: 780px;" class="printable">
   <div class="action-buttons" style="display: flex;">
     <a class="btn bg-white btn-light mx-1px text-95" data-title="Print" (click)="onPrint()">
       <i class="mr-1 fa fa-print text-primary-m1 text-120 w-2"></i>
@@ -197,7 +170,8 @@
     </a>
     <a class="btn bg-white btn-light mx-1px text-95" data-title="Save" (click)="Update()" [routerLink]="['/Controle',this.service.list[0].numero]">
       <i class="mr-1 fa fa-save text-success-m1 text-120 w-2"></i>
-      <span style="padding-left: 8px;">Save</span>
+      <span style="padding-left: 8px;" *ngIf="ServiceS.Controleur.designation==='Verificateur' ">Verifier</span>
+      <span style="padding-left: 8px;" *ngIf="ServiceS.Controleur.designation==='Controleur' ">Save</span>
     </a>
   </div>
 </div>

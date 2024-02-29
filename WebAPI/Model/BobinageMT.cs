@@ -18,6 +18,7 @@ namespace WebAPI.Model
         public float? Prevue { get; set; }
         public float? Cnc { get; set; }
         public string Nom { get; set; } = "";
+
         [JsonIgnore]
         public Transformateur? Transformateur { get; set; }
     }

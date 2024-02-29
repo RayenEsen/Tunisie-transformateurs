@@ -75,7 +75,7 @@ export class MagnetiqueComponentComponent implements OnInit {
         () => {
             console.log('Magnetiques updated successfully');
             // Creating and adding the event
-            const newEvent = new Event(this.serviceS.Controleur.idC, 'Participer a le Controle dimensionnelle circuit magnetique', new Date()," opéré par " + this.etapeSelected.controleurs[0] + " et " + this.etapeSelected.controleurs[1] + " pour le transformateur " + this.transformateurId + ".");
+            const newEvent = new Event(this.serviceS.Controleur.idC, 'Participer a le Controle dimensionnelle circuit magnetique', new Date()," opéré par " + this.etapeSelected.operateur1 + " et " + this.etapeSelected.operateur2 + " pour le transformateur " + this.transformateurId + ".");
             this.eventService.AddEvent(newEvent)
             .subscribe({
             next: (response) => {

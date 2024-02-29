@@ -13,6 +13,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { DropdownModule } from 'primeng/dropdown';
+import { AutoCompleteModule } from 'primeng/autocomplete';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -92,6 +93,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
     ProgressSpinnerModule,
     MultiSelectModule,
     DropdownModule,
+    AutoCompleteModule,
     ],
   providers: [MessageService,ConfirmationService],
   bootstrap: [AppComponent]

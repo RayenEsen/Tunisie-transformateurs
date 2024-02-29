@@ -3,13 +3,13 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
 <link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
 <div style="display: flex;">
-<img src="assets/LogoPV.png" style="width: 300px;">
-<img src="assets/9001ISO.png" style="width: 180px; height: 70px;">
+<img src="assets/LogoPV.png" style="width: 300px;margin-right: 23vh;" >
+<img src="assets/9001ISO.png" style="width: 180px; height: 70px;"  class="printing">
 <img src="assets/14001ISO-removebg-preview.png" style="width: 180px; height: 93px;">
 <img src="assets/iso-45001.png" style="width: 180px; height: 147px;   ; margin-left: -27px;     margin-top: -38px; ">
 <img src="assets/iso50001.png" style="width: 180px; height: 72px; ">
 </div>
-  <div class="invoice-header" >
+  <div class="invoice-header printing3">
     <div class="row">
       <div class="col-xs-8" *ngIf="pv">
         <h1>Pv d'essai <small>Transformateur</small></h1>
@@ -19,10 +19,8 @@
       </div>
     </div>
   </div>
-  <div class="page-header text-blue-d2" style=" margin: 40px 30px 20px;" >
-
-
-  <div class="row">
+  <div class="page-header text-blue-d2 " style=" margin: 40px 30px 20px;" >
+  <div class="row" >
     <div class="col-sm-6"style=" text-align: left;">
         <div>
             <span class="text text-grey-m2 align-middle">Marque/Brand:</span>
@@ -84,14 +82,10 @@
 </div>
 </div>
 </div>
-  <div class="invoice-body">
-
-    <div class="row" style="display: contents;">
-      <div>
-
-      <div class="col-xs-5" style="display: contents;">
+  <div class="invoice-body printing7" style="margin-left: -29px;">
+    <div>
         <div class="panel panel-default">
-          <div class="panel-heading">
+          <div class="panel-heading  printing1">
             <h3 class="panel-title">Voltage Ratio / Rapport de transformation</h3>
             <small>{{ service.list[0].mtu1 }} V/ {{ service.list[0].btu2 }} V / {{ service.list[0].couplage }}</small>
           </div>
@@ -105,49 +99,50 @@
               </tr>
               <tr>
                 <td class="text-center colfix">1</td>
-                <td class="text-center colfix"><input type="number" readonly [value]="this.pv[0].vt11?.toFixed(3)"></td>
-                <td class="text-center colfix"><input type="number" readonly [value]="this.pv[0].vt12?.toFixed(3)"></td>
-                <td class="text-center colfix"><input type="number"[(ngModel)]="pv[0].vm11"></td>
-                <td class="text-center colfix"><input type="number"[(ngModel)]="pv[0].vm12"></td>
-                <td class="text-center colfix"><input type="number"[(ngModel)]="pv[0].vm13"></td>
+                <td class="text-center colfix"><input class="text-center colfix" type="number" readonly [value]="this.pv[0].vt11?.toFixed(3)"></td>
+                <td class="text-center colfix"><input class="text-center colfix" type="number" readonly [value]="this.pv[0].vt12?.toFixed(3)"></td>
+                <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="pv[0].vm11"></td>
+                <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="pv[0].vm12"></td>
+                <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="pv[0].vm13"></td>
               </tr>
               <tr>
                 <td class="text-center colfix">2</td>
-                <td class="text-center colfix"><input type="number" readonly [value]="this.pv[0].vt21?.toFixed(3)"></td>
-                <td class="text-center colfix"><input type="number" readonly [value]="this.pv[0].vt22?.toFixed(3)"></td>
-                <td class="text-center colfix"><input type="number"[(ngModel)]="pv[0].vm21"></td>
-                <td class="text-center colfix"><input type="number"[(ngModel)]="pv[0].vm22"></td>
-                <td class="text-center colfix"><input type="number"[(ngModel)]="pv[0].vm23"></td>
+                <td class="text-center colfix"><input class="text-center colfix" type="number" readonly [value]="this.pv[0].vt21?.toFixed(3)"></td>
+                <td class="text-center colfix"><input class="text-center colfix" type="number" readonly [value]="this.pv[0].vt22?.toFixed(3)"></td>
+                <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="pv[0].vm21"></td>
+                <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="pv[0].vm22"></td>
+                <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="pv[0].vm23"></td>
               </tr>
               <tr>
                 <td class="text-center colfix">3</td>
-                <td class="text-center colfix"><input type="number" readonly [value]="this.pv[0].vt31?.toFixed(3)"></td>
-                <td class="text-center colfix"><input type="number" readonly [value]="this.pv[0].vt32?.toFixed(3)"></td>
-                <td class="text-center colfix"><input type="number"[(ngModel)]="pv[0].vm31"></td>
-                <td class="text-center colfix"><input type="number"[(ngModel)]="pv[0].vm32"></td>
-                <td class="text-center colfix"><input type="number"[(ngModel)]="pv[0].vm33"></td>
+                <td class="text-center colfix"><input class="text-center colfix" type="number" readonly [value]="this.pv[0].vt31?.toFixed(3)"></td>
+                <td class="text-center colfix"><input class="text-center colfix" type="number" readonly [value]="this.pv[0].vt32?.toFixed(3)"></td>
+                <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="pv[0].vm31"></td>
+                <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="pv[0].vm32"></td>
+                <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="pv[0].vm33"></td>
               </tr>
               <tr>
                 <td class="text-center colfix">4</td>
-                <td class="text-center colfix"><input type="number" readonly [value]="this.pv[0].vt41?.toFixed(3)"></td>
-                <td class="text-center colfix"><input type="number" readonly [value]="this.pv[0].vt42?.toFixed(3)"></td>
-                <td class="text-center colfix"><input type="number"[(ngModel)]="pv[0].vm41"></td>
-                <td class="text-center colfix"><input type="number"[(ngModel)]="pv[0].vm42"></td>
-                <td class="text-center colfix"><input type="number"[(ngModel)]="pv[0].vm43"></td>
+                <td class="text-center colfix"><input class="text-center colfix" type="number" readonly [value]="this.pv[0].vt41?.toFixed(3)"></td>
+                <td class="text-center colfix"><input class="text-center colfix" type="number" readonly [value]="this.pv[0].vt42?.toFixed(3)"></td>
+                <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="pv[0].vm41"></td>
+                <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="pv[0].vm42"></td>
+                <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="pv[0].vm43"></td>
               </tr>
               <tr>
                 <td class="text-center colfix">5</td>
-                <td class="text-center colfix"><input type="number" readonly [value]="this.pv[0].vt51?.toFixed(3)"></td>
-                <td class="text-center colfix"><input type="number" readonly [value]="this.pv[0].vt52?.toFixed(3)"></td>
-                <td class="text-center colfix"><input type="number"[(ngModel)]="pv[0].vm51"></td>
-                <td class="text-center colfix"><input type="number"[(ngModel)]="pv[0].vm52"></td>
-                <td class="text-center colfix"><input type="number"[(ngModel)]="pv[0].vm53"></td>
+                <td class="text-center colfix"><input class="text-center colfix" type="number" readonly [value]="this.pv[0].vt51?.toFixed(3)"></td>
+                <td class="text-center colfix"><input class="text-center colfix" type="number" readonly [value]="this.pv[0].vt52?.toFixed(3)"></td>
+                <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="pv[0].vm51"></td>
+                <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="pv[0].vm52"></td>
+                <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="pv[0].vm53"></td>
               </tr>
+              <tr></tr>
             </tbody>
           </table>
-
         </div>
-        <div class="panel panel-default">
+
+        <div class="panel panel-default" >
           <div class="panel-heading">
             <h3 class="panel-title">Resistence Mesurement / Mesure des resistances</h3>
           </div>
@@ -161,35 +156,34 @@
               <tr>
                 <td rowspan="3" class="text-center colfix">LV/BT</td>
                 <td class="text-center colfix">N-a</td>
-                <td class="text-center colfix"><input type="number"[(ngModel)]="pv[0].na0"></td>
-                <td rowspan="6" class="text-center colfix"><input type="number" [(ngModel)]="pv[0].temp"></td>
+                <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="pv[0].na0"></td>
+                <td rowspan="6" class="text-center colfix"><input class="text-center colfix" type="number" [(ngModel)]="pv[0].temp"></td>
               </tr>
               <tr>
                 <td class="text-center colfix">N-b</td>
-                <td class="text-center colfix"><input type="number" [(ngModel)]="pv[0].nb0"></td>
+                <td class="text-center colfix"><input class="text-center colfix" type="number" [(ngModel)]="pv[0].nb0"></td>
               </tr>
               <tr>
                 <td class="text-center colfix">N-c</td>
-                <td class="text-center colfix"><input type="number" [(ngModel)]="pv[0].nc0"></td>
+                <td class="text-center colfix"><input class="text-center colfix" type="number" [(ngModel)]="pv[0].nc0"></td>
               </tr>
               <tr>
                 <td rowspan="3" class="text-center colfix">MV/MT</td>
                 <td class="text-center colfix">N-A</td>
-                <td class="text-center colfix"><input type="number" [(ngModel)]="pv[0].na1"></td>
+                <td class="text-center colfix"><input class="text-center colfix" type="number" [(ngModel)]="pv[0].na1"></td>
               </tr>
               <tr>
                 <td class="text-center colfix">N-B</td>
-                <td class="text-center colfix"><input type="number" [(ngModel)]="pv[0].nb2"></td>
+                <td class="text-center colfix"><input class="text-center colfix" type="number" [(ngModel)]="pv[0].nb2"></td>
               </tr>
               <tr>
                 <td class="text-center colfix">N-C</td>
-                <td class="text-center colfix"><input type="number" [(ngModel)]="pv[0].nc3"></td>
+                <td class="text-center colfix"><input class="text-center colfix" type="number" [(ngModel)]="pv[0].nc3"></td>
               </tr>
             </tbody>
           </table>
         </div>
-
-        </div>
+</div>
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">No load test / Essais a vide</h3>
@@ -213,14 +207,14 @@
             <td class="text-center colfix">Io[%]</td>
           </tr>
           <tr>
-            <td class="text-center colfix"> <input type="number"  [(ngModel)]="pv[0].tappings" name="tappings max=6">
+            <td class="text-center colfix"> <input class="text-center colfix" type="number"  [(ngModel)]="pv[0].tappings" name="tappings max=6">
             </td>
-            <td class="text-center colfix"><input type="number" [(ngModel)]="pv[0].wog"></td>
-            <td class="text-center colfix"><input type="number" [(ngModel)]="pv[0].iog"></td>
-            <td class="text-center colfix"><input type="number" [(ngModel)]="this.service.list[0].btu2" readonly></td>
-            <td class="text-center colfix"><input type="number" [(ngModel)]="pv[0].iom"></td>
-            <td class="text-center colfix"><input type="number" [(ngModel)]="pv[0].wom"></td>
-            <td class="text-center colfix"><input type="number"[value]="this.getIOPourcentageMesurees().toFixed(3)" readonly></td>
+            <td class="text-center colfix"><input class="text-center colfix" type="number" [(ngModel)]="pv[0].wog"></td>
+            <td class="text-center colfix"><input class="text-center colfix" type="number" [(ngModel)]="pv[0].iog"></td>
+            <td class="text-center colfix"><input class="text-center colfix" type="number" [(ngModel)]="this.service.list[0].btu2" readonly></td>
+            <td class="text-center colfix"><input class="text-center colfix" type="number" [(ngModel)]="pv[0].iom"></td>
+            <td class="text-center colfix"><input class="text-center colfix" type="number" [(ngModel)]="pv[0].wom"></td>
+            <td class="text-center colfix"><input class="text-center colfix" type="number"[value]="this.getIOPourcentageMesurees().toFixed(3)" readonly></td>
           </tr>
         </tbody>
       </table>
@@ -249,20 +243,20 @@
             <td class="text-center colfix">Zcc [%]</td>
           </tr>
           <tr>
-            <td class="text-center colfix"><input type="number"[(ngModel)]="pv[0].tappings"></td>
-            <td class="text-center colfix"><input type="number"[(ngModel)]="pv[0].zccg"></td>
-            <td class="text-center colfix"><input type="number"[(ngModel)]="pv[0].wccg"></td>
-            <td class="text-center colfix"><input type="number"[(ngModel)]="pv[0].temp"></td>
-            <td class="text-center colfix"><input type="number"[(ngModel)]="pv[0].uccm"></td>
-            <td class="text-center colfix"><input type="number"[(ngModel)]="this.service.list[0].mtu2"></td>
-            <td class="text-center colfix"><input type="number"[(ngModel)]="pv[0].wccm1"></td>
-            <td class="text-center colfix"><input type="number" [value]="this.getZccPourcentage().toFixed(3)" readonly></td>
+            <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="pv[0].tappings"></td>
+            <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="pv[0].zccg"></td>
+            <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="pv[0].wccg"></td>
+            <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="pv[0].temp"></td>
+            <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="pv[0].uccm"></td>
+            <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="this.service.list[0].mtu2"></td>
+            <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="pv[0].wccm1"></td>
+            <td class="text-center colfix"><input class="text-center colfix" type="number" [value]="this.getZccPourcentage().toFixed(3)" readonly></td>
           </tr>
           <tr>
             <td colspan="6" class="text-right colfix">Valeurs at 75C / Valeurs à 75C
       </td>
-            <td class="text-center colfix"><input type="number"[value]="this.getwccm2().toFixed(3)" readonly></td>
-            <td class="text-center colfix"><input type="number"[value]="this.getZcc2().toFixed(3)" readonly></td>
+            <td class="text-center colfix"><input class="text-center colfix" type="number"[value]="this.getwccm2().toFixed(3)" readonly></td>
+            <td class="text-center colfix"><input class="text-center colfix" type="number"[value]="this.getZcc2().toFixed(3)" readonly></td>
           </tr>
         </tbody>
       </table>
@@ -276,20 +270,20 @@
           <tr>
             <td class="text-left colfix" style="width: 200px;">Induced voltage test at / Essai par tension induite a 150 Hz</td>
             <td class="text-center colfix">U [V]</td>
-            <td class="text-center colfix"><input type="number" [(ngModel)]="pv[0].u1"></td>
-            <td class="text-center colfix"><input type="number"[(ngModel)]="pv[0].t1"></td>
+            <td class="text-center colfix"><input class="text-center colfix" type="number" [(ngModel)]="pv[0].u1"></td>
+            <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="pv[0].t1"></td>
           </tr>
           <tr>
             <td class="text-left colfix" style="width: 200px;">Applied voltage test (HV) at / Essai par tension appliqueés (HT) a 50Hz</td>
             <td class="text-center colfix">U [kV]</td>
-            <td class="text-center colfix"><input type="number"[(ngModel)]="pv[0].u2"></td>
-            <td class="text-center colfix"><input type="number"[(ngModel)]="pv[0].t2"></td>
+            <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="pv[0].u2"></td>
+            <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="pv[0].t2"></td>
           </tr>
           <tr>
             <td class="text-left colfix" style="width: 200px;">Applied voltage test (LV) at / Essai par tension appliqueés (BT) a 50Hz</td>
             <td class="text-center colfix">U [kV]</td>
-            <td class="text-center colfix"><input type="number"[(ngModel)]="pv[0].u3"></td>
-            <td class="text-center colfix"><input type="number"[(ngModel)]="pv[0].t3"></td>
+            <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="pv[0].u3"></td>
+            <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="pv[0].t3"></td>
           </tr>
         </tbody>
       </table>
@@ -309,36 +303,39 @@
           </tr>
           <tr>
             <td class="text-left colfix">Breakdown voltage / Tension de ciaquage (KV)</td>
-            <td class="text-center colfix"><input type="number" [(ngModel)]="pv[0].claquage"></td>
+            <td class="text-center colfix"><input class="text-center colfix" type="number" [(ngModel)]="pv[0].claquage"></td>
           </tr>
         </tbody>
       </table>
     </div>
 
   </div>
-  <div class="invoice-footer">
+  <div class="row" style="display: contents;">
+    <div>
+
+  <div class="invoice-footer printing8">
     <div style="display: flex; justify-content: space-between;">
       <strong style="text-align: left;">Customer <br> Client<br> {{service.list[0].client}}</strong>
       <strong style="text-align: center;">R.Laboratory <br> R.Loborataire <br> {{pv[0].controleurDeQualite?.username}} </strong>
       <strong style="text-align: right;">R. Technical <br>R.Technique<br> {{pv[0].technique}} </strong>
   </div>
-      <hr style="border-color: #51121E; border-width: 5px; height: 10px;">
+      <hr style="border-color: #51121E; border-width: 5px; height: 10px;" class="printing5">
     <br/>
-    <strong>Direction commerciale :</strong>Immeuble l'Express-Centre Nord 2eme Etage- Appt A2-7 Tunis 1082 Tél : 00 216 71 822 503 Fax : 00 216 71 822 515
-    <br><strong>Siege Social & Usine </strong>Rue Avicenne -2021 OUED ELLIL-TUNISIE Tél : 216 71 629 664 Fax : +216 71 629 664 Fax : +216 71 629 551
-    <br>Web : www.ttransfo.com / E-Mail : info&#64;ttransfo.com
-
+      <strong>Direction commerciale :</strong>Immeuble l'Express-Centre Nord 2eme Etage- Appt A2-7 Tunis 1082 Tél : 00 216 71 822 503 Fax : 00 216 71 822 515
+      <br><strong>Siege Social & Usine </strong>Rue Avicenne -2021 OUED ELLIL-TUNISIE Tél : 216 71 629 664 Fax : +216 71 629 664 Fax : +216 71 629 551
+      <br>Web : www.ttransfo.com / E-Mail : info&#64;ttransfo.com
   </div>
 </div>
-<div class="page-tools" style="margin-left: 786px;" class="printable">
+<div class="page-tools" style="padding-left: 136vh;" class="printable">
   <div class="action-buttons" style="display: flex;">
     <a class="btn bg-white btn-light mx-1px text-95" data-title="Print" (click)="onPrint()">
       <i class="mr-1 fa fa-print text-primary-m1 text-120 w-2"></i>
       <span style="padding-left: 8px;">Print</span>
     </a>
-    <a class="btn bg-white btn-light mx-1px text-95" (click)="savePvValues()" data-title="Save">
+    <a class="btn bg-white btn-light mx-1px text-95 " (click)="savePvValues()" data-title="Save">
       <i class="mr-1 fa fa-save text-success-m1 text-120 w-2"></i>
-      <span style="padding-left: 8px;">Save</span>
+      <span style="padding-left: 8px;" *ngIf="ServiceS.Controleur.designation==='Verificateur' ">Verifier</span>
+      <span style="padding-left: 8px;" *ngIf="ServiceS.Controleur.designation==='Controleur' ">Save</span>
     </a>
   </div>
 </div>

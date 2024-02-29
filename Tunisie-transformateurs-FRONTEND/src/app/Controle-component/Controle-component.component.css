@@ -17,7 +17,6 @@
 .card {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
-  overflow: hidden;
   padding: 15px;
   margin-top: 20px;
   background-color: #fff;
@@ -25,10 +24,7 @@
   transition: box-shadow 0.3s, transform 0.3s;
 }
 
-.card:hover {
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  transform: translateY(-5px);
-}
+
 
 .avatar.xs:hover {
   transform: scale(1.1);
@@ -185,44 +181,7 @@ body{padding-top:20px;
       border-bottom: inherit;
       border-top: inherit;
   }
-  select {
-    border: none;
-    border-bottom: 1px solid #ccc;
-    padding: 8px;
-    background-color: transparent;
-    transition: border-color 0.3s;
-    appearance: none;
-  }
 
-  select:focus {
-    outline: none;
-    border-color: #4570e7;
-  }
-
-  /* Optional: Add styles to mimic the appearance of the input */
-  select {
-    padding: 8px;
-    border-radius: 0;
-    border: 1px solid #ccc;
-    background-color: transparent;
-    transition: border-color 0.3s;
-  }
-
-  select:hover,
-  select:focus {
-    border-color: #4570e7;
-  }
-  select {
-    border: none;
-    padding: 8px;
-    background-color: transparent;
-    transition: border-color 0.3s;
-    appearance: none; /* Remove default arrow */
-  }
-
-  select:focus {
-    outline: none;
-  }
 
 /* Add this to your existing CSS file or style section */
 .position-absolute img {
@@ -246,24 +205,6 @@ body{padding-top:20px;
   }
 }
 
-
-/* Add bottom border to select element */
-select {
-  border-bottom: 1px solid #ccc; /* Add bottom border */
-}
-
-select {
-  max-height: 100px; /* Adjust the maximum height as needed */
-  overflow-y: auto; /* Enable vertical overflow scrolling */
-}
-
-
-/* Add hover effect for the select element */
-select:hover {
-  cursor: pointer; /* Change cursor to pointer on hover */
-  border-color: #4570e7; /* Change border color on hover */
-}
-
 /* Additional styles for the list items */
 .list-group-item {
   transition: background-color 0.3s ease; /* Smooth background color transition */
@@ -278,4 +219,9 @@ select:hover {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+}
+/* Adjust display property to make p-autoComplete inline */
+.p-fluid {
+  display: inline-block;
+  vertical-align: middle; /* Optional: Align the autocomplete with the text */
 }

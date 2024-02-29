@@ -1,6 +1,4 @@
-import { ControleurDeQualite } from "./Controlleur-service.model";
 import { Transformateur } from "./Transformateur-service.model";
-
 export class Etape {
   id_Etape : number = 0;
   etapeNumero: number = 0;
@@ -10,6 +8,9 @@ export class Etape {
   dateFin: Date | undefined;
   etat?: string = "";
   observation?: string = "";
-  controleurs: ControleurDeQualite[] = [];
+  operateur1?: string = "";
+  operateur2?: string = "";
+  controleur: string = '';
+  verificateur: string = '';
   transformateur?: Transformateur;
 }

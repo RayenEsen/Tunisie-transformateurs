@@ -23,8 +23,9 @@ namespace WebAPI.Model
         public Transformateur? Transformateur { get; set; }
         public string? Etat { get; set; } = "";
         public string? Observation { get; set; } = "";
-
-        public ICollection<ControleurDeQualité> Controleurs { get; set; } = new List<ControleurDeQualité>();
-
+        public string? Operateur1 { get; set; } 
+        public string? Operateur2 { get; set; }
+        public string? Controleur { get; set; }
+        public string? Verificateur { get; set; }
     }
 }

@@ -1,6 +1,5 @@
 /* Gradient background for the main container */
 .cd__main {
-
   background: linear-gradient(to right, #9796f0, #fbc7d4) !important;
   transition: background 0.3s ease-in-out; /* Adding a background transition */
 }
@@ -19,10 +18,12 @@ body {
 
 /* Styling for the invoice container */
 .invoice {
+  margin-bottom: 20vh;
+  margin-top: 10vh;
+  margin-left: 25vh;
   background: #fff;
   padding-left: 30px;
-  width: 1000px !important;
-  margin: 50px auto;
+  width: 1200px !important;
   transition: transform 0.3s ease-in-out, width 0.3s ease-in-out; /* Adding a transform and width transition */
 }
 
@@ -128,7 +129,9 @@ body {
   filter: brightness(1.2); /* Slight increase in brightness on hover */
 }
 /* Styling for the input fields */
-input[type="number"] {
+
+
+input[type="number"]  {
   width: 95px;
   padding: 5px;
   border: 1px solid #ccc;
@@ -207,7 +210,56 @@ img:hover {
     background: none;
     box-shadow: none;
   }
+  .printing3{
+    margin-bottom: -43px;  }
+  td{
+    max-width: fit-content;
+  }
+  .printing4
+  {
+    margin-bottom: -45px;
+  }
+  .printing5
+  {
+    margin-bottom: -10px;
+  }
+  .printing{
+    margin-left: -10vh;
+  }
+  .panel-heading
+  {
+    padding: 5px;
+  }
+  .printing2
+  {
+    margin-bottom: -30px;
+  }
+  .printing1
+  {
+    display: flex;
+  }
+  .printing7
+  {
+    margin-top: -45px;
+  }
+  .printing8
+  {
+    margin-top: -40px;
+  }
+  .printing45
+  {
+    margin-left: 0vh;
+  }
 }
+
+@media print {
+  /* Reset margin-left for .invoice when printing */
+  .invoice {
+    margin-left: 0;
+    margin-top: 2vh;
+  }
+}
+
 
 @page {
   size: auto;

@@ -13,8 +13,7 @@ import { MagnetiqueServiceService } from '../Shared/Magnetique-service.service';
 import { Magnetique } from '../Shared/Magnetique-service.model';
 import { MontageServiceService } from '../Shared/Montage-service.service';
 import { Montage } from '../Shared/Montage-service.model';
-import { ControlleurServiceService } from '../Shared/Controlleur-service.service';
-import { ControleurDeQualite } from '../Shared/Controlleur-service.model';
+
 import { Message, MessageService } from 'primeng/api';
 import { Ecuvage } from '../Shared/Ecuvage-service.model';
 import { EcuvageServiceService } from '../Shared/Ecuvage-service.service';
@@ -24,6 +23,8 @@ import { PeintureServiceService } from '../Shared/Peinture-service.service';
 import { Peinture } from '../Shared/Peinture-service.model';
 import { ConseptionServiceService } from '../Shared/Conseption-service.service';
 import { Conseption } from '../Shared/Conseption-service.model';
+import { OperateurSuggestions } from '../Shared/OperateurSuggestions-service.model';
+import { OperateurSuggestionsServiceService } from '../Shared/OperateurSuggestions-service.service';
 @Component({
   selector: 'app-Controle-component',
   templateUrl: './Controle-component.component.html',
@@ -32,15 +33,16 @@ import { Conseption } from '../Shared/Conseption-service.model';
 export class ControleComponentComponent implements OnInit {
 
   transformateurId: number = 0;
-  filteredEtapes: Etape[] = [];
 
   etapes: Etape[] = []; // Array to store fetched Etapes
   bobinages: Bobinage[] = []; // Array to store fetched Etapes
   bobinagesMT: BobinageMT[] = []; // Array to store fetched Etapes
   Magnetiques: Magnetique[] = []; // Array to store fetched Etapes
   Montages: Montage[] = []; // Array to store fetched Etapes
-  users: ControleurDeQualite[] = [];
   operateurIndexes: number[][] = [];
+  operateurSuggestion : OperateurSuggestions = new OperateurSuggestions;
+  suggestions: string[] = [];
+  filteredSuggestions : string[] = []
   constructor(
     private route: ActivatedRoute,
     public serviceE: EtapeServiceService,
@@ -51,16 +53,21 @@ export class ControleComponentComponent implements OnInit {
     public ServiceMT : BobinageMTServiceService,
     public ServiceMag : MagnetiqueServiceService,
     public ServiceMon : MontageServiceService,
-    public userService : ControlleurServiceService,
     public MessageService : MessageService,
     public EcuvageService : EcuvageServiceService,
     public RemplissageService : RemplissageServiceService,
     public PeintureService : PeintureServiceService,
     public ConseptionService : ConseptionServiceService,
+    public OperateurService : OperateurSuggestionsServiceService,
   ) {}
 
 
   ngOnInit() {
+    this.OperateurService.GetAllSuggestions().subscribe({
+      next: (response: any[]) => {
+        this.suggestions=response;
+      }
+    });
     this.route.params.subscribe(params => {
       this.transformateurId = +params['id'] || 0;
       this.Service.GetTransformateur(this.transformateurId);
@@ -69,11 +76,7 @@ export class ControleComponentComponent implements OnInit {
           .subscribe(
               etapes => {
                   console.log(etapes);
-                  // Filter etapes based on "Operateur" designation
-                  this.filteredEtapes = etapes.map(et => ({
-                      ...et,
-                      controleurs: et.controleurs.filter(c => c.designation === 'Operateur' || c === null)
-                  }));
+                  this.etapes = etapes; // Assign etapes directly without filtering
 
                   // Move the code dependent on this.etapes inside this subscription callback
                   this.fetchAndUpdateBobinages();
@@ -93,19 +96,56 @@ export class ControleComponentComponent implements OnInit {
     });
   }
 
+  search(event: any) {
+    this.OperateurService.GetAllSuggestions().subscribe({
+      next: (response: any[]) => {
+        this.suggestions=response;
+      }
+    });
+    let filtered: string[] = [];
+    let query = event.query.toLowerCase(); // Convert query to lower case once
+
+    for (let i = 0; i < this.suggestions.length; i++) {
+      let suggestion = this.suggestions[i];
+      if (typeof suggestion === 'string') { // Check if suggestion is a string
+        if (suggestion.toLowerCase().indexOf(query) === 0) {
+          filtered.push(suggestion);
+        }
+      } else {
+        console.warn(`Invalid suggestion at index ${i}:`, suggestion);
+      }
+    }
+
+    this.filteredSuggestions = filtered;
+  }
+
+  verif(etape: Etape) {
+    console.log('etape:', etape); // Log the contents of the etape object
+    if (etape.operateur1 || etape.operateur2) {
+      // The etape object has both operateur1 and operateur2 defined
+      this.router.navigate(this.getRouterLink(etape.etapeNumero));
+    } else {
+      // The etape object does not have both operateur1 and operateur2 defined
+      this.MessageService.add({ severity: 'error', summary: 'Erreur', detail: 'Opérateur est requis pour continuer.' });
+    }
+  }
+
+
+
+
   fetchAndUpdateBobinages() {
     this.ServiceBT.getBobinageByTransformateurId(this.transformateurId)
       .subscribe(
         bobinages => {
           console.log(bobinages);
           // Check if filteredEtapes[0] is defined before accessing its properties
-          if (bobinages.every(b => b.bt1 !== null) && this.filteredEtapes[0] && this.filteredEtapes[0].dateFin === null) {
+          if (bobinages.every(b => b.bt1 !== null) && this.etapes[0] && this.etapes[0].dateFin === null) {
             this.updateEtapeDateFin(1);
           }
-          if (bobinages.every(b => b.bt2 !== null) && this.filteredEtapes[1] && this.filteredEtapes[1].dateFin === null) {
+          if (bobinages.every(b => b.bt2 !== null) && this.etapes[1] && this.etapes[1].dateFin === null) {
             this.updateEtapeDateFin(2);
           }
-          if (bobinages.every(b => b.bt3 !== null) && this.filteredEtapes[2] && this.filteredEtapes[2].dateFin === null) {
+          if (bobinages.every(b => b.bt3 !== null) && this.etapes[2] && this.etapes[2].dateFin === null) {
             this.updateEtapeDateFin(3);
           }
         }
@@ -118,13 +158,13 @@ export class ControleComponentComponent implements OnInit {
         bobinagesMT => {
           console.log(bobinagesMT);
           // Check if filteredEtapes[3] is defined before accessing its properties
-          if (bobinagesMT.every(b => b.bt1 !== null) && this.filteredEtapes[3] && this.filteredEtapes[3].dateFin === null) {
+          if (bobinagesMT.every(b => b.bt1 !== null) && this.etapes[3] && this.etapes[3].dateFin === null) {
             this.updateEtapeDateFin(4);
           }
-          if (bobinagesMT.every(b => b.bt2 !== null) && this.filteredEtapes[4] && this.filteredEtapes[4].dateFin === null) {
+          if (bobinagesMT.every(b => b.bt2 !== null) && this.etapes[4] && this.etapes[4].dateFin === null) {
             this.updateEtapeDateFin(5);
           }
-          if (bobinagesMT.every(b => b.bt3 !== null) && this.filteredEtapes[5] && this.filteredEtapes[5].dateFin === null) {
+          if (bobinagesMT.every(b => b.bt3 !== null) && this.etapes[5] && this.etapes[5].dateFin === null) {
             this.updateEtapeDateFin(6);
           }
         }
@@ -146,7 +186,7 @@ export class ControleComponentComponent implements OnInit {
             item.f3c3p !== null
           );
 
-          if (allConditionsMet && this.filteredEtapes[6] && this.filteredEtapes[6].dateFin === null && this.filteredEtapes[7] && this.filteredEtapes[7].dateFin === null) {
+          if (allConditionsMet && this.etapes[6] && this.etapes[6].dateFin === null && this.etapes[7] && this.etapes[7].dateFin === null) {
             this.updateEtapeDateFin(7);
             this.updateEtapeDateFin(8);
           }
@@ -169,7 +209,7 @@ export class ControleComponentComponent implements OnInit {
             item.c3p !== null
           );
 
-          if (allConditionsMet && this.filteredEtapes[8] && this.filteredEtapes[8].dateFin === null && this.filteredEtapes[9] && this.filteredEtapes[9].dateFin === null && allConditionsMet && this.filteredEtapes[10] && this.filteredEtapes[10].dateFin === null && allConditionsMet && this.filteredEtapes[11] && this.filteredEtapes[11].dateFin === null) {
+          if (allConditionsMet && this.etapes[8] && this.etapes[8].dateFin === null && this.etapes[9] && this.etapes[9].dateFin === null && allConditionsMet && this.etapes[10] && this.etapes[10].dateFin === null && allConditionsMet && this.etapes[11] && this.etapes[11].dateFin === null) {
             this.updateEtapeDateFin(9);
             this.updateEtapeDateFin(10);
             this.updateEtapeDateFin(11);
@@ -187,11 +227,10 @@ export class ControleComponentComponent implements OnInit {
             item.conformite !== null
           );
 
-          if (allConditionsMet && this.filteredEtapes[12] && this.filteredEtapes[12].dateFin === null && this.filteredEtapes[13] && this.filteredEtapes[13].dateFin === null )
+          if (allConditionsMet && this.etapes[12] && this.etapes[12].dateFin === null && this.etapes[13] && this.etapes[13].dateFin === null )
           {
             this.updateEtapeDateFin(13);
             this.updateEtapeDateFin(14);
-
           }
         }
       );
@@ -205,7 +244,7 @@ export class ControleComponentComponent implements OnInit {
             item.cnc !== null
           );
 
-          if (allConditionsMet && this.filteredEtapes[14] && this.filteredEtapes[14].dateFin === null && this.filteredEtapes[15] && this.filteredEtapes[15].dateFin === null )
+          if (allConditionsMet && this.etapes[14] && this.etapes[14].dateFin === null && this.etapes[15] && this.etapes[15].dateFin === null )
           {
             this.updateEtapeDateFin(15);
             this.updateEtapeDateFin(16);
@@ -222,7 +261,7 @@ export class ControleComponentComponent implements OnInit {
             item.cnc==='C'
           );
 
-          if (allConditionsMet && this.filteredEtapes[16] && this.filteredEtapes[16].dateFin === null)
+          if (allConditionsMet && this.etapes[16] && this.etapes[16].dateFin === null)
           {
             this.updateEtapeDateFin(17);
           }
@@ -238,7 +277,7 @@ export class ControleComponentComponent implements OnInit {
             item.conformiter==='Yes'
           );
 
-          if (allConditionsMet && this.filteredEtapes[17] && this.filteredEtapes[17].dateFin === null)
+          if (allConditionsMet && this.etapes[17] && this.etapes[17].dateFin === null)
           {
             this.updateEtapeDateFin(18);
           }
@@ -247,7 +286,7 @@ export class ControleComponentComponent implements OnInit {
   }
 
   updateEtapeDateFin(etapeNumero: number) {
-    const selectedEtape = this.filteredEtapes.find(et => et.etapeNumero === etapeNumero);
+    const selectedEtape = this.etapes.find(et => et.etapeNumero === etapeNumero);
     if (selectedEtape) {
       selectedEtape.dateFin = new Date();
       this.serviceE.UpdateEtape(this.transformateurId, etapeNumero, selectedEtape)
@@ -270,21 +309,33 @@ export class ControleComponentComponent implements OnInit {
 
   toggleEditable() {
     this.isReadOnly = !this.isReadOnly;
-
-    if (!this.isReadOnly) {
-      this.userService.getUsersByRole('Operateur').subscribe((user: ControleurDeQualite[]) => {
-        this.users = user ;
-        console.log(this.users)
-      });
-    } else {
-      // Clear the users array when readonly to hide the autocomplete options
-      this.users = [];
-    }
   }
 
   updateEtape(etapeNumero: number) {
+
     // Find the selected etape from filteredEtapes
-    const selectedFilteredEtape = this.filteredEtapes.find(et => et.etapeNumero === etapeNumero);
+    const selectedFilteredEtape = this.etapes.find(et => et.etapeNumero === etapeNumero);
+// Check if operateur1 is present and not already in suggestions
+if (selectedFilteredEtape?.operateur1 && !this.suggestions.includes(selectedFilteredEtape.operateur1)) {
+  console.log(selectedFilteredEtape.operateur1);
+  this.operateurSuggestion.nom = selectedFilteredEtape.operateur1;
+  this.OperateurService.AddSuggestion(this.operateurSuggestion).subscribe({
+    next: (response) => {
+      this.suggestions.push(response);
+    }
+  });
+}
+
+// Check if operateur2 is present and not already in suggestions
+if (selectedFilteredEtape?.operateur2 && !this.suggestions.includes(selectedFilteredEtape.operateur2)) {
+  console.log(selectedFilteredEtape.operateur2);
+  this.operateurSuggestion.nom = selectedFilteredEtape.operateur2;
+  this.OperateurService.AddSuggestion(this.operateurSuggestion).subscribe({
+    next: (response) => {
+      this.suggestions.push(response);
+    }
+  });
+}
 
     // Update dateDebut for the selected etape
     if (selectedFilteredEtape) {
@@ -383,13 +434,7 @@ export class ControleComponentComponent implements OnInit {
       }
     }
 
-    verif(etape: Etape): void {
-      if (etape.controleurs.some(controleur => controleur.designation === "Operateur")) {
-        this.router.navigate(this.getRouterLink(etape.etapeNumero));
-      } else {
-        this.MessageService.add({ severity: 'error', summary: 'Erreur', detail: 'Opérateur est requis pour continuer.' });
-      }
-    }
+
 
     END_OF_PRODUCTION() {
       if (

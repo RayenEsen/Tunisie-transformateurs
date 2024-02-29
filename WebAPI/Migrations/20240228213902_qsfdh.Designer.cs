@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebAPI.Model;
 
@@ -11,9 +12,11 @@ using WebAPI.Model;
 namespace WebAPI.Migrations
 {
     [DbContext(typeof(TransformateurContext))]
-    partial class TransformateurContextModelSnapshot : ModelSnapshot
+    [Migration("20240228213902_qsfdh")]
+    partial class qsfdh
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,6 +45,9 @@ namespace WebAPI.Migrations
                     b.Property<float?>("Cnc")
                         .HasColumnType("real");
 
+                    b.Property<string>("ControleurIdC")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Nom")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -53,6 +59,8 @@ namespace WebAPI.Migrations
                         .HasColumnType("real");
 
                     b.HasKey("IdBobinage");
+
+                    b.HasIndex("ControleurIdC");
 
                     b.HasIndex("Numero");
 
@@ -288,9 +296,6 @@ namespace WebAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id_Etape"));
 
-                    b.Property<string>("Controleur")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("DateDebut")
                         .HasColumnType("datetime2");
 
@@ -317,9 +322,6 @@ namespace WebAPI.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Operateur2")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Verificateur")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id_Etape");
@@ -922,11 +924,17 @@ namespace WebAPI.Migrations
 
             modelBuilder.Entity("WebAPI.Model.Bobinage", b =>
                 {
+                    b.HasOne("WebAPI.Model.ControleurDeQualité", "Controleur")
+                        .WithMany()
+                        .HasForeignKey("ControleurIdC");
+
                     b.HasOne("WebAPI.Model.Transformateur", "Transformateur")
                         .WithMany("Bobinages")
                         .HasForeignKey("Numero")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Controleur");
 
                     b.Navigation("Transformateur");
                 });

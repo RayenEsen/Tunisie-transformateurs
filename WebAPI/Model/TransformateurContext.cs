@@ -26,7 +26,7 @@ namespace WebAPI.Model
         public DbSet<pfp> pfps { get; set; }
         public DbSet<Conseption> Conseptions { get; set; }
         public DbSet<ConseptionValues> ConseptionValues { get; set; }
-
+        public DbSet<OperateurSuggestions> OperateurSuggestions { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Configure one-to-one relationship between Transformateur and Pv
@@ -78,11 +78,6 @@ namespace WebAPI.Model
             .HasOne(b => b.Transformateur)
             .WithMany(t => t.Montage)
             .HasForeignKey(b => b.Numero);
-
-            // Configure the many-to-many relationship between ControleurDeQualité and Etape
-            modelBuilder.Entity<ControleurDeQualité>()
-                .HasMany(c => c.Etapes)
-                .WithMany(e => e.Controleurs);
 
             // Configure the one-to-many relationship between ControleurDeQualité and Event
             modelBuilder.Entity<ControleurDeQualité>()

@@ -87,7 +87,6 @@ namespace WebAPI.Controller
         public async Task<ActionResult<IEnumerable<Etape>>> GetEtapesByTransformateurId(int transformateurId)
         {
             var etapes = await _context.etapes
-                .Include(e => e.Controleurs) // Include the related Controleur entities
                 .Where(e => e.Numero == transformateurId)
                 .OrderBy(e => e.EtapeNumero) // Order by the 'etapeNumero' property
                 .ToListAsync();
@@ -116,7 +115,6 @@ namespace WebAPI.Controller
         public async Task<IActionResult> UpdateControleursByNumeroAndTransformateur(int numero, int transformateurId, Etape updatedEtape)
         {
             var etape = await _context.etapes
-                .Include(e => e.Controleurs) // Include the Controleurs related to the Etape
                 .Where(e => e.Numero == transformateurId && e.EtapeNumero == numero)
                 .FirstOrDefaultAsync();
 
@@ -127,22 +125,10 @@ namespace WebAPI.Controller
             etape.DateDebut = DateTime.Now;
             etape.Etat = updatedEtape.Etat;
             etape.Observation = updatedEtape.Observation;
-
-            // Clear existing Controleurs
-            etape.Controleurs.Clear();
-
-            // Add new Controleurs
-            foreach (var controleur in updatedEtape.Controleurs)
-            {
-                // Find the corresponding ControleurDeQualité object from the database
-                var existingControleur = await _context.controleurDeQualités.FindAsync(controleur.IdC);
-                if (existingControleur != null)
-                {
-                    // Add the ControleurDeQualité to the Etape's Controleurs collection
-                    etape.Controleurs.Add(existingControleur);
-                }
-            }
-
+            etape.Operateur1 = updatedEtape.Operateur1;
+            etape.Operateur2 = updatedEtape.Operateur2;
+            etape.Verificateur = updatedEtape.Verificateur;
+            etape.Controleur = updatedEtape.Controleur;
             try
             {
                 await _context.SaveChangesAsync();
@@ -168,7 +154,6 @@ namespace WebAPI.Controller
         public async Task<ActionResult<Etape>> GetEtapeByNumeroAndTransformateur(int numero, int transformateurId)
         {
             var etape = await _context.etapes
-                .Include(e => e.Controleurs) // Include the controleur data in the query
                 .Where(e => e.Numero == transformateurId && e.EtapeNumero == numero)
                 .FirstOrDefaultAsync();
 
