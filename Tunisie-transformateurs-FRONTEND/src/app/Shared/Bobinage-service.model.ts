@@ -8,7 +8,7 @@ export class Bobinage {
   bt2?: number;
   bt3?: number;
   prevue?: number;
-  cnc?: number;
+  cnc?: string;
   nom: string = '';
 
   transformateur?: Transformateur; // Assuming Transformateur is another TypeScript class

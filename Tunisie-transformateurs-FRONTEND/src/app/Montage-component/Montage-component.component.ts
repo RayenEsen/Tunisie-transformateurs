@@ -90,13 +90,27 @@ export class MontageComponentComponent implements OnInit {
     this.ServiceMontage.UpdateListMontage(this.Montages).subscribe(
         () => {
             console.log('Montages updated successfully');
+            if(this.SessionS.Controleur.designation==="Controleur" && this.SessionS.Controleur.username)
+            {
+              this.etapeSelected.controleur=this.SessionS.Controleur.username;
+            }
+            if(this.SessionS.Controleur.designation==="Verificateur" && this.SessionS.Controleur.username)
+            {
+              this.etapeSelected.verificateur=this.SessionS.Controleur.username;
+            }
                                     // Creating and adding the event
                                     const newEvent = new Event(this.SessionS.Controleur.idC, 'Participer a le Controle Montage', new Date(),"opéré par " + this.etapeSelected.operateur1 + " et " + this.etapeSelected.operateur2 + " pour le transformateur " + this.transformateurId + ".");
                                     this.eventService.AddEvent(newEvent)
                                     .subscribe({
                                     next: (response) => {
                                     console.log('Event added successfully:', response);
-                                    // Add any further logic here if needed
+                                      // Update the etapeSelected
+                                      this.ServiceE.UpdateEtape(this.transformateurId, this.etapenumero, this.etapeSelected).subscribe({
+                                        next: (response) => {
+                                          console.log('Etape updated successfully:', response);
+                                          // Handle the response as needed
+                                        },
+                                      });
                                     },
                                     error: (error) => {
                                     console.error('Error adding event:', error);

@@ -533,16 +533,11 @@ export class AddComponentComponent implements OnInit {
           concatMap(() => {
             // Use forkJoin to execute multiple observables in parallel
             const RemplissageObservable: Observable<any>[] = [];
-
-
-            for (let i = 1; i <= 3; i++) {
               const RemplissageAjouter: Remplissage = {
                 numero: this.transformateurAjouter.numero,
                 idRemplissage: 0
               };
               RemplissageObservable.push(this.ServiceRemplissage.addRemplissage(RemplissageAjouter));
-            }
-
             return forkJoin(RemplissageObservable);
           }),
 

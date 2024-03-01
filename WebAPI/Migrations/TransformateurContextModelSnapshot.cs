@@ -39,8 +39,8 @@ namespace WebAPI.Migrations
                     b.Property<float?>("Bt3")
                         .HasColumnType("real");
 
-                    b.Property<float?>("Cnc")
-                        .HasColumnType("real");
+                    b.Property<string>("Cnc")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nom")
                         .IsRequired()
@@ -76,8 +76,8 @@ namespace WebAPI.Migrations
                     b.Property<float?>("Bt3")
                         .HasColumnType("real");
 
-                    b.Property<float?>("Cnc")
-                        .HasColumnType("real");
+                    b.Property<string>("Cnc")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nom")
                         .IsRequired()
@@ -252,8 +252,8 @@ namespace WebAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdMagnetique"));
 
-                    b.Property<float?>("Cnc")
-                        .HasColumnType("real");
+                    b.Property<string>("Cnc")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Numero")
                         .HasColumnType("int");
@@ -758,8 +758,8 @@ namespace WebAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdRemplissage"));
 
-                    b.Property<float?>("Cnc")
-                        .HasColumnType("real");
+                    b.Property<string>("Cnc")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Controleur")
                         .HasColumnType("nvarchar(max)");

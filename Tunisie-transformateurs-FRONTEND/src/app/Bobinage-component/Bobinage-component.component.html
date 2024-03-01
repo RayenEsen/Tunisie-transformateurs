@@ -118,8 +118,7 @@
               <td class="text-center colfix"><input type="number" [(ngModel)]="bobinage.bt2"></td>
               <td class="text-center colfix"><input type="number" [(ngModel)]="bobinage.bt3"></td>
               <td class="text-center colfix"><input type="number" [(ngModel)]="bobinage.prevue"></td>
-              <td class="text-center colfix"><input type="number" [(ngModel)]="bobinage.cnc"></td>
-
+              <td class="text-center colfix"><input type="text" [(ngModel)]="bobinage.cnc"></td>
             </tr>
         </tbody>
       </table>
@@ -132,13 +131,14 @@
         <tbody>
           <tr>
             <td>Operateur</td>
-            <td class="text-center colfix">{{etapeSelected.operateur1}}</td>
-            <td class="text-center colfix">{{etapeSelected.operateur2}}</td>
-            <td class="text-center colfix">{{etapeSelected2.operateur1}}</td>
-            <td class="text-center colfix">{{etapeSelected2.operateur1}}</td>
-            <td class="text-center colfix">{{etapeSelected3.operateur1}}</td>
-            <td class="text-center colfix">{{etapeSelected3.operateur1}}</td>
+            <td class="text-center colfix" style="white-space: nowrap;">{{etapeSelected.operateur1}}</td>
+            <td class="text-center colfix" style="white-space: nowrap;">{{etapeSelected.operateur2}}</td>
+            <td class="text-center colfix" style="white-space: nowrap;">{{etapeSelected2.operateur1}}</td>
+            <td class="text-center colfix" style="white-space: nowrap;">{{etapeSelected2.operateur1}}</td>
+            <td class="text-center colfix" style="white-space: nowrap;">{{etapeSelected3.operateur1}}</td>
+            <td class="text-center colfix" style="white-space: nowrap;">{{etapeSelected3.operateur1}}</td>
           </tr>
+
           <tr>
             <td>Controleur</td>
             <td colspan="6" class="text-center colfix">{{etapeSelected.controleur}}</td>

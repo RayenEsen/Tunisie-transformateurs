@@ -115,8 +115,8 @@ body {
 }
 
 /* Hover effect on the invoice container */
-.invoice:hover {
-  transform: scale(1.02); /* Scaling up on hover */
+.invoice.hover-disabled:hover {
+  transform: none; /* Disable scaling up on hover */
 }
 
 /* Hover effect on the logo */
@@ -265,3 +265,17 @@ img:hover {
   size: auto;
   margin: 0;
        }
+/* Info section */
+.info-section {
+  margin-right: 78vh;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+/* Info items */
+.info-item {
+  margin-bottom: 5px;
+  font-size: 14px;
+}

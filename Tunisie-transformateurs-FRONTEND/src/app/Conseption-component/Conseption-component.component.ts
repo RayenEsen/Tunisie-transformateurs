@@ -74,31 +74,34 @@ export class ConseptionComponentComponent implements OnInit {
 
 
   update() {
+    if(this.ServiceS.Controleur.designation==="Controleur" && this.ServiceS.Controleur.username)
+    {
+      this.etapeSelected.controleur=this.ServiceS.Controleur.username;
+    }
+    if(this.ServiceS.Controleur.designation==="Verificateur" && this.ServiceS.Controleur.username)
+    {
+      this.etapeSelected.verificateur=this.ServiceS.Controleur.username;
+    }
     this.ServiceConseption.updateConseptions(this.transformateurId, this.conseption).subscribe({
       next: (response) => {
-        console.log(response); // Log the response
+        console.log(this.etapeSelected)
+        this.ServiceE.UpdateEtape(this.transformateurId, this.etapenumero, this.etapeSelected).subscribe({
+          next: (response) => {
+              console.log('Etape updated successfully:', response);
+              // Handle the response as needed
+          },
+          error: (error) => {
+              console.error('Error updating etape:', error);
+              // Handle the error appropriately
+          }
+      });
       },
       error: (error) => {
         console.error('Error updating Conseptions:', error); // Log the error
         // Handle error as needed
       }
     });
-    // Update the etapeSelected
-    console.log(this.etapeSelected)
-    this.ServiceE.UpdateEtape(this.transformateurId, this.etapenumero, this.etapeSelected).subscribe({
-      next: (response) => {
-        console.log('Etape updated successfully:', response);
-        // Handle the response as needed
-      },
-    });
-    this.service.UpdateTransformateur(this.transformateurId,this.service.list[0])
-    .subscribe({
-      next : (response) =>
-      {
-        console.log('Transformateur updated successfully:', response);
-      }
-    })
-  }
+}
 
   // Method to trigger file input click event
   uploadFile(): void {

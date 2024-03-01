@@ -9,7 +9,7 @@ pressiond?: number;
 pressionf?: number;
 hd?: number;
 hf?: number;
-cnc?: number;
+cnc?: string;
 controleur?: string;
 observations?: string;
 transformateur?: Transformateur;

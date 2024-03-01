@@ -90,13 +90,16 @@
                       </div>
 
                       <div class="ms-3">
-                        <p class="mb-0 font-weight-medium">La phase <strong>{{ etape.nom }}</strong> Supervisé par l'opérateur :
-                          <p-autoComplete   [style]="{'width': '26,5%'}" [(ngModel)]="etape.operateur1" [disabled]="isReadOnly" [suggestions]="filteredSuggestions" (completeMethod)="search($event)"></p-autoComplete>
-                            et l'Opérateur
-                          <p-autoComplete  [style]="{'width': '26,5%'}" [(ngModel)]="etape.operateur2" [disabled]="isReadOnly" [suggestions]="filteredSuggestions" (completeMethod)="search($event)"></p-autoComplete>
-                            <br> débutant le   {{ etape.dateDebut | date:'dd/MM/yyyy HH:mm' }} et se terminant le {{ etape.dateFin | date:'dd/MM/yyyy HH:mm' }}.
+                        <p class="mb-0 font-weight-medium">
+                          <strong>{{ etape.nom }}</strong> Supervisé par  :
+                          <span class="p-fluid">
+                            <p-autoComplete [(ngModel)]="selectedItemsMap[etape.etapeNumero]" [suggestions]="filteredSuggestions" (completeMethod)="search($event)" [disabled]="isReadOnly" [dropdown]="true" [multiple]="true"></p-autoComplete>
+                          </span>
+                          <br>
+                          Débutant le <span class="date">{{ etape.dateDebut | date:'dd/MM/yyyy HH:mm' }}</span> et se terminant le <span class="date">{{ etape.dateFin | date:'dd/MM/yyyy HH:mm' }}</span>.
                         </p>
                       </div>
+
                     </div>
                     <div style="display: flex;">
                       <!-- spans with icons -->
@@ -108,8 +111,6 @@
                         <i class="material-icons" style="color: #122151;">save</i>
                       </span>
                     </div>
-
-
                   </div>
                 </li>
               </ul>

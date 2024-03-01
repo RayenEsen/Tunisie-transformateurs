@@ -84,7 +84,7 @@
             <td class="text-center colfix"><input type="number" [(ngModel)]="electrique.p3"></td>
             <td class="text-center colfix"><input type="number" [(ngModel)]="electrique.p4"></td>
             <td class="text-center colfix"><input type="number" [(ngModel)]="electrique.p5"></td>
-            <td class="text-center colfix"><input type="number" [(ngModel)]="electrique.cnc"></td>
+            <td class="text-center colfix"><input type="text" [(ngModel)]="electrique.cnc"></td>
           </tr>
         </tbody>
       </table>
@@ -110,9 +110,9 @@
               </tr>
               <tr *ngFor="let parties2 of partie2.slice(0, 4)">
                 <td class="text-center colfix"><input type="number" [(ngModel)]="parties2.vp1"></td>
-                <td class="text-center colfix"><input type="number" [(ngModel)]="parties2.cnc1"></td>
+                <td class="text-center colfix"><input type="text" [(ngModel)]="parties2.cnc1"></td>
                 <td class="text-center colfix"><input type="number" [(ngModel)]="parties2.vp2"></td>
-                <td class="text-center colfix"><input type="number" [(ngModel)]="parties2.cnc2"></td>
+                <td class="text-center colfix"><input type="text" [(ngModel)]="parties2.cnc2"></td>
               </tr>
             </tbody>
           </table>
@@ -136,24 +136,20 @@
               </tr>
               <tr *ngFor="let parties2 of partie2.slice(4)">
                 <td class="text-center colfix"><input type="number" [(ngModel)]="parties2.vp1"></td>
-                <td class="text-center colfix"><input type="number" [(ngModel)]="parties2.cnc1"></td>
+                <td class="text-center colfix"><input type="text" [(ngModel)]="parties2.cnc1"></td>
                 <td class="text-center colfix"><input type="number" [(ngModel)]="parties2.vp2"></td>
-                <td class="text-center colfix"><input type="number" [(ngModel)]="parties2.cnc2"></td>
+                <td class="text-center colfix"><input type="text" [(ngModel)]="parties2.cnc2"></td>
               </tr>
             </tbody>
           </table>
         </div>
-
-
   </div>
   <div class="invoice-footer">
-
       <hr style="border-color: #51121E; border-width: 5px; height: 10px;">
     <br/>
     <strong>Direction commerciale :</strong>Immeuble l'Express-Centre Nord 2eme Etage- Appt A2-7 Tunis 1082 Tél : 00 216 71 822 503 Fax : 00 216 71 822 515
     <br><strong>Siege Social & Usine </strong>Rue Avicenne -2021 OUED ELLIL-TUNISIE Tél : 216 71 629 664 Fax : +216 71 629 664 Fax : +216 71 629 551
     <br>Web : www.ttransfo.com / E-Mail : info&#64;ttransfo.com
-
   </div>
 </div>
 <div class="page-tools" style="margin-left: 786px;" class="printable">
@@ -164,7 +160,7 @@
     </a>
     <a class="btn bg-white btn-light mx-1px text-95" data-title="Save" (click)="update()"  [routerLink]="['/Controle',this.service.list[0].numero]">
       <i class="mr-1 fa fa-save text-success-m1 text-120 w-2"></i>
-      <span style="padding-left: 8px;">Print</span>
+      <span style="padding-left: 8px;">Save</span>
     </a>
   </div>
 </div>

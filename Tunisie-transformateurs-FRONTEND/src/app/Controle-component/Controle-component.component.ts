@@ -28,12 +28,13 @@ import { OperateurSuggestionsServiceService } from '../Shared/OperateurSuggestio
 @Component({
   selector: 'app-Controle-component',
   templateUrl: './Controle-component.component.html',
-  styleUrls: ['./Controle-component.component.css']
+  styleUrls: ['./Controle-component.component.css'],
+
 })
 export class ControleComponentComponent implements OnInit {
+  selectedItemsMap: { [key: string]: any[] } = {}; // Map to store selected items for each etape
 
   transformateurId: number = 0;
-
   etapes: Etape[] = []; // Array to store fetched Etapes
   bobinages: Bobinage[] = []; // Array to store fetched Etapes
   bobinagesMT: BobinageMT[] = []; // Array to store fetched Etapes
@@ -77,6 +78,7 @@ export class ControleComponentComponent implements OnInit {
               etapes => {
                   console.log(etapes);
                   this.etapes = etapes; // Assign etapes directly without filtering
+                  this.initializeSelectedItemsMap();
 
                   // Move the code dependent on this.etapes inside this subscription callback
                   this.fetchAndUpdateBobinages();
@@ -94,8 +96,20 @@ export class ControleComponentComponent implements OnInit {
               }
           );
     });
-  }
 
+  }
+  initializeSelectedItemsMap(): void {
+    this.etapes.forEach(etape => {
+      const selectedItems: any[] = [];
+      if (etape.operateur1) {
+        selectedItems.push(etape.operateur1);
+      }
+      if (etape.operateur2) {
+        selectedItems.push(etape.operateur2);
+      }
+      this.selectedItemsMap[etape.etapeNumero] = selectedItems;
+    });
+  }
   search(event: any) {
     this.OperateurService.GetAllSuggestions().subscribe({
       next: (response: any[]) => {
@@ -315,6 +329,20 @@ export class ControleComponentComponent implements OnInit {
 
     // Find the selected etape from filteredEtapes
     const selectedFilteredEtape = this.etapes.find(et => et.etapeNumero === etapeNumero);
+    if (!selectedFilteredEtape) {
+      return;
+    }
+
+    // Check the number of selected items
+    const selectedItems = this.selectedItemsMap[etapeNumero];
+    if (selectedItems && selectedItems.length > 2) {
+      this.MessageService.add({ severity: 'info', summary: 'Info', detail: 'Vous ne pouvez sélectionner que jusqu\'à deux éléments.' });
+      return;
+    }
+
+    // Update operateur1 and operateur2 based on selected items
+    selectedFilteredEtape.operateur1 = selectedItems && selectedItems.length > 0 ? selectedItems[0] : null;
+    selectedFilteredEtape.operateur2 = selectedItems && selectedItems.length > 1 ? selectedItems[1] : null;
 // Check if operateur1 is present and not already in suggestions
 if (selectedFilteredEtape?.operateur1 && !this.suggestions.includes(selectedFilteredEtape.operateur1)) {
   console.log(selectedFilteredEtape.operateur1);

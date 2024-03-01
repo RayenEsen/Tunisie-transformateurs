@@ -129,6 +129,9 @@ namespace WebAPI.Controller
             etape.Operateur2 = updatedEtape.Operateur2;
             etape.Verificateur = updatedEtape.Verificateur;
             etape.Controleur = updatedEtape.Controleur;
+            etape.Observation = updatedEtape.Observation;
+            etape.Etat = updatedEtape.Etat;
+
             try
             {
                 await _context.SaveChangesAsync();

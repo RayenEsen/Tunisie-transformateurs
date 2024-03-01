@@ -16,7 +16,7 @@ namespace WebAPI.Model
         public float? Pressionf { get; set; }
         public float? Hd { get; set; }
         public float? Hf { get; set; }
-        public float? Cnc { get; set; }
+        public string? Cnc { get; set; }
         public string? Controleur { get; set; }
         public string? Observations { get; set; }
         [JsonIgnore]

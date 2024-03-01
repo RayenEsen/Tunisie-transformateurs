@@ -74,13 +74,27 @@ export class MagnetiqueComponentComponent implements OnInit {
     this.ServiceM.UpdateListBobinage(this.Magnetiques).subscribe(
         () => {
             console.log('Magnetiques updated successfully');
+            if(this.serviceS.Controleur.designation==="Controleur" && this.serviceS.Controleur.username)
+            {
+              this.etapeSelected.controleur=this.serviceS.Controleur.username;
+            }
+            if(this.serviceS.Controleur.designation==="Verificateur" && this.serviceS.Controleur.username)
+            {
+              this.etapeSelected.verificateur=this.serviceS.Controleur.username;
+            }
             // Creating and adding the event
             const newEvent = new Event(this.serviceS.Controleur.idC, 'Participer a le Controle dimensionnelle circuit magnetique', new Date()," opéré par " + this.etapeSelected.operateur1 + " et " + this.etapeSelected.operateur2 + " pour le transformateur " + this.transformateurId + ".");
             this.eventService.AddEvent(newEvent)
             .subscribe({
             next: (response) => {
             console.log('Event added successfully:', response);
-            // Add any further logic here if needed
+            // Update the etapeSelected
+            this.serviceE.UpdateEtape(this.transformateurId, this.etapenumero, this.etapeSelected).subscribe({
+              next: (response) => {
+                console.log('Etape updated successfully:', response);
+                // Handle the response as needed
+              },
+            });
             },
             error: (error) => {
             console.error('Error adding event:', error);

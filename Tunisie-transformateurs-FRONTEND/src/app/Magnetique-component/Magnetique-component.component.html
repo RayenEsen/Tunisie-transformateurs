@@ -135,27 +135,23 @@
       <table class="table table-bordered table-condensed" >
         <tbody>
           <tr>
-            <td class="text-left colfix">Operateur</td>
-            <td class="text-left colfix" style="padding-left: 10px;"></td>
-            <td class="text-left colfix"></td>
-
-            <td class="text-left colfix" style="padding-left: 10px;"></td>
-            <td class="text-left colfix"></td>
-
-
+            <td>Operateur</td>
+            <td class="text-center colfix" style="white-space: nowrap;">{{etapeSelected.operateur1}}</td>
+            <td class="text-center colfix" style="white-space: nowrap;">{{etapeSelected.operateur2}}</td>
+            <td class="text-center colfix" style="white-space: nowrap;">{{etapeSelected2.operateur1}}</td>
+            <td class="text-center colfix" style="white-space: nowrap;">{{etapeSelected2.operateur1}}</td>
           </tr>
           <tr>
-            <td class="text-left colfix">Controleur</td>
-            <td colspan="2" class="text-left colfix" style="padding-left: 10px;" [colSpan]="4"></td>
-
+            <td>Controleur</td>
+            <td colspan="6" class="text-center colfix">{{etapeSelected.controleur}}</td>
           </tr>
           <tr>
-            <td class="text-left colfix">Verificateur</td>
-            <td colspan="2" class="text-left colfix" style="padding-left: 10px;" [colSpan]="4"></td>
+            <td>Verificateur</td>
+            <td colspan="6" class="text-center colfix">{{etapeSelected.verificateur}}</td>
           </tr>
           <tr>
             <td class="text-left colfix">Etat</td>
-            <td colspan="2" class="text-left colfix" style="padding-left: 10px;" [colSpan]="4"><input type="" [(ngModel)]="etapeSelected.etat"></td>
+            <td colspan="2" class="text-left colfix" style="padding-left: 10px;" [colSpan]="4"><input   [(ngModel)]="etapeSelected.etat"></td>
           </tr>
         </tbody>
       </table>

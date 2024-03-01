@@ -115,7 +115,9 @@
               <td class="text-center colfix"><input [(ngModel)]="remplissage.pressionf" type="number"></td>
               <td class="text-center colfix"><input [(ngModel)]="remplissage.hd" type="number"></td>
               <td class="text-center colfix"><input [(ngModel)]="remplissage.hf" type="number"></td>
-              <td class="text-center colfix"><input [(ngModel)]="remplissage.cnc" type="number"></td>
+              <td class="text-center colfix" [ngStyle]="{'color': remplissage.cnc === 'C' ? 'green' : 'red'}">
+                <input [(ngModel)]="remplissage.cnc" type="text">
+              </td>
               <td class="text-center colfix"><input [(ngModel)]="remplissage.controleur" type="text"></td>
               <td class="text-center colfix"><input [(ngModel)]="remplissage.observations" type="text"></td>
             </tr>

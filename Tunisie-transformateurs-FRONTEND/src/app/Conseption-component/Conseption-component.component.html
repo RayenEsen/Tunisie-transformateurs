@@ -141,13 +141,26 @@
               <td class="text-center colfix">Opérateur</td>
             </tr>
             <tr>
-              <td class="text-center colfix"></td>
+              <td class="text-center colfix">{{etapeSelected.operateur1}}</td>
+            </tr>
+            <tr>
+              <td class="text-center colfix">{{etapeSelected.operateur2}}</td>
             </tr>
             <tr>
               <td class="text-center colfix">Controleur</td>
             </tr>
             <tr>
-              <td class="text-center colfix">Basem Chaafi</td>
+              <td class="text-center colfix">
+                {{ etapeSelected.controleur ? etapeSelected.controleur : 'Pas encore de contrôleur' }}
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center colfix">Verificateur</td>
+            </tr>
+            <tr>
+              <td class="text-center colfix">
+                {{ etapeSelected.verificateur ? etapeSelected.verificateur : 'Pas encore de vérificateur' }}
+              </td>
             </tr>
             <tr>
               <td class="text-center colfix">Observation</td>
@@ -179,9 +192,9 @@
     </a>
     <a [routerLink]="['/Controle', service.list[0]!.numero]" class="btn bg-white btn-light mx-1px text-95" data-title="Save" (click)="update()">
       <i class="mr-1 fa fa-save text-success-m1 text-120 w-2" style="margin-right: 5px;"></i> <!-- Added margin-right -->
-      Save
+      <span style="padding-left: 8px;" *ngIf="ServiceS.Controleur.designation==='Verificateur' ">Verifier</span>
+      <span style="padding-left: 8px;" *ngIf="ServiceS.Controleur.designation==='Controleur' ">Save</span>
     </a>
-
   </div>
 </div>
 

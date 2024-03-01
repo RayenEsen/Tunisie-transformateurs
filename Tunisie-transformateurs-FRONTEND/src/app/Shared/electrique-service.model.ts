@@ -8,6 +8,6 @@ export class Electrique {
   p3?: number;
   p4?: number;
   p5?: number;
-  cnc?: number;
+  cnc?: string;
   transformateur?: Transformateur;
 }

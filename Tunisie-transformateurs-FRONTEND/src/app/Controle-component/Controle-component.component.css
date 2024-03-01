@@ -1,3 +1,14 @@
+/* styles.css or style.scss */
+
+.font-weight-medium {
+  font-weight: 500; /* Adjust the font weight as needed */
+}
+
+.date {
+  color: #122151; /* Change the color to match your design */
+  font-style: italic; /* Apply italic style to the date */
+}
+
 .card {
   border: none;
   margin-bottom: 24px;
@@ -225,3 +236,4 @@ body{padding-top:20px;
   display: inline-block;
   vertical-align: middle; /* Optional: Align the autocomplete with the text */
 }
+

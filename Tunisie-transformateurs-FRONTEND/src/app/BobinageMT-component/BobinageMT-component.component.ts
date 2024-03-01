@@ -87,7 +87,14 @@ export class BobinageMTComponentComponent implements OnInit {
     this.ServiceMT.UpdateListBobinage(this.bobinagesMT).subscribe(
         () => {
             console.log('Bobinages updated successfully');
-
+            if(this.ServiceS.Controleur.designation==="Controleur" && this.ServiceS.Controleur.username)
+            {
+              this.etapeSelected.controleur=this.ServiceS.Controleur.username;
+            }
+            if(this.ServiceS.Controleur.designation==="Verificateur" && this.ServiceS.Controleur.username)
+            {
+              this.etapeSelected.verificateur=this.ServiceS.Controleur.username;
+            }
             // Creating and adding the event
             const newEvent = new Event(this.ServiceS.Controleur.idC,'Participer a le Controle dimensionnelle bobinage MT', new Date(),"opéré par " + this.etapeSelected.operateur1 + " et " + this.etapeSelected.operateur2 + " pour le transformateur " + this.transformateurId + ".");
             this.eventService.AddEvent(newEvent)

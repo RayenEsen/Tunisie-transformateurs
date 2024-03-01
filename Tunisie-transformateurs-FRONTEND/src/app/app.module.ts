@@ -14,7 +14,7 @@ import { ProgressBarModule } from 'primeng/progressbar';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { DropdownModule } from 'primeng/dropdown';
 import { AutoCompleteModule } from 'primeng/autocomplete';
-
+import { DialogModule } from 'primeng/dialog';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -46,6 +46,7 @@ import { PeintureComponentComponent } from './Peinture-component/Peinture-compon
 import { ConseptionComponentComponent } from './Conseption-component/Conseption-component.component';
 import { MessageService } from 'primeng/api';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { AvatarModule } from 'primeng/avatar';
 
 @NgModule({
   declarations: [
@@ -94,6 +95,8 @@ import { MultiSelectModule } from 'primeng/multiselect';
     MultiSelectModule,
     DropdownModule,
     AutoCompleteModule,
+    DialogModule,
+    AvatarModule,
     ],
   providers: [MessageService,ConfirmationService],
   bootstrap: [AppComponent]

@@ -250,13 +250,15 @@
             <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="pv[0].uccm"></td>
             <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="this.service.list[0].mtu2"></td>
             <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="pv[0].wccm1"></td>
-            <td class="text-center colfix"><input class="text-center colfix" type="number" [value]="this.getZccPourcentage().toFixed(3)" readonly></td>
+
+           <td class="text-center colfix"><input class="text-center colfix" type="number" [value]="this.getZccPourcentage().toFixed(3)" readonly></td>
+
           </tr>
           <tr>
             <td colspan="6" class="text-right colfix">Valeurs at 75C / Valeurs à 75C
       </td>
             <td class="text-center colfix"><input class="text-center colfix" type="number"[value]="this.getwccm2().toFixed(3)" readonly></td>
-            <td class="text-center colfix"><input class="text-center colfix" type="number"[value]="this.getZcc2().toFixed(3)" readonly></td>
+            <td class="text-center colfix"><input class="text-center colfix" (click)="toggleDialogAndHoverEffect()" label="Show" type="number"[value]="this.getZcc2().toFixed(3)" readonly></td>
           </tr>
         </tbody>
       </table>
@@ -341,3 +343,131 @@
 </div>
 </div>
 
+<p-dialog  [modal]="true" header="Fiche de Calcul" [(visible)]="visible"  [maximizable]="true" [style]="{ width: '50vw' }" [draggable]="true" [resizable]="true">
+
+  <div style="padding-left: 5px;" *ngIf="this.pv[0]?.na1 !== undefined && this.pv[0]?.nb2 !== undefined && this.pv[0]?.nc3 !== undefined &&
+            this.pv[0]?.na0 !== undefined && this.pv[0]?.nb0 !== undefined && this.pv[0]?.nc0 !== undefined &&
+            this.pv[0]?.wccm1 !== undefined">
+<div class="info-section">
+  <div class="info-item">x6: 1</div>
+  <div class="info-item">Ibt: 1</div>
+  <div class="info-item">Norme: {{ this.service.list[0].norme }}</div>
+  <div class="info-item">Type: {{ this.service.list[0].type }}</div>
+</div>
+
+
+<div style="display: contents;">
+  <div class="panel panel-default" style="width: fit-content; margin-right: auto;">
+    <div class="panel-heading">
+                      <h3 class="panel-title">Partie 1</h3>
+                    </div>
+   <table class="table table-bordered table-condensed">
+    <tbody>
+        <tr>
+            <td class="text-left colfix">N</td>
+            <td class="text-center colfix">Ref Transfo</td>
+            <td class="text-center colfix">UAB (V)</td>
+            <td class="text-center colfix">RAB (ohm) T0</td>
+            <td class="text-center colfix">RAB (ohm) T0(cc)</td>
+            <td class="text-center colfix">RAB (ohm)</td>
+            <td class="text-center colfix">UAC (V)</td>
+            <td class="text-center colfix">RAC (ohm) T0</td>
+            <td class="text-center colfix">RAC (ohm) T0(cc)</td>
+            <td class="text-center colfix">RAC (ohm)</td>
+            <td class="text-center colfix">UBC (V)</td>
+            <td class="text-center colfix">RBC (ohm) T0</td>
+            <td class="text-center colfix">RBC (ohm) T0(cc)</td>
+            <td class="text-center colfix">Ua (V)</td>
+            <td class="text-center colfix">Ra (ohm) T0</td>
+            <td class="text-center colfix">Ra (ohm) T0(cc)</td>
+            <td class="text-center colfix">Ra (ohm)</td>
+            <td class="text-center colfix">Ub</td>
+            <td class="text-center colfix">Rb (ohm) T0</td>
+            <td class="text-center colfix">Rb (ohm) T0(cc)</td>
+            <td class="text-center colfix">Rb (ohm)</td>
+            <td class="text-center colfix">Uc</td>
+            <td class="text-center colfix">Rc (ohm) T0</td>
+            <td class="text-center colfix">Rc (ohm) T0(cc)</td>
+            <td class="text-center colfix">Rc (ohm)</td>
+        </tr>
+        <tr>
+          <td class="text-center colfix">1</td>
+          <td class="text-center colfix">{{ this.service.list[0].numero }}</td>
+          <td class="text-center colfix">{{ UAB.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ RABohmT0.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ RABohmT0cc.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ RABohm.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ UAC.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ RACohmT0.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ RACohmT0cc.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ RACohm.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ UBC.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ RBCohmT0.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ RBCohmT0cc.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ Ua.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ RaohmTo.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ RaohmT0cc.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ Raohm.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ Ub.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ RbohmTo.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ RbohmT0cc.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ Rbohm.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ Uc.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ RcohmTo.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ RcohmT0cc.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ Rcohm.toFixed(4) }}</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="panel panel-default" style="width: fit-content;margin-top: 5vh;">
+    <div class="panel-heading">
+      <h3 class="panel-title">Partie 2</h3>
+    </div>
+    <table class="table table-bordered table-condensed">
+      <tbody>
+        <tr>
+          <td class="text-left colfix">N</td>
+          <td class="text-center colfix">Ref Transfo</td>
+          <td class="text-center colfix">Io (A)</td>
+          <td class="text-center colfix">Io (%)</td>
+
+          <td class="text-center colfix">Po (W)</td>
+          <td class="text-center colfix">Ucc T0 (cc)</td>
+          <td class="text-center colfix">Ucc T0(cc) (%)</td>
+          <td class="text-center colfix">PjhTo</td>
+          <td class="text-center colfix">PjhtT0cc</td>
+          <td class="text-center colfix">PjbTo</td>
+          <td class="text-center colfix">PjbT0cc</td>
+          <td class="text-center colfix">PaddTo</td>
+          <td class="text-center colfix">Pjht</td>
+          <td class="text-center colfix">Pjbt</td>
+          <td class="text-center colfix">Padd</td>
+          <td class="text-center colfix">PCC (W)</td>
+        </tr>
+        <tr>
+          <td class="text-left colfix">1</td>
+          <td class="text-center colfix">{{ this.service.list[0].numero }}</td>
+          <td class="text-center colfix">{{ this.pv[0].iom }}</td>
+          <td class="text-center colfix">{{ this.getIOPourcentageMesurees().toFixed(3) }}</td>
+
+          <td class="text-center colfix">{{ Po.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ UccT0.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ UccT0Pourcentage.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ PjhTo.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ PjhtT0cc.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ PjbTo.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ PjbT0cc.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ PaddTo.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ Pjht.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ Pjbt.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ Padd.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ PccTocc.toFixed(4) }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+  </div>
+</p-dialog>

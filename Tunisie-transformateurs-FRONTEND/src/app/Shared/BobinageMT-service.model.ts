@@ -8,7 +8,7 @@ export class BobinageMT {
   bt2?: number | null;
   bt3?: number | null;
   prevue?: number | null;
-  cnc?: number;
+  cnc?: string;
   nom!: string;
 
   transformateur?: Transformateur | null;

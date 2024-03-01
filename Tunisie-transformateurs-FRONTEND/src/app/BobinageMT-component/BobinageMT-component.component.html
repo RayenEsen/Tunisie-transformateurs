@@ -117,8 +117,7 @@
               <td class="text-center colfix"><input type="number" [(ngModel)]="bobinageMT.bt2"></td>
               <td class="text-center colfix"><input type="number" [(ngModel)]="bobinageMT.bt3"></td>
               <td class="text-center colfix"><input type="number" [(ngModel)]="bobinageMT.prevue"></td>
-              <td class="text-center colfix"><input type="number" [(ngModel)]="bobinageMT.cnc"></td>
-
+              <td class="text-center colfix"><input type="text" [(ngModel)]="bobinageMT.cnc"></td>
             </tr>
         </tbody>
       </table>
@@ -128,7 +127,25 @@
         <h3 class="panel-title">Trucs connexes:</h3>
       </div>
       <table  class="table table-bordered table-condensed" >
-
+        <tbody>
+          <tr>
+            <td>Operateur</td>
+            <td class="text-center colfix" style="white-space: nowrap;">{{etapeSelected.operateur1}}</td>
+            <td class="text-center colfix" style="white-space: nowrap;">{{etapeSelected.operateur2}}</td>
+            <td class="text-center colfix" style="white-space: nowrap;">{{etapeSelected2.operateur1}}</td>
+            <td class="text-center colfix" style="white-space: nowrap;">{{etapeSelected2.operateur1}}</td>
+            <td class="text-center colfix" style="white-space: nowrap;">{{etapeSelected3.operateur1}}</td>
+            <td class="text-center colfix" style="white-space: nowrap;">{{etapeSelected3.operateur1}}</td>
+          </tr>
+          <tr>
+            <td>Controleur</td>
+            <td colspan="6" class="text-center colfix">{{etapeSelected.controleur}}</td>
+          </tr>
+          <tr>
+            <td>Verificateur</td>
+            <td colspan="6" class="text-center colfix">{{etapeSelected.verificateur}}</td>
+          </tr>
+        </tbody>
       </table>
     </div>
 
@@ -141,16 +158,17 @@
 
   </div>
 </div>
-<div class="page-tools" style="padding-left:  786px;" class="printable">
+<div class="page-tools" style="padding-left:  780px;" class="printable">
   <div class="action-buttons" style="display: flex;">
     <a class="btn bg-white btn-light mx-1px text-95" data-title="Print" (click)="onPrint()">
       <i class="mr-1 fa fa-print text-primary-m1 text-120 w-2"></i>
       <span style="padding-left: 8px;">Print</span>
         </a>
-    <a class="btn bg-white btn-light mx-1px text-95" data-title="Save" (click)="Update()" [routerLink]="['/Controle',this.service.list[0].numero]">
-      <i class="mr-1 fa fa-save text-success-m1 text-120 w-2"></i>
-      <span style="padding-left: 8px;">Save</span>
-    </a>
+        <a class="btn bg-white btn-light mx-1px text-95" data-title="Save" (click)="Update()" [routerLink]="['/Controle',this.service.list[0].numero]">
+          <i class="mr-1 fa fa-save text-success-m1 text-120 w-2"></i>
+          <span style="padding-left: 8px;" *ngIf="ServiceS.Controleur.designation==='Verificateur' ">Verifier</span>
+          <span style="padding-left: 8px;" *ngIf="ServiceS.Controleur.designation==='Controleur' ">Save</span>
+        </a>
   </div>
 </div>
 </div>
