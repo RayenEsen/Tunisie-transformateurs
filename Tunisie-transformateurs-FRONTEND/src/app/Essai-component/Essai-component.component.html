@@ -1,5 +1,5 @@
 
-<div #printSection class="invoice" >
+<div #printSection class="invoice" [class.hover-disabled]="isHoverDisabled">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
 <link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
 <div style="display: flex;">
@@ -257,8 +257,8 @@
           <tr>
             <td colspan="6" class="text-right colfix">Valeurs at 75C / Valeurs à 75C
       </td>
-            <td class="text-center colfix"><input class="text-center colfix" type="number"[value]="this.getwccm2().toFixed(3)" readonly></td>
-            <td class="text-center colfix"><input class="text-center colfix" (click)="toggleDialogAndHoverEffect()" label="Show" type="number"[value]="this.getZcc2().toFixed(3)" readonly></td>
+            <td class="text-center colfix"><input title="Cliquez pour afficher la fiche de calcul"  tooltipPosition="bottom" class="text-center colfix" (click)="toggleDialogAndHoverEffect()" label="Show"  type="number"[value]="this.getwccm2().toFixed(3)" readonly></td>
+            <td class="text-center colfix"><input title="Cliquez pour afficher la fiche de calcul"   tooltipPosition="bottom" class="text-center colfix" (click)="toggleDialogAndHoverEffect()" label="Show" type="number"[value]="this.getZcc2().toFixed(3)" readonly></td>
           </tr>
         </tbody>
       </table>
@@ -431,18 +431,25 @@
           <td class="text-center colfix">Ref Transfo</td>
           <td class="text-center colfix">Io (A)</td>
           <td class="text-center colfix">Io (%)</td>
-
           <td class="text-center colfix">Po (W)</td>
-          <td class="text-center colfix">Ucc T0 (cc)</td>
-          <td class="text-center colfix">Ucc T0(cc) (%)</td>
-          <td class="text-center colfix">PjhTo</td>
-          <td class="text-center colfix">PjhtT0cc</td>
-          <td class="text-center colfix">PjbTo</td>
-          <td class="text-center colfix">PjbT0cc</td>
-          <td class="text-center colfix">PaddTo</td>
-          <td class="text-center colfix">Pjht</td>
-          <td class="text-center colfix">Pjbt</td>
-          <td class="text-center colfix">Padd</td>
+          <td class="text-center colfix">Ucc T0 (V)</td>
+          <td class="text-center colfix">Ucc T0 (%)</td>
+
+          <td class="text-center colfix">Pcc T0cc (W)</td>
+          <td class="text-center colfix">Ur T0 (%)</td>
+          <td class="text-center colfix">Ux (%)</td>
+          <td class="text-center colfix">Ur (%)</td>
+          <td class="text-center colfix">Ucc (%)</td>
+
+
+          <td class="text-center colfix">Pj(HT)T0 (W)</td>
+          <td class="text-center colfix">Pj(HT)T0cc (W)</td>
+          <td class="text-center colfix">Pj(BT)To (W)</td>
+          <td class="text-center colfix">Pj(BT)T0cc (W)</td>
+          <td class="text-center colfix">PaddTocc</td>
+          <td class="text-center colfix">Pj(HT) (W)</td>
+          <td class="text-center colfix">Pj(BT) (W)</td>
+          <td class="text-center colfix">Padd (W)</td>
           <td class="text-center colfix">PCC (W)</td>
         </tr>
         <tr>
@@ -454,6 +461,13 @@
           <td class="text-center colfix">{{ Po.toFixed(4) }}</td>
           <td class="text-center colfix">{{ UccT0.toFixed(4) }}</td>
           <td class="text-center colfix">{{ UccT0Pourcentage.toFixed(4) }}</td>
+
+          <td class="text-center colfix">{{ this.pv[0] && this.pv[0].wccm1 !== undefined ? this.pv[0].wccm1.toFixed(4) : 'N/A' }}</td>
+          <td class="text-center colfix">{{this.UrT0.toFixed(4)}}</td>
+          <td class="text-center colfix">{{this.Ux.toFixed(4)}}</td>
+          <td class="text-center colfix">{{this.Ur.toFixed(4)}}</td>
+          <td class="text-center colfix">{{this.getZcc2().toFixed(4)}}</td>
+
           <td class="text-center colfix">{{ PjhTo.toFixed(4) }}</td>
           <td class="text-center colfix">{{ PjhtT0cc.toFixed(4) }}</td>
           <td class="text-center colfix">{{ PjbTo.toFixed(4) }}</td>
@@ -462,7 +476,7 @@
           <td class="text-center colfix">{{ Pjht.toFixed(4) }}</td>
           <td class="text-center colfix">{{ Pjbt.toFixed(4) }}</td>
           <td class="text-center colfix">{{ Padd.toFixed(4) }}</td>
-          <td class="text-center colfix">{{ PccTocc.toFixed(4) }}</td>
+          <td class="text-center colfix">{{this.getwccm2().toFixed(2)}}</td>
         </tr>
       </tbody>
     </table>
@@ -471,3 +485,5 @@
 
   </div>
 </p-dialog>
+
+

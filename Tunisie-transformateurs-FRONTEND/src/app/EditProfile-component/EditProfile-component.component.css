@@ -42,6 +42,13 @@ body {
   cursor: pointer;
   border: solid 1px #122151;
 }
+
+.add-experience2:active {
+  background: #ffffff;
+  color: #122151;
+  cursor: pointer;
+
+}
 .container img {
   width: 150px;
   height: 150px; /* Adjust the height as needed */

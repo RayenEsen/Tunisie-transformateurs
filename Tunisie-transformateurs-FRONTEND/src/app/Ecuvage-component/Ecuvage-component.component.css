@@ -43,6 +43,8 @@ body {
   height: 100%;
 }
 
+
+
 .icon i {
   font-size: 1.2em; /* Adjust the icon size as needed */
 }
@@ -154,7 +156,7 @@ body {
   filter: brightness(1.2); /* Slight increase in brightness on hover */
 }
 /* Styling for input fields */
-input {
+input[type=text] {
   width: 100%; /* Make the input fields fill the width of their parent */
   padding: 5px;
   border: 1px solid #ccc;
@@ -169,27 +171,39 @@ input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+/* Select all input elements of type number */
+input[type=number] {
+  /* Set appearance to text to make it look like a normal text input */
+  -moz-appearance: textfield;
+  appearance: textfield;
+  border: 0px;
+}
+
+input[type=number] {
+  width: 1em; /* You can adjust this value based on your design */
+  text-align: center;
+}
 
 /* Hover effect on input fields */
-input:hover {
+input[type=text] :hover {
   border-color: #555;
 }
 
 /* Focus effect on input fields */
-input:focus {
+input[type=text] :focus {
   outline: none;
   border-color: #2196F3;
   box-shadow: 0 0 5px rgba(33, 150, 243, 0.5);
 }
 
 /* Animation for input fields */
-input {
+input[type=text]  {
   transform: scale(1);
   transition: transform 0.3s ease-in-out;
 }
 
 /* Scale up effect on hover for input fields */
-input:hover {
+input[type=text] :hover {
   transform: scale(1.05);
 }
 

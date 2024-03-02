@@ -115,9 +115,15 @@ body {
 }
 
 /* Hover effect on the invoice container */
+.invoice:hover {
+  transform: scale(1.015) translate(2px, -2px); /* Slight scaling up and movement on hover */
+}
+
+/* Disable hover effect when hover-disabled class is present */
 .invoice.hover-disabled:hover {
   transform: none; /* Disable scaling up on hover */
 }
+
 
 /* Hover effect on the logo */
 .logo {

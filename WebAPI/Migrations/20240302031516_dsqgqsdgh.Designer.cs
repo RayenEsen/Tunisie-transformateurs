@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebAPI.Model;
 
@@ -11,9 +12,11 @@ using WebAPI.Model;
 namespace WebAPI.Migrations
 {
     [DbContext(typeof(TransformateurContext))]
-    partial class TransformateurContextModelSnapshot : ModelSnapshot
+    [Migration("20240302031516_dsqgqsdgh")]
+    partial class dsqgqsdgh
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -255,31 +258,31 @@ namespace WebAPI.Migrations
                     b.Property<int>("Numero")
                         .HasColumnType("int");
 
-                    b.Property<int?>("V1")
+                    b.Property<int>("V1")
                         .HasColumnType("int");
 
-                    b.Property<int?>("V2")
+                    b.Property<int>("V2")
                         .HasColumnType("int");
 
-                    b.Property<int?>("V3")
+                    b.Property<int>("V3")
                         .HasColumnType("int");
 
-                    b.Property<int?>("V4")
+                    b.Property<int>("V4")
                         .HasColumnType("int");
 
-                    b.Property<int?>("V5")
+                    b.Property<int>("V5")
                         .HasColumnType("int");
 
-                    b.Property<int?>("V6")
+                    b.Property<int>("V6")
                         .HasColumnType("int");
 
-                    b.Property<int?>("V7")
+                    b.Property<int>("V7")
                         .HasColumnType("int");
 
-                    b.Property<int?>("V8")
+                    b.Property<int>("V8")
                         .HasColumnType("int");
 
-                    b.Property<int?>("V9")
+                    b.Property<int>("V9")
                         .HasColumnType("int");
 
                     b.HasKey("IdEcuvageValues");

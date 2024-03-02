@@ -90,23 +90,39 @@
                       </div>
 
                       <div class="ms-3">
+                        <div style="display: flex;">
                         <p class="mb-0 font-weight-medium">
+
                           <strong>{{ etape.nom }}</strong> Supervisé par  :
-                          <span class="p-fluid">
-                            <p-autoComplete [(ngModel)]="selectedItemsMap[etape.etapeNumero]" [suggestions]="filteredSuggestions" (completeMethod)="search($event)" [disabled]="isReadOnly" [dropdown]="true" [multiple]="true"></p-autoComplete>
-                          </span>
+
+                        </p>
+                        <p-inplace  (onClick)="toggleclosable()">
+                          <ng-template pTemplate="display">
+                            <ng-container *ngIf="etape.operateur1 || etape.operateur2">
+                              <span>
+                                {{ etape.operateur1 }}
+                                <ng-container *ngIf="etape.operateur2"> et {{ etape.operateur2 }}</ng-container>
+                              </span>
+                            </ng-container>
+                            <ng-container *ngIf="!(etape.operateur1 || etape.operateur2)">
+                              <span>Assigner un opérateur</span>
+                            </ng-container>
+                          </ng-template>
+                          <ng-template pTemplate="content" style="margin-top: -10px;">
+                            <span class="p-fluid">
+                              <p-autoComplete [(ngModel)]="selectedItemsMap[etape.etapeNumero]" [suggestions]="filteredSuggestions" (completeMethod)="search($event)" [dropdown]="true" [multiple]="true"></p-autoComplete>
+                            </span>
+                          </ng-template>
+
+                        </p-inplace>
+
+                        </div>
                           <br>
                           Débutant le <span class="date">{{ etape.dateDebut | date:'dd/MM/yyyy HH:mm' }}</span> et se terminant le <span class="date">{{ etape.dateFin | date:'dd/MM/yyyy HH:mm' }}</span>.
-                        </p>
                       </div>
 
                     </div>
                     <div style="display: flex;">
-                      <!-- spans with icons -->
-                      <span class="btn btn-ghost btn-icon btn-sm rounded-circle" (click)="toggleEditable()">
-                        <i class="material-icons" style="color: #122151;">edit</i>
-                      </span>
-
                       <span class="btn btn-ghost btn-icon btn-sm rounded-circle" (click)="updateEtape(etape.etapeNumero)">
                         <i class="material-icons" style="color: #122151;">save</i>
                       </span>

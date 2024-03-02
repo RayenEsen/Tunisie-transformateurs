@@ -39,8 +39,7 @@ export class ApresMontageComponentComponent implements OnInit {
     }
   }
 });
-
-  }
+}
 
   update() {
     this.serviceElectrique.UpdateListElectrique(this.electriques).subscribe({

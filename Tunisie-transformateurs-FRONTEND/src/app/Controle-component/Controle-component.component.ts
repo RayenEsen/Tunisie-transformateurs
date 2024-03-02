@@ -319,10 +319,10 @@ export class ControleComponentComponent implements OnInit {
 
 
 
-  isReadOnly: boolean = true;
+  closable: boolean = true;
 
-  toggleEditable() {
-    this.isReadOnly = !this.isReadOnly;
+  toggleclosable() {
+    this.closable = !this.closable;
   }
 
   updateEtape(etapeNumero: number) {
@@ -380,7 +380,6 @@ if (selectedFilteredEtape?.operateur2 && !this.suggestions.includes(selectedFilt
         .subscribe(
           () => {
             console.log('Etape updated successfully');
-            this.isReadOnly = true;
           },
           error => {
             console.error('Error updating Etape', error);

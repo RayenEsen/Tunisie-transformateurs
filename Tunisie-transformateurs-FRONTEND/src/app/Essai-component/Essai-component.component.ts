@@ -305,8 +305,11 @@
   isHoverDisabled: boolean = false;
 
   toggleDialogAndHoverEffect(): void {
-    this.visible = true; // Show dialog
     this.isHoverDisabled = true; // Disable hover effect
-  }
+    setTimeout(() => {
+        this.visible = true; // Show dialog after a short delay
+    }, 300); // Adjust the delay as needed
+}
+
 
   }

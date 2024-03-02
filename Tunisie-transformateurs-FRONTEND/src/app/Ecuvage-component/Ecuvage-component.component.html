@@ -5,8 +5,8 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
 <link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
-<div style="display: flex;    padding-left: 60px;" >
-<img src="assets/LogoPV.png" style="width: 300px;">
+<div style="display: flex;    padding-left: 0px;" >
+<img src="assets/LogoPV.png" style="width: 300px;margin-right: 20vh;">
 <img src="assets/9001ISO.png" style="width: 180px; height: 70px;">
 <img src="assets/14001ISO-removebg-preview.png" style="width: 180px; height: 93px;">
 <img src="assets/iso-45001.png" style="width: 180px; height: 147px;   ; margin-left: -27px;     margin-top: -38px; ">
@@ -82,10 +82,10 @@
               <td class="text-left colfix">Propreté de la cuve et la partie active (Présence poussiére , bavure,...)</td>
             </tr>
             <tr>
-              <td class="text-left colfix">Distance entre la partie active et la cuve TRF 30KV VP>=6cm & TRF 15KV: VP>= 5cm</td>
+              <td class="text-left colfix">Distance entre la partie active et la cuve TRF 30KV VP&ge;<input type="number" [(ngModel)]="ecuvagesValues[0].v1">cm & TRF 15KV: VP&ge;<input type="number" [(ngModel)]="ecuvagesValues[0].v2">cm</td>
             </tr>
             <tr>
-              <td class="text-left colfix">Distance entre BT (variation , entrée et sortie) et cuve : VP>=3cm</td>
+              <td class="text-left colfix">Distance entre BT (variation , entrée et sortie) et cuve : VP>=<input type="number" [(ngModel)]="ecuvagesValues[0].v3">cm</td>
             </tr>
             <tr>
               <td class="text-left colfix">Fixation de la partie active par rapport à la cuve</td>
@@ -103,10 +103,10 @@
               <td class="text-left colfix">Etat du joint (couverecle, commutateur,...)</td>
             </tr>
             <tr>
-              <td class="text-left colfix"><strong>Distace couvercle/culasse:</strong> TRI: VP&ge;15cm, TRI(H61): VP&ge;17cm, Biphasé: VP>22cm</td>
+              <td class="text-left colfix"><strong>Distace couvercle/culasse:</strong> TRI: VP&ge;<input type="number" [(ngModel)]="ecuvagesValues[0].v4">cm, TRI(H61): VP&ge;<input type="number" [(ngModel)]="ecuvagesValues[0].v5">cm, Biphasé: VP><input type="number" [(ngModel)]="ecuvagesValues[0].v6">cm</td>
             </tr>
             <tr>
-              <td class="text-left colfix"><strong>Longeur Phase:</strong> TRF 30KV (Isolateur classe36 : 30KV) : VP=42cm<br>TRF 15KV (Isolateur classe24 : 20KV) : VP=38cm, TRF 10KV (Isolateur classe12 : 10KV) : VP=20cm</td>
+              <td class="text-left colfix"><strong>Longeur Phase:</strong> TRF 30KV (Isolateur classe36 : 30KV) : VP=<input type="number" [(ngModel)]="ecuvagesValues[0].v7">cm<br>TRF 15KV (Isolateur classe24 : 20KV) : VP=<input type="number" [(ngModel)]="ecuvagesValues[0].v8">cm, TRF 10KV (Isolateur classe12 : 10KV) : VP=<input type="number" [(ngModel)]="ecuvagesValues[0].v9">cm</td>
             </tr>
           </tbody>
         </table>

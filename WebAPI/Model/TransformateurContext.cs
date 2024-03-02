@@ -27,6 +27,7 @@ namespace WebAPI.Model
         public DbSet<Conseption> Conseptions { get; set; }
         public DbSet<ConseptionValues> ConseptionValues { get; set; }
         public DbSet<OperateurSuggestions> OperateurSuggestions { get; set; }
+        public DbSet<EcuvageValues> EcuvageValues { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Configure one-to-one relationship between Transformateur and Pv
@@ -100,6 +101,12 @@ namespace WebAPI.Model
             modelBuilder.Entity<Ecuvage>()
                 .HasOne(e => e.Transformateur)
                 .WithMany(t => t.Ecuvage)
+                .HasForeignKey(e => e.Numero)
+                .IsRequired();
+
+            modelBuilder.Entity<EcuvageValues>()
+                .HasOne(e => e.Transformateur)
+                .WithMany(t => t.EcuvageValues)
                 .HasForeignKey(e => e.Numero)
                 .IsRequired();
 

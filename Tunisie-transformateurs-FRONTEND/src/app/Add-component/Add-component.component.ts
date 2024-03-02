@@ -36,7 +36,8 @@ import { ConseptionValues } from '../Shared/ConseptionValues-service.model';
 import { ConseptionValuesServiceService } from '../Shared/ConseptionValues-service.service';
 import { MessageService } from 'primeng/api';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-
+import { EcuvageValuesServiceService } from '../Shared/EcuvageValues-service.service';
+import { EcuvageValues } from '../Shared/EcuvageValues-service.model';
 @Component({
   selector: 'app-Add-component',
   templateUrl: './Add-component.component.html',
@@ -110,6 +111,7 @@ export class AddComponentComponent implements OnInit {
      public ServiceConseption : ConseptionServiceService,
      public ServiceConseptionValues : ConseptionValuesServiceService,
      private messageService: MessageService,
+     public ServiceEV : EcuvageValuesServiceService,
      ){ }
 
   ngOnInit() {
@@ -479,6 +481,8 @@ export class AddComponentComponent implements OnInit {
             // Return the observable for adding the single Peinture
             return this.ServicePeinture.addPeinture(peintureAjouter);
           }),
+
+
 
           concatMap(() => {
             // Use forkJoin to execute multiple observables in parallel

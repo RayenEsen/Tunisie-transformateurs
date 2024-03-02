@@ -17,6 +17,10 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 import { DialogModule } from 'primeng/dialog';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { InplaceModule } from 'primeng/inplace';
+import { TooltipModule } from 'primeng/tooltip';
+import { RippleModule } from 'primeng/ripple';
+import { PaginatorModule } from 'primeng/paginator';
 
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { TopNavComponent } from './top-nav/top-nav.component';
@@ -97,6 +101,10 @@ import { AvatarModule } from 'primeng/avatar';
     AutoCompleteModule,
     DialogModule,
     AvatarModule,
+    InplaceModule,
+    TooltipModule,
+    RippleModule,
+    PaginatorModule,
     ],
   providers: [MessageService,ConfirmationService],
   bootstrap: [AppComponent]
