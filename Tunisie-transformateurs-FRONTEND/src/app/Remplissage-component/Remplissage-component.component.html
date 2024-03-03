@@ -116,9 +116,10 @@
               <td class="text-center colfix"><input [(ngModel)]="remplissage.hd" type="number"></td>
               <td class="text-center colfix"><input [(ngModel)]="remplissage.hf" type="number"></td>
               <td class="text-center colfix" [ngStyle]="{'color': remplissage.cnc === 'C' ? 'green' : 'red'}">
-                <input [(ngModel)]="remplissage.cnc" type="text">
+                <input [(ngModel)]="remplissage.cnc" type="text" (ngModelChange)="Confirm(remplissage.idRemplissage)">
               </td>
-              <td class="text-center colfix"><input [(ngModel)]="remplissage.controleur" type="text"></td>
+
+              <td class="text-center colfix">{{this.etapeSelected.controleur}}</td>
               <td class="text-center colfix"><input [(ngModel)]="remplissage.observations" type="text"></td>
             </tr>
           </tbody>
