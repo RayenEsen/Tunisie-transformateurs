@@ -101,7 +101,6 @@
                       <div class="dropdown-menu dropdown-menu-end">
                         <a [routerLink]="['/Ajouter_Transformateur', transformateur.numero]"  class="dropdown-item">Voir les détails</a>
                         <!-- Replace the anchor tag with a button -->
-
                         <button type="button" class="dropdown-item"  (click)="confirm1(transformateur.numero)">Supprimer</button>
                         <a [routerLink]="['/Essai_Transformateur', transformateur.numero]"  class="dropdown-item">Essais</a>
                     </div>
@@ -110,10 +109,8 @@
                 </tr>
               </tbody>
             </table>
-            <div style="z-index: 9999;">
-              <p-paginator [totalRecords]="120" [rowsPerPageOptions]="[10, 20, 30]"></p-paginator>
-            </div>
           </div>
+          <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows"  [totalRecords]="totalRecords" [rowsPerPageOptions]="[10, 20, 30]"></p-paginator>
         </div>
       </div>
     </div>

@@ -16,8 +16,9 @@ import { MessageService } from 'primeng/api';
 })
 export class TransformateurInfoComponent implements OnInit {
 
-
-
+  rows: number = 10; // Number of rows per page
+  first : number = 0;
+  totalRecords: number = 0;
   list: Transformateur[] = [];
   nbAttente: number = 0;
   nbConforme: number = 0;
@@ -39,6 +40,8 @@ export class TransformateurInfoComponent implements OnInit {
     this.service.refreshList2().subscribe({
       next: (res: Transformateur[]) => {
         this.list = res;
+        this.totalRecords=this.list.length;
+        this.paginate(); // Paginate data after fetching
         console.log(this.list)
         if (this.list.length > 0) {
           // Iterate through each item in this.list
@@ -89,6 +92,61 @@ export class TransformateurInfoComponent implements OnInit {
     this.fetchPvsCountByResult("Non Conforme", 'nbNonConforme');
   }
 
+  onPageChange(event: any) {
+    this.first = event.first;
+    this.rows = event.rows;
+    this.paginate(); // Paginate data when page changes
+  }
+  paginate() {
+    const start = this.first;
+    const end = start + this.rows;
+    this.service.refreshList2().subscribe({
+      next: (res: Transformateur[]) => {
+        // Slice the data array based on current page and rows per page
+        const slicedData = res.slice(start, end);
+        // Fetch Pv data for each Transformateur
+        slicedData.forEach((transformateur, index) => {
+          this.ServicePv.getPvByTransformerId(transformateur.numero).subscribe({
+            next: (response: Pv[]) => {
+              if (response.length > 0) {
+                // Assign the Pv to the current item in slicedData
+                slicedData[index].pv = response[0];
+
+                // Check if id_C is defined in Pv
+                if (slicedData[index].pv?.idC) {
+                  const currentIndex = index as number;  // Cast index to number
+                  this.ServiceC.getControleurById(slicedData[currentIndex].pv!.idC)
+                    .subscribe({
+                      next: (result: ControleurDeQualite) => {
+                        // Assuming the result is of type ControleurDeQualite
+                        // Assign the ControleurDeQualite to the current Pv
+                        slicedData[currentIndex].pv!.controleurDeQualite = result;
+                      },
+                      error: (error) => {
+                        console.error('Error fetching data:', error);
+                      }
+                  });
+                } else {
+                  console.error('Error: Pv.id_C is undefined.');
+                }
+              } else {
+                console.error('Error: Empty result for Pv.');
+              }
+            },
+            error: (err: any) => {
+              console.error('Error fetching Pv:', err);
+            }
+          });
+        });
+
+        // Update the list with slicedData
+        this.list = slicedData;
+      },
+      error: (err) => {
+        console.error('Error fetching Transformateur:', err);
+      }
+    });
+  }
 
 
   Search() {

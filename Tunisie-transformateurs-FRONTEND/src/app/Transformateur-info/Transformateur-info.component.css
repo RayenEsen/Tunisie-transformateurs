@@ -125,3 +125,16 @@ a{
   transform: scale(1.2);
 }
 
+::ng-deep .p-dropdown-items-wrapper ol,
+::ng-deep .p-dropdown-items-wrapper ul {
+    padding-left: 1em;
+}
+
+::ng-deep .p-paginator
+{
+  justify-content: right;
+}
+
+.p-paginator {
+  z-index: 9999; /* Set a high z-index value to ensure it appears above other content */
+}

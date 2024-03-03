@@ -10,11 +10,14 @@ import { MessageService } from 'primeng/api';
 })
 export class PlanificationComponentComponent implements OnInit {
 
+  totalRecords: number = 0;
   list: Transformateur[] = [];
   searchItem: string = '';
   Choix1: string = '';
   Choix2: string = '';
-
+  first: number = 0;
+  rows: number = 10;
+  listnotpaginated: Transformateur[] = [];
   constructor(public Service: TransformateurServiceService,public ServiceM : MessageService) { }
 
   ngOnInit() {
@@ -26,6 +29,9 @@ export class PlanificationComponentComponent implements OnInit {
 
         Result = Result.filter(item => item.etat==="Production")
         this.list=Result;
+        this.listnotpaginated=Result;
+        this.totalRecords = this.list.length;
+        this.paginate(); // Paginate data after fetching
       }
     });
   }
@@ -71,5 +77,15 @@ export class PlanificationComponentComponent implements OnInit {
     });
   }
 
+  onPageChange(event: any) {
+    this.first = event.first;
+    this.rows = event.rows;
+    this.paginate(); // Paginate data when page changes
+  }
 
+  paginate() {
+    const start = this.first;
+    const end = start + this.rows;
+    this.list = this.listnotpaginated.slice(start, end); // Slice the data array based on current page and rows per page
+  }
 }
