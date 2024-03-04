@@ -117,12 +117,19 @@ namespace WebAPI.Controller
         }
 
         [HttpPost("VerifyUser")]
-        public async Task<ActionResult<bool>> VerifyUser(string id, string password, string email)
+        public async Task<ActionResult<ControleurDeQualité>> VerifyUser(string id, string password, string email)
         {
-            var userExists = await _context.controleurDeQualités
-                .AnyAsync(u => u.IdC == id && u.Password == password && u.Email == email);
+            var user = await _context.controleurDeQualités
+                .FirstOrDefaultAsync(u => u.IdC == id && u.Password == password && u.Email == email);
 
-            return Ok(userExists);
+            if (user != null)
+            {
+                return Ok(user);
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
         [HttpGet("ByDesignation/{designation}")]

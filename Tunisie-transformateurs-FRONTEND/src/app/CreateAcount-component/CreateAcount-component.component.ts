@@ -35,9 +35,9 @@ export class CreateAcountComponentComponent implements OnInit {
         next: (userExists) => {
           if (userExists) {
             // User exists, start the session and navigate to Edit_profile
-            this.ServiceS.sessionStart(this.Controleur);
-                      // Creating and adding the event
-          const newEvent = new Event(this.ServiceS.Controleur.idC, 'Connecter', new Date(),"");
+          this.ServiceS.sessionStart(this.Controleur);
+          // Creating and adding the event
+          const newEvent = new Event(this.ServiceS.Controleur.idC, 'Connecter',  new Date(),userExists.username+ " a Connecter");
           this.eventService.AddEvent(newEvent)
             .subscribe({
               next: (response) => {

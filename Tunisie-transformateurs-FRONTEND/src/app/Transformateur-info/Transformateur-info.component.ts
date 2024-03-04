@@ -7,7 +7,9 @@ import { ControleurDeQualite } from '../Shared/Controlleur-service.model';
 import { ControlleurServiceService } from '../Shared/Controlleur-service.service';
 import { ConfirmationService, Message } from 'primeng/api';
 import { MessageService } from 'primeng/api';
-
+import { SessionService } from '../utils/session-service.service';
+import { EventServiceService } from '../Shared/Event-service.service';
+import { Event } from '../Shared/Event-service.model'
 @Component({
   selector: 'app-Transformateur-info',
   templateUrl: './Transformateur-info.component.html',
@@ -34,6 +36,8 @@ export class TransformateurInfoComponent implements OnInit {
     public ServiceC: ControlleurServiceService,
     public ConfirmationService : ConfirmationService,
     public messageService: MessageService,
+    public ServiceS : SessionService,
+    public EventService : EventServiceService,
   ) { }
 
   ngOnInit() {
@@ -241,7 +245,18 @@ onDelete(id: number) {
     next: (res: Transformateur[]) => {
       console.log(res);
       this.list = res;
-
+      const newEvent = new Event(this.ServiceS.Controleur.idC,'Supprimer un transformateur', new Date(),this.ServiceS.Controleur.username + ' a supprimer un transformateur '+ " avec le numéro " + id);
+      this.EventService.AddEvent(newEvent)
+        .subscribe({
+          next: (response) => {
+            console.log('Event added successfully:', response);
+            // Add any further logic here if needed
+          },
+          error: (error) => {
+            console.error('Error adding event:', error);
+            // Handle the error appropriately
+          }
+        });
       // Recalculate nbAttente, nbConforme, and nbNonConforme
       this.nbAttente = this.list.filter(transformateur => transformateur.pv?.resultat === 'En Attente').length;
       this.nbConforme = this.list.filter(transformateur => transformateur.pv?.resultat === 'Conforme').length;

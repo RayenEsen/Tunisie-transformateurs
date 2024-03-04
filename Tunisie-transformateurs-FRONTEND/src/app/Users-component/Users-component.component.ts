@@ -19,12 +19,14 @@ export class UsersComponentComponent implements OnInit {
 
   list : ControleurDeQualite[] = [];
   events : Event[] = [];
+  eventsTotal : Event[] = [];
+
   UserSelected: ControleurDeQualite | null = null;
   PfoOfUserSelected?: string;
   keyword: string = "";
   imageData: string[] = [];
   defaultImageUrl = 'https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg';
-
+  sidebarVisible = false;
   constructor(public MessageService : MessageService,public ConformationService : ConfirmationService,public ServicePFP : PfpServiceService,public ServiceC : ControlleurServiceService,public eventService : EventServiceService,public ServiceS : SessionService) { }
 
   ngOnInit(): void {
@@ -145,6 +147,28 @@ export class UsersComponentComponent implements OnInit {
     }
 }
 
+History()
+{
+  this.eventService.GetAllEvents().subscribe({
+    next : (response) =>
+    {
+      this.eventsTotal = response;
+    }
+  })
+}
+
+isToday(eventDate: Date | string): boolean {
+  // Convert eventDate to Date object if it's a string
+  if (typeof eventDate === 'string') {
+    eventDate = new Date(eventDate);
+  }
+
+  // Check if it's today
+  const today = new Date();
+  return eventDate.getFullYear() === today.getFullYear() &&
+         eventDate.getMonth() === today.getMonth() &&
+         eventDate.getDate() === today.getDate();
+}
 
 Supprimer(id: string) {
   this.ServiceC.RemoveControleur(id).subscribe({

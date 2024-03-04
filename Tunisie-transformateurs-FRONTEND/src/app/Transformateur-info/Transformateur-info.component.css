@@ -138,3 +138,13 @@ a{
 .p-paginator {
   z-index: 9999; /* Set a high z-index value to ensure it appears above other content */
 }
+/* CSS to style the image when there is no data */
+.no-data-image {
+  width: 100px; /* Adjust the width as needed */
+  align-self: center;
+  padding-top: 5vh;
+  opacity: 0.5;
+  padding-bottom: 5vh;
+  /* You can adjust the opacity to make it appear faded */
+  /* You can add more styling properties as needed */
+}

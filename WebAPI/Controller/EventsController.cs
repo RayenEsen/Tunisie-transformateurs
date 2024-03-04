@@ -24,7 +24,8 @@ namespace WebAPI.Controller
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Event>>> Getevents()
         {
-            return await _context.events.ToListAsync();
+            var events = await _context.events.OrderByDescending(e => e.EventDate).ToListAsync();
+            return events;
         }
 
         // GET: api/Events/5

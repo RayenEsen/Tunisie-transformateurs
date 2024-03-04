@@ -464,11 +464,7 @@ if (selectedFilteredEtape?.operateur2 && !this.suggestions.includes(selectedFilt
 
 
     END_OF_PRODUCTION() {
-      if (
-        this.etapes.every(item => item.dateFin !== undefined) &&
-        this.Service.list.length > 0 &&
-        this.Service.list[0].dateFin?.toString() === "0001-01-01T00:00:00"
-      ) {
+      if (this.etapes.every(item => item.dateFin !== null)) {
         this.Service.list[0].dateFin = new Date();
         this.Service.UpdateTransformateur(this.transformateurId, this.Service.list[0]).subscribe({
           next: (response) => {

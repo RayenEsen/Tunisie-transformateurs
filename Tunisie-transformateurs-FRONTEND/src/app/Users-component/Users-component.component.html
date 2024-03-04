@@ -1,3 +1,5 @@
+
+
 <div class="container mt-5" style="padding-left: 55px; padding-bottom: 30px;" [ngClass]="{'pagemargin': !UserSelected, 'pagemarginSelected': UserSelected}" >
 
   <div class="row">
@@ -8,9 +10,10 @@
         <div class="card-header bg-primary text-white" style="display: flex;">
 
           <h5 class="card-title mb-0">Personnels</h5>
-
+          <div style="margin-left: auto;">
+            <i class="pi pi-history" style="color: white;" (click)="sidebarVisible = true; History()"></i>
         </div>
-
+        </div>
         <div class="card-body">
      <!-- Form -->
      <div class="justify-content-center row">
@@ -169,3 +172,61 @@
 </div>
 <p-confirmDialog></p-confirmDialog>
 <p-toast></p-toast>
+<p-sidebar [(visible)]="sidebarVisible">
+  <ng-template pTemplate="header"><h5 class="card-title">Historique</h5></ng-template>
+  <ng-template pTemplate="content">
+    <div class="row d-flex justify-content-center mt-70 mb-70">
+
+      <div >
+
+        <div class="main-card mb-3 ">
+                                    <div class="card-body">
+                                      <div *ngFor="let event of eventsTotal" class="vertical-timeline vertical-timeline--animate vertical-timeline--one-column">
+                                        <div class="vertical-timeline-item vertical-timeline-element">
+                                            <div>
+                                                <span class="vertical-timeline-element-icon bounce-in">
+                                                    <ng-container *ngIf="event.eventname==='Connecter' ">
+                                                        <i class="fas fa-user-check" style="color: #28a745;"></i>
+                                                    </ng-container>
+                                                    <ng-container *ngIf="event.eventname.includes('Ajouter')">
+                                                        <i class="fas fa-plus-circle" style="color: #007bff;"></i>
+                                                    </ng-container>
+                                                    <ng-container *ngIf="event.eventname.includes('Tester')">
+                                                        <i class="fas fa-flask" style="color: #28a745;"></i>
+                                                    </ng-container>
+                                                    <ng-container *ngIf="event.eventname.includes('Participer')">
+                                                        <i class="fas fa-hard-hat" style="color: #ffc107;"></i>
+                                                    </ng-container>
+                                                    <ng-container *ngIf="event.eventname.includes('Supprimer')">
+                                                        <i class="fas fa-times-circle" style="color:  #dc3545;"></i>
+                                                    </ng-container>
+                                                    <ng-container *ngIf="event.eventname.includes('Deconnecter')">
+                                                        <i class="fas fa-sign-out-alt" style="color: #6c757d;"></i>
+                                                    </ng-container>
+                                                    <ng-container *ngIf="event.eventname.includes('modifier')">
+                                                      <i class="fas fa-edit" style="color: purple;"></i>
+                                                    </ng-container>
+                                                    <ng-container *ngIf="event.eventname.includes('Verifier')">
+                                                      <i class="fas fa-check-circle" style="color: black;"></i>
+                                                    </ng-container>
+                                                </span>
+                                                <div class="vertical-timeline-element-content bounce-in">
+                                                    <h4 class="timeline-title">{{ event.eventname }}</h4>
+                                                      <div *ngIf="isToday(event.eventDate)">
+                                                        <p>{{event.eventDetails}},
+                                                          aujourd'hui à <a href="javascript:void(0);" data-abc="true">{{event.eventDate | date: 'shortTime'}}</a></p>
+                                                      </div>
+                                                      <div *ngIf="!isToday(event.eventDate)">
+                                                        <p>{{event.eventDetails}},
+                                                          <a href="javascript:void(0);" data-abc="true">12:00 PM</a></p>
+                                                      </div>
+                                                    <span class="vertical-timeline-element-date">{{ event.eventDate | date: 'shortTime' }}</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+
+    </div> </div>
+  </ng-template>
+</p-sidebar>

@@ -63,18 +63,37 @@
           response => {
             console.log('Pv values updated successfully', response);
           // Creating and adding the event
-          const newEvent = new Event(this.ServiceS.Controleur.idC, 'Tester un transformateur', new Date(),"Essai No "+this.pv[0].id_pv+" de transformateur "+this.pv[0].id_t);
-          this.eventService.AddEvent(newEvent)
-            .subscribe({
-              next: (response) => {
-                console.log('Event added successfully:', response);
-                // Add any further logic here if needed
-              },
-              error: (error) => {
-                console.error('Error adding event:', error);
-                // Handle the error appropriately
-              }
-            });
+          if(this.ServiceS.Controleur.designation==="Verificateur")
+          {
+            const newEvent = new Event(this.ServiceS.Controleur.idC, "Verifier le Teste d'un transformateur", new Date(),"Essai Numero "+this.pv[0].id_pv+" de transformateur "+this.pv[0].id_t+ " est verifier par "+this.ServiceS.Controleur.username);
+            this.eventService.AddEvent(newEvent)
+              .subscribe({
+                next: (response) => {
+                  console.log('Event added successfully:', response);
+                  // Add any further logic here if needed
+                },
+                error: (error) => {
+                  console.error('Error adding event:', error);
+                  // Handle the error appropriately
+                }
+              });
+          }
+          else
+          {
+            const newEvent = new Event(this.ServiceS.Controleur.idC, 'Tester un transformateur', new Date(),"Essai Numero "+this.pv[0].id_pv+" de transformateur "+this.pv[0].id_t+ " est tester par "+this.ServiceS.Controleur.username);
+            this.eventService.AddEvent(newEvent)
+              .subscribe({
+                next: (response) => {
+                  console.log('Event added successfully:', response);
+                  // Add any further logic here if needed
+                },
+                error: (error) => {
+                  console.error('Error adding event:', error);
+                  // Handle the error appropriately
+                }
+              });
+          }
+
 
             // Redirect the user to the specified page
             this.router.navigate(['/Ajouter_Transformateur/', this.transformateurId]);

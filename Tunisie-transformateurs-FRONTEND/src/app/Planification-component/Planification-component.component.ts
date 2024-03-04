@@ -35,6 +35,7 @@ export class PlanificationComponentComponent implements OnInit {
       }
     });
   }
+
   Search()
   {
     this.Service.searchTransformateurs(this.searchItem)

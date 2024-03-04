@@ -18,16 +18,14 @@ export class NavBarComponent implements OnInit {
   Disconnect()
   {
     // Creating and adding the event
-    const newEvent = new Event(this.ServiceS.Controleur.idC, 'Deconnecter', new Date(),"");
-    this.eventService.AddEvent(newEvent)
-    .subscribe({
+    const username = this.ServiceS.Controleur && this.ServiceS.Controleur.username ? this.ServiceS.Controleur.username : '';
+    const newEvent = new Event(this.ServiceS.Controleur.idC, 'Deconnecter',  new Date(),username+ " a Deconnecter");
+
+    this.eventService.AddEvent(newEvent).subscribe({
     next: (response) => {
-    console.log('Event added successfully:', response);
-    // Add any further logic here if needed
     },
     error: (error) => {
     console.error('Error adding event:', error);
-    // Handle the error appropriately
     }
     });
     this.ServiceS.sessionDestroy();

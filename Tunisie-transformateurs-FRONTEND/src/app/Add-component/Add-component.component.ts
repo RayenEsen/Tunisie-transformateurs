@@ -590,7 +590,7 @@ export class AddComponentComponent implements OnInit {
         .subscribe({
           next: (results: any) => {
             // Navigate or perform other actions on successful completion
-            const newEvent = new Event(this.serviceS.Controleur.idC, 'Ajouter un transformateur', new Date(),"transformateur de type " + this.transformateurAjouter.type + " avec le numéro " + this.transformateurAjouter.numero+".");
+            const newEvent = new Event(this.serviceS.Controleur.idC,'Ajouter un transformateur', new Date(),this.serviceS.Controleur.username + ' a ajouter un transformateur '+ this.transformateurAjouter.type + " avec le numéro " + this.transformateurAjouter.numero);
             this.EventService.AddEvent(newEvent)
               .subscribe({
                 next: (response) => {

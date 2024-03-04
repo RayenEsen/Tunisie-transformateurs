@@ -139,3 +139,12 @@ img:hover {
   background-color: #fafafa;
 }
 
+/* CSS to style the image when there is no data */
+.no-data-image {
+  width: 100px; /* Adjust the width as needed */
+  margin-left: 72vh;
+  padding-top: 5vh;
+  opacity: 0.5;
+  /* You can adjust the opacity to make it appear faded */
+  /* You can add more styling properties as needed */
+}

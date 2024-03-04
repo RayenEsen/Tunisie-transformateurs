@@ -89,10 +89,11 @@ export class BobinageComponentComponent implements OnInit {
         {
           this.etapeSelected.verificateur=this.ServiceS.Controleur.username;
         }
-        // Creating and adding the event
-        const newEvent = new Event(this.ServiceS.Controleur.idC, 'Participer a le Controle dimensionnelle bobinage BT'
-          , new Date(), " pour le transformateur " + this.transformateurId + ".");
-        this.eventService.AddEvent(newEvent)
+        if(this.ServiceS.Controleur.designation==="Controleur")
+        {
+          const newEvent = new Event(this.ServiceS.Controleur.idC, 'Participer a le Controle dimensionnelle bobinage BT'
+          , new Date(),this.ServiceS.Controleur.username+" a Participer a le Controle dimensionnelle bobinage BT de le transformateur " + this.transformateurId);
+          this.eventService.AddEvent(newEvent)
           .subscribe({
             next: (response) => {
               console.log('Event added successfully:', response);
@@ -108,6 +109,29 @@ export class BobinageComponentComponent implements OnInit {
               console.error('Error adding event:', error);
             }
           });
+        }
+        else
+        {
+          const newEvent = new Event(this.ServiceS.Controleur.idC, 'Verifier le Controle dimensionnelle bobinage BT'
+          , new Date(),this.ServiceS.Controleur.username+" a Verifier le Controle dimensionnelle bobinage BT de le transformateur " + this.transformateurId);
+          this.eventService.AddEvent(newEvent)
+          .subscribe({
+            next: (response) => {
+              console.log('Event added successfully:', response);
+            // Update the etapeSelected
+            this.ServiceE.UpdateEtape(this.transformateurId, this.etapenumero, this.etapeSelected).subscribe({
+              next: (response) => {
+                console.log('Etape updated successfully:', response);
+                // Handle the response as needed
+              },
+            });
+            },
+            error: (error) => {
+              console.error('Error adding event:', error);
+            }
+          });
+        }
+
       },
       error => {
         console.error('Error updating bobinages:', error);

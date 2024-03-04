@@ -76,8 +76,8 @@
                   <th class="text-end">Action</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr *ngFor="let transformateur of list" class="align-middle">
+              <tbody *ngIf="list.length>0">
+                <tr *ngFor="let transformateur of list" class="align-middle" >
                   <td>
                     <div class="d-flex align-items-center">
                       <img *ngIf="transformateur.type==='Monophasés' " src="assets/mono.png" class="avatar sm rounded-pill me-3 flex-shrink-0" alt="Customer">
@@ -110,7 +110,8 @@
               </tbody>
             </table>
           </div>
-          <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows"  [totalRecords]="totalRecords" [rowsPerPageOptions]="[10, 20, 30]"></p-paginator>
+          <img src="assets/null (2).png" class="no-data-image" alt="No Data" *ngIf="list.length===0">
+          <p-paginator  *ngIf="list.length>9" (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows"  [totalRecords]="totalRecords" [rowsPerPageOptions]="[10, 20, 30]"></p-paginator>
         </div>
       </div>
     </div>

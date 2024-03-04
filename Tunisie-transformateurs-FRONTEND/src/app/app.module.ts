@@ -21,6 +21,7 @@ import { InplaceModule } from 'primeng/inplace';
 import { TooltipModule } from 'primeng/tooltip';
 import { RippleModule } from 'primeng/ripple';
 import { PaginatorModule } from 'primeng/paginator';
+import { SidebarModule } from 'primeng/sidebar';
 
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { TopNavComponent } from './top-nav/top-nav.component';
@@ -105,6 +106,7 @@ import { AvatarModule } from 'primeng/avatar';
     TooltipModule,
     RippleModule,
     PaginatorModule,
+    SidebarModule,
     ],
   providers: [MessageService,ConfirmationService],
   bootstrap: [AppComponent]
