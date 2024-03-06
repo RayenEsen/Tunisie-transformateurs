@@ -1,0 +1,160 @@
+/* General styles */
+body {
+  font-family: 'Roboto', Arial, sans-serif;
+  background-color: #f8f8f8;
+  color: #444;
+  margin: 0;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Card styles */
+.card {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 15px;
+  margin-top: 20px;
+  background-color: #fff;
+  border: 1px solid #eee;
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+
+
+
+.card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+}
+
+::ng-deep a.p-ripple.p-element.p-menuitem-link.ng-star-inserted {
+  color: black; /* Remove color */
+  text-decoration: none; /* Remove underline */
+}
+
+
+.back{
+  background-image: url('https://source.unsplash.com/BtbjCFUvBXs/1920x1080');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.table th {
+  font-weight: 500;
+  color: #827fc0;
+}
+.table thead {
+  background-color: #f3f2f7;
+}
+.table>tbody>tr>td, .table>tfoot>tr>td, .table>thead>tr>td {
+  padding: 14px 12px;
+  vertical-align: middle;
+}
+.table tr td {
+  color: #8887a9;
+}
+/* Add this CSS to your stylesheet */
+tbody tr {
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Add a smooth transition effect */
+}
+
+tbody tr:hover {
+  background-color: #f0f0f0; /* Change the background color on hover */
+}
+/* Table styles */
+.table {
+  font-size: 1rem;
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.table th, .table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ccc;
+}
+
+.table th {
+  font-weight: 600;
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.table tbody tr:hover {
+  background-color: #f9f9f9;
+}
+
+
+
+/* Hover effect for table rows */
+.table tbody tr:hover {
+  background-color: #f9f9f9; /* Light gray hover background */
+}
+input[type="number"]  {
+  width: 95px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Remove spinner buttons in number input fields */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
+
+/* Hover effect on input fields */
+input[type="number"]:hover {
+  border-color: #555;
+}
+
+/* Focus effect on input fields */
+input[type="number"]:focus {
+  outline: none;
+  border-color: #2196F3;
+  box-shadow: 0 0 5px rgba(33, 150, 243, 0.5);
+}
+
+/* Animation for input fields */
+input[type="number"] {
+  transform: scale(1);
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Scale up effect on hover for input fields */
+input[type="number"]:hover {
+  transform: scale(1.05);
+}
+
+/* Hover effect on images */
+img:hover {
+  opacity: 0.8; /* Adjust opacity as needed */
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* Animation for images */
+img {
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Scale up effect on hover for images */
+img:hover {
+  transform: scale(1.1);
+}
+
+::ng-deep .p-button.p-button-icon-only {
+  height: 2.2rem;
+  width: 3rem;
+  padding: 0.75rem 0;
+}
+
+/* Adjust the width of the header cell */
+th.text-center.colfix {
+  width: auto; /* or set a specific width that fits the content */
+}
+

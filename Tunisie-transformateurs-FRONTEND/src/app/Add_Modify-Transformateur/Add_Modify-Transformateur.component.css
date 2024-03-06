@@ -201,13 +201,7 @@ card {
     transform: scale(0.8) rotate(360deg);
 }
 
-.masthead {
-    height: 130vh;
-    margin-bottom: 600px;
-    margin-left: 100px;
-    color: #51121E;
-    font-family: 'Helvetica', sans-serif; /* Change the font family as needed */
-  }
+
 /* Add animation and quality changes to buttons */
 .btn {
     transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;

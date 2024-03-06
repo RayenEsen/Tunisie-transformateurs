@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { Event } from '../Shared/Event-service.model'
 import { EventServiceService } from '../Shared/Event-service.service'
 import { SessionService } from '../utils/session-service.service'
+import { TreeNode } from 'primeng/api';
 @Component({
   selector: 'app-Add_Modify-Transformateur',
   templateUrl: './Add_Modify-Transformateur.component.html',
@@ -18,6 +19,7 @@ export class Add_ModifyTransformateurComponent implements OnInit {
   isEditMode: boolean = false;
   transformateur: any = {};
   pv: Pv[] = [];
+  display : boolean = false;
   constructor(
     private route: ActivatedRoute,
     public service: TransformateurServiceService,
@@ -33,6 +35,7 @@ export class Add_ModifyTransformateurComponent implements OnInit {
 
       if (this.transformateurId) {
         this.service.GetTransformateur(this.transformateurId);
+
         this.servicePv.getPvByTransformerId(this.transformateurId).subscribe(
           (pvData: Pv[]) => {
             this.pv = pvData;
@@ -42,7 +45,6 @@ export class Add_ModifyTransformateurComponent implements OnInit {
             console.error('Error fetching Pv data:', error);
           }
         );
-        console.log('Transformateur Data:', this.service.list);
       }
     });
   }

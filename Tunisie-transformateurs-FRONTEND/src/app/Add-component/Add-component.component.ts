@@ -196,12 +196,12 @@ export class AddComponentComponent implements OnInit {
         }
 
         if (Accessoire.name === "Borne Fix 24") {
-          this.transformateurAjouter.borne = "Borne Fix 24'";
+          this.transformateurAjouter.borne = "Borne Fix 24";
           foundMatch = true;
         }
 
         if (Accessoire.name === "Borne Fix 36") {
-          this.transformateurAjouter.borne = "Borne Fix 36'";
+          this.transformateurAjouter.borne = "Borne Fix 36";
           foundMatch = true;
         }
 

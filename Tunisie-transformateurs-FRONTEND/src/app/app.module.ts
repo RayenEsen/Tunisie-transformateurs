@@ -26,6 +26,9 @@ import { OrganizationChartModule } from 'primeng/organizationchart';
 import { TimelineModule } from 'primeng/timeline';
 import { DeferModule } from 'primeng/defer';
 import { TreeSelectModule } from 'primeng/treeselect';
+import { TreeModule } from 'primeng/tree';
+import { TableModule } from 'primeng/table';
+import { TabMenuModule } from 'primeng/tabmenu';
 
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { TopNavComponent } from './top-nav/top-nav.component';
@@ -57,6 +60,7 @@ import { MessageService } from 'primeng/api';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { AvatarModule } from 'primeng/avatar';
 import { ChartModule } from 'primeng/chart';
+import { OutilsComponentComponent } from './outils-component/outils-component.component';
 
 @NgModule({
   declarations: [
@@ -85,6 +89,7 @@ import { ChartModule } from 'primeng/chart';
       LivraisonComponentComponent,
       PeintureComponentComponent,
       ConseptionComponentComponent,
+      OutilsComponentComponent
    ],
   imports: [
     BrowserModule,
@@ -117,6 +122,9 @@ import { ChartModule } from 'primeng/chart';
     DeferModule,
     ChartModule,
     TreeSelectModule,
+    TreeModule,
+    TableModule,
+    TabMenuModule
     ],
   providers: [MessageService,ConfirmationService],
   bootstrap: [AppComponent]
