@@ -118,8 +118,23 @@
 
                         </div>
                           <br>
-                          Débutant le <span class="date">{{ etape.dateDebut | date:'dd/MM/yyyy HH:mm' }}</span> et se terminant le <span class="date">{{ etape.dateFin | date:'dd/MM/yyyy HH:mm' }}</span>.
-                      </div>
+                          <p-inplace [closable]="closable">
+                            <ng-template pTemplate="display">
+                              <ng-container>
+
+                                <span class="date" *ngIf="(etape.dateDebut || etape.dateFin)">
+                                  Débutant {{ etape.dateDebut | date: 'dd/MM/yyyy HH:mm' }} et Terminer le  {{ etape.dateFin | date: 'dd/MM/yyyy HH:mm' }}
+                                  </span>
+                              </ng-container>
+                              <ng-container>
+                                <span class="date" *ngIf=" !(etape.dateDebut || etape.dateFin)">Cliquez pour définir une période de dates.</span>
+                              </ng-container>
+                            </ng-template>
+                            <ng-template pTemplate="content">
+                              Débutant et Terminer le <p-calendar [showTime]="true" [ngModel]="rangeDatesMap.get(etape.etapeNumero)" (ngModelChange)="updateRangeDates($event, etape.etapeNumero)" selectionMode="range" [readonlyInput]="true"></p-calendar>
+                              </ng-template>
+                        </p-inplace>
+                       </div>
 
                     </div>
                     <div style="display: flex;">

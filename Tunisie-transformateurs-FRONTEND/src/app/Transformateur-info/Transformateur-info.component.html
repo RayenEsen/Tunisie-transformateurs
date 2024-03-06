@@ -56,7 +56,7 @@
       </div>
   </div>
   <!-- end row -->
-    <div class="row">
+    <div class="row" style="margin-bottom: 5vh;">
       <div class="col-12 mb-3 mb-lg-5">
         <div class="overflow-hidden card table-nowrap table-card">
           <div class="card-header d-flex justify-content-between align-items-center">
@@ -111,7 +111,7 @@
             </table>
           </div>
           <img src="assets/null (2).png" class="no-data-image" alt="No Data" *ngIf="list.length===0">
-          <p-paginator  *ngIf="list.length>9" (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows"  [totalRecords]="totalRecords" [rowsPerPageOptions]="[10, 20, 30]"></p-paginator>
+          <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows"  [totalRecords]="totalRecords" [rowsPerPageOptions]="[5,10, 20, 30]"></p-paginator>
         </div>
       </div>
     </div>

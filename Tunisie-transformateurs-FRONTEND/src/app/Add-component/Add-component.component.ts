@@ -45,11 +45,34 @@ import { EcuvageValues } from '../Shared/EcuvageValues-service.model';
 })
 export class AddComponentComponent implements OnInit {
   loading = false;
-  Accessoires : any[] = [
+  nodes = [
+    {
+      label: 'Isolateur',
+      children: [
+
+      ]
+    },
+    {
+      label: 'Borne mobile',
+      children: [
+        { label: 'Borne mobile 24', selectable: true },
+        { label: 'Borne mobile 36', selectable: true }
+      ]
+    }
+  ];
+  SelectedNode : any;
+  prisesOptions: { value: string, label: string }[] = [
+    { value: "1", label: '1' },
+    { value: "2", label: '2' },
+    { value: "3", label: '3' },
+    { value: "4", label: '4' },
+    { value:"5", label: '5' }
+  ];
+    Accessoires : any[] = [
     {name : 'Relais,Thermostat,Assecheur,Reservoir'},
     {name : 'DMCR'},
-    {name : 'Borne'},
-    {name : 'Isolateur'},
+    {name : 'Borne Fix 24'},
+    {name : 'Borne Fix 36'},
     {name : 'Galet'},
     {name : 'Capot'},
   ]
@@ -89,7 +112,9 @@ export class AddComponentComponent implements OnInit {
     galet: '',
     capot: '',
     sans: '',
-    quantite: 1
+    quantite: 1,
+    borne: '',
+    isolateur: '',
   };
 
   constructor(
@@ -117,24 +142,23 @@ export class AddComponentComponent implements OnInit {
   ngOnInit() {
 
   }
+  extractLabel(node: any): string {
+    return node ? node.label : null; // Return null if node is null or undefined
+  }
 
   validateForm(): boolean {
     if (
       this.transformateurAjouter.numero === 0 || this.transformateurAjouter.numero === undefined ||
       this.transformateurAjouter.marque === '' || this.transformateurAjouter.marque === undefined ||
+      this.transformateurAjouter.etat === '' || this.transformateurAjouter.etat === undefined ||
+
       this.transformateurAjouter.client === '' || this.transformateurAjouter.client === undefined ||
-      this.transformateurAjouter.norme === '' || this.transformateurAjouter.norme === undefined ||
       this.transformateurAjouter.power === '' || this.transformateurAjouter.power === undefined ||
       this.transformateurAjouter.mtu1 === 0 || this.transformateurAjouter.mtu1 === undefined ||
       this.transformateurAjouter.mtu2 === 0 || this.transformateurAjouter.mtu2 === undefined ||
       this.transformateurAjouter.btu2 === 0 || this.transformateurAjouter.btu2 === undefined ||
-      this.transformateurAjouter.bti2 === 0 || this.transformateurAjouter.bti2 === undefined ||
-      this.transformateurAjouter.nbphase === 0 || this.transformateurAjouter.nbphase === undefined ||
       this.transformateurAjouter.prises === '' || this.transformateurAjouter.prises === undefined ||
-      this.transformateurAjouter.couplage === '' || this.transformateurAjouter.couplage === undefined ||
-      this.transformateurAjouter.cooling === '' || this.transformateurAjouter.cooling === undefined ||
       this.transformateurAjouter.libelle === '' || this.transformateurAjouter.libelle === undefined ||
-      this.transformateurAjouter.frequency === 0 || this.transformateurAjouter.frequency === undefined ||
       this.transformateurAjouter.type === '' || this.transformateurAjouter.type === undefined
     ) {
       return true; // Form is valid if any property meets the condition
@@ -156,6 +180,8 @@ export class AddComponentComponent implements OnInit {
       this.transformateurAjouter.mtu2 = this.getI1();
       this.transformateurAjouter.bti2 = this.getI2();
       this.transformateurAjouter.etat = this.etat.name;
+      this.transformateurAjouter.norme= "CEI76";
+      this.transformateurAjouter.isolateur=this.SelectedNode.label;
       let foundMatch = false;
 
       for (let Accessoire of this.SelectedAccesoires) {
@@ -169,15 +195,16 @@ export class AddComponentComponent implements OnInit {
           foundMatch = true;
         }
 
-        if (Accessoire.name === "Borne") {
-          this.transformateurAjouter.accessoires2 = "Borne";
+        if (Accessoire.name === "Borne Fix 24") {
+          this.transformateurAjouter.borne = "Borne Fix 24'";
           foundMatch = true;
         }
 
-        if (Accessoire.name === "Isolateur") {
-          this.transformateurAjouter.accessoires2 = "Isolateur";
+        if (Accessoire.name === "Borne Fix 36") {
+          this.transformateurAjouter.borne = "Borne Fix 36'";
           foundMatch = true;
         }
+
 
         if (Accessoire.name === "Capot") {
           this.transformateurAjouter.capot = "Capot";
@@ -188,6 +215,7 @@ export class AddComponentComponent implements OnInit {
           this.transformateurAjouter.galet = "Galet";
           foundMatch = true;
         }
+
       }
 
       if (!foundMatch) {

@@ -44,6 +44,7 @@
       }
       );
     }
+
     savePvValues() {
       if (this.pv && this.pv.length > 0 && this.pv[0].id_pv !== undefined) {
         this.pv[0].zccm1=this.getZccPourcentage();
@@ -93,8 +94,6 @@
                 }
               });
           }
-
-
             // Redirect the user to the specified page
             this.router.navigate(['/Ajouter_Transformateur/', this.transformateurId]);
           },

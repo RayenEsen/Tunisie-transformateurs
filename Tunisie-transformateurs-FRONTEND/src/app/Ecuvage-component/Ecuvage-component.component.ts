@@ -19,23 +19,22 @@ export class EcuvageComponentComponent implements OnInit {
   ecuvages: Ecuvage[] = [];
   ecuvagesValues: EcuvageValues[] = [];
 
-  constructor(public ServiceEcu : EcuvageServiceService,public router: Router,private route: ActivatedRoute,public service : TransformateurServiceService, public ServiceEV : EcuvageValuesServiceService) { }
+  constructor(public ServiceS : SessionService,public ServiceEcu : EcuvageServiceService,public router: Router,private route: ActivatedRoute,public service : TransformateurServiceService, public ServiceEV : EcuvageValuesServiceService) { }
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.transformateurId = +params['id'] || 0;
       this.service.GetTransformateur(this.transformateurId);
-      
+
       this.ServiceEcu.getEcuvageByTransformateurId(this.transformateurId).subscribe({
         next: (ecuvage: Ecuvage[]) => {
           this.ecuvages = ecuvage;
           console.log(this.ecuvages);
         }
       });
-  
+
       this.ServiceEV.getEcuvageValuesByTransformateurId(this.transformateurId).subscribe({
         next: (response) => {
           this.ecuvagesValues = response;
-    
           // Check if ecuvageValues for this transformateurId exists
           const existingEcuvageValues = this.ecuvagesValues.find(ev => ev.numero === this.transformateurId);
           if (!existingEcuvageValues) {
@@ -53,10 +52,9 @@ export class EcuvageComponentComponent implements OnInit {
               v8: 0,
               v9: 0
             };
-      
             this.ServiceEV.AddEcuvageValues(ecuvageValuesAjouter).subscribe({
               next: (response) => {
-                console.log(response);
+                this.ecuvagesValues=response;
               }
             });
           }
@@ -64,8 +62,8 @@ export class EcuvageComponentComponent implements OnInit {
       });
     });
   }
-  
-  
+
+
     // Function to handle the print action
     onPrint() {
       window.print();

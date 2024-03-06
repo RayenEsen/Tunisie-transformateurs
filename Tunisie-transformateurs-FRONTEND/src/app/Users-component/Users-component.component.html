@@ -50,7 +50,7 @@
                       <div class="col-lg-3">
                           <div>
                             <a href="javascript:void(0)" class="btn btn-primary btn" style="background-color: #122151; border-color: #122151;" (click)="search(keyword)" >Rechercher</a>&nbsp;
-                            <a href="javascript:void(0)" class="btn btn-default btn"  >Filtrer</a>&nbsp;
+                            <a href="javascript:void(0)" class="btn btn-default btn">Filtrer</a>&nbsp;
                           </div>
                       </div>
                   </div>
@@ -107,7 +107,7 @@
               </a>
 
               <div class="dropdown-menu dropdown-menu-right">
-                <a class="dropdown-item" href="#" (click)="confirm1(UserSelected.idC)">Supprimer</a>
+                <a class="dropdown-item" href="#"  (click)="confirm1(UserSelected.idC)">Supprimer</a>
                 <button class="dropdown-item" href="#" (click)="Update(UserSelected.idC,UserSelected)">Sauvegarder</button>
               </div>
             </div>
@@ -170,7 +170,7 @@
     </div>
   </div>
 </div>
-<p-confirmDialog></p-confirmDialog>
+<p-confirmDialog ></p-confirmDialog>
 <p-toast></p-toast>
 <p-sidebar [(visible)]="sidebarVisible">
   <ng-template pTemplate="header"><h5 class="card-title">Historique</h5></ng-template>

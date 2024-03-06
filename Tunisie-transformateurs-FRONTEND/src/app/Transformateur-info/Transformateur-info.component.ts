@@ -104,51 +104,56 @@ export class TransformateurInfoComponent implements OnInit {
   paginate() {
     const start = this.first;
     const end = start + this.rows;
-    this.service.refreshList2().subscribe({
-      next: (res: Transformateur[]) => {
-        // Slice the data array based on current page and rows per page
-        const slicedData = res.slice(start, end);
-        // Fetch Pv data for each Transformateur
-        slicedData.forEach((transformateur, index) => {
-          this.ServicePv.getPvByTransformerId(transformateur.numero).subscribe({
-            next: (response: Pv[]) => {
-              if (response.length > 0) {
-                // Assign the Pv to the current item in slicedData
-                slicedData[index].pv = response[0];
 
-                // Check if id_C is defined in Pv
-                if (slicedData[index].pv?.idC) {
-                  const currentIndex = index as number;  // Cast index to number
-                  this.ServiceC.getControleurById(slicedData[currentIndex].pv!.idC)
-                    .subscribe({
-                      next: (result: ControleurDeQualite) => {
-                        // Assuming the result is of type ControleurDeQualite
-                        // Assign the ControleurDeQualite to the current Pv
-                        slicedData[currentIndex].pv!.controleurDeQualite = result;
-                      },
-                      error: (error) => {
-                        console.error('Error fetching data:', error);
-                      }
-                  });
-                } else {
-                  console.error('Error: Pv.id_C is undefined.');
-                }
-              } else {
-                console.error('Error: Empty result for Pv.');
-              }
-            },
-            error: (err: any) => {
-              console.error('Error fetching Pv:', err);
+    // Check if there's a search query
+    if (this.searchItem.trim()) {
+      // If search query exists, paginate the search results
+      const slicedSearchResults = this.list.slice(start, end);
+      this.updatePvData(slicedSearchResults);
+      this.list = slicedSearchResults;
+    } else {
+      // If no search query, paginate the original list
+      this.service.refreshList2().subscribe({
+        next: (res: Transformateur[]) => {
+          const slicedData = res.slice(start, end);
+          this.updatePvData(slicedData);
+          this.list = slicedData;
+        },
+        error: (err) => {
+          console.error('Error fetching Transformateur:', err);
+        }
+      });
+    }
+  }
+
+  updatePvData(data: Transformateur[]) {
+    data.forEach((transformateur, index) => {
+      this.ServicePv.getPvByTransformerId(transformateur.numero).subscribe({
+        next: (response: Pv[]) => {
+          if (response.length > 0) {
+            data[index].pv = response[0];
+            if (data[index].pv?.idC) {
+              const currentIndex = index as number;
+              this.ServiceC.getControleurById(data[currentIndex].pv!.idC)
+                .subscribe({
+                  next: (result: ControleurDeQualite) => {
+                    data[currentIndex].pv!.controleurDeQualite = result;
+                  },
+                  error: (error) => {
+                    console.error('Error fetching data:', error);
+                  }
+              });
+            } else {
+              console.error('Error: Pv.id_C is undefined.');
             }
-          });
-        });
-
-        // Update the list with slicedData
-        this.list = slicedData;
-      },
-      error: (err) => {
-        console.error('Error fetching Transformateur:', err);
-      }
+          } else {
+            console.error('Error: Empty result for Pv.');
+          }
+        },
+        error: (err: any) => {
+          console.error('Error fetching Pv:', err);
+        }
+      });
     });
   }
 

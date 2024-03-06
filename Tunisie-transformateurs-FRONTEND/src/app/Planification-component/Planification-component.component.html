@@ -60,10 +60,10 @@
                                   <th>Num Transformateur</th>
                                   <th>Type</th>
                                   <th>Puissance</th>
-                                  <th>Date de lancement</th>
-                                  <th>Date de fin production</th>
-                                  <th>Date d'essai</th>
-                                  <th>Resultat Essai</th>
+                                  <th style="text-wrap: nowrap;">Date de lancement</th>
+                                  <th style="text-wrap: nowrap;">Date de fin production</th>
+                                  <th style="text-wrap: nowrap;">Date d'essai</th>
+                                  <th style="text-wrap: nowrap;">Resultat Essai</th>
                                   <th style="padding-left: 6vh;">Date de livraison</th>
                               </tr>
                           </thead>
@@ -80,9 +80,9 @@
                               <td class="text-center colfix">{{transformateur.type}}</td>
                               <td class="text-center colfix">{{transformateur.power}}Kva</td>
                               <td class="text-center colfix">{{transformateur.date | date:'yyyy-MM-dd'}}</td>
-                              <td class="text-center colfix">
+                              <td class="text-center colfix" (click)="$event.stopPropagation();Results(transformateur.numero);sidebarVisible=true">
                                 {{
-                                  isDateFinDefault(transformateur) ? 'En construction' : (transformateur.dateFin | date:'yyyy-MM-dd')
+                                  isDateFinDefault(transformateur) ? 'En cours' : (transformateur.dateFin | date:'yyyy-MM-dd')
                                 }}
                               </td>
 
@@ -100,10 +100,31 @@
                       </table>
                   </div>
                   <img src="assets/null (2).png" class="no-data-image" alt="No Data" *ngIf="list.length===0">
-                  <p-paginator *ngIf="list.length>8" (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows"  [totalRecords]="totalRecords" [rowsPerPageOptions]="[10, 20, 30]"></p-paginator>
+                  <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows"  [totalRecords]="totalRecords" [rowsPerPageOptions]="[5,10, 20, 30]"></p-paginator>
                 </div>
           </div>
       </div>
   </div>
 </div>
 <p-toast></p-toast>
+<p-sidebar [(visible)]="sidebarVisible" position="left">
+  <ng-template pTemplate="header"><h5 class="card-title">Résultats de la suivi de la production</h5></ng-template>
+  <ng-template pTemplate="content">
+
+    <p-timeline [value]="Etape">
+      <ng-template pTemplate="content" let-Etape>
+          <small class="p-text-secondary">{{ Etape.nom }}</small>
+      </ng-template>
+      <ng-template pTemplate="opposite" let-Etape>
+          <ng-container *ngIf="Etape.dateFin; else iconTemplate">
+            <small>{{ Etape.dateFin | date: 'dd/MM/yyyy HH:mm' }}</small>
+          </ng-container>
+          <ng-template #iconTemplate>
+                En cours
+          </ng-template>
+      </ng-template>
+  </p-timeline>
+
+
+  </ng-template>
+</p-sidebar>

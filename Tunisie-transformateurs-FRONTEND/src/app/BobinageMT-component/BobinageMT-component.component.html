@@ -117,7 +117,7 @@
               <td class="text-center colfix"><input type="number" [(ngModel)]="bobinageMT.bt2"></td>
               <td class="text-center colfix"><input type="number" [(ngModel)]="bobinageMT.bt3"></td>
               <td class="text-center colfix"><input type="number" [(ngModel)]="bobinageMT.prevue"></td>
-              <td class="text-center colfix"><input type="text" [(ngModel)]="bobinageMT.cnc"></td>
+              <td class="text-center colfix"><input type="text" [(ngModel)]="bobinageMT.cnc" [ngStyle]="{'color': bobinageMT.cnc === 'C' ? 'green' : 'red'}"></td>
             </tr>
         </tbody>
       </table>

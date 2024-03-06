@@ -74,7 +74,8 @@
                               <th>Puissance KVA</th>
                               <th style="writing-mode: vertical-rl; text-orientation: mixed;">Thermostat</th>
                               <th style="writing-mode: vertical-rl; text-orientation: mixed;">Galet</th>
-                              <th style="writing-mode: vertical-rl; text-orientation: mixed;">Borne</th>
+                              <th style="writing-mode: vertical-rl; text-orientation: mixed;">Borne Fix</th>
+
                               <th style="writing-mode: vertical-rl; text-orientation: mixed;">Assecheur</th>
                               <th style="writing-mode: vertical-rl; text-orientation: mixed;">Capot</th>
                               <th style="writing-mode: vertical-rl; text-orientation: mixed;">Relais</th>
@@ -85,14 +86,15 @@
                               <th>Client</th>
                             </tr>
                             <tr *ngFor="let transformateur of list">
-                              <td style="white-space: nowrap;color: #122151;">{{ this.transformateur.date | date:'yyyy-MM-dd' }}</td>
-                              <td style="color: #122151;">123456</td>
+                              <td style="white-space: nowrap;color: #122151;">{{ this.transformateur.dateLivraison | date:'yyyy-MM-dd' }}</td>
+                              <td style="color: #122151;"></td>
                               <td style="color: #122151;">{{this.transformateur.client}}</td>
                               <td style="color: #122151;">{{this.transformateur.numero}}</td>
                               <td style="color: #122151;">{{this.transformateur.power}}</td>
                               <td><span class="fa fa-check text-primary" *ngIf="transformateur.accessoires==='NONDMCR' ; else notMet"></span></td>
                               <td><span class="fa fa-check text-primary" *ngIf="transformateur.galet==='Galet' ; else notMet"></span></td>
-                              <td><span class="fa fa-check text-primary" *ngIf="transformateur.accessoires2==='Borne'; else notMet"></span></td>
+                              <td><span class="fa fa-check text-primary" *ngIf="(transformateur.borne==='Borne Fix 36' || transformateur.borne==='Borne Fix 24' ); else notMet"></span></td>
+
                               <td><span class="fa fa-check text-primary" *ngIf="transformateur.accessoires==='NONDMCR' ; else notMet"></span></td>
                               <td><span class="fa fa-check text-primary" *ngIf="transformateur.capot==='Capot' ; else notMet"></span></td>
                               <td><span class="fa fa-check text-primary" *ngIf="transformateur.accessoires==='NONDMCR' ; else notMet"></span></td>

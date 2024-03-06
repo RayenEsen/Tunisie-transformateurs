@@ -214,3 +214,15 @@ select.formbold-form-input,
 }
 
 
+::ng-deep .p-treeselect {
+  width: 100%;
+  display: inline-flex;
+  cursor: pointer;
+  position: relative;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+::ng-deep ul.p-tree-container.ng-star-inserted {
+  padding-left: 0rem;
+}

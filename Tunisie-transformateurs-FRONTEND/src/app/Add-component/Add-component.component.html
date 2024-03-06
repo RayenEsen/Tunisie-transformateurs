@@ -9,7 +9,7 @@
   <div class="formbold-form-wrapper"  [style.pointer-events]="loading ? 'none' : 'auto'">
          <img src="assets/Logo.png" style="margin-left: 320px;">
       <div class="formbold-input-wrapp formbold-mb-3">
-        <label for="firstname" class="formbold-form-label" style="color: #122151;"> Marque / Id <small style="color: red;">*</small></label>
+        <label for="firstname" class="formbold-form-label" style="color: #122151;"> Marque / Numero <small style="color: red;">*</small></label>
         <div>
           <input
             placeholder="Tunisie transformateurs"
@@ -60,16 +60,6 @@
       </div>
 
       <div class="formbold-mb-3">
-        <label for="age" class="formbold-form-label" style="color: #122151;"> Norme <small style="color: red;">*</small></label>
-        <input
-          name="norme"
-          placeholder="Norme"
-          class="formbold-form-input"
-          [(ngModel)]="transformateurAjouter.norme"
-        />
-      </div>
-
-      <div class="formbold-mb-3">
         <label class="formbold-form-label" style="color: #122151;">Couplage<small style="color: red;">*</small></label>
         <select class="formbold-form-input" name="occupation" id="occupation" name="couplage" [(ngModel)]="transformateurAjouter.couplage">
           <option value="" disabled selected>Sélectionner le couplage</option>
@@ -94,12 +84,9 @@
 
         <label for="address" class="formbold-form-label" style="color: #122151;"> Prises <small style="color: red;">*</small></label>
 
-        <input
-          name="prises"
-          placeholder="Prises"
-          class="formbold-form-input"
-          [(ngModel)]="transformateurAjouter.prises"
-        />
+
+        <p-dropdown [style]="{'width': '100%'}" [options]="prisesOptions" [(ngModel)]="transformateurAjouter.prises" optionLabel="label" optionValue="value" [showClear]="true" placeholder="Prises"></p-dropdown>
+
       </div>
       <div class="formbold-mb-3">
         <label class="formbold-form-label" style="color: #122151;">Type<small style="color: red;">*</small></label>
@@ -109,7 +96,6 @@
           <option value="Monophasés">Monophasés</option>
           <option value="Résine">Biphasé</option>
         </select>
-
 
       </div>
       <div class="formbold-mb-3">
@@ -131,25 +117,6 @@
         />
       </div>
 
-      <div class="formbold-mb-3">
-        <label for="address" class="formbold-form-label" style="color: #122151;"> Refroidissement	<small style="color: red;">*</small></label>
-
-        <input
-          name="cooling"
-          placeholder="Refroidissement"
-          class="formbold-form-input formbold-mb-3"
-          [(ngModel)]="transformateurAjouter.cooling"
-        />
-        <label for="address" class="formbold-form-label" style="color: #122151;"> Frequence (HZ)<small style="color: red;">*</small></label>
-
-        <input
-          name="frequency"
-          placeholder="Frequence"
-          class="formbold-form-input"
-          [(ngModel)]="transformateurAjouter.frequency"
-        />
-      </div>
-
       <div class="formbold-input-wrapp formbold-mb-3">
         <label for="firstname" class="formbold-form-label" style="color: #122151;"> Libelle <small style="color: red;">*</small></label>
         <div>
@@ -164,6 +131,11 @@
       <div class="formbold-input-wrapp formbold-mb-3" >
         <label  for="firstname" class="formbold-form-label" style="color: #122151;"> Accessoires <small style="color: red;">*</small></label>
         <p-multiSelect [style]="{'width': '100%'}" [options]="Accessoires" placeholder="Sélectionner les Accessoires" [(ngModel)]="SelectedAccesoires"  optionLabel="name"></p-multiSelect>
+      </div>
+
+      <div class="formbold-input-wrapp formbold-mb-3">
+        <label for="borne" class="formbold-form-label" style="color: #122151;">Borne <small style="color: red;">*</small></label>
+        <p-treeSelect class="md:w-20rem w-full" containerStyleClass="w-full" [(ngModel)]="SelectedNode" [options]="nodes" optionLabel="label" placeholder="Sélectionner la Borne"></p-treeSelect>
       </div>
 
 

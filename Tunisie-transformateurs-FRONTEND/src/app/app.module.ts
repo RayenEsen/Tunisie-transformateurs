@@ -22,6 +22,10 @@ import { TooltipModule } from 'primeng/tooltip';
 import { RippleModule } from 'primeng/ripple';
 import { PaginatorModule } from 'primeng/paginator';
 import { SidebarModule } from 'primeng/sidebar';
+import { OrganizationChartModule } from 'primeng/organizationchart';
+import { TimelineModule } from 'primeng/timeline';
+import { DeferModule } from 'primeng/defer';
+import { TreeSelectModule } from 'primeng/treeselect';
 
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { TopNavComponent } from './top-nav/top-nav.component';
@@ -52,6 +56,7 @@ import { ConseptionComponentComponent } from './Conseption-component/Conseption-
 import { MessageService } from 'primeng/api';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { AvatarModule } from 'primeng/avatar';
+import { ChartModule } from 'primeng/chart';
 
 @NgModule({
   declarations: [
@@ -107,6 +112,11 @@ import { AvatarModule } from 'primeng/avatar';
     RippleModule,
     PaginatorModule,
     SidebarModule,
+    OrganizationChartModule,
+    TimelineModule,
+    DeferModule,
+    ChartModule,
+    TreeSelectModule,
     ],
   providers: [MessageService,ConfirmationService],
   bootstrap: [AppComponent]

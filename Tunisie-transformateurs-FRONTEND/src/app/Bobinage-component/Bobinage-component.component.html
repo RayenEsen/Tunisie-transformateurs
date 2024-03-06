@@ -77,7 +77,7 @@
             </tr>
             <tr>
             <td class="text-center colfix" *ngIf="service.list[0].accessoires2==='Borne'; else notMet"><span class="fa fa-check text-primary"></span></td>
-            <td class="text-center colfix" *ngIf="service.list[0].accessoires2==='Isolateur'; else notMet"><span class="fa fa-check text-primary"></span></td>
+            <td class="text-center colfix" *ngIf="service.list[0].borne; else notMet"><span class="fa fa-check text-primary"></span></td>
               <td class="text-center colfix" *ngIf="service.list[0].accessoires==='NONDMCR' ; else notMet"><span class="fa fa-check text-primary"></span></td>
               <td class="text-center colfix" *ngIf="service.list[0].accessoires==='NONDMCR' ; else notMet"><span class="fa fa-times text-light"></span></td>
               <td class="text-center colfix" *ngIf="service.list[0].bornesembrochables==='5POS' ; else notMet"><span class="fa fa-check text-primary"></span></td>
@@ -118,7 +118,7 @@
               <td class="text-center colfix"><input type="number" [(ngModel)]="bobinage.bt2"></td>
               <td class="text-center colfix"><input type="number" [(ngModel)]="bobinage.bt3"></td>
               <td class="text-center colfix"><input type="number" [(ngModel)]="bobinage.prevue"></td>
-              <td class="text-center colfix"><input type="text" [(ngModel)]="bobinage.cnc"></td>
+              <td class="text-center colfix"><input type="text" [(ngModel)]="bobinage.cnc" [ngStyle]="{'color': bobinage.cnc === 'C' ? 'green' : 'red'}"></td>
             </tr>
         </tbody>
       </table>

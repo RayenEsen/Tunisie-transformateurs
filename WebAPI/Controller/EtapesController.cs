@@ -122,7 +122,8 @@ namespace WebAPI.Controller
             {
                 return NotFound("Etape not found");
             }
-            etape.DateDebut = DateTime.Now;
+            etape.DateDebut = updatedEtape.DateDebut;
+            etape.DateFin = updatedEtape.DateFin;
             etape.Etat = updatedEtape.Etat;
             etape.Observation = updatedEtape.Observation;
             etape.Operateur1 = updatedEtape.Operateur1;

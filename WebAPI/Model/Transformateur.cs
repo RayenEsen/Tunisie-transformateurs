@@ -49,6 +49,8 @@ namespace WebAPI.Model
         public string Galet { get; set; } = "";
         public string Capot { get; set; } = "";
         public string Sans { get; set; } = "";
+        public string Borne { get; set; } = "";
+        public string Isolateur { get; set; } = "";
 
         public string Bornesembrochables { get; set; } = "";
         public float Frequency { get; set; }

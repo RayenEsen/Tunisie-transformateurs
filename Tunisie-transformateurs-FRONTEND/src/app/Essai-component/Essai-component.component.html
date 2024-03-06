@@ -345,9 +345,7 @@
 
 <p-dialog  [modal]="true" header="Fiche de Calcul" [(visible)]="visible"  [maximizable]="true" [style]="{ width: '50vw' }" [draggable]="true" [resizable]="true">
 
-  <div style="padding-left: 5px;" *ngIf="this.pv[0]?.na1 !== undefined && this.pv[0]?.nb2 !== undefined && this.pv[0]?.nc3 !== undefined &&
-            this.pv[0]?.na0 !== undefined && this.pv[0]?.nb0 !== undefined && this.pv[0]?.nc0 !== undefined &&
-            this.pv[0]?.wccm1 !== undefined">
+  <div style="padding-left: 5px;">
 <div class="info-section">
   <div class="info-item">x6: 1</div>
   <div class="info-item">Ibt: 1</div>
@@ -393,29 +391,29 @@
         <tr>
           <td class="text-center colfix">1</td>
           <td class="text-center colfix">{{ this.service.list[0].numero }}</td>
-          <td class="text-center colfix">{{ UAB.toFixed(4) }}</td>
-          <td class="text-center colfix">{{ RABohmT0.toFixed(4) }}</td>
-          <td class="text-center colfix">{{ RABohmT0cc.toFixed(4) }}</td>
-          <td class="text-center colfix">{{ RABohm.toFixed(4) }}</td>
-          <td class="text-center colfix">{{ UAC.toFixed(4) }}</td>
-          <td class="text-center colfix">{{ RACohmT0.toFixed(4) }}</td>
-          <td class="text-center colfix">{{ RACohmT0cc.toFixed(4) }}</td>
-          <td class="text-center colfix">{{ RACohm.toFixed(4) }}</td>
-          <td class="text-center colfix">{{ UBC.toFixed(4) }}</td>
-          <td class="text-center colfix">{{ RBCohmT0.toFixed(4) }}</td>
-          <td class="text-center colfix">{{ RBCohmT0cc.toFixed(4) }}</td>
-          <td class="text-center colfix">{{ Ua.toFixed(4) }}</td>
-          <td class="text-center colfix">{{ RaohmTo.toFixed(4) }}</td>
-          <td class="text-center colfix">{{ RaohmT0cc.toFixed(4) }}</td>
-          <td class="text-center colfix">{{ Raohm.toFixed(4) }}</td>
-          <td class="text-center colfix">{{ Ub.toFixed(4) }}</td>
-          <td class="text-center colfix">{{ RbohmTo.toFixed(4) }}</td>
-          <td class="text-center colfix">{{ RbohmT0cc.toFixed(4) }}</td>
-          <td class="text-center colfix">{{ Rbohm.toFixed(4) }}</td>
-          <td class="text-center colfix">{{ Uc.toFixed(4) }}</td>
-          <td class="text-center colfix">{{ RcohmTo.toFixed(4) }}</td>
-          <td class="text-center colfix">{{ RcohmT0cc.toFixed(4) }}</td>
-          <td class="text-center colfix">{{ Rcohm.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ UAB?.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ RABohmT0?.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ RABohmT0cc?.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ RABohm?.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ UAC?.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ RACohmT0?.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ RACohmT0cc?.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ RACohm?.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ UBC?.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ RBCohmT0?.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ RBCohmT0cc?.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ Ua?.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ RaohmTo?.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ RaohmT0cc?.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ Raohm?.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ Ub?.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ RbohmTo?.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ RbohmT0cc?.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ Rbohm?.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ Uc?.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ RcohmTo?.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ RcohmT0cc?.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ Rcohm?.toFixed(4) }}</td>
       </tr>
     </tbody>
   </table>
@@ -458,25 +456,25 @@
           <td class="text-center colfix">{{ this.pv[0].iom }}</td>
           <td class="text-center colfix">{{ this.getIOPourcentageMesurees().toFixed(3) }}</td>
 
-          <td class="text-center colfix">{{ Po.toFixed(4) }}</td>
-          <td class="text-center colfix">{{ UccT0.toFixed(4) }}</td>
-          <td class="text-center colfix">{{ UccT0Pourcentage.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ Po?.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ UccT0?.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ UccT0Pourcentage?.toFixed(4) }}</td>
 
-          <td class="text-center colfix">{{ this.pv[0] && this.pv[0].wccm1 !== undefined ? this.pv[0].wccm1.toFixed(4) : 'N/A' }}</td>
-          <td class="text-center colfix">{{this.UrT0.toFixed(4)}}</td>
-          <td class="text-center colfix">{{this.Ux.toFixed(4)}}</td>
-          <td class="text-center colfix">{{this.Ur.toFixed(4)}}</td>
-          <td class="text-center colfix">{{this.getZcc2().toFixed(4)}}</td>
+          <td class="text-center colfix">{{ this.pv[0] && this.pv[0].wccm1 !== undefined ? this.pv[0].wccm1?.toFixed(4) : 'N/A' }}</td>
+          <td class="text-center colfix">{{this.UrT0?.toFixed(4)}}</td>
+          <td class="text-center colfix">{{this.Ux?.toFixed(4)}}</td>
+          <td class="text-center colfix">{{this.Ur?.toFixed(4)}}</td>
+          <td class="text-center colfix">{{this.getZcc2()?.toFixed(4)}}</td>
 
-          <td class="text-center colfix">{{ PjhTo.toFixed(4) }}</td>
-          <td class="text-center colfix">{{ PjhtT0cc.toFixed(4) }}</td>
-          <td class="text-center colfix">{{ PjbTo.toFixed(4) }}</td>
-          <td class="text-center colfix">{{ PjbT0cc.toFixed(4) }}</td>
-          <td class="text-center colfix">{{ PaddTo.toFixed(4) }}</td>
-          <td class="text-center colfix">{{ Pjht.toFixed(4) }}</td>
-          <td class="text-center colfix">{{ Pjbt.toFixed(4) }}</td>
-          <td class="text-center colfix">{{ Padd.toFixed(4) }}</td>
-          <td class="text-center colfix">{{this.getwccm2().toFixed(2)}}</td>
+          <td class="text-center colfix">{{ PjhTo?.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ PjhtT0cc?.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ PjbTo?.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ PjbT0cc?.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ PaddTo?.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ Pjht?.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ Pjbt?.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ Padd?.toFixed(4) }}</td>
+          <td class="text-center colfix">{{this.getwccm2()?.toFixed(2)}}</td>
         </tr>
       </tbody>
     </table>

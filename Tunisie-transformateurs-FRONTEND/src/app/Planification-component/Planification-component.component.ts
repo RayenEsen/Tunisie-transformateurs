@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Transformateur } from '../Shared/Transformateur-service.model';
 import { TransformateurServiceService } from '../Shared/Transformateur-service.service';
 import { MessageService } from 'primeng/api';
-
+import { TreeNode } from 'primeng/api';
+import { EtapeServiceService } from '../Shared/Etape-service.service';
+import { Etape } from '../Shared/Etape-servicemodel';
 @Component({
   selector: 'app-Planification-component',
   templateUrl: './Planification-component.component.html',
@@ -18,7 +20,10 @@ export class PlanificationComponentComponent implements OnInit {
   first: number = 0;
   rows: number = 10;
   listnotpaginated: Transformateur[] = [];
-  constructor(public Service: TransformateurServiceService,public ServiceM : MessageService) { }
+  sidebarVisible : boolean = false;
+  Etape : Etape[] = [];
+
+  constructor(public ServiceE : EtapeServiceService,public Service: TransformateurServiceService,public ServiceM : MessageService) { }
 
   ngOnInit() {
     this.Service.getTransformateurAndItsPvs()
@@ -46,6 +51,17 @@ export class PlanificationComponentComponent implements OnInit {
         this.list=Result;
       }
     });
+  }
+
+  Results(id: number)
+  {
+    this.ServiceE.getEtapesByTransformateurId(id).subscribe({
+      next : (Response) =>
+      {
+        this.Etape = Response;
+        console.log(this.Etape)
+      }
+    })
   }
 
   filtrer()

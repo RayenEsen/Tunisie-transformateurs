@@ -32,8 +32,9 @@ import { OperateurSuggestionsServiceService } from '../Shared/OperateurSuggestio
 
 })
 export class ControleComponentComponent implements OnInit {
-  selectedItemsMap: { [key: string]: any[] } = {}; // Map to store selected items for each etape
+  closable2: boolean = true; // Set to true to make the inplace element closable
 
+  selectedItemsMap: { [key: string]: any[] } = {}; // Map to store selected items for each etape
   transformateurId: number = 0;
   etapes: Etape[] = []; // Array to store fetched Etapes
   bobinages: Bobinage[] = []; // Array to store fetched Etapes
@@ -43,7 +44,9 @@ export class ControleComponentComponent implements OnInit {
   operateurIndexes: number[][] = [];
   operateurSuggestion : OperateurSuggestions = new OperateurSuggestions;
   suggestions: string[] = [];
-  filteredSuggestions : string[] = []
+  filteredSuggestions : string[] = [];
+  rangeDatesMap: Map<number, Date[]> = new Map<number, Date[]>();
+
   constructor(
     private route: ActivatedRoute,
     public serviceE: EtapeServiceService,
@@ -80,15 +83,6 @@ export class ControleComponentComponent implements OnInit {
                   this.etapes = etapes; // Assign etapes directly without filtering
                   this.initializeSelectedItemsMap();
 
-                  // Move the code dependent on this.etapes inside this subscription callback
-                  this.fetchAndUpdateBobinages();
-                  this.fetchAndUpdateBobinagesMT();
-                  this.fetchAndUpdateMagnetiques();
-                  this.fetchAndUpdateMontages();
-                  this.fetchAndUpdateEncuvage();
-                  this.fetchAndUpdateRemplissage();
-                  this.fetchAndUpdatePeinture();
-                  this.fetchAndUpdateConseption();
                   this.END_OF_PRODUCTION();
               },
               error => {
@@ -96,8 +90,21 @@ export class ControleComponentComponent implements OnInit {
               }
           );
     });
-
   }
+
+  updateRangeDates(value: Date[], etapeNumero: number) {
+    this.rangeDatesMap.set(etapeNumero, value);
+  }
+
+    // Initialize the date map
+  initializeDateMap(): void {
+    this.etapes.forEach(etape => {
+      const dateRange: Date[] = [new Date(), new Date()]; // Initialize with default dates or null
+      this.rangeDatesMap.set(etape.etapeNumero, dateRange);
+    });
+  }
+
+
   initializeSelectedItemsMap(): void {
     this.etapes.forEach(etape => {
       const selectedItems: any[] = [];
@@ -110,28 +117,28 @@ export class ControleComponentComponent implements OnInit {
       this.selectedItemsMap[etape.etapeNumero] = selectedItems;
     });
   }
+
   search(event: any) {
     this.OperateurService.GetAllSuggestions().subscribe({
       next: (response: any[]) => {
-        this.suggestions=response;
+        this.suggestions = response;
       }
     });
-    let filtered: string[] = [];
-    let query = event.query.toLowerCase(); // Convert query to lower case once
 
-    for (let i = 0; i < this.suggestions.length; i++) {
-      let suggestion = this.suggestions[i];
-      if (typeof suggestion === 'string') { // Check if suggestion is a string
-        if (suggestion.toLowerCase().indexOf(query) === 0) {
-          filtered.push(suggestion);
-        }
-      } else {
-        console.warn(`Invalid suggestion at index ${i}:`, suggestion);
-      }
+    let query = event.query; // Keep the query as it is without converting to lowercase
+
+    // Filter the suggestions based on the query
+    this.filteredSuggestions = this.suggestions.filter(suggestion =>
+      typeof suggestion === 'string' &&
+      suggestion.toLowerCase().startsWith(query.toLowerCase())
+    );
+
+    // If the searched suggestion doesn't exist in filteredSuggestions and the array is not empty, add it to the beginning
+    if (this.filteredSuggestions.length === 0 && !this.filteredSuggestions.includes(query)) {
+      this.filteredSuggestions.unshift(query);
     }
-
-    this.filteredSuggestions = filtered;
   }
+
 
   verif(etape: Etape) {
     console.log('etape:', etape); // Log the contents of the etape object
@@ -143,180 +150,6 @@ export class ControleComponentComponent implements OnInit {
       this.MessageService.add({ severity: 'error', summary: 'Erreur', detail: 'Opérateur est requis pour continuer.' });
     }
   }
-
-
-
-
-  fetchAndUpdateBobinages() {
-    this.ServiceBT.getBobinageByTransformateurId(this.transformateurId)
-      .subscribe(
-        bobinages => {
-          console.log(bobinages);
-          // Check if filteredEtapes[0] is defined before accessing its properties
-          if (bobinages.every(b => b.bt1 !== null) && this.etapes[0] && this.etapes[0].dateFin === null) {
-            this.updateEtapeDateFin(1);
-          }
-          if (bobinages.every(b => b.bt2 !== null) && this.etapes[1] && this.etapes[1].dateFin === null) {
-            this.updateEtapeDateFin(2);
-          }
-          if (bobinages.every(b => b.bt3 !== null) && this.etapes[2] && this.etapes[2].dateFin === null) {
-            this.updateEtapeDateFin(3);
-          }
-        }
-      );
-  }
-
-  fetchAndUpdateBobinagesMT() {
-    this.ServiceMT.getBobinageByTransformateurId(this.transformateurId)
-      .subscribe(
-        bobinagesMT => {
-          console.log(bobinagesMT);
-          // Check if filteredEtapes[3] is defined before accessing its properties
-          if (bobinagesMT.every(b => b.bt1 !== null) && this.etapes[3] && this.etapes[3].dateFin === null) {
-            this.updateEtapeDateFin(4);
-          }
-          if (bobinagesMT.every(b => b.bt2 !== null) && this.etapes[4] && this.etapes[4].dateFin === null) {
-            this.updateEtapeDateFin(5);
-          }
-          if (bobinagesMT.every(b => b.bt3 !== null) && this.etapes[5] && this.etapes[5].dateFin === null) {
-            this.updateEtapeDateFin(6);
-          }
-        }
-      );
-  }
-
-  fetchAndUpdateMagnetiques() {
-    this.ServiceMag.getMagnetiqueByTransformateurId(this.transformateurId)
-      .subscribe(
-        Magnetiques => {
-          console.log(Magnetiques);
-
-          const allConditionsMet = Magnetiques.every(item =>
-            item.f1c1m !== null &&
-            item.f1c1p !== null &&
-            item.f2c2m !== null &&
-            item.f2c2p !== null &&
-            item.f3c3m !== null &&
-            item.f3c3p !== null
-          );
-
-          if (allConditionsMet && this.etapes[6] && this.etapes[6].dateFin === null && this.etapes[7] && this.etapes[7].dateFin === null) {
-            this.updateEtapeDateFin(7);
-            this.updateEtapeDateFin(8);
-          }
-        }
-      );
-  }
-
-  fetchAndUpdateMontages() {
-    this.ServiceMon.getMontageByTransformateurId(this.transformateurId)
-      .subscribe(
-        Montages => {
-          console.log(Montages);
-
-          const allConditionsMet = Montages.every(item =>
-            item.c1m !== null &&
-            item.c1p !== null &&
-            item.c2m !== null &&
-            item.c2p !== null &&
-            item.c3m !== null &&
-            item.c3p !== null
-          );
-
-          if (allConditionsMet && this.etapes[8] && this.etapes[8].dateFin === null && this.etapes[9] && this.etapes[9].dateFin === null && allConditionsMet && this.etapes[10] && this.etapes[10].dateFin === null && allConditionsMet && this.etapes[11] && this.etapes[11].dateFin === null) {
-            this.updateEtapeDateFin(9);
-            this.updateEtapeDateFin(10);
-            this.updateEtapeDateFin(11);
-            this.updateEtapeDateFin(12);
-          }
-        }
-      );
-  }
-
-  fetchAndUpdateEncuvage() {
-    this.EcuvageService.getEcuvageByTransformateurId(this.transformateurId)
-      .subscribe(
-        Ecuvages => {
-          const allConditionsMet = Ecuvages.every(item =>
-            item.conformite !== null
-          );
-
-          if (allConditionsMet && this.etapes[12] && this.etapes[12].dateFin === null && this.etapes[13] && this.etapes[13].dateFin === null )
-          {
-            this.updateEtapeDateFin(13);
-            this.updateEtapeDateFin(14);
-          }
-        }
-      );
-  }
-
-  fetchAndUpdateRemplissage() {
-    this.RemplissageService.getRemplissagesByTransformateurId(this.transformateurId)
-      .subscribe(
-        Remplissages => {
-          const allConditionsMet = Remplissages.every(item =>
-            item.cnc !== null
-          );
-
-          if (allConditionsMet && this.etapes[14] && this.etapes[14].dateFin === null && this.etapes[15] && this.etapes[15].dateFin === null )
-          {
-            this.updateEtapeDateFin(15);
-            this.updateEtapeDateFin(16);
-          }
-        }
-      );
-  }
-
-  fetchAndUpdatePeinture() {
-    this.PeintureService.getPeintureByTransformateurId(this.transformateurId)
-      .subscribe(
-        Peintures => {
-          const allConditionsMet = Peintures.some(item =>
-            item.cnc==='C'
-          );
-
-          if (allConditionsMet && this.etapes[16] && this.etapes[16].dateFin === null)
-          {
-            this.updateEtapeDateFin(17);
-          }
-        }
-      );
-  }
-
-  fetchAndUpdateConseption() {
-    this.ConseptionService.getConseptionsByTransformateur(this.transformateurId)
-      .subscribe(
-        Conseptions => {
-          const allConditionsMet = Conseptions.every(item =>
-            item.conformiter==='Yes'
-          );
-
-          if (allConditionsMet && this.etapes[17] && this.etapes[17].dateFin === null)
-          {
-            this.updateEtapeDateFin(18);
-          }
-        }
-      );
-  }
-
-  updateEtapeDateFin(etapeNumero: number) {
-    const selectedEtape = this.etapes.find(et => et.etapeNumero === etapeNumero);
-    if (selectedEtape) {
-      selectedEtape.dateFin = new Date();
-      this.serviceE.UpdateEtape(this.transformateurId, etapeNumero, selectedEtape)
-        .subscribe(
-          () => {
-            console.log(`Etape ${etapeNumero} dateFin updated successfully`);
-          },
-          error => {
-            console.error(`Error updating Etape ${etapeNumero} dateFin`, error);
-          }
-        );
-    } else {
-      console.error(`Etape ${etapeNumero} not found`);
-    }
-  }
-
 
 
   closable: boolean = true;
@@ -343,15 +176,15 @@ export class ControleComponentComponent implements OnInit {
     // Update operateur1 and operateur2 based on selected items
     selectedFilteredEtape.operateur1 = selectedItems && selectedItems.length > 0 ? selectedItems[0] : null;
     selectedFilteredEtape.operateur2 = selectedItems && selectedItems.length > 1 ? selectedItems[1] : null;
-// Check if operateur1 is present and not already in suggestions
-if (selectedFilteredEtape?.operateur1 && !this.suggestions.includes(selectedFilteredEtape.operateur1)) {
-  console.log(selectedFilteredEtape.operateur1);
-  this.operateurSuggestion.nom = selectedFilteredEtape.operateur1;
-  this.OperateurService.AddSuggestion(this.operateurSuggestion).subscribe({
-    next: (response) => {
-      this.suggestions.push(response);
-    }
-  });
+    // Check if operateur1 is present and not already in suggestions
+    if (selectedFilteredEtape?.operateur1 && !this.suggestions.includes(selectedFilteredEtape.operateur1)) {
+      console.log(selectedFilteredEtape.operateur1);
+      this.operateurSuggestion.nom = selectedFilteredEtape.operateur1;
+      this.OperateurService.AddSuggestion(this.operateurSuggestion).subscribe({
+        next: (response) => {
+          this.suggestions.push(response);
+        }
+      });
 }
 
 // Check if operateur2 is present and not already in suggestions
@@ -367,14 +200,27 @@ if (selectedFilteredEtape?.operateur2 && !this.suggestions.includes(selectedFilt
 
     // Update dateDebut for the selected etape
     if (selectedFilteredEtape) {
-      selectedFilteredEtape.dateDebut = new Date();
 
       // Apply changes from selectedFilteredEtape to the original etape
       const index = this.etapes.findIndex(et => et.etapeNumero === etapeNumero);
       if (index !== -1) {
         this.etapes[index] = { ...this.etapes[index], ...selectedFilteredEtape };
       }
+      const dateRange = this.rangeDatesMap.get(etapeNumero);
 
+      // Check if dateRange is not null or undefined
+      if (dateRange) {
+        // Find the etape in the etapes array
+        const etapeselected = this.etapes.find(et => et.etapeNumero === etapeNumero);
+
+        // Check if etapeselected is not null or undefined
+        if (etapeselected) {
+          // Update etape.datedebut and etape.detafin
+          etapeselected.dateDebut = dateRange[0];
+          etapeselected.dateFin = dateRange[1];
+        }
+      }
+      console.log
       // Update the etape via service
       this.serviceE.UpdateEtape(this.transformateurId, etapeNumero, selectedFilteredEtape)
         .subscribe(
