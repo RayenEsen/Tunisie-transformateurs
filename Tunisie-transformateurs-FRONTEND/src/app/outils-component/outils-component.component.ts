@@ -18,95 +18,126 @@ export class OutilsComponentComponent implements OnInit {
   activeItem: any; // Define the activeItem variable
   C4: number = 0;
   Choices: number[] = [50, 70, 80, 90, 100, 110, 120, 130, 140, 150, 170, 190, 205, 220, 240];
-  ep : number[] = []
-  Results: number[] = []
-  constructor(public ServiceM : MessageService) {}
-
-
-    // Method to handle tab change event
-    onTabChange(event: any) {
-      this.activeItem = event.item; // Update the activeItem variable
-    }
-
-    InitialisePE()
-    {
-      console.log(this.ep)
-      this.ep = []
-    }
-
-    CalculateEp(x: number) {
-      // Calculate the result
-      const result = Math.sqrt((this.C4 * this.C4) - (x * x)) - this.ep.reduce((acc, val) => acc + val, 0);
-
-      // Push the result to the ep array
-      if (!isNaN(result)) {
-        this.ep.push(result);
-      }
-      return result;
-    }
-
-    CalculateReele() {
-      return this.Results.slice(0, 8).reduce((acc, val, index) => acc + (val * this.ep[index]), 0) / 100;
-    }
-
-    CalculEdiale()
-    {
-      return  (this.C4 * this.C4 * Math.PI) / 400
-    }
-
-    Ratio() {
-      return this.CalculateReele() / this.CalculEdiale();
-    }
-
-
-    Somme() {
-        return this.ep.reduce((acc, curr) => acc + curr, 0);
-    }
-
-
-    epValues: number[] = [];
-
-    populateResults() {
-      if(this.C4>240 || this.C4<50)
-      {
-        this.ServiceM.add({ severity: 'error', summary: 'Error', detail: 'Le nombre doit être compris entre 50 et 240.' });
-        return;
-      }
-      // Step 1: Filter numbers larger than C4
-      const filteredChoices = this.Choices.filter(num => num < this.C4);
-
-      // Step 2: Sort filtered numbers in descending order
-      filteredChoices.sort((a, b) => b - a);
-
-      // Step 3: Find the index of the first number smaller than C4
-      const startIndex = filteredChoices.findIndex(num => num < this.C4);
-
-      // Step 4: Take the first 9 unique numbers from the sorted array starting from the index found
-      if (startIndex !== -1) {
-        this.Results = filteredChoices.slice(startIndex, startIndex + 9);
-      } else {
-        this.Results = [];
-      }
-
-      // Step 5: If the number of results is less than 9, continue filling with choices or repeat 50
-      while (this.Results.length < 8) {
-        if (filteredChoices.length > 0) {
-          const lastNumber = filteredChoices.pop(); // Remove the last number from the choices
-          if (lastNumber !== undefined && lastNumber !== 50 && !this.Results.includes(lastNumber)) {
-            this.Results.push(lastNumber); // Add it to the results if it's not 50 and not already in the results
-          }
-        } else {
-          this.Results.push(50); // Repeat 50 if needed
-        }
-      }
-      // Pre-calculate ep values
-      this.epValues = this.Results.map(item => this.CalculateEp(item));
-    }
-
-
+  ep: number[] = Array(8).fill(0);
+  Results: number[] = Array(8).fill(0);
+  targetRatio: number = 1;
+  combinations: number[][] = [];
+  Ratio: number = 0;
+  BestReele: number = 0;
+  bestideele: number = 0;
+  BestSum: number = 0;
+  IncreaseChance : number = 0;
+  constructor(public ServiceM: MessageService) {}
 
   ngOnInit() {
 
+  }
+
+  generateCombinations() {
+    const seenCombinations: Set<string> = new Set();
+    let attempts = 0;
+
+    while (this.combinations.length < this.IncreaseChance && attempts < 100000) {
+      const filteredChoices = this.Choices.filter(choice => choice < this.C4);
+      const combination: number[] = [];
+
+      while (combination.length < 8) {
+        if (filteredChoices.length > 0) {
+          const randomIndex = Math.floor(Math.random() * filteredChoices.length);
+          const randomChoice = filteredChoices[randomIndex];
+          combination.push(randomChoice);
+          // Remove the chosen value from filteredChoices
+          filteredChoices.splice(randomIndex, 1);
+        } else {
+          // If filteredChoices is empty, fill the remaining slots with 0
+          combination.push(0);
+        }
+      }
+
+      const combinationKey = combination.join(',');
+      if (!seenCombinations.has(combinationKey)) {
+        seenCombinations.add(combinationKey);
+        this.combinations.push(combination);
+      }
+
+      attempts++;
+    }
+  }
+
+
+  calculateEp(combination: number[]) {
+    console.log("Combination inside the CalculateEP "+combination)
+    let remainingC4 = this.C4 * this.C4;
+    let cumulativeSum = 0; // Track the cumulative sum for ep calculations
+
+    combination.forEach((number, index) => {
+      const sqrt = Math.sqrt(remainingC4 - number * number);
+
+      // No subtraction for the first element (index === 0)
+      const epValue = index === 0 ? sqrt : sqrt - cumulativeSum;
+      this.ep.push(epValue);
+      cumulativeSum += epValue; // Update cumulative sum for subsequent elements
+    });
+  }
+
+  findBestCombination() {
+    let bestRatio = Infinity;
+    let bestCombination: number[] = [];
+    let bestEp: number[] = [];
+
+    this.combinations.forEach((combination, index) => {
+        // Reset ep array before calculating for each combination
+        this.ep = [];
+
+        this.calculateEp(combination);
+        const REELE = combination.reduce((acc, val, index) => acc + val * this.ep[index], 0) / 100;
+
+        const c4Squared = this.C4 * this.C4;
+        const IDEELE = c4Squared * Math.PI / 400;
+
+        if (IDEELE !== 0) {
+            const ratio = REELE / IDEELE;
+            console.log(`Combination ${index + 1}:`, combination);
+
+            const ratioDifference = Math.abs(ratio - this.targetRatio);
+            if (ratioDifference < Math.abs(bestRatio - this.targetRatio)) {
+                bestRatio = ratio;
+                this.BestReele = REELE;
+                this.bestideele = IDEELE;
+                bestCombination = combination;
+                bestEp = [...this.ep]; // Store the ep for the best combination
+                this.Results = bestCombination;
+                this.Ratio = bestRatio;
+            }
+        } else {
+            console.log("Error: IDEELE is 0");
+        }
+    });
+
+    // Recalculate ep for the best combination
+    this.calculateEp(bestCombination);
+    this.ep=bestEp
+    this.BestSum = this.ep.reduce((acc, val) => acc + val, 0);
+    console.log("Best Combination:", bestCombination);
+    console.log("Best Ratio:", bestRatio);
+    console.log("Best ep", bestEp);
+}
+
+
+DoTheWorkMethod() {
+  if (this.C4 < 50 || this.C4 > 240) {
+    this.ServiceM.add({ severity: 'error', summary: 'Erreur', detail: 'La valeur de D Circuit doit être comprise entre 50 et 240' });
+    this.C4 = 0;
+  }
+  else
+  {
+    this.generateCombinations()
+    this.findBestCombination()
+  }
+}
+  // Method to handle tab change event
+  onTabChange(event: any) {
+    this.activeItem = event.item; // Update the activeItem variable
   }
 
 }

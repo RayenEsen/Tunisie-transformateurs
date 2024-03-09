@@ -1,27 +1,36 @@
 <!-- Your HTML component -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-<header class="back" style="padding-bottom: 43vh;padding-left: 8vh;">
+<header class="back" style="padding-bottom: 20vh;padding-left: 8vh;">
   <div class="container" style="max-width: 500vh;">
+
+
 
   <!-- end row -->
   <div class="row justify-content-center" style="margin-bottom: 5vh;">
+
     <div class="col-12 col-lg-8 mb-3 mb-lg-5">
       <div class="overflow-hidden card table-nowrap table-card">
         <div class="d-flex justify-content-center" style="margin-bottom: 5vh;">
           <p-tabMenu [scrollable]="true" [model]="items" [activeItem]="activeItem" (onTabChange)="onTabChange($event)"></p-tabMenu>
         </div>
+        <div>
+
+          <input type="text" style="text-align: center; padding: 0.5rem;margin-left: 50vh; border-radius: 5px; border: 1px solid #ccc; font-size: 1rem;" pInputText [(ngModel)]="IncreaseChance" class="w-full"/>
+          <p-slider [min]="0" [max]="100000" [(ngModel)]="IncreaseChance" class="w-full"></p-slider>
+      </div>
+
         <div class="table-responsive" style="display: flex;">
           <table class="table table-hover mb-0" >
             <tbody>
               <tr class="align-self-center">
                 <th class="text-center colfix">D circuit</th>
                 <th class="text-center colfix">
-                  <p-inplace [closable]="true" (onDeactivate)="populateResults()">
+                  <p-inplace [closable]="true" (onDeactivate)="DoTheWorkMethod()">
                     <ng-template pTemplate="display">
                         <span>{{C4}}</span>
                     </ng-template>
                     <ng-template pTemplate="content" >
-                      <input  (ngModelChange)="InitialisePE()" type="number" [(ngModel)]="C4" pInputText />
+                      <input   type="number" [(ngModel)]="C4"  pInputText />
                     </ng-template>
                 </p-inplace>
                 </th>
@@ -30,27 +39,27 @@
               <tr *ngFor="let item of Results; let i = index">
                 <td class="text-center colfix"><strong>G{{i+1}}</strong></td>
                 <td class="text-center colfix">{{item}}</td>
-                <td class="text-center colfix">{{epValues[i].toFixed(4)}}</td>
+                <td class="text-center colfix">{{ ep[i].toFixed(2) }}</td>
               </tr>
 
 
               <tr>
                 <td colspan="2">Epaisseur totale</td>
-                <td class="text-center colfix">{{ Somme() }}</td>
+                <td class="text-center colfix">{{this.BestSum}}</td>
 
               </tr>
 
               <tr>
                 <td colspan="2">Section réele mm²</td>
-                <td class="text-center colfix">{{CalculateReele()}}</td>
+                <td class="text-center colfix">{{this.BestReele}}</td>
               </tr>
               <tr>
                 <td colspan="2">Section édiale en mm²</td>
-                <td class="text-center colfix">{{CalculEdiale()}}</td>
+                <td class="text-center colfix">{{this.bestideele}}</td>
               </tr>
               <tr>
                 <td colspan="2">RASIO</td>
-                <td class="text-center colfix"><strong>{{ Ratio() }}</strong></td>
+                <td class="text-center colfix"><strong>{{Ratio}}</strong></td>
               </tr>
 
             </tbody>

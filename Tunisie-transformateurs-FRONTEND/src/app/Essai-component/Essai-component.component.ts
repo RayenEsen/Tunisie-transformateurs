@@ -16,6 +16,12 @@
     currentDate: string = '';
     transformateurId: number = 0;
     pv: Pv[] = [];
+    items: any[] = [
+      { label: 'Fiche de calcul', icon: 'pi pi-calculator', command: () => this.toggleDialogAndHoverEffect() },
+      { label: 'Imprimer', icon: 'pi pi-print', command: () => this.onPrint() },
+      { label: 'Resultat des Tests', icon: 'pi pi-question', command: () => console.log('Item 3 clicked') }
+
+    ];
 
     constructor(
       private router: Router,
@@ -48,8 +54,8 @@
     savePvValues() {
       if (this.pv && this.pv.length > 0 && this.pv[0].id_pv !== undefined) {
         this.pv[0].zccm1=this.getZccPourcentage();
-        this.pv[0].zcmm2=this.getZcc2();
-        this.pv[0].wccm2=this.getwccm2();
+        this.pv[0].zcmm2=this.Zcc2;
+        this.pv[0].wccm2=this.wcc2;
         console.log(this.ServiceS.Controleur)
         if(this.ServiceS.Controleur.designation==="Verificateur")
         {
@@ -116,7 +122,6 @@
     // Function to handle the print action
     onPrint() {
       window.print();
-
     }
 
     getIOPourcentageMesurees()
@@ -136,7 +141,9 @@
       else return 0;
     }
     ibt: number = 0;
+    iht: number = 0;
     cc: number = 0;
+    cc2: number = 0;
     x6: number = 0;
     UAB: number = 0;
     UAC: number = 0;
@@ -189,13 +196,28 @@
     wccm2: number = 0;
     Ur: number = 0;
 
+    RAohmT0: number = 0;
+    RAohm: number = 0;
+    RBohmT0: number = 0;
+    RBohm: number = 0;
+    RCohmT0: number = 0;
+    RCohm: number = 0;
+    RaohmT0: number = 0;
+    RbohmT0: number = 0;
+    RcohmT0: number = 0;
+    Zcc2: number = 0;
+    wcc2: number = 0;
     getZcc2() {
+      //Calculations for Cuivre
       if (this.service.list[0].libelle === "Cuivre" && this.pv[0].temp !== undefined &&
           this.pv[0].na1 !== undefined && this.pv[0].nb2 !== undefined && this.pv[0].nc3 !== undefined &&
           this.pv[0].na0 !== undefined && this.pv[0].nb0 !== undefined && this.pv[0].nc0 !== undefined &&
           this.pv[0].wccm1 !== undefined) {
             this.ibt = 1;
+            this.iht = 1;
             this.cc = (235 + 75) / (235 + this.pv[0].temp);
+            this.cc2 = 300 / (this.pv[0].temp+225)
+
             this.x6 = (235 + this.pv[0].temp) / (235 + this.pv[0].temp);
             this.UAB = this.pv[0].na1;
             this.UAC = this.pv[0].nb2;
@@ -205,10 +227,9 @@
             this.Uc = this.pv[0].nc0;
             if (this.pv && this.pv[0] && typeof this.pv[0].uccm === 'number') {
               this.UccT0 = this.pv[0].uccm;
-          }
+           }
             this.UccT0Pourcentage = this.getZccPourcentage();
             this.PccTocc = this.pv[0].wccm1;
-
             this.RABohmT0 = this.UAB / this.ibt;
             this.RABohmT0cc = this.RABohmT0 * this.x6;
             this.RABohm = this.RABohmT0 * this.cc;
@@ -245,89 +266,80 @@
             this.power = parseInt(this.service.list[0].power, 10);
             this.UrT0 = this.PccTocc / (this.power * 10);
             this.Ux = Math.sqrt((this.UccT0Pourcentage * this.UccT0Pourcentage) - (this.UrT0 * this.UrT0));
-            this.wccm2 = this.getwccm2();
-            this.Ur = this.wccm2 / (this.power * 10);
-
-        return  Math.sqrt((this.Ur * this.Ur) + (this.Ux * this.Ux));
+            this.wcc2 = this.Pjht+this.Pjbt+this.Padd
+            this.Ur = this.wcc2  / (this.power * 10);
+            this.Po = this.pv[0]?.wom ?? 0; // Default value of 0 if this.pv[0].wom is undefined
+            this.Zcc2 = Math.sqrt((this.Ur * this.Ur) + (this.Ux * this.Ux));
       }
-      else return 0 ;
+      //Calculations for Aluminum
+      else if (this.service.list[0].libelle === "Aluminum" && this.pv[0].temp !== undefined &&
+      this.pv[0].na1 !== undefined && this.pv[0].nb2 !== undefined && this.pv[0].nc3 !== undefined &&
+      this.pv[0].na0 !== undefined && this.pv[0].nb0 !== undefined && this.pv[0].nc0 !== undefined &&
+      this.pv[0].wccm1 !== undefined)
+      {
+        this.cc2 = 300 / (this.pv[0].temp+225)
+        this.cc = (235 + 75) / (235 + this.pv[0].temp);
+
+        this.iht = 1;
+        this.ibt = 1;
+        this.UAB = this.pv[0].na1;
+        this.UAC = this.pv[0].nb2;
+        this.UBC = this.pv[0].nc3;
+        this.Ua = this.pv[0].na0;
+        this.Ub = this.pv[0].nb0;
+        this.Uc = this.pv[0].nc0;
+        this.power = parseInt(this.service.list[0].power, 10);
+        if (this.pv && this.pv[0] && typeof this.pv[0].uccm === 'number') {
+          this.UccT0 = this.pv[0].uccm;
+       }
+        this.RAohmT0 = this.UAB / this.iht;
+        this.RAohm = this.RAohmT0 * this.cc2;
+        this.RBohmT0 = this.UAC / this.iht;
+        this.RBohm = this.RBohmT0 * this.cc2;
+        this.RCohmT0 =  this.UBC / this.iht;
+        this.RCohm = this.RCohmT0 * this.cc2;
+
+        this.RaohmT0 =  this.Ua / this.ibt;
+        this.Raohm = this.RaohmT0 * this.cc2;
+        this.RbohmT0 =  this.Ua / this.ibt;
+        this.Rbohm = this.RaohmT0 * this.cc2;
+        this.RcohmT0 =  this.Ua / this.ibt;
+        this.Rcohm = this.RaohmT0 * this.cc2;
+        this.UccT0Pourcentage = this.getZccPourcentage();
+        this.PccTocc = this.pv[0].wccm1;
+        this.UrT0 = this.PccTocc / (this.power*10)
+        this.Ux = Math.sqrt( (this.UccT0Pourcentage*this.UccT0Pourcentage) - (this.UrT0*this.UrT0) )
+        this.PjhTo = (this.RAohmT0+this.RBohmT0+this.RCohmT0) * this.service.list[0].mtu2 * this.service.list[0].mtu2;
+        this.PjbTo = ( this.RaohmT0+this.RbohmT0+this.RcohmT0) * this.service.list[0].bti2 * this.service.list[0].bti2;
+        this.PaddTo = (this.PccTocc) - (this.PjhTo + this.PjbTo) * (225+this.pv[0].temp)/(225+this.pv[0].temp);
+        this.Pjht = this.PjhTo*this.cc2;
+        this.Pjbt = this.PjbTo*this.cc2;
+        this.Padd = this.PaddTo/this.cc;
+        this.Po = this.pv[0]?.wom ?? 0; // Default value of 0 if this.pv[0].wom is undefined
+        this.wcc2 = this.Pjht+this.Pjbt+this.Padd;
+        this.Ur = this.wcc2 / (this.power * 10);
+        this.Zcc2 = Math.sqrt(this.Ur * this.Ur + this.Ux * this.Ux);
+      }
     }
-    getwccm2()
-    {
-      if (this.service.list[0].libelle === "Cuivre" && this.pv[0].temp !== undefined &&
-          this.pv[0].na1 !== undefined && this.pv[0].nb2 !== undefined && this.pv[0].nc3 !== undefined &&
-          this.pv[0].na0 !== undefined && this.pv[0].nb0 !== undefined && this.pv[0].nc0 !== undefined &&
-          this.pv[0].wccm1 !== undefined) {
 
-            this.ibt = 1;
-            this.cc = (235 + 75) / (235 + this.pv[0].temp);
-            this.x6 = (235 + this.pv[0].temp) / (235 + this.pv[0].temp);
-            // Assuming these variables are defined within a method of an object
 
-            this.UAB = this.pv[0].na1;
-            this.UAC = this.pv[0].nb2;
-            this.UBC = this.pv[0].nc3;
-            this.Ua = this.pv[0].na0;
-            this.Ub = this.pv[0].nb0;
-            this.Uc = this.pv[0].nc0;
 
-            if (this.pv[0].wom !== undefined && this.pv[0].uccm !== undefined) {
-              this.Po = this.pv[0].wom;
-              this.UccT0 = this.pv[0].uccm;
-          } else {
-              // Handle the case where one or both of the properties are undefined
-              // You can assign default values or handle the error as needed
-          }
 
-            this.UccT0Pourcentage = this.getZccPourcentage();
-            this.PccTocc = this.pv[0].wccm1;
-
-            this.RABohmT0 = this.UAB / this.ibt;
-            this.RABohmT0cc = this.RABohmT0 * this.x6;
-            this.RABohm = this.RABohmT0 * this.cc;
-
-            this.RACohmT0 = this.UAC / this.ibt;
-            this.RACohmT0cc = this.RACohmT0 * this.x6;
-            this.RACohm = this.RACohmT0 * this.cc;
-
-            this.RBCohmT0 = this.UBC / this.ibt;
-            this.RBCohmT0cc = this.RBCohmT0 * this.x6;
-            this.RBCohm = this.RBCohmT0 * this.cc;
-
-            this.RaohmTo = this.Ua / this.ibt;
-            this.RaohmT0cc = this.RaohmTo * this.x6;
-            this.Raohm = this.RaohmT0cc * this.cc;
-
-            this.RbohmTo = this.Ub / this.ibt;
-            this.RbohmT0cc = this.RbohmTo * this.x6;
-            this.Rbohm = this.RbohmT0cc * this.cc;
-
-            this.RcohmTo = this.Uc / this.ibt;
-            this.RcohmT0cc = this.RcohmTo * this.x6;
-            this.Rcohm = this.RcohmT0cc * this.cc;
-
-            this.PjhTo = 1.5 * ((this.RABohmT0 + this.RACohmT0 + this.RBCohmT0) / 3) * this.service.list[0].mtu2 * this.service.list[0].mtu2;
-            this.PjhtT0cc = 1.5 * ((this.RABohmT0cc + this.RACohmT0cc + this.RBCohmT0cc) / 3) * this.service.list[0].mtu2 * this.service.list[0].mtu2;
-            this.PjbTo = (this.RaohmTo + this.RbohmTo + this.RcohmTo) * this.service.list[0].bti2 * this.service.list[0].bti2;
-            this.PjbT0cc = (this.RaohmT0cc + this.RbohmT0cc + this.RcohmT0cc) * this.service.list[0].bti2 * this.service.list[0].bti2;
-            this.PaddTo = this.PccTocc - (this.PjhtT0cc + this.PjbT0cc);
-            this.Pjht = this.PjhTo * this.cc;
-            this.Pjbt = this.PjbTo * this.cc;
-            this.Padd = this.PaddTo / this.cc;
-
-        return this.Pjht+this.Pjbt+this.Padd;
-    }
-    else return 0;
-  }
   visible: boolean = false; // Variable to control the visibility of the dialog
   isHoverDisabled: boolean = false;
 
   toggleDialogAndHoverEffect(): void {
+    this.getZcc2();
     this.isHoverDisabled = true; // Disable hover effect
     setTimeout(() => {
         this.visible = true; // Show dialog after a short delay
     }, 300); // Adjust the delay as needed
 }
 
+ngAfterViewInit() {
 
-  }
+    this.getZcc2();
+}
+
+
+}

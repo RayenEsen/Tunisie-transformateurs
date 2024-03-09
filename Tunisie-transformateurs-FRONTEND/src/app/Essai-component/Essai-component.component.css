@@ -27,6 +27,10 @@ body {
   transition: transform 0.3s ease-in-out, width 0.3s ease-in-out; /* Adding a transform and width transition */
 }
 
+.ButtonClass{
+  padding-left: 190vh;
+}
+
 /* Styling for the header of the invoice */
 .invoice .invoice-header {
   padding: 25px 25px 15px;
@@ -221,6 +225,7 @@ img:hover {
   td{
     max-width: fit-content;
   }
+
   .printing4
   {
     margin-bottom: -45px;
@@ -266,6 +271,12 @@ img:hover {
   }
 }
 
+@media print {
+  .printableButton {
+    display: none;
+  }
+}
+
 
 @page {
   size: auto;
@@ -284,4 +295,35 @@ img:hover {
 .info-item {
   margin-bottom: 5px;
   font-size: 14px;
+}
+::ng-deep .p-speeddial .p-speeddial-button {
+  border-radius: 50%;
+  background-color: rgba(18, 33, 81, 0.8); /* Adjust the alpha value (0.8) to lighten or darken the color */
+  border-color: white;
+}
+
+::ng-deep .p-speeddial-button.p-button.p-button-icon-only .p-icon {
+  color: wheat;
+}
+.speedDialContainer {
+  position: absolute;
+  top: 12%;
+  right: 4%;
+}
+
+::ng-deep .speedDialContainer a {
+  background-color: white;
+  color:rgba(18, 33, 81, 0.8);
+}
+
+::ng-deep .speedDialContainer ul {
+  margin-top: 8px;
+  margin-bottom: 10px;
+}
+@media print {
+  ::ng-deep .p-speeddial .p-speeddial-button,
+  ::ng-deep .p-speeddial-button.p-button.p-button-icon-only .p-icon,
+  .speedDialContainer {
+    display: none !important;
+  }
 }

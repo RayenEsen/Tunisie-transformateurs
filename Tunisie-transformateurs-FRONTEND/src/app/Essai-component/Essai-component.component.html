@@ -1,8 +1,12 @@
-
+<div class="speedDialContainer">
+  <p-speedDial [model]="items"  direction="down"></p-speedDial>
+</div>
 <div #printSection class="invoice" [class.hover-disabled]="isHoverDisabled">
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
 <link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
 <div style="display: flex;">
+
 <img src="assets/LogoPV.png" style="width: 300px;margin-right: 23vh;" >
 <img src="assets/9001ISO.png" style="width: 180px; height: 70px;"  class="printing">
 <img src="assets/14001ISO-removebg-preview.png" style="width: 180px; height: 93px;">
@@ -249,7 +253,9 @@
             <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="pv[0].temp"></td>
             <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="pv[0].uccm"></td>
             <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="this.service.list[0].mtu2"></td>
-            <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="pv[0].wccm1"></td>
+            <td class="text-center colfix">
+              <input class="text-center colfix" type="number" [(ngModel)]="pv[0].wccm1">
+            </td>
 
            <td class="text-center colfix"><input class="text-center colfix" type="number" [value]="this.getZccPourcentage().toFixed(3)" readonly></td>
 
@@ -257,8 +263,8 @@
           <tr>
             <td colspan="6" class="text-right colfix">Valeurs at 75C / Valeurs à 75C
       </td>
-            <td class="text-center colfix"><input title="Cliquez pour afficher la fiche de calcul"  tooltipPosition="bottom" class="text-center colfix" (click)="toggleDialogAndHoverEffect()" label="Show"  type="number"[value]="this.getwccm2().toFixed(3)" readonly></td>
-            <td class="text-center colfix"><input title="Cliquez pour afficher la fiche de calcul"   tooltipPosition="bottom" class="text-center colfix" (click)="toggleDialogAndHoverEffect()" label="Show" type="number"[value]="this.getZcc2().toFixed(3)" readonly></td>
+            <td class="text-center colfix" ><input title="Cliquez pour afficher la fiche de calcul"  tooltipPosition="bottom" class="text-center colfix"  label="Show"  type="number"[value]="this.wcc2.toFixed(3)" readonly></td>
+            <td class="text-center colfix"><input title="Cliquez pour afficher la fiche de calcul"   tooltipPosition="bottom" class="text-center colfix" label="Show" type="number"[value]="this.Zcc2.toFixed(3)" readonly></td>
           </tr>
         </tbody>
       </table>
@@ -349,12 +355,16 @@
 <div class="info-section">
   <div class="info-item">x6: 1</div>
   <div class="info-item">Ibt: 1</div>
+  <div class="info-item">Iht: 1</div>
+  <div class="info-item" style="white-space: nowrap;">CC 1 : {{cc.toFixed(3)}}</div>
+  <div class="info-item" style="white-space: nowrap;">CC 2 : {{cc.toFixed(3)}}</div>
+
   <div class="info-item">Norme: {{ this.service.list[0].norme }}</div>
   <div class="info-item">Type: {{ this.service.list[0].type }}</div>
 </div>
 
 
-<div style="display: contents;">
+<div style="display: contents;" *ngIf="this.service.list[0].libelle === 'Cuivre'">
   <div class="panel panel-default" style="width: fit-content; margin-right: auto;">
     <div class="panel-heading">
                       <h3 class="panel-title">Partie 1</h3>
@@ -463,8 +473,8 @@
           <td class="text-center colfix">{{ this.pv[0] && this.pv[0].wccm1 !== undefined ? this.pv[0].wccm1?.toFixed(4) : 'N/A' }}</td>
           <td class="text-center colfix">{{this.UrT0?.toFixed(4)}}</td>
           <td class="text-center colfix">{{this.Ux?.toFixed(4)}}</td>
-          <td class="text-center colfix">{{this.Ur?.toFixed(4)}}</td>
-          <td class="text-center colfix">{{this.getZcc2()?.toFixed(4)}}</td>
+          <td class="text-center colfix">{{this.Ur.toFixed(4)}}</td>
+          <td class="text-center colfix">{{this.Zcc2?.toFixed(4)}}</td>
 
           <td class="text-center colfix">{{ PjhTo?.toFixed(4) }}</td>
           <td class="text-center colfix">{{ PjhtT0cc?.toFixed(4) }}</td>
@@ -474,12 +484,127 @@
           <td class="text-center colfix">{{ Pjht?.toFixed(4) }}</td>
           <td class="text-center colfix">{{ Pjbt?.toFixed(4) }}</td>
           <td class="text-center colfix">{{ Padd?.toFixed(4) }}</td>
-          <td class="text-center colfix">{{this.getwccm2()?.toFixed(2)}}</td>
+          <td class="text-center colfix">{{ wcc2?.toFixed(4)}}</td>
         </tr>
       </tbody>
     </table>
   </div>
 </div>
+
+
+<div style="display: contents;" *ngIf="this.service.list[0].libelle === 'Aluminum'">
+  <div class="panel panel-default" style="width: fit-content; margin-right: auto;">
+    <div class="panel-heading">
+                      <h3 class="panel-title">Partie 1</h3>
+                    </div>
+   <table class="table table-bordered table-condensed">
+    <tbody>
+        <tr>
+            <td class="text-left colfix">N</td>
+            <td class="text-center colfix">Ref Transfo</td>
+            <td class="text-center colfix">UA (V)</td>
+            <td class="text-center colfix">RA (ohm) T0</td>
+            <td class="text-center colfix">RA (ohm)</td>
+            <td class="text-center colfix">UB (V)</td>
+            <td class="text-center colfix">RB (ohm) T0</td>
+            <td class="text-center colfix">RB (ohm)</td>
+            <td class="text-center colfix">UC (V)</td>
+            <td class="text-center colfix">RC (ohm) T0</td>
+            <td class="text-center colfix">RC (ohm)</td>
+            <td class="text-center colfix">Ua (V)</td>
+            <td class="text-center colfix">Ra (ohm) T0</td>
+            <td class="text-center colfix">Ra (ohm)</td>
+            <td class="text-center colfix">Ub (V)</td>
+            <td class="text-center colfix">Rb (ohm) T0</td>
+            <td class="text-center colfix">Rb (ohm)</td>
+            <td class="text-center colfix">Uc (V)</td>
+            <td class="text-center colfix">Rc (ohm) T0</td>
+            <td class="text-center colfix">Rc (ohm)</td>
+        </tr>
+        <tr>
+          <td class="text-center colfix">1</td>
+          <td class="text-center colfix">{{this.service.list[0].numero}}</td>
+          <td class="text-center colfix">{{this.UAB.toFixed(4)}}</td>
+          <td class="text-center colfix">{{this.RAohmT0.toFixed(4)}}</td>
+          <td class="text-center colfix">{{this.RAohm.toFixed(4)}}</td>
+          <td class="text-center colfix">{{this.UAC.toFixed(4)}}</td>
+          <td class="text-center colfix">{{this.RBohmT0.toFixed(4)}}</td>
+          <td class="text-center colfix">{{this.RBohm.toFixed(4)}}</td>
+          <td class="text-center colfix">{{this.UBC.toFixed(4)}}</td>
+          <td class="text-center colfix">{{this.RCohmT0.toFixed(4)}}</td>
+          <td class="text-center colfix">{{this.RCohm.toFixed(4)}}</td>
+          <td class="text-center colfix">{{this.Ua}}</td>
+          <td class="text-center colfix">{{this.RaohmT0.toFixed(4)}}</td>
+          <td class="text-center colfix">{{this.Raohm.toFixed(4)}}</td>
+          <td class="text-center colfix">{{this.Ub}}</td>
+          <td class="text-center colfix">{{this.RbohmT0.toFixed(4)}}</td>
+          <td class="text-center colfix">{{this.Rbohm.toFixed(4)}}</td>
+          <td class="text-center colfix">{{this.Uc}}</td>
+          <td class="text-center colfix">{{this.RcohmT0.toFixed(4)}}</td>
+          <td class="text-center colfix">{{this.Rcohm.toFixed(4)}}</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="panel panel-default" style="width: fit-content;margin-top: 5vh;">
+    <div class="panel-heading">
+      <h3 class="panel-title">Partie 2</h3>
+    </div>
+    <table class="table table-bordered table-condensed">
+      <tbody>
+        <tr>
+          <td class="text-left colfix">N</td>
+          <td class="text-center colfix">Ref Transfo</td>
+          <td class="text-center colfix">Io (A)</td>
+          <td class="text-center colfix">Io (%)</td>
+          <td class="text-center colfix">Po (W)</td>
+          <td class="text-center colfix">Ucc T0 (V)</td>
+          <td class="text-center colfix">Ucc T0 (%)</td>
+
+          <td class="text-center colfix">Pcc T0cc (W)</td>
+          <td class="text-center colfix">Ur T0 (%)</td>
+          <td class="text-center colfix">Ux (%)</td>
+          <td class="text-center colfix">Ur (%)</td>
+          <td class="text-center colfix">Ucc (%)</td>
+
+
+          <td class="text-center colfix">Pj(HT)T0 (W)</td>
+          <td class="text-center colfix">Pj(BT)To (W)</td>
+          <td class="text-center colfix">PaddTo (W)</td>
+          <td class="text-center colfix">Pj(HT) (W)</td>
+          <td class="text-center colfix">Pj(BT) (W)</td>
+          <td class="text-center colfix">Padd (W)</td>
+          <td class="text-center colfix">PCC (W)</td>
+        </tr>
+        <tr>
+          <td class="text-left colfix">1</td>
+          <td class="text-center colfix">{{ this.service.list[0].numero }}</td>
+          <td class="text-center colfix">{{ this.pv[0].iom }}</td>
+          <td class="text-center colfix">{{ this.getIOPourcentageMesurees().toFixed(3) }}</td>
+
+          <td class="text-center colfix">{{ Po?.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ UccT0?.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ UccT0Pourcentage?.toFixed(4) }}</td>
+
+          <td class="text-center colfix">{{ this.pv[0] && this.pv[0].wccm1 !== undefined ? this.pv[0].wccm1?.toFixed(4) : 'N/A' }}</td>
+          <td class="text-center colfix">{{this.UrT0?.toFixed(4)}}</td>
+          <td class="text-center colfix">{{this.Ux?.toFixed(4)}}</td>
+          <td class="text-center colfix">{{this.Ur?.toFixed(4)}}</td>
+          <td class="text-center colfix">{{this.Zcc2?.toFixed(4)}}</td>
+
+          <td class="text-center colfix">{{ PjhTo?.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ PjbTo?.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ PaddTo?.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ Pjht?.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ Pjbt?.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ Padd?.toFixed(4) }}</td>
+          <td class="text-center colfix">{{ wcc2?.toFixed(4)}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
 
   </div>
 </p-dialog>

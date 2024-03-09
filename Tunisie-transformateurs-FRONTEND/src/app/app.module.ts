@@ -29,6 +29,10 @@ import { TreeSelectModule } from 'primeng/treeselect';
 import { TreeModule } from 'primeng/tree';
 import { TableModule } from 'primeng/table';
 import { TabMenuModule } from 'primeng/tabmenu';
+import { SliderModule } from 'primeng/slider';
+import { SpeedDialModule } from 'primeng/speeddial';
+import { InputGroupModule } from 'primeng/inputgroup';
+import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { TopNavComponent } from './top-nav/top-nav.component';
@@ -124,7 +128,11 @@ import { OutilsComponentComponent } from './outils-component/outils-component.co
     TreeSelectModule,
     TreeModule,
     TableModule,
-    TabMenuModule
+    TabMenuModule,
+    SliderModule,
+    SpeedDialModule,
+    InputGroupModule,
+    InputGroupAddonModule,
     ],
   providers: [MessageService,ConfirmationService],
   bootstrap: [AppComponent]

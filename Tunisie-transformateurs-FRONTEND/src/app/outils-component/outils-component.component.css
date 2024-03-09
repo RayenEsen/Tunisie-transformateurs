@@ -27,7 +27,7 @@ body {
 }
 
 ::ng-deep a.p-ripple.p-element.p-menuitem-link.ng-star-inserted {
-  color: black; /* Remove color */
+  color: rgba(0, 0, 0, 0.521); /* Remove color */
   text-decoration: none; /* Remove underline */
 }
 
