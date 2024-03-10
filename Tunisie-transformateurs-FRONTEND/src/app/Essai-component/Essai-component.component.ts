@@ -15,12 +15,12 @@
 
     currentDate: string = '';
     transformateurId: number = 0;
+    sidebarVisible1: boolean = false;
     pv: Pv[] = [];
     items: any[] = [
       { label: 'Fiche de calcul', icon: 'pi pi-calculator', command: () => this.toggleDialogAndHoverEffect() },
       { label: 'Imprimer', icon: 'pi pi-print', command: () => this.onPrint() },
-      { label: 'Resultat des Tests', icon: 'pi pi-question', command: () => console.log('Item 3 clicked') }
-
+      { label: 'Resultat des Tests', icon: 'pi pi-question', command: () => this.showDialog() }
     ];
 
     constructor(
@@ -50,7 +50,12 @@
       }
       );
     }
-
+    isHoverDisabled: boolean = false;
+    showDialog()
+    {
+      this.isHoverDisabled = true;
+      this.sidebarVisible1 = !this.sidebarVisible1
+    }
     savePvValues() {
       if (this.pv && this.pv.length > 0 && this.pv[0].id_pv !== undefined) {
         this.pv[0].zccm1=this.getZccPourcentage();
@@ -326,7 +331,6 @@
 
 
   visible: boolean = false; // Variable to control the visibility of the dialog
-  isHoverDisabled: boolean = false;
 
   toggleDialogAndHoverEffect(): void {
     this.getZcc2();
@@ -340,6 +344,57 @@ ngAfterViewInit() {
 
     this.getZcc2();
 }
+
+
+Intervalle(x: number, y: number, V1: number, V2: number, V3: number) {
+  console.log(`Checking Intervalle: x=${x}, y=${y}, V1=${V1}, V2=${V2}, V3=${V3}`);
+  return V1 >= y && V1 <= x &&
+         V2 >= y && V2 <= x &&
+         V3 >= y && V3 <= x;
+}
+
+ValidateEssais() {
+  // Check if all values are empty
+  const allEmpty = !(
+    this.pv[0].vt11 || this.pv[0].vt12 || this.pv[0].vm11 || this.pv[0].vm12 || this.pv[0].vm13 ||
+    this.pv[0].vt21 || this.pv[0].vt22 || this.pv[0].vm21 || this.pv[0].vm22 || this.pv[0].vm23 ||
+    this.pv[0].vt31 || this.pv[0].vt32 || this.pv[0].vm31 || this.pv[0].vm32 || this.pv[0].vm33 ||
+    this.pv[0].vt41 || this.pv[0].vt42 || this.pv[0].vm41 || this.pv[0].vm42 || this.pv[0].vm43 ||
+    this.pv[0].vt51 || this.pv[0].vt52 || this.pv[0].vm51 || this.pv[0].vm52 || this.pv[0].vm53
+  );
+
+  if (allEmpty) {
+    return "En Attente";
+  } else {
+    // Check if each interval is within range
+    const conform = (
+      this.Intervalle(this.pv[0].vt11 ?? 0, this.pv[0].vt12 ?? 0, this.pv[0].vm11 ?? 0, this.pv[0].vm12 ?? 0, this.pv[0].vm13 ?? 0) &&
+      this.Intervalle(this.pv[0].vt21 ?? 0, this.pv[0].vt22 ?? 0, this.pv[0].vm21 ?? 0, this.pv[0].vm22 ?? 0, this.pv[0].vm23 ?? 0) &&
+      this.Intervalle(this.pv[0].vt31 ?? 0, this.pv[0].vt32 ?? 0, this.pv[0].vm31 ?? 0, this.pv[0].vm32 ?? 0, this.pv[0].vm33 ?? 0) &&
+      this.Intervalle(this.pv[0].vt41 ?? 0, this.pv[0].vt42 ?? 0, this.pv[0].vm41 ?? 0, this.pv[0].vm42 ?? 0, this.pv[0].vm43 ?? 0) &&
+      this.Intervalle(this.pv[0].vt51 ?? 0, this.pv[0].vt52 ?? 0, this.pv[0].vm51 ?? 0, this.pv[0].vm52 ?? 0, this.pv[0].vm53 ?? 0)
+    );
+
+    return conform ? "Conforme" : "Non Conforme";
+  }
+}
+
+
+ValidateEssais2() {
+  if (
+    this.pv[0].na0 !== null &&
+    this.pv[0].na1 !== null &&
+    this.pv[0].nb0 !== null &&
+    this.pv[0].nb2 !== null &&
+    this.pv[0].nc0 !== null &&
+    this.pv[0].nc3 !== null
+  ) {
+    return "Conforme";
+  } else {
+    return "En Attente";
+  }
+}
+
 
 
 }

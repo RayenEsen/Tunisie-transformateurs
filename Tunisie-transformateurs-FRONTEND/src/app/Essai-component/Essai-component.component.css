@@ -310,7 +310,9 @@ img:hover {
   top: 12%;
   right: 4%;
 }
-
+::ng-deep .p-sidebar-left .p-icon {
+  color: black; /* Modern red color */
+}
 ::ng-deep .speedDialContainer a {
   background-color: white;
   color:rgba(18, 33, 81, 0.8);
@@ -326,4 +328,41 @@ img:hover {
   .speedDialContainer {
     display: none !important;
   }
+}
+
+
+::ng-deep .p-sidebar-left {
+  top: 0;
+  left: 0;
+  width: 35rem;
+  height: 100%;
+  background-color: #f4f4f4; /* Change background color to light gray */
+}
+
+
+
+
+::ng-deep .card-title {
+  color: #333; /* Dark gray text color */
+  margin: 10px 0; /* Adjust margin as needed */
+  padding: 10px; /* Add padding for better spacing */
+}
+
+::ng-deep .p-sidebar-content h5 {
+  color: #333; /* Dark gray text color */
+  margin: 5px 0; /* Reduce margin for tighter spacing */
+  padding: 8px; /* Adjust padding for better spacing */
+  border-bottom: 1px solid #ddd; /* Add a bottom border for separation */
+  font-size: larger;
+}
+
+::ng-deep .p-sidebar-content h5:last-child {
+  border-bottom: none; /* Remove bottom border from the last h5 element */
+}
+
+
+::ng-deep .p-sidebar-footer {
+  color: #333; /* Dark gray text color */
+  margin: 10px 0; /* Adjust margin as needed */
+  padding: 10px; /* Add padding for better spacing */
 }

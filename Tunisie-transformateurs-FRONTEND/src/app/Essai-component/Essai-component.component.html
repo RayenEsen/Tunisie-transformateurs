@@ -609,4 +609,21 @@
   </div>
 </p-dialog>
 
+<p-sidebar [(visible)]="sidebarVisible1" position="left">
+  <ng-template pTemplate="header"><h3 class="card-title" style="white-space: nowrap;color: black;">Historique</h3></ng-template>
+  <ng-template pTemplate="content">
+    <h5 style="white-space: nowrap;" >Rapport de transformation : {{this.ValidateEssais()}}</h5>
+    <h5 style="white-space: nowrap;">Mesure des resistances : {{this.ValidateEssais2()}}</h5>
+    <h5 style="white-space: nowrap;">Essais a vide : En Attente</h5>
+    <h5 style="white-space: nowrap;">Essais en charge : En Attente</h5>
+    <h5 style="white-space: nowrap;">Essais diélectrique : En Attente</h5>
+    <h5 style="white-space: nowrap;">Essai du liquide isolant : En Attente</h5>
+
+  </ng-template>
+  <ng-template pTemplate="footer" [ngStyle]="{'color': this.pv[0].resultat === 'En Attente' ? '#666' : '#333'}">
+    <span style="font-weight: bold;">Résultat final: </span>
+    <span>{{ this.pv[0].resultat }}</span>
+  </ng-template>
+
+  </p-sidebar>
 

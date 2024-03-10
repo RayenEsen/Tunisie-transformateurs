@@ -31,6 +31,7 @@ export class InscriptionComponentComponent implements OnInit {
 
   Inscription() {
     if (this.ValidateInputs()) {
+      this.Controleur.username = this.Controleur.nom+" "+this.Controleur.prenom
       this.ServiceC.AddControleur(this.Controleur).subscribe({
         next: () => {
             // User registration successful, navigate to the desired page (e.g., profile page)

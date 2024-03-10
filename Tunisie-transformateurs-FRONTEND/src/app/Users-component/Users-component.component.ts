@@ -180,6 +180,7 @@ Supprimer(id: string) {
       if (this.UserSelected && this.UserSelected.idC === id) {
         this.ServiceS.sessionDestroy();
         console.log('Session cleared successfully');
+        this.UserSelected = null; // Clear the selected user
       } // Closing parenthesis added here
     },
     error: (error) => {
@@ -187,6 +188,7 @@ Supprimer(id: string) {
     }
   });
 }
+
 
 
 search(keyword: string) {
