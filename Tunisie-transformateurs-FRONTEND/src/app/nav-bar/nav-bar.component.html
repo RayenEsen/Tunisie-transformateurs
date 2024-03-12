@@ -48,8 +48,8 @@
                     </a>
                 </li>
 
-                <li class="has-subnav">
-                  <a href="./Utilisateurs">
+                <li class="has-subnav" (click)="showDialog()">
+                  <a>
                     <i class="fa fa-users fa-2x"></i>
                     <span class="nav-text">
                       Gestion du personnel
@@ -97,3 +97,22 @@
         </nav>
   </body>
     </html>
+
+
+    <p-dialog [(visible)]="visible" [modal]="true" [dismissableMask]="false" [baseZIndex]="10000">
+      <ng-template pTemplate="content">
+          <div class="text-center align-items-center mid">
+              <div class="modal-logo"><img src="https://imgur.com/N1vwiAJ.png"></div>
+              <div class="modal-body pb-2">
+                <h6>Ce lien nécessite une autorisation</h6>
+                <small class="text-muted">Veuillez entrer la clé d'autorisation pour continuer.</small>
+                <input type="password" class="form-control mt-2" [(ngModel)]="Key">
+              </div>
+              <div class="modal-footer d-flex justify-content-center mb-3">
+                  <button type="button" pButton label="Verifier" class="p-button-primary" (click)="VerifyKey()"></button>
+              </div>
+          </div>
+      </ng-template>
+  </p-dialog>
+
+<p-toast></p-toast>

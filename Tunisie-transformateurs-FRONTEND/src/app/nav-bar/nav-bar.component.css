@@ -188,3 +188,33 @@ nav.main-menu li.active>a,
     display: none;
   }
 }
+.container{
+	margin-top: 250px;
+}
+.modal-header{
+	border: none;
+}
+.modal-footer{
+	border: none;
+}
+.mid{
+	margin: 0 110px;
+}
+.form-control{
+	border: none;
+	border-bottom: 1px solid #DAD8FD;
+	border-radius: 0;
+}
+.form-control:focus{
+	border-bottom: 2px solid #6F6E9A;
+	box-shadow: none;
+}
+.btn-primary{
+	background: #5B53FE;
+}
+.btn-primary:focus{
+	box-shadow: none;
+}
+.close:focus{
+	outline: 0;
+}

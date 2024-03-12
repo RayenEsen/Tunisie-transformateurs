@@ -9,6 +9,8 @@ import { EditProfileComponentComponent } from './EditProfile-component/EditProfi
 import { CreateAcountComponentComponent } from './CreateAcount-component/CreateAcount-component.component';
 import { PlanificationComponentComponent } from './Planification-component/Planification-component.component';
 import { AuthGuard } from './guards/auth.guard';
+import { AdministrationOnlyGuard } from './guards/administration-only.guard';
+
 import { InscriptionComponentComponent } from './Inscription-component/Inscription-component.component';
 import { ControleComponentComponent } from './Controle-component/Controle-component.component';
 import { BobinageComponentComponent } from './Bobinage-component/Bobinage-component.component';
@@ -32,7 +34,7 @@ const routes: Routes = [
   { path: 'Edit_profile' , component : EditProfileComponentComponent , canActivate: [AuthGuard]},
   { path: 'Sign_in' , component : CreateAcountComponentComponent},
   { path: 'Planification' , component : PlanificationComponentComponent , canActivate: [AuthGuard]},
-  { path: 'Utilisateurs' , component : UsersComponentComponent , canActivate: [AuthGuard]},
+  { path: 'Utilisateurs' , component : UsersComponentComponent , canActivate: [AdministrationOnlyGuard]},
   { path: 'Bobinage/:id/:etapenumero' , component : BobinageComponentComponent , canActivate: [AuthGuard]},
   { path: 'BobinageMT/:id/:etapenumero' , component : BobinageMTComponentComponent , canActivate: [AuthGuard]},
   { path: 'Magnetique/:id/:etapenumero' , component : MagnetiqueComponentComponent , canActivate: [AuthGuard]},

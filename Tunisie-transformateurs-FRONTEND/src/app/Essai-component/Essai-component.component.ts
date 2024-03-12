@@ -6,6 +6,7 @@
   import { SessionService } from '../utils/session-service.service';
   import { Event } from '../Shared/Event-service.model'
   import { EventServiceService } from '../Shared/Event-service.service'
+  import { MessageService } from 'primeng/api';
   @Component({
     selector: 'app-Essai-component',
     templateUrl: './Essai-component.component.html',
@@ -20,8 +21,14 @@
     items: any[] = [
       { label: 'Fiche de calcul', icon: 'pi pi-calculator', command: () => this.toggleDialogAndHoverEffect() },
       { label: 'Imprimer', icon: 'pi pi-print', command: () => this.onPrint() },
-      { label: 'Resultat des Tests', icon: 'pi pi-question', command: () => this.showDialog() }
+      { label: 'Resultat des Tests', icon: 'pi pi-question', command: () => this.showDialog() },
     ];
+
+    items2: any[] = [
+      { label: 'Sauvegarder', icon: 'pi pi-save', command: () => { this.getZcc2(); this.savePvValues(); } },
+      { label: 'Réfléchir', icon: 'pi pi-refresh', command: () => this.refreshPage() }
+    ];
+
 
     constructor(
       private router: Router,
@@ -29,8 +36,8 @@
       public service: TransformateurServiceService,
       public pvService: PvServiceService,
       public ServiceS : SessionService,
-      public eventService : EventServiceService
-
+      public eventService : EventServiceService,
+      public ServiceM : MessageService,
     ) { }
 
     ngOnInit() {
@@ -42,6 +49,7 @@
           (pvData: Pv[]) => {
             this.pv = pvData;
             console.log('Pv Data:', this.pv);
+            this.getZcc2()
           },
           error => {
             console.error('Error fetching Pv data:', error);
@@ -55,6 +63,9 @@
     {
       this.isHoverDisabled = true;
       this.sidebarVisible1 = !this.sidebarVisible1
+    }
+    refreshPage() {
+      window.location.reload();
     }
     savePvValues() {
       if (this.pv && this.pv.length > 0 && this.pv[0].id_pv !== undefined) {
@@ -106,7 +117,7 @@
               });
           }
             // Redirect the user to the specified page
-            this.router.navigate(['/Ajouter_Transformateur/', this.transformateurId]);
+            this.ServiceM.add({ severity: 'success', summary: 'Succès', detail: 'Les informations de Pv sont sauvegardées' });
           },
           error => {
             console.error('Error updating Pv values', error);
@@ -276,12 +287,24 @@
             this.Po = this.pv[0]?.wom ?? 0; // Default value of 0 if this.pv[0].wom is undefined
             this.Zcc2 = Math.sqrt((this.Ur * this.Ur) + (this.Ux * this.Ux));
       }
-      //Calculations for Aluminum
-      else if (this.service.list[0].libelle === "Aluminum" && this.pv[0].temp !== undefined &&
-      this.pv[0].na1 !== undefined && this.pv[0].nb2 !== undefined && this.pv[0].nc3 !== undefined &&
-      this.pv[0].na0 !== undefined && this.pv[0].nb0 !== undefined && this.pv[0].nc0 !== undefined &&
-      this.pv[0].wccm1 !== undefined)
-      {
+      else if (this.service.list[0].libelle === "Aluminum" &&
+      this.pv[0].temp !== undefined &&
+      this.pv[0].na1 !== undefined &&
+      this.pv[0].nb2 !== undefined &&
+      this.pv[0].nc3 !== undefined &&
+      this.pv[0].na0 !== undefined &&
+      this.pv[0].nb0 !== undefined &&
+      this.pv[0].nc0 !== undefined &&
+      this.pv[0].wccm1 !== undefined &&
+      this.pv[0].temp !== null &&
+      this.pv[0].na1 !== null &&
+      this.pv[0].nb2 !== null &&
+      this.pv[0].nc3 !== null &&
+      this.pv[0].na0 !== null &&
+      this.pv[0].nb0 !== null &&
+      this.pv[0].nc0 !== null &&
+      this.pv[0].wccm1 !== null) {
+
         this.cc2 = 300 / (this.pv[0].temp+225)
         this.cc = (235 + 75) / (235 + this.pv[0].temp);
 
@@ -325,6 +348,10 @@
         this.Ur = this.wcc2 / (this.power * 10);
         this.Zcc2 = Math.sqrt(this.Ur * this.Ur + this.Ux * this.Ux);
       }
+      else {
+        // Handle the case when data is not available or properties are undefined
+        console.error('Invalid data or undefined properties in pv[0].');
+    }
     }
 
 
@@ -340,11 +367,6 @@
     }, 300); // Adjust the delay as needed
 }
 
-ngAfterViewInit() {
-
-    this.getZcc2();
-}
-
 
 Intervalle(x: number, y: number, V1: number, V2: number, V3: number) {
   console.log(`Checking Intervalle: x=${x}, y=${y}, V1=${V1}, V2=${V2}, V3=${V3}`);
@@ -355,15 +377,36 @@ Intervalle(x: number, y: number, V1: number, V2: number, V3: number) {
 
 ValidateEssais() {
   // Check if all values are empty
-  const allEmpty = !(
-    this.pv[0].vt11 || this.pv[0].vt12 || this.pv[0].vm11 || this.pv[0].vm12 || this.pv[0].vm13 ||
-    this.pv[0].vt21 || this.pv[0].vt22 || this.pv[0].vm21 || this.pv[0].vm22 || this.pv[0].vm23 ||
-    this.pv[0].vt31 || this.pv[0].vt32 || this.pv[0].vm31 || this.pv[0].vm32 || this.pv[0].vm33 ||
-    this.pv[0].vt41 || this.pv[0].vt42 || this.pv[0].vm41 || this.pv[0].vm42 || this.pv[0].vm43 ||
-    this.pv[0].vt51 || this.pv[0].vt52 || this.pv[0].vm51 || this.pv[0].vm52 || this.pv[0].vm53
+  const allNullOrZero = (
+    this.pv[0].vt11 === null || this.pv[0].vt11 === 0 ||
+    this.pv[0].vt12 === null || this.pv[0].vt12 === 0 ||
+    this.pv[0].vm11 === null || this.pv[0].vm11 === 0 ||
+    this.pv[0].vm12 === null || this.pv[0].vm12 === 0 ||
+    this.pv[0].vm13 === null || this.pv[0].vm13 === 0 ||
+    this.pv[0].vt21 === null || this.pv[0].vt21 === 0 ||
+    this.pv[0].vt22 === null || this.pv[0].vt22 === 0 ||
+    this.pv[0].vm21 === null || this.pv[0].vm21 === 0 ||
+    this.pv[0].vm22 === null || this.pv[0].vm22 === 0 ||
+    this.pv[0].vm23 === null || this.pv[0].vm23 === 0 ||
+    this.pv[0].vt31 === null || this.pv[0].vt31 === 0 ||
+    this.pv[0].vt32 === null || this.pv[0].vt32 === 0 ||
+    this.pv[0].vm31 === null || this.pv[0].vm31 === 0 ||
+    this.pv[0].vm32 === null || this.pv[0].vm32 === 0 ||
+    this.pv[0].vm33 === null || this.pv[0].vm33 === 0 ||
+    this.pv[0].vt41 === null || this.pv[0].vt41 === 0 ||
+    this.pv[0].vt42 === null || this.pv[0].vt42 === 0 ||
+    this.pv[0].vm41 === null || this.pv[0].vm41 === 0 ||
+    this.pv[0].vm42 === null || this.pv[0].vm42 === 0 ||
+    this.pv[0].vm43 === null || this.pv[0].vm43 === 0 ||
+    this.pv[0].vt51 === null || this.pv[0].vt51 === 0 ||
+    this.pv[0].vt52 === null || this.pv[0].vt52 === 0 ||
+    this.pv[0].vm51 === null || this.pv[0].vm51 === 0 ||
+    this.pv[0].vm52 === null || this.pv[0].vm52 === 0 ||
+    this.pv[0].vm53 === null || this.pv[0].vm53 === 0
   );
 
-  if (allEmpty) {
+
+  if (allNullOrZero) {
     return "En Attente";
   } else {
     // Check if each interval is within range
@@ -396,5 +439,12 @@ ValidateEssais2() {
 }
 
 
+disableHoverEffect(event: MouseEvent) {
+  // Check if the left mouse button was clicked (button code: 0 for left-click)
+  if (event.button === 0) {
+    // Disable hover effects
+    this.isHoverDisabled = true;
+  }
+}
 
 }

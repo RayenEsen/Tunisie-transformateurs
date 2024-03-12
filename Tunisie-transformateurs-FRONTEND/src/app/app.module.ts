@@ -65,6 +65,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { AvatarModule } from 'primeng/avatar';
 import { ChartModule } from 'primeng/chart';
 import { OutilsComponentComponent } from './outils-component/outils-component.component';
+import { ContextMenuModule } from 'primeng/contextmenu';
 
 @NgModule({
   declarations: [
@@ -133,6 +134,7 @@ import { OutilsComponentComponent } from './outils-component/outils-component.co
     SpeedDialModule,
     InputGroupModule,
     InputGroupAddonModule,
+    ContextMenuModule,
     ],
   providers: [MessageService,ConfirmationService],
   bootstrap: [AppComponent]

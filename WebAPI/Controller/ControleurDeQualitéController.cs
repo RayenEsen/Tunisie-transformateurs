@@ -24,13 +24,15 @@ namespace WebAPI.Controller
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ControleurDeQualité>>> GetcontroleurDeQualités()
         {
-            // Include the related pfp data
+            // Include the related pfp data and filter by designation
             var controleurs = await _context.controleurDeQualités
-                                        .Include(c => c.Pfp) // Assuming the navigation property is called "Pfp"
-                                        .ToListAsync();
+                                            .Include(c => c.Pfp) // Assuming the navigation property is called "Pfp"
+                                            .Where(c => c.Designation != "Administrateur")
+                                            .ToListAsync();
 
             return controleurs;
         }
+
 
 
         // GET: api/ControleurDeQualité/5
