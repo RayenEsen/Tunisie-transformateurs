@@ -14,7 +14,6 @@ import { MessageService } from 'primeng/api';
 })
 export class EditProfileComponentComponent implements OnInit {
 
-
   Controleur: ControleurDeQualite = new ControleurDeQualite;
   Confirm : string = '';
   selectedFile?: File ; // Track the selected profile picture file
@@ -22,7 +21,6 @@ export class EditProfileComponentComponent implements OnInit {
   defaultImageUrl = 'https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg';
   imageData: string | undefined;
   imageData1: string | undefined;
-
 
   constructor(private messageService: MessageService,public ServiceC : ControlleurServiceService,public ServiceS : SessionService, public ServicePfp : PfpServiceService) { }
 
@@ -105,8 +103,6 @@ export class EditProfileComponentComponent implements OnInit {
       this.messageService.add({ severity: 'error', summary: 'Erreur', detail: 'Le mot de passe est Obligatoire' });
     }
   }
-
-
 
 
   onFileSelected(event: any) {

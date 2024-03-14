@@ -66,6 +66,7 @@ import { AvatarModule } from 'primeng/avatar';
 import { ChartModule } from 'primeng/chart';
 import { OutilsComponentComponent } from './outils-component/outils-component.component';
 import { ContextMenuModule } from 'primeng/contextmenu';
+import { DashBoardComponentComponent } from './DashBoard-component/DashBoard-component.component';
 
 @NgModule({
   declarations: [
@@ -94,7 +95,8 @@ import { ContextMenuModule } from 'primeng/contextmenu';
       LivraisonComponentComponent,
       PeintureComponentComponent,
       ConseptionComponentComponent,
-      OutilsComponentComponent
+      OutilsComponentComponent,
+      DashBoardComponentComponent
    ],
   imports: [
     BrowserModule,

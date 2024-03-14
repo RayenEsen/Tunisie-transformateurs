@@ -35,11 +35,11 @@ export class NavBarComponent implements OnInit {
     this.ServiceS.sessionDestroy();
   }
   visible : boolean = false;
-  showDialog()
+  showDialog(url : string)
   {
   if(this.ServiceS.Controleur.designation==="Administrateur")
   {
-    this.router.navigate(['/Utilisateurs']);
+    this.router.navigate(['/'+url+'']);
   }
   else
   {
@@ -55,7 +55,8 @@ export class NavBarComponent implements OnInit {
         next: (Response) => {
           this.visible = false;
           this.Key = '';
-          this.router.navigate(['/Utilisateurs']);
+          this.ServiceM.add({ severity: 'success', summary: 'Accès accordé', detail: 'Access to Administration granted' });
+          this.router.navigate(['/Edit_profile']);
         },
         error: (error) => {
           console.error('Error updating controller:', error);

@@ -48,16 +48,17 @@
                     </a>
                 </li>
 
-                <li class="has-subnav" (click)="showDialog()">
+                <li class="has-subnav" (click)="showDialog('Utilisateurs')">
                   <a>
                     <i class="fa fa-users fa-2x"></i>
                     <span class="nav-text">
                       Gestion du personnel
-                      </span>
+                    </span>
                   </a>
-              </li>
-              <li>
-                  <a href="#">
+                </li>
+
+              <li class="has-subnav" (click)="showDialog('DashBoard')">
+                  <a>
                     <i class="fa fa-line-chart"></i> <!-- Chart icon -->
                     <span class="nav-text">
                           Tableau de bord

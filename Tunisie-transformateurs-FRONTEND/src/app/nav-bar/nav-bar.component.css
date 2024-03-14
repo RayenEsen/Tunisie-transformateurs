@@ -188,33 +188,56 @@ nav.main-menu li.active>a,
     display: none;
   }
 }
-.container{
-	margin-top: 250px;
+
+
+.container {
+  margin-top: 250px;
 }
-.modal-header{
-	border: none;
+
+.modal-header {
+  border: none;
 }
-.modal-footer{
-	border: none;
+
+.modal-footer {
+  border: none;
 }
-.mid{
-	margin: 0 110px;
+
+.mid {
+  margin: 0 110px;
 }
-.form-control{
-	border: none;
-	border-bottom: 1px solid #DAD8FD;
-	border-radius: 0;
+
+.form-control {
+  border: none;
+  border-bottom: 1px solid #DAD8FD;
+  border-radius: 0;
 }
-.form-control:focus{
-	border-bottom: 2px solid #6F6E9A;
-	box-shadow: none;
+
+.form-control:focus {
+  border-bottom: 2px solid #6F6E9A;
+  box-shadow: none;
 }
-.btn-primary{
-	background: #5B53FE;
+
+.btn-primary {
+  background: #5B53FE;
 }
-.btn-primary:focus{
-	box-shadow: none;
+
+.btn-primary:focus {
+  box-shadow: none;
 }
-.close:focus{
-	outline: 0;
+
+.close:focus {
+  outline: 0;
+}
+
+
+::ng-deep .p-dialog .p-dialog-header {
+  border-bottom: 0 none;
+  background: #ffffff;
+  color: #374151;
+  padding: 0rem;
+  border-top-right-radius: 6px;
+  border-top-left-radius: 6px;
+}
+.has-subnav:hover {
+  cursor: pointer; /* Change cursor to pointer when hovering */
 }

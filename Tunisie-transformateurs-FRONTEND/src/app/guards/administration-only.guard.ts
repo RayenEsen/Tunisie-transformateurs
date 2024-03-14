@@ -9,7 +9,7 @@ export class AdministrationOnlyGuard implements CanActivate {
   constructor(private sessionService: SessionService, private router: Router) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    const protectedRoutes: string[] = ['/Utilisateurs'];
+    const protectedRoutes: string[] = ['/Utilisateurs','/DashBoard'];
 
     // Check if the user is authenticated and is an administrator
     const isAuthenticated: boolean = this.sessionService.hasSession();

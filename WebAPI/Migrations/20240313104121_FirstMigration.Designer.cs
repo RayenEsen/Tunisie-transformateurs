@@ -12,8 +12,8 @@ using WebAPI.Model;
 namespace WebAPI.Migrations
 {
     [DbContext(typeof(TransformateurContext))]
-    [Migration("20240301034744_sfdhsdh")]
-    partial class sfdhsdh
+    [Migration("20240313104121_FirstMigration")]
+    partial class FirstMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -42,8 +42,8 @@ namespace WebAPI.Migrations
                     b.Property<float?>("Bt3")
                         .HasColumnType("real");
 
-                    b.Property<float?>("Cnc")
-                        .HasColumnType("real");
+                    b.Property<string>("Cnc")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nom")
                         .IsRequired()
@@ -79,8 +79,8 @@ namespace WebAPI.Migrations
                     b.Property<float?>("Bt3")
                         .HasColumnType("real");
 
-                    b.Property<float?>("Cnc")
-                        .HasColumnType("real");
+                    b.Property<string>("Cnc")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nom")
                         .IsRequired()
@@ -247,6 +247,51 @@ namespace WebAPI.Migrations
                     b.ToTable("ecuvages");
                 });
 
+            modelBuilder.Entity("WebAPI.Model.EcuvageValues", b =>
+                {
+                    b.Property<int>("IdEcuvageValues")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdEcuvageValues"));
+
+                    b.Property<int>("Numero")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("V1")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("V2")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("V3")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("V4")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("V5")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("V6")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("V7")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("V8")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("V9")
+                        .HasColumnType("int");
+
+                    b.HasKey("IdEcuvageValues");
+
+                    b.HasIndex("Numero");
+
+                    b.ToTable("EcuvageValues");
+                });
+
             modelBuilder.Entity("WebAPI.Model.Electrique", b =>
                 {
                     b.Property<int>("IdMagnetique")
@@ -255,8 +300,8 @@ namespace WebAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdMagnetique"));
 
-                    b.Property<float?>("Cnc")
-                        .HasColumnType("real");
+                    b.Property<string>("Cnc")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Numero")
                         .HasColumnType("int");
@@ -808,6 +853,10 @@ namespace WebAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Borne")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Bornesembrochables")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -851,6 +900,10 @@ namespace WebAPI.Migrations
                         .HasColumnType("real");
 
                     b.Property<string>("Galet")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Isolateur")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -971,6 +1024,17 @@ namespace WebAPI.Migrations
                 {
                     b.HasOne("WebAPI.Model.Transformateur", "Transformateur")
                         .WithMany("Ecuvage")
+                        .HasForeignKey("Numero")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Transformateur");
+                });
+
+            modelBuilder.Entity("WebAPI.Model.EcuvageValues", b =>
+                {
+                    b.HasOne("WebAPI.Model.Transformateur", "Transformateur")
+                        .WithMany("EcuvageValues")
                         .HasForeignKey("Numero")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1117,6 +1181,8 @@ namespace WebAPI.Migrations
                     b.Navigation("Conseption");
 
                     b.Navigation("Ecuvage");
+
+                    b.Navigation("EcuvageValues");
 
                     b.Navigation("Electriques");
 

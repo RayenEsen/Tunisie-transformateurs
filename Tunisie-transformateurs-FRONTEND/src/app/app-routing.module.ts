@@ -25,6 +25,7 @@ import { LivraisonComponentComponent } from './Livraison-component/Livraison-com
 import { PeintureComponentComponent } from './Peinture-component/Peinture-component.component';
 import { ConseptionComponentComponent } from './Conseption-component/Conseption-component.component';
 import { OutilsComponentComponent } from './outils-component/outils-component.component';
+import { DashBoardComponentComponent } from './DashBoard-component/DashBoard-component.component';
 const routes: Routes = [
   { path: 'Transformateur', component: TransformateurInfoComponent , canActivate: [AuthGuard]},
   { path: 'Ajouter_Transformateur', component: Add_ModifyTransformateurComponent , canActivate: [AuthGuard]},
@@ -46,6 +47,7 @@ const routes: Routes = [
   { path: 'Peinture/:id/:etapenumero' , component : PeintureComponentComponent, canActivate: [AuthGuard]},
   { path: 'Conseption/:id/:etapenumero' , component : ConseptionComponentComponent, canActivate: [AuthGuard]},
   { path: 'Outils' , component : OutilsComponentComponent, canActivate: [AuthGuard]},
+  { path: 'DashBoard' , component : DashBoardComponentComponent, canActivate: [AdministrationOnlyGuard]},
 
   { path: 'Sign_up' , component : InscriptionComponentComponent},
   { path: 'Controle/:id' , component : ControleComponentComponent, canActivate: [AuthGuard]},

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace WebAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class Test : Migration
+    public partial class FirstMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -35,12 +35,27 @@ namespace WebAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "OperateurSuggestions",
+                columns: table => new
+                {
+                    IdOperateur = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nom = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OperateurSuggestions", x => x.IdOperateur);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "transformateurs",
                 columns: table => new
                 {
                     Numero = table.Column<int>(type: "int", nullable: false),
                     Marque = table.Column<string>(type: "nvarchar(100)", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DateLivraison = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DateFin = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Client = table.Column<string>(type: "nvarchar(100)", nullable: false),
                     Norme = table.Column<string>(type: "nvarchar(100)", nullable: false),
@@ -50,6 +65,7 @@ namespace WebAPI.Migrations
                     Btu2 = table.Column<float>(type: "real", nullable: false),
                     Bti2 = table.Column<float>(type: "real", nullable: false),
                     Nbphase = table.Column<int>(type: "int", nullable: false),
+                    Quantite = table.Column<int>(type: "int", nullable: false),
                     Prises = table.Column<string>(type: "nvarchar(100)", nullable: false),
                     Couplage = table.Column<string>(type: "nvarchar(100)", nullable: false),
                     Cooling = table.Column<string>(type: "nvarchar(100)", nullable: false),
@@ -57,6 +73,11 @@ namespace WebAPI.Migrations
                     Accessoires = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Accessoires2 = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Etat = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Galet = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Capot = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Sans = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Borne = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Isolateur = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Bornesembrochables = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Frequency = table.Column<float>(type: "real", nullable: false)
                 },
@@ -88,6 +109,26 @@ namespace WebAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "pfps",
+                columns: table => new
+                {
+                    Idpfp = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IdC = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Pathway = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_pfps", x => x.Idpfp);
+                    table.ForeignKey(
+                        name: "FK_pfps_controleurDeQualités_IdC",
+                        column: x => x.IdC,
+                        principalTable: "controleurDeQualités",
+                        principalColumn: "IdC",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Bobinage",
                 columns: table => new
                 {
@@ -98,18 +139,12 @@ namespace WebAPI.Migrations
                     Bt2 = table.Column<float>(type: "real", nullable: true),
                     Bt3 = table.Column<float>(type: "real", nullable: true),
                     Prevue = table.Column<float>(type: "real", nullable: true),
-                    Cnc = table.Column<float>(type: "real", nullable: true),
-                    Nom = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ControleurIdC = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    Cnc = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Nom = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Bobinage", x => x.IdBobinage);
-                    table.ForeignKey(
-                        name: "FK_Bobinage_controleurDeQualités_ControleurIdC",
-                        column: x => x.ControleurIdC,
-                        principalTable: "controleurDeQualités",
-                        principalColumn: "IdC");
                     table.ForeignKey(
                         name: "FK_Bobinage_transformateurs_Numero",
                         column: x => x.Numero,
@@ -129,7 +164,7 @@ namespace WebAPI.Migrations
                     Bt2 = table.Column<float>(type: "real", nullable: true),
                     Bt3 = table.Column<float>(type: "real", nullable: true),
                     Prevue = table.Column<float>(type: "real", nullable: true),
-                    Cnc = table.Column<float>(type: "real", nullable: true),
+                    Cnc = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Nom = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
@@ -137,6 +172,33 @@ namespace WebAPI.Migrations
                     table.PrimaryKey("PK_bobinageMTs", x => x.IdBobinageMT);
                     table.ForeignKey(
                         name: "FK_bobinageMTs_transformateurs_Numero",
+                        column: x => x.Numero,
+                        principalTable: "transformateurs",
+                        principalColumn: "Numero",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Conseptions",
+                columns: table => new
+                {
+                    IdConseption = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Numero = table.Column<int>(type: "int", nullable: false),
+                    Nom = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Date = table.Column<DateOnly>(type: "date", nullable: true),
+                    Quantity = table.Column<int>(type: "int", nullable: true),
+                    Quantity2 = table.Column<int>(type: "int", nullable: true),
+                    ConseptionNumber = table.Column<int>(type: "int", nullable: true),
+                    Conformiter = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Observation = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Image = table.Column<byte[]>(type: "varbinary(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Conseptions", x => x.IdConseption);
+                    table.ForeignKey(
+                        name: "FK_Conseptions_transformateurs_Numero",
                         column: x => x.Numero,
                         principalTable: "transformateurs",
                         principalColumn: "Numero",
@@ -165,6 +227,34 @@ namespace WebAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "EcuvageValues",
+                columns: table => new
+                {
+                    IdEcuvageValues = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Numero = table.Column<int>(type: "int", nullable: false),
+                    V1 = table.Column<int>(type: "int", nullable: true),
+                    V2 = table.Column<int>(type: "int", nullable: true),
+                    V3 = table.Column<int>(type: "int", nullable: true),
+                    V4 = table.Column<int>(type: "int", nullable: true),
+                    V5 = table.Column<int>(type: "int", nullable: true),
+                    V6 = table.Column<int>(type: "int", nullable: true),
+                    V7 = table.Column<int>(type: "int", nullable: true),
+                    V8 = table.Column<int>(type: "int", nullable: true),
+                    V9 = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EcuvageValues", x => x.IdEcuvageValues);
+                    table.ForeignKey(
+                        name: "FK_EcuvageValues_transformateurs_Numero",
+                        column: x => x.Numero,
+                        principalTable: "transformateurs",
+                        principalColumn: "Numero",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Electrique",
                 columns: table => new
                 {
@@ -176,7 +266,7 @@ namespace WebAPI.Migrations
                     P3 = table.Column<float>(type: "real", nullable: true),
                     P4 = table.Column<float>(type: "real", nullable: true),
                     P5 = table.Column<float>(type: "real", nullable: true),
-                    Cnc = table.Column<float>(type: "real", nullable: true)
+                    Cnc = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -224,7 +314,11 @@ namespace WebAPI.Migrations
                     DateDebut = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DateFin = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Etat = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Observation = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Observation = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Operateur1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Operateur2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Controleur = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Verificateur = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -292,6 +386,42 @@ namespace WebAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "peintures",
+                columns: table => new
+                {
+                    IdPeinture = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Numerop = table.Column<int>(type: "int", nullable: false),
+                    Numero = table.Column<int>(type: "int", nullable: false),
+                    DatePentiure = table.Column<DateOnly>(type: "date", nullable: true),
+                    Fuite = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Penture = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Isolateur = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Marquage = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Neutre = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Terre = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Commut = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Soupage = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Signature = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Vanne = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Relais = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Doigt = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Cosse = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Observation = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Cnc = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_peintures", x => x.IdPeinture);
+                    table.ForeignKey(
+                        name: "FK_peintures_transformateurs_Numero",
+                        column: x => x.Numero,
+                        principalTable: "transformateurs",
+                        principalColumn: "Numero",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "pvs",
                 columns: table => new
                 {
@@ -301,6 +431,7 @@ namespace WebAPI.Migrations
                     IdC = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Resultat = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Technique = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Tappings = table.Column<int>(type: "int", nullable: true),
                     Version = table.Column<int>(type: "int", nullable: true),
                     Vt11 = table.Column<float>(type: "real", nullable: true),
@@ -383,7 +514,7 @@ namespace WebAPI.Migrations
                     Pressionf = table.Column<float>(type: "real", nullable: true),
                     Hd = table.Column<float>(type: "real", nullable: true),
                     Hf = table.Column<float>(type: "real", nullable: true),
-                    Cnc = table.Column<float>(type: "real", nullable: true),
+                    Cnc = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Controleur = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Observations = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -399,33 +530,26 @@ namespace WebAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ControleurDeQualitéEtape",
+                name: "ConseptionValues",
                 columns: table => new
                 {
-                    ControleursIdC = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    EtapesId_Etape = table.Column<int>(type: "int", nullable: false)
+                    ValueId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IdConseption = table.Column<int>(type: "int", nullable: false),
+                    Nom = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Prevue = table.Column<float>(type: "real", nullable: true),
+                    Mesuree = table.Column<float>(type: "real", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ControleurDeQualitéEtape", x => new { x.ControleursIdC, x.EtapesId_Etape });
+                    table.PrimaryKey("PK_ConseptionValues", x => x.ValueId);
                     table.ForeignKey(
-                        name: "FK_ControleurDeQualitéEtape_controleurDeQualités_ControleursIdC",
-                        column: x => x.ControleursIdC,
-                        principalTable: "controleurDeQualités",
-                        principalColumn: "IdC",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ControleurDeQualitéEtape_etapes_EtapesId_Etape",
-                        column: x => x.EtapesId_Etape,
-                        principalTable: "etapes",
-                        principalColumn: "Id_Etape",
+                        name: "FK_ConseptionValues_Conseptions_IdConseption",
+                        column: x => x.IdConseption,
+                        principalTable: "Conseptions",
+                        principalColumn: "IdConseption",
                         onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Bobinage_ControleurIdC",
-                table: "Bobinage",
-                column: "ControleurIdC");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Bobinage_Numero",
@@ -438,13 +562,23 @@ namespace WebAPI.Migrations
                 column: "Numero");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ControleurDeQualitéEtape_EtapesId_Etape",
-                table: "ControleurDeQualitéEtape",
-                column: "EtapesId_Etape");
+                name: "IX_Conseptions_Numero",
+                table: "Conseptions",
+                column: "Numero");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ConseptionValues_IdConseption",
+                table: "ConseptionValues",
+                column: "IdConseption");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ecuvages_Numero",
                 table: "ecuvages",
+                column: "Numero");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EcuvageValues_Numero",
+                table: "EcuvageValues",
                 column: "Numero");
 
             migrationBuilder.CreateIndex(
@@ -478,6 +612,17 @@ namespace WebAPI.Migrations
                 column: "Numero");
 
             migrationBuilder.CreateIndex(
+                name: "IX_peintures_Numero",
+                table: "peintures",
+                column: "Numero");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_pfps_IdC",
+                table: "pfps",
+                column: "IdC",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_pvs_Id_t",
                 table: "pvs",
                 column: "Id_t",
@@ -504,16 +649,22 @@ namespace WebAPI.Migrations
                 name: "bobinageMTs");
 
             migrationBuilder.DropTable(
-                name: "ControleurDeQualitéEtape");
+                name: "ConseptionValues");
 
             migrationBuilder.DropTable(
                 name: "ecuvages");
+
+            migrationBuilder.DropTable(
+                name: "EcuvageValues");
 
             migrationBuilder.DropTable(
                 name: "Electrique");
 
             migrationBuilder.DropTable(
                 name: "Etape1");
+
+            migrationBuilder.DropTable(
+                name: "etapes");
 
             migrationBuilder.DropTable(
                 name: "events");
@@ -525,13 +676,22 @@ namespace WebAPI.Migrations
                 name: "montages");
 
             migrationBuilder.DropTable(
+                name: "OperateurSuggestions");
+
+            migrationBuilder.DropTable(
+                name: "peintures");
+
+            migrationBuilder.DropTable(
+                name: "pfps");
+
+            migrationBuilder.DropTable(
                 name: "pvs");
 
             migrationBuilder.DropTable(
                 name: "remplissages");
 
             migrationBuilder.DropTable(
-                name: "etapes");
+                name: "Conseptions");
 
             migrationBuilder.DropTable(
                 name: "controleurDeQualités");
