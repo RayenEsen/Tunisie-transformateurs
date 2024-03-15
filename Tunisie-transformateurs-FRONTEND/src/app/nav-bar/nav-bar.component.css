@@ -230,14 +230,7 @@ nav.main-menu li.active>a,
 }
 
 
-::ng-deep .p-dialog .p-dialog-header {
-  border-bottom: 0 none;
-  background: #ffffff;
-  color: #374151;
-  padding: 0rem;
-  border-top-right-radius: 6px;
-  border-top-left-radius: 6px;
-}
+
 .has-subnav:hover {
   cursor: pointer; /* Change cursor to pointer when hovering */
 }

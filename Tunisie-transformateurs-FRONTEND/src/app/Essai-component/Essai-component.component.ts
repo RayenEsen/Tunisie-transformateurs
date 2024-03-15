@@ -140,6 +140,8 @@
       window.print();
     }
 
+
+
     getIOPourcentageMesurees()
     {
       if(this.pv[0].iom)

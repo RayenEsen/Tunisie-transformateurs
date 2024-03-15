@@ -78,7 +78,9 @@ export class AddComponentComponent implements OnInit {
   ]
   Missions: any[] =[
     {name : 'Production'},
-    {name : 'Reparation'}
+    {name : 'Reparation'},
+    {name : 'Prototype'},
+
   ]
   etat : any;
   selectedMission: any; // Declare selectedCountry property
@@ -180,7 +182,7 @@ export class AddComponentComponent implements OnInit {
       this.transformateurAjouter.mtu2 = this.getI1();
       this.transformateurAjouter.bti2 = this.getI2();
       this.transformateurAjouter.etat = this.etat.name;
-      this.transformateurAjouter.norme= "CEI76";
+      this.transformateurAjouter.norme= "CEI60076";
       this.transformateurAjouter.isolateur=this.SelectedNode.label;
       let foundMatch = false;
 

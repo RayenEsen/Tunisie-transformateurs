@@ -108,41 +108,46 @@
                 <td class="text-center colfix">1</td>
                 <td class="text-center colfix"><input class="text-center colfix" type="number" readonly [value]="this.pv[0].vt11?.toFixed(3)"></td>
                 <td class="text-center colfix"><input class="text-center colfix" type="number" readonly [value]="this.pv[0].vt12?.toFixed(3)"></td>
-                <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="pv[0].vm11"></td>
-                <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="pv[0].vm12"></td>
-                <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="pv[0].vm13"></td>
+                <td class="text-center colfix">
+                  <input #input1 (keydown.enter)="input2.focus()" class="text-center colfix" type="number" [(ngModel)]="pv[0].vm11">
+                </td>
+                <td class="text-center colfix">
+                  <input #input2 (keydown.enter)="input3.focus()" class="text-center colfix" type="number" [(ngModel)]="pv[0].vm12">
+                </td>
+
+                <td class="text-center colfix"><input #input3 (keydown.enter)="input4.focus()" class="text-center colfix" type="number"[(ngModel)]="pv[0].vm13"></td>
               </tr>
               <tr>
                 <td class="text-center colfix">2</td>
                 <td class="text-center colfix"><input class="text-center colfix" type="number" readonly [value]="this.pv[0].vt21?.toFixed(3)"></td>
                 <td class="text-center colfix"><input class="text-center colfix" type="number" readonly [value]="this.pv[0].vt22?.toFixed(3)"></td>
-                <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="pv[0].vm21"></td>
-                <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="pv[0].vm22"></td>
-                <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="pv[0].vm23"></td>
+                <td class="text-center colfix"><input #input4 (keydown.enter)="input5.focus()" class="text-center colfix" type="number"[(ngModel)]="pv[0].vm21"></td>
+                <td class="text-center colfix"><input #input5 (keydown.enter)="input6.focus()" class="text-center colfix" type="number"[(ngModel)]="pv[0].vm22"></td>
+                <td class="text-center colfix"><input #input6 (keydown.enter)="input7.focus()" class="text-center colfix" type="number"[(ngModel)]="pv[0].vm23"></td>
               </tr>
               <tr>
                 <td class="text-center colfix">3</td>
                 <td class="text-center colfix"><input class="text-center colfix" type="number" readonly [value]="this.pv[0].vt31?.toFixed(3)"></td>
                 <td class="text-center colfix"><input class="text-center colfix" type="number" readonly [value]="this.pv[0].vt32?.toFixed(3)"></td>
-                <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="pv[0].vm31"></td>
-                <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="pv[0].vm32"></td>
-                <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="pv[0].vm33"></td>
+                <td class="text-center colfix"><input #input7 (keydown.enter)="input8.focus()" class="text-center colfix" type="number"[(ngModel)]="pv[0].vm31"></td>
+                <td class="text-center colfix"><input #input8 (keydown.enter)="input9.focus()" class="text-center colfix" type="number"[(ngModel)]="pv[0].vm32"></td>
+                <td class="text-center colfix"><input #input9 (keydown.enter)="input10.focus()" class="text-center colfix" type="number"[(ngModel)]="pv[0].vm33"></td>
               </tr>
               <tr>
                 <td class="text-center colfix">4</td>
                 <td class="text-center colfix"><input class="text-center colfix" type="number" readonly [value]="this.pv[0].vt41?.toFixed(3)"></td>
                 <td class="text-center colfix"><input class="text-center colfix" type="number" readonly [value]="this.pv[0].vt42?.toFixed(3)"></td>
-                <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="pv[0].vm41"></td>
-                <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="pv[0].vm42"></td>
-                <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="pv[0].vm43"></td>
+                <td class="text-center colfix"><input #input10 (keydown.enter)="input11.focus()" class="text-center colfix" type="number"[(ngModel)]="pv[0].vm41"></td>
+                <td class="text-center colfix"><input #input11 (keydown.enter)="input12.focus()"  class="text-center colfix" type="number"[(ngModel)]="pv[0].vm42"></td>
+                <td class="text-center colfix"><input #input12 (keydown.enter)="input13.focus()" class="text-center colfix" type="number"[(ngModel)]="pv[0].vm43"></td>
               </tr>
               <tr>
                 <td class="text-center colfix">5</td>
                 <td class="text-center colfix"><input class="text-center colfix" type="number" readonly [value]="this.pv[0].vt51?.toFixed(3)"></td>
                 <td class="text-center colfix"><input class="text-center colfix" type="number" readonly [value]="this.pv[0].vt52?.toFixed(3)"></td>
-                <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="pv[0].vm51"></td>
-                <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="pv[0].vm52"></td>
-                <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="pv[0].vm53"></td>
+                <td class="text-center colfix"><input #input13 (keydown.enter)="input14.focus()" class="text-center colfix" type="number"[(ngModel)]="pv[0].vm51"></td>
+                <td class="text-center colfix"><input #input14 (keydown.enter)="input15.focus()" class="text-center colfix" type="number"[(ngModel)]="pv[0].vm52"></td>
+                <td class="text-center colfix"><input #input15 class="text-center colfix" type="number"[(ngModel)]="pv[0].vm53"></td>
               </tr>
               <tr></tr>
             </tbody>
@@ -163,29 +168,29 @@
               <tr>
                 <td rowspan="3" class="text-center colfix">LV/BT</td>
                 <td class="text-center colfix">N-a</td>
-                <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="pv[0].na0"></td>
-                <td rowspan="6" class="text-center colfix"><input class="text-center colfix" type="number" [(ngModel)]="pv[0].temp"></td>
+                <td class="text-center colfix"><input  #input1 (keydown.enter)="input2.focus()" class="text-center colfix" type="number"[(ngModel)]="pv[0].na0"></td>
+                <td rowspan="6" class="text-center colfix"><input #input2 (keydown.enter)="input3.focus()" class="text-center colfix" type="number" [(ngModel)]="pv[0].temp"></td>
               </tr>
               <tr>
                 <td class="text-center colfix">N-b</td>
-                <td class="text-center colfix"><input class="text-center colfix" type="number" [(ngModel)]="pv[0].nb0"></td>
+                <td class="text-center colfix"><input #input3 (keydown.enter)="input4.focus()" class="text-center colfix" type="number" [(ngModel)]="pv[0].nb0"></td>
               </tr>
               <tr>
                 <td class="text-center colfix">N-c</td>
-                <td class="text-center colfix"><input class="text-center colfix" type="number" [(ngModel)]="pv[0].nc0"></td>
+                <td class="text-center colfix"><input #input4 (keydown.enter)="input5.focus()" class="text-center colfix" type="number" [(ngModel)]="pv[0].nc0"></td>
               </tr>
               <tr>
                 <td rowspan="3" class="text-center colfix">MV/MT</td>
                 <td class="text-center colfix">N-A</td>
-                <td class="text-center colfix"><input class="text-center colfix" type="number" [(ngModel)]="pv[0].na1"></td>
+                <td class="text-center colfix"><input #input5 (keydown.enter)="input6.focus()" class="text-center colfix" type="number" [(ngModel)]="pv[0].na1"></td>
               </tr>
               <tr>
                 <td class="text-center colfix">N-B</td>
-                <td class="text-center colfix"><input class="text-center colfix" type="number" [(ngModel)]="pv[0].nb2"></td>
+                <td class="text-center colfix"><input #input6 (keydown.enter)="input7.focus()" class="text-center colfix" type="number" [(ngModel)]="pv[0].nb2"></td>
               </tr>
               <tr>
                 <td class="text-center colfix">N-C</td>
-                <td class="text-center colfix"><input class="text-center colfix" type="number" [(ngModel)]="pv[0].nc3"></td>
+                <td class="text-center colfix"><input #input7  class="text-center colfix" type="number" [(ngModel)]="pv[0].nc3"></td>
               </tr>
             </tbody>
           </table>
@@ -264,7 +269,7 @@
 
           </tr>
           <tr>
-            <td colspan="6" class="text-right colfix">Valeurs at 75C / Valeurs à 75C
+            <td colspan="6" class="text-right colfix">values at 75° / Valeurs à 75°
       </td>
             <td class="text-center colfix" ><input title="Cliquez pour afficher la fiche de calcul"  tooltipPosition="bottom" class="text-center colfix"  label="Show"  type="number"[value]="this.wcc2.toFixed(3)" readonly></td>
             <td class="text-center colfix"><input title="Cliquez pour afficher la fiche de calcul"   tooltipPosition="bottom" class="text-center colfix" label="Show" type="number"[value]="this.Zcc2.toFixed(3)" readonly></td>
@@ -295,26 +300,6 @@
             <td class="text-center colfix">U [kV]</td>
             <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="pv[0].u3"></td>
             <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="pv[0].t3"></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">Insulation liquid test / Essai du liquide isolant</h3>
-      </div>
-      <table class="table table-bordered table-condensed" *ngIf="pv && pv.length">
-        <tbody>
-          <tr>
-            <td rowspan="2" class="text-left colfix ">Insultation liquid type / Type du liquide isolant</td>
-            <td class="text-center colfix" class="text-center colfix">Non inhibated mineral oil </td>
-          </tr>
-          <tr>
-            <td class="text-center colfix" class="text-center colfix">Huile minérale non inhibée</td>
-          </tr>
-          <tr>
-            <td class="text-left colfix">Breakdown voltage / Tension de ciaquage (KV)</td>
-            <td class="text-center colfix"><input class="text-center colfix" type="number" [(ngModel)]="pv[0].claquage"></td>
           </tr>
         </tbody>
       </table>
@@ -620,8 +605,6 @@
     <h5 style="white-space: nowrap;">Essais a vide : En Attente</h5>
     <h5 style="white-space: nowrap;">Essais en charge : En Attente</h5>
     <h5 style="white-space: nowrap;">Essais diélectrique : En Attente</h5>
-    <h5 style="white-space: nowrap;">Essai du liquide isolant : En Attente</h5>
-
   </ng-template>
   <ng-template pTemplate="footer" [ngStyle]="{'color': this.pv[0].resultat === 'En Attente' ? '#666' : '#333'}">
     <span style="font-weight: bold;">Résultat final: </span>

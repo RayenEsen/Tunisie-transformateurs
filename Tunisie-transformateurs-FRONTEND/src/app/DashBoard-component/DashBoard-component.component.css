@@ -38,10 +38,6 @@
 .n { grid-area: n; }
 
 
-/* For presentation only, no need to copy the code below */
-
-
-
 .container > div[class]:not(.g.card):not(.n.card):not(.m.card):not(.k.card) {
   background: #ffffff;
   position: relative;

@@ -45,8 +45,8 @@ export class DashBoardComponentComponent implements OnInit {
         {
           "label": "Repared",
           "data": [10, 30, 11, 30, 25, 27, 60 , 28, 48, 40, 19, 86, 27, 90],
-          "backgroundColor": "rgba(54, 162, 235, 0.2)",
-          "borderColor": "rgba(54, 162, 235, 1)",
+          "backgroundColor": "rgba(46, 204, 113, 0.2)",
+          "borderColor": "rgba(39, 174, 96, 1)",
           "borderWidth": 1
         }
       ]
