@@ -1,0 +1,135 @@
+
+<div class="formbold-main-wrapper" style="padding-left: 20vh;">
+
+  <div class="formbold-form-wrapper">
+    <div style="display: flex;    margin-top: -4vh; margin-bottom: 6vh;">
+
+  <img src="assets/LogoPV.png" style="width: 300px;margin-right: 0vh;     margin-left: -5vh;" >
+  <img src="assets/9001ISO.png" style="width: 180px; height: 70px;"  class="printing">
+  <img src="assets/14001ISO-removebg-preview.png" style="width: 180px; height: 93px;">
+  <img src="assets/iso-45001.png" style="width: 180px; height: 147px;   ; margin-left: -27px;     margin-top: -38px; ">
+  <img src="assets/iso50001.png" style="width: 180px; height: 72px; ">
+  </div>
+  <div class="invoice">
+    <div class="invoice-header">
+      <div class="row">
+        <div class="col-xs-8">
+          <h1>Analyse <small>de non conformiter</small></h1>
+          <h4 class="text-muted">
+            No: 1591 | Date: 12/12/1999
+          </h4>
+        </div>
+      </div>
+    </div>
+  </div>
+      <div class="formbold-input-wrapp formbold-mb-3">
+        <label for="firstname" class="formbold-form-label" style="color: #122151;"> Numero / Puissance <small style="color: red;">*</small></label>
+        <div>
+          <input
+            placeholder="Numero"
+            class="formbold-form-input"
+            name="Numero"
+            [value]="this.service.list[0].numero"
+            readonly
+          />
+
+          <input
+            name="Puissance"
+            placeholder="Puissance"
+            class="formbold-form-input"
+            [value]="this.service.list[0].power"
+            readonly
+          />
+        </div>
+      </div>
+
+      <div class="formbold-mb-3">
+        <label class="formbold-form-label" style="color: #122151;">Origine<small style="color: red;">*</small></label>
+        <p-dropdown [style]="{'width': '100%'}" [options]="Origines" [(ngModel)]="etat" optionLabel="name" [showClear]="true" placeholder="Sélectionner L'origine" (onChange)="onOrigineChange($event)">
+          <ng-template pTemplate="selectedItem">
+            <div class="flex align-items-center gap-2" *ngIf="selectedOrigine">
+              <div style="display: inline-block;">{{ selectedOrigine.name }}</div>
+            </div>
+          </ng-template>
+          <ng-template let-origine pTemplate="item">
+            <div class="flex align-items-center gap-2">
+              <div style="display: inline-block;">{{ origine.name }}</div>
+            </div>
+          </ng-template>
+        </p-dropdown>
+      </div>
+
+
+      <div class="formbold-mb-3">
+        <label for="age" class="formbold-form-label" style="color: #122151;"> Description NC <small style="color: red;">*</small></label>
+        <textarea [(ngModel)]="Rapport.description" rows="2" [autoResize]="true" cols="108" pInputTextarea></textarea>
+      </div>
+
+
+      <div class="formbold-mb-3">
+        <label for="age" class="formbold-form-label" style="color: #122151;"> Analyse des Causes <small style="color: red;">*</small></label>
+        <textarea rows="2"  [(ngModel)]="Rapport.analyse" [autoResize]="true" cols="108" pInputTextarea></textarea>
+      </div>
+
+
+      <div class="formbold-mb-3">
+        <label for="age" class="formbold-form-label" style="color: #122151;"> Action <small style="color: red;">*</small></label>
+        <input
+          name="Action"
+          placeholder="Action"
+          class="formbold-form-input"
+          [(ngModel)]="Rapport.action"
+        />
+      </div>
+
+      <div class="formbold-mb-3">
+        <label for="age" class="formbold-form-label" style="color: #122151;"> Responsable <small style="color: red;">*</small></label>
+        <input
+          name="Responsable"
+          placeholder="Responsable"
+          class="formbold-form-input"
+          [(ngModel)]="Rapport.responsable"
+        />
+      </div>
+
+      <div class="formbold-mb-3">
+        <label for="age" class="formbold-form-label" style="color: #122151;"> Délais <small style="color: red;">*</small></label>
+        <input
+          name="Délais"
+          placeholder="Délais"
+          class="formbold-form-input"
+          [(ngModel)]="Rapport.delais"
+        />
+      </div>
+
+
+      <div class="formbold-mb-3">
+        <label class="formbold-form-label" style="color: #122151;">Etat de la NC<small style="color: red;">*</small></label>
+        <p-dropdown [style]="{'width': '100%'}" [options]="ChoixEtat" [(ngModel)]="etat2" optionLabel="ChoixEtat" [showClear]="true" placeholder="Sélectionner L'etat de La NC" (onChange)="onOrigineChange($event)">
+          <ng-template pTemplate="selectedItem">
+            <div class="flex align-items-center gap-2" *ngIf="selectedChoix">
+              <div style="display: inline-block;">{{ selectedChoix.name }}</div>
+            </div>
+          </ng-template>
+          <ng-template let-choixEtat pTemplate="item">
+            <div class="flex align-items-center gap-2">
+              <div style="display: inline-block;">{{ choixEtat.name }}</div>
+            </div>
+          </ng-template>
+        </p-dropdown>
+      </div>
+
+      <div class="formbold-mb-3">
+        <label for="age" class="formbold-form-label" style="color: #122151;"> Efficacite de L'action <small style="color: red;">*</small></label>
+        <input
+          name="Efficacite de L'action"
+          placeholder="Efficacite de L'action"
+          class="formbold-form-input"
+          [(ngModel)]="Rapport.efficacite"
+        />
+      </div>
+
+      <button class="formbold-btn" label="Submit" (click)="save()">Ajouter</button>
+
+  </div>
+</div>

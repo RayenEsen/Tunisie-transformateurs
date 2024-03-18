@@ -105,4 +105,21 @@ export class PlanificationComponentComponent implements OnInit {
     const end = start + this.rows;
     this.list = this.listnotpaginated.slice(start, end); // Slice the data array based on current page and rows per page
   }
+
+  getStyle(Etape: any) {
+    if (Etape.resultat === 'En Attente') {
+      return { cursor: 'default' };
+    } else if (Etape.resultat === 'Conforme') {
+      return { cursor: 'default' };
+    } else {
+      return { cursor: 'pointer' };
+    }
+  }
+
+
+  Visible: boolean = false;
+  ShowDialog()
+  {
+    this.Visible = !this.Visible;
+  }
 }

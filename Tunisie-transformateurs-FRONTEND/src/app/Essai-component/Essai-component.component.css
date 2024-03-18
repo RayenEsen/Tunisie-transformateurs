@@ -366,3 +366,118 @@ img:hover {
   margin: 10px 0; /* Adjust margin as needed */
   padding: 10px; /* Add padding for better spacing */
 }
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+body{
+	background: #E2E5EE;
+	font-family: 'Roboto', sans-serif;
+}
+.container{
+	margin-top: 200px;
+}
+.modal-header{
+	border: none;
+}
+.modal-footer{
+	border: none;
+}
+.close{
+	outline: 0;
+}
+.fa-folder-open{
+	color: #5E55E2;
+    background: #D8D6FF;
+    border-radius: 50%;
+    padding: 8px;
+    font-size: 14px;
+}
+.form-control::placeholder{
+	font-size: 14px;
+}
+.form-control{
+	border: 1px solid #EFEFF1;
+}
+.form-control:focus{
+	box-shadow: none;
+	border: 1px solid #EFEFF1;
+}
+.badge-success{
+	background: #87E5D5;
+	padding: 10px 20px;
+	border-radius: 20px;
+	font-size: 9px;
+}
+.fa-globe-asia{
+	color: #A1A7B5;
+	padding-top: 6px;
+}
+.fa-slack{
+	color: #A1A7B5;
+	padding-top: 6px;
+}
+.d-flex.justify-content-between{
+	font-size: 14px;
+}
+.footer{
+	background: #F2F3F7;
+}
+.btn-primary{
+	background: #5B51FF;
+	font-size: 13px;
+}
+.btn-primary:focus{
+	box-shadow: none;
+}
+.btn-primary:hover{
+	background: #5B51FF;
+}
+.fa-sort-down{
+	transform: translateY(-2px);
+	cursor: pointer;
+}
+.modal {
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  margin: auto;
+  padding: 20px;
+}
+
+.modal-header {
+  background-color: #122151;
+  color: #fff;
+  padding: 10px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.modal-body .form-group {
+  margin-bottom: 20px;
+}
+
+.modal-body input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+}
+
+.modal-body input:focus {
+  border-color: #122151;
+}
+
+.modal-body .form-group.d-flex.justify-content-end {
+  margin-top: 20px;
+}
+
+.modal-body .form-group.d-flex.justify-content-end .badge {
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.modal-body .form-group.d-flex.justify-content-end .badge:hover {
+  background-color: #0d1744;
+}
+

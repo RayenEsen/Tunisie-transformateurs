@@ -103,7 +103,7 @@ namespace WebAPI.Controller
             try
             {
                 await _context.SaveChangesAsync();
-                return NoContent();
+                return Ok(peintures); // Return the updated list of peintures
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -119,13 +119,17 @@ namespace WebAPI.Controller
         // POST: api/Peintures
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Peinture>> PostPeinture(Peinture peinture)
+        public async Task<ActionResult<IEnumerable<Peinture>>> PostPeinture(Peinture peinture)
         {
             _context.peintures.Add(peinture);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetPeinture", new { id = peinture.IdPeinture }, peinture);
+            // Retrieve all peintures after adding the new one
+            var allPeintures = await _context.peintures.ToListAsync();
+
+            return Ok(allPeintures);
         }
+
 
         // DELETE: api/Peintures/5
         [HttpDelete("{id}")]

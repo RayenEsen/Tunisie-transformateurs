@@ -80,15 +80,32 @@ export class BobinageComponentComponent implements OnInit {
     // Call the service method to update bobinages
     this.ServiceB.UpdateListBobinage(this.bobinages).subscribe(
       () => {
-        console.log('Bobinages updated successfully');
+
+        if (this.bobinages.every(bobinage => bobinage.cnc === "C"))
+        {
+          this.etapeSelected.resultat="Conforme"
+          this.etapeSelected2.resultat="Conforme"
+          this.etapeSelected3.resultat="Conforme"
+        }
+        if (this.bobinages.some(bobinage => bobinage.cnc === "NC"))
+        {
+          this.etapeSelected.resultat="Non conforme"
+          this.etapeSelected2.resultat="Non conforme"
+          this.etapeSelected3.resultat="Non conforme"
+        }
+
+
         if(this.ServiceS.Controleur.designation==="Controleur" && this.ServiceS.Controleur.username)
         {
           this.etapeSelected.controleur=this.ServiceS.Controleur.username;
         }
+
+
         if(this.ServiceS.Controleur.designation==="Verificateur" && this.ServiceS.Controleur.username)
         {
           this.etapeSelected.verificateur=this.ServiceS.Controleur.username;
         }
+
         if(this.ServiceS.Controleur.designation==="Controleur")
         {
           const newEvent = new Event(this.ServiceS.Controleur.idC, 'Participer a le Controle dimensionnelle bobinage BT'
@@ -100,8 +117,19 @@ export class BobinageComponentComponent implements OnInit {
             // Update the etapeSelected
             this.ServiceE.UpdateEtape(this.transformateurId, this.etapenumero, this.etapeSelected).subscribe({
               next: (response) => {
-                console.log('Etape updated successfully:', response);
-                // Handle the response as needed
+
+              },
+            });
+
+            this.ServiceE.UpdateEtape(this.transformateurId, this.etapenumero+1, this.etapeSelected2).subscribe({
+              next: (response) => {
+
+              },
+            });
+
+            this.ServiceE.UpdateEtape(this.transformateurId, this.etapenumero+2, this.etapeSelected3).subscribe({
+              next: (response) => {
+
               },
             });
             },
@@ -121,10 +149,22 @@ export class BobinageComponentComponent implements OnInit {
             // Update the etapeSelected
             this.ServiceE.UpdateEtape(this.transformateurId, this.etapenumero, this.etapeSelected).subscribe({
               next: (response) => {
-                console.log('Etape updated successfully:', response);
-                // Handle the response as needed
+
               },
             });
+
+            this.ServiceE.UpdateEtape(this.transformateurId, this.etapenumero+1, this.etapeSelected2).subscribe({
+              next: (response) => {
+
+              },
+            });
+
+            this.ServiceE.UpdateEtape(this.transformateurId, this.etapenumero+2, this.etapeSelected3).subscribe({
+              next: (response) => {
+
+              },
+            });
+
             },
             error: (error) => {
               console.error('Error adding event:', error);

@@ -5,6 +5,11 @@ import { EventServiceService } from '../Shared/Event-service.service';
 import { Event } from '../Shared/Event-service.model';
 import { Peinture } from '../Shared/Peinture-service.model';
 import { PeintureServiceService } from '../Shared/Peinture-service.service';
+import { Message, MessageService } from 'primeng/api';
+import { EtapeServiceService } from '../Shared/Etape-service.service';
+import { Etape } from '../Shared/Etape-servicemodel';
+import { SessionService } from '../utils/session-service.service';
+
 @Component({
   selector: 'app-Peinture-component',
   templateUrl: './Peinture-component.component.html',
@@ -16,13 +21,27 @@ export class PeintureComponentComponent implements OnInit {
   transformateurId: number = 0;
   peintures : Peinture[] = [];
   selectedPeinture: Peinture | undefined;
+  etapenumero:number = 0;
+  etapeSelected : Etape = new Etape;
 
-  constructor(public router: Router,public ServiceP : PeintureServiceService,private route: ActivatedRoute , public service : TransformateurServiceService, public eventService : EventServiceService) { }
+  constructor(public ServiceS : SessionService,public ServiceE : EtapeServiceService, public ServiceM : MessageService,public router: Router,public ServiceP : PeintureServiceService,private route: ActivatedRoute , public service : TransformateurServiceService, public eventService : EventServiceService) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.transformateurId = +params['id'] || 0;
+      this.etapenumero= +params['etapenumero'] || 0;
+
       this.service.GetTransformateur(this.transformateurId);
+      this.ServiceE.getEtapeByNumeroAndTransformateur(this.etapenumero,this.transformateurId)
+      .subscribe(
+        etape => {
+          this.etapeSelected=etape;
+        },
+        error => {
+          // Handle any errors that occur during the HTTP request
+          console.error('Error fetching etape:', error);
+        }
+      );
     });
     this.ServiceP.getPeintureByTransformateurId(this.transformateurId)
     .subscribe((result: Peinture[]) => {
@@ -38,7 +57,8 @@ export class PeintureComponentComponent implements OnInit {
         return;
       }
       if (this.selectedPeinture.numerop === this.peintures[this.peintures.length - 1].numerop) {
-
+      if(this.selectedPeinture.datePentiure!==null && this.selectedPeinture.observation!==null)
+      {
       // Toggle properties between "C" and "NC"
       switch (x) {
         case 3:
@@ -117,6 +137,18 @@ export class PeintureComponentComponent implements OnInit {
             this.ServiceP.updateListPeinture(this.peintures)
             .subscribe(
               () => {
+                const lastPeinture = this.peintures[this.peintures.length - 1];
+
+                if (lastPeinture.cnc === "C") {
+                  this.etapeSelected.resultat = "Conforme";
+                } else if (lastPeinture.cnc === "NC" || lastPeinture.cnc === null) {
+                  this.etapeSelected.resultat = "Non conforme";
+                }
+                this.ServiceE.UpdateEtape(this.transformateurId, this.etapenumero, this.etapeSelected).subscribe({
+                  next: (response) => {
+
+                  },
+                });
                 window.location.reload();
               },
               error => {
@@ -131,15 +163,68 @@ export class PeintureComponentComponent implements OnInit {
           }
         );
       }
-    }
-    }
 
-
+      }
+    }
+  }
     update() {
-      console.log(this.peintures)
       this.ServiceP.updateListPeinture(this.peintures)
         .subscribe(
           () => {
+
+            const lastPeinture = this.peintures[this.peintures.length - 1];
+
+            if (lastPeinture.cnc === "C") {
+              this.etapeSelected.resultat = "Conforme";
+            } else if (lastPeinture.cnc === "NC" || lastPeinture.cnc === null) {
+              this.etapeSelected.resultat = "Non conforme";
+            }
+
+
+
+            if(this.ServiceS.Controleur.designation==="Controleur")
+            {
+              const newEvent = new Event(this.ServiceS.Controleur.idC, 'Participer a le Peinture'
+              , new Date(),this.ServiceS.Controleur.username+" a Participer a le Peinture de le transformateur " + this.transformateurId);
+              this.eventService.AddEvent(newEvent)
+              .subscribe({
+                next: (response) => {
+                  console.log('Event added successfully:', response);
+                // Update the etapeSelected
+                this.ServiceE.UpdateEtape(this.transformateurId, this.etapenumero, this.etapeSelected).subscribe({
+                  next: (response) => {
+
+                  },
+                });
+
+
+                },
+                error: (error) => {
+                  console.error('Error adding event:', error);
+                }
+              });
+            }
+            else
+            {
+              const newEvent = new Event(this.ServiceS.Controleur.idC, 'Verifier le Peinture'
+              , new Date(),this.ServiceS.Controleur.username+" a Verifier le Peinture de le transformateur " + this.transformateurId);
+              this.eventService.AddEvent(newEvent)
+              .subscribe({
+                next: (response) => {
+                  console.log('Event added successfully:', response);
+                // Update the etapeSelected
+                this.ServiceE.UpdateEtape(this.transformateurId, this.etapenumero, this.etapeSelected).subscribe({
+                  next: (response) => {
+
+                  },
+                });
+                },
+                error: (error) => {
+                  console.error('Error adding event:', error);
+                }
+              });
+            }
+            this.ServiceM.add({ severity: 'success', summary: 'Succès', detail: 'Peinture Sauvegarder avec succés' });
           },
           error => {
             console.error('Failed to update peintures:', error);

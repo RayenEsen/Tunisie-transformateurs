@@ -3,7 +3,7 @@
 <section class="timeline_area section_padding_130" style="padding-left: 50px;">
     <div class="container" style="max-width: 1400px;">
 
-        <div class="row" class="card" style="margin-bottom: 400px;">
+        <div class="row" class="card" style="margin-bottom: 200px;">
           <div style="display: flex;">
             <img src="assets/LogoPV.png" style="width: 300px;margin-right: 50vh;">
             <img src="assets/9001ISO.png" style="width: 180px; height: 70px;">
@@ -20,7 +20,6 @@
                         <div class="timeline-date wow fadeInLeft" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInLeft;">
                             <p><strong>#{{peinture.numerop}}</strong><input type="date" [(ngModel)]="peinture.datePentiure"></p>
                         </div>
-
                         <div class="row" style="margin-right: 0vh;">
                             <div class="col-12 col-md-6 col-lg-4" >
                                 <div  class="single-timeline-content d-flex wow fadeInLeft"  data-wow-delay="0.3s" style="visibility: visible;width: fit-content; animation-delay: 0.3s; animation-name: fadeInLeft;">
@@ -49,23 +48,27 @@
                                             <tr>
                                               <td class="text-center colfix">{{service.list[0].numero}}</td>
                                               <td class="text-center colfix">{{service.list[0].power}}</td>
-                                              <td class="text-center colfix clickable-td" (click)="confirm(3, peinture.numerop)">{{this.peinture.fuite}}</td>
-                                              <td class="text-center colfix clickable-td" (click)="confirm(4, peinture.numerop)">{{this.peinture.penture}}</td>
-                                              <td class="text-center colfix clickable-td" (click)="confirm(5, peinture.numerop)">{{this.peinture.isolateur}}</td>
-                                              <td class="text-center colfix clickable-td" (click)="confirm(6, peinture.numerop)">{{this.peinture.marquage}}</td>
-                                              <td class="text-center colfix clickable-td" (click)="confirm(7, peinture.numerop)">{{this.peinture.neutre}}</td>
-                                              <td class="text-center colfix clickable-td" (click)="confirm(8, peinture.numerop)">{{this.peinture.terre}}</td>
-                                              <td class="text-center colfix clickable-td" (click)="confirm(9, peinture.numerop)">{{this.peinture.commut}}</td>
-                                              <td class="text-center colfix clickable-td" (click)="confirm(10, peinture.numerop)">{{this.peinture.soupage}}</td>
-                                              <td class="text-center colfix clickable-td" (click)="confirm(11, peinture.numerop)">{{this.peinture.signature}}</td>
-                                              <td class="text-center colfix clickable-td" (click)="confirm(12, peinture.numerop)">{{this.peinture.vanne}}</td>
-                                              <td class="text-center colfix clickable-td" (click)="confirm(13, peinture.numerop)">{{this.peinture.relais}}</td>
-                                              <td class="text-center colfix clickable-td" (click)="confirm(14, peinture.numerop)">{{this.peinture.doigt}}</td>
-                                              <td class="text-center colfix clickable-td" (click)="confirm(15, peinture.numerop)">{{this.peinture.cosse}}</td>
-                                              <td *ngIf="this.peinture.cnc==='NC' " class="text-center colfix clickable-td" style="color: red;">{{this.peinture.cnc}}</td>
-                                              <td *ngIf="this.peinture.cnc==='C'" class="text-center colfix clickable-td" style="color: green;">{{this.peinture.cnc}}</td>
+                                              <td class="text-center colfix clickable-td" (click)="confirm(3, peinture.numerop)" [style.color]="peinture.fuite === 'C' ? 'green' : 'red'">{{ peinture.fuite }}</td>
+                                              <td class="text-center colfix clickable-td" (click)="confirm(4, peinture.numerop)" [style.color]="peinture.penture === 'C' ? 'green' : 'red'">{{ peinture.penture }}</td>
+                                              <td class="text-center colfix clickable-td" (click)="confirm(5, peinture.numerop)" [style.color]="peinture.isolateur === 'C' ? 'green' : 'red'">{{ peinture.isolateur }}</td>
+                                              <td class="text-center colfix clickable-td" (click)="confirm(6, peinture.numerop)" [style.color]="peinture.marquage === 'C' ? 'green' : 'red'">{{ peinture.marquage }}</td>
+                                              <td class="text-center colfix clickable-td" (click)="confirm(7, peinture.numerop)" [style.color]="peinture.neutre === 'C' ? 'green' : 'red'">{{ peinture.neutre }}</td>
+                                              <td class="text-center colfix clickable-td" (click)="confirm(8, peinture.numerop)" [style.color]="peinture.terre === 'C' ? 'green' : 'red'">{{ peinture.terre }}</td>
+                                              <td class="text-center colfix clickable-td" (click)="confirm(9, peinture.numerop)" [style.color]="peinture.commut === 'C' ? 'green' : 'red'">{{ peinture.commut }}</td>
 
-                                              <td class="text-center colfix"><input [(ngModel)]="peinture.observation"  style="width: 100%;"></td>
+                                              <td class="text-center colfix clickable-td" (click)="confirm(10, peinture.numerop)" [style.color]="peinture.soupage === 'C' ? 'green' : 'red'">{{ peinture.soupage }}</td>
+                                              <td class="text-center colfix clickable-td" (click)="confirm(11, peinture.numerop)" [style.color]="peinture.signature === 'C' ? 'green' : 'red'">{{ peinture.signature }}</td>
+                                              <td class="text-center colfix clickable-td" (click)="confirm(12, peinture.numerop)" [style.color]="peinture.vanne === 'C' ? 'green' : 'red'">{{ peinture.vanne }}</td>
+
+                                              <td class="text-center colfix clickable-td" (click)="confirm(13, peinture.numerop)" [style.color]="peinture.relais === 'C' ? 'green' : 'red'">{{ peinture.relais }}</td>
+                                              <td class="text-center colfix clickable-td" (click)="confirm(14, peinture.numerop)" [style.color]="peinture.doigt === 'C' ? 'green' : 'red'">{{ peinture.doigt }}</td>
+                                              <td class="text-center colfix clickable-td" (click)="confirm(15, peinture.numerop)" [style.color]="peinture.cosse === 'C' ? 'green' : 'red'">{{ peinture.cosse }}</td>
+
+                                              <td *ngIf="peinture.cnc === 'NC'" class="text-center colfix clickable-td" style="color: red;">{{ peinture.cnc }}</td>
+                                              <td *ngIf="peinture.cnc === 'C'" class="text-center colfix clickable-td" style="color: green;">{{ peinture.cnc }}</td>
+                                              <td *ngIf="peinture.cnc !== 'NC' && peinture.cnc !== 'C'" class="text-center colfix clickable-td"></td>
+
+                                              <td class="text-center colfix"><input class="text-center colfix" [(ngModel)]="peinture.observation"  style="width: 100%;"></td>
                                             </tr>
 
                                             <tr>
@@ -100,3 +103,4 @@
     </div>
 
 </section>
+<p-toast></p-toast>

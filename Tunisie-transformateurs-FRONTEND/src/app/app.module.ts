@@ -33,6 +33,8 @@ import { SliderModule } from 'primeng/slider';
 import { SpeedDialModule } from 'primeng/speeddial';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { TopNavComponent } from './top-nav/top-nav.component';
@@ -67,6 +69,7 @@ import { ChartModule } from 'primeng/chart';
 import { OutilsComponentComponent } from './outils-component/outils-component.component';
 import { ContextMenuModule } from 'primeng/contextmenu';
 import { DashBoardComponentComponent } from './DashBoard-component/DashBoard-component.component';
+import { RepportComponentComponent } from './Repport-component/Repport-component.component';
 
 @NgModule({
   declarations: [
@@ -96,7 +99,8 @@ import { DashBoardComponentComponent } from './DashBoard-component/DashBoard-com
       PeintureComponentComponent,
       ConseptionComponentComponent,
       OutilsComponentComponent,
-      DashBoardComponentComponent
+      DashBoardComponentComponent,
+      RepportComponentComponent
    ],
   imports: [
     BrowserModule,
@@ -137,6 +141,8 @@ import { DashBoardComponentComponent } from './DashBoard-component/DashBoard-com
     InputGroupModule,
     InputGroupAddonModule,
     ContextMenuModule,
+    OverlayPanelModule,
+    InputTextareaModule,
     ],
   providers: [MessageService,ConfirmationService],
   bootstrap: [AppComponent]

@@ -80,7 +80,6 @@ export class AddComponentComponent implements OnInit {
     {name : 'Production'},
     {name : 'Reparation'},
     {name : 'Prototype'},
-
   ]
   etat : any;
   selectedMission: any; // Declare selectedCountry property
@@ -609,7 +608,8 @@ export class AddComponentComponent implements OnInit {
                 dateFin: undefined,
                 nom: etapeNames[i] || '',
                 controleur: '',
-                verificateur: ''
+                verificateur: '',
+                resultat: 'En Attente'
               };
               etapeObservables.push(this.serviceE.AddEtape(etapeAjouter));
             }

@@ -132,7 +132,7 @@ namespace WebAPI.Controller
             etape.Controleur = updatedEtape.Controleur;
             etape.Observation = updatedEtape.Observation;
             etape.Etat = updatedEtape.Etat;
-
+            etape.Resultat = updatedEtape.Resultat;
             try
             {
                 await _context.SaveChangesAsync();

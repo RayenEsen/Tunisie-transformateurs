@@ -9,7 +9,7 @@ export class AuthGuard implements CanActivate {
   constructor(private sessionService: SessionService, private router: Router) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    const protectedRoutes: string[] = ['/Transformateur','/Edit_profile','/Add_transformateur','/Ajouter_Transformateur','/Planification','/Bobinage','/BobinageMT','/Magnetique','/Ecuvage','/Livraison','/Montage','/ApresMontage','/Remplissage','/Peinture','/Conseption'];
+    const protectedRoutes: string[] = ['/Transformateur','/Edit_profile','/Add_transformateur','/Ajouter_Transformateur','/Planification','/Bobinage','/BobinageMT','/Magnetique','/Ecuvage','/Livraison','/Montage','/ApresMontage','/Remplissage','/Peinture','/Conseption','/Report'];
 
     // Check if the user is authenticated or has the necessary credentials
     const isAuthenticated: boolean = this.sessionService.hasSession();

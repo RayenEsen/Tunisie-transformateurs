@@ -173,19 +173,34 @@ export class ControleComponentComponent implements OnInit {
       return;
     }
 
-    // Update operateur1 and operateur2 based on selected items
-    selectedFilteredEtape.operateur1 = selectedItems && selectedItems.length > 0 ? selectedItems[0] : null;
-    selectedFilteredEtape.operateur2 = selectedItems && selectedItems.length > 1 ? selectedItems[1] : null;
-    // Check if operateur1 is present and not already in suggestions
-    if (selectedFilteredEtape?.operateur1 && !this.suggestions.includes(selectedFilteredEtape.operateur1)) {
-      console.log(selectedFilteredEtape.operateur1);
-      this.operateurSuggestion.nom = selectedFilteredEtape.operateur1;
-      this.OperateurService.AddSuggestion(this.operateurSuggestion).subscribe({
-        next: (response) => {
-          this.suggestions.push(response);
-        }
-      });
+// Update operateur1 and operateur2 based on selected items
+selectedFilteredEtape.operateur1 = selectedItems && selectedItems.length > 0 ? selectedItems[0] : null;
+selectedFilteredEtape.operateur2 = selectedItems && selectedItems.length > 1 ? selectedItems[1] : null;
+
+// Check if operateur1 is present and not already in suggestions
+if (selectedFilteredEtape?.operateur1 && !this.suggestions.includes(selectedFilteredEtape.operateur1)) {
+  this.suggestions.push(selectedFilteredEtape.operateur1);
+
+  this.operateurSuggestion.nom = selectedFilteredEtape.operateur1;
+  this.OperateurService.AddSuggestion(this.operateurSuggestion).subscribe({
+    next: (response) => {
+      // Handle the response if needed
+    }
+  });
 }
+
+// Check if operateur2 is present and not already in suggestions
+if (selectedFilteredEtape?.operateur2 && !this.suggestions.includes(selectedFilteredEtape.operateur2)) {
+  this.suggestions.push(selectedFilteredEtape.operateur2);
+
+  this.operateurSuggestion.nom = selectedFilteredEtape.operateur2;
+  this.OperateurService.AddSuggestion(this.operateurSuggestion).subscribe({
+    next: (response) => {
+      // Handle the response if needed
+    }
+  });
+}
+
 
 // Check if operateur2 is present and not already in suggestions
 if (selectedFilteredEtape?.operateur2 && !this.suggestions.includes(selectedFilteredEtape.operateur2)) {
@@ -237,8 +252,7 @@ if (selectedFilteredEtape?.operateur2 && !this.suggestions.includes(selectedFilt
 
 
     getOrderValue(numeroETAPE: number): number {
-      // Add your logic here to determine the order based on numeroETAPE
-      // For example, return different order values for different Etape numbers
+
       if (numeroETAPE === 1) {
         return 1;
       } else if (numeroETAPE === 3) {

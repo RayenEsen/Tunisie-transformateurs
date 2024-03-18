@@ -3,9 +3,7 @@
 <div class="speedDialContainer">
   <p-speedDial [model]="items"  direction="down"></p-speedDial>
 </div>
-<div #printSection class="invoice" [ngClass]="{'hover-disabled': isHoverDisabled}"(click)="disableHoverEffect($event)" >
-  <p-contextMenu [model]="items2" [global]="true" ></p-contextMenu>
-
+<div #printSection class="invoice" [ngClass]="{'hover-disabled': isHoverDisabled}"  >
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
 <link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
 <div style="display: flex;">
@@ -147,7 +145,7 @@
                 <td class="text-center colfix"><input class="text-center colfix" type="number" readonly [value]="this.pv[0].vt52?.toFixed(3)"></td>
                 <td class="text-center colfix"><input #input13 (keydown.enter)="input14.focus()" class="text-center colfix" type="number"[(ngModel)]="pv[0].vm51"></td>
                 <td class="text-center colfix"><input #input14 (keydown.enter)="input15.focus()" class="text-center colfix" type="number"[(ngModel)]="pv[0].vm52"></td>
-                <td class="text-center colfix"><input #input15 class="text-center colfix" type="number"[(ngModel)]="pv[0].vm53"></td>
+                <td class="text-center colfix"><input #input15 (keydown.enter)="focusInput16()" class="text-center colfix" type="number"[(ngModel)]="pv[0].vm53"></td>
               </tr>
               <tr></tr>
             </tbody>
@@ -168,29 +166,29 @@
               <tr>
                 <td rowspan="3" class="text-center colfix">LV/BT</td>
                 <td class="text-center colfix">N-a</td>
-                <td class="text-center colfix"><input  #input1 (keydown.enter)="input2.focus()" class="text-center colfix" type="number"[(ngModel)]="pv[0].na0"></td>
-                <td rowspan="6" class="text-center colfix"><input #input2 (keydown.enter)="input3.focus()" class="text-center colfix" type="number" [(ngModel)]="pv[0].temp"></td>
+                <td class="text-center colfix"><input #input16 (keydown.enter)="input17.focus()"  class="text-center colfix" type="number"[(ngModel)]="pv[0].na0"></td>
+                <td rowspan="6" class="text-center colfix"><input #input17 (keydown.enter)="input18.focus()" class="text-center colfix" type="number" [(ngModel)]="pv[0].temp"></td>
               </tr>
               <tr>
                 <td class="text-center colfix">N-b</td>
-                <td class="text-center colfix"><input #input3 (keydown.enter)="input4.focus()" class="text-center colfix" type="number" [(ngModel)]="pv[0].nb0"></td>
+                <td class="text-center colfix"><input #input18 (keydown.enter)="input19.focus()" class="text-center colfix" type="number" [(ngModel)]="pv[0].nb0"></td>
               </tr>
               <tr>
                 <td class="text-center colfix">N-c</td>
-                <td class="text-center colfix"><input #input4 (keydown.enter)="input5.focus()" class="text-center colfix" type="number" [(ngModel)]="pv[0].nc0"></td>
+                <td class="text-center colfix"><input #input19 (keydown.enter)="input20.focus()" class="text-center colfix" type="number" [(ngModel)]="pv[0].nc0"></td>
               </tr>
               <tr>
                 <td rowspan="3" class="text-center colfix">MV/MT</td>
                 <td class="text-center colfix">N-A</td>
-                <td class="text-center colfix"><input #input5 (keydown.enter)="input6.focus()" class="text-center colfix" type="number" [(ngModel)]="pv[0].na1"></td>
+                <td class="text-center colfix"><input #input20 (keydown.enter)="input21.focus()" class="text-center colfix" type="number" [(ngModel)]="pv[0].na1"></td>
               </tr>
               <tr>
                 <td class="text-center colfix">N-B</td>
-                <td class="text-center colfix"><input #input6 (keydown.enter)="input7.focus()" class="text-center colfix" type="number" [(ngModel)]="pv[0].nb2"></td>
+                <td class="text-center colfix"><input #input21 (keydown.enter)="input22.focus()" class="text-center colfix" type="number" [(ngModel)]="pv[0].nb2"></td>
               </tr>
               <tr>
                 <td class="text-center colfix">N-C</td>
-                <td class="text-center colfix"><input #input7  class="text-center colfix" type="number" [(ngModel)]="pv[0].nc3"></td>
+                <td class="text-center colfix"><input  #input22 (keydown.enter)="focusInput23()" class="text-center colfix" type="number" [(ngModel)]="pv[0].nc3"></td>
               </tr>
             </tbody>
           </table>
@@ -219,14 +217,14 @@
             <td class="text-center colfix">Io[%]</td>
           </tr>
           <tr>
-            <td class="text-center colfix"> <input class="text-center colfix" type="number"  [(ngModel)]="pv[0].tappings" name="tappings max=6">
-            </td>
-            <td class="text-center colfix"><input class="text-center colfix" type="number" [(ngModel)]="pv[0].wog"></td>
-            <td class="text-center colfix"><input class="text-center colfix" type="number" [(ngModel)]="pv[0].iog"></td>
+            <td class="text-center colfix"><input class="text-center colfix" type="number" [(ngModel)]="pv[0].tappings" name="tappings max=6"></td>
+            <td class="text-center colfix"><input #input23 (keydown.enter)="input24.focus()"  class="text-center colfix" type="number" [(ngModel)]="pv[0].wog"></td>
+            <td class="text-center colfix"><input #input24 (keydown.enter)="input25.focus()" class="text-center colfix" type="number" [(ngModel)]="pv[0].iog"></td>
             <td class="text-center colfix"><input class="text-center colfix" type="number" [(ngModel)]="this.service.list[0].btu2" readonly></td>
-            <td class="text-center colfix"><input class="text-center colfix" type="number" [(ngModel)]="pv[0].iom"></td>
-            <td class="text-center colfix"><input class="text-center colfix" type="number" [(ngModel)]="pv[0].wom"></td>
-            <td class="text-center colfix"><input class="text-center colfix" type="number"[value]="this.getIOPourcentageMesurees().toFixed(3)" readonly></td>
+            <td class="text-center colfix" *ngIf="this.service.list[0].type==='Triphasés'" ><input  class="text-center colfix" type="number" [value]="pv[0].iom" readonly (click)="this.showDialog2()" ></td>
+            <td class="text-center colfix" *ngIf="this.service.list[0].type!=='Triphasés'" ><input  class="text-center colfix" type="number" [(ngModel)]="pv[0].iom" ></td>
+            <td class="text-center colfix"><input class="text-center colfix" type="number" #input25 (keydown.enter)="focusInput26()" [(ngModel)]="pv[0].wom"></td>
+            <td class="text-center colfix"><input class="text-center colfix" type="number" [value]="this.getIOPourcentageMesurees().toFixed(3)" readonly></td>
           </tr>
         </tbody>
       </table>
@@ -256,13 +254,13 @@
           </tr>
           <tr>
             <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="pv[0].tappings"></td>
-            <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="pv[0].zccg"></td>
-            <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="pv[0].wccg"></td>
-            <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="pv[0].temp"></td>
-            <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="pv[0].uccm"></td>
-            <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="this.service.list[0].mtu2"></td>
+            <td class="text-center colfix"><input  #input26 (keydown.enter)="input27.focus()" class="text-center colfix" type="number"[(ngModel)]="pv[0].zccg"></td>
+            <td class="text-center colfix"><input  #input27 (keydown.enter)="input28.focus()" class="text-center colfix" type="number"[(ngModel)]="pv[0].wccg"></td>
+            <td class="text-center colfix"><input  class="text-center colfix" type="number"[(ngModel)]="pv[0].temp"></td>
+            <td class="text-center colfix"><input  #input28 (keydown.enter)="input29.focus()" class="text-center colfix" type="number"[(ngModel)]="pv[0].uccm"></td>
+            <td class="text-center colfix"><input  class="text-center colfix" type="number"[(ngModel)]="this.service.list[0].mtu2"></td>
             <td class="text-center colfix">
-              <input class="text-center colfix" type="number" [(ngModel)]="pv[0].wccm1">
+              <input  (ngModelChange)="getZcc2()" #input29 (keydown.enter)="focusInput30()" class="text-center colfix" type="number" [(ngModel)]="pv[0].wccm1">
             </td>
 
            <td class="text-center colfix"><input class="text-center colfix" type="number" [value]="this.getZccPourcentage().toFixed(3)" readonly></td>
@@ -286,20 +284,20 @@
           <tr>
             <td class="text-left colfix" style="width: 200px;">Induced voltage test at / Essai par tension induite a 150 Hz</td>
             <td class="text-center colfix">U [V]</td>
-            <td class="text-center colfix"><input class="text-center colfix" type="number" [(ngModel)]="pv[0].u1"></td>
-            <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="pv[0].t1"></td>
+            <td class="text-center colfix"><input #input30 (keydown.enter)="input31.focus()" class="text-center colfix" type="number" [(ngModel)]="pv[0].u1"></td>
+            <td class="text-center colfix"><input #input31 (keydown.enter)="input32.focus()" class="text-center colfix" type="number"[(ngModel)]="pv[0].t1"></td>
           </tr>
           <tr>
             <td class="text-left colfix" style="width: 200px;">Applied voltage test (HV) at / Essai par tension appliqueés (HT) a 50Hz</td>
             <td class="text-center colfix">U [kV]</td>
-            <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="pv[0].u2"></td>
-            <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="pv[0].t2"></td>
+            <td class="text-center colfix"><input #input32 (keydown.enter)="input33.focus()" class="text-center colfix" type="number"[(ngModel)]="pv[0].u2"></td>
+            <td class="text-center colfix"><input #input33 (keydown.enter)="input34.focus()"class="text-center colfix" type="number"[(ngModel)]="pv[0].t2"></td>
           </tr>
           <tr>
             <td class="text-left colfix" style="width: 200px;">Applied voltage test (LV) at / Essai par tension appliqueés (BT) a 50Hz</td>
             <td class="text-center colfix">U [kV]</td>
-            <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="pv[0].u3"></td>
-            <td class="text-center colfix"><input class="text-center colfix" type="number"[(ngModel)]="pv[0].t3"></td>
+            <td class="text-center colfix"><input  #input34 (keydown.enter)="input35.focus()" class="text-center colfix" type="number"[(ngModel)]="pv[0].u3"></td>
+            <td class="text-center colfix"><input  #input35  class="text-center colfix" type="number"[(ngModel)]="pv[0].t3"></td>
           </tr>
         </tbody>
       </table>
@@ -328,7 +326,7 @@
       <i class="mr-1 fa fa-print text-primary-m1 text-120 w-2"></i>
       <span style="padding-left: 8px;">Print</span>
     </a>
-    <a class="btn bg-white btn-light mx-1px text-95" routerLink="/Transformateur" data-title="Save">
+    <a  class="btn bg-white btn-light mx-1px text-95" (click)="savePvValues();getZcc2()" data-title="Save">
     <i class="mr-1 fa fa-save text-success-m1 text-120 w-2"></i>
       <span style="padding-left: 8px;" *ngIf="ServiceS.Controleur.designation==='Verificateur' ">Verifier</span>
       <span style="padding-left: 8px;" *ngIf="ServiceS.Controleur.designation==='Controleur' ">Save</span>
@@ -337,11 +335,10 @@
 </div>
 </div>
 
-<p-dialog  [modal]="true" header="Fiche de Calcul" [(visible)]="visible"  [maximizable]="true" [style]="{ width: '50vw' }" [draggable]="true" [resizable]="true">
+<p-dialog (onHide)="this.isHoverDisabled = false"  [modal]="true" header="Fiche de Calcul" [(visible)]="visible"  [maximizable]="true" [style]="{ width: '50vw' }" [draggable]="true" [resizable]="true">
 
   <div style="padding-left: 5px;">
 <div class="info-section">
-  <div class="info-item">x6: 1</div>
   <div class="info-item">Ibt: 1 A</div>
   <div class="info-item">Iht: 1 A</div>
   <div class="info-item" style="white-space: nowrap;">CC 1 : {{cc.toFixed(3)}}</div>
@@ -349,8 +346,9 @@
 
   <div class="info-item">Norme: {{ this.service.list[0].norme }}</div>
   <div class="info-item">Type: {{ this.service.list[0].type }}</div>
-</div>
+  <div class="info-item">Libelle: {{ this.service.list[0].libelle }}</div>
 
+</div>
 
 <div style="display: contents;" *ngIf="this.service.list[0].libelle === 'Cuivre'">
   <div class="panel panel-default" style="width: fit-content; margin-right: auto;">
@@ -480,7 +478,8 @@
 </div>
 
 
-<div style="display: contents;" *ngIf="this.service.list[0].libelle === 'Aluminum'">
+
+<div style="display: contents;" *ngIf="this.service.list[0].libelle==='Aluminum' ">
   <div class="panel panel-default" style="width: fit-content; margin-right: auto;">
     <div class="panel-heading">
                       <h3 class="panel-title">Partie 1</h3>
@@ -510,7 +509,7 @@
             <td class="text-center colfix">Rc (ohm)</td>
         </tr>
         <tr>
-          <td class="text-center colfix">1</td>
+          <td class="text-left colfix">1</td>
           <td class="text-center colfix">{{this.service.list[0].numero}}</td>
           <td class="text-center colfix">{{this.UAB.toFixed(4)}}</td>
           <td class="text-center colfix">{{this.RAohmT0.toFixed(4)}}</td>
@@ -549,7 +548,7 @@
           <td class="text-center colfix">Ucc T0 (V)</td>
           <td class="text-center colfix">Ucc T0 (%)</td>
 
-          <td class="text-center colfix">Pcc T0cc (W)</td>
+          <td class="text-center colfix">Pcc T0 (W)</td>
           <td class="text-center colfix">Ur T0 (%)</td>
           <td class="text-center colfix">Ux (%)</td>
           <td class="text-center colfix">Ur (%)</td>
@@ -563,6 +562,8 @@
           <td class="text-center colfix">Pj(BT) (W)</td>
           <td class="text-center colfix">Padd (W)</td>
           <td class="text-center colfix">PCC (W)</td>
+          <td class="text-center colfix">PTO (W)</td>
+
         </tr>
         <tr>
           <td class="text-left colfix">1</td>
@@ -587,6 +588,7 @@
           <td class="text-center colfix">{{ Pjbt?.toFixed(4) }}</td>
           <td class="text-center colfix">{{ Padd?.toFixed(4) }}</td>
           <td class="text-center colfix">{{ wcc2?.toFixed(4)}}</td>
+          <td class="text-center colfix">{{ PTOT?.toFixed(4)}}</td>
         </tr>
       </tbody>
     </table>
@@ -597,7 +599,7 @@
   </div>
 </p-dialog>
 
-<p-sidebar [(visible)]="sidebarVisible1" position="left">
+<p-sidebar (onHide)="this.isHoverDisabled = false"  [(visible)]="sidebarVisible1" position="left">
   <ng-template pTemplate="header"><h3 class="card-title" style="white-space: nowrap;color: black;">Historique</h3></ng-template>
   <ng-template pTemplate="content">
     <h5 style="white-space: nowrap;" >Rapport de transformation : {{this.ValidateEssais()}}</h5>
@@ -612,4 +614,30 @@
   </ng-template>
 
   </p-sidebar>
+  <p-dialog   (onHide)="isHoverDisabled = false;" [modal]="true" [(visible)]="visible4" [breakpoints]="{'960px': '75vw'}" [style]="{'width': '50vw'}" [draggable]="false" [resizable]="false">
+    <ng-template pTemplate="header">
+      <div class="custom-header" style="padding-left: 1vh;" >
+        <!-- Your custom header content goes here -->
+        <h5><i class="fas fa-bolt"></i> Calculer Io [A]</h5>
+      </div>
+    </ng-template>
+    <div>
+      <div>
+      </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <input #input1 (keydown.enter)="input2.focus()" [(ngModel)]="IA"  class="form-control" placeholder="Saisir Ia">
+          </div>
+          <div class="form-group">
+            <input #input2 (keydown.enter)="input3.focus()" [(ngModel)]="IB" class="form-control" placeholder="Saisir Ib">
+          </div>
+          <div class="form-group">
+            <input #input3 [(ngModel)]="IC" class="form-control" placeholder="Saisir Ic">
+          </div>
+          <div class="form-group d-flex justify-content-end" (click)="CalculateI0();isHoverDisabled = false;this.visible4=false; ">
+            <span  class="badge badge-success" style="cursor: pointer; background-color: #122151;">Sauvegarder</span>
+          </div>
+        </div>
+    </div>
+  </p-dialog>
 

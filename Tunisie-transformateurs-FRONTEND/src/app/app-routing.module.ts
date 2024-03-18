@@ -26,11 +26,20 @@ import { PeintureComponentComponent } from './Peinture-component/Peinture-compon
 import { ConseptionComponentComponent } from './Conseption-component/Conseption-component.component';
 import { OutilsComponentComponent } from './outils-component/outils-component.component';
 import { DashBoardComponentComponent } from './DashBoard-component/DashBoard-component.component';
+import { RepportComponentComponent } from './Repport-component/Repport-component.component';
 const routes: Routes = [
   { path: 'Transformateur', component: TransformateurInfoComponent , canActivate: [AuthGuard]},
   { path: 'Ajouter_Transformateur', component: Add_ModifyTransformateurComponent , canActivate: [AuthGuard]},
   { path: 'Ajouter_Transformateur/:id', component: Add_ModifyTransformateurComponent , canActivate: [AuthGuard]},
+
+
+
+
   { path: 'Essai_Transformateur/:id' , component: EssaiComponentComponent , canActivate: [AuthGuard]},
+
+  { path: 'Repport/:id' , component: RepportComponentComponent , canActivate: [AuthGuard]},
+
+
   { path: 'Add_transformateur' , component: AddComponentComponent , canActivate: [AuthGuard]},
   { path: 'Edit_profile' , component : EditProfileComponentComponent , canActivate: [AuthGuard]},
   { path: 'Sign_in' , component : CreateAcountComponentComponent},
@@ -46,6 +55,7 @@ const routes: Routes = [
   { path: 'Remplissage/:id/:etapenumero' , component : RemplissageComponentComponent, canActivate: [AuthGuard]},
   { path: 'Peinture/:id/:etapenumero' , component : PeintureComponentComponent, canActivate: [AuthGuard]},
   { path: 'Conseption/:id/:etapenumero' , component : ConseptionComponentComponent, canActivate: [AuthGuard]},
+
   { path: 'Outils' , component : OutilsComponentComponent, canActivate: [AuthGuard]},
   { path: 'DashBoard' , component : DashBoardComponentComponent, canActivate: [AdministrationOnlyGuard]},
 

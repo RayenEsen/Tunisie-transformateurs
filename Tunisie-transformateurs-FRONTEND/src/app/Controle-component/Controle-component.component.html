@@ -131,7 +131,7 @@
                               </ng-container>
                             </ng-template>
                             <ng-template pTemplate="content">
-                              Débutant et Terminer le <p-calendar [showTime]="true" [ngModel]="rangeDatesMap.get(etape.etapeNumero)" (ngModelChange)="updateRangeDates($event, etape.etapeNumero)" selectionMode="multiple" [readonlyInput]="true"></p-calendar>
+                              Débutant et Terminer le <p-calendar (onClose)="updateEtape(etape.etapeNumero)" [showTime]="true" [ngModel]="rangeDatesMap.get(etape.etapeNumero)" (ngModelChange)="updateRangeDates($event, etape.etapeNumero)" selectionMode="multiple" [readonlyInput]="true"></p-calendar>
                               </ng-template>
                         </p-inplace>
                        </div>

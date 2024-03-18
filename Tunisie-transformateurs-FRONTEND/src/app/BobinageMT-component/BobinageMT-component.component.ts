@@ -86,7 +86,18 @@ export class BobinageMTComponentComponent implements OnInit {
     // Call the service method to update bobinages
     this.ServiceMT.UpdateListBobinage(this.bobinagesMT).subscribe(
         () => {
-            console.log('Bobinages updated successfully');
+            if (this.bobinagesMT.every(bobinage => bobinage.cnc === "C"))
+            {
+              this.etapeSelected.resultat="Conforme"
+              this.etapeSelected2.resultat="Conforme"
+              this.etapeSelected3.resultat="Conforme"
+            }
+            if (this.bobinagesMT.some(bobinage => bobinage.cnc === "NC"))
+            {
+              this.etapeSelected.resultat="Non conforme"
+              this.etapeSelected2.resultat="Non conforme"
+              this.etapeSelected3.resultat="Non conforme"
+            }
             if(this.ServiceS.Controleur.designation==="Controleur" && this.ServiceS.Controleur.username)
             {
               this.etapeSelected.controleur=this.ServiceS.Controleur.username;
@@ -113,7 +124,31 @@ export class BobinageMTComponentComponent implements OnInit {
                                 // Handle the error appropriately
                             }
                         });
-                        // Add any further logic here if needed
+
+                        // Update the etapeSelected
+                        this.ServiceE.UpdateEtape(this.transformateurId, this.etapenumero+1, this.etapeSelected2).subscribe({
+                          next: (response) => {
+                              console.log('Etape updated successfully:', response);
+                              // Handle the response as needed
+                          },
+                          error: (error) => {
+                              console.error('Error updating etape:', error);
+                              // Handle the error appropriately
+                          }
+                      });
+
+                        // Update the etapeSelected
+                        this.ServiceE.UpdateEtape(this.transformateurId, this.etapenumero+2, this.etapeSelected3).subscribe({
+                          next: (response) => {
+                              console.log('Etape updated successfully:', response);
+                              // Handle the response as needed
+                          },
+                          error: (error) => {
+                              console.error('Error updating etape:', error);
+                              // Handle the error appropriately
+                          }
+                      });
+
                     },
                     error: (error) => {
                         console.error('Error adding event:', error);

@@ -74,6 +74,17 @@ export class ConseptionComponentComponent implements OnInit {
 
 
   update() {
+
+    if (this.conseption.every(conseption => conseption.conformiter === "Yes"))
+    {
+      this.etapeSelected.resultat="Conforme"
+    }
+    if (this.conseption.some(conseption => conseption.conformiter === "No"))
+    {
+      this.etapeSelected.resultat="Non conforme"
+    }
+
+
     if(this.ServiceS.Controleur.designation==="Controleur" && this.ServiceS.Controleur.username)
     {
       this.etapeSelected.controleur=this.ServiceS.Controleur.username;

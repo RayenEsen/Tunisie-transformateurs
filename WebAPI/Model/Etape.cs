@@ -27,5 +27,6 @@ namespace WebAPI.Model
         public string? Operateur2 { get; set; }
         public string? Controleur { get; set; }
         public string? Verificateur { get; set; }
+        public string? Resultat { get; set; }
     }
 }

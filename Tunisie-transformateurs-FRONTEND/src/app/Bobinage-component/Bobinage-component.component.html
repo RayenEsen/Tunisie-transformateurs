@@ -114,11 +114,11 @@
             </tr>
             <tr *ngFor="let bobinage of bobinages">
               <td class="text-left colfix">{{bobinage.nom}}</td>
-              <td class="text-center colfix"><input type="number" [(ngModel)]="bobinage.bt1"></td>
-              <td class="text-center colfix"><input type="number" [(ngModel)]="bobinage.bt2"></td>
-              <td class="text-center colfix"><input type="number" [(ngModel)]="bobinage.bt3"></td>
-              <td class="text-center colfix"><input type="number" [(ngModel)]="bobinage.prevue"></td>
-              <td class="text-center colfix"><input type="text" [(ngModel)]="bobinage.cnc" [ngStyle]="{'color': bobinage.cnc === 'C' ? 'green' : 'red'}"></td>
+              <td class="text-center colfix"><input  #input1 (keydown.enter)="input2.focus()" type="number" [(ngModel)]="bobinage.bt1"></td>
+              <td class="text-center colfix"><input  #input2 (keydown.enter)="input3.focus()" type="number" [(ngModel)]="bobinage.bt2"></td>
+              <td class="text-center colfix"><input  #input3 (keydown.enter)="input4.focus()" type="number" [(ngModel)]="bobinage.bt3"></td>
+              <td class="text-center colfix"><input  #input4 (keydown.enter)="input5.focus()" type="number" [(ngModel)]="bobinage.prevue"></td>
+              <td class="text-center colfix"><input  #input5 type="text" [(ngModel)]="bobinage.cnc" [ngStyle]="{'color': bobinage.cnc === 'C' ? 'green' : 'red'}"></td>
             </tr>
         </tbody>
       </table>

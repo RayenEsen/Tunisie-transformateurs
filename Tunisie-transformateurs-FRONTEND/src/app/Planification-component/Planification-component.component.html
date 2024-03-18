@@ -113,8 +113,9 @@
 
     <p-timeline [value]="Etape">
       <ng-template pTemplate="content" let-Etape>
-          <small class="p-text-secondary">{{ Etape.nom }}</small>
+        <small style="display: flex;" [ngStyle]="getStyle(Etape)">{{ Etape.nom }} <p *ngIf="Etape.resultat==='Conforme' " style="color: green;">(C)</p> <p style="color: red;" *ngIf="Etape.resultat==='Non conforme' ">(NC)</p></small>
       </ng-template>
+
       <ng-template pTemplate="opposite" let-Etape>
           <ng-container *ngIf="Etape.dateFin; else iconTemplate">
             <small>{{ Etape.dateFin | date: 'dd/MM/yyyy HH:mm' }}</small>
@@ -124,7 +125,5 @@
           </ng-template>
       </ng-template>
   </p-timeline>
-
-
   </ng-template>
 </p-sidebar>
