@@ -875,6 +875,9 @@ namespace WebAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<int>("Commande")
+                        .HasColumnType("int");
+
                     b.Property<string>("Cooling")
                         .IsRequired()
                         .HasColumnType("nvarchar(100)");
@@ -886,10 +889,16 @@ namespace WebAPI.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime>("DateCloture")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime>("DateFin")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DateLivraison")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("Dateprevue")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Etat")
@@ -937,6 +946,9 @@ namespace WebAPI.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<int>("Quantite")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantite2")
                         .HasColumnType("int");
 
                     b.Property<string>("Sans")

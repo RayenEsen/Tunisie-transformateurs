@@ -113,16 +113,16 @@
             <td class="text-center colfix">Mesurée</td>
             <td class="text-center colfix">Prevue</td>
           </tr>
-          <tr *ngFor="let magnetique of Magnetiques">
+          <tr *ngFor="let magnetique of Magnetiques; let i = index">
             <td class="text-left colfix">{{ magnetique.nom }}</td>
-            <td class="text-center colfix"><input type="number" [(ngModel)]="magnetique.f1c1m"></td>
-            <td class="text-center colfix"><input type="number" [(ngModel)]="magnetique.f1c1p"></td>
-            <td class="text-center colfix"><input type="number" [(ngModel)]="magnetique.f2c2m"></td>
-            <td class="text-center colfix"><input type="number" [(ngModel)]="magnetique.f2c2p"></td>
-            <td class="text-center colfix"><input type="number" [(ngModel)]="magnetique.f3c3m"></td>
-            <td class="text-center colfix"><input type="number" [(ngModel)]="magnetique.f3c3p"></td>
-            <td class="text-center colfix"><input type="number" [(ngModel)]="magnetique.c4m"></td>
-            <td class="text-center colfix"><input type="number" [(ngModel)]="magnetique.c4p"></td>
+            <td class="text-center colfix"><input #input1 (keydown.enter)="handleEnter(i, input2)" type="number" [(ngModel)]="magnetique.f1c1m"></td>
+            <td class="text-center colfix"><input #input2 (keydown.enter)="handleEnter(i, input3)" type="number" [(ngModel)]="magnetique.f1c1p"></td>
+            <td class="text-center colfix"><input #input3 (keydown.enter)="handleEnter(i, input4)" type="number" [(ngModel)]="magnetique.f2c2m"></td>
+            <td class="text-center colfix"><input #input4 (keydown.enter)="handleEnter(i, input5)" type="number" [(ngModel)]="magnetique.f2c2p"></td>
+            <td class="text-center colfix"><input #input5 (keydown.enter)="handleEnter(i, input6)" type="number" [(ngModel)]="magnetique.f3c3m"></td>
+            <td class="text-center colfix"><input #input6 (keydown.enter)="handleEnter(i, input7)" type="number" [(ngModel)]="magnetique.f3c3p"></td>
+            <td class="text-center colfix"><input #input7 (keydown.enter)="handleEnter(i, input8)" type="number" [(ngModel)]="magnetique.c4m"></td>
+            <td class="text-center colfix"><input #input8 type="number" [(ngModel)]="magnetique.c4p"></td>
           </tr>
         </tbody>
       </table>

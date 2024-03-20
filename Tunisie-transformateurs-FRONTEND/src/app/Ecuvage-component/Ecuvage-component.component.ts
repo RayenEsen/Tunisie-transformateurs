@@ -28,32 +28,32 @@ export class EcuvageComponentComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.transformateurId = +params['id'] || 0;
-      this.etapenumero= +params['etapenumero'] || 0;
+      this.etapenumero = +params['etapenumero'] || 0;
 
+      // Fetch etapes
       this.service.GetTransformateur(this.transformateurId);
       this.ServiceE.getEtapeByNumeroAndTransformateur(this.etapenumero,this.transformateurId)
-      .subscribe(
-        etape => {
-          this.etapeSelected=etape;
-          console.log(this.etapeSelected);
-        },
-        error => {
-          // Handle any errors that occur during the HTTP request
-          console.error('Error fetching etape:', error);
-        }
-      );
+        .subscribe(
+          etape => {
+            this.etapeSelected = etape;
+            console.log(this.etapeSelected);
+          },
+          error => {
+            console.error('Error fetching etape:', error);
+          }
+        );
       this.ServiceE.getEtapeByNumeroAndTransformateur(this.etapenumero+1,this.transformateurId)
-      .subscribe(
-        etape => {
-          this.etapeSelected2=etape;
-          console.log(this.etapeSelected);
-        },
-        error => {
-          // Handle any errors that occur during the HTTP request
-          console.error('Error fetching etape:', error);
-        }
-      );
-    });
+        .subscribe(
+          etape => {
+            this.etapeSelected2 = etape;
+            console.log(this.etapeSelected);
+          },
+          error => {
+            console.error('Error fetching etape:', error);
+          }
+        );
+
+      // Fetch ecuvage
       this.ServiceEcu.getEcuvageByTransformateurId(this.transformateurId).subscribe({
         next: (ecuvage: Ecuvage[]) => {
           this.ecuvages = ecuvage;
@@ -61,6 +61,7 @@ export class EcuvageComponentComponent implements OnInit {
         }
       });
 
+      // Fetch ecuvageValues
       this.ServiceEV.getEcuvageValuesByTransformateurId(this.transformateurId).subscribe({
         next: (response) => {
           this.ecuvagesValues = response;
@@ -83,13 +84,16 @@ export class EcuvageComponentComponent implements OnInit {
             };
             this.ServiceEV.AddEcuvageValues(ecuvageValuesAjouter).subscribe({
               next: (response) => {
-                this.ecuvagesValues=response;
+                // Once created, update ecuvagesValues
+                this.ecuvagesValues = [response];
               }
             });
           }
         }
       });
+    });
   }
+
 
 
     // Function to handle the print action

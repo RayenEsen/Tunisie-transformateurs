@@ -226,3 +226,12 @@ select.formbold-form-input,
 ::ng-deep ul.p-tree-container.ng-star-inserted {
   padding-left: 0rem;
 }
+
+
+::ng-deep .p-calendar {
+  margin-left: 0%;
+  position: relative;
+  display: inline-flex;
+  max-width: 351%;
+  width: 351%;
+}

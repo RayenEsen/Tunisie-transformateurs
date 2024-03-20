@@ -113,4 +113,10 @@ export class MagnetiqueComponentComponent implements OnInit {
       window.print();
 
     }
+    handleEnter(index: number, nextInput: HTMLInputElement): void {
+      if (index < this.Magnetiques.length) {
+        nextInput.focus();
+      }
+    }
+
 }

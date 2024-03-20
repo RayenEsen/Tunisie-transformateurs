@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace WebAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class FirstMigration : Migration
+    public partial class FirstMigrationAgainhaha : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -56,6 +56,8 @@ namespace WebAPI.Migrations
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateLivraison = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateFin = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Dateprevue = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DateCloture = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Client = table.Column<string>(type: "nvarchar(100)", nullable: false),
                     Norme = table.Column<string>(type: "nvarchar(100)", nullable: false),
@@ -66,6 +68,8 @@ namespace WebAPI.Migrations
                     Bti2 = table.Column<float>(type: "real", nullable: false),
                     Nbphase = table.Column<int>(type: "int", nullable: false),
                     Quantite = table.Column<int>(type: "int", nullable: false),
+                    Quantite2 = table.Column<int>(type: "int", nullable: false),
+                    Commande = table.Column<int>(type: "int", nullable: false),
                     Prises = table.Column<string>(type: "nvarchar(100)", nullable: false),
                     Couplage = table.Column<string>(type: "nvarchar(100)", nullable: false),
                     Cooling = table.Column<string>(type: "nvarchar(100)", nullable: false),
@@ -318,7 +322,8 @@ namespace WebAPI.Migrations
                     Operateur1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Operateur2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Controleur = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Verificateur = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Verificateur = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Resultat = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {

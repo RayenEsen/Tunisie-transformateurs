@@ -110,14 +110,14 @@
             <td class="text-center colfix">Mesurée</td>
             <td class="text-center colfix">Prévue</td>
           </tr>
-          <tr *ngFor="let montage of Montages">
+          <tr *ngFor="let montage of Montages; let i = index">
             <td>{{montage.nom}}</td>
-            <td class="text-left colfix"><input type="number" [(ngModel)]="montage.c1m"></td>
-            <td class="text-center colfix"><input type="number" [(ngModel)]="montage.c1p"></td>
-            <td class="text-center colfix"><input type="number" [(ngModel)]="montage.c2m"></td>
-            <td class="text-center colfix"><input type="number" [(ngModel)]="montage.c2p"></td>
-            <td class="text-center colfix"><input type="number" [(ngModel)]="montage.c3m"></td>
-            <td class="text-center colfix"><input type="number" [(ngModel)]="montage.c3p"></td>
+            <td class="text-left colfix"><input #input1 (keydown.enter)="handleEnter(i, input2)" type="number" [(ngModel)]="montage.c1m"></td>
+            <td class="text-center colfix"><input #input2 (keydown.enter)="handleEnter(i, input3)" type="number" [(ngModel)]="montage.c1p"></td>
+            <td class="text-center colfix"><input #input3 (keydown.enter)="handleEnter(i, input4)" type="number" [(ngModel)]="montage.c2m"></td>
+            <td class="text-center colfix"><input #input4 (keydown.enter)="handleEnter(i, input5)" type="number" [(ngModel)]="montage.c2p"></td>
+            <td class="text-center colfix"><input #input5 (keydown.enter)="handleEnter(i, input6)" type="number" [(ngModel)]="montage.c3m"></td>
+            <td class="text-center colfix"><input #input6 type="number" [(ngModel)]="montage.c3p"></td>
           </tr>
         </tbody>
       </table>

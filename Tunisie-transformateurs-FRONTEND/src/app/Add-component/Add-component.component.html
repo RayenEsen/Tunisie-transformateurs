@@ -9,20 +9,22 @@
   <div class="formbold-form-wrapper"  [style.pointer-events]="loading ? 'none' : 'auto'">
          <img src="assets/Logo.png" style="margin-left: 320px;">
       <div class="formbold-input-wrapp formbold-mb-3">
-        <label for="firstname" class="formbold-form-label" style="color: #122151;"> Marque / Numero <small style="color: red;">*</small></label>
+        <label for="firstname" class="formbold-form-label" style="color: #122151;"> Marque / Numero Commande <small style="color: red;">*</small></label>
         <div>
           <input
             placeholder="Tunisie transformateurs"
             class="formbold-form-input"
             name="marque"
             [(ngModel)]="transformateurAjouter.marque"
+            readonly
           />
 
           <input
-            name="numero"
-            placeholder="Numero"
+            name=" Numero Commande"
+            placeholder=" Numero Commande"
             class="formbold-form-input"
-            [(ngModel)]="transformateurAjouter.numero"
+            [(ngModel)]="transformateurAjouter.commande"
+
           />
         </div>
       </div>
@@ -58,6 +60,18 @@
 
         />
       </div>
+
+      <div class="formbold-mb-3">
+        <label for="age" class="formbold-form-label" style="color: #122151;"> Quantite <small style="color: red;">*</small></label>
+        <input
+          type="number"
+          name="Quantite"
+          placeholder="Quantite"
+          class="formbold-form-input"
+          [(ngModel)]="transformateurAjouter.quantite2"
+        />
+      </div>
+
 
       <div class="formbold-mb-3">
         <label class="formbold-form-label" style="color: #122151;">Couplage<small style="color: red;">*</small></label>
@@ -149,6 +163,20 @@
           </select>
         </div>
       </div>
+
+      <div class="formbold-input-wrapp formbold-mb-3">
+        <label for="firstname" class="formbold-form-label" style="color: #122151;"> Date Prevue<small style="color: red;">*</small></label>
+        <div>
+          <p-calendar  placeholder="Date Prevue" [(ngModel)]="transformateurAjouter.dateprevue" [iconDisplay]="'input'" [showIcon]="true"></p-calendar>
+        </div>
+      </div>
+      <div class="formbold-input-wrapp formbold-mb-3">
+        <label for="firstname" class="formbold-form-label" style="color: #122151;"> Date Cloture<small style="color: red;">*</small></label>
+        <div>
+          <p-calendar  placeholder="Date Cloture" [(ngModel)]="transformateurAjouter.dateCloture" [iconDisplay]="'input'" [showIcon]="true"></p-calendar>
+        </div>
+      </div>
+
 
       <div class="formbold-mb-3">
         <label for="upload" class="formbold-form-label" style="color: #122151;">

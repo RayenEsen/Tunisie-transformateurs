@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Montage } from '../Shared/Montage-service.model';
 import { MontageServiceService } from '../Shared/Montage-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -132,6 +132,12 @@ export class MontageComponentComponent implements OnInit {
     onPrint() {
       window.print();
 
+    }
+
+    handleEnter(index: number, nextInput: HTMLInputElement): void {
+      if (index < this.Montages.length ) {
+        nextInput.focus();
+      }
     }
 
 }

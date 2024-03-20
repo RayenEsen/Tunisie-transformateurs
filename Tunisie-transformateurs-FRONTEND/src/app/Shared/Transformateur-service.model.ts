@@ -13,6 +13,8 @@ export class Transformateur {
   dateLivraison?: Date;
   dateFin?: Date;
 
+  dateprevue?: Date;
+  dateCloture?: Date;
 
   type: string = "";
   client: string = "";
@@ -38,6 +40,10 @@ export class Transformateur {
   borne: string = "";
   bornesembrochables: string  = "";
   frequency: number = 0;
+
+  quantite2: number = 0;
+  commande: number = 0;
+
   pv?: Pv;
   etapes?: Etape[]; // One-to-many relationship with Etape
   bobinage?: Bobinage[]; // One-to-many relationship with Etape

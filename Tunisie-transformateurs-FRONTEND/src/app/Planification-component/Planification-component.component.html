@@ -108,22 +108,35 @@
 </div>
 <p-toast></p-toast>
 <p-sidebar [(visible)]="sidebarVisible" position="left">
-  <ng-template pTemplate="header"><h5 class="card-title">Résultats de la suivi de la production</h5></ng-template>
+  <ng-template pTemplate="header">
+    <h5 class="card-title">Résultats de la suivi de la production</h5>
+  </ng-template>
   <ng-template pTemplate="content">
 
     <p-timeline [value]="Etape">
       <ng-template pTemplate="content" let-Etape>
-        <small style="display: flex;" [ngStyle]="getStyle(Etape)">{{ Etape.nom }} <p *ngIf="Etape.resultat==='Conforme' " style="color: green;">(C)</p> <p style="color: red;" *ngIf="Etape.resultat==='Non conforme' ">(NC)</p></small>
+        <small style="display: flex;" [ngStyle]="getStyle(Etape)">
+          {{ Etape.nom }}
+          <p *ngIf="Etape.resultat==='Conforme' " style="color: green;">(C)</p>
+          <p style="color: red;" *ngIf="Etape.resultat==='Non conforme' ">(NC)</p>
+        </small>
       </ng-template>
 
       <ng-template pTemplate="opposite" let-Etape>
-          <ng-container *ngIf="Etape.dateFin; else iconTemplate">
-            <small>{{ Etape.dateFin | date: 'dd/MM/yyyy HH:mm' }}</small>
-          </ng-container>
-          <ng-template #iconTemplate>
-                En cours
-          </ng-template>
+        <ng-container *ngIf="Etape.dateFin; else iconTemplate">
+          <small>{{ Etape.dateFin | date: 'dd/MM/yyyy HH:mm' }}</small>
+        </ng-container>
+        <ng-template #iconTemplate>
+          En cours
+        </ng-template>
       </ng-template>
-  </p-timeline>
+    </p-timeline>
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <!-- Your footer content here -->
+    <div style="text-align: left; padding: 10px; background-color: #f0f0f0;">
+      Resultat : En Attente
+    </div>
   </ng-template>
 </p-sidebar>
+
