@@ -89,7 +89,20 @@ export class MontageComponentComponent implements OnInit {
   Update() {
     this.ServiceMontage.UpdateListMontage(this.Montages).subscribe(
         () => {
-            console.log('Montages updated successfully');
+
+
+            if (this.Montages.every(Montage => Montage.cnc1 === "C") && this.Montages.every(Montage => Montage.cnc2 === "C") && this.Montages.every(Montage => Montage.cnc3 === "C"))
+            {
+              this.etapeSelected.resultat="Conforme"
+              this.etapeSelected2.resultat="Conforme"
+            }
+
+            if (this.Montages.every(Montage => Montage.cnc1 === "NC") && this.Montages.every(Montage => Montage.cnc2 === "NC") && this.Montages.every(Montage => Montage.cnc3 === "NC"))
+            {
+              this.etapeSelected.resultat="Non conforme"
+              this.etapeSelected2.resultat="Non conforme"
+            }
+
             if(this.SessionS.Controleur.designation==="Controleur" && this.SessionS.Controleur.username)
             {
               this.etapeSelected.controleur=this.SessionS.Controleur.username;
@@ -98,25 +111,84 @@ export class MontageComponentComponent implements OnInit {
             {
               this.etapeSelected.verificateur=this.SessionS.Controleur.username;
             }
-                                    // Creating and adding the event
-                                    const newEvent = new Event(this.SessionS.Controleur.idC, 'Participer a le Controle Montage', new Date(),"opéré par " + this.etapeSelected.operateur1 + " et " + this.etapeSelected.operateur2 + " pour le transformateur " + this.transformateurId + ".");
-                                    this.eventService.AddEvent(newEvent)
-                                    .subscribe({
-                                    next: (response) => {
-                                    console.log('Event added successfully:', response);
-                                      // Update the etapeSelected
-                                      this.ServiceE.UpdateEtape(this.transformateurId, this.etapenumero, this.etapeSelected).subscribe({
-                                        next: (response) => {
-                                          console.log('Etape updated successfully:', response);
-                                          // Handle the response as needed
-                                        },
-                                      });
-                                    },
-                                    error: (error) => {
-                                    console.error('Error adding event:', error);
-                                    // Handle the error appropriately
-                                    }
-                                    });
+            if(this.SessionS.Controleur.designation==="Controleur")
+            {
+              const newEvent = new Event(this.SessionS.Controleur.idC, 'Participer a le Montage'
+              , new Date(),this.SessionS.Controleur.username+" a Participer a le Montage " + this.transformateurId);
+              this.eventService.AddEvent(newEvent)
+              .subscribe({
+                next: (response) => {
+                  console.log('Event added successfully:', response);
+                // Update the etapeSelected
+                this.ServiceE.UpdateEtape(this.transformateurId, this.etapenumero, this.etapeSelected).subscribe({
+                  next: (response) => {
+
+                  },
+                });
+
+                this.ServiceE.UpdateEtape(this.transformateurId, this.etapenumero+1, this.etapeSelected2).subscribe({
+                  next: (response) => {
+
+                  },
+                });
+
+                this.ServiceE.UpdateEtape(this.transformateurId, this.etapenumero+2, this.etapeSelected2).subscribe({
+                  next: (response) => {
+
+                  },
+                });
+
+                this.ServiceE.UpdateEtape(this.transformateurId, this.etapenumero+3, this.etapeSelected2).subscribe({
+                  next: (response) => {
+
+                  },
+                });
+
+                },
+                error: (error) => {
+                  console.error('Error adding event:', error);
+                }
+              });
+            }
+            else
+            {
+              const newEvent = new Event(this.SessionS.Controleur.idC, 'Verifier le Montage'
+              , new Date(),this.SessionS.Controleur.username+" a Verifier le Montage de le transformateur " + this.transformateurId);
+              this.eventService.AddEvent(newEvent)
+              .subscribe({
+                next: (response) => {
+                  console.log('Event added successfully:', response);
+                // Update the etapeSelected
+                this.ServiceE.UpdateEtape(this.transformateurId, this.etapenumero, this.etapeSelected).subscribe({
+                  next: (response) => {
+
+                  },
+                });
+
+                this.ServiceE.UpdateEtape(this.transformateurId, this.etapenumero+1, this.etapeSelected2).subscribe({
+                  next: (response) => {
+
+                  },
+                });
+
+                this.ServiceE.UpdateEtape(this.transformateurId, this.etapenumero+2, this.etapeSelected2).subscribe({
+                  next: (response) => {
+
+                  },
+                });
+
+                this.ServiceE.UpdateEtape(this.transformateurId, this.etapenumero+3, this.etapeSelected2).subscribe({
+                  next: (response) => {
+
+                  },
+                });
+
+                },
+                error: (error) => {
+                  console.error('Error adding event:', error);
+                }
+              });
+            }
         },
         error => {
             console.error('Error updating Montages:', error);

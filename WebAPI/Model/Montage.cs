@@ -13,10 +13,15 @@ namespace WebAPI.Model
         public int Numero { get; set; }
         public int? c1m { get; set; }
         public float? c1p { get; set; }
+        public string? Cnc1 { get; set; }
         public float? c2m { get; set; }
         public float? c2p { get; set; }
+        public string? Cnc2 { get; set; }
+
         public float? c3m { get; set; }
         public float? c3p { get; set; }
+        public string? Cnc3 { get; set; }
+
         public string Nom { get; set; } = "";
         [JsonIgnore]
         public Transformateur? Transformateur { get; set; }

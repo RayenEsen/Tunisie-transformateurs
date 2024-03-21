@@ -1,9 +1,9 @@
-import { Transformateur } from "./Transformateur-service.model";
 
 export class Rapport {
 
 idRapport!: number; // Auto-generated primary key
-numero!: number;
+Id_Etape!: number;
+
 dater!: Date; // Assuming DateOnly is serialized as string
 origine?: string;
 description?: string;
@@ -14,6 +14,5 @@ delais?: string;
 etat?: string;
 efficacite?: string;
 
-transformateur?: Transformateur;
 }
 

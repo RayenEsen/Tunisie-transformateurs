@@ -21,6 +21,8 @@ namespace WebAPI.Model
 
         [JsonIgnore]
         public Transformateur? Transformateur { get; set; }
+        [JsonIgnore]
+        public Rapport? Rapport { get; set; }
         public string? Etat { get; set; } = "";
         public string? Observation { get; set; } = "";
         public string? Operateur1 { get; set; } 

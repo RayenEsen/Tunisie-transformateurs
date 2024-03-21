@@ -115,7 +115,7 @@
 
     <p-timeline [value]="Etape">
       <ng-template pTemplate="content" let-Etape>
-        <small style="display: flex;" [ngStyle]="getStyle(Etape)">
+        <small style="display: flex;" [ngStyle]="getStyle(Etape)" (click)="Rapport(Etape)">
           {{ Etape.nom }}
           <p *ngIf="Etape.resultat==='Conforme' " style="color: green;">(C)</p>
           <p style="color: red;" *ngIf="Etape.resultat==='Non conforme' ">(NC)</p>
@@ -135,7 +135,13 @@
   <ng-template pTemplate="footer">
     <!-- Your footer content here -->
     <div style="text-align: left; padding: 10px; background-color: #f0f0f0;">
-      Resultat : En Attente
+      <span>
+        <span class="resultat-label">Resultat :</span>
+        <span [ngClass]="{'green-text': Resultat() === 'Conforme', 'red-text': Resultat() === 'Non Conforme', 'grey-text': Resultat() !== 'Conforme' && Resultat() !== 'Non Conforme'}">
+          {{ Resultat() }}
+        </span>
+
+      </span>
     </div>
   </ng-template>
 </p-sidebar>

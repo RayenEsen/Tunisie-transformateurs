@@ -17,7 +17,7 @@ namespace WebAPI.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.2")
+                .HasAnnotation("ProductVersion", "8.0.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -451,6 +451,22 @@ namespace WebAPI.Migrations
                     b.Property<float?>("C4p")
                         .HasColumnType("real");
 
+                    b.Property<string>("Cnc1")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Cnc2")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Cnc3")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Cnc4")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<float?>("F1c1m")
                         .HasColumnType("real");
 
@@ -490,6 +506,15 @@ namespace WebAPI.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdMagnetique"));
+
+                    b.Property<string>("Cnc1")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Cnc2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Cnc3")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nom")
                         .IsRequired()
@@ -796,6 +821,60 @@ namespace WebAPI.Migrations
                         .IsUnique();
 
                     b.ToTable("pvs");
+                });
+
+            modelBuilder.Entity("WebAPI.Model.Rapport", b =>
+                {
+                    b.Property<int>("IdRapport")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdRapport"));
+
+                    b.Property<string>("Action")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Analyse")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Dater")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Delais")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Efficacite")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Etat")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Id_Etape")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Origine")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Responsable")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("IdRapport");
+
+                    b.HasIndex("Id_Etape")
+                        .IsUnique();
+
+                    b.ToTable("Rapports");
                 });
 
             modelBuilder.Entity("WebAPI.Model.Remplissage", b =>
@@ -1148,6 +1227,17 @@ namespace WebAPI.Migrations
                     b.Navigation("ControleurDeQualite");
                 });
 
+            modelBuilder.Entity("WebAPI.Model.Rapport", b =>
+                {
+                    b.HasOne("WebAPI.Model.Etape", "Etape")
+                        .WithOne("Rapport")
+                        .HasForeignKey("WebAPI.Model.Rapport", "Id_Etape")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Etape");
+                });
+
             modelBuilder.Entity("WebAPI.Model.Remplissage", b =>
                 {
                     b.HasOne("WebAPI.Model.Transformateur", "Transformateur")
@@ -1182,6 +1272,11 @@ namespace WebAPI.Migrations
                     b.Navigation("Pfp");
 
                     b.Navigation("Pvs");
+                });
+
+            modelBuilder.Entity("WebAPI.Model.Etape", b =>
+                {
+                    b.Navigation("Rapport");
                 });
 
             modelBuilder.Entity("WebAPI.Model.Transformateur", b =>

@@ -28,6 +28,9 @@ namespace WebAPI.Model
         public DbSet<ConseptionValues> ConseptionValues { get; set; }
         public DbSet<OperateurSuggestions> OperateurSuggestions { get; set; }
         public DbSet<EcuvageValues> EcuvageValues { get; set; }
+
+        public DbSet<Rapport> Rapports { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Configure one-to-one relationship between Transformateur and Pv
@@ -47,6 +50,8 @@ namespace WebAPI.Model
                 .HasMany(c => c.Pvs)
                 .WithOne(p => p.ControleurDeQualite)
                 .HasForeignKey(p => p.IdC);
+
+
 
             modelBuilder.Entity<Conseption>()
                 .HasMany(c => c.ConseptionValues)
@@ -74,6 +79,15 @@ namespace WebAPI.Model
             .HasOne(b => b.Transformateur)
             .WithMany(t => t.Magnetique)
             .HasForeignKey(b => b.Numero);
+
+
+
+            // Configure one-to-one relationship between Etape and Rapport
+            modelBuilder.Entity<Etape>()
+                .HasOne(e => e.Rapport)
+                .WithOne(r => r.Etape)
+                .HasForeignKey<Rapport>(r => r.Id_Etape);
+
 
             modelBuilder.Entity<Montage>()
             .HasOne(b => b.Transformateur)

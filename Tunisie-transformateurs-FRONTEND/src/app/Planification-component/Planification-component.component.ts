@@ -5,6 +5,8 @@ import { MessageService } from 'primeng/api';
 import { TreeNode } from 'primeng/api';
 import { EtapeServiceService } from '../Shared/Etape-service.service';
 import { Etape } from '../Shared/Etape-servicemodel';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-Planification-component',
   templateUrl: './Planification-component.component.html',
@@ -23,7 +25,7 @@ export class PlanificationComponentComponent implements OnInit {
   sidebarVisible : boolean = false;
   Etape : Etape[] = [];
 
-  constructor(public ServiceE : EtapeServiceService,public Service: TransformateurServiceService,public ServiceM : MessageService) { }
+  constructor(private router : Router,public ServiceE : EtapeServiceService,public Service: TransformateurServiceService,public ServiceM : MessageService) { }
 
   ngOnInit() {
     this.Service.getTransformateurAndItsPvs()
@@ -121,5 +123,22 @@ export class PlanificationComponentComponent implements OnInit {
   ShowDialog()
   {
     this.Visible = !this.Visible;
+  }
+
+  Resultat()
+  {
+    if(this.Etape.every(etape => etape.resultat==="Conforme"))
+    return "Conforme";
+    else if(this.Etape.every(etape => etape.resultat==="Non Conforme"))
+    return "Non Conforme"
+    else return "En Attente"
+  }
+
+  Rapport(etape : Etape)
+  {
+    if(etape.resultat!=='Conforme')
+    {
+      this.router.navigate(['/Repport/'+etape.numero+'/'+etape.id_Etape]);
+    }
   }
 }

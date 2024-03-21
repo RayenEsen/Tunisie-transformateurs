@@ -73,6 +73,22 @@ export class MagnetiqueComponentComponent implements OnInit {
     // Call the service method to update Magnetiques
     this.ServiceM.UpdateListBobinage(this.Magnetiques).subscribe(
         () => {
+
+
+          if (this.Magnetiques.every(Magnetique => Magnetique.cnc1 === "C") && this.Magnetiques.every(Magnetique => Magnetique.cnc2 === "C") && this.Magnetiques.every(Magnetique => Magnetique.cnc3 === "C") && this.Magnetiques.every(Magnetique => Magnetique.cnc4 === "C"))
+          {
+            this.etapeSelected.resultat="Conforme"
+            this.etapeSelected2.resultat="Conforme"
+          }
+
+
+          if (this.Magnetiques.every(Magnetique => Magnetique.cnc1 === "NC") && this.Magnetiques.every(Magnetique => Magnetique.cnc2 === "NC") && this.Magnetiques.every(Magnetique => Magnetique.cnc3 === "NC") && this.Magnetiques.every(Magnetique => Magnetique.cnc4 === "NC"))
+          {
+            this.etapeSelected.resultat="Non conforme"
+            this.etapeSelected2.resultat="Non conforme"
+          }
+
+
             console.log('Magnetiques updated successfully');
             if(this.serviceS.Controleur.designation==="Controleur" && this.serviceS.Controleur.username)
             {
@@ -82,25 +98,62 @@ export class MagnetiqueComponentComponent implements OnInit {
             {
               this.etapeSelected.verificateur=this.serviceS.Controleur.username;
             }
-            // Creating and adding the event
-            const newEvent = new Event(this.serviceS.Controleur.idC, 'Participer a le Controle dimensionnelle circuit magnetique', new Date()," opéré par " + this.etapeSelected.operateur1 + " et " + this.etapeSelected.operateur2 + " pour le transformateur " + this.transformateurId + ".");
-            this.eventService.AddEvent(newEvent)
-            .subscribe({
-            next: (response) => {
-            console.log('Event added successfully:', response);
-            // Update the etapeSelected
-            this.serviceE.UpdateEtape(this.transformateurId, this.etapenumero, this.etapeSelected).subscribe({
-              next: (response) => {
-                console.log('Etape updated successfully:', response);
-                // Handle the response as needed
-              },
-            });
-            },
-            error: (error) => {
-            console.error('Error adding event:', error);
-            // Handle the error appropriately
+            if(this.serviceS.Controleur.designation==="Controleur")
+            {
+              const newEvent = new Event(this.serviceS.Controleur.idC, 'Participer a le Controle dimensionnelle circuit magnetique'
+              , new Date(),this.serviceS.Controleur.username+" a Participer a le Controle dimensionnelle circuit magnetique de le transformateur " + this.transformateurId);
+              this.eventService.AddEvent(newEvent)
+              .subscribe({
+                next: (response) => {
+                  console.log('Event added successfully:', response);
+                // Update the etapeSelected
+                this.serviceE.UpdateEtape(this.transformateurId, this.etapenumero, this.etapeSelected).subscribe({
+                  next: (response) => {
+
+                  },
+                });
+
+                this.serviceE.UpdateEtape(this.transformateurId, this.etapenumero+1, this.etapeSelected2).subscribe({
+                  next: (response) => {
+
+                  },
+                });
+
+                },
+                error: (error) => {
+                  console.error('Error adding event:', error);
+                }
+              });
             }
-            });
+            else
+            {
+              const newEvent = new Event(this.serviceS.Controleur.idC, 'Verifier le Controle dimensionnelle circuit magnetique'
+              , new Date(),this.serviceS.Controleur.username+" a Verifier le Controle dimensionnelle circuit magnetique de le transformateur " + this.transformateurId);
+              this.eventService.AddEvent(newEvent)
+              .subscribe({
+                next: (response) => {
+                  console.log('Event added successfully:', response);
+                // Update the etapeSelected
+                this.serviceE.UpdateEtape(this.transformateurId, this.etapenumero, this.etapeSelected).subscribe({
+                  next: (response) => {
+
+                  },
+                });
+
+                this.serviceE.UpdateEtape(this.transformateurId, this.etapenumero+1, this.etapeSelected2).subscribe({
+                  next: (response) => {
+
+                  },
+                });
+
+
+                },
+                error: (error) => {
+                  console.error('Error adding event:', error);
+                }
+              });
+            }
+
         },
         error => {
             console.error('Error updating Magnetiques:', error);

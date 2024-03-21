@@ -261,3 +261,5 @@ C:\Users\USER\Desktop\PFE\WebAPI\obj\Debug\net8.0\refint\WebAPI.dll
 C:\Users\USER\Desktop\PFE\WebAPI\obj\Debug\net8.0\WebAPI.pdb
 C:\Users\USER\Desktop\PFE\WebAPI\obj\Debug\net8.0\WebAPI.genruntimeconfig.cache
 C:\Users\USER\Desktop\PFE\WebAPI\obj\Debug\net8.0\ref\WebAPI.dll
+C:\Users\USER\Desktop\PFE\WebAPI\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\USER\Desktop\PFE\WebAPI\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll

@@ -37,7 +37,7 @@ const routes: Routes = [
 
   { path: 'Essai_Transformateur/:id' , component: EssaiComponentComponent , canActivate: [AuthGuard]},
 
-  { path: 'Repport/:id' , component: RepportComponentComponent , canActivate: [AuthGuard]},
+  { path: 'Repport/:id/:etapenumero' , component: RepportComponentComponent , canActivate: [AuthGuard]},
 
 
   { path: 'Add_transformateur' , component: AddComponentComponent , canActivate: [AuthGuard]},
