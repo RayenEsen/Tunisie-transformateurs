@@ -3,6 +3,7 @@ import { TransformateurServiceService } from '../Shared/Transformateur-service.s
 import { ActivatedRoute, Router } from '@angular/router';
 import { Rapport } from '../Shared/Rapport-service.model';
 import { RapportServiceService } from '../Shared/Rapport-service.service';
+import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-Repport-component',
   templateUrl: './Repport-component.component.html',
@@ -44,7 +45,7 @@ export class RepportComponentComponent implements OnInit {
   onChoixChange(event: any) {
     this.selectedChoix = event.value;
   }
-  constructor(public ServiceR : RapportServiceService,public service : TransformateurServiceService,public router: Router,private route: ActivatedRoute,) {
+  constructor(private messageService: MessageService,public ServiceR : RapportServiceService,public service : TransformateurServiceService,public router: Router,private route: ActivatedRoute,) {
 
   }
 
@@ -54,21 +55,41 @@ export class RepportComponentComponent implements OnInit {
       this.etapenumero = +params['etapenumero'] || 0;
 
       this.service.GetTransformateur(this.transformateurId);
-
+      this.ServiceR.getRapportByEtapeId(this.etapenumero).subscribe({
+        next : (response) =>
+        {
+          this.Rapport = response;
+          this.etat = this.Origines.find(origine => origine.name === response.origine);
+          this.selectedOrigine = this.etat; // Assign etat to selectedOrigine
+          this.etat2 = this.ChoixEtat.find(choix => choix.name === response.etat)
+          this.selectedChoix = this.etat2;
+        }
+      })
     });
   }
-  save()
-  {
-    this.Rapport.origine= this.etat.name;
-    this.Rapport.etat= this.etat2.name;
-    this.Rapport.Id_Etape= this.etapenumero;
-    console.log(this.Rapport)
-    this.ServiceR.AddRapport(this.Rapport).subscribe({
-      next : (response) =>
-      {
-        this.Rapport=response;
+
+
+  save() {
+    console.log(this.etat);
+    this.Rapport.origine = this.etat.name;
+    this.Rapport.etat = this.etat2.name;
+    this.Rapport.Id_Etape = this.etapenumero;
+    this.Rapport.dater = new Date();
+
+    this.ServiceR.upsertRapport(this.Rapport).subscribe({
+      next: () => {
+        this.messageService.add({ severity: 'success', summary: 'Succès', detail: 'Les informations ont été enregistrées.' });
+      },
+      error: (error) => {
+        this.messageService.add({ severity: 'error', summary: 'Erreur', detail: 'Une erreur est survenue lors de l\'enregistrement des informations.' });
       }
-    })
+    });
   }
 
+
+
+  formatDate(date: string | Date): string {
+    const dateString = typeof date === 'string' ? date : date?.toISOString();
+    return dateString ? new Date(dateString).toLocaleDateString('en-US', { day: '2-digit', month: '2-digit', year: 'numeric' }) : new Date().toLocaleDateString('en-US', { day: '2-digit', month: '2-digit', year: 'numeric' });
+  }
 }

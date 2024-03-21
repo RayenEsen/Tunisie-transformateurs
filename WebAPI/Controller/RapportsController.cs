@@ -112,6 +112,59 @@ namespace WebAPI.Controller
 
             return rapportExists;
         }
+        // GET: api/Rapports/ByEtapeId/5
+        [HttpGet("ByEtapeId/{id}")]
+        public async Task<ActionResult<Rapport>> GetRapportByEtapeId(int id)
+        {
+            var rapport = await _context.Rapports
+                                        .Include(r => r.Etape) // Assuming "Etape" is a navigation property in your Rapport model
+                                        .FirstOrDefaultAsync(r => r.Etape.Id_Etape == id);
+
+            if (rapport == null)
+            {
+                return NotFound();
+            }
+
+            return rapport;
+        }
+
+        // PUT: api/Rapports/UpsertRapport
+        [HttpPut("UpsertRapport")]
+        public async Task<IActionResult> UpsertRapport(Rapport rapport)
+        {
+            var existingRapport = await _context.Rapports.FindAsync(rapport.IdRapport);
+
+            if (existingRapport == null)
+            {
+                // The rapport does not exist, so add it
+                _context.Rapports.Add(rapport);
+            }
+            else
+            {
+                // The rapport exists, so update it
+                _context.Entry(existingRapport).CurrentValues.SetValues(rapport);
+            }
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!RapportExists(rapport.IdRapport))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
+
 
     }
 }
