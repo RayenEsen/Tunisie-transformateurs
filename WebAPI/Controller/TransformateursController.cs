@@ -144,9 +144,13 @@ namespace WebAPI.Controller
                     t.Cooling.Contains(searchTerm) ||
                     t.Libelle.Contains(searchTerm) ||
                     t.Type.Contains(searchTerm) ||
+                    t.Commande.ToString().Contains(searchTerm) ||
+                    t.Etat.ToString().Contains(searchTerm) ||
+
                     t.Pv.Resultat.Contains(searchTerm) ||
                     t.Pv.ControleurDeQualite.Username.Contains(searchTerm) ||
                     t.Numero.ToString().Contains(searchTerm))
+
                 .ToListAsync();
 
             return result;

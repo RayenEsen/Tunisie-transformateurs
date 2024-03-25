@@ -27,6 +27,7 @@ import { ConseptionComponentComponent } from './Conseption-component/Conseption-
 import { OutilsComponentComponent } from './outils-component/outils-component.component';
 import { DashBoardComponentComponent } from './DashBoard-component/DashBoard-component.component';
 import { RepportComponentComponent } from './Repport-component/Repport-component.component';
+import { EssaiMonoComponentComponent } from './EssaiMono-component/EssaiMono-component.component';
 const routes: Routes = [
   { path: 'Transformateur', component: TransformateurInfoComponent , canActivate: [AuthGuard]},
   { path: 'Ajouter_Transformateur', component: Add_ModifyTransformateurComponent , canActivate: [AuthGuard]},
@@ -36,6 +37,7 @@ const routes: Routes = [
 
 
   { path: 'Essai_Transformateur/:id' , component: EssaiComponentComponent , canActivate: [AuthGuard]},
+  { path: 'Essai_Transformateur_Mono/:id' , component: EssaiMonoComponentComponent , canActivate: [AuthGuard]},
 
   { path: 'Repport/:id/:etapenumero' , component: RepportComponentComponent , canActivate: [AuthGuard]},
 

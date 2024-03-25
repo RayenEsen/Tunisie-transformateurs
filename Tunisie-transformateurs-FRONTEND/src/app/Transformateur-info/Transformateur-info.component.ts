@@ -11,6 +11,7 @@ import { SessionService } from '../utils/session-service.service';
 import { EventServiceService } from '../Shared/Event-service.service';
 import { Event } from '../Shared/Event-service.model'
 import { Router } from '@angular/router';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-Transformateur-info',
@@ -265,10 +266,7 @@ onDelete(id: number) {
             // Handle the error appropriately
           }
         });
-      // Recalculate nbAttente, nbConforme, and nbNonConforme
-      this.nbAttente = this.list.filter(transformateur => transformateur.pv?.resultat === 'En Attente').length;
-      this.nbConforme = this.list.filter(transformateur => transformateur.pv?.resultat === 'Conforme').length;
-      this.nbNonConforme = this.list.filter(transformateur => transformateur.pv?.resultat === 'Non Conforme').length;
+
 
       // Iterate through each item in this.list
       this.list.forEach((transformateur, index) => {
@@ -286,8 +284,11 @@ onDelete(id: number) {
                     // Assuming the result is of type ControleurDeQualite
                     // Assign the ControleurDeQualite to the current Pv
                     this.list[currentIndex].pv!.controleurDeQualite = result;
-                    console.log(this.list[index]);
-                  },
+                    // Recalculate nbAttente, nbConforme, and nbNonConforme
+                    this.nbAttente = this.list.filter(transformateur => transformateur.pv?.resultat === 'En Attente').length;
+                    this.nbConforme = this.list.filter(transformateur => transformateur.pv?.resultat === 'Conforme').length;
+                    this.nbNonConforme = this.list.filter(transformateur => transformateur.pv?.resultat === 'Non Conforme').length;
+                    },
                   error: (error) => {
                     console.error('Error fetching data:', error);
                   }
@@ -316,9 +317,8 @@ onDelete(id: number) {
 
 items: any[] = [
   { label: 'Supprimer', icon: 'pi pi-trash', command: () => this.DeleteListOfTransformateurs() },
-  { label: 'Exporter', icon: 'pi pi-file-pdf' }
+  { label: 'Exporter', icon: 'pi pi-file-pdf', command: () => this.exportListToExcel() }
 ];
-
 
 save()
 {
@@ -337,7 +337,7 @@ addToDeletedTransformateurs(transformateur: any) {
     // If transformateur ID does not exist in the list, add it
     this.DeletedTransformateurIds.push(transformateur.numero);
   }
-  console.log(this.DeletedTransformateurIds);
+
 }
 
 
@@ -348,15 +348,70 @@ DeleteListOfTransformateurs() {
       response => {
         // Handle success if needed
         console.log('Transformateurs deleted:', response);
-        // Clear the DeletedTransformateurIds array after deletion
-        this.DeletedTransformateurIds = [];
+        // Filter out the deleted transformateurs from the list
+        this.list = this.list.filter(transformateur => !response.some(deletedTransformateur => deletedTransformateur.numero === transformateur.numero));
+        this.nbAttente = this.list.filter(transformateur => transformateur.pv?.resultat === 'En Attente').length;
+        this.nbConforme = this.list.filter(transformateur => transformateur.pv?.resultat === 'Conforme').length;
+        this.nbNonConforme = this.list.filter(transformateur => transformateur.pv?.resultat === 'Non Conforme').length;
+        this.messageService.add({ severity: 'success', summary: 'Succès', detail: 'Transformateur supprimé avec succès' });
+        const newEvent = new Event(this.ServiceS.Controleur.idC,'Supprimer un transformateur', new Date(),this.ServiceS.Controleur.username + ' a supprimer un list des transformateurs '+ " avec les numéros " + this.DeletedTransformateurIds);
+        this.EventService.AddEvent(newEvent)
+          .subscribe({
+            next: (response) => {
+              console.log('Event added successfully:', response);
+              // Add any further logic here if needed
+            },
+            error: (error) => {
+              console.error('Error adding event:', error);
+              // Handle the error appropriately
+            }
+          });
       },
       error => {
         // Handle error if needed
         console.error('Error deleting transformateurs:', error);
       }
     );
+
+        // Clear the DeletedTransformateurIds array after deletion
+        this.DeletedTransformateurIds = [];
 }
 
+
+exportListToExcel(): void {
+  // Modify the list in place to remove properties with null values and format dates
+  this.list.forEach((item: any) => {
+    for (const key in item) {
+      if (item.hasOwnProperty(key) && (item[key] === null || item[key] === "")) {
+        delete item[key];
+      }
+    }
+
+    // Format date properties to display only day, month, and year
+    for (const key in item) {
+      if (Object.prototype.hasOwnProperty.call(item, key) && key.startsWith('date')) {
+        const dateValue = new Date(item[key]);
+        if (!isNaN(dateValue.getTime())) {
+          item[key] = dateValue.toLocaleDateString(undefined, { day: '2-digit', month: '2-digit', year: 'numeric' });
+        }
+      }
+    }
+  });
+
+  // Create a new worksheet
+  const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.list);
+
+  // Create a new workbook
+  const wb: XLSX.WorkBook = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+  // Generate Excel file and trigger download
+  XLSX.writeFile(wb, 'transformateurs.xlsx');
+}
+
+navigateToEssai(type: string, numero: number): void {
+  const route = type === 'Monophasés' ? '/Essai_Transformateur_Mono' : '/Essai_Transformateur';
+  this.router.navigate([route, numero], { queryParams: { id: numero } });
+}
 
 }

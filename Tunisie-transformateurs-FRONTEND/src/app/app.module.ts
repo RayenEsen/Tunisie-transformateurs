@@ -72,9 +72,11 @@ import { ContextMenuModule } from 'primeng/contextmenu';
 import { DashBoardComponentComponent } from './DashBoard-component/DashBoard-component.component';
 import { RepportComponentComponent } from './Repport-component/Repport-component.component';
 import { KeyFilterModule } from 'primeng/keyfilter';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { EssaiMonoComponentComponent } from './EssaiMono-component/EssaiMono-component.component';
 
 @NgModule({
-  declarations: [
+  declarations: [	
     AppComponent,
     NavBarComponent,
     TopNavComponent,
@@ -102,7 +104,8 @@ import { KeyFilterModule } from 'primeng/keyfilter';
       ConseptionComponentComponent,
       OutilsComponentComponent,
       DashBoardComponentComponent,
-      RepportComponentComponent
+      RepportComponentComponent,
+      EssaiMonoComponentComponent
    ],
   imports: [
     BrowserModule,
@@ -147,6 +150,7 @@ import { KeyFilterModule } from 'primeng/keyfilter';
     InputTextareaModule,
     KeyFilterModule,
     SplitButtonModule,
+    RadioButtonModule,
     ],
   providers: [MessageService,ConfirmationService],
   bootstrap: [AppComponent]
