@@ -10,6 +10,8 @@ import { MessageService } from 'primeng/api';
 import { SessionService } from '../utils/session-service.service';
 import { EventServiceService } from '../Shared/Event-service.service';
 import { Event } from '../Shared/Event-service.model'
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-Transformateur-info',
   templateUrl: './Transformateur-info.component.html',
@@ -38,6 +40,7 @@ export class TransformateurInfoComponent implements OnInit {
     public messageService: MessageService,
     public ServiceS : SessionService,
     public EventService : EventServiceService,
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -311,6 +314,49 @@ onDelete(id: number) {
   });
 }
 
+items: any[] = [
+  { label: 'Supprimer', icon: 'pi pi-trash', command: () => this.DeleteListOfTransformateurs() },
+  { label: 'Exporter', icon: 'pi pi-file-pdf' }
+];
+
+
+save()
+{
+  this.router.navigate(['/Add_transformateur']);
+}
+
+DeletedTransformateurIds: number[] = [];
+
+// Method to add the clicked transformateur's ID to DeletedTransformateurIds list
+addToDeletedTransformateurs(transformateur: any) {
+  const index = this.DeletedTransformateurIds.indexOf(transformateur.numero);
+  if (index !== -1) {
+    // If transformateur ID exists in the list, remove it
+    this.DeletedTransformateurIds.splice(index, 1);
+  } else {
+    // If transformateur ID does not exist in the list, add it
+    this.DeletedTransformateurIds.push(transformateur.numero);
+  }
+  console.log(this.DeletedTransformateurIds);
+}
+
+
+DeleteListOfTransformateurs() {
+  // Call the deleteTransformateursList method and pass the array of transformateur IDs
+  this.service.deleteTransformateursList(this.DeletedTransformateurIds)
+    .subscribe(
+      response => {
+        // Handle success if needed
+        console.log('Transformateurs deleted:', response);
+        // Clear the DeletedTransformateurIds array after deletion
+        this.DeletedTransformateurIds = [];
+      },
+      error => {
+        // Handle error if needed
+        console.error('Error deleting transformateurs:', error);
+      }
+    );
+}
 
 
 }

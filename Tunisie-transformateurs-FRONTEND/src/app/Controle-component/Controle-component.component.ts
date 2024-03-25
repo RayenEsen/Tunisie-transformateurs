@@ -141,12 +141,16 @@ export class ControleComponentComponent implements OnInit {
 
 
   verif(etape: Etape) {
-    console.log('etape:', etape); // Log the contents of the etape object
     if (etape.operateur1 || etape.operateur2) {
-      // The etape object has both operateur1 and operateur2 defined
-      this.router.navigate(this.getRouterLink(etape.etapeNumero));
+      if(etape.dateDebut!==null && etape.dateFin!==null)
+      {
+        this.router.navigate(this.getRouterLink(etape.etapeNumero));
+      }
+      else
+      {
+        this.MessageService.add({ severity: 'error', summary: 'Erreur', detail: 'Date est requis pour continuer.' });
+      }
     } else {
-      // The etape object does not have both operateur1 and operateur2 defined
       this.MessageService.add({ severity: 'error', summary: 'Erreur', detail: 'Opérateur est requis pour continuer.' });
     }
   }
@@ -324,7 +328,7 @@ if (selectedFilteredEtape?.operateur2 && !this.suggestions.includes(selectedFilt
 
 
     END_OF_PRODUCTION() {
-      if (this.etapes.every(item => item.dateFin !== null)) {
+      if (this.etapes.every(item => item.resultat === 'Conforme' )) {
         this.Service.list[0].dateFin = new Date();
         this.Service.UpdateTransformateur(this.transformateurId, this.Service.list[0]).subscribe({
           next: (response) => {

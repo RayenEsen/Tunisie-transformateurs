@@ -1,3 +1,4 @@
+import { Etape } from "./Etape-servicemodel";
 
 export class Rapport {
 
@@ -13,6 +14,7 @@ responsable?: string;
 delais?: string;
 etat?: string;
 efficacite?: string;
+etape?: Etape;
 
 }
 

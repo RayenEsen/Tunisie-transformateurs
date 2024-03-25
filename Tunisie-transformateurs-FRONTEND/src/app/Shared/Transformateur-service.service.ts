@@ -83,5 +83,17 @@ export class TransformateurServiceService {
     return this.http.get<Transformateur[]>(filterUrl);
   }
 
+  deleteTransformateursList(ids: number[]): Observable<Transformateur[]> {
+    const deleteUrl = `${this.url}/DeleteList`;
+    return this.http.delete<Transformateur[]>(deleteUrl, {
+      body: ids // Pass the array of IDs in the request body
+    }).pipe(
+      catchError(err => {
+        console.error(err);
+        return throwError(err);
+      })
+    );
+  }
+
 
 }

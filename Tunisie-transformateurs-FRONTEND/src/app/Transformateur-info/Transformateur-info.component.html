@@ -1,4 +1,4 @@
-<!-- Your HTML component -->
+
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 <header class="back" style="padding-bottom: 16vh;padding-left: 8vh;">
   <div class="container">
@@ -61,7 +61,7 @@
         <div class="overflow-hidden card table-nowrap table-card">
           <div class="card-header d-flex justify-content-between align-items-center">
             <h5 class="mb-0">List des Transformateurs</h5>
-            <a href="" class="btn btn-light btn-sm" href="Add_transformateur">Ajouter</a>
+            <p-splitButton label="Ajouter" [model]="this.items" (onClick)="save()" styleClass="p-button-text p-button-secondary mr-2 mb-2"></p-splitButton>
           </div>
           <div class="table-responsive">
             <table class="table mb-0">
@@ -73,11 +73,12 @@
                   <th>Type</th>
                   <th>Conclusion</th>
                   <th>Controleur</th>
+                  <th>Commande</th>
                   <th class="text-end">Action</th>
                 </tr>
               </thead>
               <tbody *ngIf="list.length>0">
-                <tr *ngFor="let transformateur of list" class="align-middle" >
+                <tr *ngFor="let transformateur of list" class="align-middle" (click)="addToDeletedTransformateurs(transformateur)">
                   <td>
                     <div class="d-flex align-items-center">
                       <img *ngIf="transformateur.type==='Monophasés' " src="assets/mono.png" class="avatar sm rounded-pill me-3 flex-shrink-0" alt="Customer">
@@ -93,19 +94,22 @@
                   <td><span>{{ transformateur.type }}</span></td>
                   <td>{{transformateur.pv?.resultat}}</td>
                   <td><span>{{ transformateur.pv?.controleurDeQualite?.username }}</span></td>
+                  <td><span>{{ transformateur.commande }}</span></td>
+
                   <td class="text-end">
-                    <div class="drodown">
+                    <div class="drodown" (click)="$event.stopPropagation()">
                       <a data-bs-toggle="dropdown" href="#" class="btn p-1" aria-expanded="false">
                         <i class="fa fa-bars" aria-hidden="true"></i>
                       </a>
                       <div class="dropdown-menu dropdown-menu-end">
-                        <a [routerLink]="['/Ajouter_Transformateur', transformateur.numero]"  class="dropdown-item">Voir les détails</a>
+                        <a [routerLink]="['/Ajouter_Transformateur', transformateur.numero]" class="dropdown-item" (click)="$event.stopPropagation()">Voir les détails</a>
                         <!-- Replace the anchor tag with a button -->
-                        <button type="button" class="dropdown-item"  (click)="confirm1(transformateur.numero)">Supprimer</button>
-                        <a [routerLink]="['/Essai_Transformateur', transformateur.numero]"  class="dropdown-item">Essais</a>
-                    </div>
+                        <button type="button" class="dropdown-item" (click)="confirm1(transformateur.numero); $event.stopPropagation()">Supprimer</button>
+                        <a [routerLink]="['/Essai_Transformateur', transformateur.numero]" class="dropdown-item" (click)="$event.stopPropagation()">Essais</a>
+                      </div>
                     </div>
                   </td>
+
                 </tr>
               </tbody>
             </table>

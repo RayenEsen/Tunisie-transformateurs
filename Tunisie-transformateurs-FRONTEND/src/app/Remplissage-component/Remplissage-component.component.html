@@ -109,31 +109,32 @@
               <td class="text-center colfix">Controleur</td>
               <td class="text-center colfix">Observations</td>
             </tr>
-            <tr *ngFor="let remplissage of remplissages; let last = last">
+            <tr *ngFor="let remplissage of remplissages; let last = last; let i = index">
               <td class="text-center colfix">
                 <input [(ngModel)]="remplissage.datet" type="date" [disabled]="!last">
               </td>
               <td class="text-center colfix">
-                <input [(ngModel)]="remplissage.pressiond" type="number" [disabled]="!last">
+                <input [(ngModel)]="remplissage.pressiond" type="number" [disabled]="!last" (keydown.enter)="handleEnter(i, input2)">
               </td>
               <td class="text-center colfix">
-                <input [(ngModel)]="remplissage.pressionf" type="number" [disabled]="!last">
+                <input [(ngModel)]="remplissage.pressionf" #input2  type="number" [disabled]="!last" (keydown.enter)="handleEnter(i, input3)">
               </td>
               <td class="text-center colfix">
-                <input [(ngModel)]="remplissage.hd" type="number" [disabled]="!last">
+                <input [(ngModel)]="remplissage.hd" #input3 type="number" [disabled]="!last" (keydown.enter)="handleEnter(i, input4)">
               </td>
               <td class="text-center colfix">
-                <input [(ngModel)]="remplissage.hf" type="number" [disabled]="!last">
+                <input [(ngModel)]="remplissage.hf" #input4 type="number" [disabled]="!last" (keydown.enter)="handleEnter(i, input5)">
               </td>
               <td class="text-center colfix" [ngStyle]="{'color': remplissage.cnc === 'C' ? 'green' : 'red'}">
-                <input [(ngModel)]="remplissage.cnc" type="text" [disabled]="!last || !allInputsFilled(remplissage)" (ngModelChange)="Confirm(remplissage.idRemplissage)">
+                <input #input6 [(ngModel)]="remplissage.cnc"   type="text" [disabled]="!last || !allInputsFilled(remplissage)" >
               </td>
 
               <td class="text-center colfix">{{ this.etapeSelected.controleur }}</td>
               <td class="text-center colfix">
-                <input [(ngModel)]="remplissage.observations" type="text" [disabled]="!last">
+                <input #input5 (keydown.enter)="handleEnter(i, input6)" [(ngModel)]="remplissage.observations" type="text" [disabled]="!last">
               </td>
             </tr>
+
 
           </tbody>
         </table>

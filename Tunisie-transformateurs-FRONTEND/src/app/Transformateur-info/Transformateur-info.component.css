@@ -148,3 +148,42 @@ a{
   /* You can adjust the opacity to make it appear faded */
   /* You can add more styling properties as needed */
 }
+::ng-deep .p-splitbutton {
+  font-size: 14px; /* Increase font size */
+  border-radius: 4px; /* Add some border radius for a modern look */
+}
+
+::ng-deep .p-splitbutton .p-button {
+  padding: 8px 16px; /* Increase padding */
+}
+
+::ng-deep .p-splitbutton .p-splitbutton-icon {
+  width: 20px; /* Increase icon width */
+  height: 20px; /* Increase icon height */
+  margin-right: 4px; /* Add some spacing between the icon and text */
+}
+
+::ng-deep .p-splitbutton .p-splitbutton-icon .p-button-icon {
+  font-size: 16px; /* Adjust icon size */
+}
+
+/* Optional: Add some hover effect for a modern feel */
+::ng-deep .p-splitbutton:hover {
+  background-color: #f0f0f0;
+}
+
+::ng-deep .p-splitbutton .p-menu {
+  padding-left: 0;
+}
+::ng-deep .p-tieredmenu-root-list {
+  padding-left: 0 !important;
+}
+::ng-deep .p-tieredmenu.p-tieredmenu-overlay {
+  width: fit-content;
+  background: #ffffff;
+  border: 0 none;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+}
+::ng-deep .p-ripple.p-element.p-menuitem-link.ng-star-inserted {
+  text-decoration: none !important;
+}

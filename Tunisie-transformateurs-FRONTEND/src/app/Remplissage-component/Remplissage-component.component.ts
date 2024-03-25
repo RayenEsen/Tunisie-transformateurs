@@ -191,5 +191,9 @@ export class RemplissageComponentComponent implements OnInit {
   allInputsFilled(remplissage: any): boolean {
     return remplissage.datet && remplissage.pressiond && remplissage.pressionf && remplissage.hd && remplissage.hf && remplissage.observations;
   }
-
+  handleEnter(index: number, nextInput: HTMLInputElement): void {
+    if (index < this.remplissages.length ) {
+      nextInput.focus();
+    }
+  }
 }

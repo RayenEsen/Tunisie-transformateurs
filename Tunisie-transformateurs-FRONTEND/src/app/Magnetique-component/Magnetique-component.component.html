@@ -127,29 +127,69 @@
           </tr>
           <tr *ngFor="let magnetique of Magnetiques; let i = index">
             <td class="text-left colfix">{{ magnetique.nom }}</td>
-            <td class="text-center colfix"><input #input1 (keydown.enter)="handleEnter(i, input2)" type="number" [(ngModel)]="magnetique.f1c1m"></td>
-            <td class="text-center colfix"><input #input2 (keydown.enter)="handleEnter(i, input3)" type="number" [(ngModel)]="magnetique.f1c1p"></td>
-
-            <td class="text-center colfix"><input [style.color]="magnetique.cnc1 === 'C' ? 'green' : (magnetique.cnc1 === 'NC' ? 'red' : '')" #input3 (keydown.enter)="handleEnter(i, input4)" type="text" [(ngModel)]="magnetique.cnc1"></td>
-
-
-            <td class="text-center colfix"><input #input4 (keydown.enter)="handleEnter(i, input5)" type="number" [(ngModel)]="magnetique.f2c2m"></td>
-            <td class="text-center colfix"><input #input5 (keydown.enter)="handleEnter(i, input6)" type="number" [(ngModel)]="magnetique.f2c2p"></td>
-
-            <td class="text-center colfix"><input #input6 [style.color]="magnetique.cnc1 === 'C' ? 'green' : (magnetique.cnc1 === 'NC' ? 'red' : '')" (keydown.enter)="handleEnter(i, input7)" type="text" [(ngModel)]="magnetique.cnc2"></td>
-
-
-            <td class="text-center colfix"><input #input7 (keydown.enter)="handleEnter(i, input8)" type="number" [(ngModel)]="magnetique.f3c3m"></td>
-            <td class="text-center colfix"><input #input8 (keydown.enter)="handleEnter(i, input9)" type="number" [(ngModel)]="magnetique.f3c3p"></td>
-
-            <td class="text-center colfix"><input #input9 [style.color]="magnetique.cnc1 === 'C' ? 'green' : (magnetique.cnc1 === 'NC' ? 'red' : '')" (keydown.enter)="handleEnter(i, input10)" type="text" [(ngModel)]="magnetique.cnc3"></td>
+            <td class="text-center colfix">
+              <input #input1 (keydown.enter)="handleEnter(i, input2)" type="number" [(ngModel)]="magnetique.f1c1m">
+            </td>
+            <td class="text-center colfix">
+              <input #input2 (keydown.enter)="handleEnter(i, input3)" type="number" [(ngModel)]="magnetique.f1c1p">
+            </td>
+            <td class="text-center colfix">
+              <input [style.color]="magnetique.cnc1 === 'C' ? 'green' : (magnetique.cnc1 === 'NC' ? 'red' : '')"
+                     [disabled]="!input1.value || !input2.value"
+                     #input3 (keydown.enter)="handleEnter(i, input4)"
+                     type="text"
+                     [(ngModel)]="magnetique.cnc1">
+            </td>
 
 
-            <td class="text-center colfix"><input #input10 (keydown.enter)="handleEnter(i, input11)" type="number" [(ngModel)]="magnetique.c4m"></td>
-            <td class="text-center colfix"><input #input11 (keydown.enter)="handleEnter(i, input12)" type="number" [(ngModel)]="magnetique.c4p"></td>
+
+            <td class="text-center colfix">
+              <input #input4 (keydown.enter)="handleEnter(i, input5)" type="number" [(ngModel)]="magnetique.f2c2m">
+            </td>
+            <td class="text-center colfix">
+              <input #input5 (keydown.enter)="handleEnter(i, input6)" type="number" [(ngModel)]="magnetique.f2c2p">
+            </td>
+            <td class="text-center colfix">
+              <input #input6
+                     [style.color]="magnetique.cnc2 === 'C' ? 'green' : (magnetique.cnc2 === 'NC' ? 'red' : '')"
+                     [disabled]="!input4.value || !input5.value"
+                     (keydown.enter)="handleEnter(i, input7)"
+                     type="text"
+                     [(ngModel)]="magnetique.cnc2">
+            </td>
 
 
-            <td class="text-center colfix"><input #input12 [style.color]="magnetique.cnc1 === 'C' ? 'green' : (magnetique.cnc1 === 'NC' ? 'red' : '')" type="text" [(ngModel)]="magnetique.cnc4"></td>
+
+            <td class="text-center colfix">
+              <input #input7 (keydown.enter)="handleEnter(i, input8)" type="number" [(ngModel)]="magnetique.f3c3m">
+            </td>
+            <td class="text-center colfix">
+              <input #input8 (keydown.enter)="handleEnter(i, input9)" type="number" [(ngModel)]="magnetique.f3c3p">
+            </td>
+            <td class="text-center colfix">
+              <input #input9
+                     [style.color]="magnetique.cnc3 === 'C' ? 'green' : (magnetique.cnc3 === 'NC' ? 'red' : '')"
+                     [disabled]="!input7.value || !input8.value"
+                     (keydown.enter)="handleEnter(i, input10)"
+                     type="text"
+                     [(ngModel)]="magnetique.cnc3">
+            </td>
+
+
+            <td class="text-center colfix">
+              <input #input10 (keydown.enter)="handleEnter(i, input11)" type="number" [(ngModel)]="magnetique.c4m">
+            </td>
+            <td class="text-center colfix">
+              <input #input11 (keydown.enter)="handleEnter(i, input12)" type="number" [(ngModel)]="magnetique.c4p">
+            </td>
+            <td class="text-center colfix">
+              <input #input12
+                     [style.color]="magnetique.cnc4 === 'C' ? 'green' : (magnetique.cnc4 === 'NC' ? 'red' : '')"
+                     [disabled]="!input10.value || !input11.value"
+                     type="text"
+                     [(ngModel)]="magnetique.cnc4">
+            </td>
+
 
           </tr>
         </tbody>

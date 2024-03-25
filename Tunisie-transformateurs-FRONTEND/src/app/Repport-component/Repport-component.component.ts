@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Rapport } from '../Shared/Rapport-service.model';
 import { RapportServiceService } from '../Shared/Rapport-service.service';
 import { MessageService } from 'primeng/api';
+import { EtapeServiceService } from '../Shared/Etape-service.service';
+import { Etape } from '../Shared/Etape-servicemodel';
 @Component({
   selector: 'app-Repport-component',
   templateUrl: './Repport-component.component.html',
@@ -45,10 +47,11 @@ export class RepportComponentComponent implements OnInit {
   onChoixChange(event: any) {
     this.selectedChoix = event.value;
   }
-  constructor(private messageService: MessageService,public ServiceR : RapportServiceService,public service : TransformateurServiceService,public router: Router,private route: ActivatedRoute,) {
+  constructor(public ServiceE : EtapeServiceService,private messageService: MessageService,public ServiceR : RapportServiceService,public service : TransformateurServiceService,public router: Router,private route: ActivatedRoute,) {
 
   }
 
+  etape : Etape = new Etape();
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.transformateurId = +params['id'] || 0;
@@ -65,6 +68,12 @@ export class RepportComponentComponent implements OnInit {
           this.selectedChoix = this.etat2;
         }
       })
+      this.ServiceE.getEtapeById(this.etapenumero).subscribe({
+        next : (Response) =>
+        {
+          this.etape=Response;
+        }
+      })
     });
   }
 
@@ -75,11 +84,16 @@ export class RepportComponentComponent implements OnInit {
     this.Rapport.etat = this.etat2.name;
     this.Rapport.Id_Etape = this.etapenumero;
     this.Rapport.dater = new Date();
-
     this.ServiceR.upsertRapport(this.Rapport).subscribe({
       next: () => {
-        this.messageService.add({ severity: 'success', summary: 'Succès', detail: 'Les informations ont été enregistrées.' });
-      },
+        this.etape.resultat = this.Rapport.etat!;
+        this.ServiceE.updateEtape2(this.etapenumero,this.etape).subscribe({
+          next: (response) =>
+          {
+            this.messageService.add({ severity: 'success', summary: 'Succès', detail: 'Les informations ont été enregistrées.' });
+          }
+        })
+        },
       error: (error) => {
         this.messageService.add({ severity: 'error', summary: 'Erreur', detail: 'Une erreur est survenue lors de l\'enregistrement des informations.' });
       }

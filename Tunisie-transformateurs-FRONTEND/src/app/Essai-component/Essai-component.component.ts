@@ -24,9 +24,6 @@
       { label: 'Resultat des Tests', icon: 'pi pi-question', command: () => this.showDialog() },
     ];
 
-
-
-
     constructor(
       private router: Router,
       private route: ActivatedRoute,
@@ -61,6 +58,7 @@
       this.isHoverDisabled = true;
       this.sidebarVisible1 = !this.sidebarVisible1
     }
+
 
     visible4: boolean = false;
 
@@ -261,15 +259,20 @@
     wcc2: number = 0;
     PTOT: number = 0;
     getZcc2() {
-      //Calculations for Cuivre (The one that got changed)
-      if (this.service.list[0].libelle === "Aluminum" && this.pv[0].temp !== undefined &&
-          this.pv[0].na1 !== undefined && this.pv[0].nb2 !== undefined && this.pv[0].nc3 !== undefined &&
-          this.pv[0].na0 !== undefined && this.pv[0].nb0 !== undefined && this.pv[0].nc0 !== undefined &&
-          this.pv[0].wccm1 !== undefined && this.service.list[0].type==="Triphasés") {
+      if (this.service.list[0].libelle === "Aluminum" &&
+      this.pv[0].temp !== undefined && this.pv[0].temp !== null &&
+      this.pv[0].na1 !== undefined && this.pv[0].na1 !== null &&
+      this.pv[0].nb2 !== undefined && this.pv[0].nb2 !== null &&
+      this.pv[0].nc3 !== undefined && this.pv[0].nc3 !== null &&
+      this.pv[0].na0 !== undefined && this.pv[0].na0 !== null &&
+      this.pv[0].nb0 !== undefined && this.pv[0].nb0 !== null &&
+      this.pv[0].nc0 !== undefined && this.pv[0].nc0 !== null &&
+      this.pv[0].wccm1 !== undefined && this.pv[0].wccm1 !== null &&
+      this.service.list[0].type === "Triphasés" && this.service.list[0].type !== null) {
             this.ibt = 1;
             this.iht = 1;
-            this.cc = (235 + 75) / (235 + this.pv[0].temp);
-            this.cc2 = 310 / (this.pv[0].temp+235)
+            this.cc = (225 + 75) / (225 + this.pv[0].temp);
+            this.cc2 = 300 / (this.pv[0].temp+225)
 
             this.UAB = this.pv[0].na1;
             this.UAC = this.pv[0].nb2;
@@ -321,17 +324,21 @@
             this.Zcc2 = Math.sqrt((this.Ur * this.Ur) + (this.Ux * this.Ux));
             this.PTOT = this.wcc2 + this.Po;
       }
-      //Still waiting for the correct version
-      else if (this.service.list[0].libelle === "Cuivre" && this.pv[0].temp !== undefined &&
-      this.pv[0].na1 !== undefined && this.pv[0].nb2 !== undefined && this.pv[0].nc3 !== undefined &&
-      this.pv[0].na0 !== undefined && this.pv[0].nb0 !== undefined && this.pv[0].nc0 !== undefined &&
-      this.pv[0].wccm1 !== undefined && this.service.list[0].type==="Triphasés") {
+      else if (this.service.list[0].libelle === "Cuivre" &&
+      this.pv[0].temp !== undefined && this.pv[0].temp !== null &&
+      this.pv[0].na1 !== undefined && this.pv[0].na1 !== null &&
+      this.pv[0].nb2 !== undefined && this.pv[0].nb2 !== null &&
+      this.pv[0].nc3 !== undefined && this.pv[0].nc3 !== null &&
+      this.pv[0].na0 !== undefined && this.pv[0].na0 !== null &&
+      this.pv[0].nb0 !== undefined && this.pv[0].nb0 !== null &&
+      this.pv[0].nc0 !== undefined && this.pv[0].nc0 !== null &&
+      this.pv[0].wccm1 !== undefined && this.pv[0].wccm1 !== null &&
+      this.service.list[0].type === "Triphasés" && this.service.list[0].type !== null) {
         this.ibt = 1;
         this.iht = 1;
         this.cc = (235 + 75) / (235 + this.pv[0].temp);
-        this.cc2 = 300 / (this.pv[0].temp+225)
+        this.cc2 = 310 / (this.pv[0].temp+235)
 
-        this.x6 = (235 + this.pv[0].temp) / (235 + this.pv[0].temp);
         this.UAB = this.pv[0].na1;
         this.UAC = this.pv[0].nb2;
         this.UBC = this.pv[0].nc3;
@@ -343,46 +350,44 @@
        }
         this.UccT0Pourcentage = this.getZccPourcentage();
         this.PccTocc = this.pv[0].wccm1;
-        this.RABohmT0 = this.UAB / this.ibt;
-        this.RABohmT0cc = this.RABohmT0 * this.x6;
-        this.RABohm = this.RABohmT0 * this.cc;
 
-        this.RACohmT0 = this.UAC / this.ibt;
-        this.RACohmT0cc = this.RACohmT0 * this.x6;
-        this.RACohm = this.RACohmT0 * this.cc;
+        this.RAohmT0 = this.UAB / this.iht;
+        this.RAohm = this.RAohmT0 * this.cc2;
 
-        this.RBCohmT0 = this.UBC / this.ibt;
-        this.RBCohmT0cc = this.RBCohmT0 * this.x6;
-        this.RBCohm = this.RBCohmT0 * this.cc;
+        this.RBohmT0 = this.UAC / this.iht;
+        this.RBohm = this.RBohmT0 * this.cc2
 
-        this.RaohmTo = this.Ua / this.ibt;
-        this.RaohmT0cc = this.RaohmTo * this.x6;
-        this.Raohm = this.RaohmT0cc * this.cc;
+        this.RCohmT0 = this.UBC / this.iht;
+        this.RCohm = this.RCohmT0 * this.cc2;
 
-        this.RbohmTo = this.Ub / this.ibt;
-        this.RbohmT0cc = this.RbohmTo * this.x6;
-        this.Rbohm = this.RbohmT0cc * this.cc;
+        this.RaohmT0 = this.Ua / this.ibt;
+        this.Raohm = this.RaohmT0 * this.cc2;
 
-        this.RcohmTo = this.Uc / this.ibt;
-        this.RcohmT0cc = this.RcohmTo * this.x6;
-        this.Rcohm = this.RcohmT0cc * this.cc;
+        this.RbohmT0 = this.Ub / this.ibt;
+        this.Rbohm = this.RbohmT0 * this.cc2;
 
-        this.PjhTo = 1.5 * ((this.RABohmT0 + this.RACohmT0 + this.RBCohmT0) / 3) * this.service.list[0].mtu2 * this.service.list[0].mtu2;
-        this.PjhtT0cc = 1.5 * ((this.RABohmT0cc + this.RACohmT0cc + this.RBCohmT0cc) / 3) * this.service.list[0].mtu2 * this.service.list[0].mtu2;
-        this.PjbTo = (this.RaohmTo + this.RbohmTo + this.RcohmTo) * this.service.list[0].bti2 * this.service.list[0].bti2;
-        this.PjbT0cc = (this.RaohmT0cc + this.RbohmT0cc + this.RcohmT0cc) * this.service.list[0].bti2 * this.service.list[0].bti2;
-        this.PaddTo = this.PccTocc - (this.PjhtT0cc + this.PjbT0cc);
-        this.Pjht = this.PjhTo * this.cc;
-        this.Pjbt = this.PjbTo * this.cc;
+        this.RcohmT0 = this.Uc / this.ibt;
+        this.Rcohm = this.RcohmT0 * this.cc2;
+
+        this.PjhTo = 1.5 * ((this.RAohmT0 + this.RBohmT0 + this.RCohmT0) / 3) * this.service.list[0].mtu2 * this.service.list[0].mtu2;
+        this.PjbTo = 1.5 * ((this.RaohmT0 + this.RbohmT0 + this.RcohmT0) / 3) * this.service.list[0].bti2 * this.service.list[0].bti2;
+
+        this.PaddTo = this.PccTocc - (this.PjhTo+this.PjbTo) * (225+this.pv[0].temp)/(225+this.pv[0].temp)
+        this.Pjht = this.PjhTo * this.cc2;
+        this.Pjbt = this.PjbTo * this.cc2;
         this.Padd = this.PaddTo / this.cc;
 
         this.power = parseInt(this.service.list[0].power, 10);
         this.UrT0 = this.PccTocc / (this.power * 10);
+
         this.Ux = Math.sqrt((this.UccT0Pourcentage * this.UccT0Pourcentage) - (this.UrT0 * this.UrT0));
-        this.wcc2 = this.Pjht+this.Pjbt+this.Padd
+        this.wcc2 = this.Pjht+this.Pjbt+this.Padd;
+
+
         this.Ur = this.wcc2  / (this.power * 10);
         this.Po = this.pv[0]?.wom ?? 0; // Default value of 0 if this.pv[0].wom is undefined
         this.Zcc2 = Math.sqrt((this.Ur * this.Ur) + (this.Ux * this.Ux));
+        this.PTOT = this.wcc2 + this.Po;
   }
       else {
         // Handle the case when data is not available or properties are undefined
@@ -508,5 +513,58 @@ focusInput30() {
         this.input30.nativeElement.focus();
     }
 }
+
+
+getP3(MultiplyFactor: number): number {
+  let result: number = 0;
+
+  if (this.service.list[0].couplage.toUpperCase() === "MONO") {
+    result = (this.service.list[0].mtu1 / this.service.list[0].btu2) * 1000;
+  } else if (this.service.list[0].couplage.toUpperCase() === "YNYN") {
+    result = (this.service.list[0].mtu1 / this.service.list[0].btu2) * 1000;
+  } else if (this.service.list[0].couplage.toUpperCase() === "DYN") {
+    result =( ( this.service.list[0].mtu1 / this.service.list[0].btu2) * 1000 )* Math.sqrt(3);
+  } else {
+    result = ( ( (this.service.list[0].mtu1 /this.service.list[0].btu2) * 1000 )* Math.sqrt(3) )/ 2;
+  }
+
+  result = result * MultiplyFactor;
+  // Do not call toFixed here, so the result is a number
+  return result;
+}
+getPI(MultiplyFactor : number)
+{
+  return this.getP3(1)*MultiplyFactor;
+}
+getintervalle(MultiplyFactor: number,x : number){
+  return this.getPI(x)*MultiplyFactor;
+}
+getI1() {
+  let Resultat: number = 0;
+
+
+    const power: number = parseFloat(this.service.list[0].power); // Convert string to number
+    const mtu1: number = this.service.list[0].mtu1; // Assuming mtu1 is a number
+
+    if (this.service.list[0].couplage.toUpperCase() === "MONO") {
+      Resultat = power / mtu1;
+    } else {
+      Resultat = (power / mtu1) / Math.sqrt(3);
+    }
+
+    return Resultat;
+  }
+  getI2() {
+    let Resultat: number = 0;
+      const power: number = parseFloat(this.service.list[0].power); // Convert string to number
+      const btu2: number = this.service.list[0].btu2; // Assuming mtu1 is a number
+
+      if (this.service.list[0].couplage.toUpperCase() === "MONO") {
+        Resultat = (power / btu2) * 1000;
+      } else {
+        Resultat =( ((power / btu2) ) / Math.sqrt(3) )*1000;
+      }
+      return Resultat;
+    }
 
 }

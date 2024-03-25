@@ -118,19 +118,54 @@
           </tr>
           <tr *ngFor="let montage of Montages; let i = index">
             <td>{{montage.nom}}</td>
-            <td class="text-left colfix"><input #input1 (keydown.enter)="handleEnter(i, input2)" type="number" [(ngModel)]="montage.c1m"></td>
-            <td class="text-center colfix"><input #input2 (keydown.enter)="handleEnter(i, input3)" type="number" [(ngModel)]="montage.c1p"></td>
-            <td class="text-center colfix"><input #input3 [style.color]="montage.cnc1 === 'C' ? 'green' : (montage.cnc1 === 'NC' ? 'red' : '')" (keydown.enter)="handleEnter(i, input4)" type="text" [(ngModel)]="montage.cnc1"></td>
+            <td class="text-left colfix">
+              <input #input1 (keydown.enter)="handleEnter(i, input2)" type="number" [(ngModel)]="montage.c1m">
+            </td>
+            <td class="text-center colfix">
+              <input #input2 (keydown.enter)="handleEnter(i, input3)" type="number" [(ngModel)]="montage.c1p">
+            </td>
+            <td class="text-center colfix">
+              <input #input3
+                     [style.color]="montage.cnc1 === 'C' ? 'green' : (montage.cnc1 === 'NC' ? 'red' : '')"
+                     [disabled]="!input1.value || !input2.value"
+                     (keydown.enter)="handleEnter(i, input4)"
+                     type="text"
+                     [(ngModel)]="montage.cnc1">
+            </td>
 
 
-            <td class="text-center colfix"><input #input4 (keydown.enter)="handleEnter(i, input5)" type="number" [(ngModel)]="montage.c2m"></td>
-            <td class="text-center colfix"><input #input5 (keydown.enter)="handleEnter(i, input6)" type="number" [(ngModel)]="montage.c2p"></td>
-            <td class="text-center colfix"><input [style.color]="montage.cnc2 === 'C' ? 'green' : (montage.cnc2 === 'NC' ? 'red' : '')" #input6 (keydown.enter)="handleEnter(i, input7)" type="text" [(ngModel)]="montage.cnc2"></td>
+
+            <td class="text-center colfix">
+              <input #input4 (keydown.enter)="handleEnter(i, input5)" type="number" [(ngModel)]="montage.c2m">
+            </td>
+            <td class="text-center colfix">
+              <input #input5 (keydown.enter)="handleEnter(i, input6)" type="number" [(ngModel)]="montage.c2p">
+            </td>
+            <td class="text-center colfix">
+              <input #input6
+                     [style.color]="montage.cnc2 === 'C' ? 'green' : (montage.cnc2 === 'NC' ? 'red' : '')"
+                     [disabled]="!input4.value || !input5.value"
+                     (keydown.enter)="handleEnter(i, input7)"
+                     type="text"
+                     [(ngModel)]="montage.cnc2">
+            </td>
 
 
-            <td class="text-center colfix"><input #input7 (keydown.enter)="handleEnter(i, input8)" type="number" [(ngModel)]="montage.c3m"></td>
-            <td class="text-center colfix"><input #input8 (keydown.enter)="handleEnter(i, input9)" type="number" [(ngModel)]="montage.c3p"></td>
-            <td class="text-center colfix"><input [style.color]="montage.cnc3 === 'C' ? 'green' : (montage.cnc3 === 'NC' ? 'red' : '')" #input9  type="text" [(ngModel)]="montage.cnc3"></td>
+
+            <td class="text-center colfix">
+              <input #input7 (keydown.enter)="handleEnter(i, input8)" type="number" [(ngModel)]="montage.c3m">
+            </td>
+            <td class="text-center colfix">
+              <input #input8 (keydown.enter)="handleEnter(i, input9)" type="number" [(ngModel)]="montage.c3p">
+            </td>
+            <td class="text-center colfix">
+              <input #input9
+                     [style.color]="montage.cnc3 === 'C' ? 'green' : (montage.cnc3 === 'NC' ? 'red' : '')"
+                     [disabled]="!input7.value || !input8.value"
+                     type="text"
+                     [(ngModel)]="montage.cnc3">
+            </td>
+
 
 
           </tr>

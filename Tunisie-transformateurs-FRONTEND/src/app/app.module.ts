@@ -35,6 +35,7 @@ import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import { SplitButtonModule } from 'primeng/splitbutton';
 
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { TopNavComponent } from './top-nav/top-nav.component';
@@ -70,6 +71,7 @@ import { OutilsComponentComponent } from './outils-component/outils-component.co
 import { ContextMenuModule } from 'primeng/contextmenu';
 import { DashBoardComponentComponent } from './DashBoard-component/DashBoard-component.component';
 import { RepportComponentComponent } from './Repport-component/Repport-component.component';
+import { KeyFilterModule } from 'primeng/keyfilter';
 
 @NgModule({
   declarations: [
@@ -143,6 +145,8 @@ import { RepportComponentComponent } from './Repport-component/Repport-component
     ContextMenuModule,
     OverlayPanelModule,
     InputTextareaModule,
+    KeyFilterModule,
+    SplitButtonModule,
     ],
   providers: [MessageService,ConfirmationService],
   bootstrap: [AppComponent]

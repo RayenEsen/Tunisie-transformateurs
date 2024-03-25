@@ -33,7 +33,6 @@ namespace WebAPI.Model
 
         public string Efficacite { get; set; } = "";
 
-        [JsonIgnore]
         public Etape? Etape { get; set; }
     }
 }

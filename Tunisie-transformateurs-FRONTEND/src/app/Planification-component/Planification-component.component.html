@@ -117,9 +117,11 @@
       <ng-template pTemplate="content" let-Etape>
         <small style="display: flex;" [ngStyle]="getStyle(Etape)" (click)="Rapport(Etape)">
           {{ Etape.nom }}
-          <p *ngIf="Etape.resultat==='Conforme' " style="color: green;">(C)</p>
-          <p style="color: red;" *ngIf="Etape.resultat==='Non conforme' ">(NC)</p>
-        </small>
+          <p *ngIf="Etape.resultat==='Conforme'" style="color: green;">(C)</p>
+          <p style="color: red;" *ngIf="Etape.resultat === 'Non conforme'">(NC)</p>
+          <p style="color: rgb(25, 0, 255); font-size: small;" *ngIf="Etape.resultat !== 'Non conforme' && Etape.resultat !== 'Conforme' && Etape.resultat!=='En Attente' ">({{Etape.resultat}})</p>
+
+                  </small>
       </ng-template>
 
       <ng-template pTemplate="opposite" let-Etape>

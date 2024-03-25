@@ -197,6 +197,24 @@ namespace WebAPI.Controller
             return result;
         }
 
+        [HttpDelete("DeleteList")]
+        public async Task<IActionResult> DeleteTransformateursList(List<int> ids)
+        {
+            // Find the transformateurs in the list of IDs
+            var transformateurs = await _context.transformateurs.Where(t => ids.Contains(t.Numero)).ToListAsync();
+
+            if (transformateurs == null || transformateurs.Count == 0)
+            {
+                return NotFound();
+            }
+
+            _context.transformateurs.RemoveRange(transformateurs);
+            await _context.SaveChangesAsync();
+
+            // Return the deleted transformateurs
+            return Ok(transformateurs);
+        }
+
 
 
         private bool TransformateurExists(int id)
