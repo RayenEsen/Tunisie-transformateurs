@@ -235,7 +235,7 @@
 
   </div>
 </div>
-<div class="page-tools" style="margin-left: 786px;" class="printable">
+<div class="page-tools" style="margin-left: 786px;" class="printable" *ngIf="serviceS.Controleur.designation === 'Verificateur' || serviceS.Controleur.designation === 'Controleur'">
   <div class="action-buttons" style="display: flex;">
     <a class="btn bg-white btn-light mx-1px text-95" data-title="Print" (click)="onPrint()">
       <i class="mr-1 fa fa-print text-primary-m1 text-120 w-2"></i>

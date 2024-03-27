@@ -12,142 +12,143 @@
 <img src="assets/iso-45001.png" style="width: 180px; height: 147px;   ; margin-left: -27px;     margin-top: -38px; ">
 <img src="assets/iso50001.png" style="width: 180px; height: 72px; ">
 </div>
-  <div class="invoice-header printing3">
-    <div class="row">
-      <div class="col-xs-8">
-        <h1>Pv d'essai <small>Transformateur</small></h1>
-        <h4 class="text-muted" >
-          No: 1234 | Date: 11/11/2011
-        </h4>
-      </div>
+<div class="invoice-header printing3">
+  <div class="row">
+    <div class="col-xs-8" *ngIf="pv">
+      <h1>Pv d'essai <small>Transformateur</small></h1>
+      <h4 class="text-muted" *ngIf="pv && pv.length > 0">
+        No: {{ pv[0].id_pv }} | Date: {{ pv[0].date.toString().split('T')[0] }}
+      </h4>
     </div>
   </div>
+</div>
   <div class="page-header text-blue-d2 " style=" margin: 40px 30px 20px;" >
-  <div class="row" >
-    <div class="col-sm-6"style=" text-align: left;">
+    <div class="row" >
+      <div class="col-sm-6"style=" text-align: left;">
+          <div>
+              <span class="text text-grey-m2 align-middle">Marque/Brand:</span>
+              <span class="text-600 text-110 text-blue align-middle"> {{ service.list[0].marque }}</span>
+          </div>
+          <div class="text-grey-m2">
+              <div class="my-1">
+                  Numero/Numéro: {{ service.list[0].numero }}
+              </div>
+              <div class="my-1">
+                  Client/Customer: {{service.list[0].client}}
+              </div>
+              <div class="my-1"><b class="text-600">Norme/Standard: {{ service.list[0].norme }}</b></div>
+          </div>
+      </div>
+      <div class="col-sm-6" style=" text-align: center;">
         <div>
-            <span class="text text-grey-m2 align-middle">Marque/Brand:</span>
-            <span class="text-600 text-110 text-blue align-middle"> test</span>
+            <span class="text text-grey-m2 align-middle">Puissance/Power:</span>
+            <span class="text-600 text-110 text-blue align-middle"> {{ service.list[0].power }} KVA</span>
         </div>
         <div class="text-grey-m2">
             <div class="my-1">
-                Numero/Numéro: test
+                MT:U1/MV:V1: {{ service.list[0].mtu1 }} KV
             </div>
             <div class="my-1">
-                Client/Customer: test
+                MT:I1/MV:I1: {{ service.list[0].mtu2 .toFixed(3)}} A
             </div>
-            <div class="my-1"><b class="text-600">Norme/Standard: test</b></div>
+            <div class="my-1">
+              BT:U2/LV:V2: {{ service.list[0].btu2 }} V
+          </div>
+            <div class="my-1"><b class="text-600">BT:I2/LV:I2: {{ service.list[0].bti2.toFixed(3) }} A</b></div>
         </div>
     </div>
-    <div class="col-sm-6" style=" text-align: center;">
+    <div class="col-sm-6" style=" text-align: right;">
       <div>
-          <span class="text text-grey-m2 align-middle">Puissance/Power:</span>
-          <span class="text-600 text-110 text-blue align-middle"> test KVA</span>
+          <span> <strong>CE-FOR-20-V<input placeholder="6" [(ngModel)]="pv[0].version" type="number"
+            style="border: none;
+            padding-left: 1px;
+            outline: none;
+            background: none;
+            font-size: inherit;
+            font-family: inherit;
+            color: inherit;width: 2ch;"></strong></span><br>
+          <span class="text text-grey-m2 align-middle">Nbr des phases/Nb of phases:</span>
+          <span class="text-600 text-110 text-blue align-middle">{{ service.list[0].nbphase }}</span>
       </div>
       <div class="text-grey-m2">
           <div class="my-1">
-              MT:U1/MV:V1: test KV
+              Prises/Tapping: {{ service.list[0].prises }}
           </div>
           <div class="my-1">
-              MT:I1/MV:I1: test A
+              Couplage/Connection: {{ service.list[0].couplage }}
           </div>
           <div class="my-1">
-            BT:U2/LV:V2: test V
+            Refroidissement/Cooling: {{ service.list[0].cooling }}
         </div>
-          <div class="my-1"><b class="text-600">BT:I2/LV:I2: test A</b></div>
+          <div class="my-1"><b class="text-600">Frequence/Frequency: {{ service.list[0].frequency }}Hz</b></div>
       </div>
   </div>
-  <div class="col-sm-6" style=" text-align: right;">
-    <div>
-        <span> <strong>CE-FOR-20-V<input placeholder="6" test type="number"
-          style="border: none;
-          padding-left: 1px;
-          outline: none;
-          background: none;
-          font-size: inherit;
-          font-family: inherit;
-          color: inherit;width: 2ch;"></strong></span><br>
-        <span class="text text-grey-m2 align-middle">Nbr des phases/Nb of phases:</span>
-        <span class="text-600 text-110 text-blue align-middle">test</span>
-    </div>
-    <div class="text-grey-m2">
-        <div class="my-1">
-            Prises/Tapping: test
-        </div>
-        <div class="my-1">
-            Couplage/Connection: test
-        </div>
-        <div class="my-1">
-          Refroidissement/Cooling: test
-      </div>
-        <div class="my-1"><b class="text-600">Frequence/Frequency:test Hz</b></div>
-    </div>
-</div>
-</div>
-</div>
+  </div>
+  </div>
   <div class="invoice-body printing7" style="margin-left: -29px;">
     <div>
-        <div class="panel panel-default">
-          <div class="panel-heading  printing1">
-            <h3 class="panel-title">Voltage Ratio / Rapport de transformateur (Tolerance ± 0,5 %)</h3>
-            <small>test V/ test V / test</small>
-          </div>
-          <table class="table table-bordered table-condensed">
-            <tbody>
-              <tr>
-                <td colspan="2" class="text-center colfix">Position du Commutateur</td>
-                <td class="text-center colfix" colspan="2">Valeur Theorique</td>
-                <td class="text-center colfix">Valeur trouveé</td>
-                <td class="text-center colfix">Conclusion</td>
-              </tr>
-              <tr>
-                <td class="text-center colfix"><input class="text-center colfix" type="number" readonly></td>
-                <td class="text-center colfix"><input class="text-center colfix" type="number" readonly></td>
-                <td class="text-center colfix"><input class="text-center colfix" type="number" readonly></td>
-                <td class="text-center colfix"><input class="text-center colfix" type="number" readonly></td>
-
-                <td class="text-center colfix"><input class="text-center colfix" type="number" readonly></td>
-                <td class="text-center colfix"><input class="text-center colfix" type="number" readonly></td>
-              </tr>
-              <tr>
-                <td class="text-center colfix"><input class="text-center colfix" type="number" readonly></td>
-                <td class="text-center colfix"><input class="text-center colfix" type="number" readonly></td>
-                <td class="text-center colfix"><input class="text-center colfix" type="number" readonly></td>
-                <td class="text-center colfix"><input class="text-center colfix" type="number" readonly></td>
-
-                <td class="text-center colfix"><input class="text-center colfix" type="number" readonly></td>
-                <td class="text-center colfix"><input class="text-center colfix" type="number" readonly></td>
-              </tr>
-              <tr>
-                <td class="text-center colfix"><input class="text-center colfix" type="number" readonly></td>
-                <td class="text-center colfix"><input class="text-center colfix" type="number" readonly></td>
-                <td class="text-center colfix"><input class="text-center colfix" type="number" readonly></td>
-                <td class="text-center colfix"><input class="text-center colfix" type="number" readonly></td>
-
-                <td class="text-center colfix"><input class="text-center colfix" type="number" readonly></td>
-                <td class="text-center colfix"><input class="text-center colfix" type="number" readonly></td>
-              </tr>
-              <tr>
-                <td class="text-center colfix"><input class="text-center colfix" type="number" readonly></td>
-                <td class="text-center colfix"><input class="text-center colfix" type="number" readonly></td>
-                <td class="text-center colfix"><input class="text-center colfix" type="number" readonly></td>
-                <td class="text-center colfix"><input class="text-center colfix" type="number" readonly></td>
-
-                <td class="text-center colfix"><input class="text-center colfix" type="number" readonly></td>
-                <td class="text-center colfix"><input class="text-center colfix" type="number" readonly></td>
-              </tr>
-              <tr>
-                <td class="text-center colfix"><input class="text-center colfix" type="number" readonly></td>
-                <td class="text-center colfix"><input class="text-center colfix" type="number" readonly></td>
-                <td class="text-center colfix"><input class="text-center colfix" type="number" readonly></td>
-                <td class="text-center colfix"><input class="text-center colfix" type="number" readonly></td>
-
-                <td class="text-center colfix"><input class="text-center colfix" type="number" readonly></td>
-                <td class="text-center colfix"><input class="text-center colfix" type="number" readonly></td>
-              </tr>
-            </tbody>
-          </table>
+      <div class="panel panel-default">
+        <div class="panel-heading  printing1">
+          <h3 class="panel-title">Voltage Ratio / Rapport de transformation</h3>
+          <small>{{ service.list[0].mtu1 }} V/ {{ service.list[0].btu2 }} V / {{ service.list[0].couplage }}</small>
         </div>
+
+        <table class="table table-bordered table-condensed"  *ngIf="pv && pv.length > 0">
+          <tbody>
+            <tr>
+              <td class="text-center colfix">Prises / Tappings</td>
+              <td colspan="2" class="text-center colfix">Valeurs théorique / Thoeric values</td>
+              <td colspan="3" class="text-center colfix">Valeurs mesurées/Messured values</td>
+            </tr>
+            <tr>
+              <td class="text-center colfix">1</td>
+              <td class="text-center colfix"><input class="text-center colfix" type="number" readonly [value]="this.pv[0].vt11?.toFixed(3)"></td>
+              <td class="text-center colfix"><input class="text-center colfix" type="number" readonly [value]="this.pv[0].vt12?.toFixed(3)"></td>
+              <td class="text-center colfix">
+                <input #input1 (keydown.enter)="input2.focus()" class="text-center colfix" type="number" [(ngModel)]="pv[0].vm11">
+              </td>
+              <td class="text-center colfix">
+                <input #input2 (keydown.enter)="input3.focus()" class="text-center colfix" type="number" [(ngModel)]="pv[0].vm12">
+              </td>
+
+              <td class="text-center colfix"><input #input3 (keydown.enter)="input4.focus()" class="text-center colfix" type="number"[(ngModel)]="pv[0].vm13"></td>
+            </tr>
+            <tr>
+              <td class="text-center colfix">2</td>
+              <td class="text-center colfix"><input class="text-center colfix" type="number" readonly [value]="this.pv[0].vt21?.toFixed(3)"></td>
+              <td class="text-center colfix"><input class="text-center colfix" type="number" readonly [value]="this.pv[0].vt22?.toFixed(3)"></td>
+              <td class="text-center colfix"><input #input4 (keydown.enter)="input5.focus()" class="text-center colfix" type="number"[(ngModel)]="pv[0].vm21"></td>
+              <td class="text-center colfix"><input #input5 (keydown.enter)="input6.focus()" class="text-center colfix" type="number"[(ngModel)]="pv[0].vm22"></td>
+              <td class="text-center colfix"><input #input6 (keydown.enter)="input7.focus()" class="text-center colfix" type="number"[(ngModel)]="pv[0].vm23"></td>
+            </tr>
+            <tr>
+              <td class="text-center colfix">3</td>
+              <td class="text-center colfix"><input class="text-center colfix" type="number" readonly [value]="this.pv[0].vt31?.toFixed(3)"></td>
+              <td class="text-center colfix"><input class="text-center colfix" type="number" readonly [value]="this.pv[0].vt32?.toFixed(3)"></td>
+              <td class="text-center colfix"><input #input7 (keydown.enter)="input8.focus()" class="text-center colfix" type="number"[(ngModel)]="pv[0].vm31"></td>
+              <td class="text-center colfix"><input #input8 (keydown.enter)="input9.focus()" class="text-center colfix" type="number"[(ngModel)]="pv[0].vm32"></td>
+              <td class="text-center colfix"><input #input9 (keydown.enter)="input10.focus()" class="text-center colfix" type="number"[(ngModel)]="pv[0].vm33"></td>
+            </tr>
+            <tr>
+              <td class="text-center colfix">4</td>
+              <td class="text-center colfix"><input class="text-center colfix" type="number" readonly [value]="this.pv[0].vt41?.toFixed(3)"></td>
+              <td class="text-center colfix"><input class="text-center colfix" type="number" readonly [value]="this.pv[0].vt42?.toFixed(3)"></td>
+              <td class="text-center colfix"><input #input10 (keydown.enter)="input11.focus()" class="text-center colfix" type="number"[(ngModel)]="pv[0].vm41"></td>
+              <td class="text-center colfix"><input #input11 (keydown.enter)="input12.focus()"  class="text-center colfix" type="number"[(ngModel)]="pv[0].vm42"></td>
+              <td class="text-center colfix"><input #input12 (keydown.enter)="input13.focus()" class="text-center colfix" type="number"[(ngModel)]="pv[0].vm43"></td>
+            </tr>
+            <tr>
+              <td class="text-center colfix">5</td>
+              <td class="text-center colfix"><input class="text-center colfix" type="number" readonly [value]="this.pv[0].vt51?.toFixed(3)"></td>
+              <td class="text-center colfix"><input class="text-center colfix" type="number" readonly [value]="this.pv[0].vt52?.toFixed(3)"></td>
+              <td class="text-center colfix"><input #input13 (keydown.enter)="input14.focus()" class="text-center colfix" type="number"[(ngModel)]="pv[0].vm51"></td>
+              <td class="text-center colfix"><input #input14 (keydown.enter)="input15.focus()" class="text-center colfix" type="number"[(ngModel)]="pv[0].vm52"></td>
+              <td class="text-center colfix"><input #input15 (keydown.enter)="focusInput16()"  class="text-center colfix" type="number"[(ngModel)]="pv[0].vm53"></td>
+            </tr>
+            <tr></tr>
+          </tbody>
+        </table>
+      </div>
 
         <div class="panel panel-default">
           <div class="panel-heading">
@@ -157,7 +158,15 @@
           <table class="table table-bordered table-condensed">
             <tbody>
               <tr>
-                <td style="font-size: 14px;">Valeur normaliseé : Pertes dans le fer : PO = 120 W (±15%) Courant à vide I0 = 2,5% (+30%)</td>
+
+                <td style="font-size: 14px;">Valeur normaliseé : Pertes dans le fer :<span> PO (W) = <input placeholder="0" [(ngModel)]="pv[0].wog" type="number"
+                  style="border: none;
+                  padding-left: 10px;
+                  outline: none;
+                  background: none;
+                  font-size: inherit;
+                  font-family: inherit;
+                  ;width: 8ch;"></span> (±15%) Courant à vide I0 = 2,5% (+30%)</td>
               </tr>
               <tr>
                 <td style="padding: 0px;"></td>
@@ -175,11 +184,11 @@
                 <td class="text-center colfix">Conclusion</td>
               </tr>
               <tr>
+                <td class="text-center colfix"><input class="text-center colfix" type="number" [(ngModel)]="pv[0].tappings" name="tappings max=6"></td>
                 <td class="text-center colfix"><input class="text-center colfix" type="number" readonly></td>
+                <td class="text-center colfix"><input class="text-center colfix" type="number" [(ngModel)]="pv[0].iom" ></td>
                 <td class="text-center colfix"><input class="text-center colfix" type="number" readonly></td>
-                <td class="text-center colfix"><input class="text-center colfix" type="number" readonly></td>
-                <td class="text-center colfix"><input class="text-center colfix" type="number" readonly></td>
-                <td class="text-center colfix"><input class="text-center colfix" type="number" readonly></td>
+                <td class="text-center colfix"><input class="text-center colfix" type="number" [value]="this.getIOPourcentageMesurees().toFixed(3)" readonly></td>
                 <td class="text-center colfix"><input class="text-center colfix" type="number" readonly></td>
               </tr>
             </tbody>
@@ -194,10 +203,24 @@
           <table class="table table-bordered table-condensed">
             <tbody>
               <tr>
-                <td style="font-size: 14px;">Temperature d'essais : T = 15°C</td>
+                <td style="font-size: 14px;">Temperature d'essais : T = <input placeholder="0" [(ngModel)]="pv[0].temp" type="number"
+                  style="border: none;
+                  padding-left: 10px;
+                  outline: none;
+                  background: none;
+                  font-size: inherit;
+                  font-family: inherit;
+                  ;width: 6ch;"> °C</td>
               </tr>
               <tr>
-                <td style="font-size: 14px;">Valeur normaliseé : Pertes dans cuivre : 580 W (+15%), Tension de C.C : UCC = 4,5% (±10%)</td>
+                <td style="font-size: 14px;">Valeur normaliseé : Pertes dans cuivre : 580 W (+15%), Tension de C.C : UCC = <input placeholder="0" [(ngModel)]="pv[0].uccm" type="number"
+                  style="border: none;
+                  padding-left: 10px;
+                  outline: none;
+                  background: none;
+                  font-size: inherit;
+                  font-family: inherit;
+                  ;width: 8ch;">% (±10%)</td>
               </tr>
               <tr>
                 <td style="padding: 0px;"></td>
@@ -215,7 +238,7 @@
                 <td class="text-center colfix">Conclusion</td>
               </tr>
               <tr>
-                <td class="text-center colfix"><input class="text-center colfix" type="number" readonly></td>
+                <td class="text-center colfix"><input class="text-center colfix" type="number" [(ngModel)]="pv[0].tappings" name="tappings max=6"></td>
                 <td class="text-center colfix"><input class="text-center colfix" type="number" readonly></td>
                 <td class="text-center colfix"><input class="text-center colfix" type="number" readonly></td>
                 <td class="text-center colfix"><input class="text-center colfix" type="number" readonly></td>
@@ -241,23 +264,23 @@
               </tr>
               <tr>
                 <td class="text-center colfix">Entre Spires</td>
-                <td class="text-center colfix"><input class="text-center colfix" type="number"></td>
-                <td class="text-center colfix"><input class="text-center colfix" type="number"></td>
-                <td class="text-center colfix"><input class="text-center colfix" type="number"></td>
+                <td class="text-center colfix"><input [(ngModel)]="pv[0].na0" class="text-center colfix" type="number"></td>
+                <td class="text-center colfix"><input [(ngModel)]="pv[0].nb0" class="text-center colfix" type="number"></td>
+                <td class="text-center colfix"><input [(ngModel)]="pv[0].nc0" class="text-center colfix" type="number"></td>
                 <td class="text-center colfix"><input class="text-center colfix" type="number"></td>
               </tr>
               <tr>
                 <td class="text-center colfix">Entre HT & BT Masse</td>
-                <td class="text-center colfix"><input class="text-center colfix" type="number"></td>
-                <td class="text-center colfix"><input class="text-center colfix" type="number"></td>
-                <td class="text-center colfix"><input class="text-center colfix" type="number"></td>
+                <td class="text-center colfix"><input [(ngModel)]="pv[0].na1" class="text-center colfix" type="number"></td>
+                <td class="text-center colfix"><input [(ngModel)]="pv[0].nb2" class="text-center colfix" type="number"></td>
+                <td class="text-center colfix"><input [(ngModel)]="pv[0].nc3" class="text-center colfix" type="number"></td>
                 <td class="text-center colfix"><input class="text-center colfix" type="number"></td>
               </tr>
               <tr>
                 <td class="text-center colfix">Entre BT & HT Masse</td>
-                <td class="text-center colfix"><input class="text-center colfix" type="number"></td>
-                <td class="text-center colfix"><input class="text-center colfix" type="number"></td>
-                <td class="text-center colfix"><input class="text-center colfix" type="number"></td>
+                <td class="text-center colfix"><input [(ngModel)]="pv[0].u1" class="text-center colfix" type="number"></td>
+                <td class="text-center colfix"><input [(ngModel)]="pv[0].t1" class="text-center colfix" type="number"></td>
+                <td class="text-center colfix"><input [(ngModel)]="pv[0].u2" class="text-center colfix" type="number"></td>
                 <td class="text-center colfix"><input class="text-center colfix" type="number"></td>
               </tr>
             </tbody>
@@ -275,8 +298,8 @@
                 <td class="text-center colfix">Resistance BT (Ω)</td>
               </tr>
               <tr>
-                <td class="text-center colfix"><input class="text-center colfix" type="number"></td>
-                <td class="text-center colfix"><input class="text-center colfix" type="number"></td>
+                <td class="text-center colfix"><input [(ngModel)]="pv[0].t2" class="text-center colfix" type="number"></td>
+                <td class="text-center colfix"><input [(ngModel)]="pv[0].u3" class="text-center colfix" type="number"></td>
               </tr>
             </tbody>
           </table>
@@ -288,9 +311,9 @@
 
   <div class="invoice-footer printing8">
     <div style="display: flex; justify-content: space-between;">
-      <strong style="text-align: left;">Customer <br> Client<br> </strong>
-      <strong style="text-align: center;">R.Laboratory <br> R.Loborataire <br> </strong>
-      <strong style="text-align: right;">R. Technical <br>R.Technique<br>  </strong>
+      <strong style="text-align: left;">Customer <br> Client<br> {{service.list[0].client}}</strong>
+      <strong style="text-align: center;">R.Laboratory <br> R.Loborataire <br> {{pv[0].controleurDeQualite?.username}} </strong>
+      <strong style="text-align: right;">R. Technical <br>R.Technique<br> {{pv[0].technique}} </strong>
   </div>
       <hr style="border-color: #51121E; border-width: 5px; height: 10px;" class="printing5">
     <br/>
@@ -301,13 +324,14 @@
 </div>
 <div class="page-tools" style="padding-left: 136vh;" class="printable">
   <div class="action-buttons" style="display: flex;">
-    <a class="btn bg-white btn-light mx-1px text-95" data-title="Print" >
+    <a class="btn bg-white btn-light mx-1px text-95" data-title="Print" (click)="onPrint()">
       <i class="mr-1 fa fa-print text-primary-m1 text-120 w-2"></i>
       <span style="padding-left: 8px;">Print</span>
     </a>
-    <a  class="btn bg-white btn-light mx-1px text-95" data-title="Save">
+    <a  class="btn bg-white btn-light mx-1px text-95" (click)="savePvValues();" data-title="Save">
     <i class="mr-1 fa fa-save text-success-m1 text-120 w-2"></i>
-      <span style="padding-left: 8px;">Verifier</span>
+      <span style="padding-left: 8px;" *ngIf="ServiceS.Controleur.designation==='Verificateur' ">Verifier</span>
+      <span style="padding-left: 8px;" *ngIf="ServiceS.Controleur.designation==='Controleur' ">Save</span>
     </a>
   </div>
 </div>

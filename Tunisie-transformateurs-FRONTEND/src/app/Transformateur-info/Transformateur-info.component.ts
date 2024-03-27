@@ -340,7 +340,6 @@ addToDeletedTransformateurs(transformateur: any) {
 
 }
 
-
 DeleteListOfTransformateurs() {
   // Call the deleteTransformateursList method and pass the array of transformateur IDs
   this.service.deleteTransformateursList(this.DeletedTransformateurIds)
@@ -354,11 +353,24 @@ DeleteListOfTransformateurs() {
         this.nbConforme = this.list.filter(transformateur => transformateur.pv?.resultat === 'Conforme').length;
         this.nbNonConforme = this.list.filter(transformateur => transformateur.pv?.resultat === 'Non Conforme').length;
         this.messageService.add({ severity: 'success', summary: 'Succès', detail: 'Transformateur supprimé avec succès' });
-        const newEvent = new Event(this.ServiceS.Controleur.idC,'Supprimer un transformateur', new Date(),this.ServiceS.Controleur.username + ' a supprimer un list des transformateurs '+ " avec les numéros " + this.DeletedTransformateurIds);
+
+        // Create and add the event
+        const firstTransformateurId = this.DeletedTransformateurIds.length > 0 ? this.DeletedTransformateurIds[0] : undefined;
+        const lastTransformateurId = this.DeletedTransformateurIds.length > 0 ? this.DeletedTransformateurIds[this.DeletedTransformateurIds.length - 1] : undefined;
+
+        const newEvent = new Event(
+            this.ServiceS.Controleur.idC,
+            'Supprimer un transformateur',
+            new Date(),
+            this.ServiceS.Controleur.username + ' a supprimé une liste de transformateurs entre ' + firstTransformateurId + ' et ' + lastTransformateurId
+        );
+
         this.EventService.AddEvent(newEvent)
           .subscribe({
             next: (response) => {
               console.log('Event added successfully:', response);
+              // Clear the DeletedTransformateurIds array after the event is added
+              this.DeletedTransformateurIds = [];
               // Add any further logic here if needed
             },
             error: (error) => {
@@ -372,9 +384,6 @@ DeleteListOfTransformateurs() {
         console.error('Error deleting transformateurs:', error);
       }
     );
-
-        // Clear the DeletedTransformateurIds array after deletion
-        this.DeletedTransformateurIds = [];
 }
 
 

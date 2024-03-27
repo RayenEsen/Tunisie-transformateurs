@@ -179,7 +179,6 @@ export class BobinageComponentComponent implements OnInit {
     );
   }
 
-
     // Function to handle the print action
     onPrint() {
       window.print();

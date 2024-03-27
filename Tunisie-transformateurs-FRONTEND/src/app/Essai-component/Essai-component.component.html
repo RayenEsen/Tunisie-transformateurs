@@ -285,18 +285,18 @@
             <td class="text-left colfix" style="width: 200px;">Induced voltage test at / Essai par tension induite a 150 Hz</td>
             <td class="text-center colfix">U [V]</td>
             <td class="text-center colfix"><input #input30 (keydown.enter)="input31.focus()" class="text-center colfix" type="number" [(ngModel)]="pv[0].u1"></td>
-            <td class="text-center colfix"><input #input31 (keydown.enter)="input32.focus()" class="text-center colfix" type="number"[(ngModel)]="pv[0].t1"></td>
+            <td class="text-center colfix"><input #input31 (keydown.enter)="input32.focus()" class="text-center colfix" type="number" [(ngModel)]="pv[0].t1"></td>
           </tr>
           <tr>
             <td class="text-left colfix" style="width: 200px;">Applied voltage test (HV) at / Essai par tension appliqueés (HT) a 50Hz</td>
             <td class="text-center colfix">U [kV]</td>
-            <td class="text-center colfix"><input #input32 (keydown.enter)="input33.focus()" class="text-center colfix" type="number"[(ngModel)]="pv[0].u2"></td>
-            <td class="text-center colfix"><input #input33 (keydown.enter)="input34.focus()"class="text-center colfix" type="number"[(ngModel)]="pv[0].t2"></td>
+            <td class="text-center colfix"><input #input32 (keydown.enter)="input33.focus()" class="text-center colfix" type="number" [(ngModel)]="pv[0].u2"></td>
+            <td class="text-center colfix"><input #input33 (keydown.enter)="input34.focus()"class="text-center colfix" type="number" [(ngModel)]="pv[0].t2"></td>
           </tr>
           <tr>
             <td class="text-left colfix" style="width: 200px;">Applied voltage test (LV) at / Essai par tension appliqueés (BT) a 50Hz</td>
             <td class="text-center colfix">U [kV]</td>
-            <td class="text-center colfix"><input  #input34 (keydown.enter)="input35.focus()" class="text-center colfix" type="number"[(ngModel)]="pv[0].u3"></td>
+            <td class="text-center colfix"><input  #input34 (keydown.enter)="input35.focus()" class="text-center colfix" type="number" [(ngModel)]="pv[0].u3"></td>
             <td class="text-center colfix"><input  #input35  class="text-center colfix" type="number"[(ngModel)]="pv[0].t3"></td>
           </tr>
         </tbody>
@@ -320,7 +320,7 @@
       <br>Web : www.ttransfo.com / E-Mail : info&#64;ttransfo.com
   </div>
 </div>
-<div class="page-tools" style="padding-left: 136vh;" class="printable">
+<div class="page-tools" style="padding-left: 136vh;" class="printable" *ngIf="ServiceS.Controleur.designation === 'Verificateur' || ServiceS.Controleur.designation === 'Controleur'">
   <div class="action-buttons" style="display: flex;">
     <a class="btn bg-white btn-light mx-1px text-95" data-title="Print" (click)="onPrint()">
       <i class="mr-1 fa fa-print text-primary-m1 text-120 w-2"></i>

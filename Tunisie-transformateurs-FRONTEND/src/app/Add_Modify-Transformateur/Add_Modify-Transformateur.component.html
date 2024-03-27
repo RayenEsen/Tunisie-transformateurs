@@ -62,7 +62,7 @@
           <hr class="border-light m-0" >
           <div class="table-responsive" class="card mb-4">
             <div class="card-body">
-              <table class="table card-table m-0">
+              <table class="table card-table m-0" *ngIf="service.list[0].type==='Triphasés' ">
                 <tbody >
                   <tr>
                     <th>Essais de Transformateur</th>
@@ -99,12 +99,44 @@
                     <td>Essai dialectriques</td>
                     <td><span class="fa fa-times text-light"></span></td>
                   </tr>
+                </tbody>
+              </table>
+
+              <table class="table card-table m-0" *ngIf="service.list[0].type==='Monophasés' ">
+                <tbody >
                   <tr>
-                    <td>Essai du liquide isolant</td>
+                    <th>Essais de Transformateur</th>
+                    <th>Conforme</th>
+                  </tr>
+                  <tr>
+                    <td>Rapport de transformation</td>
+                    <td *ngIf="ValidateEssais()">
+                      <span class="fa fa-check text-primary"></span>
+                    </td>
+                    <td *ngIf="!ValidateEssais()">
+                      <span class="fa fa-times text-light"></span>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>Essai a vide</td>
+                    <td><span class="fa fa-times text-light"></span></td>
+                  </tr>
+                  <tr>
+                    <td>Essai en court circuit</td>
+                    <td><span class="fa fa-times text-light"></span></td>
+                  </tr>
+                  <tr>
+                    <td>Essais Dielectriques</td>
+                    <td><span class="fa fa-times text-light"></span></td>
+                  </tr>
+                  <tr>
+                    <td>Mesure des resistances</td>
                     <td><span class="fa fa-times text-light"></span></td>
                   </tr>
                 </tbody>
               </table>
+
             </div>
           </div>
           <div class="card">
