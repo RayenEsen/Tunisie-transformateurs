@@ -116,10 +116,13 @@ body {
   font-family: monospace;
 }
 
-/* Hover effect on the invoice container */
-.invoice:hover {
-  transform: scale(1.005); /* Scaling up on hover */
+
+::ng-deep svg:not(:root) {
+  color: white;
+  overflow: hidden;
+  margin-top: 2vh;
 }
+
 
 /* Hover effect on the logo */
 .logo {
@@ -185,7 +188,7 @@ img {
 
 /* Scale up effect on hover for images */
 img:hover {
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
 .clickable {
@@ -226,3 +229,4 @@ img:hover {
        .text-light {
         color: #920303 !important;
     }
+

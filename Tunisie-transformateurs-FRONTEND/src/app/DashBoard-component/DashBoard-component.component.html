@@ -75,13 +75,90 @@
     <p-chart type="pie" [data]="data" ></p-chart>
   </div>
   <div class="g card" style="justify-content: end;">
-
     <p-chart type="bar" [data]="date2"></p-chart>
-
   </div>
 
   <div class="k card">
-    <p-chart type="line" [data]="data6" ></p-chart>
+
+      <p-table
+      #dt1
+      [value]="list"
+      dataKey="numero"
+      [rows]="10"
+      [showCurrentPageReport]="true"
+      [rowsPerPageOptions]="[10, 25, 50]"
+      [paginator]="true"
+      selectionMode="single"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [globalFilterFields]="['numero', 'date', 'dateLivraison', 'dateFin', 'type', 'puissance', 'dateLancement', 'datePrevue', 'dateCloture', 'dateFinProduction', 'resultatProduction', 'dateEssai', 'resultatEssai']"
+      >
+      <ng-template pTemplate="caption">
+        <div class="flex" style="display: flex; align-items: center;">
+          <button pButton label="Actualiser" class="p-button-outlined" icon="pi pi-refresh" (click)="ResetList()"></button>
+          <span class="p-input-icon-left" style="margin-left: auto;">
+              <i class="pi pi-search"></i>
+              <input pInputText type="text" [(ngModel)]="searchkey" (ngModelChange)="Search()" placeholder="Mot-clé à rechercher" />
+          </span>
+      </div>
+
+      </ng-template>
+      <ng-template pTemplate="header">
+          <tr>
+              <th style="min-width:10rem">Index</th>
+              <th style="min-width:10rem" pSortableColumn="numero">Numero <p-sortIcon field="numero"></p-sortIcon></th>
+              <th style="min-width:15rem">Type <p-columnFilter type="text" field="type" display="menu"></p-columnFilter></th>
+              <th style="min-width:15rem">Mission <p-columnFilter type="text" field="etat" display="menu"></p-columnFilter></th>
+
+              <th style="min-width:15rem" pSortableColumn="power">Puissance <p-sortIcon field="power"></p-sortIcon></th>
+
+              <th style="min-width:15rem">Date de Lancement  <p-columnFilter type="date" field="transformateur.dateLivraison" display="menu"></p-columnFilter></th>
+
+              <th style="min-width:15rem">Date de Prevue <p-columnFilter type="date" field="transformateur.dateprevue" display="menu"></p-columnFilter></th>
+              <th style="min-width:15rem">Date de Cloture <p-columnFilter type="date" field="transformateur.dateCloture" display="menu"></p-columnFilter></th>
+
+              <th style="min-width:15rem">Date Fin Production <p-columnFilter type="date" field="transformateur.dateFin" display="menu"></p-columnFilter></th>
+              <th style="min-width:15rem">Resultat Production </th>
+              <th style="min-width:15rem">Date de Livraison <p-columnFilter type="date" field="transformateur.dateLivraison" display="menu"></p-columnFilter></th>
+
+              <th style="min-width:15rem">Date de Essai <p-columnFilter type="date" field="transformateur.pv.date" display="menu"></p-columnFilter></th>
+              <th style="min-width:15rem">Resultat de Essai <p-columnFilter type="text" field="pv.resultat" display="menu"></p-columnFilter></th>
+
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-transformateur let-i="rowIndex">
+          <tr>
+              <td>{{ i }}</td>
+              <td>{{ transformateur.numero }}</td>
+              <td>{{ transformateur.type }}</td>
+              <td>{{ transformateur.etat }}</td>
+              <td>{{ transformateur.power }}</td>
+              <td>{{ transformateur.date.toString().split('T')[0] }}</td>
+              <td>{{ transformateur.dateprevue.toString().split('T')[0] }}</td>
+              <td>{{ transformateur.dateCloture.toString().split('T')[0] }}</td>
+
+
+              <td>{{ transformateur.dateFin !== "0001-01-01T00:00:00" ? transformateur.dateFin.toString().split('T')[0] : 'En Cours' }}</td>
+
+
+              <p-progressBar [value]="Resultat_de_Production(transformateur.etapes)"  (click)="show();Results(transformateur.numero)" [showValue]="false"></p-progressBar>
+              <td>
+                {{ transformateur.dateLivraison !== "0001-01-01T00:00:00" ? transformateur.dateLivraison.toString().split('T')[0] : 'En Cours' }}
+              </td>
+              <td>{{ transformateur.pv.date.toString().split('T')[0] }}</td>
+              <td>
+                <p-tag [value]="transformateur.pv.resultat" [severity]="getSeverity(transformateur.pv.resultat)"></p-tag>
+              </td>
+
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+          <tr>
+              <td colspan="6">No data found.</td>
+          </tr>
+      </ng-template>
+  </p-table>
+
+
   </div>
   <div class="l card">
     <p-chart type="doughnut" [data]="data" ></p-chart>
@@ -96,3 +173,43 @@
 
 
 </header>
+<p-dialog [maximizable]="true" header="Détails de production" [(visible)]="visible" [style]="{ width: '50vw', height: '300px' }">
+  <p-table
+   [value]="Etape"
+   responsiveLayout="stack"
+   selectionMode="single"
+   [breakpoint]="'960px'"
+   [tableStyle]="{'min-width': '70rem'}">
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th>Index</th>
+            <th >Nom<p-columnFilter type="text" field="nom" display="menu"></p-columnFilter></th>
+            <th>Date Debut<p-columnFilter type="text" field="dateDebut" display="menu"></p-columnFilter></th>
+            <th>Date Fin<p-columnFilter type="text" field="dateFin" display="menu"></p-columnFilter></th>
+            <th>Operateur 1<p-columnFilter type="text" field="operateur1" display="menu"></p-columnFilter></th>
+            <th>Operateur 2<p-columnFilter type="text" field="operateur2" display="menu"></p-columnFilter></th>
+            <th>Controleur<p-columnFilter type="text" field="controleur" display="menu"></p-columnFilter></th>
+            <th>Verificateur<p-columnFilter type="text" field="verificateur" display="menu"></p-columnFilter></th>
+            <th>Resultat<p-columnFilter type="text" field="resultat" display="menu"></p-columnFilter></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-etape let-columns="columns" let-i="rowIndex">
+        <tr>
+          <td>{{i}}</td>
+          <td>{{ etape.nom}}</td>
+          <td>{{ etape.dateDebut ? etape.dateDebut.toString().split('T')[0] : 'En Cours' }}</td>
+          <td>{{ etape.dateFin ? etape.dateFin.toString().split('T')[0] : 'En Cours' }}</td>
+
+          <td>{{ etape.operateur1 || 'Aucun' }}</td>
+          <td>{{ etape.operateur2 || 'Aucun' }}</td>
+          <td>{{etape.controleur || 'Aucun'}}</td>
+          <td>{{etape.verificateur || 'Aucun'}}</td>
+          <td>
+            <p-tag [value]="etape.resultat" [severity]="getSeverity2(etape.resultat)"></p-tag>
+          </td>
+        </tr>
+    </ng-template>
+
+
+</p-table>
+</p-dialog>

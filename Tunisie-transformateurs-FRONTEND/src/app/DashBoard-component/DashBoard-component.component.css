@@ -171,3 +171,11 @@
 45deg
 , #ffdf40, #ff8359)!important;
 }
+
+::ng-deep .p-progressbar {
+  height: 10px; /* Set the height to make it smaller */
+  margin-top: 3vh;
+  width: 80%;
+}
+
+

@@ -118,13 +118,19 @@
           <tbody>
             <tr>
               <td class="text-center colfix">250</td>
-              <td class="text-center colfix">24095-24103</td>
+              <td class="text-center colfix">
+                <span style="margin-right: 3vh;">24095-24103</span>
+                <p-button (click)="uploadFileAndUpdateConseption(Conseption.idConseption)" icon="pi pi-upload" [rounded]="true" [text]="true" severity="secondary"></p-button>
+              </td>
+
+
             </tr>
             <tr>
-              <td colspan="2" class="text-center colfix clickable" (click)="uploadFileAndUpdateConseption(Conseption.idConseption)">
-                <img [src]="Conseption.image ? 'data:image/jpeg;base64,' + Conseption.image : 'assets/temp.png'" style="max-width: 250px; padding-top: 3vh;" alt="Conseption Image">
-                <!-- Hidden file input element -->
-                <input type="file" id="fileInput" (change)="onFileSelected($event)" style="display: none;">
+
+              <td colspan="2" class="text-center colfix clickable" style="padding: 6vh;" >
+                <p-image [src]="Conseption.image ? 'data:image/jpeg;base64,' + Conseption.image : 'assets/temp.png'"
+                alt="Conseption Image" width="250" [preview]="true" >
+       </p-image>
               </td>
           </tr>
           </tbody>
@@ -132,7 +138,9 @@
         <table class="table table-bordered table-condensed">
           <tbody>
             <tr>
-              <td class="text-center colfix" style="padding-bottom: 12px;">Date</td>
+              <td class="text-center colfix" style="padding-bottom: 12px;">
+                Date
+              </td>
             </tr>
             <tr>
               <td class="text-center colfix"><input type="date" [(ngModel)]="Conseption.date"></td>

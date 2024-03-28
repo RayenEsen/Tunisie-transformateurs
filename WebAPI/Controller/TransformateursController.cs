@@ -31,7 +31,7 @@ namespace WebAPI.Controller
         public async Task<ActionResult<IEnumerable<Transformateur>>> GetAllTransformateursWithPv()
         {
                 // Include the Pv navigation property in the query
-                var transformateursWithPvs = await _context.transformateurs.Include(t => t.Pv).ToListAsync();
+                var transformateursWithPvs = await _context.transformateurs.Include(t => t.Pv).Include(t => t.Etapes).ToListAsync();
 
                 return transformateursWithPvs;
         }

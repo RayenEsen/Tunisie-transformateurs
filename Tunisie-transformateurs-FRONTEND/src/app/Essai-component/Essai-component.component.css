@@ -296,6 +296,8 @@ img:hover {
   margin-bottom: 5px;
   font-size: 14px;
 }
+
+
 ::ng-deep .p-speeddial .p-speeddial-button {
   border-radius: 50%;
   background-color: rgba(18, 33, 81, 0.8); /* Adjust the alpha value (0.8) to lighten or darken the color */
@@ -434,6 +436,7 @@ body{
 	transform: translateY(-2px);
 	cursor: pointer;
 }
+
 .modal {
   background-color: #fff;
   border-radius: 5px;

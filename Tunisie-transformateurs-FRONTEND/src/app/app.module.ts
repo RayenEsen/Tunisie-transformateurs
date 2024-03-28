@@ -36,6 +36,7 @@ import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { SplitButtonModule } from 'primeng/splitbutton';
+import { TagModule } from 'primeng/tag';
 
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { TopNavComponent } from './top-nav/top-nav.component';
@@ -74,9 +75,11 @@ import { RepportComponentComponent } from './Repport-component/Repport-component
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { EssaiMonoComponentComponent } from './EssaiMono-component/EssaiMono-component.component';
+import { FileUploadModule } from 'primeng/fileupload';
+import { InputTextModule } from 'primeng/inputtext';
 
 @NgModule({
-  declarations: [	
+  declarations: [
     AppComponent,
     NavBarComponent,
     TopNavComponent,
@@ -105,7 +108,8 @@ import { EssaiMonoComponentComponent } from './EssaiMono-component/EssaiMono-com
       OutilsComponentComponent,
       DashBoardComponentComponent,
       RepportComponentComponent,
-      EssaiMonoComponentComponent
+      EssaiMonoComponentComponent,
+
    ],
   imports: [
     BrowserModule,
@@ -151,6 +155,10 @@ import { EssaiMonoComponentComponent } from './EssaiMono-component/EssaiMono-com
     KeyFilterModule,
     SplitButtonModule,
     RadioButtonModule,
+    FileUploadModule,
+    TagModule,
+    InputTextModule,
+
     ],
   providers: [MessageService,ConfirmationService],
   bootstrap: [AppComponent]

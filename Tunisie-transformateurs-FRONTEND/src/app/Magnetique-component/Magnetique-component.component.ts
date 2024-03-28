@@ -40,7 +40,6 @@ export class MagnetiqueComponentComponent implements OnInit {
         this.ServiceM.getMagnetiqueByTransformateurId(this.transformateurId)
           .subscribe((result: Magnetique[]) => {
             this.Magnetiques = result;
-            console.log(this.Magnetiques);
           });
           this.service.GetTransformateur(this.transformateurId);
       }
@@ -48,7 +47,6 @@ export class MagnetiqueComponentComponent implements OnInit {
       .subscribe(
         etape => {
           this.etapeSelected=etape;
-          console.log(this.etapeSelected);
         },
         error => {
           // Handle any errors that occur during the HTTP request
@@ -59,7 +57,6 @@ export class MagnetiqueComponentComponent implements OnInit {
       .subscribe(
         etape => {
           this.etapeSelected2=etape;
-          console.log(this.etapeSelected);
         },
         error => {
           // Handle any errors that occur during the HTTP request
@@ -88,8 +85,6 @@ export class MagnetiqueComponentComponent implements OnInit {
             this.etapeSelected2.resultat="Non conforme"
           }
 
-
-            console.log('Magnetiques updated successfully');
             if(this.serviceS.Controleur.designation==="Controleur" && this.serviceS.Controleur.username)
             {
               this.etapeSelected.controleur=this.serviceS.Controleur.username;
@@ -105,11 +100,9 @@ export class MagnetiqueComponentComponent implements OnInit {
               this.eventService.AddEvent(newEvent)
               .subscribe({
                 next: (response) => {
-                  console.log('Event added successfully:', response);
-                // Update the etapeSelected
++                // Update the etapeSelected
                 this.serviceE.UpdateEtape(this.transformateurId, this.etapenumero, this.etapeSelected).subscribe({
                   next: (response) => {
-
                   },
                 });
 

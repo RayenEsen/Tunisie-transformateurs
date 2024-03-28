@@ -131,6 +131,8 @@ export class ConseptionComponentComponent implements OnInit {
     }
   }
 
+
+
   uploadFileAndUpdateConseption(conseptionId: number): void {
     // Trigger file selection
     const fileInput = document.createElement('input');
@@ -193,6 +195,8 @@ verif()
 {
 
 }
+
+
 
 }
 
