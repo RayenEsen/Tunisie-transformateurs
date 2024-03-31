@@ -46,7 +46,7 @@ export class Transformateur {
 
   pv?: Pv;
   etapes?: Etape[]; // One-to-many relationship with Etape
-  bobinage?: Bobinage[]; // One-to-many relationship with Etape
-  bobinageMT?: BobinageMT[]; // One-to-many relationship with Etape
+  bobinages?: Bobinage[]; // One-to-many relationship with Etape
+  bobinagesMT?: BobinageMT[]; // One-to-many relationship with Etape
   magnetique?: Magnetique[]; // One-to-many relationship with Etape
 }

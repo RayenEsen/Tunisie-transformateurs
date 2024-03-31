@@ -3,6 +3,19 @@ import { TransformateurServiceService } from '../Shared/Transformateur-service.s
 import { Transformateur } from '../Shared/Transformateur-service.model';
 import { Etape } from '../Shared/Etape-servicemodel';
 import { EtapeServiceService } from '../Shared/Etape-service.service';
+import { Bobinage } from '../Shared/Bobinage-service.model';
+import { BobinageServiceService } from '../Shared/Bobinage-service.service';
+import { BobinageMT } from '../Shared/BobinageMT-service.model';
+import { BobinageMTServiceService } from '../Shared/BobinageMT-service.service';
+import { MagnetiqueServiceService } from '../Shared/Magnetique-service.service';
+import { Magnetique } from '../Shared/Magnetique-service.model';
+import { Montage } from '../Shared/Montage-service.model';
+import { MontageServiceService } from '../Shared/Montage-service.service';
+import { Ecuvage } from '../Shared/Ecuvage-service.model';
+import { EcuvageServiceService } from '../Shared/Ecuvage-service.service';
+import { Remplissage } from '../Shared/Remplissage-service.model';
+import { RemplissageServiceService } from '../Shared/Remplissage-service.service';
+
 @Component({
   selector: 'app-DashBoard-component',
   templateUrl: './DashBoard-component.component.html',
@@ -10,7 +23,15 @@ import { EtapeServiceService } from '../Shared/Etape-service.service';
 })
 export class DashBoardComponentComponent implements OnInit {
 
-  constructor(public service: TransformateurServiceService,public ServiceE : EtapeServiceService,) { }
+  constructor(public service: TransformateurServiceService,
+  public ServiceE : EtapeServiceService,
+  public ServiceBobinage : BobinageServiceService,
+  public ServiceBobinageMT : BobinageMTServiceService,
+  public ServiceMagnetique : MagnetiqueServiceService,
+  public ServiceMontage : MontageServiceService,
+  public ServiceEcuvage : EcuvageServiceService,
+  public ServiceRemplissage : RemplissageServiceService,
+  ) { }
 
     /*Stuff That will get deleted L8ater*/
     data: any;
@@ -25,6 +46,8 @@ export class DashBoardComponentComponent implements OnInit {
   Etape : Etape[] = [];
 
   originalList: Transformateur[] = []; // Variable to store the original list
+  originalEtape: Etape[] = []; // Variable to store the original list
+
   searchkey : string = '';
   ngOnInit() {
 
@@ -130,14 +153,12 @@ this.data9 = {
   ]
 };
 /*--------------------------------------*/
-
   this.service.getTransformateurAndItsPvs().subscribe({
     next : (Response) =>
     {
       this.list=Response;
-      this.originalList = this.list;
-
       console.log(this.list)
+      this.originalList = this.list;
     }
   })
   }
@@ -152,6 +173,25 @@ this.data9 = {
         );
         console.log(this.list);
     }
+}
+
+
+Search2() {
+  if (this.searchkey.trim() !== '') {
+      // Filter the list based on the searchkey
+      this.Etape = this.Etape.filter(item =>
+          Object.values(item).some(val =>
+              val !== null && val.toString().toLowerCase().includes(this.searchkey.toLowerCase())
+          )
+      );
+      console.log(this.list);
+  }
+}
+
+ResetList2() {
+  // Reset the list to its original state
+  this.Etape = this.originalEtape;
+  this.searchkey = '';
 }
 
 ResetList() {
@@ -190,32 +230,97 @@ show()
   this.visible=!this.visible;
 }
 
+Bobinage : Bobinage[] = [];
+BobinageMT : BobinageMT[] = [];
+Magnetique : Magnetique[] = [];
+Montage : Montage[] = [];
+Ecuvage : Ecuvage[] = [];
+Remplissage : Remplissage[] = [];
+
+Bobinage_Progress : number = 0
+BobinageMT_Progress : number = 0
+Magnetique_Progress : number = 0
+Montage_Progress : number = 0
+Ecuvage_Progress : number = 0
+Remplissage_Progress : number = 0
+
 Results(id: number)
 {
   this.ServiceE.getEtapesByTransformateurId(id).subscribe({
     next : (Response) =>
     {
       this.Etape = Response;
-      console.log(this.Etape)
+      this.originalEtape = this.Etape;
     }
-  })
+  }),
+  this.ServiceBobinage.getBobinageByTransformateurId(id).subscribe({
+    next: (Response) => {
+      this.Bobinage = Response;
+      this.Bobinage_Progress = (this.Bobinage.filter(item => item.cnc !== "NC" ).length / 9) * 100;
+
+    }
+  });
+  this.ServiceBobinageMT.getBobinageByTransformateurId(id).subscribe({
+    next: (Response) => {
+      this.BobinageMT = Response;
+      this.BobinageMT_Progress = (this.BobinageMT.filter(item => item.cnc !== "NC" ).length / 9) * 100;
+    }
+  });
+  this.ServiceMagnetique.getMagnetiqueByTransformateurId(id).subscribe({
+    next: (Response) => {
+      this.Magnetique = Response;
+
+      this.Magnetique_Progress = (this.Magnetique.filter(item =>
+        (item.cnc1 !== "NC" && item.cnc1 !== null) ||
+        (item.cnc2 !== "NC" && item.cnc2 !== null) ||
+        (item.cnc3 !== "NC" && item.cnc3 !== null) ||
+        (item.cnc4 !== "NC" && item.cnc4 !== null)
+      ).length / 4) * 100;
+      console.log(this.Magnetique_Progress)
+          }
+  });
+  this.ServiceMontage.getMontageByTransformateurId(id).subscribe({
+    next: (Response) => {
+      this.Montage = Response;
+      this.Montage_Progress = (this.Montage.filter(item =>
+        (item.cnc1 !== "NC" && item.cnc1 !== null) ||
+        (item.cnc2 !== "NC" && item.cnc2 !== null) ||
+        (item.cnc3 !== "NC" && item.cnc3 !== null)
+      ).length / 3) * 100;
+          }
+  });
+  this.ServiceEcuvage.getEcuvageByTransformateurId(id).subscribe({
+    next: (Response) => {
+      this.Ecuvage = Response;
+      this.Ecuvage_Progress = (this.Ecuvage.filter(item =>
+        (item.conformite !== "NC" && item.conformite !== null)
+      ).length / 11) * 100;
+          }
+  });
+  this.ServiceRemplissage.getRemplissagesByTransformateurId(id).subscribe({
+    next: (Response) => {
+      this.Remplissage = Response;
+      this.Remplissage_Progress  = (this.Remplissage.filter(item =>
+        (item.cnc !== "NC" && item.cnc !== null)
+      ).length ) * 100;
+          }
+  });
 }
 
 
-getSeverity2(resultat : string)
-{
-  if(resultat!=="Non conforme" && resultat!=="En Attente")
-  {
+getSeverity2(resultat: string) {
+  if (resultat === "Conforme") {
     return 'success'; // Light green
-  }
-  else if(resultat=== "Non conforme")
-  {
+  } else if (resultat === "Non conforme") {
     return 'danger'; // Amber
-  }
-  else
-  {
+  } else if (resultat === "En Attente") {
     return 'primary'; // Light blue
+  } else {
+    return 'warning';
   }
 }
+
+
+
 
 }
