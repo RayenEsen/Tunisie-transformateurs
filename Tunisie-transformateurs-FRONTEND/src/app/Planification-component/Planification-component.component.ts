@@ -126,14 +126,24 @@ export class PlanificationComponentComponent implements OnInit {
     this.Visible = !this.Visible;
   }
 
-  Resultat()
-  {
-    if(this.Etape.every(etape => etape.resultat==="Conforme"))
-    return "Conforme";
-    else if(this.Etape.every(etape => etape.resultat==="Non Conforme"))
-    return "Non Conforme"
-    else return "En Attente"
-  }
+  Resultat() {
+    const nonConformes = this.Etape.filter(etape => etape.resultat === "Non conforme");
+
+    // Check if all Non conforme etapes are treated
+    const areAllNonConformeTreated = nonConformes.every(etape => etape.traitement === "Oui");
+
+    if (areAllNonConformeTreated) {
+        return "Conforme";
+    } else if (nonConformes.length > 0) {
+        return "Non Conforme";
+    } else if (this.Etape.every(etape => etape.resultat === "Conforme")) {
+        return "Conforme";
+    } else {
+        return "En Attente";
+    }
+}
+
+
 
   Rapport(etape : Etape)
   {
@@ -141,6 +151,7 @@ export class PlanificationComponentComponent implements OnInit {
     {
       this.router.navigate(['/Repport/'+etape.numero+'/'+etape.id_Etape]);
     }
+
   }
 
 }

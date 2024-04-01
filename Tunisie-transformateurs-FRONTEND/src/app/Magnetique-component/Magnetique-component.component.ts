@@ -8,7 +8,7 @@ import { EventServiceService } from '../Shared/Event-service.service'
 import { SessionService } from '../utils/session-service.service'
 import { Etape } from '../Shared/Etape-servicemodel';
 import { EtapeServiceService } from '../Shared/Etape-service.service';
-
+import { Message, MessageService } from 'primeng/api';
 @Component({
   selector: 'app-Magnetique-component',
   templateUrl: './Magnetique-component.component.html',
@@ -30,6 +30,7 @@ export class MagnetiqueComponentComponent implements OnInit {
               public serviceS : SessionService,
               public serviceE : EtapeServiceService,
               public eventService : EventServiceService,
+              public messageService : MessageService,
               ) { }
 
   ngOnInit() {
@@ -71,6 +72,7 @@ export class MagnetiqueComponentComponent implements OnInit {
     this.ServiceM.UpdateListBobinage(this.Magnetiques).subscribe(
         () => {
 
+          this.messageService.add({ severity: 'success', summary: 'Succès', detail: 'Controle dimensionnelle circuit magnétique mis à jour avec succès' });
 
           if (this.Magnetiques.every(Magnetique => Magnetique.cnc1 === "C") && this.Magnetiques.every(Magnetique => Magnetique.cnc2 === "C") && this.Magnetiques.every(Magnetique => Magnetique.cnc3 === "C") && this.Magnetiques.every(Magnetique => Magnetique.cnc4 === "C"))
           {
@@ -79,7 +81,7 @@ export class MagnetiqueComponentComponent implements OnInit {
           }
 
 
-          if (this.Magnetiques.every(Magnetique => Magnetique.cnc1 === "NC") && this.Magnetiques.every(Magnetique => Magnetique.cnc2 === "NC") && this.Magnetiques.every(Magnetique => Magnetique.cnc3 === "NC") && this.Magnetiques.every(Magnetique => Magnetique.cnc4 === "NC"))
+          if (this.Magnetiques.some(Magnetique => Magnetique.cnc1 === "NC") || this.Magnetiques.some(Magnetique => Magnetique.cnc2 === "NC") || this.Magnetiques.some(Magnetique => Magnetique.cnc3 === "NC") || this.Magnetiques.some(Magnetique => Magnetique.cnc4 === "NC"))
           {
             this.etapeSelected.resultat="Non conforme"
             this.etapeSelected2.resultat="Non conforme"

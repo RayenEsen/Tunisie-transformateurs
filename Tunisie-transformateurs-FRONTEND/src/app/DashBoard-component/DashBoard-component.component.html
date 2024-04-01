@@ -79,6 +79,7 @@
   </div>
 
   <div class="k card">
+
     <p-table
     *ngIf="visible"
      [value]="Etape"
@@ -103,16 +104,20 @@
       <ng-template pTemplate="header" let-columns>
           <tr>
               <th>Index</th>
-              <th >Nom<p-columnFilter type="text" field="nom" display="menu"></p-columnFilter></th>
+              <th>Nom<p-columnFilter type="text" field="nom" display="menu"></p-columnFilter></th>
               <th>Date Debut<p-columnFilter type="text" field="dateDebut" display="menu"></p-columnFilter></th>
               <th>Date Fin<p-columnFilter type="text" field="dateFin" display="menu"></p-columnFilter></th>
               <th>Operateur 1<p-columnFilter type="text" field="operateur1" display="menu"></p-columnFilter></th>
               <th>Operateur 2<p-columnFilter type="text" field="operateur2" display="menu"></p-columnFilter></th>
               <th>Controleur<p-columnFilter type="text" field="controleur" display="menu"></p-columnFilter></th>
               <th>Verificateur<p-columnFilter type="text" field="verificateur" display="menu"></p-columnFilter></th>
-              <th>Progrés de L'etape</th>
+              <th>
+                Progrés de L'etape
+                <i class="pi pi-chart-bar" style="font-size: 1rem; cursor: pointer;"></i>
+            </th>
 
-              <th>Resultat<p-columnFilter type="text" field="resultat" display="menu"></p-columnFilter></th>
+              <th>Resultat Final<p-columnFilter type="text" field="resultat" display="menu"></p-columnFilter></th>
+              <th>Traiter<p-columnFilter type="text" field="traitement" display="menu"></p-columnFilter></th>
 
           </tr>
       </ng-template>
@@ -125,8 +130,8 @@
 
             <td>{{ etape.operateur1 || 'Aucun' }}</td>
             <td>{{ etape.operateur2 || 'Aucun' }}</td>
-            <td>{{etape.controleur || 'Aucun'}}</td>
-            <td>{{etape.verificateur || 'Aucun'}}</td>
+            <td>{{ etape.controleur || 'Aucun' }}</td>
+            <td>{{ etape.verificateur || 'Aucun' }}</td>
 
             <p-progressBar
             class="clickable-progress-bar"
@@ -164,12 +169,27 @@
   *ngIf="etape.nom === 'Remplissage' || etape.nom === 'Etancheite'"
   [showValue]="false">
 </p-progressBar>
+
+<p-progressBar
+class="clickable-progress-bar"
+[value]="Peinture_Progress"
+*ngIf="etape.nom === 'Peinture'"
+[showValue]="false">
+</p-progressBar>
+
+<p-progressBar
+class="clickable-progress-bar"
+[value]="Conseption_Progress"
+*ngIf="etape.nom === 'Chaudronnerie'"
+[showValue]="false">
+</p-progressBar>
             <td>
               <p-tag [value]="etape.resultat" [severity]="getSeverity2(etape.resultat)"></p-tag>
             </td>
+            <td>{{ (etape.traitement === 'Aucun' && etape.resultat === 'Non conforme') ? 'Non' : etape.traitement }}</td>
           </tr>
-      </ng-template>
 
+      </ng-template>
 
   </p-table>
 
@@ -201,7 +221,7 @@
       <ng-template pTemplate="header">
           <tr>
               <th style="min-width:10rem">Index</th>
-              <th style="min-width:10rem" pSortableColumn="numero">Numero <p-sortIcon field="numero"></p-sortIcon></th>
+              <th style="min-width:10rem">Numero  <p-columnFilter type="text" field="numero" display="menu"></p-columnFilter> </th>
               <th style="min-width:15rem">Type <p-columnFilter type="text" field="type" display="menu"></p-columnFilter></th>
               <th style="min-width:15rem">Mission <p-columnFilter type="text" field="etat" display="menu"></p-columnFilter></th>
 
@@ -210,16 +230,16 @@
               <th style="min-width:15rem"> Commande  <p-columnFilter type="text" field="commande" display="menu"></p-columnFilter></th>
 
 
-              <th style="min-width:15rem">Date de Lancement  <p-columnFilter type="date" field="dateLivraison" display="menu"></p-columnFilter></th>
+              <th style="min-width:15rem">Date de Lancement  <p-columnFilter type="text" field="dateLivraison" display="menu"></p-columnFilter></th>
 
-              <th style="min-width:15rem">Date de Prevue <p-columnFilter type="date" field="dateprevue" display="menu"></p-columnFilter></th>
-              <th style="min-width:15rem">Date de Cloture <p-columnFilter type="date" field="dateCloture" display="menu"></p-columnFilter></th>
+              <th style="min-width:15rem">Date de Prevue <p-columnFilter type="text" field="dateprevue" display="menu"></p-columnFilter></th>
+              <th style="min-width:15rem">Date de Cloture <p-columnFilter type="text" field="dateCloture" display="menu"></p-columnFilter></th>
 
-              <th style="min-width:15rem">Date Fin Production <p-columnFilter type="date" field="dateFin" display="menu"></p-columnFilter></th>
+              <th style="min-width:15rem">Date Fin Production <p-columnFilter type="text" field="dateFin" display="menu"></p-columnFilter></th>
               <th style="min-width:15rem">Resultat Production </th>
-              <th style="min-width:15rem">Date de Livraison <p-columnFilter type="date" field="dateLivraison" display="menu"></p-columnFilter></th>
+              <th style="min-width:15rem">Date de Livraison <p-columnFilter type="text" field="dateLivraison" display="menu"></p-columnFilter></th>
 
-              <th style="min-width:15rem">Date de Essai <p-columnFilter type="date" field="pv.date" display="menu"></p-columnFilter></th>
+              <th style="min-width:15rem">Date de Essai <p-columnFilter type="text" field="pv.date" display="menu"></p-columnFilter></th>
               <th style="min-width:15rem">Resultat de Essai <p-columnFilter type="text" field="pv.resultat" display="menu"></p-columnFilter></th>
 
           </tr>
@@ -254,7 +274,7 @@
       </ng-template>
       <ng-template pTemplate="emptymessage">
           <tr>
-              <td colspan="6">No data found.</td>
+            <td colspan="6">Aucune donnée trouvée.</td>
           </tr>
       </ng-template>
   </p-table>

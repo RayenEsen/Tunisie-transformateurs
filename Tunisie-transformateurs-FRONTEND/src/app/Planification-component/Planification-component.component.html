@@ -120,8 +120,7 @@
           <p *ngIf="Etape.resultat==='Conforme'" style="color: green;">(C)</p>
           <p style="color: red;" *ngIf="Etape.resultat === 'Non conforme'">(NC)</p>
           <p style="color: rgb(25, 0, 255); font-size: small;" *ngIf="Etape.resultat !== 'Non conforme' && Etape.resultat !== 'Conforme' && Etape.resultat!=='En Attente' ">({{Etape.resultat}})</p>
-
-                  </small>
+        </small>
       </ng-template>
 
       <ng-template pTemplate="opposite" let-Etape>
@@ -142,9 +141,63 @@
         <span [ngClass]="{'green-text': Resultat() === 'Conforme', 'red-text': Resultat() === 'Non Conforme', 'grey-text': Resultat() !== 'Conforme' && Resultat() !== 'Non Conforme'}">
           {{ Resultat() }}
         </span>
-
       </span>
     </div>
   </ng-template>
 </p-sidebar>
+
+<p-sidebar [(visible)]="sidebarVisible" position="left">
+  <ng-template pTemplate="header"><h5 class="card-title">Resultat de la production</h5></ng-template>
+  <ng-template pTemplate="content">
+    <div class="row d-flex justify-content-center mt-70 mb-70">
+
+      <div >
+
+        <div class="main-card mb-3 ">
+          <div class="card-body">
+                <div *ngFor="let etape of Etape" class="vertical-timeline vertical-timeline--animate vertical-timeline--one-column">
+                  <div class="vertical-timeline-item vertical-timeline-element">
+                      <div>
+                          <span class="vertical-timeline-element-icon bounce-in">
+                            <i class="fas fa-thumbs-up" style="color: #28a745;" *ngIf="etape.resultat==='Conforme'"></i>
+                            <i class="fas fa-thumbs-down" style="color: #dc3545;" *ngIf="etape.resultat==='Non conforme'"></i>
+                            <i class="fas fa-hourglass-half" style="color: #ffc107;" *ngIf="etape.resultat==='En Attente'"></i>
+                          </span>
+                          <div class="vertical-timeline-element-content bounce-in">
+                              <h4 class="timeline-title">{{etape.nom}}</h4>
+                              <p>
+                                Débutant {{ etape.dateDebut | date:'d MMMM yyyy' }} et termine le {{ etape.dateFin | date:'d MMMM yyyy' }},
+                                gérée par {{ etape.operateur1 }} {{ etape.operateur2 }}.
+                                <ng-container *ngIf="etape.traitement === 'Oui' && etape.resultat==='Non conforme'" >
+                                  La conformité a été <strong  (click)="Rapport(etape)" style="cursor: pointer;">traitée.</strong>
+                                </ng-container>
+                                  <ng-container *ngIf="etape.traitement === 'Non' || etape.traitement === 'Aucun' && etape.resultat==='Non conforme' " >
+                                      Le conformité n'est pas <strong (click)="Rapport(etape)" style="cursor: pointer;">traitée.</strong>
+                                  </ng-container>
+                            </p>
+                          </div>
+                      </div>
+                  </div>
+
+              </div>
+          </div>
+      </div>
+
+
+    </div> </div>
+
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <!-- Your footer content here -->
+    <div style="text-align: left; padding: 10px; background-color: #f0f0f0;">
+      <span>
+        <span class="resultat-label">Resultat :</span>
+        <span [ngClass]="{'green-text': Resultat() === 'Conforme', 'red-text': Resultat() === 'Non Conforme', 'grey-text': Resultat() !== 'Conforme' && Resultat() !== 'Non Conforme'}">
+          {{ Resultat() }}
+        </span>
+      </span>
+    </div>
+  </ng-template>
+</p-sidebar>
+
 

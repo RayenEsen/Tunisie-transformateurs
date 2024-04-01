@@ -8,7 +8,7 @@ import { Etape } from '../Shared/Etape-servicemodel';
 import { SessionService } from '../utils/session-service.service';
 import { EventServiceService } from '../Shared/Event-service.service'
 import { Event } from '../Shared/Event-service.model'
-
+import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-Bobinage-component',
   templateUrl: './Bobinage-component.component.html',
@@ -24,7 +24,7 @@ export class BobinageComponentComponent implements OnInit {
   etapeSelected3 : Etape = new Etape;
 
 
-  constructor(public ServiceB : BobinageServiceService,public router: Router,private route: ActivatedRoute , public service : TransformateurServiceService , public ServiceE : EtapeServiceService , public ServiceS : SessionService , public eventService : EventServiceService,
+  constructor(public ServiceB : BobinageServiceService,public router: Router,private route: ActivatedRoute , public service : TransformateurServiceService , public ServiceE : EtapeServiceService , public ServiceS : SessionService , public eventService : EventServiceService , public ServiceMessage : MessageService,
     ) { }
 
   ngOnInit() {
@@ -80,7 +80,7 @@ export class BobinageComponentComponent implements OnInit {
     // Call the service method to update bobinages
     this.ServiceB.UpdateListBobinage(this.bobinages).subscribe(
       () => {
-
+        this.ServiceMessage.add({ severity: 'success', summary: 'Succès', detail: 'Bobinage mis à jour avec succès' });
         if (this.bobinages.every(bobinage => bobinage.cnc === "C"))
         {
           this.etapeSelected.resultat="Conforme"

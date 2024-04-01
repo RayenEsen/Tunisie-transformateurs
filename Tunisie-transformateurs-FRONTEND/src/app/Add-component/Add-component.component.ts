@@ -648,7 +648,7 @@ export class AddComponentComponent implements OnInit {
                 15: 'Remplissage',
                 16: 'Etancheite',
                 17: 'Peinture',
-                18: 'Conseption'
+                18: 'Chaudronnerie'
               };
 
               for (let i = 1; i <= 18; i++) {
@@ -661,7 +661,8 @@ export class AddComponentComponent implements OnInit {
                   nom: etapeNames[i] || '',
                   controleur: '',
                   verificateur: '',
-                  resultat: 'En Attente'
+                  resultat: 'En Attente',
+                  traitement: 'Aucun'
                 };
                 etapeObservables.push(this.serviceE.AddEtape(etapeAjouter));
               }

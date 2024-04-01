@@ -10,6 +10,7 @@ import { EtapeServiceService } from '../Shared/Etape-service.service';
 import { Etape } from '../Shared/Etape-servicemodel';
 import { EventServiceService } from '../Shared/Event-service.service'
 import { Event } from '../Shared/Event-service.model'
+import { Message, MessageService } from 'primeng/api';
 @Component({
   selector: 'app-Ecuvage-component',
   templateUrl: './Ecuvage-component.component.html',
@@ -24,7 +25,7 @@ export class EcuvageComponentComponent implements OnInit {
   ecuvagesValues: EcuvageValues[] = [];
   etapeSelected : Etape = new Etape;
   etapeSelected2 : Etape = new Etape;
-  constructor(public eventService : EventServiceService,public ServiceE : EtapeServiceService,public ServiceS : SessionService,public ServiceEcu : EcuvageServiceService,public router: Router,private route: ActivatedRoute,public service : TransformateurServiceService, public ServiceEV : EcuvageValuesServiceService) { }
+  constructor(public eventService : EventServiceService,public ServiceE : EtapeServiceService,public ServiceS : SessionService,public ServiceEcu : EcuvageServiceService,public router: Router,private route: ActivatedRoute,public service : TransformateurServiceService, public ServiceEV : EcuvageValuesServiceService , public messageService : MessageService) { }
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.transformateurId = +params['id'] || 0;
@@ -114,6 +115,7 @@ export class EcuvageComponentComponent implements OnInit {
     }
 
     update() {
+      this.messageService.add({ severity: 'success', summary: 'Succès', detail: 'Encuvage mis à jour avec succès' });
       if (this.ecuvages.every(Ecuvage => Ecuvage.conformite === "Yes"))
       {
         this.etapeSelected.resultat="Conforme"

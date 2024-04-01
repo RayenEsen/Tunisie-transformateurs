@@ -325,22 +325,25 @@ if (selectedFilteredEtape?.operateur2 && !this.suggestions.includes(selectedFilt
       }
     }
 
-
-
     END_OF_PRODUCTION() {
-      if (this.etapes.every(item => item.resultat === 'Conforme' )) {
-        this.Service.list[0].dateFin = new Date();
-        this.Service.UpdateTransformateur(this.transformateurId, this.Service.list[0]).subscribe({
-          next: (response) => {
-            console.log("Finished updating dateFin");
-          },
-          error: (error) => {
-            console.error("Error updating dateFin:", error);
-          }
-        });
-      }
-    }
+      const allConforme = this.etapes.every(item => item.resultat === 'Conforme');
+      const allNonConformeTreated = this.etapes
+          .filter(item => item.resultat === 'Non conforme')
+          .every(item => item.traitement === 'Oui');
 
+      if (allConforme || allNonConformeTreated &&
+          (this.Service.list[0].dateFin instanceof Date && this.Service.list[0].dateFin.toISOString() === "0001-01-01T00:00:00")) {
+          this.Service.list[0].dateFin = new Date(); // Assign current date
+          this.Service.UpdateTransformateur(this.transformateurId, this.Service.list[0]).subscribe({
+              next: (response) => {
+                  console.log("Finished updating dateFin");
+              },
+              error: (error) => {
+                  console.error("Error updating dateFin:", error);
+              }
+          });
+      }
+  }
 
 
 }

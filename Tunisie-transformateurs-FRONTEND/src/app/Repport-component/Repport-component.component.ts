@@ -86,7 +86,7 @@ export class RepportComponentComponent implements OnInit {
     this.Rapport.dater = new Date();
     this.ServiceR.upsertRapport(this.Rapport).subscribe({
       next: () => {
-        this.etape.resultat = this.Rapport.etat!;
+        this.etape.traitement = "Oui";
         this.ServiceE.updateEtape2(this.etapenumero,this.etape).subscribe({
           next: (response) =>
           {
@@ -94,9 +94,6 @@ export class RepportComponentComponent implements OnInit {
           }
         })
         },
-      error: (error) => {
-        this.messageService.add({ severity: 'error', summary: 'Erreur', detail: 'Une erreur est survenue lors de l\'enregistrement des informations.' });
-      }
     });
   }
 

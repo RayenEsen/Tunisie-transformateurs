@@ -126,7 +126,7 @@
                 <input [(ngModel)]="remplissage.hf" #input4 type="number" [disabled]="!last" (keydown.enter)="handleEnter(i, input5)">
               </td>
               <td class="text-center colfix" [ngStyle]="{'color': remplissage.cnc === 'C' ? 'green' : 'red'}">
-                <input #input6 [(ngModel)]="remplissage.cnc"   type="text" [disabled]="!last || !allInputsFilled(remplissage)" >
+                <input #input6 [(ngModel)]="remplissage.cnc" (ngModelChange)="Confirm(remplissage.idRemplissage)" type="text" [disabled]="!last || !allInputsFilled(remplissage)">
               </td>
 
               <td class="text-center colfix">{{ this.etapeSelected.controleur }}</td>
@@ -156,7 +156,7 @@
       <a class="btn bg-white btn-light mx-1px text-95" (click)="onPrint()" data-title="Print" >
         <i class="mr-1 fa fa-print text-primary-m1 text-120 w-2"></i>
         <span style="padding-left: 8px;">Print</span>      </a>
-      <a class="btn bg-white btn-light mx-1px text-95" data-title="Save" (click)="update()"  [routerLink]="['/Controle',this.service.list[0].numero]">
+      <a [routerLink]="['/Controle', service.list[0]!.numero]" class="btn bg-white btn-light mx-1px text-95" data-title="Save" (click)="update()">
         <i class="mr-1 fa fa-save text-success-m1 text-120 w-2"></i>
         <span style="padding-left: 8px;" *ngIf="serviceS.Controleur.designation==='Verificateur' ">Verifier</span>
         <span style="padding-left: 8px;" *ngIf="serviceS.Controleur.designation==='Controleur' ">Save</span>

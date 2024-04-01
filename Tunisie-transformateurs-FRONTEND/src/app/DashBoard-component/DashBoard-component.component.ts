@@ -15,7 +15,10 @@ import { Ecuvage } from '../Shared/Ecuvage-service.model';
 import { EcuvageServiceService } from '../Shared/Ecuvage-service.service';
 import { Remplissage } from '../Shared/Remplissage-service.model';
 import { RemplissageServiceService } from '../Shared/Remplissage-service.service';
-
+import { Peinture } from '../Shared/Peinture-service.model';
+import { PeintureServiceService } from '../Shared/Peinture-service.service';
+import { Conseption } from '../Shared/Conseption-service.model';
+import { ConseptionServiceService } from '../Shared/Conseption-service.service';
 @Component({
   selector: 'app-DashBoard-component',
   templateUrl: './DashBoard-component.component.html',
@@ -31,6 +34,8 @@ export class DashBoardComponentComponent implements OnInit {
   public ServiceMontage : MontageServiceService,
   public ServiceEcuvage : EcuvageServiceService,
   public ServiceRemplissage : RemplissageServiceService,
+  public ServicePeinture : PeintureServiceService,
+  public ServiceConseption : ConseptionServiceService,
   ) { }
 
     /*Stuff That will get deleted L8ater*/
@@ -44,6 +49,7 @@ export class DashBoardComponentComponent implements OnInit {
 
   list: Transformateur[] = [];
   Etape : Etape[] = [];
+
 
   originalList: Transformateur[] = []; // Variable to store the original list
   originalEtape: Etape[] = []; // Variable to store the original list
@@ -157,7 +163,6 @@ this.data9 = {
     next : (Response) =>
     {
       this.list=Response;
-      console.log(this.list)
       this.originalList = this.list;
     }
   })
@@ -204,7 +209,7 @@ ResetList() {
 Production_Progress : number = 0
 Resultat_de_Production(etapes : Etape[])
 {
-  const conformeEtapes = etapes.filter(etape => etape.resultat !== "Non Conforme" && etape.resultat !== "En Attente").length;
+  const conformeEtapes = etapes.filter(etape => etape.resultat !== "Non conforme" && etape.resultat !== "En Attente").length;
   this.Production_Progress = (conformeEtapes / 18) * 100;
   return  this.Production_Progress;
 }
@@ -230,12 +235,15 @@ show()
   this.visible=!this.visible;
 }
 
+
 Bobinage : Bobinage[] = [];
 BobinageMT : BobinageMT[] = [];
 Magnetique : Magnetique[] = [];
 Montage : Montage[] = [];
 Ecuvage : Ecuvage[] = [];
 Remplissage : Remplissage[] = [];
+Peinture : Peinture[] = [];
+Conseption : Conseption[] = [];
 
 Bobinage_Progress : number = 0
 BobinageMT_Progress : number = 0
@@ -243,7 +251,8 @@ Magnetique_Progress : number = 0
 Montage_Progress : number = 0
 Ecuvage_Progress : number = 0
 Remplissage_Progress : number = 0
-
+Peinture_Progress : number = 0
+Conseption_Progress : number = 0
 Results(id: number)
 {
   this.ServiceE.getEtapesByTransformateurId(id).subscribe({
@@ -255,26 +264,25 @@ Results(id: number)
   }),
   this.ServiceBobinage.getBobinageByTransformateurId(id).subscribe({
     next: (Response) => {
-      this.Bobinage = Response;
-      this.Bobinage_Progress = (this.Bobinage.filter(item => item.cnc !== "NC" ).length / 9) * 100;
-
+      this.Bobinage = Response;4
+      this.Bobinage_Progress = (this.Bobinage.filter(item => item.cnc === "C").length / 9) * 100;
     }
   });
   this.ServiceBobinageMT.getBobinageByTransformateurId(id).subscribe({
     next: (Response) => {
       this.BobinageMT = Response;
-      this.BobinageMT_Progress = (this.BobinageMT.filter(item => item.cnc !== "NC" ).length / 9) * 100;
+      this.BobinageMT_Progress = (this.BobinageMT.filter(item => item.cnc === "C" ).length / 9) * 100;
     }
   });
   this.ServiceMagnetique.getMagnetiqueByTransformateurId(id).subscribe({
     next: (Response) => {
       this.Magnetique = Response;
-
+      console.log(this.Magnetique)
       this.Magnetique_Progress = (this.Magnetique.filter(item =>
-        (item.cnc1 !== "NC" && item.cnc1 !== null) ||
-        (item.cnc2 !== "NC" && item.cnc2 !== null) ||
-        (item.cnc3 !== "NC" && item.cnc3 !== null) ||
-        (item.cnc4 !== "NC" && item.cnc4 !== null)
+        (item.cnc1 === "C" ) &&
+        (item.cnc2 === "C") &&
+        (item.cnc3 === "C") &&
+        (item.cnc4 === "C")
       ).length / 4) * 100;
       console.log(this.Magnetique_Progress)
           }
@@ -283,9 +291,9 @@ Results(id: number)
     next: (Response) => {
       this.Montage = Response;
       this.Montage_Progress = (this.Montage.filter(item =>
-        (item.cnc1 !== "NC" && item.cnc1 !== null) ||
-        (item.cnc2 !== "NC" && item.cnc2 !== null) ||
-        (item.cnc3 !== "NC" && item.cnc3 !== null)
+        (item.cnc1 === "C") &&
+        (item.cnc2 === "C") &&
+        (item.cnc3 === "C")
       ).length / 3) * 100;
           }
   });
@@ -293,7 +301,7 @@ Results(id: number)
     next: (Response) => {
       this.Ecuvage = Response;
       this.Ecuvage_Progress = (this.Ecuvage.filter(item =>
-        (item.conformite !== "NC" && item.conformite !== null)
+        (item.conformite === "Yes")
       ).length / 11) * 100;
           }
   });
@@ -301,10 +309,23 @@ Results(id: number)
     next: (Response) => {
       this.Remplissage = Response;
       this.Remplissage_Progress  = (this.Remplissage.filter(item =>
-        (item.cnc !== "NC" && item.cnc !== null)
+        (item.cnc === "C")
       ).length ) * 100;
           }
   });
+  this.ServicePeinture.getPeintureByTransformateurId(id).subscribe({
+    next: (Response) => {
+      this.Peinture = Response;
+      this.Peinture_Progress = (this.Peinture.filter(item => item.cnc=== "C").length  ) * 100;
+    }
+  })
+  this.ServiceConseption.getConseptionsByTransformateur(id).subscribe({
+    next : (Response) =>
+     {
+      this.Conseption = Response;
+      this.Conseption_Progress = (this.Conseption.filter(item => item.conformiter==="Yes").length / 16)*100
+     }
+  })
 }
 
 

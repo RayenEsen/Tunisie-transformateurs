@@ -8,6 +8,7 @@ import { EtapeServiceService } from '../Shared/Etape-service.service';
 import { SessionService } from '../utils/session-service.service';
 import { EventServiceService } from '../Shared/Event-service.service'
 import { Event } from '../Shared/Event-service.model'
+import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-Montage-component',
   templateUrl: './Montage-component.component.html',
@@ -25,7 +26,7 @@ export class MontageComponentComponent implements OnInit {
   etapenumero:number = 0;
 
 
-  constructor(public ServiceMontage : MontageServiceService,public router: Router,private route: ActivatedRoute , public service : TransformateurServiceService, public SessionS : SessionService , public ServiceE : EtapeServiceService , public eventService : EventServiceService) { }
+  constructor(public ServiceMontage : MontageServiceService,public router: Router,private route: ActivatedRoute , public service : TransformateurServiceService, public SessionS : SessionService , public ServiceE : EtapeServiceService , public eventService : EventServiceService, public messageService : MessageService) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -90,6 +91,7 @@ export class MontageComponentComponent implements OnInit {
     this.ServiceMontage.UpdateListMontage(this.Montages).subscribe(
         () => {
 
+            this.messageService.add({ severity: 'success', summary: 'Succès', detail: 'Montage mis à jour avec succès' });
 
             if (this.Montages.every(Montage => Montage.cnc1 === "C") && this.Montages.every(Montage => Montage.cnc2 === "C") && this.Montages.every(Montage => Montage.cnc3 === "C"))
             {
@@ -97,7 +99,7 @@ export class MontageComponentComponent implements OnInit {
               this.etapeSelected2.resultat="Conforme"
             }
 
-            if (this.Montages.every(Montage => Montage.cnc1 === "NC") && this.Montages.every(Montage => Montage.cnc2 === "NC") && this.Montages.every(Montage => Montage.cnc3 === "NC"))
+            if (this.Montages.some(Montage => Montage.cnc1 === "NC") || this.Montages.some(Montage => Montage.cnc2 === "NC") || this.Montages.some(Montage => Montage.cnc3 === "NC"))
             {
               this.etapeSelected.resultat="Non conforme"
               this.etapeSelected2.resultat="Non conforme"

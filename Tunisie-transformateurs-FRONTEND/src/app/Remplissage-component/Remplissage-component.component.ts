@@ -24,7 +24,7 @@ export class RemplissageComponentComponent implements OnInit {
   etapeSelected2: Etape = new Etape;
 
   remplissageSelected?: Remplissage | undefined;
-  constructor(public ServiceE : EtapeServiceService,public ServiceRemplissage : RemplissageServiceService,public router: Router,private route: ActivatedRoute,public service : TransformateurServiceService , public serviceS : SessionService , public eventService : EventServiceService) { }
+  constructor(public ServiceE : EtapeServiceService,public ServiceRemplissage : RemplissageServiceService,public router: Router,private route: ActivatedRoute,public service : TransformateurServiceService , public serviceS : SessionService , public eventService : EventServiceService, public messageService : MessageService) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -78,7 +78,6 @@ export class RemplissageComponentComponent implements OnInit {
       // Find the remplissage with the specified ID
       this.remplissageSelected = this.remplissages.find(remplissage => remplissage.idRemplissage === id);
       if (!this.remplissageSelected) {
-        console.log('Remplissage not found');
         return;
       }
       if (this.remplissageSelected.cnc==="NC")
@@ -127,6 +126,8 @@ export class RemplissageComponentComponent implements OnInit {
       // Call the service method to update Magnetiques
       this.ServiceRemplissage.updateListRemplissage(this.remplissages).subscribe(
           () => {
+            this.messageService.add({ severity: 'success', summary: 'Succès', detail: 'Remplissage et Etancheite mis à jour avec succès' });
+
             if(this.serviceS.Controleur.designation==="Controleur")
             {
               const newEvent = new Event(this.serviceS.Controleur.idC, 'Participer a le Remplissage et le etancheite'

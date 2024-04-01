@@ -11,7 +11,7 @@ import { ConseptionServiceService } from '../Shared/Conseption-service.service';
 import { ConseptionValues } from '../Shared/ConseptionValues-service.model';
 import { ConseptionValuesServiceService } from '../Shared/ConseptionValues-service.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-
+import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-Conseption-component',
   templateUrl: './Conseption-component.component.html',
@@ -35,6 +35,7 @@ export class ConseptionComponentComponent implements OnInit {
     public ServiceS: SessionService,
     public eventService : EventServiceService,
     private sanitizer: DomSanitizer,
+    public ServiceMessage : MessageService,
   ) {}
 
   ngOnInit() {
@@ -95,7 +96,7 @@ export class ConseptionComponentComponent implements OnInit {
     }
     this.ServiceConseption.updateConseptions(this.transformateurId, this.conseption).subscribe({
       next: (response) => {
-        console.log(this.etapeSelected)
+        this.ServiceMessage.add({ severity: 'success', summary: 'Succès', detail: 'Chaudronnerie mis à jour avec succès' });
         this.ServiceE.UpdateEtape(this.transformateurId, this.etapenumero, this.etapeSelected).subscribe({
           next: (response) => {
               console.log('Etape updated successfully:', response);

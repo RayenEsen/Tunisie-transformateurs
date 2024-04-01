@@ -13,5 +13,6 @@ export class Etape {
   controleur: string = '';
   verificateur: string = '';
   resultat: string = '';
+  traitement?: string = '';
   transformateur?: Transformateur;
 }

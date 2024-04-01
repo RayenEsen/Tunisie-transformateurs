@@ -88,9 +88,10 @@
                       <i class="mr-1 fa fa-print text-primary-m1 text-120 w-2"></i>
                       Print
                     </a>
-                    <a class="btn bg-white btn-light mx-1px text-95" data-title="Save" (click)="update()">
+                    <a [routerLink]="['/Controle', service.list[0]!.numero]" class="btn bg-white btn-light mx-1px text-95" data-title="Save" (click)="update()">
                       <i class="mr-1 fa fa-save text-success-m1 text-120 w-2"></i>
-                      Save
+                      <span style="padding-left: 8px;" *ngIf="ServiceS.Controleur.designation==='Verificateur' ">Verifier</span>
+                      <span style="padding-left: 8px;" *ngIf="ServiceS.Controleur.designation==='Controleur' ">Save</span>
                     </a>
                   </div>
                 </div>

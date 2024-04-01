@@ -8,6 +8,7 @@ import { Etape } from '../Shared/Etape-servicemodel';
 import { SessionService } from '../utils/session-service.service';
 import { EventServiceService } from '../Shared/Event-service.service'
 import { Event } from '../Shared/Event-service.model'
+import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-BobinageMT-component',
   templateUrl: './BobinageMT-component.component.html',
@@ -29,7 +30,8 @@ export class BobinageMTComponentComponent implements OnInit {
     public service: TransformateurServiceService,
     public ServiceE: EtapeServiceService,
     public ServiceS: SessionService,
-    public eventService : EventServiceService
+    public eventService : EventServiceService,
+    public messageService : MessageService,
   ) {}
 
   ngOnInit() {
@@ -86,6 +88,7 @@ export class BobinageMTComponentComponent implements OnInit {
     // Call the service method to update bobinages
     this.ServiceMT.UpdateListBobinage(this.bobinagesMT).subscribe(
         () => {
+            this.messageService.add({ severity: 'success', summary: 'Succès', detail: 'Bobinage MT mis à jour avec succès' });
             if (this.bobinagesMT.every(bobinage => bobinage.cnc === "C"))
             {
               this.etapeSelected.resultat="Conforme"
