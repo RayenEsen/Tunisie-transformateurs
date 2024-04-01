@@ -55,7 +55,8 @@
           </div>
       </div>
   </div>
-  <!-- end row -->
+
+
     <div class="row" style="margin-bottom: 5vh;">
       <div class="col-12 mb-3 mb-lg-5">
         <div class="overflow-hidden card table-nowrap table-card">
@@ -63,65 +64,136 @@
             <h5 class="mb-0">List des Transformateurs</h5>
             <p-splitButton label="Ajouter" [model]="this.items" (onClick)="save()" styleClass="p-button-text p-button-secondary mr-2 mb-2"></p-splitButton>
           </div>
-          <div class="table-responsive">
-            <table class="table mb-0" >
-              <thead class="small text-uppercase bg-body text-muted">
+          <div class="table-responsive" style="margin-top: 2vh;">
+            <p-table
+            #dt1
+            [value]="list"
+            [resizableColumns]="true"
+            dataKey="numero"
+            [rows]="10"
+            [showCurrentPageReport]="true"
+            [rowsPerPageOptions]="[5,10, 25, 50]"
+            [paginator]="true"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            [globalFilterFields]="['marque', 'numero', 'client', 'type', 'etat', 'commande']"
+            >
+
+            <ng-template pTemplate="header">
                 <tr>
-                  <th>Marque</th>
-                  <th>Numero</th>
-                  <th>Client</th>
-                  <th>Type</th>
-                  <th>Conclusion</th>
-                  <th>Controleur</th>
-                  <th>Commande</th>
-                  <th>Mission</th>
-                  <th class="text-end">Action</th>
+                    <th style="min-width:21rem">
+                        <div class="flex align-items-center">
+                            Marque
+                        </div>
+                    </th>
+                    <th style="min-width:10rem">
+                      <div class="flex align-items-center">
+                          Numero
+                          <p-columnFilter type="numeric" field="numero" display="menu" ></p-columnFilter>
+                        </div>
+                  </th>
+                    <th style="min-width:10rem">
+                        <div class="flex align-items-center">
+                            Client
+                            <p-columnFilter type="text" field="client" display="menu"></p-columnFilter>
+                        </div>
+                    </th>
+
+                    <th style="min-width:10rem">
+                        <div class="flex align-items-center">
+                            Type
+                            <p-columnFilter type="text" field="type" display="menu"></p-columnFilter>
+                        </div>
+                    </th>
+                    <th style="min-width:10rem">
+                        <div class="flex align-items-center">
+                            Controlleur
+                            <p-columnFilter type="text" field="pv.controleurDeQualite?.username" display="menu"></p-columnFilter>
+                        </div>
+                    </th>
+
+                    <th style="min-width:10rem">
+                      <div class="flex align-items-center">
+                          Commande
+                          <p-columnFilter type="numeric" field="commande" display="menu" ></p-columnFilter>
+                      </div>
+                    </th>
+
+
+                    <th style="min-width:10rem">
+                      <div class="flex align-items-center">
+                          Mission
+                          <p-columnFilter type="text" field="etat" display="menu"></p-columnFilter>
+                        </div>
+                    </th>
+
+                    <th style="width: 10rem">
+                        <div class="flex align-items-center">
+                          Conclusion
+                          <p-columnFilter type="text" field="pv.resultat" display="menu"></p-columnFilter>
+                        </div>
+                    </th>
+
+                    <th style="width: 3rem">
+                      <div class="flex align-items-center">
+                          Action
+                      </div>
+                  </th>
                 </tr>
-              </thead>
-              <tbody *ngIf="list.length>0">
-                <tr *ngFor="let transformateur of list" class="align-middle clickable-row" (click)="addToDeletedTransformateurs(transformateur)">
-                  <td>
-                    <div class="d-flex align-items-center">
+
+
+            </ng-template>
+            <ng-template pTemplate="body" let-transformateur let-i="rowIndex" >
+                <tr>
+                    <td>
                       <img *ngIf="transformateur.type==='Monophasés' " src="assets/mono.png" class="avatar sm rounded-pill me-3 flex-shrink-0" alt="Customer">
                       <img *ngIf="transformateur.type==='Triphasés' " src="assets/triphaser.png" class="avatar sm rounded-pill me-3 flex-shrink-0" alt="Customer">
                       <img *ngIf="transformateur.type==='Biphasés' " src="assets/resine.png" class="avatar sm rounded-pill me-3 flex-shrink-0" alt="Customer">
-                      <div>
-                        <div class="h6 mb-0 lh-1">{{ transformateur.marque }}</div>
-                      </div>
-                    </div>
+                        {{ transformateur.marque }}
+                    </td>
+                    <td>
+                      {{ transformateur.numero }}
                   </td>
-                  <td>{{ transformateur.numero }}</td>
-                  <td><span class="d-inline-block align-middle">{{ transformateur.client }}</span></td>
-                  <td><span>{{ transformateur.type }}</span></td>
-                  <td>{{transformateur.pv?.resultat}}</td>
-                  <td><span>{{ transformateur.pv?.controleurDeQualite?.username }}</span></td>
-                  <td><span>{{ transformateur.commande }}</span></td>
-                  <td><span>{{ transformateur.etat }}</span></td>
+                    <td>
+                        {{ transformateur.client }}
+                    </td>
+                    <td>
+                        {{ transformateur.type  }}
+                    </td>
+                    <td>
+                      {{  transformateur.pv?.controleurDeQualite?.username  }}
+                    </td>
+                    <td>
+                      {{ transformateur.commande  }}
+                    </td>
+                    <td>
+                      {{ transformateur.etat  }}
+                    </td>
+                    <td>
+                      <p-tag [value]="transformateur.pv.resultat" [severity]="getSeverity(transformateur.pv.resultat)"></p-tag>
+                    </td>
+                      <td class="text-end" >
+                          <div class="drodown" >
+                            <a data-bs-toggle="dropdown" href="#" class="btn p-1" aria-expanded="false">
+                              <i class="fa fa-bars" aria-hidden="true"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end">
+                              <a [routerLink]="['/Ajouter_Transformateur', transformateur.numero]" class="dropdown-item">Voir les détails</a>
+                              <!-- Replace the anchor tag with a button -->
+                              <button type="button" class="dropdown-item" (click)="confirm1(transformateur.numero)"  >Supprimer</button>
+                              <a class="dropdown-item" (click)="navigateToEssai(transformateur.type, transformateur.numero)" >Essais</a>
+                            </div>
+                          </div>
 
-                  <td class="text-end" (click)="$event.stopPropagation()">
-                    <ng-container *ngIf="!DeletedTransformateurIds.includes(transformateur.numero)">
-                      <div class="drodown" (click)="$event.stopPropagation()">
-                        <a data-bs-toggle="dropdown" href="#" class="btn p-1" aria-expanded="false">
-                          <i class="fa fa-bars" aria-hidden="true"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-end">
-                          <a [routerLink]="['/Ajouter_Transformateur', transformateur.numero]" class="dropdown-item" (click)="$event.stopPropagation()">Voir les détails</a>
-                          <!-- Replace the anchor tag with a button -->
-                          <button type="button" class="dropdown-item" (click)="confirm1(transformateur.numero); $event.stopPropagation()">Supprimer</button>
-                          <a (click)="navigateToEssai(transformateur.type, transformateur.numero)" class="dropdown-item" (click)="$event.stopPropagation()">Essais</a>
-                        </div>
-                      </div>
-                    </ng-container>
-                    <ng-container *ngIf="DeletedTransformateurIds.includes(transformateur.numero)">
-                      <i class="pi pi-times" style="color: red"></i>
-                    </ng-container>
-                  </td>
+                      </td>
                 </tr>
-              </tbody>
-            </table>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="7">Aucun transformateur trouvé.</td>
+                </tr>
+            </ng-template>
+        </p-table>
           </div>
-          <img src="assets/null (2).png" class="no-data-image" alt="No Data" *ngIf="list.length===0">
-          <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows"  [totalRecords]="totalRecords" [rowsPerPageOptions]="[5,10, 20, 30]"></p-paginator>
         </div>
       </div>
     </div>

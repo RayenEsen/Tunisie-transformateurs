@@ -117,7 +117,7 @@ export class BobinageComponentComponent implements OnInit {
             // Update the etapeSelected
             this.ServiceE.UpdateEtape(this.transformateurId, this.etapenumero, this.etapeSelected).subscribe({
               next: (response) => {
-
+                console.log(this.etapeSelected)
               },
             });
 

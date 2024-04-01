@@ -239,12 +239,11 @@ if (selectedFilteredEtape?.operateur2 && !this.suggestions.includes(selectedFilt
           etapeselected.dateFin = dateRange[1];
         }
       }
-      console.log
       // Update the etape via service
       this.serviceE.UpdateEtape(this.transformateurId, etapeNumero, selectedFilteredEtape)
         .subscribe(
           () => {
-            console.log('Etape updated successfully');
+
           },
           error => {
             console.error('Error updating Etape', error);

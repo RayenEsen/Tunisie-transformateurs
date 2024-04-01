@@ -135,54 +135,62 @@
 
             <p-progressBar
             class="clickable-progress-bar"
-            [value]="Bobinage_Progress"
+            [value]="etape.traitement === 'Oui' ? 100 : Bobinage_Progress"
             *ngIf="etape.nom === 'BT1' || etape.nom === 'BT2' || etape.nom === 'BT3'"
             [showValue]="false">
-          </p-progressBar>
-          <p-progressBar
-          class="clickable-progress-bar"
-          [value]="BobinageMT_Progress"
-          *ngIf="etape.nom === 'MT1' || etape.nom === 'MT2' || etape.nom === 'MT3'"
-          [showValue]="false">
         </p-progressBar>
+
         <p-progressBar
         class="clickable-progress-bar"
-        [value]="Magnetique_Progress"
-        *ngIf="etape.nom === 'Decoupage CM' || etape.nom === 'Montage CM'"
+        [value]="etape.traitement === 'Oui' ? 100 : BobinageMT_Progress"
+        *ngIf="etape.nom === 'MT1' || etape.nom === 'MT2' || etape.nom === 'MT3'"
         [showValue]="false">
-      </p-progressBar>
-      <p-progressBar
-      class="clickable-progress-bar"
-      [value]="Montage_Progress"
-      *ngIf="etape.nom === 'Calage' || etape.nom === 'Fermeture' || etape.nom === 'Cablage BT' || etape.nom === 'Cablage MT'"
-      [showValue]="false">
     </p-progressBar>
+
     <p-progressBar
     class="clickable-progress-bar"
-    [value]="Ecuvage_Progress"
+    [value]="etape.traitement === 'Oui' ? 100 : Magnetique_Progress"
+    *ngIf="etape.nom === 'Decoupage CM' || etape.nom === 'Montage CM'"
+    [showValue]="false">
+</p-progressBar>
+
+<p-progressBar
+    class="clickable-progress-bar"
+    [value]="etape.traitement === 'Oui' ? 100 : Montage_Progress"
+    *ngIf="etape.nom === 'Calage' || etape.nom === 'Fermeture' || etape.nom === 'Cablage BT' || etape.nom === 'Cablage MT'"
+    [showValue]="false">
+</p-progressBar>
+
+<p-progressBar
+    class="clickable-progress-bar"
+    [value]="etape.traitement === 'Oui' ? 100 : Ecuvage_Progress"
     *ngIf="etape.nom === 'Etuvage' || etape.nom === 'Encuvage'"
     [showValue]="false">
-  </p-progressBar>
-  <p-progressBar
-  class="clickable-progress-bar"
-  [value]="Remplissage_Progress"
-  *ngIf="etape.nom === 'Remplissage' || etape.nom === 'Etancheite'"
-  [showValue]="false">
 </p-progressBar>
 
 <p-progressBar
-class="clickable-progress-bar"
-[value]="Peinture_Progress"
-*ngIf="etape.nom === 'Peinture'"
-[showValue]="false">
+    class="clickable-progress-bar"
+    [value]="etape.traitement === 'Oui' ? 100 : Remplissage_Progress"
+    *ngIf="etape.nom === 'Remplissage' || etape.nom === 'Etancheite'"
+    [showValue]="false">
 </p-progressBar>
 
+
 <p-progressBar
-class="clickable-progress-bar"
-[value]="Conseption_Progress"
-*ngIf="etape.nom === 'Chaudronnerie'"
-[showValue]="false">
+    class="clickable-progress-bar"
+    [value]="etape.traitement === 'Oui' ? 100 : Peinture_Progress"
+    *ngIf="etape.nom === 'Peinture'"
+    [showValue]="false">
 </p-progressBar>
+
+
+<p-progressBar
+    class="clickable-progress-bar"
+    [value]="etape.traitement === 'Oui' ? 100 : Conseption_Progress"
+    *ngIf="etape.nom === 'Chaudronnerie'"
+    [showValue]="false">
+</p-progressBar>
+
             <td>
               <p-tag [value]="etape.resultat" [severity]="getSeverity2(etape.resultat)"></p-tag>
             </td>
@@ -198,8 +206,7 @@ class="clickable-progress-bar"
       *ngIf="!visible"
       [value]="list"
       dataKey="numero"
-      rowGroupMode="subheader"
-      groupRowsBy="list.commande"
+
       [rows]="10"
       [showCurrentPageReport]="true"
       [rowsPerPageOptions]="[10, 25, 50]"

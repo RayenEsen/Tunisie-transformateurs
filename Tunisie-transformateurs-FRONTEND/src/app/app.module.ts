@@ -37,6 +37,7 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { SplitButtonModule } from 'primeng/splitbutton';
 import { TagModule } from 'primeng/tag';
+import { MenuModule } from 'primeng/menu';
 
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { TopNavComponent } from './top-nav/top-nav.component';
@@ -158,7 +159,7 @@ import { InputTextModule } from 'primeng/inputtext';
     FileUploadModule,
     TagModule,
     InputTextModule,
-
+    MenuModule,
     ],
   providers: [MessageService,ConfirmationService],
   bootstrap: [AppComponent]

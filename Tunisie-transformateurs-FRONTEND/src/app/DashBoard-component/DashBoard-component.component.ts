@@ -206,13 +206,22 @@ ResetList() {
 }
 
 
-Production_Progress : number = 0
-Resultat_de_Production(etapes : Etape[])
-{
-  const conformeEtapes = etapes.filter(etape => etape.resultat !== "Non conforme" && etape.resultat !== "En Attente").length;
-  this.Production_Progress = (conformeEtapes / 18) * 100;
-  return  this.Production_Progress;
+Production_Progress: number = 0;
+
+Resultat_de_Production(etapes: Etape[]) {
+    const treatedNonConformeEtapes = etapes.filter(etape => etape.resultat === "Non conforme" && etape.traitement === "Oui").length;
+    const nonConformeEtapes = etapes.filter(etape => etape.resultat === "Non conforme" && etape.traitement !== "Oui").length;
+    const conformeEtapes = etapes.filter(etape => etape.resultat !== "Non conforme" && etape.resultat !== "En Attente").length;
+
+    const totalEtapes = 18; // Assuming total number of etapes is 18
+
+    // Calculate production progress
+    const totalConformeEtapes = conformeEtapes + treatedNonConformeEtapes;
+    this.Production_Progress = (totalConformeEtapes / totalEtapes) * 100;
+
+    return this.Production_Progress;
 }
+
 
 
 getSeverity(resultat: string): string {
@@ -226,7 +235,6 @@ getSeverity(resultat: string): string {
     default:
       return 'red'; // Default to light blue for unrecognized values
   }
-
 }
 
 visible = false;
@@ -264,7 +272,7 @@ Results(id: number)
   }),
   this.ServiceBobinage.getBobinageByTransformateurId(id).subscribe({
     next: (Response) => {
-      this.Bobinage = Response;4
+      this.Bobinage = Response;
       this.Bobinage_Progress = (this.Bobinage.filter(item => item.cnc === "C").length / 9) * 100;
     }
   });

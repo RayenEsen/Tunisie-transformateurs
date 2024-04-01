@@ -127,21 +127,36 @@ export class PlanificationComponentComponent implements OnInit {
   }
 
   Resultat() {
-    const nonConformes = this.Etape.filter(etape => etape.resultat === "Non conforme");
+    // Check if there is any "En Attente" status
+    const enAttente = this.Etape.some(etape => etape.resultat === "En Attente");
 
-    // Check if all Non conforme etapes are treated
-    const areAllNonConformeTreated = nonConformes.every(etape => etape.traitement === "Oui");
-
-    if (areAllNonConformeTreated) {
-        return "Conforme";
-    } else if (nonConformes.length > 0) {
-        return "Non Conforme";
-    } else if (this.Etape.every(etape => etape.resultat === "Conforme")) {
-        return "Conforme";
-    } else {
+    if (enAttente) {
         return "En Attente";
     }
+
+    // Check if all etapes are "Conforme"
+    const areAllConforme = this.Etape.every(etape => etape.resultat === "Conforme");
+
+    if (areAllConforme) {
+        return "Conforme";
+    }
+
+    // Check if there are any non-conforming etapes
+    const nonConformes = this.Etape.filter(etape => etape.resultat === "Non conforme");
+    const areAllNonConformeTreated = nonConformes.every(etape => etape.traitement === "Oui");
+
+    if (nonConformes.length > 0) {
+        if (areAllNonConformeTreated) {
+            return "Conforme";
+        } else {
+            return "Non Conforme";
+        }
+    }
+
+    // If no "En Attente", "Non conforme", or "Conforme", return "Conforme" by default
+    return "Conforme";
 }
+
 
 
 

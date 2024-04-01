@@ -21,9 +21,7 @@ import * as XLSX from 'xlsx';
 })
 export class TransformateurInfoComponent implements OnInit {
 
-  rows: number = 10; // Number of rows per page
-  first : number = 0;
-  totalRecords: number = 0;
+
   list: Transformateur[] = [];
   nbAttente: number = 0;
   nbConforme: number = 0;
@@ -48,8 +46,7 @@ export class TransformateurInfoComponent implements OnInit {
     this.service.refreshList2().subscribe({
       next: (res: Transformateur[]) => {
         this.list = res;
-        this.totalRecords=this.list.length;
-        this.paginate(); // Paginate data after fetching
+
         console.log(this.list)
         if (this.list.length > 0) {
           // Iterate through each item in this.list
@@ -100,35 +97,7 @@ export class TransformateurInfoComponent implements OnInit {
     this.fetchPvsCountByResult("Non Conforme", 'nbNonConforme');
   }
 
-  onPageChange(event: any) {
-    this.first = event.first;
-    this.rows = event.rows;
-    this.paginate(); // Paginate data when page changes
-  }
-  paginate() {
-    const start = this.first;
-    const end = start + this.rows;
 
-    // Check if there's a search query
-    if (this.searchItem.trim()) {
-      // If search query exists, paginate the search results
-      const slicedSearchResults = this.list.slice(start, end);
-      this.updatePvData(slicedSearchResults);
-      this.list = slicedSearchResults;
-    } else {
-      // If no search query, paginate the original list
-      this.service.refreshList2().subscribe({
-        next: (res: Transformateur[]) => {
-          const slicedData = res.slice(start, end);
-          this.updatePvData(slicedData);
-          this.list = slicedData;
-        },
-        error: (err) => {
-          console.error('Error fetching Transformateur:', err);
-        }
-      });
-    }
-  }
 
   updatePvData(data: Transformateur[]) {
     data.forEach((transformateur, index) => {
@@ -421,6 +390,19 @@ exportListToExcel(): void {
 navigateToEssai(type: string, numero: number): void {
   const route = type === 'Monophasés' ? '/Essai_Transformateur_Mono' : '/Essai_Transformateur';
   this.router.navigate([route, numero], { queryParams: { id: numero } });
+}
+
+getSeverity(resultat: string): string {
+  switch (resultat) {
+    case 'Conforme':
+      return 'success'; // Light green
+    case 'danger':
+      return '#FFC107'; // Amber
+    case 'primary':
+      return '#122151'; // Light blue
+    default:
+      return 'red'; // Default to light blue for unrecognized values
+  }
 }
 
 }
