@@ -1,3 +1,4 @@
+
 <header style="background-color: whitesmoke;padding-bottom: 10%;">
   <div style="padding-left: 7%;padding-right: 3%;padding-top: 2%;">
     <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4">
@@ -194,8 +195,24 @@
             <td>
               <p-tag [value]="etape.resultat" [severity]="getSeverity2(etape.resultat)"></p-tag>
             </td>
-            <td>{{ (etape.traitement === 'Aucun' && etape.resultat === 'Non conforme') ? 'Non' : etape.traitement }}</td>
-          </tr>
+            <td>
+              <ng-container *ngIf="etape.traitement === 'Aucun' && etape.resultat === 'Non conforme'">
+                  Non
+              </ng-container>
+              <ng-container *ngIf="etape.traitement !== 'Aucun' || etape.resultat !== 'Non conforme'">
+                  {{ etape.traitement }}
+              </ng-container>
+              <ng-container *ngIf="etape.traitement === 'Oui'">
+                  <i class="pi pi-check-circle" style="color: #34d73a;"></i> <!-- Display a green check mark icon -->
+              </ng-container>
+              <ng-container *ngIf="etape.traitement === 'Non' || (etape.traitement === 'Aucun' && etape.resultat === 'Non conforme')">
+                  <i class="pi pi-times-circle text-danger"></i> <!-- Display a red cross mark icon -->
+              </ng-container>
+              <ng-container *ngIf="etape.traitement === 'Aucun' && etape.resultat !== 'Non conforme'">
+                  <i class="pi pi-question-circle text-muted"></i> <!-- Display a gray question mark icon -->
+              </ng-container>
+          </td>
+                    </tr>
 
       </ng-template>
 
@@ -206,7 +223,6 @@
       *ngIf="!visible"
       [value]="list"
       dataKey="numero"
-
       [rows]="10"
       [showCurrentPageReport]="true"
       [rowsPerPageOptions]="[10, 25, 50]"
@@ -228,13 +244,13 @@
       <ng-template pTemplate="header">
           <tr>
               <th style="min-width:10rem">Index</th>
-              <th style="min-width:10rem">Numero  <p-columnFilter type="text" field="numero" display="menu"></p-columnFilter> </th>
+              <th style="min-width:10rem">Numero  <p-columnFilter type="numeric" field="numero" display="menu"></p-columnFilter> </th>
               <th style="min-width:15rem">Type <p-columnFilter type="text" field="type" display="menu"></p-columnFilter></th>
               <th style="min-width:15rem">Mission <p-columnFilter type="text" field="etat" display="menu"></p-columnFilter></th>
 
               <th style="min-width:15rem" pSortableColumn="power">Puissance <p-sortIcon field="power"></p-sortIcon></th>
 
-              <th style="min-width:15rem"> Commande  <p-columnFilter type="text" field="commande" display="menu"></p-columnFilter></th>
+              <th style="min-width:15rem"> Commande  <p-columnFilter type="numeric" field="commande" display="menu"></p-columnFilter></th>
 
 
               <th style="min-width:15rem">Date de Lancement  <p-columnFilter type="text" field="dateLivraison" display="menu"></p-columnFilter></th>
@@ -266,9 +282,14 @@
 
 
               <td>{{ transformateur.dateFin !== "0001-01-01T00:00:00" ? transformateur.dateFin.toString().split('T')[0] : 'En Cours' }}</td>
-
-
-              <p-progressBar class="clickable-progress-bar" [value]="Resultat_de_Production(transformateur.etapes)"  (click)="show();Results(transformateur.numero)" [showValue]="false"></p-progressBar>
+              <td>
+                <div *ngIf="transformateur.etat !== 'Production'; else productionProgress">
+                  Pas de production
+                </div>
+                <ng-template #productionProgress>
+                  <p-progressBar class="clickable-progress-bar" [value]="Resultat_de_Production(transformateur.etapes)" (click)="show();Results(transformateur.numero)" [showValue]="false"></p-progressBar>
+                </ng-template>
+              </td>
               <td>
                 {{ transformateur.dateLivraison !== "0001-01-01T00:00:00" ? transformateur.dateLivraison.toString().split('T')[0] : 'En Cours' }}
               </td>

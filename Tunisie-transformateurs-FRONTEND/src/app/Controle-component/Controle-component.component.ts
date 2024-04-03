@@ -326,12 +326,18 @@ if (selectedFilteredEtape?.operateur2 && !this.suggestions.includes(selectedFilt
 
     END_OF_PRODUCTION() {
       const allConforme = this.etapes.every(item => item.resultat === 'Conforme');
-      const allNonConformeTreated = this.etapes
-          .filter(item => item.resultat === 'Non conforme')
-          .every(item => item.traitement === 'Oui');
-
-      if (allConforme || allNonConformeTreated &&
-          (this.Service.list[0].dateFin instanceof Date && this.Service.list[0].dateFin.toISOString() === "0001-01-01T00:00:00")) {
+      
+      const nonConformeItems = this.etapes.filter(item => item.resultat === 'Non conforme');
+      const allNonConformeTreated = nonConformeItems.length > 0 ? 
+          nonConformeItems.every(item => item.traitement === 'Oui') : false;
+      
+      const NewDateFin = this.Service.list?.[0]?.dateFin?.toString() === "0001-01-01T00:00:00";
+      
+      console.log(allConforme);
+      console.log(allNonConformeTreated);
+      console.log(NewDateFin);
+  
+      if ((allConforme || allNonConformeTreated) && NewDateFin) {
           this.Service.list[0].dateFin = new Date(); // Assign current date
           this.Service.UpdateTransformateur(this.transformateurId, this.Service.list[0]).subscribe({
               next: (response) => {
@@ -343,6 +349,7 @@ if (selectedFilteredEtape?.operateur2 && !this.suggestions.includes(selectedFilt
           });
       }
   }
+  
 
 
 }

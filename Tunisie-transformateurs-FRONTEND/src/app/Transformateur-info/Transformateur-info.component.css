@@ -159,3 +159,6 @@ a{
 ::ng-deep .p-ripple.p-element.p-menuitem-link.ng-star-inserted {
   text-decoration: none !important;
 }
+.clickable-row:hover {
+  cursor: pointer;
+}

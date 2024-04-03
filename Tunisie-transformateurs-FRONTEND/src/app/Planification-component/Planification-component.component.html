@@ -2,109 +2,176 @@
 
   <div class="row">
 
-      <div class="col-xl-12">
 
-          <div class="card">
 
-            <div class="container">
 
-              <div class="card-body">
+  <div class="col-xl-12">
 
-                  <h5 class="header-title pb-3 mt-0">Planification</h5>
-                  <div class="justify-content-center row">
-                    <div class="col-lg-12">
-                        <div class="candidate-list-widgets mb-4">
-                            <form action="#" class="">
-                                <div class="g-2 row">
-                                    <div class="col-lg-3">
-                                        <div class="filler-job-form">
-                                            <i class="uil uil-briefcase-alt"></i><input id="exampleFormControlInput1" placeholder="Recherche... " [(ngModel)]="searchItem" name="searchItem" type="search" class="form-control filler-job-input-box form-control" />
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <div class="filler-job-form">
-                                            <i class="uil uil-location-point"></i>
-                                            <select class="form-select selectForm__inner" data-trigger="true" name="Choix1" [(ngModel)]="Choix1" id="choices-single-location" aria-label="Default select example">
-                                                <option value="">Filtrer selon les dates</option>
-                                                <option value="DL">Date de lancement</option>
-                                                <option value="DP">Date de fin production</option>
-                                                <option value="DE">Date d'essai</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <div class="filler-job-form">
-                                            <i class="uil uil-clipboard-notes"></i>
-                                            <select class="form-select selectForm__inner" data-trigger="true" name="Choix2" [(ngModel)]="Choix2" id="choices-single-categories" aria-label="Default select example">
-                                                <option value="">Saisir Type de filtre</option>
-                                                <option value="A">Ascendant</option>
-                                                <option value="D">Descendant</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <div>
-                                          <a href="javascript:void(0)" class="btn btn-primary btn" style="background-color: #122151; border-color: #122151;" (click)="Search()">Rechercher</a>&nbsp;
-                                          <a href="javascript:void(0)" class="btn btn-default btn" (click)="filtrer()" >Filtrer</a>&nbsp;
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                  <div class="table-responsive">
-                      <table class="table table-hover mb-0">
-                          <thead>
-                              <tr class="align-self-center">
-                                  <th>Num Transformateur</th>
-                                  <th>Type</th>
-                                  <th>Puissance</th>
-                                  <th style="text-wrap: nowrap;">Date de lancement</th>
-                                  <th style="text-wrap: nowrap;">Date de fin production</th>
-                                  <th style="text-wrap: nowrap;">Date d'essai</th>
-                                  <th style="text-wrap: nowrap;">Resultat Essai</th>
-                                  <th style="padding-left: 6vh;">Date de livraison</th>
-                              </tr>
-                          </thead>
-                          <tbody *ngIf="list.length>0">
-                            <tr *ngFor="let transformateur of list" [routerLink]="['/Controle', transformateur.numero]">
-                              <td>
-                                  <div class="d-flex align-items-center">
-                                      <img *ngIf="transformateur.type==='Monophasés'" src="assets/mono.png" class="avatar sm rounded-pill me-3 flex-shrink-0" alt="Customer">
-                                      <img *ngIf="transformateur.type==='Triphasés'" src="assets/triphaser.png" class="avatar sm rounded-pill me-3 flex-shrink-0" alt="Customer">
-                                      <img *ngIf="transformateur.type==='Biphasés'" src="assets/resine.png" class="avatar sm rounded-pill me-3 flex-shrink-0" alt="Customer">
-                                      <span>{{transformateur.numero}}</span>
+    <div class="card">
+
+      <div class="container">
+
+        <div class="card-body">
+
+            <h5 class="header-title pb-3 mt-0">Planification</h5>
+            <div class="justify-content-center row" style="padding-bottom: 3%;">
+              <div class="col-lg-12">
+                  <div class="candidate-list-widgets mb-4">
+                      <form action="#" class="">
+                          <div class="g-2 row">
+                              <div class="col-lg-3">
+                                  <div class="filler-job-form">
+                                      <i class="uil uil-briefcase-alt"></i><input id="exampleFormControlInput1" placeholder="Recherche... " [(ngModel)]="searchItem" name="searchItem" type="search" class="form-control filler-job-input-box form-control" />
                                   </div>
-                              </td>
-                              <td class="text-center colfix">{{transformateur.type}}</td>
-                              <td class="text-center colfix">{{transformateur.power}}Kva</td>
-                              <td class="text-center colfix">{{transformateur.date | date:'yyyy-MM-dd'}}</td>
-                              <td class="text-center colfix" (click)="$event.stopPropagation();Results(transformateur.numero);sidebarVisible=true">
-                                {{
-                                  isDateFinDefault(transformateur) ? 'En cours' : (transformateur.dateFin | date:'yyyy-MM-dd')
-                                }}
-                              </td>
-
-                              <td class="text-center colfix">{{transformateur.pv?.date | date:'yyyy-MM-dd'}}</td>
-                              <td class="text-center colfix"><span class="badge badge-boxed badge-soft-warning">{{transformateur.pv?.resultat}}</span></td>
-                              <td class="text-center colfix">
-                                <div (click)="$event.stopPropagation()" class="text-center colfix">
-                                  <input type="datetime-local" [(ngModel)]="transformateur.dateLivraison" (change)="saveDateLivraison(transformateur)" style="width: 85%;">
-                                </div>
-                              </td>
-                          </tr>
-
-                        </tbody>
-
-                      </table>
+                              </div>
+                              <div class="col-lg-3">
+                                  <div class="filler-job-form">
+                                      <i class="uil uil-location-point"></i>
+                                      <select class="form-select selectForm__inner" data-trigger="true" name="Choix1" [(ngModel)]="Choix1" id="choices-single-location" aria-label="Default select example">
+                                          <option value="">Filtrer selon les dates</option>
+                                          <option value="DL">Date de lancement</option>
+                                          <option value="DP">Date de fin production</option>
+                                          <option value="DE">Date d'essai</option>
+                                      </select>
+                                  </div>
+                              </div>
+                              <div class="col-lg-3">
+                                  <div class="filler-job-form">
+                                      <i class="uil uil-clipboard-notes"></i>
+                                      <select class="form-select selectForm__inner" data-trigger="true" name="Choix2" [(ngModel)]="Choix2" id="choices-single-categories" aria-label="Default select example">
+                                          <option value="">Saisir Type de filtre</option>
+                                          <option value="A">Ascendant</option>
+                                          <option value="D">Descendant</option>
+                                      </select>
+                                  </div>
+                              </div>
+                              <div class="col-lg-3">
+                                  <div>
+                                    <a href="javascript:void(0)" class="btn btn-primary btn" style="background-color: #122151; border-color: #122151;" (click)="Search2()">Rechercher</a>&nbsp;
+                                    <a href="javascript:void(0)" class="btn btn-default btn" (click)="filtrer()" >Filtrer</a>&nbsp;
+                                  </div>
+                              </div>
+                          </div>
+                      </form>
                   </div>
-                  <img src="assets/null (2).png" class="no-data-image" alt="No Data" *ngIf="list.length===0">
-                  <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="rows"  [totalRecords]="totalRecords" [rowsPerPageOptions]="[5,10, 20, 30]"></p-paginator>
-                </div>
+              </div>
           </div>
-      </div>
-  </div>
+            <div class="table-responsive">
+              <p-table
+              #dt1
+              [value]="list"
+              dataKey="numero"
+              [rows]="10"
+              [resizableColumns]="true"
+              [showCurrentPageReport]="true"
+              [rowsPerPageOptions]="[10, 25, 50]"
+              [paginator]="true"
+              selectionMode="multiple"
+              currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+              [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']">
+
+              <ng-template pTemplate="header">
+                  <tr>
+                      <th style="min-width:15rem">
+                          <div class="flex align-items-center">
+                            Num Transformateur
+                            <p-columnFilter type="numeric" field="numero" display="menu" ></p-columnFilter>
+
+                          </div>
+                      </th>
+                      <th style="min-width:10rem">
+                          <div class="flex align-items-center">
+                            Type
+                            <p-columnFilter type="text" field="type" display="menu"></p-columnFilter>
+                          </div>
+                      </th>
+
+                      <th style="min-width:10rem" pSortableColumn="power">
+                          <div class="flex align-items-center">
+                            Puissance
+                            <p-sortIcon field="power"></p-sortIcon>
+                          </div>
+                      </th>
+                      <th style="min-width:10rem">
+                          <div class="flex align-items-center">
+                            Date de lancement
+                            <p-columnFilter type="text" field="date" display="menu"></p-columnFilter>
+
+                          </div>
+                      </th>
+
+                      <th style="width: 3rem">
+                          <div class="flex align-items-center">
+                            Date de fin production
+                            <p-columnFilter type="text" field="dateFin" display="menu"></p-columnFilter>
+
+                          </div>
+                      </th>
+
+                      <th style="width: 3rem">
+                        <div class="flex align-items-center">
+                          Date d'essai
+                          <p-columnFilter type="text" field="pv.date" display="menu"></p-columnFilter>
+
+                        </div>
+                    </th>
+
+                    <th style="width: 3rem">
+                      <div class="flex align-items-center">
+                        Resultat Essai
+                        <p-columnFilter type="text" field="pv.resultat" display="menu"></p-columnFilter>
+                      </div>
+                  </th>
+
+                  <th style="width: 3rem">
+                    <div class="flex align-items-center">
+                      Date de livraison
+                      <p-columnFilter type="text" field="dateLivraison" display="menu"></p-columnFilter>
+                    </div>
+                </th>
+                  </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-transformateur>
+                  <tr class="clickable-row"  [routerLink]="['/Controle', transformateur.numero]">
+                    <td>
+                      <div class="d-flex align-items-center">
+                          <img *ngIf="transformateur.type==='Monophasés'" src="assets/mono.png" class="avatar sm rounded-pill me-3 flex-shrink-0" alt="Customer">
+                          <img *ngIf="transformateur.type==='Triphasés'" src="assets/triphaser.png" class="avatar sm rounded-pill me-3 flex-shrink-0" alt="Customer">
+                          <img *ngIf="transformateur.type==='Biphasés'" src="assets/resine.png" class="avatar sm rounded-pill me-3 flex-shrink-0" alt="Customer">
+                          <span>{{transformateur.numero}}</span>
+                      </div>
+                  </td>
+                  <td>{{transformateur.type}}</td>
+                  <td>{{transformateur.power}}Kva</td>
+                  <td>{{transformateur.date | date:'yyyy-MM-dd'}}</td>
+                  <td (click)="$event.stopPropagation();Results(transformateur.numero);sidebarVisible=true">
+                    {{
+                      isDateFinDefault(transformateur) ? 'En cours' : (transformateur.dateFin | date:'yyyy-MM-dd')
+                    }}
+                  </td>
+
+                  <td>{{transformateur.pv?.date | date:'yyyy-MM-dd'}}</td>
+                  <td><span class="badge badge-boxed badge-soft-warning">{{transformateur.pv?.resultat}}</span></td>
+                  <td>
+                    <div (click)="$event.stopPropagation()" >
+                      <input type="datetime-local" [(ngModel)]="transformateur.dateLivraison" (change)="saveDateLivraison(transformateur)" >
+                    </div>
+                  </td>
+
+
+                  </tr>
+              </ng-template>
+              <ng-template pTemplate="emptymessage">
+                  <tr>
+                      <td colspan="7">No customers found.</td>
+                  </tr>
+              </ng-template>
+          </p-table>
+            </div>
+          </div>
+    </div>
+</div>
+</div>
 </div>
 <p-toast></p-toast>
 <p-sidebar [(visible)]="sidebarVisible" position="left">

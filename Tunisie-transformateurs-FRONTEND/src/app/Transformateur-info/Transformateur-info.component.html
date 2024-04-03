@@ -75,11 +75,16 @@
             [rowsPerPageOptions]="[5,10, 25, 50]"
             [paginator]="true"
             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            selectionMode="multiple"
+            [(selection)]="selectedtransformateurs"
             [globalFilterFields]="['marque', 'numero', 'client', 'type', 'etat', 'commande']"
             >
 
             <ng-template pTemplate="header">
                 <tr>
+                  <th style="width: 4rem">
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                  </th>
                     <th style="min-width:21rem">
                         <div class="flex align-items-center">
                             Marque
@@ -118,7 +123,6 @@
                       </div>
                     </th>
 
-
                     <th style="min-width:10rem">
                       <div class="flex align-items-center">
                           Mission
@@ -144,6 +148,9 @@
             </ng-template>
             <ng-template pTemplate="body" let-transformateur let-i="rowIndex" >
                 <tr>
+                  <td>
+                    <p-tableCheckbox [value]="transformateur"></p-tableCheckbox>
+                  </td>
                     <td>
                       <img *ngIf="transformateur.type==='Monophasés' " src="assets/mono.png" class="avatar sm rounded-pill me-3 flex-shrink-0" alt="Customer">
                       <img *ngIf="transformateur.type==='Triphasés' " src="assets/triphaser.png" class="avatar sm rounded-pill me-3 flex-shrink-0" alt="Customer">

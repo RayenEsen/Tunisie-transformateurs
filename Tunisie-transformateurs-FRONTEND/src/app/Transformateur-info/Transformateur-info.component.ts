@@ -294,24 +294,24 @@ save()
   this.router.navigate(['/Add_transformateur']);
 }
 
-DeletedTransformateurIds: number[] = [];
 
-// Method to add the clicked transformateur's ID to DeletedTransformateurIds list
-addToDeletedTransformateurs(transformateur: any) {
-  const index = this.DeletedTransformateurIds.indexOf(transformateur.numero);
-  if (index !== -1) {
-    // If transformateur ID exists in the list, remove it
-    this.DeletedTransformateurIds.splice(index, 1);
-  } else {
-    // If transformateur ID does not exist in the list, add it
-    this.DeletedTransformateurIds.push(transformateur.numero);
-  }
+selectedtransformateurs: Transformateur[] = []
 
-}
+
+
 
 DeleteListOfTransformateurs() {
-  // Call the deleteTransformateursList method and pass the array of transformateur IDs
-  this.service.deleteTransformateursList(this.DeletedTransformateurIds)
+// Initialize DeletedTransformateurIds as an empty array
+const DeletedTransformateurIds: number[] = [];
+
+// Loop through each element in selectedtransformateurs
+for (const transformateur of this.selectedtransformateurs) {
+    // Push the 'numero' value of each Transformateur into DeletedTransformateurIds
+    DeletedTransformateurIds.push(transformateur.numero);
+}
+console.log(this.selectedtransformateurs)
+console.log(DeletedTransformateurIds)
+  this.service.deleteTransformateursList(DeletedTransformateurIds)
     .subscribe(
       response => {
         // Handle success if needed
@@ -324,8 +324,8 @@ DeleteListOfTransformateurs() {
         this.messageService.add({ severity: 'success', summary: 'Succès', detail: 'Transformateur supprimé avec succès' });
 
         // Create and add the event
-        const firstTransformateurId = this.DeletedTransformateurIds.length > 0 ? this.DeletedTransformateurIds[0] : undefined;
-        const lastTransformateurId = this.DeletedTransformateurIds.length > 0 ? this.DeletedTransformateurIds[this.DeletedTransformateurIds.length - 1] : undefined;
+        const firstTransformateurId = DeletedTransformateurIds.length > 0 ? DeletedTransformateurIds[0] : undefined;
+        const lastTransformateurId =  DeletedTransformateurIds.length > 0 ? DeletedTransformateurIds[DeletedTransformateurIds.length - 1] : undefined;
 
         const newEvent = new Event(
             this.ServiceS.Controleur.idC,
@@ -338,9 +338,7 @@ DeleteListOfTransformateurs() {
           .subscribe({
             next: (response) => {
               console.log('Event added successfully:', response);
-              // Clear the DeletedTransformateurIds array after the event is added
-              this.DeletedTransformateurIds = [];
-              // Add any further logic here if needed
+
             },
             error: (error) => {
               console.error('Error adding event:', error);
@@ -404,5 +402,6 @@ getSeverity(resultat: string): string {
       return 'red'; // Default to light blue for unrecognized values
   }
 }
+
 
 }

@@ -38,6 +38,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { SplitButtonModule } from 'primeng/splitbutton';
 import { TagModule } from 'primeng/tag';
 import { MenuModule } from 'primeng/menu';
+import { StepsModule } from 'primeng/steps';
 
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { TopNavComponent } from './top-nav/top-nav.component';
@@ -78,6 +79,9 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { EssaiMonoComponentComponent } from './EssaiMono-component/EssaiMono-component.component';
 import { FileUploadModule } from 'primeng/fileupload';
 import { InputTextModule } from 'primeng/inputtext';
+import { CheckboxModule } from 'primeng/checkbox';
+import { CardModule } from 'primeng/card';
+import { StepperModule } from 'primeng/stepper';
 
 @NgModule({
   declarations: [
@@ -160,6 +164,10 @@ import { InputTextModule } from 'primeng/inputtext';
     TagModule,
     InputTextModule,
     MenuModule,
+    CheckboxModule,
+    CardModule,
+    StepperModule,
+    StepsModule,
     ],
   providers: [MessageService,ConfirmationService],
   bootstrap: [AppComponent]

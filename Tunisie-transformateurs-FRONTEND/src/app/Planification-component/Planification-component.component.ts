@@ -15,14 +15,11 @@ import { Rapport } from '../Shared/Rapport-service.model';
 })
 export class PlanificationComponentComponent implements OnInit {
 
-  totalRecords: number = 0;
   list: Transformateur[] = [];
   searchItem: string = '';
   Choix1: string = '';
   Choix2: string = '';
-  first: number = 0;
-  rows: number = 10;
-  listnotpaginated: Transformateur[] = [];
+
   sidebarVisible : boolean = false;
   Etape : Etape[] = [];
 
@@ -37,24 +34,10 @@ export class PlanificationComponentComponent implements OnInit {
 
         Result = Result.filter(item => item.etat==="Production")
         this.list=Result;
-        this.listnotpaginated=Result;
-        this.totalRecords = this.list.length;
-        this.paginate(); // Paginate data after fetching
       }
     });
   }
 
-  Search()
-  {
-    this.Service.searchTransformateurs(this.searchItem)
-    .subscribe({
-      next:(Result : Transformateur[]) =>
-      {
-        console.log(this.searchItem)
-        this.list=Result;
-      }
-    });
-  }
 
   Results(id: number)
   {
@@ -97,17 +80,6 @@ export class PlanificationComponentComponent implements OnInit {
     });
   }
 
-  onPageChange(event: any) {
-    this.first = event.first;
-    this.rows = event.rows;
-    this.paginate(); // Paginate data when page changes
-  }
-
-  paginate() {
-    const start = this.first;
-    const end = start + this.rows;
-    this.list = this.listnotpaginated.slice(start, end); // Slice the data array based on current page and rows per page
-  }
 
   getStyle(Etape: any) {
     if (Etape.resultat === 'En Attente') {
@@ -168,5 +140,20 @@ export class PlanificationComponentComponent implements OnInit {
     }
 
   }
+
+  Search2() {
+    console.log(this.searchItem)
+    if (this.searchItem.trim() !== '') {
+        // Filter the list based on the searchkey
+        this.list = this.list.filter(item =>
+            Object.values(item).some(val =>
+                val !== null && val.toString().toLowerCase().includes(this.searchItem.toLowerCase())
+            )
+        );
+        console.log(this.list);
+    }
+  }
+
+
 
 }

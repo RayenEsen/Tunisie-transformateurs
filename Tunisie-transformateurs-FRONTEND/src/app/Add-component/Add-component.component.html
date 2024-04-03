@@ -201,8 +201,117 @@
           </div>
         </label>
       </div>
+
+
+
+
       <p-toast></p-toast>
       <button class="formbold-btn" label="Submit" (click)="submitForm()">Ajouter</button>
 
+  </div>
+</div>
+
+
+<div class="container"  style="background-color: #eee0;">
+  <div class="card">
+      <div class="form">
+          <div class="left-side">
+              <div class="left-heading">
+                <img src="assets/white.png" width="70%" style="filter: brightness(200%) contrast(200%);">
+              </div>
+              <div class="steps-content">
+                  <h3>Ajouter <span class="step-number"></span></h3>
+                  <p class="step-number-content active">Ajouter un ou plusieures transformateurs</p>
+
+              </div>
+              <ul class="progress-bar">
+                  <li class="active">Informations Generales </li>
+                  <li>
+                      <p>Détails du transformateur</p>
+                  </li>
+                  <li>
+                      <p>Partie 3</p>
+                  </li>
+
+                  <li>
+                    <p>Accessoires et Dates</p>
+                </li>
+
+              </ul>
+
+
+
+          </div>
+          <div class="right-side" style="width: -webkit-fill-available;">
+              <div class="main active">
+
+                  <div class="buttons" >
+                    <div class="formbold-input-wrapp formbold-mb-3">
+                      <label for="firstname" class="formbold-form-label" style="color: #122151;"> Marque / Numero Commande <small style="color: red;">*</small></label>
+                      <div>
+                        <input
+                          placeholder="Tunisie transformateurs"
+                          class="formbold-form-input"
+                          name="marque"
+                          [(ngModel)]="transformateurAjouter.marque"
+                          readonly
+                        />
+
+                        <input
+                          name=" Numero Commande"
+                          placeholder=" Numero Commande"
+                          class="formbold-form-input"
+                          [(ngModel)]="transformateurAjouter.commande"
+
+                        />
+                      </div>
+                    </div>
+                    <div class="formbold-mb-3">
+                      <label class="formbold-form-label" style="color: #122151;">Mission<small style="color: red;">*</small></label>
+                      <p-dropdown [style]="{'width': '100%'}" [options]="Missions" [(ngModel)]="etat" optionLabel="name" [showClear]="true" placeholder="Sélectionner le Mission" (onChange)="onMissionChange($event)">
+                        <ng-template pTemplate="selectedItem">
+                          <div class="flex align-items-center gap-2" *ngIf="selectedMission">
+                            <img [src]="getMissionImageUrl(selectedMission)" style="width: 18px; height: 18px; vertical-align: middle; margin-right: 5px;" />
+                            <div style="display: inline-block;">{{ selectedMission.name }}</div>
+                          </div>
+                        </ng-template>
+                        <ng-template let-mission pTemplate="item">
+                          <div class="flex align-items-center gap-2">
+                            <img [src]="getMissionImageUrl(mission)" style="width: 18px; height: 18px; vertical-align: middle; margin-right: 5px;" />
+                            <div style="display: inline-block;">{{ mission.name }}</div>
+                          </div>
+                        </ng-template>
+                      </p-dropdown>
+
+
+                      <div class="formbold-mb-3" style="margin-top: 2vh;">
+                        <label for="age" class="formbold-form-label" style="color: #122151;"> Client <small style="color: red;">*</small></label>
+                        <input
+                          name="client"
+                          placeholder="Client"
+                          class="formbold-form-input"
+                          [(ngModel)]="transformateurAjouter.client"
+
+                        />
+                      </div>
+
+                      <div class="formbold-mb-3" style="margin-bottom: 5vh;">
+                        <label for="age" class="formbold-form-label" style="color: #122151;"> Quantite <small style="color: red;">*</small></label>
+                        <input
+                          type="number"
+                          name="Quantite"
+                          placeholder="Quantite"
+                          class="formbold-form-input"
+                          [(ngModel)]="transformateurAjouter.quantite2"
+                        />
+                      </div>
+                      <p-button label="Suivant" icon="pi pi-arrow-right" iconPos="right"></p-button>
+
+                    </div>
+                  </div>
+              </div>
+
+          </div>
+      </div>
   </div>
 </div>
