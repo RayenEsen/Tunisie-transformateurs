@@ -1,3 +1,4 @@
+
 <div class="container" style="padding-left: 45px;   margin-top:20px; padding-bottom: 100px;  min-height: 700px;">
 
   <div class="row">
@@ -16,6 +17,7 @@
             <h5 class="header-title pb-3 mt-0">Echaufement</h5>
 
             <div class="table-responsive">
+
               <p-table
               #dt1
               [value]="list"
@@ -25,9 +27,10 @@
               [showCurrentPageReport]="true"
               [rowsPerPageOptions]="[10, 25, 50]"
               [paginator]="true"
+              editMode="row"
               selectionMode="multiple"
               currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-              [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']">
+              >
 
               <ng-template pTemplate="header">
                   <tr>
@@ -44,39 +47,44 @@
 
 
 
-
                     <th style="min-width:15rem">
                       <div class="flex align-items-center">
                         Perte totale
-                        <p-columnFilter type="numeric" field="numero" display="menu" ></p-columnFilter>
+                        <p-columnFilter type="numeric" field="perte_totale" display="menu" ></p-columnFilter>
                       </div>
                     </th>
 
                     <th style="min-width:15rem">
                       <div class="flex align-items-center">
                         R1(BT) (Ω)
-                        <p-columnFilter type="numeric" field="numero" display="menu" ></p-columnFilter>
+                        <p-columnFilter type="numeric" field="r1BT" display="menu" ></p-columnFilter>
                       </div>
                     </th>
 
                     <th style="min-width:15rem">
                       <div class="flex align-items-center">
                         R1(MT) (Ω)
-                        <p-columnFilter type="numeric" field="numero" display="menu" ></p-columnFilter>
+                        <p-columnFilter type="numeric" field="r1MT" display="menu" ></p-columnFilter>
                       </div>
                     </th>
 
                     <th style="min-width:15rem">
                       <div class="flex align-items-center">
                         Temperature a froid 01
-                        <p-columnFilter type="numeric" field="numero" display="menu" ></p-columnFilter>
+                        <p-columnFilter type="numeric" field="temperature" display="menu" ></p-columnFilter>
+                      </div>
+                    </th>
+
+                    <th style="min-width:5rem">
+                      <div class="flex align-items-center">
+                        Action
                       </div>
                     </th>
 
                   </tr>
               </ng-template>
-              <ng-template pTemplate="body" let-transformateur>
-                  <tr class="clickable-row" >
+              <ng-template pTemplate="body" let-transformateur let-editing="editing" let-ri="rowIndex">
+                  <tr  [pEditableRow]="transformateur" >
                     <td>
                       <div class="d-flex align-items-center">
                           <img *ngIf="transformateur.type==='Monophasés'" src="assets/mono.png" class="avatar sm rounded-pill me-3 flex-shrink-0" alt="Customer">
@@ -133,6 +141,33 @@
                       </ng-template>
                   </p-cellEditor>
               </td>
+
+
+
+              <td class="text-end">
+                <div style="display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+                  <div>
+                    <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" (click)="onRowEditInit(transformateur)" class="p-button-rounded p-button-text"></button>
+                    <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check" (click)="onRowEditSave(transformateur)" class="p-button-rounded p-button-text p-button-success mr-2"></button>
+                    <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times" (click)="onRowEditCancel(transformateur, ri)" class="p-button-rounded p-button-text p-button-danger"></button>
+                  </div>
+
+                  <div >
+                    <a data-bs-toggle="dropdown" href="#" class="btn p-1" aria-expanded="false">
+                      <i class="fa fa-bars" aria-hidden="true"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end">
+                      <a class="dropdown-item">Echauf BT</a>
+                      <!-- Replace the anchor tag with a button -->
+                      <button type="button" class="dropdown-item">Echauf MT</button>
+                      <a class="dropdown-item">Echauf liquide</a>
+                    </div>
+                  </div>
+                </div>
+              </td>
+
+
+
 
 
                   </tr>

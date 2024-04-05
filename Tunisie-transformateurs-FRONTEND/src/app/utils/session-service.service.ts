@@ -25,7 +25,7 @@ export class SessionService {
 
   sessionDestroy() {
     sessionStorage.removeItem(this.SESSION_KEY);
-    this.router.navigate(['/login']);
+    this.router.navigate(['']);
   }
 
   hasSession(): boolean {
