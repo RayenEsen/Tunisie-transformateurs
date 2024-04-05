@@ -56,7 +56,10 @@ namespace WebAPI.Model
         public string Sans { get; set; } = "";
         public string Borne { get; set; } = "";
         public string Isolateur { get; set; } = "";
-
+        public float Perte_totale { get; set; } 
+        public float R1BT { get; set; }
+        public float R1MT { get; set; }
+        public float Temperature { get; set; }
         public string Bornesembrochables { get; set; } = "";
         public float Frequency { get; set; }
         //Navigation property

@@ -83,8 +83,11 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { CardModule } from 'primeng/card';
 import { StepperModule } from 'primeng/stepper';
 
+import { IconFieldModule } from 'primeng/iconfield';
+import { InputIconModule } from 'primeng/inputicon';
+import { EchaufementComponentComponent } from './Echaufement-component/Echaufement-component.component';
 @NgModule({
-  declarations: [
+  declarations: [	
     AppComponent,
     NavBarComponent,
     TopNavComponent,
@@ -114,7 +117,7 @@ import { StepperModule } from 'primeng/stepper';
       DashBoardComponentComponent,
       RepportComponentComponent,
       EssaiMonoComponentComponent,
-
+      EchaufementComponentComponent
    ],
   imports: [
     BrowserModule,
@@ -168,6 +171,8 @@ import { StepperModule } from 'primeng/stepper';
     CardModule,
     StepperModule,
     StepsModule,
+    IconFieldModule,
+    InputIconModule,
     ],
   providers: [MessageService,ConfirmationService],
   bootstrap: [AppComponent]

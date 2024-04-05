@@ -28,6 +28,7 @@ import { OutilsComponentComponent } from './outils-component/outils-component.co
 import { DashBoardComponentComponent } from './DashBoard-component/DashBoard-component.component';
 import { RepportComponentComponent } from './Repport-component/Repport-component.component';
 import { EssaiMonoComponentComponent } from './EssaiMono-component/EssaiMono-component.component';
+import { EchaufementComponentComponent } from './Echaufement-component/Echaufement-component.component';
 const routes: Routes = [
   { path: 'Transformateur', component: TransformateurInfoComponent , canActivate: [AuthGuard]},
   { path: 'Ajouter_Transformateur', component: Add_ModifyTransformateurComponent , canActivate: [AuthGuard]},
@@ -43,6 +44,8 @@ const routes: Routes = [
 
 
   { path: 'Add_transformateur' , component: AddComponentComponent , canActivate: [AuthGuard]},
+  { path: 'Echaufement' , component: EchaufementComponentComponent , canActivate: [AuthGuard]},
+
   { path: 'Edit_profile' , component : EditProfileComponentComponent , canActivate: [AuthGuard]},
   { path: 'Sign_in' , component : CreateAcountComponentComponent},
   { path: 'Planification' , component : PlanificationComponentComponent , canActivate: [AuthGuard]},

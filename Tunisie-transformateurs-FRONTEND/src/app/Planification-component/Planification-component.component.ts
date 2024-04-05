@@ -32,7 +32,6 @@ export class PlanificationComponentComponent implements OnInit {
       {
         console.log(Result)
 
-        Result = Result.filter(item => item.etat==="Production")
         this.list=Result;
       }
     });

@@ -1,219 +1,16 @@
+
 <div *ngIf="loading === true" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 9999;">
   <p-progressSpinner ariaLabel="loading"></p-progressSpinner>
 </div>
 
 
-<div class="formbold-main-wrapper">
-  <!-- Author: FormBold Team -->
-  <!-- Learn More: https://formbold.com -->
-  <div class="formbold-form-wrapper"  [style.pointer-events]="loading ? 'none' : 'auto'">
-         <img src="assets/Logo.png" style="margin-left: 320px;">
-      <div class="formbold-input-wrapp formbold-mb-3">
-        <label for="firstname" class="formbold-form-label" style="color: #122151;"> Marque / Numero Commande <small style="color: red;">*</small></label>
-        <div>
-          <input
-            placeholder="Tunisie transformateurs"
-            class="formbold-form-input"
-            name="marque"
-            [(ngModel)]="transformateurAjouter.marque"
-            readonly
-          />
-
-          <input
-            name=" Numero Commande"
-            placeholder=" Numero Commande"
-            class="formbold-form-input"
-            [(ngModel)]="transformateurAjouter.commande"
-
-          />
-        </div>
-      </div>
-
-        <div class="formbold-mb-3">
-        <label class="formbold-form-label" style="color: #122151;">Mission<small style="color: red;">*</small></label>
-        <p-dropdown [style]="{'width': '100%'}" [options]="Missions" [(ngModel)]="etat" optionLabel="name" [showClear]="true" placeholder="Sélectionner le Mission" (onChange)="onMissionChange($event)">
-          <ng-template pTemplate="selectedItem">
-            <div class="flex align-items-center gap-2" *ngIf="selectedMission">
-              <img [src]="getMissionImageUrl(selectedMission)" style="width: 18px; height: 18px; vertical-align: middle; margin-right: 5px;" />
-              <div style="display: inline-block;">{{ selectedMission.name }}</div>
-            </div>
-          </ng-template>
-          <ng-template let-mission pTemplate="item">
-            <div class="flex align-items-center gap-2">
-              <img [src]="getMissionImageUrl(mission)" style="width: 18px; height: 18px; vertical-align: middle; margin-right: 5px;" />
-              <div style="display: inline-block;">{{ mission.name }}</div>
-            </div>
-          </ng-template>
-        </p-dropdown>
-
-
-
-      </div>
-
-      <div class="formbold-mb-3">
-        <label for="age" class="formbold-form-label" style="color: #122151;"> Client <small style="color: red;">*</small></label>
-        <input
-          name="client"
-          placeholder="Client"
-          class="formbold-form-input"
-          [(ngModel)]="transformateurAjouter.client"
-
-        />
-      </div>
-
-      <div class="formbold-mb-3">
-        <label for="age" class="formbold-form-label" style="color: #122151;"> Quantite <small style="color: red;">*</small></label>
-        <input
-          type="number"
-          name="Quantite"
-          placeholder="Quantite"
-          class="formbold-form-input"
-          [(ngModel)]="transformateurAjouter.quantite2"
-        />
-      </div>
-
-
-      <div class="formbold-mb-3">
-        <label class="formbold-form-label" style="color: #122151;">Couplage<small style="color: red;">*</small></label>
-        <select class="formbold-form-input" name="occupation" id="occupation" name="couplage" [(ngModel)]="transformateurAjouter.couplage">
-          <option value="" disabled selected>Sélectionner le couplage</option>
-          <option value="Mono">Mono</option>
-          <option value="YNYN">Ynyn</option>
-          <option value="DYN">Dyn</option>
-          <option value="YZ">YZ</option>
-        </select>
-      </div>
-
-      <div class="formbold-mb-3">
-        <label for="email" class="formbold-form-label" style="color: #122151;"> Puissance (KVA) <small style="color: red;">*</small></label>
-        <input
-          name="power"
-          placeholder="Puissance"
-          class="formbold-form-input"
-          [(ngModel)]="transformateurAjouter.power"
-        />
-      </div>
-
-      <div class="formbold-mb-3">
-
-        <label for="address" class="formbold-form-label" style="color: #122151;"> Prises <small style="color: red;">*</small></label>
-
-
-        <p-dropdown [style]="{'width': '100%'}" [options]="prisesOptions" [(ngModel)]="transformateurAjouter.prises" optionLabel="label" optionValue="value" [showClear]="true" placeholder="Prises"></p-dropdown>
-
-      </div>
-      <div class="formbold-mb-3">
-        <label class="formbold-form-label" style="color: #122151;">Type<small style="color: red;">*</small></label>
-        <select class="formbold-form-input" name="occupation" id="occupation" name="couplage" [(ngModel)]="transformateurAjouter.type">
-          <option value="" disabled selected>Sélectionner le type</option>
-          <option value="Triphasés">Triphasés</option>
-          <option value="Monophasés">Monophasés</option>
-          <option value="Biphasés">Biphasé</option>
-        </select>
-
-      </div>
-      <div class="formbold-mb-3">
-        <label for="address" class="formbold-form-label" style="color: #122151;"> MT:U1 (KV) <small style="color: red;">*</small></label>
-
-        <input
-          name="mtu1"
-          placeholder="MT:U1"
-          class="formbold-form-input formbold-mb-3"
-          [(ngModel)]="transformateurAjouter.mtu1"
-        />
-        <label for="address" class="formbold-form-label" style="color: #122151;"> BT:U2 (V)<small style="color: red;">*</small></label>
-
-        <input
-          name="btu2"
-          placeholder="BT:U2"
-          class="formbold-form-input"
-          [(ngModel)]="transformateurAjouter.btu2"
-        />
-      </div>
-
-      <div class="formbold-input-wrapp formbold-mb-3">
-        <label for="firstname" class="formbold-form-label" style="color: #122151;"> Libelle <small style="color: red;">*</small></label>
-        <div>
-          <select class="formbold-form-input" name="occupation" id="occupation" name="couplage" [(ngModel)]="transformateurAjouter.libelle">
-            <option value="" disabled selected>Sélectionner le Libelle</option>
-            <option value="Aluminum">Aluminum</option>
-            <option value="Cuivre">Cuivre</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="formbold-input-wrapp formbold-mb-3" >
-        <label  for="firstname" class="formbold-form-label" style="color: #122151;"> Accessoires <small style="color: red;">*</small></label>
-        <p-multiSelect [style]="{'width': '100%'}" [options]="Accessoires" placeholder="Sélectionner les Accessoires" [(ngModel)]="SelectedAccesoires"  optionLabel="name"></p-multiSelect>
-      </div>
-
-      <div class="formbold-input-wrapp formbold-mb-3">
-        <label for="borne" class="formbold-form-label" style="color: #122151;">Extra <small style="color: red;">*</small></label>
-        <p-treeSelect class="md:w-20rem w-full" containerStyleClass="w-full" [(ngModel)]="SelectedNode" [options]="nodes" optionLabel="label" placeholder="Sélectionner la Borne"></p-treeSelect>
-      </div>
-
-
-      <div class="formbold-input-wrapp formbold-mb-3">
-        <label for="firstname" class="formbold-form-label" style="color: #122151;"> Position <small style="color: red;">*</small></label>
-        <div>
-          <select class="formbold-form-input" name="Accessoires" id="occupation"  [(ngModel)]="transformateurAjouter.bornesembrochables">
-            <option value="" disabled selected>Sélectionner les Positions</option>
-            <option value="3POS">3POS</option>
-            <option value="5POS">5POS</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="formbold-input-wrapp formbold-mb-3">
-        <label for="firstname" class="formbold-form-label" style="color: #122151;"> Date Prevue<small style="color: red;">*</small></label>
-        <div>
-          <p-calendar  placeholder="Date Prevue" [(ngModel)]="transformateurAjouter.dateprevue" [iconDisplay]="'input'" [showIcon]="true"></p-calendar>
-        </div>
-      </div>
-      <div class="formbold-input-wrapp formbold-mb-3">
-        <label for="firstname" class="formbold-form-label" style="color: #122151;"> Date Cloture<small style="color: red;">*</small></label>
-        <div>
-          <p-calendar  placeholder="Date Cloture" [(ngModel)]="transformateurAjouter.dateCloture" [iconDisplay]="'input'" [showIcon]="true"></p-calendar>
-        </div>
-      </div>
-
-
-      <div class="formbold-mb-3">
-        <label for="upload" class="formbold-form-label" style="color: #122151;">
-          Téléchargez une photo
-        </label>
-        <input
-          type="file"
-          name="upload"
-          id="upload"
-          class="formbold-form-input formbold-form-file"
-        />
-      </div>
-
-      <div class="formbold-checkbox-wrapper">
-        <label for="supportCheckbox" class="formbold-checkbox-label">
-          <div class="formbold-relative">
-            <input
-              type="checkbox"
-              id="supportCheckbox"
-              class="formbold-input-checkbox"
-            />
-          </div>
-        </label>
-      </div>
-
-
-
 
       <p-toast></p-toast>
-      <button class="formbold-btn" label="Submit" (click)="submitForm()">Ajouter</button>
-
-  </div>
-</div>
 
 
-<div class="container"  style="background-color: #eee0;">
-  <div class="card">
+
+      <div class="container" style="background-color: #eee0; margin-bottom: 8vh;">
+        <div class="card"  [class.disable-hover]="active3">
       <div class="form">
           <div class="left-side">
               <div class="left-heading">
@@ -225,16 +22,16 @@
 
               </div>
               <ul class="progress-bar">
-                  <li class="active">Informations Generales </li>
-                  <li>
-                      <p>Détails du transformateur</p>
+                  <li [class.active]="active1">Informations Generales </li>
+                  <li [class.active]="active2">
+                      <p>Détails du transformateur 1</p>
                   </li>
-                  <li>
-                      <p>Partie 3</p>
+                  <li [class.active]="active3">
+                      <p>Détails du transformateur 2</p>
                   </li>
 
-                  <li>
-                    <p>Accessoires et Dates</p>
+                  <li [class.active]="active4">
+                    <p>Accessoires</p>
                 </li>
 
               </ul>
@@ -243,7 +40,7 @@
 
           </div>
           <div class="right-side" style="width: -webkit-fill-available;">
-              <div class="main active">
+            <div class="main" [class.active]="active1">
 
                   <div class="buttons" >
                     <div class="formbold-input-wrapp formbold-mb-3">
@@ -305,13 +102,187 @@
                           [(ngModel)]="transformateurAjouter.quantite2"
                         />
                       </div>
-                      <p-button label="Suivant" icon="pi pi-arrow-right" iconPos="right"></p-button>
+                      <p-button label="Suivant" icon="pi pi-arrow-right" iconPos="right" (click)="click(2)"></p-button>
 
                     </div>
                   </div>
               </div>
 
+              <div class="main" [class.active]="active2">
+
+                <div class="buttons" >
+
+                  <div class="formbold-input-wrapp formbold-mb-3">
+                    <label for="firstname" class="formbold-form-label" style="color: #122151;"> MT:U1 (KV) / BT:U2 (V) <small style="color: red;">*</small></label>
+                    <div>
+                      <input
+                      name="mtu1"
+                      placeholder="MT:U1"
+                      class="formbold-form-input formbold-mb-3"
+                      [(ngModel)]="transformateurAjouter.mtu1"
+                    />
+
+
+
+                    <input
+                    name="btu2"
+                    placeholder="BT:U2"
+                    class="formbold-form-input formbold-mb-3"
+                    [(ngModel)]="transformateurAjouter.btu2"
+                  />
+
+                    </div>
+                  </div>
+
+                  <div class="formbold-mb-3" style="margin-top: -16px;">
+                    <label class="formbold-form-label" style="color: #122151;">Couplage<small style="color: red;">*</small></label>
+                    <select class="formbold-form-input" name="occupation" id="occupation" name="couplage" [(ngModel)]="transformateurAjouter.couplage">
+                      <option value="" disabled selected>Sélectionner le couplage</option>
+                      <option value="Mono">Mono</option>
+                      <option value="YNYN">Ynyn</option>
+                      <option value="DYN">Dyn</option>
+                      <option value="YZ">YZ</option>
+                    </select>
+                  </div>
+
+                  <div class="formbold-mb-3">
+                    <label for="email" class="formbold-form-label" style="color: #122151;"> Puissance (KVA) <small style="color: red;">*</small></label>
+                    <input
+                      name="power"
+                      placeholder="Puissance"
+                      class="formbold-form-input"
+                      [(ngModel)]="transformateurAjouter.power"
+                    />
+                  </div>
+
+                  <div class="formbold-mb-3">
+                    <label class="formbold-form-label" style="color: #122151;">Type<small style="color: red;">*</small></label>
+                    <select class="formbold-form-input" name="occupation" id="occupation" name="couplage" [(ngModel)]="transformateurAjouter.type">
+                      <option value="" disabled selected>Sélectionner le type</option>
+                      <option value="Triphasés">Triphasés</option>
+                      <option value="Monophasés">Monophasés</option>
+                      <option value="Biphasés">Biphasé</option>
+                    </select>
+
+                  </div>
+
+                  <div class="navigator">
+                    <p-button label="Presédent" icon="pi pi-arrow-left" (click)="click(1)" iconPos="left"></p-button>
+                    <p-button label="Suivant" icon="pi pi-arrow-right"  (click)="click(3)"iconPos="right"></p-button>
+                  </div>
+
+
+          </div>
+
+        </div>
+
+        <div class="main"  [class.active]="active3">
+
+          <div class="buttons">
+
+            <div class="formbold-mb-3">
+
+              <label for="address" class="formbold-form-label" style="color: #122151;"> Prises <small style="color: red;">*</small></label>
+
+
+              <p-dropdown [style]="{'width': '100%'}" [options]="prisesOptions" [(ngModel)]="transformateurAjouter.prises" optionLabel="label" optionValue="value" [showClear]="true" placeholder="Prises"></p-dropdown>
+
+            </div>
+
+            <div class="formbold-input-wrapp formbold-mb-3" style="padding-top: 2vh;">
+            <label for="firstname" class="formbold-form-label" style="color: #122151;"> Libelle <small style="color: red;">*</small></label>
+            <div>
+              <select class="formbold-form-input" name="occupation" id="occupation" name="couplage" [(ngModel)]="transformateurAjouter.libelle">
+                <option value="" disabled selected>Sélectionner le Libelle</option>
+                <option value="Aluminum">Aluminum</option>
+                <option value="Cuivre">Cuivre</option>
+              </select>
+            </div>
+            </div>
+
+
+            <div class="formbold-input-wrapp formbold-mb-3">
+              <label for="firstname" class="formbold-form-label" style="color: #122151;"> Date Prevue<small style="color: red;">*</small></label>
+              <div>
+                <p-calendar [touchUI]="true" [showIcon]="true" placeholder="Date Prevue" [(ngModel)]="transformateurAjouter.dateprevue" [iconDisplay]="'input'" [showIcon]="true"></p-calendar>
+              </div>
+            </div>
+
+            <div class="formbold-input-wrapp formbold-mb-3" style="padding-top: 2vh;">
+              <label for="firstname" class="formbold-form-label" style="color: #122151;"> Date Cloture<small style="color: red;">*</small></label>
+              <div>
+                <p-calendar [touchUI]="true" [showIcon]="true" placeholder="Date Cloture" [(ngModel)]="transformateurAjouter.dateCloture" [iconDisplay]="'input'" [showIcon]="true"></p-calendar>
+              </div>
+            </div>
+
+
+            <div class="navigator" style="padding-top: 3vh;">
+              <p-button label="Presédent" icon="pi pi-arrow-left" (click)="click(2)" iconPos="left"></p-button>
+              <p-button label="Suivant" icon="pi pi-arrow-right"  (click)="click(4)" iconPos="right"></p-button>
+            </div>
+
+
+          </div>
+          </div>
+
+          <div class="main" [class.active]="active4">
+
+            <div class="buttons" >
+
+              <div class="formbold-input-wrapp formbold-mb-3" >
+                <label  for="firstname" class="formbold-form-label" style="color: #122151;"> Accessoires <small style="color: red;">*</small></label>
+                <p-multiSelect [style]="{'width': '100%'}" [options]="Accessoires" placeholder="Sélectionner les Accessoires" [(ngModel)]="SelectedAccesoires"  optionLabel="name"></p-multiSelect>
+              </div>
+
+              <div class="formbold-input-wrapp formbold-mb-3">
+                <label for="borne" class="formbold-form-label" style="color: #122151;">Extra <small style="color: red;">*</small></label>
+                <p-treeSelect class="md:w-20rem w-full" containerStyleClass="w-full" [(ngModel)]="SelectedNode" [options]="nodes" optionLabel="label" placeholder="Sélectionner la Borne"></p-treeSelect>
+              </div>
+
+
+              <div class="formbold-input-wrapp formbold-mb-3">
+                <label for="firstname" class="formbold-form-label" style="color: #122151;"> Position <small style="color: red;">*</small></label>
+                <div>
+                  <select class="formbold-form-input" name="Accessoires" id="occupation"  [(ngModel)]="transformateurAjouter.bornesembrochables">
+                    <option value="" disabled selected>Sélectionner les Positions</option>
+                    <option value="3POS">3POS</option>
+                    <option value="5POS">5POS</option>
+                  </select>
+                </div>
+              </div>
+
+
+
+            <div class="formbold-mb-3">
+              <label for="upload" class="formbold-form-label" style="color: #122151;">
+                Téléchargez une photo
+              </label>
+              <input
+                type="file"
+                name="upload"
+                id="upload"
+                class="formbold-form-input formbold-form-file"
+              />
+            </div>
+
+            <div class="formbold-checkbox-wrapper">
+              <label for="supportCheckbox" class="formbold-checkbox-label">
+                <div class="formbold-relative">
+                  <input
+                    type="checkbox"
+                    id="supportCheckbox"
+                    class="formbold-input-checkbox"
+                  />
+                </div>
+              </label>
+            </div>
+
+            <div class="navigator" style="padding-top: 3vh;">
+              <p-button label="Presédent" (click)="click(3)" icon="pi pi-arrow-left" iconPos="left"></p-button>
+              <p-button label="Ajouter" (click)="submitForm()"  [loading]="loading" ></p-button>
+
+            </div>
+
           </div>
       </div>
   </div>
-</div>

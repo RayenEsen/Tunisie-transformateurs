@@ -290,8 +290,7 @@ export class AddComponentComponent implements OnInit {
 
         this.loading=true;
 
-        if(this.transformateurAjouter.etat==='Production')
-        {
+
           this.service.AddTransformateur(currentTransformateur)
           .pipe(
             concatMap(() => {
@@ -694,101 +693,8 @@ export class AddComponentComponent implements OnInit {
               }
             }
           });
-        }
-        else{
-          this.service.AddTransformateur(currentTransformateur)
-          .pipe(
-            concatMap(() => {
-              // Create PvAjouter using the correct id_t
-              const pvAjouter: Pv = {
-                id_pv: 0, // This will be populated by the server
-                id_t: currentTransformateur.numero,
-                date: new Date(),
-                resultat: 'En Attente',
-                tappings: 5,
-                vt11: this.getintervalle(0.95, 1.005),
-                vt12: this.getintervalle(0.95, 0.995),
-                vt21: this.getintervalle(0.975, 1.005),
-                vt22: this.getintervalle(0.975, 0.995),
-                vt31: this.getP3(1.005),
-                vt32: this.getP3(0.995),
-                vt41: this.getintervalle(1.025, 1.005),
-                vt42: this.getintervalle(1.025, 0.995),
-                vt51: this.getintervalle(1.05, 1.005),
-                vt52: this.getintervalle(1.05, 0.995),
-                vm11: undefined,
-                vm12: undefined,
-                vm13: undefined,
-                vm21: undefined,
-                vm22: undefined,
-                vm23: undefined,
-                vm31: undefined,
-                vm32: undefined,
-                vm33: undefined,
-                vm41: undefined,
-                vm42: undefined,
-                vm43: undefined,
-                vm51: undefined,
-                vm52: undefined,
-                vm53: undefined,
-                na0: undefined,
-                nb0: undefined,
-                nc0: undefined,
-                na1: undefined,
-                nb2: undefined,
-                nc3: undefined,
-                wog: undefined,
-                iog: undefined,
-                iom: undefined,
-                wom: undefined,
-                zccg: undefined,
-                wccg: undefined,
-                temp: undefined,
-                uccm: undefined,
-                wccm1: undefined,
-                wccm2: undefined,
-                zccm1: undefined,
-                zcmm2: undefined,
-                u1: undefined,
-                t1: undefined,
-                u2: undefined,
-                t2: undefined,
-                u3: undefined,
-                t3: undefined,
-                claquage: undefined,
-                idC: this.serviceS.Controleur.idC,
-                version: 0
-              };
 
-              // Call service method to add Pv
-              return this.servicePv.AddPv(pvAjouter);
-            }),
-          )
-          .subscribe({
-            next: (results: any) => {
-              // Navigate or perform other actions on successful completion
-              const newEvent = new Event(this.serviceS.Controleur.idC,'Ajouter un transformateur', new Date(),this.serviceS.Controleur.username + ' a ajouter un transformateur '+ this.transformateurAjouter.type + " avec le numéro " + this.transformateurAjouter.numero);
-              this.EventService.AddEvent(newEvent)
-                .subscribe({
-                  next: (response) => {
-                    console.log('Event added successfully:', response);
-                    // Add any further logic here if needed
-                  },
-                  error: (error) => {
-                    console.error('Error adding event:', error);
-                    // Handle the error appropriately
-                  }
-                });
-              this.router.navigate(['/Transformateur']);
-            },
-            error: (error: any) => {
-              this.loading=false;
-              if (error.status === 409) {
-                this.messageService.add({ severity: 'error', summary: 'Erreur', detail: 'Transformateur existe déjà' });
-              }
-            }
-          });
-        }
+
       } catch (error) {
         return;
       }
@@ -848,4 +754,45 @@ export class AddComponentComponent implements OnInit {
         }
         return Resultat;
       }
+
+      active1: boolean = true;
+      active2: boolean = false;
+      active3: boolean = false;
+      active4: boolean = false;
+
+      click(choice: number) {
+        if (choice === 1) {
+            this.active1 = true;
+            this.active2 = false;
+            this.active3 = false;
+            this.active4 = false;
+
+        } else if (choice === 2) {
+            this.active2 = true;
+            this.active1 = false;
+            this.active3 = false;
+            this.active4 = false;
+
+        } else if (choice === 3) {
+            this.active3 = true;
+            this.active1 = false;
+            this.active2 = false;
+            this.active4 = false;
+
+        } else if (choice === 4) {
+            this.active4 = true;
+            this.active1 = false;
+            this.active2 = false;
+            this.active3 = false;
+        }
+
+        else if (choice === 5) {
+          this.active1 = false;
+          this.active2 = false;
+          this.active3 = false;
+          this.active4 = false;
+      }
+    }
+
+
 }

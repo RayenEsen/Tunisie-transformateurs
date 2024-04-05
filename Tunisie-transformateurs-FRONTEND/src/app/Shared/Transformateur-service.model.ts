@@ -35,6 +35,12 @@ export class Transformateur {
   etat: string = "";
   galet: string = "";
   isolateur: string = "";
+
+  perte_totale?: number;
+  r1BT?:number;
+  r1MT?:number;
+  temperature?:number;
+
   capot: string = "";
   sans: string = "";
   borne: string = "";

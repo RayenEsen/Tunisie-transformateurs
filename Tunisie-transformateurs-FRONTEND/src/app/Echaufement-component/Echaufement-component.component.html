@@ -1,0 +1,155 @@
+<div class="container" style="padding-left: 45px;   margin-top:20px; padding-bottom: 100px;  min-height: 700px;">
+
+  <div class="row">
+
+
+
+
+  <div class="col-xl-12">
+
+    <div class="card">
+
+      <div class="container">
+
+        <div class="card-body">
+
+            <h5 class="header-title pb-3 mt-0">Echaufement</h5>
+
+            <div class="table-responsive">
+              <p-table
+              #dt1
+              [value]="list"
+              dataKey="numero"
+              [rows]="10"
+              [resizableColumns]="true"
+              [showCurrentPageReport]="true"
+              [rowsPerPageOptions]="[10, 25, 50]"
+              [paginator]="true"
+              selectionMode="multiple"
+              currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+              [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']">
+
+              <ng-template pTemplate="header">
+                  <tr>
+
+
+                    <th style="min-width:15rem">
+                      <div class="flex align-items-center">
+                        Numero
+                        <p-columnFilter type="numeric" field="numero" display="menu" ></p-columnFilter>
+
+                      </div>
+                    </th>
+
+
+
+
+
+                    <th style="min-width:15rem">
+                      <div class="flex align-items-center">
+                        Perte totale
+                        <p-columnFilter type="numeric" field="numero" display="menu" ></p-columnFilter>
+                      </div>
+                    </th>
+
+                    <th style="min-width:15rem">
+                      <div class="flex align-items-center">
+                        R1(BT) (Ω)
+                        <p-columnFilter type="numeric" field="numero" display="menu" ></p-columnFilter>
+                      </div>
+                    </th>
+
+                    <th style="min-width:15rem">
+                      <div class="flex align-items-center">
+                        R1(MT) (Ω)
+                        <p-columnFilter type="numeric" field="numero" display="menu" ></p-columnFilter>
+                      </div>
+                    </th>
+
+                    <th style="min-width:15rem">
+                      <div class="flex align-items-center">
+                        Temperature a froid 01
+                        <p-columnFilter type="numeric" field="numero" display="menu" ></p-columnFilter>
+                      </div>
+                    </th>
+
+                  </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-transformateur>
+                  <tr class="clickable-row" >
+                    <td>
+                      <div class="d-flex align-items-center">
+                          <img *ngIf="transformateur.type==='Monophasés'" src="assets/mono.png" class="avatar sm rounded-pill me-3 flex-shrink-0" alt="Customer">
+                          <img *ngIf="transformateur.type==='Triphasés'" src="assets/triphaser.png" class="avatar sm rounded-pill me-3 flex-shrink-0" alt="Customer">
+                          <img *ngIf="transformateur.type==='Biphasés'" src="assets/resine.png" class="avatar sm rounded-pill me-3 flex-shrink-0" alt="Customer">
+                          <span>{{transformateur.numero}}</span>
+                      </div>
+                  </td>
+
+
+                  <td [pEditableColumn]="transformateur.perte_totale" pEditableColumnField="code">
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" [(ngModel)]="transformateur.perte_totale" />
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{ transformateur.perte_totale }}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+
+
+                  <td [pEditableColumn]="transformateur.r1BT" pEditableColumnField="code">
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" [(ngModel)]="transformateur.r1BT" />
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{ transformateur.r1BT }}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+
+
+
+                  <td [pEditableColumn]="transformateur.r1MT" pEditableColumnField="code">
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" [(ngModel)]="transformateur.r1MT" />
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{ transformateur.r1MT }}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+
+                <td [pEditableColumn]="transformateur.temperature" pEditableColumnField="code">
+                  <p-cellEditor>
+                      <ng-template pTemplate="input">
+                          <input pInputText type="text" [(ngModel)]="transformateur.temperature" />
+                      </ng-template>
+                      <ng-template pTemplate="output">
+                          {{ transformateur.temperature }}
+                      </ng-template>
+                  </p-cellEditor>
+              </td>
+
+
+                  </tr>
+              </ng-template>
+              <ng-template pTemplate="emptymessage">
+                  <tr>
+                      <td colspan="7">No customers found.</td>
+                  </tr>
+              </ng-template>
+          </p-table>
+            </div>
+          </div>
+    </div>
+</div>
+</div>
+</div>
+<p-toast></p-toast>
+
+
+

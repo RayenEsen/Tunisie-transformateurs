@@ -232,8 +232,8 @@ select.formbold-form-input,
   margin-left: 0%;
   position: relative;
   display: inline-flex;
-  max-width: 351%;
-  width: 351%;
+  max-width: 362%;
+  width: 362%;
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
@@ -390,6 +390,7 @@ h2
 .main{
     display:none;
 }
+
 .company-form{
     display:none;
 }
@@ -437,6 +438,13 @@ h2
   transform: translateY(-5px);
 }
 
+/* Add a parent selector to increase specificity */
+.card.disable-hover:hover {
+  box-shadow: none;
+  transform: none;
+}
+
+
 ::ng-deep .p-button {
   background-color: #213d81; /* Background color */
   color: #ffffff; /* Text color */
@@ -446,3 +454,14 @@ h2
   cursor: pointer; /* Change cursor to pointer on hover */
 
 }
+
+.navigator {
+  display: flex;
+  justify-content: space-between;
+}
+
+.navigator p-button:nth-child(2) {
+  order: 1;
+}
+
+
