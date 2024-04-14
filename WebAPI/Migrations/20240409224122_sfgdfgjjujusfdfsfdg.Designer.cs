@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebAPI.Model;
 
@@ -11,9 +12,11 @@ using WebAPI.Model;
 namespace WebAPI.Migrations
 {
     [DbContext(typeof(TransformateurContext))]
-    partial class TransformateurContextModelSnapshot : ModelSnapshot
+    [Migration("20240409224122_sfgdfgjjujusfdfsfdg")]
+    partial class sfgdfgjjujusfdfsfdg
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -228,16 +231,6 @@ namespace WebAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Btid"));
 
-                    b.Property<string>("Conclusion")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Controleur1")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
                     b.Property<int>("Numero")
                         .HasColumnType("int");
 
@@ -258,17 +251,6 @@ namespace WebAPI.Migrations
                         .HasColumnType("real");
 
                     b.Property<float>("Ushunt")
-                        .HasColumnType("real");
-
-                    b.Property<string>("Verificateur")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Visa")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float>("Vl")
                         .HasColumnType("real");
 
                     b.HasKey("Btid");
@@ -521,32 +503,8 @@ namespace WebAPI.Migrations
                     b.Property<float>("A4")
                         .HasColumnType("real");
 
-                    b.Property<string>("Conclusion")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Controleur1")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
                     b.Property<int>("Numero")
                         .HasColumnType("int");
-
-                    b.Property<float>("Resultat")
-                        .HasColumnType("real");
-
-                    b.Property<string>("Verificateur")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Visa")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float>("Vl")
-                        .HasColumnType("real");
 
                     b.HasKey("Btid");
 

@@ -36,7 +36,7 @@
                   <tr>
 
 
-                    <th style="min-width:15rem">
+                    <th style="min-width:12rem">
                       <div class="flex align-items-center">
                         Numero
                         <p-columnFilter type="numeric" field="numero" display="menu" ></p-columnFilter>
@@ -47,28 +47,28 @@
 
 
 
-                    <th style="min-width:15rem">
+                    <th style="min-width:12rem">
                       <div class="flex align-items-center">
                         Perte totale
                         <p-columnFilter type="numeric" field="perte_totale" display="menu" ></p-columnFilter>
                       </div>
                     </th>
 
-                    <th style="min-width:15rem">
+                    <th style="min-width:12rem">
                       <div class="flex align-items-center">
                         R1(BT) (Ω)
                         <p-columnFilter type="numeric" field="r1BT" display="menu" ></p-columnFilter>
                       </div>
                     </th>
 
-                    <th style="min-width:15rem">
+                    <th style="min-width:12rem">
                       <div class="flex align-items-center">
                         R1(MT) (Ω)
                         <p-columnFilter type="numeric" field="r1MT" display="menu" ></p-columnFilter>
                       </div>
                     </th>
 
-                    <th style="min-width:15rem">
+                    <th style="min-width:12rem">
                       <div class="flex align-items-center">
                         Temperature a froid 01
                         <p-columnFilter type="numeric" field="temperature" display="menu" ></p-columnFilter>
@@ -84,8 +84,8 @@
                   </tr>
               </ng-template>
               <ng-template pTemplate="body" let-transformateur let-editing="editing" let-ri="rowIndex">
-                  <tr  [pEditableRow]="transformateur" >
-                    <td>
+                <tr [pEditableRow]="transformateur" [routerLink]="['/RapportFinal', transformateur.numero]" >
+                  <td  class="stop-propagation">
                       <div class="d-flex align-items-center">
                           <img *ngIf="transformateur.type==='Monophasés'" src="assets/mono.png" class="avatar sm rounded-pill me-3 flex-shrink-0" alt="Customer">
                           <img *ngIf="transformateur.type==='Triphasés'" src="assets/triphaser.png" class="avatar sm rounded-pill me-3 flex-shrink-0" alt="Customer">
@@ -95,10 +95,10 @@
                   </td>
 
 
-                  <td [pEditableColumn]="transformateur.perte_totale" pEditableColumnField="code">
+                  <td (click)="$event.stopPropagation()">
                     <p-cellEditor>
                         <ng-template pTemplate="input">
-                            <input pInputText type="text" [(ngModel)]="transformateur.perte_totale" />
+                            <p-inputNumber inputId="minmaxfraction"  mode="decimal"  [maxFractionDigits]="8" [(ngModel)]="transformateur.perte_totale" > </p-inputNumber>
                         </ng-template>
                         <ng-template pTemplate="output">
                             {{ transformateur.perte_totale }}
@@ -107,10 +107,10 @@
                 </td>
 
 
-                  <td [pEditableColumn]="transformateur.r1BT" pEditableColumnField="code">
+                  <td (click)="$event.stopPropagation()">
                     <p-cellEditor>
                         <ng-template pTemplate="input">
-                            <input pInputText type="text" [(ngModel)]="transformateur.r1BT" />
+                            <p-inputNumber inputId="minmaxfraction"  mode="decimal"  [maxFractionDigits]="8" [(ngModel)]="transformateur.r1BT" > </p-inputNumber>
                         </ng-template>
                         <ng-template pTemplate="output">
                             {{ transformateur.r1BT }}
@@ -120,10 +120,10 @@
 
 
 
-                  <td [pEditableColumn]="transformateur.r1MT" pEditableColumnField="code">
+                  <td (click)="$event.stopPropagation()">
                     <p-cellEditor>
                         <ng-template pTemplate="input">
-                            <input pInputText type="text" [(ngModel)]="transformateur.r1MT" />
+                            <p-inputNumber inputId="minmaxfraction"  mode="decimal"  [maxFractionDigits]="8" [(ngModel)]="transformateur.r1MT" > </p-inputNumber>
                         </ng-template>
                         <ng-template pTemplate="output">
                             {{ transformateur.r1MT }}
@@ -131,10 +131,10 @@
                     </p-cellEditor>
                 </td>
 
-                <td [pEditableColumn]="transformateur.temperature" pEditableColumnField="code">
+                <td (click)="$event.stopPropagation()">
                   <p-cellEditor>
                       <ng-template pTemplate="input">
-                          <input pInputText type="text" [(ngModel)]="transformateur.temperature" />
+                          <p-inputNumber inputId="minmaxfraction"  mode="decimal"  [maxFractionDigits]="8"  [(ngModel)]="transformateur.temperature" > </p-inputNumber>
                       </ng-template>
                       <ng-template pTemplate="output">
                           {{ transformateur.temperature }}
@@ -144,7 +144,7 @@
 
 
 
-              <td class="text-end">
+              <td class="text-end" (click)="$event.stopPropagation()">
                 <div style="display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
                   <div>
                     <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" (click)="onRowEditInit(transformateur)" class="p-button-rounded p-button-text"></button>
@@ -157,10 +157,12 @@
                       <i class="fa fa-bars" aria-hidden="true"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end">
-                      <a class="dropdown-item">Echauf BT</a>
+                      <a class="dropdown-item"  [routerLink]="['/EchaufementBT', transformateur.numero]">Echauf BT</a>
                       <!-- Replace the anchor tag with a button -->
-                      <button type="button" class="dropdown-item">Echauf MT</button>
-                      <a class="dropdown-item">Echauf liquide</a>
+                      <button type="button" class="dropdown-item"  [routerLink]="['/EchaufementMT', transformateur.numero]">Echauf MT</button>
+                      <a class="dropdown-item" [routerLink]="['/Echaufementliquide', transformateur.numero]">Echauf liquide</a>
+                      <a class="dropdown-item" [routerLink]="['/RapportFinal', transformateur.numero]">Rapport</a>
+
                     </div>
                   </div>
                 </div>

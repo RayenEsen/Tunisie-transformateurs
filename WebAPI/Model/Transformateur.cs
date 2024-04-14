@@ -78,6 +78,8 @@ namespace WebAPI.Model
         public ICollection<Remplissage>? Remplissage { get; set; }
         public ICollection<Peinture>? Peinture { get; set; }
         public ICollection<Conseption>? Conseption { get; set; }
+        public ICollection<EchauffementBT>? EchauffementBTs { get; set; }
+        public ICollection<Liquide>? Liquides { get; set; }
 
     }
 }

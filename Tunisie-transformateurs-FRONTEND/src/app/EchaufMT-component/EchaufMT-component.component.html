@@ -22,14 +22,14 @@
             <img src="assets/iso50001.png" style="width: 180px; height: 72px; ">
             </div>
           <div style="display: flex; align-items: center; margin-top: 10vh;">
-            <h5 class="mb-0">Mesure de la résistance de l'enroulement BT</h5>
+            <h5 class="mb-0">Mesure de la résistance de l'enroulement MT</h5>
             <div style="flex-grow: 1;"></div> <!-- This creates space to push the input group and button to the end -->
             <div style="display: flex; align-items: center;">
               <p-inputGroup [style]="{'width': '100%'}">
                 <p-inputGroupAddon>mΩ</p-inputGroupAddon>
-                <p-inputNumber inputId="integeronly" [(ngModel)]="this.echaufements[0].rshunt" placeholder="Saisir Rshunt(BT)"> </p-inputNumber>
+                <p-inputNumber inputId="integeronly" placeholder="Saisir Rshunt(BT)" [(ngModel)]="this.echaufements[0].rshunt"> </p-inputNumber>
               </p-inputGroup>
-              <p-button  icon="pi pi-save" (click)="update()" iconPos="left" styleClass="p-button-text p-button-secondary mr-2 mb-2"></p-button>
+              <p-button  icon="pi pi-save" iconPos="left" (click)="update()" styleClass="p-button-text p-button-secondary mr-2 mb-2"></p-button>
             </div>
           </div>
 
@@ -49,40 +49,49 @@
                      <th>U (V)</th>
                      <th>Ushunt (mV)</th>
                      <th>I (A)</th>
-                     <th>R2 (BT) (mΩ)</th>
+                     <th>R2 (MT) (mΩ)</th>
                  </tr>
              </ng-template>
              <ng-template pTemplate="body" let-echaufement let-i="rowIndex">
               <tr>
-                  <td style="min-width: 4rem">
-                    <p-inputNumber inputId="minmaxfraction"  mode="decimal" [maxFractionDigits]="8" [(ngModel)]="echaufement.temp" [disabled]="i !== 1"></p-inputNumber>
-                  </td>
+                <td style="min-width: 4rem">
+                  <p-inputNumber inputId="minmaxfraction"  mode="decimal" [maxFractionDigits]="8" [(ngModel)]="echaufement.temp" [disabled]="i !== 1"></p-inputNumber>
+                </td>
 
-                  <td style="min-width: 4rem">
-                    <input pInputText [disabled]="true" [ngModel]="convertSecondsToMinutes(echaufement.temp)">
-                  </td>
+                <td style="min-width: 4rem">
+                  <input pInputText [disabled]="true" [ngModel]="convertSecondsToMinutes(echaufement.temp)">
+                </td>
 
-                  <td  style="min-width:4rem"><p-inputNumber inputId="minmaxfraction"  mode="decimal"  [maxFractionDigits]="8" [(ngModel)]="echaufement.u"  [disabled]="i === 0"> </p-inputNumber></td>
-                  <td  style="min-width:4rem"><p-inputNumber inputId="minmaxfraction"  mode="decimal"  [maxFractionDigits]="8" [(ngModel)]="echaufement.ushunt" [disabled]="i === 0"> </p-inputNumber></td>
-                  <td  style="min-width:4rem"><p-inputNumber inputId="minmaxfraction"  mode="decimal"  [maxFractionDigits]="8" [ngModel]="CalculateI(echaufement)" [disabled]="true"> </p-inputNumber></td>
-                  <td  style="min-width:4rem" *ngIf="i !== 0"><p-inputNumber inputId="minmaxfraction"  mode="decimal"  [maxFractionDigits]="8" [ngModel]="Calculater2(echaufement)" [disabled]="true"> </p-inputNumber></td>
-                  <td  style="min-width:4rem" *ngIf="i === 0"><p-inputNumber inputId="minmaxfraction"  mode="decimal"  [maxFractionDigits]="8" [(ngModel)]="echaufement.resultat" [disabled]="false"> </p-inputNumber></td>
+                <td  style="min-width:4rem"><p-inputNumber inputId="minmaxfraction"  mode="decimal"  [maxFractionDigits]="8" [(ngModel)]="echaufement.u"  [disabled]="i === 0"> </p-inputNumber></td>
+                <td  style="min-width:4rem"><p-inputNumber inputId="minmaxfraction"  mode="decimal"  [maxFractionDigits]="8" [(ngModel)]="echaufement.ushunt" [disabled]="i === 0"> </p-inputNumber></td>
+                <td  style="min-width:4rem"><p-inputNumber inputId="minmaxfraction"  mode="decimal"  [maxFractionDigits]="8" [ngModel]="CalculateI(echaufement)" [disabled]="true"> </p-inputNumber></td>
+                <td  style="min-width:4rem" *ngIf="i !== 0"><p-inputNumber inputId="minmaxfraction"  mode="decimal"  [maxFractionDigits]="8" [ngModel]="Calculater2(echaufement)" [disabled]="true"> </p-inputNumber></td>
+                <td  style="min-width:4rem" *ngIf="i === 0"><p-inputNumber inputId="minmaxfraction"  mode="decimal"  [maxFractionDigits]="8" [(ngModel)]="echaufement.resultat" [disabled]="false"> </p-inputNumber></td>
 
 
-                 </tr>
-             </ng-template>
+               </tr>
+          </ng-template>
            </p-table>
           </div>
           <div>
 
             <div class="invoice-footer printing8">
+
                 <hr style="border-color: #51121E; border-width: 5px; height: 10px;" class="printing5">
               <br/>
                 <strong>Direction commerciale :</strong>Immeuble l'Express-Centre Nord 2eme Etage- Appt A2-7 Tunis 1082 Tél : 00 216 71 822 503 Fax : 00 216 71 822 515
                 <br><strong>Siege Social & Usine </strong>Rue Avicenne -2021 OUED ELLIL-TUNISIE Tél : 216 71 629 664 Fax : +216 71 629 664 Fax : +216 71 629 551
                 <br>Web : www.ttransfo.com / E-Mail : info&#64;ttransfo.com
             </div>
+            <div class="page-tools" style="padding-left: 0vh;" class="printable">
+              <div class="action-buttons" style="display: flex;">
 
+                <a class="btn bg-white btn-light mx-1px text-95" data-title="Save" (click)="update()">
+                  <i class="mr-1 fa fa-save text-success-m1 text-120 w-2" style="margin-right: 5px;"></i> <!-- Added margin-right -->
+                  <span style="padding-left: 8px;" >Save</span>
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>

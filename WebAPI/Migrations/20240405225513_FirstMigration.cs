@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace WebAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class sfgsdf : Migration
+    public partial class FirstMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -82,6 +82,10 @@ namespace WebAPI.Migrations
                     Sans = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Borne = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Isolateur = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Perte_totale = table.Column<float>(type: "real", nullable: false),
+                    R1BT = table.Column<float>(type: "real", nullable: false),
+                    R1MT = table.Column<float>(type: "real", nullable: false),
+                    Temperature = table.Column<float>(type: "real", nullable: false),
                     Bornesembrochables = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Frequency = table.Column<float>(type: "real", nullable: false)
                 },
@@ -210,6 +214,30 @@ namespace WebAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "EchauffementBTs",
+                columns: table => new
+                {
+                    Btid = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Numero = table.Column<int>(type: "int", nullable: false),
+                    Temp = table.Column<int>(type: "int", nullable: false),
+                    U = table.Column<float>(type: "real", nullable: false),
+                    I = table.Column<int>(type: "int", nullable: false),
+                    R2BT = table.Column<float>(type: "real", nullable: false),
+                    Rshunt = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EchauffementBTs", x => x.Btid);
+                    table.ForeignKey(
+                        name: "FK_EchauffementBTs_transformateurs_Numero",
+                        column: x => x.Numero,
+                        principalTable: "transformateurs",
+                        principalColumn: "Numero",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ecuvages",
                 columns: table => new
                 {
@@ -323,7 +351,8 @@ namespace WebAPI.Migrations
                     Operateur2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Controleur = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Verificateur = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Resultat = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Resultat = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Traitement = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -612,6 +641,11 @@ namespace WebAPI.Migrations
                 column: "IdConseption");
 
             migrationBuilder.CreateIndex(
+                name: "IX_EchauffementBTs_Numero",
+                table: "EchauffementBTs",
+                column: "Numero");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ecuvages_Numero",
                 table: "ecuvages",
                 column: "Numero");
@@ -696,6 +730,9 @@ namespace WebAPI.Migrations
 
             migrationBuilder.DropTable(
                 name: "ConseptionValues");
+
+            migrationBuilder.DropTable(
+                name: "EchauffementBTs");
 
             migrationBuilder.DropTable(
                 name: "ecuvages");

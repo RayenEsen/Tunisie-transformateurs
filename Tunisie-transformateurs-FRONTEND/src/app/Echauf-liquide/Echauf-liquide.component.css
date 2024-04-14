@@ -199,3 +199,27 @@ img {
 img:hover {
   transform: scale(1.01);
 }
+
+
+
+.conclusion {
+  background-color: #f9f9f9;
+  padding: 20px;
+  margin-top: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.conclusion h2 {
+  margin-top: 0;
+}
+
+.conclusion p {
+  margin-bottom: 10px;
+}
+
+
+::ng-deep .p-inputnumber-input {
+  flex: 1 1 auto;
+  width: 100px;
+}

@@ -30,6 +30,7 @@ namespace WebAPI.Model
         public DbSet<EcuvageValues> EcuvageValues { get; set; }
 
         public DbSet<Rapport> Rapports { get; set; }
+        public DbSet<EchauffementBT> EchauffementBTs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -106,6 +107,18 @@ namespace WebAPI.Model
                 .HasForeignKey(e => e.Numero)
                 .IsRequired();
 
+            modelBuilder.Entity<EchauffementBT>()
+                .HasOne(e => e.Transformateur)
+                .WithMany(t => t.EchauffementBTs)
+                .HasForeignKey(e => e.Numero)
+                .IsRequired();
+
+            modelBuilder.Entity<Liquide>()
+                .HasOne(e => e.Transformateur)
+                .WithMany(t => t.Liquides)
+                .HasForeignKey(e => e.Numero)
+                .IsRequired();
+
             modelBuilder.Entity<Etape1>()
                 .HasOne(e => e.Transformateur)
                 .WithMany(t => t.Etapes1)
@@ -147,5 +160,6 @@ namespace WebAPI.Model
         public DbSet<WebAPI.Model.Bobinage> Bobinage { get; set; } = default!;
         public DbSet<WebAPI.Model.Electrique> Electrique { get; set; } = default!;
         public DbSet<WebAPI.Model.Etape1> Etape1 { get; set; } = default!;
+        public DbSet<WebAPI.Model.Liquide> Liquide { get; set; } = default!;
     }
 }

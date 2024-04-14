@@ -3,18 +3,18 @@ import { EchauffementBT } from '../Shared/EchaufementBT-service.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { EchafementBTServiceService } from '../Shared/EchaufementBT-service.service';
 import { MessageService } from 'primeng/api';
-import { SessionService } from '../utils/session-service.service';
+
 @Component({
-  selector: 'app-EchaufBT-component',
-  templateUrl: './EchaufBT-component.component.html',
-  styleUrls: ['./EchaufBT-component.component.css']
+  selector: 'app-EchaufMT-component',
+  templateUrl: './EchaufMT-component.component.html',
+  styleUrls: ['./EchaufMT-component.component.css']
 })
-export class EchaufBTComponentComponent implements OnInit {
+export class EchaufMTComponentComponent implements OnInit {
 
 
   echaufements : EchauffementBT[] = []
   transformateurId!: number ;
-  constructor(public router: ActivatedRoute,public ServiceEchauf : EchafementBTServiceService, public ServiceM : MessageService , public ServiceS : SessionService) { }
+  constructor(public router: ActivatedRoute,public ServiceEchauf : EchafementBTServiceService, public ServiceM : MessageService) { }
 
   ngOnInit() {
     this.router.params.subscribe(params => {
@@ -22,11 +22,10 @@ export class EchaufBTComponentComponent implements OnInit {
     });
 
     // Create and push the first echaufement
-    this.ServiceEchauf.checkOrCreateEchauffement(this.transformateurId, "BT").subscribe({
+    this.ServiceEchauf.checkOrCreateEchauffement(this.transformateurId, "MT").subscribe({
       next: (response) => {
         this.echaufements = response;
         console.log(this.echaufements)
-
       },
       error: (error) => {
         console.error('Error:', error);

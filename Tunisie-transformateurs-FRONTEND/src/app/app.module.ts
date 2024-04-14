@@ -83,11 +83,17 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { CardModule } from 'primeng/card';
 import { StepperModule } from 'primeng/stepper';
 import { ToolbarModule } from 'primeng/toolbar';
+import { PanelModule } from 'primeng/panel';
+import { FieldsetModule } from 'primeng/fieldset';
+import { TabViewModule } from 'primeng/tabview';
 
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { EchaufementComponentComponent } from './Echaufement-component/Echaufement-component.component';
 import { EchaufBTComponentComponent } from './EchaufBT-component/EchaufBT-component.component';
+import { EchaufMTComponentComponent } from './EchaufMT-component/EchaufMT-component.component';
+import { EchaufLiquideComponent } from './Echauf-liquide/Echauf-liquide.component';
+import { FinalEchaufComponent } from './FinalEchauf/FinalEchauf.component';
 @NgModule({
   declarations: [	
     AppComponent,
@@ -120,7 +126,10 @@ import { EchaufBTComponentComponent } from './EchaufBT-component/EchaufBT-compon
       RepportComponentComponent,
       EssaiMonoComponentComponent,
       EchaufementComponentComponent,
-      EchaufBTComponentComponent
+      EchaufBTComponentComponent,
+      EchaufMTComponentComponent,
+      EchaufLiquideComponent,
+      FinalEchaufComponent
    ],
   imports: [
     BrowserModule,
@@ -177,6 +186,9 @@ import { EchaufBTComponentComponent } from './EchaufBT-component/EchaufBT-compon
     IconFieldModule,
     InputIconModule,
     ToolbarModule,
+    PanelModule,
+    FieldsetModule,
+    TabViewModule,
     ],
   providers: [MessageService,ConfirmationService],
   bootstrap: [AppComponent]

@@ -12,8 +12,8 @@ using WebAPI.Model;
 namespace WebAPI.Migrations
 {
     [DbContext(typeof(TransformateurContext))]
-    [Migration("20240320203250_sfgsdf")]
-    partial class sfgsdf
+    [Migration("20240406150948_sfdgsdfg")]
+    partial class sfdgsdfg
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -223,6 +223,42 @@ namespace WebAPI.Migrations
                     b.ToTable("controleurDeQualités");
                 });
 
+            modelBuilder.Entity("WebAPI.Model.EchauffementBT", b =>
+                {
+                    b.Property<int>("Btid")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Btid"));
+
+                    b.Property<float>("I")
+                        .HasColumnType("real");
+
+                    b.Property<int>("Numero")
+                        .HasColumnType("int");
+
+                    b.Property<float>("R2BT")
+                        .HasColumnType("real");
+
+                    b.Property<float>("Rshunt")
+                        .HasColumnType("real");
+
+                    b.Property<float>("Temp")
+                        .HasColumnType("real");
+
+                    b.Property<float>("U")
+                        .HasColumnType("real");
+
+                    b.Property<float>("Ushunt")
+                        .HasColumnType("real");
+
+                    b.HasKey("Btid");
+
+                    b.HasIndex("Numero");
+
+                    b.ToTable("EchauffementBTs");
+                });
+
             modelBuilder.Entity("WebAPI.Model.Ecuvage", b =>
                 {
                     b.Property<int>("IdMagnetique")
@@ -368,6 +404,9 @@ namespace WebAPI.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Resultat")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Traitement")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Verificateur")
@@ -1019,6 +1058,9 @@ namespace WebAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<float>("Perte_totale")
+                        .HasColumnType("real");
+
                     b.Property<string>("Power")
                         .IsRequired()
                         .HasColumnType("nvarchar(100)");
@@ -1033,9 +1075,18 @@ namespace WebAPI.Migrations
                     b.Property<int>("Quantite2")
                         .HasColumnType("int");
 
+                    b.Property<float>("R1BT")
+                        .HasColumnType("real");
+
+                    b.Property<float>("R1MT")
+                        .HasColumnType("real");
+
                     b.Property<string>("Sans")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("Temperature")
+                        .HasColumnType("real");
 
                     b.Property<string>("Type")
                         .IsRequired()
@@ -1112,6 +1163,17 @@ namespace WebAPI.Migrations
                         .IsRequired();
 
                     b.Navigation("Conseption");
+                });
+
+            modelBuilder.Entity("WebAPI.Model.EchauffementBT", b =>
+                {
+                    b.HasOne("WebAPI.Model.Transformateur", "Transformateur")
+                        .WithMany("EchauffementBTs")
+                        .HasForeignKey("Numero")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Transformateur");
                 });
 
             modelBuilder.Entity("WebAPI.Model.Ecuvage", b =>
@@ -1289,6 +1351,8 @@ namespace WebAPI.Migrations
                     b.Navigation("BobinagesMT");
 
                     b.Navigation("Conseption");
+
+                    b.Navigation("EchauffementBTs");
 
                     b.Navigation("Ecuvage");
 

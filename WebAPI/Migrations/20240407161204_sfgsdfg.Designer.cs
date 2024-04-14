@@ -12,8 +12,8 @@ using WebAPI.Model;
 namespace WebAPI.Migrations
 {
     [DbContext(typeof(TransformateurContext))]
-    [Migration("20240405004955_Prototype")]
-    partial class Prototype
+    [Migration("20240407161204_sfgsdfg")]
+    partial class sfgsdfg
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -221,6 +221,40 @@ namespace WebAPI.Migrations
                     b.HasKey("IdC");
 
                     b.ToTable("controleurDeQualités");
+                });
+
+            modelBuilder.Entity("WebAPI.Model.EchauffementBT", b =>
+                {
+                    b.Property<int>("Btid")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Btid"));
+
+                    b.Property<int>("Numero")
+                        .HasColumnType("int");
+
+                    b.Property<float>("Rshunt")
+                        .HasColumnType("real");
+
+                    b.Property<float>("Temp")
+                        .HasColumnType("real");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("U")
+                        .HasColumnType("real");
+
+                    b.Property<float>("Ushunt")
+                        .HasColumnType("real");
+
+                    b.HasKey("Btid");
+
+                    b.HasIndex("Numero");
+
+                    b.ToTable("EchauffementBTs");
                 });
 
             modelBuilder.Entity("WebAPI.Model.Ecuvage", b =>
@@ -1129,6 +1163,17 @@ namespace WebAPI.Migrations
                     b.Navigation("Conseption");
                 });
 
+            modelBuilder.Entity("WebAPI.Model.EchauffementBT", b =>
+                {
+                    b.HasOne("WebAPI.Model.Transformateur", "Transformateur")
+                        .WithMany("EchauffementBTs")
+                        .HasForeignKey("Numero")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Transformateur");
+                });
+
             modelBuilder.Entity("WebAPI.Model.Ecuvage", b =>
                 {
                     b.HasOne("WebAPI.Model.Transformateur", "Transformateur")
@@ -1304,6 +1349,8 @@ namespace WebAPI.Migrations
                     b.Navigation("BobinagesMT");
 
                     b.Navigation("Conseption");
+
+                    b.Navigation("EchauffementBTs");
 
                     b.Navigation("Ecuvage");
 

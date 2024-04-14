@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebAPI.Model;
 
@@ -11,9 +12,11 @@ using WebAPI.Model;
 namespace WebAPI.Migrations
 {
     [DbContext(typeof(TransformateurContext))]
-    partial class TransformateurContextModelSnapshot : ModelSnapshot
+    [Migration("20240405225513_FirstMigration")]
+    partial class FirstMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -228,47 +231,22 @@ namespace WebAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Btid"));
 
-                    b.Property<string>("Conclusion")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Controleur1")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
+                    b.Property<int>("I")
+                        .HasColumnType("int");
 
                     b.Property<int>("Numero")
                         .HasColumnType("int");
 
-                    b.Property<float>("Resultat")
+                    b.Property<float>("R2BT")
                         .HasColumnType("real");
 
-                    b.Property<float>("Rshunt")
-                        .HasColumnType("real");
+                    b.Property<int>("Rshunt")
+                        .HasColumnType("int");
 
-                    b.Property<float>("Temp")
-                        .HasColumnType("real");
-
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Temp")
+                        .HasColumnType("int");
 
                     b.Property<float>("U")
-                        .HasColumnType("real");
-
-                    b.Property<float>("Ushunt")
-                        .HasColumnType("real");
-
-                    b.Property<string>("Verificateur")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Visa")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float>("Vl")
                         .HasColumnType("real");
 
                     b.HasKey("Btid");
@@ -496,63 +474,6 @@ namespace WebAPI.Migrations
                     b.HasIndex("IdC");
 
                     b.ToTable("events");
-                });
-
-            modelBuilder.Entity("WebAPI.Model.Liquide", b =>
-                {
-                    b.Property<int>("Btid")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Btid"));
-
-                    b.Property<float>("A0")
-                        .HasColumnType("real");
-
-                    b.Property<float>("A1")
-                        .HasColumnType("real");
-
-                    b.Property<float>("A2")
-                        .HasColumnType("real");
-
-                    b.Property<float>("A3")
-                        .HasColumnType("real");
-
-                    b.Property<float>("A4")
-                        .HasColumnType("real");
-
-                    b.Property<string>("Conclusion")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Controleur1")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Numero")
-                        .HasColumnType("int");
-
-                    b.Property<float>("Resultat")
-                        .HasColumnType("real");
-
-                    b.Property<string>("Verificateur")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Visa")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float>("Vl")
-                        .HasColumnType("real");
-
-                    b.HasKey("Btid");
-
-                    b.HasIndex("Numero");
-
-                    b.ToTable("Liquide");
                 });
 
             modelBuilder.Entity("WebAPI.Model.Magnetique", b =>
@@ -1318,17 +1239,6 @@ namespace WebAPI.Migrations
                     b.Navigation("ControleurDeQualité");
                 });
 
-            modelBuilder.Entity("WebAPI.Model.Liquide", b =>
-                {
-                    b.HasOne("WebAPI.Model.Transformateur", "Transformateur")
-                        .WithMany("Liquides")
-                        .HasForeignKey("Numero")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Transformateur");
-                });
-
             modelBuilder.Entity("WebAPI.Model.Magnetique", b =>
                 {
                     b.HasOne("WebAPI.Model.Transformateur", "Transformateur")
@@ -1450,8 +1360,6 @@ namespace WebAPI.Migrations
                     b.Navigation("Etapes");
 
                     b.Navigation("Etapes1");
-
-                    b.Navigation("Liquides");
 
                     b.Navigation("Magnetique");
 

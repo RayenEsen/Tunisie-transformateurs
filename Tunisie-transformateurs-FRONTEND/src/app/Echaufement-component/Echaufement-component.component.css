@@ -1,42 +1,14 @@
 
-.card {
-  border: none;
-  -webkit-box-shadow: 1px 0 20px rgba(96,93,175,.05);
-  box-shadow: 1px 0 20px rgba(96,93,175,.05);
-  margin-bottom: 30px;
-}
-.table th {
-  font-weight: 500;
-  color: #827fc0;
-}
-.table thead {
-  background-color: #f3f2f7;
-}
-.table>tbody>tr>td, .table>tfoot>tr>td, .table>thead>tr>td {
-  padding: 14px 12px;
-  vertical-align: middle;
-}
-.table tr td {
-  color: #8887a9;
-}
-.thumb-sm {
-  height: 32px;
-  width: 32px;
-}
-.badge-soft-warning {
-  background-color: rgba(85, 126, 248, 0.2);
-  color: #122151;
-}
 
-.badge {
-  font-weight: 500;
-}
-.badge-soft-primary {
-  background-color: rgba(96,93,175,.2);
-  color: #605daf;
-}
+
 /* General styles */
-
+body {
+  font-family: 'Roboto', Arial, sans-serif;
+  background-color: #f8f8f8;
+  color: #444;
+  margin: 0;
+  transition: background-color 0.3s, color 0.3s;
+}
 
 /* Card styles */
 .card {
@@ -68,78 +40,66 @@
   transform: scale(1.1);
 }
 
-/* Table styles */
-.table {
-  font-size: 1rem;
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
+
+.back{
+  background-image: url('https://source.unsplash.com/BtbjCFUvBXs/1920x1080');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
-
-.table th, .table td {
-  padding: 12px;
-  text-align: left;
-  border-bottom: 1px solid #ccc;
-}
-
-.table th {
-  font-weight: 600;
-  background-color: #f0f0f0;
-  color: #333;
-}
-
-.table tbody tr:hover {
-  background-color: #f9f9f9;
-}
-
-
-
-/* Hover effect for table rows */
-.table tbody tr:hover {
-  background-color: #f9f9f9; /* Light gray hover background */
-}
-
 
 .masthead:hover {
   color: #ff7f50; /* Highlight color on hover */
 }
-
-
-
-/* Add this CSS to your stylesheet */
-tbody tr {
-  cursor: pointer;
-  transition: background-color 0.3s ease; /* Add a smooth transition effect */
+.drodown a i {
+  transition: transform 0.3s ease-in-out;
 }
 
-tbody tr:hover {
-  background-color: #f0f0f0; /* Change the background color on hover */
+.drodown a:hover i {
+  transform: scale(1.2) rotate(20deg);
 }
 
-
-/* Style for datetime-local input */
-input[type="datetime-local"] {
-  /* Remove default styles */
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  /* Customize border and padding */
-  border: 0px ;
-  padding: 8px 12px;
-  /* Set font size and color */
-  font-size: inherit;
-  color: inherit;
-  /* Set background color */
-  background-color: transparent; /* transparent background */
-  /* Add transition for smooth change */
-  transition: border-color 0.3s ease-in-out;
+.fa-warning:before, .fa-exclamation-triangle:before {
+  color: darkred;
+  content: "\f071";
+}
+.popup-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+}
+.icon-1x {
+  font-size: 24px !important;
+}
+a{
+  text-decoration:none;
+}
+.text-primary, a.text-primary:focus, a.text-primary:hover {
+  color: #00ADBB!important;
+}
+.text-black, .text-hover-black:hover {
+  color: #000 !important;
+}
+.font-weight-bold {
+  font-weight: 700 !important;
+}
+/* Hover effect for icons */
+.fa-check-circle:hover {
+  color: green; /* Change the color as needed */
+  transform: scale(1.2);
 }
 
-/* Style for datetime-local input when focused */
-input[type="datetime-local"]:focus {
-  /* Change border color when focused */
-  border-color: #80bdff; /* example color */
+.fa-hourglass:hover {
+  color: blue; /* Change the color as needed */
+  transform: scale(1.2);
 }
+
+.fa-exclamation-triangle:hover {
+  color: orange; /* Change the color as needed */
+  transform: scale(1.2);
+}
+
 ::ng-deep .p-dropdown-items-wrapper ol,
 ::ng-deep .p-dropdown-items-wrapper ul {
     padding-left: 1em;
@@ -156,131 +116,59 @@ input[type="datetime-local"]:focus {
 /* CSS to style the image when there is no data */
 .no-data-image {
   width: 100px; /* Adjust the width as needed */
-  margin-left: 75vh;
+  align-self: center;
   padding-top: 5vh;
   opacity: 0.5;
   padding-bottom: 5vh;
   /* You can adjust the opacity to make it appear faded */
   /* You can add more styling properties as needed */
 }
-
-
-::ng-deep .p-sidebar-left
-{
-  width: 24rem;
+::ng-deep .p-splitbutton {
+  font-size: 14px; /* Increase font size */
+  border-radius: 4px; /* Add some border radius for a modern look */
 }
 
-.green-text {
-  color: green;
+::ng-deep .p-splitbutton .p-button {
+  padding: 8px 16px; /* Increase padding */
 }
 
-.red-text {
-  color: red;
+::ng-deep .p-splitbutton .p-splitbutton-icon {
+  width: 20px; /* Increase icon width */
+  height: 20px; /* Increase icon height */
+  margin-right: 4px; /* Add some spacing between the icon and text */
 }
 
-.mt-70{
-  margin-top: 20px;
+::ng-deep .p-splitbutton .p-splitbutton-icon .p-button-icon {
+  font-size: 16px; /* Adjust icon size */
 }
 
-.mb-70{
-  margin-bottom: 20px;
+/* Optional: Add some hover effect for a modern feel */
+::ng-deep .p-splitbutton:hover {
+  background-color: #f0f0f0;
 }
 
-
-.vertical-timeline {
- width: 100%;
- position: relative;
- padding: 1.5rem 0 1rem;
+::ng-deep .p-splitbutton .p-menu {
+  padding-left: 0;
 }
-
-.vertical-timeline::before {
- content: '';
- position: absolute;
- top: 0;
- left: 67px;
- height: 100%;
- width: 4px;
- background: #e9ecef;
- border-radius: .25rem;
+::ng-deep .p-tieredmenu-root-list {
+  padding-left: 0 !important;
 }
-
-.vertical-timeline-element {
- position: relative;
- margin: 0 0 1rem;
+::ng-deep .p-tieredmenu.p-tieredmenu-overlay {
+  width: fit-content;
+  background: #ffffff;
+  border: 0 none;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
 }
-
-.vertical-timeline--animate .vertical-timeline-element-icon.bounce-in {
- visibility: visible;
- animation: cd-bounce-1 .8s;
-}
-.vertical-timeline-element-icon {
- position: absolute;
- top: 0;
- left: 60px;
-}
-
-.vertical-timeline-element-icon .badge-dot-xl {
- box-shadow: 0 0 0 5px #fff;
-}
-
-.badge-dot-xl {
- width: 18px;
- height: 18px;
- position: relative;
-}
-.badge:empty {
- display: none;
-}
-
-
-.badge-dot-xl::before {
- content: '';
- width: 10px;
- height: 10px;
- border-radius: .25rem;
- position: absolute;
- left: 50%;
- top: 50%;
- margin: -5px 0 0 -5px;
- background: #fff;
-}
-
-.vertical-timeline-element-content {
- position: relative;
- margin-left: 90px;
- font-size: .8rem;
-}
-
-.vertical-timeline-element-content .timeline-title {
- font-size: .8rem;
- text-transform: uppercase;
- margin: 0 0 .5rem;
- padding: 2px 0 0;
- font-weight: bold;
-}
-
-.vertical-timeline-element-content .vertical-timeline-element-date {
- display: block;
- position: absolute;
- left: -90px;
- top: 0;
- padding-right: 10px;
- text-align: right;
- color: #adb5bd;
- font-size: .7619rem;
- white-space: nowrap;
-}
-
-.vertical-timeline-element-content:after {
- content: "";
- display: table;
- clear: both;
-}
-::ng-deep .p-sidebar-left
-{
-  width: 31rem;
-
+::ng-deep .p-ripple.p-element.p-menuitem-link.ng-star-inserted {
+  text-decoration: none !important;
 }
 .clickable-row:hover {
   cursor: pointer;
+}
+.stop-propagation {
+  cursor: pointer; /* Change cursor to pointer */
+}
+
+.stop-propagation:hover {
+  cursor: pointer; /* Change cursor to pointer when hovering */
 }
